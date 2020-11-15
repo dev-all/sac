@@ -1,0 +1,300 @@
+﻿@model Agenda.Models.EventoModelView
+
+@{
+        ViewBag.Title = "Editar";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+  
+}
+
+<!-- wysihtml5 CSS
+<link rel="stylesheet" href="/content/assets/plugins/html5-editor/bootstrap-wysihtml5.css" /> -->
+<!-- Dropzone css
+<link href="/content/assets/plugins/dropzone-master/dist/dropzone.css" rel="stylesheet" type="text/css" /> -->
+<!-- page css -->
+<link href="/Content/assets/css/pages/inbox.css" rel="stylesheet">
+
+
+<!-- Page plugins css
+<link href="/content/assets/plugins/clockpicker/dist/jquery-clockpicker.min.css" rel="stylesheet">-->
+<!-- Date picker plugins css -->
+<link href="/content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Daterange picker plugins css
+<link href="/content/assets/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+<link href="/content/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">-->
+
+
+<link href="~/Content/assets/plugins/timepicker-plugin/jquery.timepicker.css" rel="stylesheet" />
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Evento </h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xlg-12 col-lg-12 col-md-12">
+        <div class="card">
+            <div class="row">
+                @using (Html.BeginForm("Edit", "Evento", FormMethod.Post, new { @class = "form-horizontal form-material", novalidate = true }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.id)
+
+                    <div class="col-xlg-12 col-lg-12 col-md-12">
+                        <div class="card-body">
+                            <h4 class="card-title">Editar Evento</h4>
+
+
+                            <div class="row " id="datepairExample">
+
+                                <div class="form-group col-xlg-3 col-lg-3 col-md-3">
+                                    <label>Fecha de inicio</label>
+                                    @Html.EditorFor(model => model.fechaInicio, new { htmlAttributes = new { placeholder = "Fecha de inicio:", @class = "date start form-control", @type = "text" } })
+
+                                </div>
+                                <div class="form-group col-xlg-3 col-lg-3 col-md-3">
+                                    <label>Hora de inicio</label>
+                                    @Html.EditorFor(model => model.horaInicio, new { htmlAttributes = new { placeholder = "Hora de inicio:", @class = " time start  form-control", @type = "text" } })
+
+                                </div>
+                                <div class="form-group col-xlg-3 col-lg-3 col-md-3">
+                                    <label>Fecha de finalización</label>
+                                    @Html.EditorFor(model => model.fechaFin, new { htmlAttributes = new { placeholder = "fecha de finalización:", @class = "date end  form-control", @type = "text" } })
+
+                                </div>
+                                <div class="form-group col-xlg-3 col-lg-3 col-md-3">
+                                    <label>Hora de finalización</label>
+                                    @Html.EditorFor(model => model.horaFin, new { htmlAttributes = new { placeholder = "Hora de finalización:", @class = "time end  form-control", @type = "text" } })
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xlg-12 col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Asisten</label>
+                                        @Html.EditorFor(model => model.asisten, new { htmlAttributes = new { placeholder = "Asisten:", @class = "form-control", @type = "text", @required = "true" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xlg-12 col-lg-12 col-md-12">
+
+                                    <div class="form-group">
+                                        <label>Recibido</label>
+                                        @Html.EditorFor(model => model.recibido, new { htmlAttributes = new { placeholder = "Recibido:", @class = "form-control", @type = "text", @required = "true" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xlg-12 col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Enviado</label>
+                                        @Html.EditorFor(model => model.enviado, new { htmlAttributes = new { placeholder = "Enviado:", @class = "form-control", @type = "text" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xlg-12 col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Ubicacion</label>
+                                        @Html.EditorFor(model => model.ubicacion, new { htmlAttributes = new { placeholder = "Ubicacion:", @class = "form-control", @type = "text" } })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xlg-12 col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Tipo</label>
+                                        @Html.EditorFor(model => model.tipo, new { htmlAttributes = new { placeholder = "Tipo:", @class = "form-control", @type = "text" } })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xlg-12 col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Observaciones</label>
+                                        @Html.TextAreaFor(model => model.obs, new { cols = "200", rows = "8", placeholder = "Ingrese las Observaciones ...", @class = "textarea_editor form-control" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button type="submit" class="btn btn-success m-t-20"><i class="fa fa-envelope-o"></i> Guardar</button>
+                                    <a href="@Url.Action("Index", "Evento")" class="btn btn-inverse m-t-20"><i class="fa fa-times"></i> Cancelar </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <!--     <script src="~/content/assets/plugins/html5-editor/wysihtml5-0.3.0.js"></script>
+      <script src="~/content/assets/plugins/html5-editor/bootstrap-wysihtml5.js"></script>
+      <script src="~/content/assets/plugins/dropzone-master/dist/dropzone.js"></script>
+    ============================================================== -->
+    <!-- Plugins for this page -->
+    <!-- ============================================================== -->
+    <!-- Plugin JavaScript -->
+    <!--<script src="~/content/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+     Clock Plugin JavaScript
+    <script src="~/content/assets/plugins/clockpicker/dist/jquery-clockpicker.min.js"></script>-->
+    <!-- Date Picker Plugin JavaScript -->
+
+    <script src="~/content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/assets/plugins/bootstrap-datepicker/bootstrap-datetimepicker.es.js"></script>
+
+    <!-- Date range Plugin JavaScript
+    <script src="~/content/assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="~/content/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>-->
+
+    <script src="~/Content/assets/plugins/timepicker-plugin/jquery.timepicker.js"></script>
+    <script src="~/Content/assets/plugins/timepicker-plugin/Datepair/datepair.js"></script>
+    <script src="~/Content/assets/plugins/timepicker-plugin/Datepair/jquery.datepair.min.js"></script>
+
+
+    @*<script src="~/Content/assets/plugins/moment/min/moment.min.js"></script>
+    <script src="~/Content/assets/plugins/moment/min/locales.min.js"></script>*@
+    <script>
+        $(document).ready(function () {
+
+            moment.locale('es-es');
+            // initialize input widgets first
+            $('#datepairExample .time').timepicker({
+                'showDuration': true,
+                'timeFormat': 'H:i'
+            });
+
+            $('#datepairExample .date').datepicker({
+                format: "dd/mm/yyyy",
+                language: "es",
+                autoclose: true,
+                todayBtn: true
+            });
+
+            // initialize datepair
+            $('#datepairExample').datepair();
+
+            //  $('.mtime').val(moment().format('HH:mm'));
+            //  $('.mdate').val(moment().format('DD/MM/YYYY'));
+
+            //$('.mdate').bootstrapMaterialDatePicker({
+            //    weekStart: 0,
+            //    time: false,
+            //    format: 'DD/MM/YYYY',
+            //    minDate: new Date()
+            //});
+
+            //$.datepicker.regional['es'] = {
+            //    closeText: 'Cerrar',
+            //    prevText: '< Ant',
+            //    nextText: 'Sig >',
+            //    currentText: 'Hoy',
+            //    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            //    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            //    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            //    dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            //    dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            //    weekHeader: 'Sm',
+            //    dateFormat: 'dd/mm/yy',
+            //    firstDay: 1,
+            //    isRTL: false,
+            //    showMonthAfterYear: false,
+            //    yearSuffix: ''
+            //};
+            //$.datepicker.setDefaults($.datepicker.regional['es']);
+
+            //$(function () {
+            //    $("#fecha").datepicker();
+            //});
+
+            ////$('.textarea_editor').wysihtml5();
+
+            //// Date Picker
+            //jQuery('.mydatepicker, #datepicker').datepicker();
+
+            //jQuery('#datepicker-autoclose').datepicker({
+            //    autoclose: true,
+            //    todayHighlight: true
+            //});
+
+            //jQuery('#date-range').datepicker({
+            //    toggleActive: true
+            //});
+
+
+            //}, function (start, end, label) {
+            //    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+            //});
+
+            //$('.input-daterange-timepicker').daterangepicker({
+
+            //    timePicker: true,
+            //    timePickerIncrement: 10,
+            //    timePicker24Hour: true,
+            //    format: "DD/MM/YYYY hh:mm ",
+            //    startDate: moment().startOf('hour'),
+            //    endDate: moment().startOf('hour'),
+            //    locale: {
+
+            //        "format": "DD/MM/YYYY hh:mm ",
+            //        "separator": " - ",
+            //        "applyLabel": "Aplicar",
+            //        "cancelLabel": "Cancelar",
+            //        "fromLabel": "desde",
+            //        "toLabel": "hasta",
+            //        "customRangeLabel": "Custom",
+            //        "daysOfWeek": [
+            //            "DO",
+            //            "LU",
+            //            "MA",
+            //            "MI",
+            //            "JU",
+            //            "VI",
+            //            "SA"
+
+            //        ],
+            //        "monthNames": [
+            //            "Enero",
+            //            "Febrero",
+            //            "Marzo",
+            //            "Abril",
+            //            "Mayo",
+            //            "Junio",
+            //            "Julio",
+            //            "Agusto",
+            //            "Septiembre",
+            //            "Octubre",
+            //            "Noviembre",
+            //            "Diciembre"
+            //        ],
+            //        "firstDay": 1
+            //    },
+            //    buttonClasses: ['btn', 'btn-sm'],
+            //    applyClass: 'btn-danger',
+            //    cancelClass: 'btn-inverse'
+
+            //});
+            //   endDate: moment().startOf('hour').add(48, 'hour'),
+            //    dateLimit: {
+            //        days: 6
+            //    }
+        });
+    </script>
+
+
+}
+

@@ -1,0 +1,137 @@
+﻿@model IEnumerable<SAC.Models.UsuarioModelView>
+
+@{
+    ViewBag.Title = "Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- page css
+<link href="/Content/assets/css/pages/inbox.css" rel="stylesheet">-->
+<link href="~/Content/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+<div>
+    @if (TempData["sucesso"] != null)
+    {
+        @Html.Partial("_PartialMsgSucesso");
+    }
+    else if (TempData["erro"] != null)
+    {
+        @Html.Partial("_PartialMsgErro");
+    }
+</div>
+
+
+
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Usuario</h4>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xlg-12 col-lg-12 col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Gestión de Usuario </h5>
+                <h6 class="card-subtitle"> </h6>                
+                 <a href="@Url.Action("Crear", "Usuario")" class="btn btn-secondary "><i class="mdi mdi-calendar-plus"></i> Nuevo Usuario</a>                                  
+                <div class="table-responsive m-t-40">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Acciones</th>
+                                <th>
+                                    Usuario
+                                </th>
+                                <th>
+                                    Apellido y Nombre
+                                </th>
+                                <th>
+                                    Rol
+                                </th>
+                                <th>
+                                    Grupo de Trabajo
+                                </th>
+                                <th>
+                                    Unidad
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr class="@("table-" + item.idPersona)">
+
+                                <td style="width:50px;">
+                                    <a href="@Url.Action("Details", "Usuario",new { id = item.idUsuario })" data-toggle="tooltip" data-original-title="Detalles" class="btn waves-effect waves-light btn-rounded btn-xs btn-dark"><i class="fa  fa-file text-info"></i></a>
+                                    <a href="@Url.Action("Edit", "Usuario",new { id = item.idUsuario })" data-toggle="tooltip" data-original-title="Editar" class="btn waves-effect waves-light btn-rounded btn-xs btn-dark"><i class="fa fa-pencil text-success"></i></a>
+                                    <a href="@Url.Action("Delete", "Usuario" ,new { id = item.idUsuario })" data-toggle="tooltip" data-original-title="Eliminar " class="btn waves-effect waves-light btn-rounded btn-xs btn-dark"> <i class="fa fa-close text-danger"></i></a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Persona.Documento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Persona.Nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rol.descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Persona.Documento)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rol.descripcion)
+                                </td>
+
+                            </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+
+
+
+@section Scripts{
+
+    <!-- ============================================================== -->
+    <!-- Plugins for this page -->
+    <!-- ============================================================== -->
+    <!-- This is data table -->
+
+    <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+
+
+        $(function () {
+         
+            $('#example23').DataTable({
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+                "order": [[2, 'asc']]
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,43 @@
+﻿<!-- BEGIN MODAL -->
+<div class="modal none-border" id="my-event">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><strong>Nuevo Evento</strong></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Nombre de Evento</label>
+                                <input class="form-control" placeholder="Ingrese Nombre de Evento" type="text" name="title">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Categoria</label>
+                                <select class="form-control" name="category">
+                                    <option value="bg-danger">Danger</option>
+                                    <option value="bg-success">Success</option>
+                                    <option value="bg-purple">Purple</option>
+                                    <option value="bg-primary">Primary</option>
+                                    <option value="bg-pink">Pink</option>
+                                    <option value="bg-info">Info</option>
+                                    <option value="bg-warning">Warning</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row"><div class="col-md-6"><h6 class="box-title m-t-30"> Fecha</h6><div class="input-group"><input type="text" class="form-control" id="datepicker-autoclose" placeholder="mm/dd/yyyy"><span class="input-group-addon"><i class="icon-calender"></i></span> </div></div><div class="col-md-6"><h6 class="box-title m-t-30">Hora</h6><div class="input-group clockpicker " data-placement="bottom" data-align="top" data-autoclose="true"><input type="text" id="time" class="form-control" value="08:00"> <span class="input-group-addon"> <span id="btnClok" class="fa fa-clock-o"></span> </span></div></div></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success save-event waves-effect waves-light">Guardar Evento</button>
+                <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Agenda.Models.RolModelView>
+
+@{
+    ViewBag.Title = "Roles";
+}
+<link href="/Content/assets/css/pages/ui-bootstrap-page.css" rel="stylesheet">
+
+
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Roles</h3>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <button type="button" class="btn btn-secondary font-14 pull-right" data-toggle="modal" data-target="#add-rol">
+                    <i class="ti-menu"></i> Agregar Rol
+                </button>
+
+                <h4 class="card-title">Roles del Sistema </h4>
+                <h6 class="card-subtitle"> Se configuran todas las acciones disponibles del sistema, puede agregar ó eliminar los items </h6>
+
+                <table class="table stylish-table">
+                    <tr>
+                        <th>idRol</th>
+                        <th>descripcion</th>
+                        <th>Accesos</th>
+                        <th>idHome</th>
+
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        string selectedRow = "";
+                        if (item.idRol == ViewBag.idRol)
+                        {
+                            selectedRow = "success";
+                        }
+                        <tr class="@selectedRow">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idRol)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.descripcion)
+                            </td>
+                            <td>
+                                <ul class="list-icons">
+                                    @foreach (var ar in item.AccionPorRol)
+                                    {
+
+                                        <li class="font-10">
+                                            <a href="javascript:void(0)">
+                                                <i class="fa fa-check text-info"></i>            @Html.Raw(ar.Accion.controlador.ToUpper()) (  @Html.Raw(ar.Accion.nombre.ToLower()) )
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idHome)
+                            </td>
+
+                            <td>
+                                @Html.ActionLink("Select", "Index", new { id = item.idRol }) |
+                                @Html.ActionLink("Edit", "Edit", new { id = item.idRol }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.idRol }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.idRol })
+                            </td>
+                        </tr>
+                    }
+
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Agenda.Models.EventoModelView>
+
+@{
+    ViewBag.Title = "Eventos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- page css -->
+<link href="/Content/assets/css/pages/inbox.css" rel="stylesheet">
+
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+
+<div>
+    @if (TempData["sucesso"] != null)
+    {
+        @Html.Partial("_PartialMsgSucesso");
+    }
+    else if (TempData["erro"] != null)
+    {
+        @Html.Partial("_PartialMsgErro");
+    }
+</div>
+
+
+
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Eventos</h4>
+    </div>
+ 
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xlg-12 col-lg-12 col-md-12">
+        <div class="card">
+            <div class="row">
+
+                <div class="col-xlg-12 col-lg-12 col-md-12">
+                    <div class="card-body ">
+                        <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
+                            <a href="@Url.Action("Crear", "Evento")" class="btn btn-secondary btn-sm"><i class="mdi mdi-calendar-plus"></i> Nuevo Evento</a>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body p-t-0">
+                        <div class="card b-all shadow-none">
+                            <div class="table-responsive">
+
+                                <table class="table table-hover no-wrap  font-14 full-color-table full-dark-table hover-table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                TIPO
+                                            </th>
+                                            <th>
+                                              FECHA DE INICIO
+                                            </th>
+                                            <th>
+                                                FECHA DE FINALIZACIÓN
+                                            </th>
+                                            <th>
+                                                ASISTEN
+                                            </th>
+                                            <th>
+                                                ENVIADO
+                                            </th>
+                                            <th>
+                                                UBICACIÓN
+                                            </th>
+                                          
+                                            <th>ACCIÓNES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.tipo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.fechaInicio)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.fechaFin)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.asisten)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.enviado)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ubicacion)
+                                                </td>
+                                              
+                                                <td style="width:50px;">
+                                                    <a href="@Url.Action("Details", "Evento",new { id = item.id })" data-toggle="tooltip" data-original-title="Detalles"> <i class="fa  fa-file text-info m-r-10 "></i> </a>
+                                                    <a href="@Url.Action("Edit", "Evento",new { id = item.id })" data-toggle="tooltip" data-original-title="Editar"> <i class="fa fa-pencil text-success m-r-10"></i> </a>
+                                                    <a href="@Url.Action("Delete", "Evento" ,new { id = item.id })" data-toggle="tooltip" data-original-title="Eliminar "> <i class="fa fa-close text-danger"></i>  </a>
+
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+
+<script type="text/javascript">
+
+
+</script>

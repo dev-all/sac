@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="Agenda_Model.AccionPorRol" Width="1.5" PointX="1.25" PointY="13.875" />
+        <EntityTypeShape EntityType="Agenda_Model.Contacto" Width="1.5" PointX="10.5" PointY="6" />
+        <EntityTypeShape EntityType="Agenda_Model.Evento" Width="1.5" PointX="8.875" PointY="9.375" />
+        <EntityTypeShape EntityType="Agenda_Model.homePorRol" Width="1.5" PointX="1" PointY="11.5" />
+        <EntityTypeShape EntityType="Agenda_Model.Localidad" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="Agenda_Model.Notificacion" Width="1.5" PointX="1.75" PointY="2.625" />
+        <EntityTypeShape EntityType="Agenda_Model.Persona" Width="1.5" PointX="5.25" PointY="4.125" />
+        <EntityTypeShape EntityType="Agenda_Model.Provincia" Width="1.5" PointX="0.75" PointY="6" />
+        <EntityTypeShape EntityType="Agenda_Model.Rol" Width="1.5" PointX="3.375" PointY="10.875" />
+        <EntityTypeShape EntityType="Agenda_Model.Usuario" Width="1.5" PointX="7.5" PointY="5.5" />
+        <AssociationConnector Association="Agenda_Model.FK_AccionesPorRoles_Roles" />
+        <AssociationConnector Association="Agenda_Model.FK_Contacto_Evento" />
+        <AssociationConnector Association="Agenda_Model.FK_Contacto_Persona" />
+        <AssociationConnector Association="Agenda_Model.FK_Evento_Usuario" />
+        <AssociationConnector Association="Agenda_Model.FK_Roles_HomePorRol" />
+        <AssociationConnector Association="Agenda_Model.FK_Localidad_Provincia" />
+        <AssociationConnector Association="Agenda_Model.FK_Personas_Localidades1" />
+        <AssociationConnector Association="Agenda_Model.FK_Notificacion_Persona" />
+        <AssociationConnector Association="Agenda_Model.FK_Personas_Provincias1" />
+        <AssociationConnector Association="Agenda_Model.FK_Usuario_Persona" />
+        <AssociationConnector Association="Agenda_Model.FK_Usuarios_Roles" />
+        <EntityTypeShape EntityType="Agenda_Model.MenuSidebar" Width="1.5" PointX="6.125" PointY="14.125" />
+        <AssociationConnector Association="Agenda_Model.FK_MenuSidebar_MenuSidebar" />
+        <EntityTypeShape EntityType="Agenda_Model.Accion" Width="1.5" PointX="4" PointY="14.125" />
+        <AssociationConnector Association="Agenda_Model.FK_AccionesPorRoles_Acciones" />
+        <AssociationConnector Association="Agenda_Model.FK_MenuSidebar_Accion" />
+        <EntityTypeShape EntityType="Agenda_Model.Prioridad" Width="1.5" PointX="11.625" PointY="9.75" />
+        <AssociationConnector Association="Agenda_Model.FK_Evento_Prioridad" />
+        <EntityTypeShape EntityType="Agenda_Model.Proveedor" Width="1.5" PointX="6.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

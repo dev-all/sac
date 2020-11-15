@@ -1,0 +1,92 @@
+﻿@model SAC.Models.EventoModelView
+
+@{
+    ViewBag.Title = "Evento - Detalles ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid ">
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row m-3">
+
+        <!-- column -->
+        <div class="col-lg-12 ">
+            <div class="card">
+                <div class="card-body b-l b-r">
+                    <h4 class="card-title"> Evento - Detalles </h4>
+                    <h6 class="card-subtitle">Se listan los eventos asignados a la SAC actual</h6>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.fechaInicio)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.activo)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.asisten)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.recibido)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.ubicacion)
+                                    </th>
+
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(model => model.fechaInicio)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.activo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.asisten)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.recibido)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => model.ubicacion)
+                                        </td>
+                                        <td>                                  
+                                            @Html.ActionLink("Volver a la lista", "Index",null, new { @class = "btn waves-effect waves-light btn-xs btn-info" })
+                                        </td>
+                                    </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+
+
+<script type="text/javascript">
+
+
+</script>
+

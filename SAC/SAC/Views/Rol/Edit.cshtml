@@ -1,0 +1,340 @@
+﻿@model SAC.Models.RolModelView
+@{
+    ViewBag.Title = "Roles";
+}
+<link href="/Content/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
+<link href="/Content/assets/css/pages/floating-label.css" rel="stylesheet">
+
+<div>
+    @if (TempData["sucesso"] != null)
+    {
+        @Html.Partial("_PartialMsgSucesso");
+    }
+    else if (TempData["erro"] != null)
+    {
+        @Html.Partial("_PartialMsgErro");
+    }
+</div>
+
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Roles</h3>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+
+
+
+                @using (Html.BeginForm("Edit", "Rol", FormMethod.Post, new { @class = "floating-labels ", novalidate = true }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.idRol)
+
+
+                    <div class="row ">
+                        <div class="col-xlg-10 col-lg-10 col-md-10 ">
+                            <div class="row ">
+                                <div class="col-xlg-12 col-lg-12 col-md-12">
+
+                                    <h4 class="card-title">Roles del Sistema </h4>
+                                    <h6 class="card-subtitle"> Se configuran todas las acciones disponibles del sistema, puede agregar ó eliminar los items </h6>
+                                </div>
+                            </div>
+
+                            <div class="row m-t-40">
+                                <div class="col-xlg-4 col-lg-4 col-md-4">
+
+                                    <div class="form-group m-b-30">
+                                        @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="bar"></span>
+                                        <label for="rol_descripcion">Nombre de Rol</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xlg-4 col-lg-4 col-md-4">
+
+                                    <div class="checkbox">
+
+                                        <div class="form-group m-b-30">
+                                            Es Administrador ?
+                                            <input type="checkbox" @Html.Raw((Model.esAdministrador) ? "checked" : " ") id="General" class="js-switch js-check-esAdministrador" data-color="#26c6da" data-size="small" />
+                                            @Html.HiddenFor(model => model.esAdministrador)
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="col-xlg-2 col-lg-2 col-md-2 pull-right m-t-40">
+                            <a href="@Url.Action("Index", "Rol" )" class="btn btn-secondary btn-sm btn-block"> Volver </a>
+                            <input type="submit" value="Guardar" class="btn btn-success btn-sm btn-block" />
+                            <a id="btnEliminar" href="#" class="btn btn-danger btn-sm btn-block "><i class="fa fa-times"></i> Eliminar </a>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="row">
+                        @*<div class="col-xlg-12 col-lg-12 col-md-12"></div>*@
+                        <div class="col-xlg-12 col-lg-12 col-md-12 bg-light-part ">
+                            <div class="row">
+                                <div class="col-xlg-6 col-lg-6 col-md-6  m-t-20">
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-subtitle">Acciones permitidas para el rol</h6>
+                                            <table id="tblMenusidebar" class="table table-hover no-wrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Acciones
+                                                        </th>
+                                                        <th>
+                                                            <button type="button" class="btn btn-secondary btn-sm pull-right" data-toggle="modal" data-target="#add-AccionPorRol">
+                                                                <i class="ti-menu"></i> Agregar Acción
+                                                            </button>
+
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model.AccionPorRol.Count() > 0)
+                                                    {
+                                                        foreach (var item in Model.AccionPorRol)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Accion.Descripcion)
+                                                                </td>
+
+                                                                <td>
+                                                                    <input type="submit" value="Eliminar" formaction="@Url.Action("DeleteAccionPorRol", "Rol", new { id = item.idRolPorAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                No se encontraron registros...
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xlg-6 col-lg-6 col-md-6  m-t-20">
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Menú Inicio para el rol</h4>
+                                            <h6 class="card-subtitle mb-2 text-muted">sub titulo</h6>
+                                            <p class="card-text"> Texto xx</p>
+
+                                            <table id="tblMenusidebar" class="table table-hover no-wrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Acciones
+                                                        </th>
+                                                        <th>
+                                                            <button type="button" class="btn btn-secondary btn-sm pull-right" data-toggle="modal" data-target="#add-AccionPorRol">
+                                                                <i class="ti-menu"></i> Agregar Acción
+                                                            </button>
+
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model.AccionPorRol.Count() > 0)
+                                                    {
+                                                        foreach (var item in Model.AccionPorRol)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.Accion.Descripcion)
+                                                                </td>
+
+                                                                <td>
+                                                                    <input type="submit" value="Eliminar" formaction="@Url.Action("DeleteAccionPorRol", "Rol", new { id = item.idRolPorAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                No se encontraron registros...
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                @*    <li class="active">
+                                                <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
+                                                    <i class="mdi mdi-arrange-send-backward"></i><span>Inicio
+                                                              <span class="label label-rouded label-themecolor pull-right">    @Html.Raw(ViewBag.Menu.Count)   </span>
+                                                    </span>
+                                                </a>
+                                                <ul aria-expanded="true" class="collapse in">
+
+
+                                                 @Html.Partial("~/Views/Configuracion/TreeItem.cshtml", ViewBag.Menu)
+                        <partial name="~/Views/Configuracion/TreeItem.cshtml" model="@ViewBag.Menu">
+
+                                    </ul>
+                                            </li>
+                                *@
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xlg-12 col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    @*<input type="submit" value="Agregar" formaction="@Url.Action("addAccionPorRol", "Rol")" class="btn btn-primary" />
+                            <button type="submit" class="btn btn-success m-t-20"><i class="fa fa-envelope-o"></i> Guardar</button>
+                            <a href="@Url.Action("Index", "Rol" )" class="btn btn-inverse m-t-20"><i class="fa fa-times"></i> Cancelar </a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--.modal --->
+                    <div id="add-AccionPorRol" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel">Nueva Accion para el rol   @Html.Raw(Model.descripcion) </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="floating-labels m-t-30">
+                                        <div class="form-group m-b-30">
+
+                                            @*@Html.DropDownListFor(model => model.idAccionPorRol, (IEnumerable<SelectListItem>)(Model.selectListAccion), "", new { @class = "form-control" })
+                                    <label for="inputControlador">Controlador - Acción</label>*@
+
+                                            @Html.DropDownListFor(model => model.idAccionPorRol,
+                                                          (IEnumerable<SelectListItem>)(new SelectList(Model.Acciones.Select(x => new { Value = x.IdAccion, Text = x.Descripcion }),
+                                                                         "Value", "Text"))
+                                                          , "Seleccionar Accion...", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="Agregar" formaction="@Url.Action("AddAccionPorRol", "Rol")" class="btn btn-primary" />
+                                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.modal- -->
+
+                    <!-- modal Eliminar --->
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                                    <h3 class="modal-title">Eliminar</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <h4>¿Está seguro de que desea eliminar?</h4>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</a>
+                                    <a id="btnConfirmEliminar" href="#" class="btn btn-success btn-sm">Confirmar</a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <!-- /.modal- -->
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            // Switchery
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+            });
+
+            var changeCheckbox = document.querySelector('.js-check-esAdministrador')
+                , changeField = document.querySelector('.js-check-esAdministrador-field');
+            changeCheckbox.onchange = function () {
+                $("input[type='hidden'][name='esAdministrador']").val(changeCheckbox.checked);
+            };
+
+
+            $("#btnEliminar").click(function (e) {
+                e.preventDefault();
+                $("#myModal").modal('show');
+            });
+
+            $("#btnConfirmEliminar").click(function (e) {
+                e.preventDefault();
+                var x = $("input[type='hidden'][name='idRol']").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Rol/Delete",
+                    data: { Id: x },
+                    success: function (result) {
+                        $("#myModal").modal("hide");
+                    }
+                })
+            });
+
+        });
+    </script>
+    <script src="~/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+}
