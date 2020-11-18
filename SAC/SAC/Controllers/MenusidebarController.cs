@@ -24,6 +24,7 @@ namespace SAC.Controllers
                 ICaccion = Mapper.Map<List<AccionModel>, List<AccionModelView>>(servicioConfiguracion.GetAccion())
 
             };
+
             return View(configAccionModelView);
         }
 
@@ -35,7 +36,7 @@ namespace SAC.Controllers
             {
                 IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioConfiguracion.GetMenuSidebar()),
                 ICaccion = Mapper.Map<List<AccionModel>, List<AccionModelView>>(servicioConfiguracion.GetAccion()),
-                menuSideBar = Mapper.Map<MenuSideBarModel, MenuSideBarModelView>(servicioConfiguracion.GetMenuSidebarPorId(id))
+                menuSideBar = Mapper.Map<MenuSideBarModel, MenuSideBarModelView>(servicioConfiguracion.GetMenuSidebarPorIdFull(id))
             };
            
             return View(configAccionModelView);

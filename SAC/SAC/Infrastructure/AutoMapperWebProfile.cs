@@ -26,8 +26,8 @@ namespace SAC.Infrastructure
 
             CreateMap<RolModel, RolModelView>();
             CreateMap<RolModelView, RolModel>();
-            CreateMap<AccionPorRolModel, AccionPorRolView>();
-            CreateMap<AccionPorRolView, AccionPorRolModel>();
+            CreateMap<AccionPorRolModel, AccionPorRolModelView>();
+            CreateMap<AccionPorRolModelView, AccionPorRolModel>();
             CreateMap<ConfiguracionModel, ConfiguracionModelView>();
             CreateMap<ConfiguracionModelView, ConfiguracionModel>();
             CreateMap<UsuarioModel, UsuarioModelView>();
@@ -44,8 +44,7 @@ namespace SAC.Infrastructure
             .ForMember(mi => mi.Controller, msb => msb.MapFrom(i => i.Accion.Controlador));
 
 
-
-
+           
 
 
         }

@@ -51,6 +51,8 @@ namespace SAC.Controllers
         public ActionResult Acceder(LoginViewModel loginViewModel)
         {
 
+
+
             if (servicioUsuario.Obtener(loginViewModel.Usuario, loginViewModel.Password, Convert.ToInt32(ConfigurationManager.AppSettings["rolInvitado"])))
             {
 
@@ -93,6 +95,9 @@ namespace SAC.Controllers
                 ViewBag.error = "Acceso invalido";
                 return View("Acceder");
             }
+
+
+
         }
      
         [HttpGet]

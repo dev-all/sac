@@ -97,7 +97,7 @@
                                     <tr>
                                         <td> @Html.DisplayFor(modelItem => item.descripcion) </td>
                                         <td>
-                                            <a href="@Url.Action("MasEvento", "Rol",new { id = item.idRol })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Detalles">más </a>
+                                            <a href="@Url.Action("Edit", "Rol",new { id = item.idRol })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Detalles">más </a>
                                         </td>
                                     </tr>
                                 }

@@ -28,16 +28,24 @@
         <div class="card">
             <div class="card-body">
 
-
-
-
                 @using (Html.BeginForm("Edit", "Rol", FormMethod.Post, new { @class = "floating-labels ", novalidate = true }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.idRol)
+                   
+                    @Html.HiddenFor(model => model.MenuSidePorRol)
 
+                    <input id="JsonMenuSiderPorRol"
+                           name="JsonMenuSiderPorRol"
+                           type="hidden"
+                           value="@ViewBag.JsonMenuSiderPorRol" />
 
+                    <input id="JsonMenuSider"
+                           name="JsonMenuSider"
+                           type="hidden"
+                           value="@ViewBag.JsonMenuSider" />
+                    
                     <div class="row ">
                         <div class="col-xlg-10 col-lg-10 col-md-10 ">
                             <div class="row ">
@@ -76,28 +84,39 @@
                             </div>
 
                         </div>
-                        <div class="col-xlg-2 col-lg-2 col-md-2 pull-right m-t-40">
-                            <a href="@Url.Action("Index", "Rol" )" class="btn btn-secondary btn-sm btn-block"> Volver </a>
-                            <input type="submit" value="Guardar" class="btn btn-success btn-sm btn-block" />
-                            <a id="btnEliminar" href="#" class="btn btn-danger btn-sm btn-block "><i class="fa fa-times"></i> Eliminar </a>
 
-                        </div>
+
                     </div>
 
-
-
-
-
-
+                  
                     <div class="row">
                         @*<div class="col-xlg-12 col-lg-12 col-md-12"></div>*@
                         <div class="col-xlg-12 col-lg-12 col-md-12 bg-light-part ">
                             <div class="row">
+
                                 <div class="col-xlg-6 col-lg-6 col-md-6  m-t-20">
 
                                     <div class="card">
                                         <div class="card-body">
-                                            <h6 class="card-subtitle">Acciones permitidas para el rol</h6>
+                                            <h5 class="card-title">Menu Inicio habilitado para el Rol</h5>
+                                            <h5 class="card-subtitle mb-2 text-muted"></h5>
+                                            <p class="card-text"> </p>
+                                            <h6 class="card-subtitle mb-2 text-muted">Habilite las opciones y seleccione guardar para confirmar los cambios</h6>
+                                            <div id="treeview-checkable" class=""></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-xlg-6 col-lg-6 col-md-6  m-t-20">
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Acciones permitidas para el rol</h5>
+                                            <h6 class="card-subtitle">
+                                                Acciones que no se encuentran en el Menu Inicio
+                                                y necesita restringir para el rol. Por defecto se encuentran todas habilitadas.
+                                            </h6>
                                             <table id="tblMenusidebar" class="table table-hover no-wrap">
                                                 <thead>
                                                     <tr>
@@ -115,20 +134,21 @@
                                                 </thead>
                                                 <tbody>
                                                     @if (Model.AccionPorRol.Count() > 0)
-                                                    {
-                                                        foreach (var item in Model.AccionPorRol)
                                                         {
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.Accion.Descripcion)
-                                                                </td>
+                                                            foreach (var item in Model.AccionPorRol)
+                                                            {
+                                                                <tr>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => item.Accion.Descripcion)
+                                                                    </td>
 
-                                                                <td>
-                                                                    <input type="submit" value="Eliminar" formaction="@Url.Action("DeleteAccionPorRol", "Rol", new { id = item.idRolPorAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
-                                                                </td>
-                                                            </tr>
+                                                                    <td>
+                                                                        <input type="submit" value="Eliminar" formaction="@Url.Action("DeleteAccionPorRol", "Rol", new { id = item.idRolPorAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
+                                                                    </td>
+                                                                </tr>
+                                                            }
                                                         }
-                                                    }
+                                                  
                                                     else
                                                     {
                                                         <tr>
@@ -143,77 +163,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-xlg-6 col-lg-6 col-md-6  m-t-20">
 
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Menú Inicio para el rol</h4>
-                                            <h6 class="card-subtitle mb-2 text-muted">sub titulo</h6>
-                                            <p class="card-text"> Texto xx</p>
-
-                                            <table id="tblMenusidebar" class="table table-hover no-wrap">
-                                                <thead>
-                                                    <tr>
-                                                        <th>
-                                                            Acciones
-                                                        </th>
-                                                        <th>
-                                                            <button type="button" class="btn btn-secondary btn-sm pull-right" data-toggle="modal" data-target="#add-AccionPorRol">
-                                                                <i class="ti-menu"></i> Agregar Acción
-                                                            </button>
-
-                                                        </th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model.AccionPorRol.Count() > 0)
-                                                    {
-                                                        foreach (var item in Model.AccionPorRol)
-                                                        {
-                                                            <tr>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => item.Accion.Descripcion)
-                                                                </td>
-
-                                                                <td>
-                                                                    <input type="submit" value="Eliminar" formaction="@Url.Action("DeleteAccionPorRol", "Rol", new { id = item.idRolPorAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
-                                                                </td>
-                                                            </tr>
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        <tr>
-                                                            <td>
-                                                                No se encontraron registros...
-                                                            </td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                @*    <li class="active">
-                                                <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="true">
-                                                    <i class="mdi mdi-arrange-send-backward"></i><span>Inicio
-                                                              <span class="label label-rouded label-themecolor pull-right">    @Html.Raw(ViewBag.Menu.Count)   </span>
-                                                    </span>
-                                                </a>
-                                                <ul aria-expanded="true" class="collapse in">
-
-
-                                                 @Html.Partial("~/Views/Configuracion/TreeItem.cshtml", ViewBag.Menu)
-                        <partial name="~/Views/Configuracion/TreeItem.cshtml" model="@ViewBag.Menu">
-
-                                    </ul>
-                                            </li>
-                                *@
                             </div>
 
                         </div>
@@ -221,14 +171,12 @@
 
                     </div>
 
-                    <div class="row">
-                        <div class="col-xlg-12 col-lg-12 col-md-12">
+                    <div class="row text-center">
+                        <div class="col-xlg-12 col-lg-12 col-md-12 m-t-40">
                             <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    @*<input type="submit" value="Agregar" formaction="@Url.Action("addAccionPorRol", "Rol")" class="btn btn-primary" />
-                            <button type="submit" class="btn btn-success m-t-20"><i class="fa fa-envelope-o"></i> Guardar</button>
-                            <a href="@Url.Action("Index", "Rol" )" class="btn btn-inverse m-t-20"><i class="fa fa-times"></i> Cancelar </a>*@
-                                </div>
+                                <a href="@Url.Action("Index", "Rol" )" class="btn btn-rounded  btn-secondary "> Volver </a>
+                                <input type="submit" value="Guardar" class="btn btn-rounded  btn-success" />
+                                <a id="btnEliminar" href="#" class="btn btn-rounded btn-danger  "><i class="fa fa-times"></i> Eliminar </a>
                             </div>
                         </div>
                     </div>
@@ -299,7 +247,9 @@
 
 @section Scripts{
     <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
-
+    <!-- Treeview Plugin JavaScript -->
+    <script src="~/Content/assets/plugins/bootstrap-treeview-master/dist/bootstrap-treeview.min.js"></script>   
+    <script src="~/Scripts/TreeView/TreeView.js"></script>
     <script>
         jQuery(document).ready(function () {
             // Switchery

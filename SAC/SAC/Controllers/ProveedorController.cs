@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using SAC.Models;
-using Negocio.Servicios;
+﻿using AutoMapper;
 using Negocio.Modelos;
-using AutoMapper;
+using Negocio.Servicios;
+using SAC.Models;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace SAC.Controllers
 {
     public class ProveedorController : BaseController
     {
 
-        private ServicioProveedor servicioConfiguracion = new ServicioProveedor();
+        private ServicioProveedor servicioProveedor = new ServicioProveedor();
         // GET: Accion
         public ActionResult Index()
         {
-            //ServicioProveedor configAccionModelView = new ServicioProveedor
-            //{
-            //    Acciones = Mapper.Map<List<>, List<AccionModelView>>(servicioConfiguracion.GetAccion())
-            //};
-            return View();
+
+            List<ProveedorModelView> model = Mapper.Map<List<ProveedorModel>, List<ProveedorModelView>>(servicioProveedor.GetAllProveedor());
+            return View(model);
         }
 
         // GET: Accion/Details/5

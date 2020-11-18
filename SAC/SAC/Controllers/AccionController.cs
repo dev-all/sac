@@ -39,11 +39,12 @@ namespace SAC.Controllers
 
         // POST: Accion/Create
         [HttpPost]
-        public ActionResult Create(AccionModelView accionModelView)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ConfigAccionModelView configAccionModelView)
         {
             try
             {
-                var evento = servicioConfiguracion.CreateAccion(Mapper.Map<AccionModelView, AccionModel>(accionModelView));
+                var evento = servicioConfiguracion.CreateAccion(Mapper.Map<AccionModelView, AccionModel>(configAccionModelView.Accion));
                
                 return RedirectToAction("Index");
             }
@@ -54,24 +55,7 @@ namespace SAC.Controllers
             }
         }
 
-        [HttpPost, ActionName("Create")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(ConfiguracionModelView configuracionModelView)
-        {
-            try
-            {
-                AccionModelView accionModelView = configuracionModelView.accion;
-                var evento = servicioConfiguracion.CreateAccion(Mapper.Map<AccionModelView, AccionModel>(accionModelView));
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.info = ex.InnerException;
-                return View();
-            }
-        }
-
-   
+       
         // GET: Accion/Edit/5
         public ActionResult Edit(int id)
         {

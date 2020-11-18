@@ -32,14 +32,20 @@
 		injectStyle: true,
 
 		levels: 2,
-
-		expandIcon: 'glyphicon glyphicon-plus',
+		/*expandIcon: 'glyphicon glyphicon-plus',
 		collapseIcon: 'glyphicon glyphicon-minus',
 		emptyIcon: 'glyphicon',
 		nodeIcon: '',
 		selectedIcon: '',
 		checkedIcon: 'glyphicon glyphicon-check',
-		uncheckedIcon: 'glyphicon glyphicon-unchecked',
+		uncheckedIcon: 'glyphicon glyphicon-unchecked',*/
+		expandIcon: 'fa fa-plus',
+		collapseIcon: 'fa fa-minus ',
+		emptyIcon: 'fa ',
+		nodeIcon: '',
+		selectedIcon: '',
+		checkedIcon: 'fa  fa-check-square-o  ',
+		uncheckedIcon: 'fa fa-square-o	',
 
 		color: undefined, // '#000000',
 		backColor: undefined, // '#FFFFFF',

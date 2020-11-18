@@ -155,12 +155,13 @@
     </Compile>
     <Compile Include="Helpers\SGPHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
-    <Compile Include="Models\AccionPorRolView.cs" />
+    <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
     <Compile Include="Models\ConfiguracionModelView.cs" />
     <Compile Include="Models\MenuSideBarModelView.cs" />
+    <Compile Include="Models\ProveedorModelView.cs" />
     <Compile Include="Models\PersonaModelView.cs" />
     <Compile Include="Models\PrioridadModelView.cs" />
     <Compile Include="Models\RolModelView.cs" />
@@ -2765,6 +2766,7 @@
     <Content Include="Scripts\js\widget-charts.js" />
     <Content Include="Scripts\js\widget-data.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\TreeView\TreeView.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2778,33 +2780,17 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Evento\Index.cshtml" />
     <Content Include="Scripts\js\prepros-6.config" />
-    <Content Include="Views\Evento\Calendario.cshtml" />
-    <Content Include="Views\Calendario\_mAddEvento.cshtml" />
-    <Content Include="Views\Evento\Evento.cshtml" />
     <Content Include="Views\Cuenta\Acceder.cshtml" />
-    <Content Include="Views\Evento\Crear.cshtml" />
     <Content Include="Views\Rol\Create.cshtml" />
-    <Content Include="Views\Rol\1Index.cshtml" />
-    <Content Include="Views\Evento\Delete.cshtml" />
-    <Content Include="Views\Evento\Details.cshtml" />
-    <Content Include="Views\Evento\Edit.cshtml" />
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Shared\_PartialMsgErro.cshtml" />
     <Content Include="Views\Shared\_PartialMsgSucesso.cshtml" />
     <Content Include="Views\Unauthorised\Index.cshtml" />
-    <Content Include="Views\NewFolder1\Create.cshtml" />
-    <Content Include="Views\NewFolder1\Delete.cshtml" />
-    <Content Include="Views\NewFolder1\Details.cshtml" />
-    <Content Include="Views\NewFolder1\Edit.cshtml" />
-    <Content Include="Views\NewFolder1\Index.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Evento.cshtml" />
-    <Content Include="Views\Configuracion\Index.cshtml" />
-    <Content Include="Views\Configuracion\_CreateMenusidebar.cshtml" />
     <Content Include="Views\Base\card.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Rol\DeleteAccionPorRol.cshtml" />
@@ -2817,6 +2803,7 @@
     <Content Include="Views\Menusidebar\Index.cshtml" />
     <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Proveedor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

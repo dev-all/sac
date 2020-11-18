@@ -101,28 +101,8 @@
                         </div>
 
 
-                        <div class="modal" tabindex="-1" role="dialog" id="modalResert">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Modal body text goes here.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!--.modal- -->
-                        <div  class="modal"  tabindex="-1"   role="dialog" aria-hidden="true">
+                        <div id="modalResert" class="modal"  tabindex="-1" data-backdrop="false"  role="dialog" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -138,13 +118,15 @@
                                         </div>
                                         <div class="form-group ">
                                             <div class="col-xs-12">
-                                                <input class="form-control" type="text" required="" placeholder="Email">
+                                                <input class="form-control" type="text" required="" placeholder="Escribir su email">
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" value="Recuperar" formaction="@Url.Action("CreateAccion", "Configuracion")" class="btn btn-primary" />
+                                        <input type="submit" value="Recuperar" 
+                                               formaction="@Url.Action("CreateAccion", "Configuracion")" 
+                                               class="btn btn-success" />
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                     </div>
                                 </div>

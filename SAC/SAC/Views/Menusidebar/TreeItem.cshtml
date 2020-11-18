@@ -6,7 +6,7 @@
 
 @foreach (var item in Model)
 {
-<li href="@Url.Action("Edit", "MenuSidebar", new { id = item.IdMenuSidebar })" class="@Html.Raw((ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString().ToLower().Equals(item.Accion.Controlador)
+<li href="navbar-brand @Url.Action("Edit", "MenuSidebar", new { id = item.IdMenuSidebar })" class="@Html.Raw((ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString().ToLower().Equals(item.Accion.Controlador)
                                                         && ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToString().ToLower().Equals(item.Accion.Nombre) ) ? "active": " ")"
     aria-expanded="@Html.Raw((ViewContext.Controller.ValueProvider.GetValue("controller").RawValue.ToString().ToLower() == item.Accion.Nombre
                                     &&  ViewContext.Controller.ValueProvider.GetValue("action").RawValue.ToString().ToLower() == item.Accion.Controlador ) ? "true": "false")">

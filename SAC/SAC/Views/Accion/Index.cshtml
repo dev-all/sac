@@ -122,7 +122,7 @@
 
                                                         <td>
                                                             <a href="@Url.Action("Edit", "Accion",new { id = item.IdAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Editar">Editar </a>
-                                                            <input type="submit" value="Eliminar" formaction="@Url.Action("DeleteAccion", "Configuracion", new { id = item.IdAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
+                                                            <input type="submit" value="Eliminar" formaction="@Url.Action("Delete", "Accion", new { id = item.IdAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
                                                         </td>
                                                     </tr>
                                                         }
@@ -169,7 +169,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <input type="submit" value="Guardar" formaction="@Url.Action("CreateAccion", "Configuracion")" class="btn btn-primary" />
+                                                        <input type="submit" value="Guardar" formaction="@Url.Action("Create", "Accion")" class="btn btn-primary" />
                                                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
                                                     </div>
                                                 </div>

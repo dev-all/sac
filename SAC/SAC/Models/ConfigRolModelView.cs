@@ -7,9 +7,10 @@ namespace SAC.Models
 {
     public class ConfigRolModelView
     {
-
-        public ICollection<RolModelView> Roles { get; set; }
         public RolModelView Rol { get; set; }
+        public ICollection<RolModelView> Roles { get; set; }    
+        public ICollection<MenuSideBarModelView> Menusidebar { get; set; }
+
     }
 
 }

@@ -17,17 +17,20 @@ namespace Datos.Repositorios
             this.context = contexto;
         }
 
-        #region
+       
         /// <summary>
         /// MenuSidebar
         /// </summary>
         public List<MenuSidebar> GetMenuSidebar()
         {
-            var side = context.MenuSidebar.Where(m => m.Activo == true && m.IdParent == null).
-                        IncludeFilter(m => m.MenuSidebar1.Where(p => p.Activo==true))
-                        .OrderBy(acc => acc.Titulo).ToList();           
+            var side = (from menu in context.MenuSidebar
+                        where menu.Activo == true && menu.IdParent == null
+                        orderby menu.Titulo
+                        select menu).ToList();
             return side;
         }
+      
+      
 
         /// <summary>
         /// MenuSidebar
@@ -35,9 +38,9 @@ namespace Datos.Repositorios
         public List<MenuSidebar> GetMenuSidebar(int IdUsuario)
         {
             var side = context.MenuSidebar.
-                IncludeFilter(m => m.MenuSidebar1.Where(p => p.Activo == true))
-                .Where(menu => menu.Activo == true && menu.IdParent == null)
-                .OrderBy(acc => acc.Titulo).ToList();
+                            IncludeFilter(m => m.MenuSidebar1.Where(p => p.Activo == true))
+                            .Where(menu => menu.Activo == true && menu.IdParent == null)
+                            .OrderBy(acc => acc.Titulo).ToList();
             return side;
         }
 
@@ -58,11 +61,29 @@ namespace Datos.Repositorios
         }
 
         public MenuSidebar GetMenuSidebarPorId(int id)
-        {            
+        {
+            context.Configuration.LazyLoadingEnabled = true;
                 return context.MenuSidebar
-                        .Include(m => m.Accion)
-                        .Include(m => m.MenuSidebar1)
                         .Where(menu => menu.IdMenuSidebar == id && menu.Activo == true).FirstOrDefault();
+        }
+        public MenuSidebar GetMenuSidebarPorIdFull(int id)
+        {
+            return context.MenuSidebar
+                    .Include(m => m.Accion)
+                    .Include(m => m.MenuSidebar1)
+                    .Where(menu => menu.IdMenuSidebar == id
+                    && menu.Activo == true).FirstOrDefault();
+        }
+
+        public List<Accion> GetAccionEnMenuSide(int idmenusider)
+        {
+            var acciones= ( from a in context.Accion
+                            join m in context.MenuSidebar
+                                    on new { a.IdAccion, Activo = true }
+                                equals new { IdAccion = (int)(m.IdAccion), m.Activo }
+                            where  m.IdMenuSidebar == idmenusider
+                            select a ).ToList();
+            return acciones;
         }
 
         public void ActualizarMenusidebar(MenuSidebar menuSideBarModel)
@@ -90,7 +111,32 @@ namespace Datos.Repositorios
             //return menu;
         }
 
+        public List<MenuSidebar> GetMenuSidebarPorRol(int idRol)
+        {
+          
+            List<MenuSidebar> menuSidebar = (from m in context.MenuSidebar
+                                             join a in context.Accion on m.IdAccion equals a.IdAccion
+                                             join apr in context.AccionPorRol on a.IdAccion equals apr.idAccion
+                                             where apr.idRol == idRol && m.Activo == true
+                                             orderby m.Orden
+                                             select m).ToList();
 
-        #endregion
+
+            return menuSidebar;
+        }
+
+
+        public List<Accion> GetAccionesEnMenuSidebarPorRol(int idRol)
+        {
+
+            List<Accion> AccionMenuSidebar = (from m in context.MenuSidebar
+                                             join a in context.Accion on m.IdAccion equals a.IdAccion
+                                             join apr in context.AccionPorRol on a.IdAccion equals apr.idAccion
+                                             where apr.idRol == idRol && m.Activo == true
+                                             orderby m.Orden
+                                             select a).ToList();
+            return AccionMenuSidebar;
+        }
+
     }
 }

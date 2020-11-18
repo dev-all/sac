@@ -22,7 +22,7 @@ namespace Negocio.Servicios
         }
 
 
-        #region
+       
         /// <summary>
         ///  meodos para gestion de acciones
         /// </summary>
@@ -56,9 +56,7 @@ namespace Negocio.Servicios
         }
 
        
-        #endregion
-
-        #region
+       
         /// <summary>
         ///  meodos para gestion de roles
         /// </summary>
@@ -77,25 +75,49 @@ namespace Negocio.Servicios
             return Mapper.Map<Rol, Modelos.RolModel>(rolRepositorio.GetRolPorId(idRol));
         }
         public void ActualizarRol(RolModel rol)
-        {
-             rolRepositorio.ActualizarRol(Mapper.Map<Modelos.RolModel, Rol>(rol));
+        {             
+            rolRepositorio.ActualizarRol(Mapper.Map<Modelos.RolModel, Rol>(rol));
         }
         public void InsertarAccionPorRol(AccionPorRolModel accionPorRol)
         {
             rolRepositorio.InsertarAccionPorRol(Mapper.Map< AccionPorRolModel, AccionPorRol>(accionPorRol));
         }
 
+        public List<AccionModel> GetAccionNoMenu(int idRol)
+        {
+            var a = accionRepositorio.GetAccionNoMenu(idRol);
+            return Mapper.Map<List<Accion>, List<AccionModel>>(a);
+        }
+
+        public List<AccionPorRolModel> GetAllAccionPorRol(int idRol)
+        {
+            return Mapper.Map<List<AccionPorRol>, List<AccionPorRolModel>>(accionRepositorio.GetAllAccionPorRol(idRol));
+        }
+
+        public AccionPorRolModel GetAccionPorRol(int idRol,int idAccion)
+        {
+            return Mapper.Map<AccionPorRol, AccionPorRolModel>(accionRepositorio.GetAccionPorRol(idRol, idAccion));
+        }
+
+        public List<MenuSideBarModel> GetMenuSidebarPorRol(int idRol)
+        {
+            return Mapper.Map<List<MenuSidebar>, List<MenuSideBarModel>>(menuSidebarRepositorio.GetMenuSidebarPorRol(idRol));
+        }
+
+        
+        public List<AccionModel> GetAccionesEnMenuSidebarPorRol(int idRol)
+        {
+            return Mapper.Map<List<Accion>, List<AccionModel>>(menuSidebarRepositorio.GetAccionesEnMenuSidebarPorRol(idRol));
+        }
+
         public RolModel DeleteAccionPorRol(int idRolPorAccion)
         {
             return Mapper.Map<Rol, Modelos.RolModel>(rolRepositorio.DeleteAccionPorRol(idRolPorAccion));           
         }
-        #endregion
-
-
-
-        #region
+       
         /// <summary>
         ///  meodos para gestion del MenuSideBar
+        ///  treeview
         /// </summary>
         /// <returns></returns>
         public List<MenuSideBarModel> GetMenuSidebar()
@@ -106,6 +128,7 @@ namespace Negocio.Servicios
 
         public MenuSideBarModel GetMenuSidebarPorId(int id)
         {
+            
             try
             {
                 var menuSideBarModel = Mapper.Map<MenuSidebar, MenuSideBarModel>(menuSidebarRepositorio.GetMenuSidebarPorId(id));
@@ -117,7 +140,34 @@ namespace Negocio.Servicios
                 return null;
             }
         }
-        
+        public MenuSideBarModel GetMenuSidebarPorIdFull(int id)
+        {
+            try
+            {
+                var menuSideBarModel = Mapper.Map<MenuSidebar, MenuSideBarModel>(menuSidebarRepositorio.GetMenuSidebarPorIdFull(id));
+                return menuSideBarModel;
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                return null;
+            }
+        }
+      
+        public List<AccionModel> GetAccionEnMenuSide(int idmenusider)
+        {
+            try
+            {               
+                var AccionesEnMenu = Mapper.Map<List<Accion>, List<AccionModel>>(menuSidebarRepositorio.GetAccionEnMenuSide(idmenusider));
+                return AccionesEnMenu;
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                return null;
+            }
+        }
+
         public List<MenuSideBarModel> GetMenuSidebar(int IdUsuario)
         {         
             try
@@ -157,27 +207,7 @@ namespace Negocio.Servicios
                 menuSidebarRepositorio.DeleteMenusidebar(id);          
         }
       
-        #endregion
-
-
-        #region
-        ///<summary>
-        ///
-        /// </summary>
-        /// 
-
-        public ConfiguracionModel GetConfiguracion()
-        {
-            ConfiguracionModel configuracionModel = new ConfiguracionModel{
-                                                                                IEmenusidebar = GetMenuSidebar(),
-                                                                                IErol = GetRol(),
-                                                                                IEaccion = GetAccion()                                                                                
-                                                                            };
-
-            return configuracionModel;
-        }
-        #endregion
-
+       
     }
 
 }

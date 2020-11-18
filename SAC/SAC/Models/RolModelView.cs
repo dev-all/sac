@@ -12,10 +12,11 @@ namespace SAC.Models
         public string descripcion { get; set; }
         public bool esAdministrador { get; set; }
         public int? idHome { get; set; }
-        public ICollection<AccionPorRolView> AccionPorRol { get; set; }
+        public ICollection<AccionPorRolModelView> AccionPorRol { get; set; }
         public ICollection<AccionModelView> Acciones { get; set; }      
         public int idAccionPorRol { get; set; }
 
+        public string MenuSidePorRol { get; set; }
     }
 
 }

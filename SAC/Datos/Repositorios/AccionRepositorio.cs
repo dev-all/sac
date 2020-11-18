@@ -15,14 +15,7 @@ namespace Datos.Repositorios
         {
             this.context = contexto;
         }
-
-
-        #region Create...
-        /// <summary>
-        /// Metodos para Gestion de Acciones
-        /// </summary>
-        /// <returns></returns>
-
+            
         public Accion CreateAccion(Accion accion)
         {
            return  Insertar(accion);
@@ -60,10 +53,49 @@ namespace Datos.Repositorios
 
             return Accion;
         }
-
+        /// <summary>
+        ///    acciones por rol que no esten el el menu
+        /// </summary>
      
-        #endregion
+        public List<AccionPorRol> GetAllAccionPorRol(int idRol)
+        { 
+            var m = context.MenuSidebar
+                    .Include(a => a.Accion)                    
+                    .Where(x => x.Activo)
+                    .Select(x => x.IdAccion)
+                    .ToArray();
 
+            var ListAccionPorRol = context.AccionPorRol
+                                    .Include(x => x.Accion)
+                                    .Where(x => x.idRol == idRol
+                                       && !(m.Contains(x.idAccion))
+                                    ).ToList();
 
+            return ListAccionPorRol;
+
+        
+        }
+        public AccionPorRol GetAccionPorRol(int idRol, int idAccion)
+        {
+            return (from  apr in context.AccionPorRol 
+                    where apr.idRol == idRol && apr.idAccion == idAccion                   
+                    select apr).FirstOrDefault();
+          
+        }
+
+        public List<Accion> GetAccionNoMenu(int idRol)
+        {
+         
+
+            var listAccion = (from a in context.Accion
+                    join m in context.MenuSidebar on a.IdAccion equals (int)m.IdAccion
+                    into m_join
+                    from m in m_join.DefaultIfEmpty()
+                    where
+                      a.Activo == true &&
+                      m.IdAccion == null
+                    select a).ToList();
+            return listAccion;
+        }
     }
 }

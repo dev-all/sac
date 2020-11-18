@@ -34,22 +34,16 @@ namespace Datos.Repositorios
         }
       
         public void ActualizarRol(Rol RolParaActualizar)
-        {
-
-            context.Rol.Attach(RolParaActualizar);
-            context.Entry(RolParaActualizar).Property(x => x.Descripcion).IsModified = true;
-            context.Entry(RolParaActualizar).Property(x => x.EsAdministrador).IsModified = true;
-            //context.Entry(RolParaActualizar).Property(x => x.IdHome).IsModified = true;
-            //context.Entry(RolParaActualizar).Property(x => x.AccionPorRol).IsModified = true;
+        {            
+            Rol rol = GetRolPorId(RolParaActualizar.IdRol);
+            rol.Descripcion = RolParaActualizar.Descripcion ?? rol.Descripcion;
+            rol.EsAdministrador = RolParaActualizar.EsAdministrador;
+            rol.IdHome = RolParaActualizar.IdHome ?? rol.IdHome;
+            if (RolParaActualizar.AccionPorRol.Count() > 0) {
+                rol.AccionPorRol = RolParaActualizar.AccionPorRol;
+            }
             context.SaveChanges();
 
-            //Rol rol = GetRolPorId(RolParaActualizar.IdRol);
-            //rol.Descripcion = RolParaActualizar.Descripcion ?? rol.Descripcion;
-            //rol.IdHome = RolParaActualizar.IdHome ?? rol.IdHome;
-            //rol.AccionPorRol = RolParaActualizar.AccionPorRol ?? rol.AccionPorRol;
-            //context.SaveChanges();
-
-          // return rol;
         }
 
         public Rol DeleteAccionPorRol(int idRolPorAccion)
@@ -62,10 +56,22 @@ namespace Datos.Repositorios
             return rol;
         }
 
-        public void InsertarAccionPorRol(AccionPorRol accionPorRolView)
+        public void InsertarAccionPorRol(AccionPorRol model)
         {
-            context.AccionPorRol.Add(accionPorRolView);
-            context.SaveChanges();          
+            var existsAccionPorRol = GetAccionPorRol(model);
+            if(existsAccionPorRol is null)
+            { 
+            context.AccionPorRol.Add(model);
+            context.SaveChanges();
+            }
+                       
         }
+
+        public AccionPorRol GetAccionPorRol(AccionPorRol model) {
+
+            return context.AccionPorRol.Where(r => r.idRol == model.idRol && r.idAccion == model.idAccion).FirstOrDefault();
+        }
+
+       
     }
 }

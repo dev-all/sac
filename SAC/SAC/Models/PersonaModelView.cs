@@ -8,7 +8,6 @@ namespace SAC.Models
 {
     public class PersonaModelView
     {
-
         public int id { get; set; }
         public string documento { get; set; }
         public string nombre { get; set; }
@@ -22,6 +21,5 @@ namespace SAC.Models
         public string telefonoAlternativo { get; set; }
         public string codigoPostal { get; set; }
         public string domicilio { get; set; }
-
     }
 }

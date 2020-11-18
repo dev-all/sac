@@ -26,7 +26,7 @@ namespace Datos.Repositorios
            return  Insertar(proveedor);
         }
 
-        public List<Proveedor> GetProveedor()
+        public List<Proveedor> GetAllProveedor()
         {
             return context.Proveedor.OrderBy(x => x.Nombre ).ToList();
         }

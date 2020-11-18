@@ -51,6 +51,11 @@
     {
         @Html.AntiForgeryToken()
 
+        <input id="JsonSelectMenuSider"
+               name="JsonSelectMenuSider"
+               type="hidden"
+               value="@ViewBag.JsonSelectMenuSider" />
+
         <div class="card ">
             <div class="card-body">
                 <div class="container">
@@ -75,14 +80,26 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8">
+                                <div class="col-md-6">
+
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Menu Inicio habilitado para el Rol</h5>
+                                            <h5 class="card-subtitle mb-2 text-muted"></h5>
+                                            <p class="card-text"> </p>
+                                            <h6 class="card-subtitle mb-2 text-muted">Habilite las opciones y seleccione guardar para confirmar los cambios</h6>
+                                            <div id="treeview-selectable" class=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
                                     <nav class="sidebar-nav">
                                         <ul id="sidebarnavConfig">
                                             <li class="nav-small-cap">Inicio</li>
                                             <li class="active">
                                                 <ul aria-expanded="true" class="collapse in">
-                                                    @Html.Partial("~/Views/Menusidebar/TreeItem.cshtml", Model.IEmenuSideBar)
+
+                                                    @*@Html.Partial("~/Views/Menusidebar/TreeItem.cshtml", Model.IEmenuSideBar)*@
                                                 </ul>
                                             </li>
                                         </ul>
@@ -90,7 +107,7 @@
                                 </div>
                             </div>
 
-                        
+
                             <!--.modal- -->
                             <div id="add-menu" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -157,6 +174,10 @@
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
+
+<!-- Treeview Plugin JavaScript -->
+<script src="~/Content/assets/plugins/bootstrap-treeview-master/dist/bootstrap-treeview.min.js"></script>
+<script src="~/Scripts/TreeView/TreeView.js"></script>
 
 @section Scripts{
 
