@@ -27,7 +27,7 @@ namespace SAC.Controllers
             configAccionModelView = new ConfigMenuSidebarModelView
             {
                 // listar menu
-                IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioConfiguracion.GetMenuSidebar()),
+               // IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioConfiguracion.GetMenuSidebar()),
                 
                 // drop de nuevo menu
                 ICaccion = Mapper.Map<List<AccionModel>, List<AccionModelView>>(servicioConfiguracion.GetAccion())
