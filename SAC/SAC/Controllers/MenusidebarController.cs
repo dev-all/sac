@@ -7,6 +7,9 @@ using SAC.Models;
 using Negocio.Servicios;
 using Negocio.Modelos;
 using AutoMapper;
+using SAC.Atributos;
+using Entidad.Models;
+using System.Web.Script.Serialization;
 namespace SAC.Controllers
 {
     public class MenusidebarController : BaseController
@@ -14,27 +17,54 @@ namespace SAC.Controllers
 
         private ServicioConfiguracion servicioConfiguracion = new ServicioConfiguracion();
         ConfigMenuSidebarModelView configAccionModelView;
+        private String JsonTreeView;
+        private JavaScriptSerializer jsonString = new JavaScriptSerializer();
 
         // GET: 
+        [AutorizacionDeSistema]
         public ActionResult Index()
         {
             configAccionModelView = new ConfigMenuSidebarModelView
             {
                 // listar menu
-                IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioConfiguracion.GetMenuSidebar()),
+               // IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioConfiguracion.GetMenuSidebar()),
                 
                 // drop de nuevo menu
                 ICaccion = Mapper.Map<List<AccionModel>, List<AccionModelView>>(servicioConfiguracion.GetAccion())
 
             };
-
-            /// menu
+            
             ViewBag.JsonMenuSider = TreeView(servicioConfiguracion.GetMenuSidebar());
-
-
 
             return View(configAccionModelView);
         }
+
+        public String TreeView(List<MenuSideBarModel> model)
+        {
+            List<TreeViewModel> ListTreeView = new List<TreeViewModel>();
+            foreach (var i in model)
+            {
+                TreeViewModel item = new TreeViewModel();
+                item.text = i.Titulo;
+                item.href = "/Menusidebar/Edit/" + i.IdMenuSidebar.ToString();
+                if (i.Group.Count > 0)
+                {
+                    List<TreeViewModel> ListNode = new List<TreeViewModel>();
+                    foreach (var n in i.Group)
+                    {
+                        TreeViewModel nodo = new TreeViewModel();
+                        nodo.text = n.Titulo;
+                        nodo.href = "/Menusidebar/Edit/" + n.IdMenuSidebar.ToString();
+                        ListNode.Add(nodo);
+                    }
+                    item.nodes = ListNode;
+                }
+                ListTreeView.Add(item);
+            }
+            JsonTreeView += jsonString.Serialize(ListTreeView);
+            return JsonTreeView;
+        }
+
 
 
         public ActionResult Edit(int id)
