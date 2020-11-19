@@ -5,6 +5,7 @@
 <!-- page css -->
 <link href="/Content/assets/css/pages/floating-label.css" rel="stylesheet">
 
+<link href="/Content/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
 
 
 <!-- ============================================================== -->
@@ -51,10 +52,14 @@
     {
         @Html.AntiForgeryToken()
 
-        <input id="JsonSelectMenuSider"
-               name="JsonSelectMenuSider"
+        <input id="JsonMenuSiderPorRol"
+               name="JsonMenuSiderPorRol"
                type="hidden"
-               value="@ViewBag.JsonSelectMenuSider" />
+               value="@ViewBag.JsonMenuSiderPorRol" />
+        <input id="JsonMenuSider"
+               name="JsonMenuSider"
+               type="hidden"
+               value="@ViewBag.JsonMenuSider" />
 
         <div class="card ">
             <div class="card-body">
@@ -79,6 +84,8 @@
                                 </div>
                             </div>
 
+
+
                             <div class="row">
                                 <div class="col-md-6">
 
@@ -93,17 +100,17 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <nav class="sidebar-nav">
+                                    @*<nav class="sidebar-nav">
                                         <ul id="sidebarnavConfig">
                                             <li class="nav-small-cap">Inicio</li>
                                             <li class="active">
                                                 <ul aria-expanded="true" class="collapse in">
 
-                                                    @*@Html.Partial("~/Views/Menusidebar/TreeItem.cshtml", Model.IEmenuSideBar)*@
+                                                    @Html.Partial("~/Views/Menusidebar/TreeItem.cshtml", Model.IEmenuSideBar)
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </nav>
+                                    </nav>*@
                                 </div>
                             </div>
 
@@ -183,6 +190,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+
         });
 
     </script>
