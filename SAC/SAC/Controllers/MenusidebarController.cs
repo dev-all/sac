@@ -11,9 +11,14 @@ using SAC.Atributos;
 using Entidad.Models;
 using System.Web.Script.Serialization;
 namespace SAC.Controllers
+
+    
 {
     public class MenusidebarController : BaseController
     {
+
+
+        /* PRUEBA DE COMENTARIO  de dev-a para */
 
         private ServicioConfiguracion servicioConfiguracion = new ServicioConfiguracion();
         ConfigMenuSidebarModelView configAccionModelView;
@@ -27,7 +32,7 @@ namespace SAC.Controllers
             configAccionModelView = new ConfigMenuSidebarModelView
             {
                 // listar menu
-               // IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioConfiguracion.GetMenuSidebar()),
+                IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioConfiguracion.GetMenuSidebar()),
                 
                 // drop de nuevo menu
                 ICaccion = Mapper.Map<List<AccionModel>, List<AccionModelView>>(servicioConfiguracion.GetAccion())
