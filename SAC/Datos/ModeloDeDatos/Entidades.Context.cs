@@ -29,7 +29,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Contacto> Contacto { get; set; }
         public virtual DbSet<Evento> Evento { get; set; }
         public virtual DbSet<homePorRol> homePorRol { get; set; }
-        public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<Notificacion> Notificacion { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
@@ -39,5 +38,15 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Accion> Accion { get; set; }
         public virtual DbSet<Prioridad> Prioridad { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+        public virtual DbSet<AfipRegimen> AfipRegimen { get; set; }
+        public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
+        public virtual DbSet<Imputacion> Imputacion { get; set; }
+        public virtual DbSet<Rubros> Rubros { get; set; }
+        public virtual DbSet<SubRubro> SubRubro { get; set; }
+        public virtual DbSet<TipoIva> TipoIva { get; set; }
+        public virtual DbSet<TipoMoneda> TipoMoneda { get; set; }
+        public virtual DbSet<TipoProveedor> TipoProveedor { get; set; }
+        public virtual DbSet<Localidad> Localidad { get; set; }
+        public virtual DbSet<Pais> Pais { get; set; }
     }
 }

@@ -44,7 +44,6 @@ namespace Datos.ModeloDeDatos
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacto> Contacto { get; set; }
-        public virtual Localidad Localidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notificacion> Notificacion { get; set; }
         public virtual Provincia Provincia { get; set; }

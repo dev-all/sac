@@ -7,28 +7,109 @@ namespace Datos.Repositorios
 {
     public class LocalidadRepositorio : RepositorioBase<Localidad>
     {
-       private INCORPORACIONES_Entities context;
+       private SAC_Entities context;
 
-        public LocalidadRepositorio(INCORPORACIONES_Entities contexto) : base(contexto)
+        public LocalidadRepositorio(SAC_Entities contexto) : base(contexto)
         {
             this.context = contexto;
         }
-    
-        public Localidad CrearLocalidad(Localidad localidad)
+
+
+
+        #region "METODOS DE ACTUALIZACION"
+
+
+        // INSERTAR
+
+        public Localidad InsertarLocalidad(Localidad localidad)
         {
             return Insertar(localidad);
         }
-     
-        public Localidad ObtenerLocalidadPorNombreIdProvincia(string nombreLocalidad, int idProvincia)
+
+
+        public Localidad ActualizarLocalidad(Localidad localidad)
         {
-            var provincia = context.Provincia.FirstOrDefault(p => p.id == idProvincia);
-            return context.Localidad.FirstOrDefault(l => l.nombre == nombreLocalidad && l.idProvincia == provincia.id);
+
+
+
+            localidad.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString()); ;
+            context.SaveChanges();
+            return localidad;
+
         }
 
-        public Provincia ObtenerProvinciaPorNombre( string nombreProvincia)
-        {            
-            return context.Provincia.FirstOrDefault(p => p.nombre == nombreProvincia);
+
+        public void EliminarLocalidad(Localidad localidad)
+        {
+
+
+            localidad.IdUsuario = localidad.IdUsuario;
+            localidad.Activo = false;
+            localidad.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString()); ;
+            context.SaveChanges();
+            //return localidad;
+
         }
+
+
+
+
+
+
+
+
+        #endregion
+
+
+        #region "METODOS DE LECTOR "
+
+
+
+
+      
+
+
+
+
+        public Localidad ObtenerIdProvincia(int idProvincia)
+        {
+            var provincia = context.Localidad.FirstOrDefault(p => p.IdProvincia == idProvincia);
+            return context.Localidad.FirstOrDefault(l => l.IdProvincia == idProvincia);
+        }
+
+
+        public Localidad ObtenerIdPais(int idPais)
+        {
+            var provincia = context.Localidad.FirstOrDefault(p => p.IdPais == idPais);
+            return context.Localidad.FirstOrDefault(l => l.IdPais == idPais);
+        }
+
+        public Localidad ModificarLocalidad(Localidad localidad)
+        {
+            return Insertar(localidad);
+        }
+
+
+        public Localidad ObtenerporId(int idLocalidad)
+        {
+
+            var localidad = context.Localidad.FirstOrDefault(p => p.Id == idLocalidad);
+            return context.Localidad.FirstOrDefault(l => l.Id == idLocalidad);
+
+
+        }
+
+        public Localidad ObtenerporCodigoPostal(int codigopostal)
+        {
+
+            var localidad = context.Localidad.FirstOrDefault(p => p.Codigo == codigopostal);
+            return context.Localidad.FirstOrDefault(l => l.Codigo == codigopostal);
+
+
+        }
+
+        #endregion
+
 
     }
 }

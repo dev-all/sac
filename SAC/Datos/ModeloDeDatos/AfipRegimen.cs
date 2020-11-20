@@ -12,25 +12,26 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Localidad
+    public partial class AfipRegimen
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AfipRegimen()
+        {
+            this.Proveedor = new HashSet<Proveedor>();
+        }
+    
         public int Id { get; set; }
-        public Nullable<int> Codigo { get; set; }
-        public string Nombre { get; set; }
-        public string Altini { get; set; }
-        public string AltFin { get; set; }
-        public string CodigoProvincia { get; set; }
-        public string NombreSucursal { get; set; }
-        public Nullable<int> CodigoSucursal { get; set; }
-        public Nullable<int> OfDistLocal { get; set; }
-        public Nullable<int> codposchr { get; set; }
-        public Nullable<int> IdPais { get; set; }
-        public Nullable<int> IdProvincia { get; set; }
+        public string Descripcion { get; set; }
+        public string Concepto { get; set; }
+        public Nullable<decimal> Aliri { get; set; }
+        public Nullable<decimal> Alirni { get; set; }
+        public Nullable<decimal> Minimo { get; set; }
+        public Nullable<byte> Imputacion { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
-        public virtual Provincia Provincia { get; set; }
-        public virtual Pais Pais { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Proveedor> Proveedor { get; set; }
     }
 }

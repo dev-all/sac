@@ -12,25 +12,25 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Localidad
+    public partial class Rubros
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Rubros()
+        {
+            this.SubRubro = new HashSet<SubRubro>();
+        }
+    
         public int Id { get; set; }
-        public Nullable<int> Codigo { get; set; }
-        public string Nombre { get; set; }
-        public string Altini { get; set; }
-        public string AltFin { get; set; }
-        public string CodigoProvincia { get; set; }
-        public string NombreSucursal { get; set; }
-        public Nullable<int> CodigoSucursal { get; set; }
-        public Nullable<int> OfDistLocal { get; set; }
-        public Nullable<int> codposchr { get; set; }
-        public Nullable<int> IdPais { get; set; }
-        public Nullable<int> IdProvincia { get; set; }
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<int> IdGrupoCuenta { get; set; }
+        public Nullable<decimal> Total { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
-        public virtual Provincia Provincia { get; set; }
-        public virtual Pais Pais { get; set; }
+        public virtual GrupoCuenta GrupoCuenta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubRubro> SubRubro { get; set; }
     }
 }
