@@ -17,17 +17,24 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Provincia()
         {
-            this.Localidad = new HashSet<Localidad>();
             this.Persona = new HashSet<Persona>();
+            this.Localidad = new HashSet<Localidad>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public bool Activo { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public string Codigo { get; set; }
+        public Nullable<int> CodigoNumero { get; set; }
+        public Nullable<int> IdPais { get; set; }
+        public Nullable<int> CodigoAfip { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
+        public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Localidad> Localidad { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Persona> Persona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Localidad> Localidad { get; set; }
+        public virtual Pais Pais { get; set; }
     }
 }

@@ -52,26 +52,26 @@ namespace SAC.Controllers
         public ActionResult Crear(String DniUniformado)
         {
           
-            if(!String.IsNullOrEmpty(DniUniformado))
-            {
-                var uniformado = Helpers.SGPHelper.ObtenerPersonaSGP(DniUniformado);
+            //if(!String.IsNullOrEmpty(DniUniformado))
+            //{
+            //    var uniformado = null; //Helpers.SGPHelper.ObtenerPersonaSGP(DniUniformado);
 
 
-                usuario.Persona = new PersonaModel()
-                {
-                    Documento = uniformado.Documento,
-                    Nombre = uniformado.Nombre,
-                    Apellido = uniformado.Apellido
-                };
-                usuario.Grado = uniformado.Grado;
-                usuario.Unidad = uniformado.Unidad;
+            //    usuario.Persona = new PersonaModel()
+            //    {
+            //        Documento = uniformado.Documento,
+            //        Nombre = uniformado.Nombre,
+            //        Apellido = uniformado.Apellido
+            //    };
+            //    usuario.Grado = uniformado.Grado;
+            //    usuario.Unidad = uniformado.Unidad;
 
 
-            }
-            else
-            {
-                usuario = null;
-            }
+            //}
+            //else
+            //{
+            //    usuario = null;
+            //}
 
             ViewBag.Roles = selectListRoles();
             return View("Crear", usuario);
