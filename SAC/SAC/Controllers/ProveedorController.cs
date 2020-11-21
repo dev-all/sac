@@ -11,6 +11,12 @@ namespace SAC.Controllers
     {
 
         private ServicioProveedor servicioProveedor = new ServicioProveedor();
+
+        public ProveedorController()
+        {
+            servicioProveedor._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
+        }
+
         // GET: Accion
         public ActionResult Index()
         {

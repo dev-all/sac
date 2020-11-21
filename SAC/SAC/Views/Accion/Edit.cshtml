@@ -10,18 +10,6 @@
 <!-- Start Page Content -->
 <!-- ============================================================== -->
 
-<div>
-    @if (TempData["sucesso"] != null)
-    {
-    @Html.Partial("_PartialMsgSucesso");
-    }
-    else if (TempData["erro"] != null)
-    {
-    @Html.Partial("_PartialMsgErro");
-    }
-</div>
-
-
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor">Evento </h3>

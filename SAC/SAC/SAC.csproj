@@ -1816,6 +1816,9 @@
     <Content Include="Content\assets\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\assets\plugins\toast-master\css\jquery.toast.css" />
     <Content Include="Content\assets\plugins\toast-master\js\jquery.toast.js" />
+    <Content Include="Content\assets\plugins\toastr\toastr.css" />
+    <Content Include="Content\assets\plugins\toastr\toastr.min.css" />
+    <Content Include="Content\assets\plugins\toastr\toastr.min.js" />
     <Content Include="Content\assets\scss\icons\flag-icon-css\flag-icon.min.css" />
     <Content Include="Content\assets\scss\icons\flag-icon-css\flags\ad.svg" />
     <Content Include="Content\assets\scss\icons\flag-icon-css\flags\ae.svg" />
@@ -2770,8 +2773,6 @@
     <Content Include="Views\Cuenta\Acceder.cshtml" />
     <Content Include="Views\Rol\Create.cshtml" />
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
-    <Content Include="Views\Shared\_PartialMsgErro.cshtml" />
-    <Content Include="Views\Shared\_PartialMsgSucesso.cshtml" />
     <Content Include="Views\Unauthorised\Index.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />

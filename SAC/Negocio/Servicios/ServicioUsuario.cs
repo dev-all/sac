@@ -17,8 +17,7 @@ namespace Negocio.Servicios
 
     public class ServicioUsuarios : ServicioBase, IServicioUsuarios
     {
-        private IUsuarioRepositorio repositorio { get; set; }
-        public Action<string, string> _mensaje;
+        private IUsuarioRepositorio repositorio { get; set; }      
         public ServicioUsuarios()
         {
             repositorio = kernel.Get<IUsuarioRepositorio>();

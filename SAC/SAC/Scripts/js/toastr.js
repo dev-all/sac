@@ -1,11 +1,8 @@
-/*
-Template Name: Material Pro admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: js
-*/
+
 $(function() {
-    "use strict";
+
+
+
       $(".tst1").click(function(){
            $.toast({
             heading: 'Welcome to Material Pro admin',
@@ -31,7 +28,8 @@ $(function() {
           });
 
      });
-      $(".tst3").click(function(){
+
+    $(".tst3").click(function () {
            $.toast({
             heading: 'Welcome to Material Pro admin',
             text: 'Use the predefined ones, or specify a custom position object.',

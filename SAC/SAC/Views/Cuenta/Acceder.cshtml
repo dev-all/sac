@@ -64,7 +64,7 @@
                 <div class="card-body ">
 
                     @using (Html.BeginForm("Acceder", "Cuenta", FormMethod.Post,
-                        new { @class = "form-horizontal form-material", novalidate = true }))
+new { @class = "form-horizontal form-material", novalidate = true }))
                     {
                         @Html.AntiForgeryToken()
 
@@ -74,27 +74,44 @@
                             <img src="/Content/assets/images/logo-text.png" alt="SAC" class="dark-logo" />
                         </div>
 
+
+
+                     
+                        if (!Html.ViewData.ModelState.IsValid)
+                        {
+                            <div id="noSchedulesAlert" class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                                </button>
+                               Los datos del usuario no son validos...
+                            </div>
+                        }
+
                         <div class="form-group m-t-40">
                             <label>Usuario</label>
                             <input type="text" class="form-control form-control-line" name="Usuario" value="" required placeholder="Escribir usuario" />
+
                         </div>
+
                         <div class="form-group ">
                             <label>Contraseña</label>
                             <input type="password" class="form-control form-control-line" name="Password" value="" required placeholder="Escribir contraseña" />
+
                         </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <a href="javascript:void(0)" class="text-dark pull-right" data-toggle="modal" data-target="#modalResert">
                                     <i class="fa fa-lock m-r-5"></i> Olvido su contraseña?
                                 </a>
-                               
+
                             </div>
                         </div>
                         <div class="row m-t-20">
                             <div class="col-md-12">
                                 <div class="form-group text-center">
                                     <div class="col-xs-12 p-b-20">
-                                        <button class="btn  btn-info btn-rounded" type="submit"> Iniciar sesión </button>
+                                        <button class="btn  btn-info btn-rounded" type="submit"> Iniciar sesión</button>
                                     </div>
                                 </div>
                             </div>
@@ -102,11 +119,11 @@
 
 
                         <!--.modal- -->
-                        <div id="modalResert" class="modal"  tabindex="-1" data-backdrop="false"  role="dialog" aria-hidden="true">
+                        <div id="modalResert" class="modal" tabindex="-1" data-backdrop="false" role="dialog" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Recuperar contraseña </h4>
+                                        <h4 class="modal-title">Recuperar contraseña</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     </div>
                                     <div class="modal-body">
@@ -124,8 +141,8 @@
 
                                     </div>
                                     <div class="modal-footer">
-                                        <input type="submit" value="Recuperar" 
-                                               formaction="@Url.Action("CreateAccion", "Configuracion")" 
+                                        <input type="submit" value="Recuperar"
+                                               formaction="@Url.Action("CreateAccion", "Configuracion")"
                                                class="btn btn-success" />
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                     </div>
@@ -165,13 +182,13 @@
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         });
-        // ==============================================================
-        // Login and Recover Password
-        // ==============================================================
-        //$('#to-recover').on("click", function () {
-        //    $("#loginform").slideUp();
-        //    $("#recoverform").fadeIn();
-        //});
+            // ==============================================================
+            // Login and Recover Password
+            // ==============================================================
+            //$('#to-recover').on("click", function () {
+            //    $("#loginform").slideUp();
+            //    $("#recoverform").fadeIn();
+            //});
 
 
     </script>

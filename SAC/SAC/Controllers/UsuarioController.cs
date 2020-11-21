@@ -24,15 +24,8 @@ namespace SAC.Controllers
         public UsuarioController()
         {
             servicioUsuario = new ServicioUsuarios();
-            servicioUsuario._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);
+            servicioUsuario._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
-
-        [NonAction]
-        private void CrearTempData(string msg_, string tipo_)
-        {
-            TempData[tipo_] = msg_;
-        }
-
 
 
         // GET: Usuario

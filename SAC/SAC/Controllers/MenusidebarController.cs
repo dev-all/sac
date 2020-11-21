@@ -25,6 +25,15 @@ namespace SAC.Controllers
         private String JsonTreeView;
         private JavaScriptSerializer jsonString = new JavaScriptSerializer();
 
+
+        public MenusidebarController()
+        {
+            servicioConfiguracion._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
+        }
+
+
+
+
         // GET: 
         [AutorizacionDeSistema]
         public ActionResult Index()
@@ -89,19 +98,14 @@ namespace SAC.Controllers
         [HttpPost]
         public ActionResult Edit(ConfigMenuSidebarModelView configMenuSidebarModelView)
         {
-            try
-            {
+            
                 if (ModelState.IsValid)
                 {
                   servicioConfiguracion.ActualizarMenusidebar(Mapper.Map<MenuSideBarModelView, MenuSideBarModel>(configMenuSidebarModelView.menuSideBar));
                 }
                 return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.info = ex.InnerException;
-                return View();
-            }
+           
+           
         }
 
 

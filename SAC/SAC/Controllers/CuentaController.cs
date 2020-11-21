@@ -20,14 +20,10 @@ namespace SAC.Controllers
         public CuentaController()
         {
             servicioUsuario = new ServicioUsuarios();
-            servicioUsuario._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);
+            servicioUsuario._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
 
-        [NonAction]
-        private void CrearTempData(string msg_, string tipo_)
-        {
-            TempData[tipo_] = msg_;
-        }
+
 
 
         // GET: Cuenta
@@ -51,8 +47,6 @@ namespace SAC.Controllers
         public ActionResult Acceder(LoginViewModel loginViewModel)
         {
 
-
-
             if (servicioUsuario.Obtener(loginViewModel.Usuario, loginViewModel.Password, Convert.ToInt32(ConfigurationManager.AppSettings["rolInvitado"])))
             {
 
@@ -66,16 +60,11 @@ namespace SAC.Controllers
                 }
                 else
                 {
-                    //string ip = Request.UserHostAddress;
-                    //servicioUsuario.LogLogin(usuario.IdUsuario, ip);
-
-                     MenuHelper menu = new MenuHelper();
-                    //System.Web.HttpContext.Current.Session["menu"] = menu.ObtenerMenu(usuario.IdUsuario);
+                 
+                    MenuHelper menu = new MenuHelper();
+                  
                     System.Web.HttpContext.Current.Session["menu"] = menu.ObtenerMenuSidebar(usuario.IdUsuario);
-                    //falta hacer el mapeo
-                    //var sb = Mapper.Map<List<MenuSideBarModel>, List<MenuItemModel>>(menu.ObtenerMenuSidebar(usuario.IdUsuario));
-                    //System.Web.HttpContext.Current.Session["menu"] = sb;
-
+                  
                     RolModel rol = servicioUsuario.ObtenerRol(usuario.IdUsuario);
 
                     if(rol != null)
@@ -92,7 +81,7 @@ namespace SAC.Controllers
             }
             else
             {
-                ViewBag.error = "Acceso invalido";
+                ViewData.ModelState.AddModelError("Usuario", "Acceso invalido");
                 return View("Acceder");
             }
 
