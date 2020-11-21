@@ -1,0 +1,434 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="SAC" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Accion" Member="Accion">
+    <Type Name="Accion">
+      <Column Name="IdAccion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Controlador" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="IdModulo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="fechaModificacion" Member="FechaModificacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="FK_AccionesPorRoles_Acciones" Member="AccionPorRol" ThisKey="IdAccion" OtherKey="IdAccion" Type="AccionPorRol" DeleteRule="NO ACTION" />
+      <Association Name="FK_MenuSidebar_Accion" Member="MenuSidebar" ThisKey="IdAccion" OtherKey="IdAccion" Type="MenuSidebar" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AccionPorRol" Member="AccionPorRol">
+    <Type Name="AccionPorRol">
+      <Column Name="idRolPorAccion" Member="IdRolPorAccion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idRol" Member="IdRol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idAccion" Member="IdAccion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="FK_AccionesPorRoles_Acciones" Member="Accion" ThisKey="IdAccion" OtherKey="IdAccion" Type="Accion" IsForeignKey="true" />
+      <Association Name="FK_AccionesPorRoles_Roles" Member="Rol" ThisKey="IdRol" OtherKey="IdRol" Type="Rol" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AfipRegimen" Member="AfipRegimen">
+    <Type Name="AfipRegimen">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Aliri" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Alirni" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Minimo" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Imputacion" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Proveedor_AfipRegimen" Member="Proveedor" ThisKey="Id" OtherKey="IdAfipRegimen" Type="Proveedor" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contacto" Member="Contacto">
+    <Type Name="Contacto">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdEvento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdPersona" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="FK_Contacto_Evento" Member="Evento" ThisKey="IdEvento" OtherKey="Id" Type="Evento" IsForeignKey="true" />
+      <Association Name="FK_Contacto_Persona" Member="Persona" ThisKey="IdPersona" OtherKey="Id" Type="Persona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Data" Member="Data">
+    <Type Name="Data">
+      <Column Name="Code" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EstadoCivil" Member="EstadoCivil">
+    <Type Name="EstadoCivil">
+      <Column Name="id" Member="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="descripcion" Member="Descripcion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="activo" Member="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Evento" Member="Evento">
+    <Type Name="Evento">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="VarChar(350)" CanBeNull="true" />
+      <Column Name="FechaInicio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HoraInicio" Type="System.TimeSpan" DbType="Time(7)" CanBeNull="true" />
+      <Column Name="FechaFin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="HoraFin" Type="System.TimeSpan" DbType="Time(7)" CanBeNull="true" />
+      <Column Name="IdPrioridad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TodoElDia" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Asisten" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Recibido" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Enviado" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Pasado" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Ubicacion" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Organizador" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Obs" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Contacto_Evento" Member="Contacto" ThisKey="Id" OtherKey="IdEvento" Type="Contacto" DeleteRule="NO ACTION" />
+      <Association Name="FK_Evento_Prioridad" Member="Prioridad" ThisKey="IdPrioridad" OtherKey="Id" Type="Prioridad" IsForeignKey="true" />
+      <Association Name="FK_Evento_Usuario" Member="Usuario" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GrupoCuenta" Member="GrupoCuenta">
+    <Type Name="GrupoCuenta">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Rubros_GrupoCuenta" Member="Rubros" ThisKey="Id" OtherKey="IdGrupoCuenta" Type="Rubros" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.homePorRol" Member="HomePorRol">
+    <Type Name="HomePorRol">
+      <Column Name="IdHome" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Metodo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Controller" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="FK_Roles_HomePorRol" Member="Rol" ThisKey="IdHome" OtherKey="IdHome" Type="Rol" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Imputacion" Member="Imputacion">
+    <Type Name="Imputacion">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdSubRubro" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SaldoInicial" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SaldoFin" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IdTipo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Alias" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Enero" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Febrero" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Marzo" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Abril" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Mayo" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Junio" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Julio" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Agosto" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Septiembre" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Octubre" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Noviembre" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Diciembre" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Imputacion_SubRubro" Member="SubRubro" ThisKey="IdSubRubro" OtherKey="Id" Type="SubRubro" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_Imputacion" Member="Proveedor" ThisKey="Id" OtherKey="IdImputacionProveedor" Type="Proveedor" DeleteRule="NO ACTION" />
+      <Association Name="FK_Proveedor_Imputacion1" Member="Proveedor_Imputacion1" ThisKey="Id" OtherKey="IdImputacionFactura" Type="Proveedor" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Localidad" Member="Localidad">
+    <Type Name="Localidad">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Altini" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AltFin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CodigoProvincia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NombreSucursal" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CodigoSucursal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OfDistLocal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="codposchr" Member="Codposchr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdPais" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Localidad_Pais" Member="Pais" ThisKey="IdPais" OtherKey="Id" Type="Pais" IsForeignKey="true" />
+      <Association Name="FK_Localidad_Provincia" Member="Provincia" ThisKey="IdProvincia" OtherKey="Id" Type="Provincia" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MenuSidebar" Member="MenuSidebar">
+    <Type Name="MenuSidebar">
+      <Column Name="IdMenuSidebar" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Icono" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Titulo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IdParent" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdAccion" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FechaModificacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="FK_MenuSidebar_Accion" Member="Accion" ThisKey="IdAccion" OtherKey="IdAccion" Type="Accion" IsForeignKey="true" />
+      <Association Name="FK_MenuSidebar_MenuSidebar" Member="IdParentMenuSidebar" ThisKey="IdParent" OtherKey="IdMenuSidebar" Type="MenuSidebar" IsForeignKey="true" />
+      <Association Name="FK_MenuSidebar_MenuSidebar" Member="IdMenuSidebarMenuSidebar" ThisKey="IdMenuSidebar" OtherKey="IdParent" Type="MenuSidebar" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notificacion" Member="Notificacion">
+    <Type Name="Notificacion">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdPersona" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EnvioEmail" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Obs" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="FK_Notificacion_Persona" Member="Persona" ThisKey="IdPersona" OtherKey="Id" Type="Persona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Pais" Member="Pais">
+    <Type Name="Pais">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CodigoAfip" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cuit" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Localidad_Pais" Member="Localidad" ThisKey="Id" OtherKey="IdPais" Type="Localidad" DeleteRule="NO ACTION" />
+      <Association Name="FK_Proveedor_Pais" Member="Proveedor" ThisKey="Id" OtherKey="IdPais" Type="Proveedor" DeleteRule="NO ACTION" />
+      <Association Name="FK_Provincia_Pais" Member="Provincia" ThisKey="Id" OtherKey="IdPais" Type="Provincia" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Persona" Member="Persona">
+    <Type Name="Persona">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Documento" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Apellido" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Sexo" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Cuil" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="TelefonoMovil" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TelefonoFijo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TelefonoAlternativo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CodigoPostal" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Domicilio" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IdProvinciaDomicilio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdLocalidadDomicilio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CodigoValidacion" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="FK_Contacto_Persona" Member="Contacto" ThisKey="Id" OtherKey="IdPersona" Type="Contacto" DeleteRule="NO ACTION" />
+      <Association Name="FK_Notificacion_Persona" Member="Notificacion" ThisKey="Id" OtherKey="IdPersona" Type="Notificacion" DeleteRule="NO ACTION" />
+      <Association Name="FK_Usuario_Persona" Member="Usuario" ThisKey="Id" OtherKey="IdPersona" Type="Usuario" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prioridad" Member="Prioridad">
+    <Type Name="Prioridad">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Color" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="FK_Evento_Prioridad" Member="Evento" ThisKey="Id" OtherKey="IdPrioridad" Type="Evento" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Proveedor" Member="Proveedor">
+    <Type Name="Proveedor">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Cuit" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdPais" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdProvincia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdTipoIva" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DiasFactura" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdImputacionProveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Observaciones" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SaldoCuentaCorriente" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdCodigoPostal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdAfipRegimen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdTipoProveedor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdImputacionFactura" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdMonedaFactura" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DescripcionFactura" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdTipoMoneda" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Perceptor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MontoMinimo" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="PorcentajePeceptor" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="IdGrupoPresupuesto" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdPuntoVenta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Proveedor_AfipRegimen" Member="AfipRegimen" ThisKey="IdAfipRegimen" OtherKey="Id" Type="AfipRegimen" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_Imputacion" Member="Imputacion" ThisKey="IdImputacionProveedor" OtherKey="Id" Type="Imputacion" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_Imputacion1" Member="IdImputacionFacturaImputacion" ThisKey="IdImputacionFactura" OtherKey="Id" Type="Imputacion" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_Pais" Member="Pais" ThisKey="IdPais" OtherKey="Id" Type="Pais" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_Provincia" Member="Provincia" ThisKey="IdProvincia" OtherKey="Id" Type="Provincia" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_TipoIva" Member="TipoIva" ThisKey="IdTipoIva" OtherKey="Id" Type="TipoIva" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_TipoMoneda" Member="TipoMoneda" ThisKey="IdTipoMoneda" OtherKey="Id" Type="TipoMoneda" IsForeignKey="true" />
+      <Association Name="FK_Proveedor_TipoProveedor" Member="TipoProveedor" ThisKey="IdTipoProveedor" OtherKey="Id" Type="TipoProveedor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Provincia" Member="Provincia">
+    <Type Name="Provincia">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CodigoNumero" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdPais" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CodigoAfip" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Localidad_Provincia" Member="Localidad" ThisKey="Id" OtherKey="IdProvincia" Type="Localidad" DeleteRule="NO ACTION" />
+      <Association Name="FK_Proveedor_Provincia" Member="Proveedor" ThisKey="Id" OtherKey="IdProvincia" Type="Proveedor" DeleteRule="NO ACTION" />
+      <Association Name="FK_Provincia_Pais" Member="Pais" ThisKey="IdPais" OtherKey="Id" Type="Pais" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rol" Member="Rol">
+    <Type Name="Rol">
+      <Column Name="IdRol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="EsAdministrador" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IdHome" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="FK_AccionesPorRoles_Roles" Member="AccionPorRol" ThisKey="IdRol" OtherKey="IdRol" Type="AccionPorRol" DeleteRule="NO ACTION" />
+      <Association Name="FK_Roles_HomePorRol" Member="HomePorRol" ThisKey="IdHome" OtherKey="IdHome" Type="HomePorRol" IsForeignKey="true" />
+      <Association Name="FK_Usuarios_Roles" Member="Usuario" ThisKey="IdRol" OtherKey="IdRol" Type="Usuario" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rubros" Member="Rubros">
+    <Type Name="Rubros">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codigo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdGrupoCuenta" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Rubros_GrupoCuenta" Member="GrupoCuenta" ThisKey="IdGrupoCuenta" OtherKey="Id" Type="GrupoCuenta" IsForeignKey="true" />
+      <Association Name="FK_SubRubro_Rubros" Member="SubRubro" ThisKey="Id" OtherKey="IdRubro" Type="SubRubro" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubRubro" Member="SubRubro">
+    <Type Name="SubRubro">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="codigo" Member="Codigo" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdRubro" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Imputacion_SubRubro" Member="Imputacion" ThisKey="Id" OtherKey="IdSubRubro" Type="Imputacion" DeleteRule="NO ACTION" />
+      <Association Name="FK_SubRubro_Rubros" Member="Rubros" ThisKey="IdRubro" OtherKey="Id" Type="Rubros" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoIva" Member="TipoIva">
+    <Type Name="TipoIva">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Porcentaje" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="FK_Proveedor_TipoIva" Member="Proveedor" ThisKey="Id" OtherKey="IdTipoIva" Type="Proveedor" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoMoneda" Member="TipoMoneda">
+    <Type Name="TipoMoneda">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Proveedor_TipoMoneda" Member="Proveedor" ThisKey="Id" OtherKey="IdTipoMoneda" Type="Proveedor" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TipoProveedor" Member="TipoProveedor">
+    <Type Name="TipoProveedor">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UltimaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Proveedor_TipoProveedor" Member="Proveedor" ThisKey="Id" OtherKey="IdTipoProveedor" Type="Proveedor" DeleteRule="NO ACTION" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Usuario" Member="Usuario">
+    <Type Name="Usuario">
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IdPersona" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdRol" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Creado" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Actualizado" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="FK_Evento_Usuario" Member="Evento" ThisKey="IdUsuario" OtherKey="IdUsuario" Type="Evento" DeleteRule="NO ACTION" />
+      <Association Name="FK_Usuario_Persona" Member="Persona" ThisKey="IdPersona" OtherKey="Id" Type="Persona" IsForeignKey="true" />
+      <Association Name="FK_Usuarios_Roles" Member="Rol" ThisKey="IdRol" OtherKey="IdRol" Type="Rol" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.fn_diagramobjects" Method="Fn_diagramobjects" IsComposable="true">
+    <Return Type="System.Int32" DbType="Int" />
+  </Function>
+  <Function Name="dbo.Migracion_DiccionarioDatos" Method="Migracion_DiccionarioDatos">
+    <ElementType Name="Migracion_DiccionarioDatosResult">
+      <Column Name="object_id" Member="Object_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Tabla" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="Columna" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="Tipo" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="Precision" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Longitud" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Permite_Nulo" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="Es Autonumerico" Member="EsAutonumerico" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.Object" DbType="sql_variant" CanBeNull="true" />
+      <Column Name="ForeignKey" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="ReferenceTableName" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="ReferenceColumnName" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_alterdiagram" Method="Sp_alterdiagram">
+    <Parameter Name="diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="owner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="version" Type="System.Int32" DbType="Int" />
+    <Parameter Name="definition" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Return Type="System.Int32" DbType="Int" />
+  </Function>
+  <Function Name="dbo.sp_creatediagram" Method="Sp_creatediagram">
+    <Parameter Name="diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="owner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="version" Type="System.Int32" DbType="Int" />
+    <Parameter Name="definition" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" />
+    <Return Type="System.Int32" DbType="Int" />
+  </Function>
+  <Function Name="dbo.sp_dropdiagram" Method="Sp_dropdiagram">
+    <Parameter Name="diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="owner_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" DbType="Int" />
+  </Function>
+  <Function Name="dbo.sp_helpdiagramdefinition" Method="Sp_helpdiagramdefinition">
+    <Parameter Name="diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="owner_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Sp_helpdiagramdefinitionResult">
+      <Column Name="version" Member="Version" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="definition" Member="Definition" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_helpdiagrams" Method="Sp_helpdiagrams">
+    <Parameter Name="diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="owner_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Sp_helpdiagramsResult">
+      <Column Name="Database" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Owner" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="OwnerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_renamediagram" Method="Sp_renamediagram">
+    <Parameter Name="diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="owner_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="new_diagramname" Type="System.String" DbType="NVarChar(128)" />
+    <Return Type="System.Int32" DbType="Int" />
+  </Function>
+</Database>

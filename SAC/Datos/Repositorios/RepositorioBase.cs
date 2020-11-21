@@ -35,21 +35,7 @@ public abstract class RepositorioBase<T> : Interfaces.IRepositorio<T> where T : 
     }
 
 
-        // METODOS LECTOR
-
-
-
-        public T Actualizar(T entidad)
-        {
-            T nuevaEntidad;
-            nuevaEntidad = DbSet.Add(entidad);
-            Contexto.SaveChanges();
-            return nuevaEntidad;
-        }
-
-
-
-
+        
         public IQueryable<T> Obtener()
     {
         return DbSet;

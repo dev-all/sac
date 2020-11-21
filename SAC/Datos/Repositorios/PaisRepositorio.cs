@@ -20,36 +20,37 @@ namespace Datos.Repositorios
         }
 
 
-       
-
-
-        public Pais ObtenerIdPais(int idPais)
+        public List<Pais> ObtenerPais(int idPais)
         {
-            var pais = context.Pais.FirstOrDefault(p => p.Id == idPais);
-            return context.Pais.FirstOrDefault(l => l.Id == idPais);
+            List<Pais> pais = context.Pais.Where(p => p.Id == idPais).ToList();
+            return pais;
         }
 
 
-          
-
-
-        public Pais ObtenerporNOMBRE(string nombre)
+        public Pais ObtenerPaisPorId(int idPais)
         {
+            var pais = context.Pais.Where(p => p.Id == idPais).FirstOrDefault();
+            return pais;
+        }
 
-            var pais = context.Pais.FirstOrDefault(p => p.Nombre == nombre);
-            return context.Pais.FirstOrDefault(l => l.Nombre == nombre);
+        public Pais ActualizarPais(Pais model)
+        {
+            Pais paisExistente = ObtenerPaisPorId(model.Id);
+            paisExistente.Nombre = model.Nombre;
+            context.SaveChanges();
+            return paisExistente;
+        }
 
-
+        public Pais ObtenerPaisPorNombre(string nombre)
+        {           
+            return context.Pais.Where(p => p.Nombre == nombre).FirstOrDefault();
         }
 
 
-        public Pais ObtenerporCodigoAfip(string codigoafip)
+        public Pais ObtenerPaisPorCodigoAfip(string codigoafip)
         {
-
-            var pais = context.Pais.FirstOrDefault(p => p.CodigoAfip == codigoafip);
-            return context.Pais.FirstOrDefault(l => l.CodigoAfip == codigoafip);
-
-
+            return context.Pais.Where(p => p.CodigoAfip == codigoafip).FirstOrDefault();
+            //return context.Pais.FirstOrDefault(l => l.CodigoAfip == codigoafip);
         }
 
 
