@@ -136,11 +136,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
-    <Compile Include="Connected Services\ServiceSGP\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\MenusidebarController.cs" />
@@ -153,7 +148,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\SGPHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
@@ -179,13 +173,6 @@
   <ItemGroup>
     <Content Include="bin\Agenda.dll" />
     <Content Include="bin\Agenda.pdb" />
-    <None Include="Connected Services\ServiceSGP\SERVICE.disco" />
-    <None Include="Connected Services\ServiceSGP\configuration91.svcinfo" />
-    <None Include="Connected Services\ServiceSGP\configuration.svcinfo" />
-    <None Include="Connected Services\ServiceSGP\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Content\assets\css\animate.css" />
     <Content Include="Content\assets\css\colors\blue-dark.css" />
     <Content Include="Content\assets\css\colors\blue.css" />
@@ -2726,7 +2713,6 @@
     <Content Include="Content\assets\plugins\timepicker-plugin\package.json" />
     <Content Include="Content\assets\plugins\timepicker-plugin\README.md" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
-    <None Include="Connected Services\ServiceSGP\SERVICE.wsdl" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -2807,6 +2793,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2833,9 +2820,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServiceSGP\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
