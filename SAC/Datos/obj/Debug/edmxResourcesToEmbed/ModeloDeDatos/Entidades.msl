@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Agenda_ModelStoreContainer" CdmEntityContainer="SAC_Entities">
     <EntitySetMapping Name="AccionPorRol">
-      <EntityTypeMapping TypeName="Agenda_Model.AccionPorRol">
+      <EntityTypeMapping TypeName="SAC_Model.AccionPorRol">
         <MappingFragment StoreEntitySet="AccionPorRol">
           <ScalarProperty Name="idAccion" ColumnName="idAccion" />
           <ScalarProperty Name="idRol" ColumnName="idRol" />
@@ -11,7 +11,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Contacto">
-      <EntityTypeMapping TypeName="Agenda_Model.Contacto">
+      <EntityTypeMapping TypeName="SAC_Model.Contacto">
         <MappingFragment StoreEntitySet="Contacto">
           <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
           <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
@@ -20,7 +20,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Evento">
-      <EntityTypeMapping TypeName="Agenda_Model.Evento">
+      <EntityTypeMapping TypeName="SAC_Model.Evento">
         <MappingFragment StoreEntitySet="Evento">
           <ScalarProperty Name="IdPrioridad" ColumnName="IdPrioridad" />
           <ScalarProperty Name="Obs" ColumnName="Obs" />
@@ -44,7 +44,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="homePorRol">
-      <EntityTypeMapping TypeName="Agenda_Model.homePorRol">
+      <EntityTypeMapping TypeName="SAC_Model.homePorRol">
         <MappingFragment StoreEntitySet="homePorRol">
           <ScalarProperty Name="Controller" ColumnName="Controller" />
           <ScalarProperty Name="Metodo" ColumnName="Metodo" />
@@ -53,7 +53,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Notificacion">
-      <EntityTypeMapping TypeName="Agenda_Model.Notificacion">
+      <EntityTypeMapping TypeName="SAC_Model.Notificacion">
         <MappingFragment StoreEntitySet="Notificacion">
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -64,33 +64,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Persona">
-      <EntityTypeMapping TypeName="Agenda_Model.Persona">
-        <MappingFragment StoreEntitySet="Persona">
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="CodigoValidacion" ColumnName="CodigoValidacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="IdLocalidadDomicilio" ColumnName="IdLocalidadDomicilio" />
-          <ScalarProperty Name="IdProvinciaDomicilio" ColumnName="IdProvinciaDomicilio" />
-          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-          <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
-          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-          <ScalarProperty Name="TelefonoAlternativo" ColumnName="TelefonoAlternativo" />
-          <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
-          <ScalarProperty Name="TelefonoMovil" ColumnName="TelefonoMovil" />
-          <ScalarProperty Name="Cuil" ColumnName="Cuil" />
-          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Documento" ColumnName="Documento" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Provincia">
-      <EntityTypeMapping TypeName="Agenda_Model.Provincia">
+      <EntityTypeMapping TypeName="SAC_Model.Provincia">
         <MappingFragment StoreEntitySet="Provincia">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -105,7 +80,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Rol">
-      <EntityTypeMapping TypeName="Agenda_Model.Rol">
+      <EntityTypeMapping TypeName="SAC_Model.Rol">
         <MappingFragment StoreEntitySet="Rol">
           <ScalarProperty Name="IdHome" ColumnName="IdHome" />
           <ScalarProperty Name="EsAdministrador" ColumnName="EsAdministrador" />
@@ -114,21 +89,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Usuario">
-      <EntityTypeMapping TypeName="Agenda_Model.Usuario">
-        <MappingFragment StoreEntitySet="Usuario">
-          <ScalarProperty Name="Actualizado" ColumnName="Actualizado" />
-          <ScalarProperty Name="Creado" ColumnName="Creado" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-          <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="MenuSidebar">
-      <EntityTypeMapping TypeName="Agenda_Model.MenuSidebar">
+      <EntityTypeMapping TypeName="SAC_Model.MenuSidebar">
         <MappingFragment StoreEntitySet="MenuSidebar">
           <ScalarProperty Name="Orden" ColumnName="Orden" />
           <ScalarProperty Name="IdParent" ColumnName="IdParent" />
@@ -143,7 +105,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Accion">
-      <EntityTypeMapping TypeName="Agenda_Model.Accion">
+      <EntityTypeMapping TypeName="SAC_Model.Accion">
         <MappingFragment StoreEntitySet="Accion">
           <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -156,7 +118,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Prioridad">
-      <EntityTypeMapping TypeName="Agenda_Model.Prioridad">
+      <EntityTypeMapping TypeName="SAC_Model.Prioridad">
         <MappingFragment StoreEntitySet="Prioridad">
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -166,7 +128,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Proveedor">
-      <EntityTypeMapping TypeName="Agenda_Model.Proveedor">
+      <EntityTypeMapping TypeName="SAC_Model.Proveedor">
         <MappingFragment StoreEntitySet="Proveedor">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -200,7 +162,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AfipRegimen">
-      <EntityTypeMapping TypeName="Agenda_Model.AfipRegimen">
+      <EntityTypeMapping TypeName="SAC_Model.AfipRegimen">
         <MappingFragment StoreEntitySet="AfipRegimen">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -216,7 +178,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GrupoCuenta">
-      <EntityTypeMapping TypeName="Agenda_Model.GrupoCuenta">
+      <EntityTypeMapping TypeName="SAC_Model.GrupoCuenta">
         <MappingFragment StoreEntitySet="GrupoCuenta">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -228,7 +190,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Imputacion">
-      <EntityTypeMapping TypeName="Agenda_Model.Imputacion">
+      <EntityTypeMapping TypeName="SAC_Model.Imputacion">
         <MappingFragment StoreEntitySet="Imputacion">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -257,7 +219,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Rubros">
-      <EntityTypeMapping TypeName="Agenda_Model.Rubros">
+      <EntityTypeMapping TypeName="SAC_Model.Rubros">
         <MappingFragment StoreEntitySet="Rubros">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -271,7 +233,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SubRubro">
-      <EntityTypeMapping TypeName="Agenda_Model.SubRubro">
+      <EntityTypeMapping TypeName="SAC_Model.SubRubro">
         <MappingFragment StoreEntitySet="SubRubro">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -284,7 +246,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TipoIva">
-      <EntityTypeMapping TypeName="Agenda_Model.TipoIva">
+      <EntityTypeMapping TypeName="SAC_Model.TipoIva">
         <MappingFragment StoreEntitySet="TipoIva">
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
           <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
@@ -294,7 +256,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TipoMoneda">
-      <EntityTypeMapping TypeName="Agenda_Model.TipoMoneda">
+      <EntityTypeMapping TypeName="SAC_Model.TipoMoneda">
         <MappingFragment StoreEntitySet="TipoMoneda">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -305,7 +267,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TipoProveedor">
-      <EntityTypeMapping TypeName="Agenda_Model.TipoProveedor">
+      <EntityTypeMapping TypeName="SAC_Model.TipoProveedor">
         <MappingFragment StoreEntitySet="TipoProveedor">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -316,7 +278,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Localidad">
-      <EntityTypeMapping TypeName="Agenda_Model.Localidad">
+      <EntityTypeMapping TypeName="SAC_Model.Localidad">
         <MappingFragment StoreEntitySet="Localidad">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -337,7 +299,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Pais">
-      <EntityTypeMapping TypeName="Agenda_Model.Pais">
+      <EntityTypeMapping TypeName="SAC_Model.Pais">
         <MappingFragment StoreEntitySet="Pais">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -346,6 +308,45 @@
           <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persona">
+      <EntityTypeMapping TypeName="SAC_Model.Persona">
+        <MappingFragment StoreEntitySet="Persona">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="CodigoValidacion" ColumnName="CodigoValidacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="IdLocalidadDomicilio" ColumnName="IdLocalidadDomicilio" />
+          <ScalarProperty Name="IdProvinciaDomicilio" ColumnName="IdProvinciaDomicilio" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+          <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+          <ScalarProperty Name="TelefonoAlternativo" ColumnName="TelefonoAlternativo" />
+          <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+          <ScalarProperty Name="TelefonoMovil" ColumnName="TelefonoMovil" />
+          <ScalarProperty Name="Cuil" ColumnName="Cuil" />
+          <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Documento" ColumnName="Documento" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="SAC_Model.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Actualizado" ColumnName="Actualizado" />
+          <ScalarProperty Name="Creado" ColumnName="Creado" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

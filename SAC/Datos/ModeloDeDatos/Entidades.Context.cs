@@ -30,10 +30,8 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Evento> Evento { get; set; }
         public virtual DbSet<homePorRol> homePorRol { get; set; }
         public virtual DbSet<Notificacion> Notificacion { get; set; }
-        public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<MenuSidebar> MenuSidebar { get; set; }
         public virtual DbSet<Accion> Accion { get; set; }
         public virtual DbSet<Prioridad> Prioridad { get; set; }
@@ -48,5 +46,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<TipoProveedor> TipoProveedor { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

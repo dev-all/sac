@@ -2774,14 +2774,9 @@
     <Content Include="Views\Rol\Create.cshtml" />
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Unauthorised\Index.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
-    <Content Include="Views\Usuario\Details.cshtml" />
-    <Content Include="Views\Usuario\Edit.cshtml" />
-    <Content Include="Views\Usuario\Evento.cshtml" />
     <Content Include="Views\Base\card.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Rol\DeleteAccionPorRol.cshtml" />
-    <Content Include="Views\Usuario\Crear.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Menusidebar\TreeItem.cshtml" />
     <Content Include="Views\Accion\Edit.cshtml" />
@@ -2791,6 +2786,8 @@
     <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\Usuario\AddOrEdit.cshtml" />
+    <Content Include="Views\Usuario\AddOrEdit - Copia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

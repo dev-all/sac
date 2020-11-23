@@ -42,7 +42,7 @@ namespace SAC.Controllers
         }
 
         // GET: Usuario/Create
-        public ActionResult Crear(String DniUniformado)
+        public ActionResult Crear(String email)
         {
           
             //if(!String.IsNullOrEmpty(DniUniformado))
@@ -73,16 +73,15 @@ namespace SAC.Controllers
         private SelectList selectListRoles()
         {
             Dictionary<int, string> dic = new Dictionary<int, string>();
-            var roles = servicioConfiguracion.GetRol();
+            var roles = servicioConfiguracion.GetAllRoles();
             foreach (var item in roles)
             {
                 dic.Add(item.IdRol, item.descripcion);
             }
             return new SelectList(dic, "Key", "Value");
         }
+       
         // POST: Usuario/Create
-
-
         //[HttpPost, ActionName("Guardar")]
         //[ValidateAntiForgeryToken]
         public ActionResult Guardar(UsuarioModelView usuarioGuardar)
@@ -122,21 +121,31 @@ namespace SAC.Controllers
         {
             return View();
         }
-
-        // POST: Usuario/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+      
+        public ActionResult AddOrEdit(int id = 0)
         {
-            try
-            {
-                // TODO: Add update logic here
+            ViewBag.Roles = selectListRoles();//Mapper.Map<List<RolModel>, List<RolModelView>>( servicioConfiguracion.GetAllRoles());
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (id == 0)
+                return View(new UsuarioModelView());
+            else
+                return View(servicioUsuario.ObtenerPorID(id));
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddOrEdit(UsuarioModelView model)
+        {
+            if (ModelState.IsValid)
             {
-                return View();
+                if (model.idUsuario == 0)
+                    servicioUsuario.AddUsuario(Mapper.Map< UsuarioModelView, UsuarioModel>(model));
+                else
+                    servicioUsuario.UpdateUsuario(Mapper.Map<UsuarioModelView, UsuarioModel>(model));
+
+                return RedirectToAction(nameof(Index));
             }
+            return View(model);
         }
 
         // GET: Usuario/Delete/5
@@ -160,5 +169,7 @@ namespace SAC.Controllers
                 return View();
             }
         }
+    
+    
     }
 }

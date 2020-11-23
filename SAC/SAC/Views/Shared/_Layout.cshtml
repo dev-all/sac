@@ -50,7 +50,7 @@
 <body class="fix-header card-no-border fix-sidebar">
 
 
-    
+
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -165,13 +165,13 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                
+
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 @RenderBody()
 
-               
+
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -215,7 +215,9 @@
     <!--Style switcher-- >
     <!-- ============================================================== -->
     <script src="/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-
+    
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <div>
         @if (TempData["ok"] != null)
         {

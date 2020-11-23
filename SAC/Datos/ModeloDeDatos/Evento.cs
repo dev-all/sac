@@ -41,7 +41,6 @@ namespace Datos.ModeloDeDatos
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacto> Contacto { get; set; }
-        public virtual Usuario Usuario { get; set; }
         public virtual Prioridad Prioridad { get; set; }
     }
 }

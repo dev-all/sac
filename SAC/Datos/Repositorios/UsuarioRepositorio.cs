@@ -94,7 +94,7 @@ namespace Datos.Repositorios
                                  .Where(menu => menu.Activo == true 
                                             && menu.IdParent == null
                                             && items.Contains(menu.Accion.Controlador.ToLower() + menu.Accion.Nombre.ToLower()))
-                                 .OrderBy(acc => acc.Titulo).ToList();
+                                 .OrderBy(acc => acc.Orden).ToList();
             return side;
         }
 

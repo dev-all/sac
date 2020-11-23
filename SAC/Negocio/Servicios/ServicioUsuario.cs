@@ -132,6 +132,17 @@ namespace Negocio.Servicios
             }
            
         }
+
+        public void UpdateUsuario(UsuarioModel usuarioModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddUsuario(UsuarioModel usuarioModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ActualizarRolDeUsaurio(int idUsuario, int idRol, int idUsuarioLogueado)
         {
               try

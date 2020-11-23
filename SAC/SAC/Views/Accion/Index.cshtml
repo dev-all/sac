@@ -1,4 +1,4 @@
-﻿@model SAC.Models.ConfigAccionModelView
+﻿  @model SAC.Models.ConfigAccionModelView
 @{
     ViewBag.Title = "Gestión de Menú";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -47,125 +47,115 @@
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Default Tab</h4>
-                <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>                             
-            
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                       
-                                        <div class="row">
-                                            <div class="col-md-10">
-                                                <h4 class="card-title">Acciones del Sistemas </h4>
-                                            </div>
-                                            <div class="col-md-2 pull-right">
-                                                <button type="button" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#add-accion">
-                                                    <i class="ti-menu"></i> Agregar Acción
-                                                </button>
-                                            </div>
-                                        </div>
-                                       
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h6 class="card-subtitle"> Se configuran todas las acciones disponibles del sistema, puede agregar ó eliminar los items </h6>
-                                            </div>
-                                        </div>
+                <h4 class="card-title">Acciones del Sistemas </h4>
+                <h6 class="card-subtitle">Use default tab with class <code>nav-tabs & tabcontent-border </code></h6>
 
-                                        <div class="table-responsive">
-                                            <table id="tblMenusidebar" class="table stylish-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>
-                                                            Descripción
-                                                        </th>
-                                                        <th>
-                                                            Controlador
-                                                        </th>
-                                                        <th>
-                                                            Acción
-                                                        </th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model.Acciones.Count() > 0)
-                                                    {
-                                                        foreach (var item in Model.Acciones)
-                                                        {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Descripcion)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Controlador)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Nombre)
-                                                        </td>
 
-                                                        <td>
-                                                            <a href="@Url.Action("Edit", "Accion",new { id = item.IdAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Editar">Editar </a>
-                                                            <input type="submit" value="Eliminar" formaction="@Url.Action("Delete", "Accion", new { id = item.IdAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
-                                                        </td>
-                                                    </tr>
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        <tr>
-                                                            <td>
-                                                                No se encontraron registros...
-                                                            </td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
+                <div class="row">
 
-                                        <!--.modal- -->
-                                        <div id="add-accion" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title" id="myModalLabel">Nueva Accion de Sistema </h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="floating-labels m-t-30">
-                                                            <div class="form-group m-b-40">
-                                                                @Html.EditorFor(model => model.Accion.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                                                                <span class="bar"></span>                                                                
-                                                                <label for="accion_nombre">Descripción </label>
-                                                            </div>
+                    <div class="col-md-2 pull-right">
+                        <button type="button" class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#add-accion">
+                            <i class="ti-menu"></i> Agregar Acción
+                        </button>
+                    </div>
+                </div>
 
-                                                            <div class="form-group m-b-40">
-                                                                @Html.EditorFor(model => model.Accion.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                                                                <span class="bar"></span>
-                                                                <label for="accion_nombre">Nombre de Acción</label>
-                                                            </div>
-                                                            <div class="form-group m-b-30">
-                                                                @Html.EditorFor(model => model.Accion.Controlador, new { htmlAttributes = new { @class = "form-control" } })
-                                                                <span class="bar"></span>
-                                                                <label for="acccion_controlador">Nombre del Controlador </label>
-                                                                <span class="help-block"><small>EJ.: Evento para EventoController </small></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <input type="submit" value="Guardar" formaction="@Url.Action("Create", "Accion")" class="btn btn-primary" />
-                                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
-                                                    </div>
-                                                </div>
 
-                                            </div>
-                                        </div>
-                                        <!-- /.modal- -->
+                <div class="table-responsive">
+                    <table id="tblAcciones" class="table stylish-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Descripción
+                                </th>
+                                <th>
+                                    Controlador
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Acciones.Count() > 0)
+                            {
+                                foreach (var item in Model.Acciones)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Controlador)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Nombre)
+                                        </td>
+
+                                        <td>
+                                            <a href="@Url.Action("Edit", "Accion",new { id = item.IdAccion })" class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Editar">Editar </a>
+
+
+                                            <input type="submit" value="Eliminar" onclick="return confirm('¿Confirma que desea eliminar este registro??')"
+                                                   formaction="@Url.Action("Delete", "Accion", new { id = item.IdAccion })"
+                                                   class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        No se encontraron registros...
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--.modal- -->
+                <div id="add-accion" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Nueva Accion de Sistema </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="floating-labels m-t-30">
+                                    <div class="form-group m-b-40">
+                                        @Html.EditorFor(model => model.Accion.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="bar"></span>
+                                        <label for="accion_nombre">Descripción </label>
+                                    </div>
+
+                                    <div class="form-group m-b-40">
+                                        @Html.EditorFor(model => model.Accion.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="bar"></span>
+                                        <label for="accion_nombre">Nombre de Acción</label>
+                                    </div>
+                                    <div class="form-group m-b-30">
+                                        @Html.EditorFor(model => model.Accion.Controlador, new { htmlAttributes = new { @class = "form-control" } })
+                                        <span class="bar"></span>
+                                        <label for="acccion_controlador">Nombre del Controlador </label>
+                                        <span class="help-block"><small>EJ.: Evento para EventoController </small></span>
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="Guardar" formaction="@Url.Action("Create", "Accion")" class="btn btn-primary" />
+                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancelar</button>
+                            </div>
                         </div>
-                  
+
+                    </div>
+                </div>
+                <!-- /.modal- -->
+
+
             </div>
         </div>
     }
@@ -201,36 +191,21 @@
         
 
         
-        //$('#tblAccion').DataTable({
-        //    dom: 'Bfrtip',
-        //    buttons: [
-        //        'pdf', 'print'
-        //    ]
-        //});
-        //$('#tblRol').DataTable({
-        //    dom: 'Bfrtip',
-        //    buttons: [
-        //        'pdf', 'print'
-        //    ]
-        //});
-        //$('#tblMenusidebar').DataTable({
-        //    dom: 'Bfrtip',
-        //    buttons: [
-        //        'pdf', 'print'
-        //    ]
-        //    });
-
-        //});
-
-
-
-
-        //$('#example23').DataTable({
-        //    dom: 'Bfrtip',
-        //    buttons: [
-        //        'pdf', 'print'
-        //    ]
-        //});
+        $('#tblAcciones').DataTable({
+            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,       
+            'dom': 'Bfrtip',
+            'buttons': [
+                'pdf'
+            ]
+        });
+   
 
     </script>
 

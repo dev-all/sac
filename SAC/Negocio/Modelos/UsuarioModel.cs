@@ -10,7 +10,7 @@ namespace Negocio.Modelos
     public class UsuarioModel
     {
         public int IdUsuario { get; set; }
-
+        public string UserName { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public bool EsAdministrador { get; set; }
