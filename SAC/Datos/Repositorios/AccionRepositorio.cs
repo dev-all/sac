@@ -48,7 +48,7 @@ namespace Datos.Repositorios
 
             Accion Accion = GetAccionPorId(IdAccion);
             Accion.Activo = false;
-            Accion.fechaModificacion = Convert.ToDateTime(DateTime.Now.ToString()); ;
+            Accion.fechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
             context.SaveChanges();
 
             return Accion;

@@ -127,8 +127,30 @@ namespace Datos.Repositorios
             return usuario.Rol;
         }
 
+        public void CreateUsuario(Usuario usuario)
+        {
+             Insertar(usuario);
+        }
+        public void UpdateUsuario(Usuario model)
+        {
+          
+            contexto.Usuario.Attach(model);
+            contexto.Entry(model).Property(x => x.UserName).IsModified = true;
+            contexto.Entry(model).Property(x => x.Password).IsModified = true;
+            contexto.Entry(model).Property(x => x.IdRol).IsModified = true;
+            contexto.Entry(model).Property(x => x.Activo).IsModified = true;
+            contexto.Entry(model).Property(x => x.Persona.Email).IsModified = true;
+            contexto.Entry(model).Property(x => x.Persona.Documento).IsModified = true;
+            contexto.Entry(model).Property(x => x.Persona.Nombre).IsModified = true;
+            contexto.Entry(model).Property(x => x.Persona.Apellido).IsModified = true;
+            contexto.Entry(model).Property(x => x.Persona.Cuil).IsModified = true;
+            contexto.Entry(model).Property(x => x.Persona.TelefonoMovil).IsModified = true;
+            contexto.Entry(model).Property(x => x.Persona.Activo).IsModified = true;
+            contexto.SaveChanges();
 
-      
+        }
+
+
 
     }
 }

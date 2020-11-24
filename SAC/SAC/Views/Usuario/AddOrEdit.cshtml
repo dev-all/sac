@@ -19,7 +19,8 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.idUsuario)
-
+    @Html.HiddenFor(model => model.idPersona)
+    @Html.HiddenFor(model => model.Persona.Id)
     <div class="row">
         <!-- Column -->
         <div class="col-lg-12">
@@ -48,7 +49,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Rol De Usuario</label>
-                                       
+
                                         @Html.DropDownListFor(model => model.idRol,
                                                    (IEnumerable<SelectListItem>)(new SelectList(ViewBag.Roles,
                                                                   "Value", "Text"))
@@ -194,7 +195,7 @@
 
 @section Scripts{
     <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
-  
+
     <script>
         jQuery(document).ready(function () {
             // Switchery
@@ -230,7 +231,7 @@
 
         });
     </script>
-  
+
 }
 
 

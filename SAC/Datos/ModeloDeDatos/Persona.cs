@@ -35,12 +35,12 @@ namespace Datos.ModeloDeDatos
         public string CodigoPostal { get; set; }
         public string Domicilio { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
-        public int IdProvinciaDomicilio { get; set; }
-        public int IdLocalidadDomicilio { get; set; }
+        public Nullable<int> IdProvinciaDomicilio { get; set; }
+        public Nullable<int> IdLocalidadDomicilio { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string CodigoValidacion { get; set; }
-        public Nullable<bool> Activo { get; set; }
+        public bool Activo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacto> Contacto { get; set; }

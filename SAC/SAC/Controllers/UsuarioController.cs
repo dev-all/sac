@@ -129,7 +129,7 @@ namespace SAC.Controllers
             if (id == 0)
                 return View(new UsuarioModelView());
             else
-                return View(servicioUsuario.ObtenerPorID(id));
+                return View(Mapper.Map<UsuarioModel,UsuarioModelView>(servicioUsuario.ObtenerPorID(id)));
 
         }
         [HttpPost]
@@ -137,12 +137,14 @@ namespace SAC.Controllers
         public ActionResult AddOrEdit(UsuarioModelView model)
         {
             if (ModelState.IsValid)
-            {
-                if (model.idUsuario == 0)
-                    servicioUsuario.AddUsuario(Mapper.Map< UsuarioModelView, UsuarioModel>(model));
-                else
+            {  
+                model.Persona.Activo = model.activo;
+                if (model.idUsuario == 0) {                  
+                    servicioUsuario.CreateUsuario(Mapper.Map< UsuarioModelView, UsuarioModel>(model));
+                }
+                else {
                     servicioUsuario.UpdateUsuario(Mapper.Map<UsuarioModelView, UsuarioModel>(model));
-
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(model);

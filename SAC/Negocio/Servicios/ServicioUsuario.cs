@@ -75,9 +75,10 @@ namespace Negocio.Servicios
         {
             try
             {
-                var usuario = repositorio.ObtenerPorID(idUsuario);
-                UsuarioModel usuarioModel = new UsuarioModel() { IdUsuario = usuario.IdUsuario };
-                return usuarioModel;
+                var usuario = Mapper.Map<Usuario, UsuarioModel>(repositorio.ObtenerPorID(idUsuario));
+                //UsuarioModel usuarioModel = new UsuarioModel() { IdUsuario = usuario.IdUsuario };
+
+                return usuario;
             }
             catch (Exception)
             {
@@ -135,20 +136,42 @@ namespace Negocio.Servicios
 
         public void UpdateUsuario(UsuarioModel usuarioModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                usuarioModel.Password = StringHelper.ObtenerMD5(usuarioModel.Password);
+                usuarioModel.Actualizado = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Persona.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                repositorio.UpdateUsuario(Mapper.Map<UsuarioModel, Usuario>(usuarioModel));
+                _mensaje("Se registro correctamente", "ok");
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+
+            }
         }
 
-        public void AddUsuario(UsuarioModel usuarioModel)
+        public void CreateUsuario(UsuarioModel usuarioModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                usuarioModel.Password = StringHelper.ObtenerMD5(usuarioModel.Password);
+                repositorio.CreateUsuario(Mapper.Map < UsuarioModel, Usuario>( usuarioModel));
+                _mensaje("Se registro correctamente", "ok");
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+
+            }
         }
 
         public void ActualizarRolDeUsaurio(int idUsuario, int idRol, int idUsuarioLogueado)
         {
-              try
+          try
             {
                 repositorio.ActualizarRolDeUsaurio(idUsuario, idRol, idUsuarioLogueado);         
-                _mensaje("Se Actualizo correctamente", "sucesso");
+                _mensaje("Se Actualizo correctamente", "ok");
             }
             catch (Exception ex)
             {
@@ -190,7 +213,7 @@ namespace Negocio.Servicios
             {
             var passwordHasheado = StringHelper.ObtenerMD5(password);
             repositorio.CambiarPassword(idUsuario, passwordHasheado);
-                _mensaje("Se Actualizo correctamente", "sucesso");
+                _mensaje("Se Actualizo correctamente", "ok");
             }
             catch (Exception ex)
             {
@@ -217,7 +240,7 @@ namespace Negocio.Servicios
         {
             try
             {
- repositorio.logLogin(idUsuario, ip);
+                 repositorio.logLogin(idUsuario, ip);
                
             }
             catch (Exception)

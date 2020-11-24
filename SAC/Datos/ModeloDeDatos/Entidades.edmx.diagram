@@ -47,12 +47,12 @@
         <AssociationConnector Association="SAC_Model.FK_Provincia_Pais" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Pais" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Provincia" />
-        <EntityTypeShape EntityType="SAC_Model.Persona" Width="1.5" PointX="5.375" PointY="2.125" />
+        <EntityTypeShape EntityType="SAC_Model.Usuario" Width="1.5" PointX="7.625" PointY="5.25" />
+        <AssociationConnector Association="SAC_Model.FK_Usuarios_Roles" />
+        <EntityTypeShape EntityType="SAC_Model.Persona" Width="1.5" PointX="5" PointY="2.875" />
         <AssociationConnector Association="SAC_Model.FK_Contacto_Persona" />
         <AssociationConnector Association="SAC_Model.FK_Notificacion_Persona" />
-        <EntityTypeShape EntityType="SAC_Model.Usuario" Width="1.5" PointX="7.625" PointY="5.25" />
         <AssociationConnector Association="SAC_Model.FK_Usuario_Persona" />
-        <AssociationConnector Association="SAC_Model.FK_Usuarios_Roles" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

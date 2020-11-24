@@ -106,6 +106,11 @@
       <End Role="Provincia" EntitySet="Provincia" />
       <End Role="Proveedor" EntitySet="Proveedor" />
     </AssociationSet>
+    <EntitySet Name="Usuario" EntityType="SAC_Model.Usuario" />
+    <AssociationSet Name="FK_Usuarios_Roles" Association="SAC_Model.FK_Usuarios_Roles">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
     <EntitySet Name="Persona" EntityType="SAC_Model.Persona" />
     <AssociationSet Name="FK_Contacto_Persona" Association="SAC_Model.FK_Contacto_Persona">
       <End Role="Persona" EntitySet="Persona" />
@@ -115,13 +120,8 @@
       <End Role="Persona" EntitySet="Persona" />
       <End Role="Notificacion" EntitySet="Notificacion" />
     </AssociationSet>
-    <EntitySet Name="Usuario" EntityType="SAC_Model.Usuario" />
     <AssociationSet Name="FK_Usuario_Persona" Association="SAC_Model.FK_Usuario_Persona">
       <End Role="Persona" EntitySet="Persona" />
-      <End Role="Usuario" EntitySet="Usuario" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Usuarios_Roles" Association="SAC_Model.FK_Usuarios_Roles">
-      <End Role="Rol" EntitySet="Rol" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
   </EntityContainer>
@@ -711,15 +711,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdPersona" Type="Int32" />
+    <Property Name="IdRol" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="Creado" Type="DateTime" Precision="3" />
+    <Property Name="Actualizado" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Rol" Relationship="SAC_Model.FK_Usuarios_Roles" FromRole="Usuario" ToRole="Rol" />
+    <NavigationProperty Name="Persona" Relationship="SAC_Model.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
+  </EntityType>
+  <Association Name="FK_Usuarios_Roles">
+    <End Type="SAC_Model.Rol" Role="Rol" Multiplicity="0..1" />
+    <End Type="SAC_Model.Usuario" Role="Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityType Name="Persona">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Documento" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Documento" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="Cuil" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
     <Property Name="TelefonoMovil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -728,12 +755,12 @@
     <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="Domicilio" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
-    <Property Name="IdProvinciaDomicilio" Type="Int32" Nullable="false" />
-    <Property Name="IdLocalidadDomicilio" Type="Int32" Nullable="false" />
+    <Property Name="IdProvinciaDomicilio" Type="Int32" />
+    <Property Name="IdLocalidadDomicilio" Type="Int32" />
     <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="CodigoValidacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Contacto" Relationship="SAC_Model.FK_Contacto_Persona" FromRole="Persona" ToRole="Contacto" />
     <NavigationProperty Name="Notificacion" Relationship="SAC_Model.FK_Notificacion_Persona" FromRole="Persona" ToRole="Notificacion" />
     <NavigationProperty Name="Usuario" Relationship="SAC_Model.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
@@ -762,21 +789,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Usuario">
-    <Key>
-      <PropertyRef Name="IdUsuario" />
-    </Key>
-    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="IdPersona" Type="Int32" />
-    <Property Name="IdRol" Type="Int32" />
-    <Property Name="Activo" Type="Boolean" Nullable="false" />
-    <Property Name="Creado" Type="DateTime" Precision="3" />
-    <Property Name="Actualizado" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Persona" Relationship="SAC_Model.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
-    <NavigationProperty Name="Rol" Relationship="SAC_Model.FK_Usuarios_Roles" FromRole="Usuario" ToRole="Rol" />
-  </EntityType>
   <Association Name="FK_Usuario_Persona">
     <End Type="SAC_Model.Persona" Role="Persona" Multiplicity="0..1" />
     <End Type="SAC_Model.Usuario" Role="Usuario" Multiplicity="*" />
@@ -786,18 +798,6 @@
       </Principal>
       <Dependent Role="Usuario">
         <PropertyRef Name="IdPersona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Usuarios_Roles">
-    <End Type="SAC_Model.Rol" Role="Rol" Multiplicity="0..1" />
-    <End Type="SAC_Model.Usuario" Role="Usuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Rol">
-        <PropertyRef Name="IdRol" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

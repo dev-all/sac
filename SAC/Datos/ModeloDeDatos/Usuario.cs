@@ -23,7 +23,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> Creado { get; set; }
         public Nullable<System.DateTime> Actualizado { get; set; }
     
-        public virtual Persona Persona { get; set; }
         public virtual Rol Rol { get; set; }
+        public virtual Persona Persona { get; set; }
     }
 }

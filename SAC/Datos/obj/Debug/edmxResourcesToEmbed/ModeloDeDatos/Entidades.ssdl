@@ -175,10 +175,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Documento" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Documento" Type="char" MaxLength="10" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
     <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
-    <Property Name="Email" Type="nvarchar" MaxLength="150" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="Sexo" Type="char" MaxLength="10" />
     <Property Name="Cuil" Type="char" MaxLength="20" />
     <Property Name="TelefonoMovil" Type="nvarchar" MaxLength="50" />
@@ -187,12 +187,12 @@
     <Property Name="CodigoPostal" Type="nchar" MaxLength="10" />
     <Property Name="Domicilio" Type="nvarchar" MaxLength="250" />
     <Property Name="FechaNacimiento" Type="datetime" />
-    <Property Name="IdProvinciaDomicilio" Type="int" Nullable="false" />
-    <Property Name="IdLocalidadDomicilio" Type="int" Nullable="false" />
+    <Property Name="IdProvinciaDomicilio" Type="int" />
+    <Property Name="IdLocalidadDomicilio" Type="int" />
     <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="CodigoValidacion" Type="nchar" MaxLength="10" />
-    <Property Name="Activo" Type="bit" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Prioridad">
     <Key>
@@ -240,7 +240,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
     <Property Name="Codigo" Type="varchar" MaxLength="20" />
     <Property Name="CodigoNumero" Type="int" />

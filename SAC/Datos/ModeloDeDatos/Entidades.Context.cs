@@ -46,7 +46,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<TipoProveedor> TipoProveedor { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
-        public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
     }
 }
