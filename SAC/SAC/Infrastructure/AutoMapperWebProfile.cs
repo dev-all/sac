@@ -17,8 +17,12 @@ namespace SAC.Infrastructure
             CreateMap<PersonaModelView,PersonaModel >();
             CreateMap<PrioridadModel, PrioridadModelView>();
             CreateMap<PrioridadModelView , PrioridadModel>();
-            CreateMap<EventoModel, EventoModelView>();             
-            CreateMap<EventoModelView, EventoModel>();
+
+            CreateMap<PaisModel, PaisModelView>();             
+            CreateMap<PaisModelView, PaisModel>();
+
+            CreateMap<ProvinciaModel, ProvinciaModelView>();
+            CreateMap<ProvinciaModelView, ProvinciaModel>();
 
             CreateMap<AccionModel, AccionModelView>();
             CreateMap<AccionModelView, AccionModel>();

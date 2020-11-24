@@ -35,8 +35,8 @@ namespace Datos.ModeloDeDatos
         public string CodigoPostal { get; set; }
         public string Domicilio { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
-        public Nullable<int> IdProvinciaDomicilio { get; set; }
-        public Nullable<int> IdLocalidadDomicilio { get; set; }
+        public int IdProvinciaDomicilio { get; set; }
+        public int IdLocalidadDomicilio { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string CodigoValidacion { get; set; }
@@ -47,7 +47,6 @@ namespace Datos.ModeloDeDatos
         public virtual Localidad Localidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notificacion> Notificacion { get; set; }
-        public virtual Provincia Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
     }

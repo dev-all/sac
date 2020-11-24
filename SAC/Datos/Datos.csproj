@@ -85,6 +85,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="ModeloDeDatos\EstadoCivil.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Evento.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>

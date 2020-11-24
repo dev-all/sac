@@ -25,19 +25,36 @@ namespace Datos.ModeloDeDatos
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AccionPorRol> AccionPorRol { get; set; }
-        public virtual DbSet<Contacto> Contacto { get; set; }
-        public virtual DbSet<Evento> Evento { get; set; }
-        public virtual DbSet<homePorRol> homePorRol { get; set; }
-        public virtual DbSet<Localidad> Localidad { get; set; }
-        public virtual DbSet<Notificacion> Notificacion { get; set; }
-        public virtual DbSet<Persona> Persona { get; set; }
-        public virtual DbSet<Provincia> Provincia { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<MenuSidebar> MenuSidebar { get; set; }
         public virtual DbSet<Accion> Accion { get; set; }
+        public virtual DbSet<AccionPorRol> AccionPorRol { get; set; }
+        public virtual DbSet<AfipRegimen> AfipRegimen { get; set; }
+        public virtual DbSet<Contacto> Contacto { get; set; }
+        public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
+        public virtual DbSet<Evento> Evento { get; set; }
+        public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
+        public virtual DbSet<homePorRol> homePorRol { get; set; }
+<<<<<<< Updated upstream
+        public virtual DbSet<Localidad> Localidad { get; set; }
+=======
+        public virtual DbSet<Imputacion> Imputacion { get; set; }
+        public virtual DbSet<Localidad> Localidad { get; set; }
+        public virtual DbSet<MenuSidebar> MenuSidebar { get; set; }
+>>>>>>> Stashed changes
+        public virtual DbSet<Notificacion> Notificacion { get; set; }
+        public virtual DbSet<Pais> Pais { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Prioridad> Prioridad { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
+<<<<<<< Updated upstream
+=======
+        public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<Rubros> Rubros { get; set; }
+        public virtual DbSet<SubRubro> SubRubro { get; set; }
+        public virtual DbSet<TipoIva> TipoIva { get; set; }
+        public virtual DbSet<TipoMoneda> TipoMoneda { get; set; }
+        public virtual DbSet<TipoProveedor> TipoProveedor { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Provincia> Provincia { get; set; }
+>>>>>>> Stashed changes
     }
 }

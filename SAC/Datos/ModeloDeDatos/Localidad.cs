@@ -26,8 +26,13 @@ namespace Datos.ModeloDeDatos
         public string Departamento { get; set; }
         public bool Activo { get; set; }
     
+<<<<<<< Updated upstream
         public virtual Provincia Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Persona> Persona { get; set; }
+=======
+        public virtual Pais Pais { get; set; }
+        public virtual Provincia Provincia { get; set; }
+>>>>>>> Stashed changes
     }
 }

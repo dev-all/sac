@@ -12,42 +12,29 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Provincia
+    public partial class Pais
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Provincia()
+        public Pais()
         {
             this.Localidad = new HashSet<Localidad>();
-<<<<<<< Updated upstream
-            this.Persona = new HashSet<Persona>();
-=======
             this.Proveedor = new HashSet<Proveedor>();
->>>>>>> Stashed changes
+            this.Provincia = new HashSet<Provincia>();
         }
     
         public int Id { get; set; }
         public string Nombre { get; set; }
-<<<<<<< Updated upstream
-        public bool Activo { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Localidad> Localidad { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Persona> Persona { get; set; }
-=======
-        public string Codigo { get; set; }
-        public Nullable<int> CodigoNumero { get; set; }
-        public Nullable<int> IdPais { get; set; }
-        public Nullable<int> CodigoAfip { get; set; }
+        public string CodigoAfip { get; set; }
+        public string Cuit { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Localidad> Localidad { get; set; }
-        public virtual Pais Pais { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
->>>>>>> Stashed changes
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Provincia> Provincia { get; set; }
     }
 }
