@@ -3,3 +3,8 @@ SAC/SAC/obj/*
 SAC/Negocio/obj/*
 SAC/Datos/obj/*
 SAC/Entidad/obj/*
+
+
+SAC/Negocio/bin/*
+SAC/Datos/bin/*
+SAC/Entidad/bin/*
