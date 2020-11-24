@@ -7,12 +7,9 @@ using SAC.Models;
 using Negocio.Servicios;
 using Negocio.Modelos;
 using AutoMapper;
-
 using SAC.Atributos;
 using Entidad.Models;
 using System.Web.Script.Serialization;
-
-
 namespace SAC.Controllers
 
     

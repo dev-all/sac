@@ -5,98 +5,110 @@ using System.Collections.Generic;
 using System.Linq;
 namespace Datos.Repositorios
 {
-    public class PaisRepositorio : RepositorioBase<Pais>
+    public class ProvinciaRepositorio : RepositorioBase<Provincia>
     {
         private SAC_Entities context;
 
-        public PaisRepositorio(SAC_Entities contexto) : base(contexto)
+        public ProvinciaRepositorio(SAC_Entities contexto) : base(contexto)
         {
             this.context = contexto;
         }
 
-        public Pais InsertarPais(Pais pais)
+        public Provincia InsertarProvincia(Provincia Provincia)
         {
-            return Insertar(pais);
+            return Insertar(Provincia);
         }
 
 
-        public Pais ObtenerPais(int idPais)
+        public Provincia ObtenerProvincia(int idProvincia)
         {
-            Pais pais = context.Pais.Where(p => p.Id == idPais).First();
-            return pais;
+            Provincia Provincia = context.Provincia.Where(p => p.Id == idProvincia).First();
+            return Provincia;
         }
 
 
 
-        //public List<Pais> ObtenerPais(int idPais)
+        //public List<Provincia> ObtenerProvincia(int idProvincia)
         //{
-        //    List<Pais> pais = context.Pais.Where(p => p.Id == idPais).ToList();
-        //    return pais;
+        //    List<Provincia> Provincia = context.Provincia.Where(p => p.Id == idProvincia).ToList();
+        //    return Provincia;
         //}
 
 
 
-        public Pais ObtenerPaisPorId(int idPais)
+        public Provincia ObtenerProvinciaPorId(int idProvincia)
         {
-            var pais = context.Pais.Where(p => p.Id == idPais).FirstOrDefault();
-            return pais;
+            var Provincia = context.Provincia.Where(p => p.Id == idProvincia).FirstOrDefault();
+            return Provincia;
         }
 
-        public Pais ActualizarPais(Pais model)
+        public Provincia ActualizarProvincia(Provincia model)
         {
-            Pais paisExistente = ObtenerPaisPorId(model.Id);
+            Provincia ProvinciaExistente = ObtenerProvinciaPorId(model.Id);
 
-            paisExistente.Id = model.Id;
-            paisExistente.Nombre = model.Nombre;
-            paisExistente.CodigoAfip = model.CodigoAfip;
-            paisExistente.Cuit = model.Cuit;
-            paisExistente.Activo = model.Activo;
+            ProvinciaExistente.Id = model.Id;
+            ProvinciaExistente.Nombre = model.Nombre;
+            ProvinciaExistente.CodigoAfip = model.CodigoAfip;
+            ProvinciaExistente.Codigo = model.Codigo;
+            ProvinciaExistente.CodigoNumero = model.CodigoNumero;
+            ProvinciaExistente.IdPais = model.IdPais;
+            ProvinciaExistente.Activo = model.Activo;
 
             context.SaveChanges();
-            return paisExistente;
+            return ProvinciaExistente;
         }
 
-        public Pais ObtenerPaisPorNombre(string nombre)
+        public Provincia ObtenerProvinciaPorNombre(string nombre)
         {
-            return context.Pais.Where(p => p.Nombre == nombre).FirstOrDefault();
+            return context.Provincia.Where(p => p.Nombre == nombre).FirstOrDefault();
         }
 
+        public Provincia ObtenerProvinciaPorNombre(string nombre, string codigo)
+        {
+            return context.Provincia.Where(p => p.Nombre == nombre && p.Codigo == codigo).FirstOrDefault();
+        }
 
+      
         /// <summary>
         /// verifica que el nombre ingresado no exista para otro id que no sea el enviado
         /// </summary>
         /// <param name="nombre"></param>
-        /// <param name="idPais"></param>
+        /// <param name="idProvincia"></param>
         /// <returns></returns>
-        public Pais ObtenerPaisPorNombre(string nombre, int idPais)
+        public Provincia ObtenerProvinciaPorNombre(string nombre, string codigo,int idProvincia)
         {
-            return context.Pais.Where(p => p.Nombre == nombre && p.Id != idPais).FirstOrDefault();
+            return context.Provincia.Where(p => p.Nombre == nombre && p.Codigo == codigo && p.Id != idProvincia).FirstOrDefault();
         }
 
 
-        public Pais ObtenerPaisPorCodigoAfip(string codigoafip)
+        public Provincia ObtenerProvinciaPorCodigoAfip(int codigoafip)
         {
-            return context.Pais.Where(p => p.CodigoAfip == codigoafip).FirstOrDefault();
-            //return context.Pais.FirstOrDefault(l => l.CodigoAfip == codigoafip);
+            return context.Provincia.Where(p => p.CodigoAfip == codigoafip).FirstOrDefault();
+            //return context.Provincia.FirstOrDefault(l => l.CodigoAfip == codigoafip);
+            
         }
 
 
-        public List<Pais> GetAllPais()
+        public List<Provincia> GetAllProvincia()
         {
-            List<Pais> listaPais = context.Pais.Where(p => p.Activo == true).ToList();
-
-            return listaPais;
+            List<Provincia> listaProvincia = context.Provincia.Where(p => p.Activo == true).ToList();
+            return listaProvincia;
+        }
+        public List<Provincia> GetAllProvincia(int idPais)
+        {
+            List<Provincia> listaProvincia = context.Provincia.Where(p => p.Activo == true && p.IdPais == idPais).ToList();
+            return listaProvincia;
         }
 
-        public int EliminarPais(int idPais)
+        public int EliminarProvincia(int idProvincia)
         {
-            Pais paisExistente = ObtenerPaisPorId(idPais);
-            paisExistente.Activo = false;
+            Provincia ProvinciaExistente = ObtenerProvinciaPorId(idProvincia);
+            ProvinciaExistente.Activo = false;
             context.SaveChanges();
             return 1;
 
-            //var oPais = context.Pais.Where(r => r.Id == idPais).FirstOrDefault();
-            //context.Pais.Remove(oPais);
+            //var oProvincia = context.Provincia.Where(r => r.Id == idProvincia).FirstOrDefault();
+            //context.Provincia.Remove(oProvincia);
             //var retorno = context.SaveChanges();
             //return retorno;
         }

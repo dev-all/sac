@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\MenusidebarController.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
     <Compile Include="Models\ConfiguracionModelView.cs" />
+    <Compile Include="Models\LocalidadModelView.cs" />
     <Compile Include="Models\MenuSideBarModelView.cs" />
     <Compile Include="Models\PaisModelView.cs" />
     <Compile Include="Models\ProveedorModelView.cs" />
@@ -1521,7 +1523,6 @@
     <Content Include="Content\assets\plugins\jquery-steps-master\test\qunit\qunit-1.11.0.css" />
     <Content Include="Content\assets\plugins\jquery-steps-master\test\qunit\qunit-1.11.0.js" />
     <Content Include="Content\assets\plugins\jquery-steps-master\test\tests.js" />
-    <Content Include="Content\assets\plugins\jquery-unobtrusive-ajax\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\assets\plugins\jquery-wizard-master\.gitattributes" />
     <Content Include="Content\assets\plugins\jquery-wizard-master\.gitignore" />
     <Content Include="Content\assets\plugins\jquery-wizard-master\config.js" />
@@ -2796,19 +2797,17 @@
     <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
-    <Content Include="Views\Pais\Index.cshtml" />
+    <Content Include="Views\Localidad\Index.cshtml" />
     <Content Include="Views\Pais\Agregar.cshtml" />
     <Content Include="Views\Pais\Editar.cshtml" />
-    <Content Include="Views\Provincia\Index.cshtml" />
+    <Content Include="Views\Pais\Index.cshtml" />
     <Content Include="Views\Provincia\Agregar.cshtml" />
     <Content Include="Views\Provincia\Editar.cshtml" />
+    <Content Include="Views\Provincia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-
     <Folder Include="Helpers\" />
-    <Folder Include="Scripts\view\" />
-
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

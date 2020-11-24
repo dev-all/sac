@@ -55,7 +55,7 @@ namespace Negocio.Servicios
 
         public ProvinciaModel GetProvincia (int _id)
         {
-            Provincia oProvincia = provinciaRepositorio.ObtenerporId(_id);
+            Provincia oProvincia = provinciaRepositorio.ObtenerProvinciaPorId(_id);
             ProvinciaModel oProvinciaModel = new ProvinciaModel();
 
             oProvinciaModel.Id = oProvincia.Id;
@@ -72,7 +72,7 @@ namespace Negocio.Servicios
         public int ActualizarPais(ProvinciaModel oProvinciaModel)
         {
             //controlar que no exista 
-            Provincia oProvincia = provinciaRepositorio.ObtenerporNOMBRE(oProvinciaModel.Nombre,oProvinciaModel.Codigo, oProvinciaModel.Id);
+            Provincia oProvincia = provinciaRepositorio.ObtenerProvinciaPorNombre(oProvinciaModel.Nombre,oProvinciaModel.Codigo, oProvinciaModel.Id);
             if (oProvincia != null) //significa que existe
             {
                 return -2;
@@ -107,7 +107,7 @@ namespace Negocio.Servicios
         public int GuardarProvincia(ProvinciaModel oProvinciaModel)
         {
             //controlar que no exista 
-            Provincia oProvincia = provinciaRepositorio.ObtenerporNOMBRE(oProvinciaModel.Nombre,oProvinciaModel.Codigo);
+            Provincia oProvincia = provinciaRepositorio.ObtenerProvinciaPorNombre(oProvinciaModel.Nombre,oProvinciaModel.Codigo);
             if (oProvincia != null)
             {
                 return -2;
@@ -141,7 +141,7 @@ namespace Negocio.Servicios
 
         public int Eliminar(int idProvincia)
         {
-            var retorno = provinciaRepositorio.EliminarPais(idProvincia);
+            var retorno = provinciaRepositorio.EliminarProvincia(idProvincia);
             if (retorno == 1)
             {
                 return 0; //ok

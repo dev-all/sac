@@ -162,7 +162,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
     <Property Name="CodigoAfip" Type="varchar" MaxLength="50" />
     <Property Name="Cuit" Type="varchar" MaxLength="50" />
@@ -175,10 +175,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Documento" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="Documento" Type="char" MaxLength="10" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
     <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
-    <Property Name="Email" Type="nvarchar" MaxLength="150" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="Sexo" Type="char" MaxLength="10" />
     <Property Name="Cuil" Type="char" MaxLength="20" />
     <Property Name="TelefonoMovil" Type="nvarchar" MaxLength="50" />
@@ -192,7 +192,7 @@
     <Property Name="FechaCreacion" Type="datetime" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="CodigoValidacion" Type="nchar" MaxLength="10" />
-    <Property Name="Activo" Type="bit" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Prioridad">
     <Key>
@@ -240,7 +240,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
     <Property Name="Codigo" Type="varchar" MaxLength="20" />
     <Property Name="CodigoNumero" Type="int" />
@@ -319,6 +319,7 @@
     </Key>
     <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
     <Property Name="IdPersona" Type="int" />
     <Property Name="IdRol" Type="int" />
     <Property Name="Activo" Type="bit" Nullable="false" />
@@ -370,30 +371,6 @@
       </Principal>
       <Dependent Role="Contacto">
         <PropertyRef Name="IdPersona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Evento_Prioridad">
-    <End Role="Prioridad" Type="Self.Prioridad" Multiplicity="0..1" />
-    <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Prioridad">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Evento">
-        <PropertyRef Name="IdPrioridad" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Evento_Usuario">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
-    <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="IdUsuario" />
-      </Principal>
-      <Dependent Role="Evento">
-        <PropertyRef Name="IdUsuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -502,6 +479,30 @@
       </Principal>
       <Dependent Role="Proveedor">
         <PropertyRef Name="IdImputacionFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Pais">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Provincia">
+    <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdProvincia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -653,14 +654,6 @@
       <End Role="Persona" EntitySet="Persona" />
       <End Role="Contacto" EntitySet="Contacto" />
     </AssociationSet>
-    <AssociationSet Name="FK_Evento_Prioridad" Association="Self.FK_Evento_Prioridad">
-      <End Role="Prioridad" EntitySet="Prioridad" />
-      <End Role="Evento" EntitySet="Evento" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Evento_Usuario" Association="Self.FK_Evento_Usuario">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Evento" EntitySet="Evento" />
-    </AssociationSet>
     <AssociationSet Name="FK_Imputacion_SubRubro" Association="Self.FK_Imputacion_SubRubro">
       <End Role="SubRubro" EntitySet="SubRubro" />
       <End Role="Imputacion" EntitySet="Imputacion" />
@@ -695,6 +688,14 @@
     </AssociationSet>
     <AssociationSet Name="FK_Proveedor_Imputacion1" Association="Self.FK_Proveedor_Imputacion1">
       <End Role="Imputacion" EntitySet="Imputacion" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Pais" Association="Self.FK_Proveedor_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Provincia" Association="Self.FK_Proveedor_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
       <End Role="Proveedor" EntitySet="Proveedor" />
     </AssociationSet>
     <AssociationSet Name="FK_Proveedor_TipoIva" Association="Self.FK_Proveedor_TipoIva">

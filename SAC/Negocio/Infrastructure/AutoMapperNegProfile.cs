@@ -25,6 +25,11 @@ namespace Agenda.Infrastructure
             CreateMap<Provincia, ProvinciaModel>();
             CreateMap<ProvinciaModel, Provincia>();
 
+
+
+            CreateMap<Evento, EventoModel>();
+            CreateMap<EventoModel, Evento>();
+
             CreateMap<Accion, AccionModel>();
             CreateMap<AccionModel, Accion>();
 

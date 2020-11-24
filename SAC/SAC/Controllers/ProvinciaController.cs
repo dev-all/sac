@@ -43,7 +43,6 @@ namespace SAC.Controllers
           
         }
 
-
         public ActionResult Agregar()
         {
             CargarPais();
@@ -53,13 +52,12 @@ namespace SAC.Controllers
         [HttpPost]
         public ActionResult Agregar(ProvinciaModelView oProvinciaModelView)
         {
-
+            CargarPais();
             int respuesta = -1;
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    CargarPais();
                     return View(oProvinciaModelView);
                 }
                 else

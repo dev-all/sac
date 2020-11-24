@@ -59,6 +59,7 @@
     <Compile Include="Interfaces\IServicioUsuario.cs" />
     <Compile Include="Modelos\AccionPorRol.cs" />
     <Compile Include="Modelos\ConfiguracionModel.cs" />
+    <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
     <Compile Include="Modelos\MenuSideBarModel.cs" />
     <Compile Include="Modelos\PaisModel.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Servicios\ServicioUsuario.cs" />
     <Compile Include="Servicios\ServicioConfiguracion.cs" />
     <Compile Include="Servicios\ServicioBase.cs" />
+    <Compile Include="Servicios\ServicioEvento.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Datos\Datos.csproj">
