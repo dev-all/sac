@@ -26,22 +26,22 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.TimeSpan> HoraInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
         public Nullable<System.TimeSpan> HoraFin { get; set; }
-        public Nullable<int> IdPrioridad { get; set; }
         public Nullable<bool> TodoElDia { get; set; }
         public string Asisten { get; set; }
         public string Recibido { get; set; }
         public string Enviado { get; set; }
         public string Pasado { get; set; }
         public string Ubicacion { get; set; }
-        public string Organizador { get; set; }
-        public string Obs { get; set; }
         public bool Activo { get; set; }
         public int IdUsuario { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string Organizador { get; set; }
+        public string Obs { get; set; }
+        public Nullable<int> IdPrioridad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacto> Contacto { get; set; }
-        public virtual Prioridad Prioridad { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Prioridad Prioridad { get; set; }
     }
 }

@@ -14,19 +14,6 @@
     }
 </style>
 
-<!-- ============================================================== -->
-<!-- Start Page Content -->
-<!-- ============================================================== -->
-<div>
-    @if (TempData["sucesso"] != null)
-    {
-        @Html.Partial("_PartialMsgSucesso");
-    }
-    else if (TempData["erro"] != null)
-    {
-        @Html.Partial("_PartialMsgErro");
-    }
-</div>
 
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->

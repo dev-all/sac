@@ -5,16 +5,7 @@
 <link href="/Content/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
 <link href="/Content/assets/css/pages/floating-label.css" rel="stylesheet">
 
-<div>
-    @if (TempData["sucesso"] != null)
-    {
-        @Html.Partial("_PartialMsgSucesso");
-    }
-    else if (TempData["erro"] != null)
-    {
-        @Html.Partial("_PartialMsgErro");
-    }
-</div>
+
 
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">

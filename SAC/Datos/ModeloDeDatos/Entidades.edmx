@@ -25,6 +25,21 @@
           <Property Name="idRol" Type="int" Nullable="false" />
           <Property Name="idAccion" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="AfipRegimen">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Concepto" Type="varchar" MaxLength="50" />
+          <Property Name="Aliri" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Alirni" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Minimo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Imputacion" Type="tinyint" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Contacto">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,14 +47,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdEvento" Type="int" Nullable="false" />
           <Property Name="IdPersona" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="EstadoCivil">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
-          <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Evento">
           <Key>
@@ -64,6 +71,17 @@
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="GrupoCuenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="homePorRol">
           <Key>
             <PropertyRef Name="IdHome" />
@@ -72,15 +90,53 @@
           <Property Name="Metodo" Type="varchar" MaxLength="50" />
           <Property Name="Controller" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Imputacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="20" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="IdSubRubro" Type="int" />
+          <Property Name="SaldoInicial" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SaldoFin" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdTipo" Type="int" />
+          <Property Name="Alias" Type="varchar" MaxLength="10" />
+          <Property Name="Enero" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Febrero" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Marzo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Abril" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Mayo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Junio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Julio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Agosto" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Septiembre" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Octubre" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Noviembre" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Diciembre" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdProvincia" Type="int" Nullable="false" />
-          <Property Name="Departamento" Type="varchar" MaxLength="50" />
-          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="int" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Altini" Type="nvarchar" MaxLength="50" />
+          <Property Name="AltFin" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodigoProvincia" Type="nvarchar" MaxLength="50" />
+          <Property Name="NombreSucursal" Type="nvarchar" MaxLength="50" />
+          <Property Name="CodigoSucursal" Type="int" />
+          <Property Name="OfDistLocal" Type="int" />
+          <Property Name="codposchr" Type="int" />
+          <Property Name="IdPais" Type="int" />
+          <Property Name="IdProvincia" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
         </EntityType>
         <EntityType Name="MenuSidebar">
           <Key>
@@ -107,13 +163,11 @@
           <Property Name="Activo" Type="bit" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
         </EntityType>
-<<<<<<< Updated upstream
-=======
         <EntityType Name="Pais">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="CodigoAfip" Type="varchar" MaxLength="50" />
           <Property Name="Cuit" Type="varchar" MaxLength="50" />
@@ -121,7 +175,6 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
         </EntityType>
->>>>>>> Stashed changes
         <EntityType Name="Persona">
           <Key>
             <PropertyRef Name="Id" />
@@ -139,8 +192,8 @@
           <Property Name="CodigoPostal" Type="nchar" MaxLength="10" />
           <Property Name="Domicilio" Type="nvarchar" MaxLength="250" />
           <Property Name="FechaNacimiento" Type="datetime" />
-          <Property Name="IdProvinciaDomicilio" Type="int" Nullable="false" />
-          <Property Name="IdLocalidadDomicilio" Type="int" Nullable="false" />
+          <Property Name="IdProvinciaDomicilio" Type="int" />
+          <Property Name="IdLocalidadDomicilio" Type="int" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="CodigoValidacion" Type="nchar" MaxLength="10" />
@@ -159,12 +212,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-<<<<<<< Updated upstream
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Activo" Type="bit" Nullable="false" />
-=======
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Cuit" Type="varchar" MaxLength="20" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Direccion" Type="varchar" MaxLength="50" />
@@ -192,18 +240,12 @@
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
->>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-<<<<<<< Updated upstream
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
-          <Property Name="Activo" Type="bit" Nullable="false" />
-=======
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Codigo" Type="varchar" MaxLength="20" />
           <Property Name="CodigoNumero" Type="int" />
@@ -212,7 +254,6 @@
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
->>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -223,13 +264,66 @@
           <Property Name="EsAdministrador" Type="bit" Nullable="false" />
           <Property Name="IdHome" Type="int" />
         </EntityType>
+        <EntityType Name="Rubros">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="10" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="IdGrupoCuenta" Type="int" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SubRubro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="10" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="IdRubro" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TipoIva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Porcentaje" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoMoneda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TipoProveedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="50" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="IdPersona" Type="int" />
           <Property Name="IdRol" Type="int" />
           <Property Name="Activo" Type="bit" Nullable="false" />
@@ -284,7 +378,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-<<<<<<< Updated upstream
         <Association Name="FK_Evento_Prioridad">
           <End Role="Prioridad" Type="Self.Prioridad" Multiplicity="0..1" />
           <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
@@ -306,7 +399,9 @@
             </Principal>
             <Dependent Role="Evento">
               <PropertyRef Name="IdUsuario" />
-=======
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Imputacion_SubRubro">
           <End Role="SubRubro" Type="Self.SubRubro" Multiplicity="0..1" />
           <End Role="Imputacion" Type="Self.Imputacion" Multiplicity="*" />
@@ -328,12 +423,11 @@
             </Principal>
             <Dependent Role="Localidad">
               <PropertyRef Name="IdPais" />
->>>>>>> Stashed changes
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Localidad_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
           <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Provincia">
@@ -380,11 +474,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-<<<<<<< Updated upstream
-        <Association Name="FK_Personas_Localidades1">
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
-          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
-=======
         <Association Name="FK_Proveedor_AfipRegimen">
           <End Role="AfipRegimen" Type="Self.AfipRegimen" Multiplicity="0..1" />
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
@@ -421,30 +510,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedor_Pais">
-          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pais">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Proveedor_TipoIva">
           <End Role="TipoIva" Type="Self.TipoIva" Multiplicity="0..1" />
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
@@ -472,25 +537,24 @@
         <Association Name="FK_Proveedor_TipoProveedor">
           <End Role="TipoProveedor" Type="Self.TipoProveedor" Multiplicity="0..1" />
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
->>>>>>> Stashed changes
           <ReferentialConstraint>
-            <Principal Role="Localidad">
+            <Principal Role="TipoProveedor">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="IdLocalidadDomicilio" />
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdTipoProveedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Personas_Provincias1">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
-          <End Role="Persona" Type="Self.Persona" Multiplicity="*" />
+        <Association Name="FK_Provincia_Pais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Provincia">
+            <Principal Role="Pais">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="IdProvinciaDomicilio" />
+            <Dependent Role="Provincia">
+              <PropertyRef Name="IdPais" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -503,6 +567,30 @@
             </Principal>
             <Dependent Role="Rol">
               <PropertyRef Name="IdHome" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rubros_GrupoCuenta">
+          <End Role="GrupoCuenta" Type="Self.GrupoCuenta" Multiplicity="0..1" />
+          <End Role="Rubros" Type="Self.Rubros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoCuenta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rubros">
+              <PropertyRef Name="IdGrupoCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubRubro_Rubros">
+          <End Role="Rubros" Type="Self.Rubros" Multiplicity="0..1" />
+          <End Role="SubRubro" Type="Self.SubRubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rubros">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubRubro">
+              <PropertyRef Name="IdRubro" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -533,18 +621,26 @@
         <EntityContainer Name="Agenda_ModelStoreContainer">
           <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccionPorRol" EntityType="Self.AccionPorRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AfipRegimen" EntityType="Self.AfipRegimen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupoCuenta" EntityType="Self.GrupoCuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="homePorRol" EntityType="Self.homePorRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imputacion" EntityType="Self.Imputacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuSidebar" EntityType="Self.MenuSidebar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prioridad" EntityType="Self.Prioridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubRubro" EntityType="Self.SubRubro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoIva" EntityType="Self.TipoIva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoMoneda" EntityType="Self.TipoMoneda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProveedor" EntityType="Self.TipoProveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="Self.FK_AccionesPorRoles_Acciones">
             <End Role="Accion" EntitySet="Accion" />
@@ -562,7 +658,6 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Contacto" EntitySet="Contacto" />
           </AssociationSet>
-<<<<<<< Updated upstream
           <AssociationSet Name="FK_Evento_Prioridad" Association="Self.FK_Evento_Prioridad">
             <End Role="Prioridad" EntitySet="Prioridad" />
             <End Role="Evento" EntitySet="Evento" />
@@ -570,7 +665,7 @@
           <AssociationSet Name="FK_Evento_Usuario" Association="Self.FK_Evento_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Evento" EntitySet="Evento" />
-=======
+          </AssociationSet>
           <AssociationSet Name="FK_Imputacion_SubRubro" Association="Self.FK_Imputacion_SubRubro">
             <End Role="SubRubro" EntitySet="SubRubro" />
             <End Role="Imputacion" EntitySet="Imputacion" />
@@ -578,7 +673,6 @@
           <AssociationSet Name="FK_Localidad_Pais" Association="Self.FK_Localidad_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Localidad" EntitySet="Localidad" />
->>>>>>> Stashed changes
           </AssociationSet>
           <AssociationSet Name="FK_Localidad_Provincia" Association="Self.FK_Localidad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
@@ -596,11 +690,6 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Notificacion" EntitySet="Notificacion" />
           </AssociationSet>
-<<<<<<< Updated upstream
-          <AssociationSet Name="FK_Personas_Localidades1" Association="Self.FK_Personas_Localidades1">
-            <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Persona" EntitySet="Persona" />
-=======
           <AssociationSet Name="FK_Proveedor_AfipRegimen" Association="Self.FK_Proveedor_AfipRegimen">
             <End Role="AfipRegimen" EntitySet="AfipRegimen" />
             <End Role="Proveedor" EntitySet="Proveedor" />
@@ -611,14 +700,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Imputacion1" Association="Self.FK_Proveedor_Imputacion1">
             <End Role="Imputacion" EntitySet="Imputacion" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Pais" Association="Self.FK_Proveedor_Pais">
-            <End Role="Pais" EntitySet="Pais" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Provincia" Association="Self.FK_Proveedor_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_TipoIva" Association="Self.FK_Proveedor_TipoIva">
@@ -632,15 +713,22 @@
           <AssociationSet Name="FK_Proveedor_TipoProveedor" Association="Self.FK_Proveedor_TipoProveedor">
             <End Role="TipoProveedor" EntitySet="TipoProveedor" />
             <End Role="Proveedor" EntitySet="Proveedor" />
->>>>>>> Stashed changes
           </AssociationSet>
-          <AssociationSet Name="FK_Personas_Provincias1" Association="Self.FK_Personas_Provincias1">
+          <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
+            <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
           <AssociationSet Name="FK_Roles_HomePorRol" Association="Self.FK_Roles_HomePorRol">
             <End Role="homePorRol" EntitySet="homePorRol" />
             <End Role="Rol" EntitySet="Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rubros_GrupoCuenta" Association="Self.FK_Rubros_GrupoCuenta">
+            <End Role="GrupoCuenta" EntitySet="GrupoCuenta" />
+            <End Role="Rubros" EntitySet="Rubros" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubRubro_Rubros" Association="Self.FK_SubRubro_Rubros">
+            <End Role="Rubros" EntitySet="Rubros" />
+            <End Role="SubRubro" EntitySet="SubRubro" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
             <End Role="Persona" EntitySet="Persona" />
@@ -656,48 +744,18 @@
     <edmx:ConceptualModels>
       <Schema Namespace="Agenda_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SAC_Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accion" EntityType="Agenda_Model.Accion" />
           <EntitySet Name="AccionPorRol" EntityType="Agenda_Model.AccionPorRol" />
-          <EntitySet Name="AfipRegimen" EntityType="Agenda_Model.AfipRegimen" />
           <EntitySet Name="Contacto" EntityType="Agenda_Model.Contacto" />
-          <EntitySet Name="EstadoCivil" EntityType="Agenda_Model.EstadoCivil" />
           <EntitySet Name="Evento" EntityType="Agenda_Model.Evento" />
-          <EntitySet Name="GrupoCuenta" EntityType="Agenda_Model.GrupoCuenta" />
           <EntitySet Name="homePorRol" EntityType="Agenda_Model.homePorRol" />
-<<<<<<< Updated upstream
-          <EntitySet Name="Localidad" EntityType="Agenda_Model.Localidad" />
-=======
-          <EntitySet Name="Imputacion" EntityType="Agenda_Model.Imputacion" />
-          <EntitySet Name="Localidad" EntityType="Agenda_Model.Localidad" />
-          <EntitySet Name="MenuSidebar" EntityType="Agenda_Model.MenuSidebar" />
->>>>>>> Stashed changes
           <EntitySet Name="Notificacion" EntityType="Agenda_Model.Notificacion" />
-          <EntitySet Name="Pais" EntityType="Agenda_Model.Pais" />
           <EntitySet Name="Persona" EntityType="Agenda_Model.Persona" />
-          <EntitySet Name="Prioridad" EntityType="Agenda_Model.Prioridad" />
-          <EntitySet Name="Proveedor" EntityType="Agenda_Model.Proveedor" />
+          <EntitySet Name="Provincia" EntityType="Agenda_Model.Provincia" />
           <EntitySet Name="Rol" EntityType="Agenda_Model.Rol" />
-          <EntitySet Name="Rubros" EntityType="Agenda_Model.Rubros" />
-          <EntitySet Name="SubRubro" EntityType="Agenda_Model.SubRubro" />
-          <EntitySet Name="TipoIva" EntityType="Agenda_Model.TipoIva" />
-          <EntitySet Name="TipoMoneda" EntityType="Agenda_Model.TipoMoneda" />
-          <EntitySet Name="TipoProveedor" EntityType="Agenda_Model.TipoProveedor" />
           <EntitySet Name="Usuario" EntityType="Agenda_Model.Usuario" />
-          <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="Agenda_Model.FK_AccionesPorRoles_Acciones">
-            <End Role="Accion" EntitySet="Accion" />
-            <End Role="AccionPorRol" EntitySet="AccionPorRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuSidebar_Accion" Association="Agenda_Model.FK_MenuSidebar_Accion">
-            <End Role="Accion" EntitySet="Accion" />
-            <End Role="MenuSidebar" EntitySet="MenuSidebar" />
-          </AssociationSet>
           <AssociationSet Name="FK_AccionesPorRoles_Roles" Association="Agenda_Model.FK_AccionesPorRoles_Roles">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="AccionPorRol" EntitySet="AccionPorRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_AfipRegimen" Association="Agenda_Model.FK_Proveedor_AfipRegimen">
-            <End Role="AfipRegimen" EntitySet="AfipRegimen" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           <AssociationSet Name="FK_Contacto_Evento" Association="Agenda_Model.FK_Contacto_Evento">
             <End Role="Evento" EntitySet="Evento" />
@@ -707,7 +765,6 @@
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Contacto" EntitySet="Contacto" />
           </AssociationSet>
-<<<<<<< Updated upstream
           <AssociationSet Name="FK_Evento_Usuario" Association="Agenda_Model.FK_Evento_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Evento" EntitySet="Evento" />
@@ -715,14 +772,6 @@
           <AssociationSet Name="FK_Roles_HomePorRol" Association="Agenda_Model.FK_Roles_HomePorRol">
             <End Role="homePorRol" EntitySet="homePorRol" />
             <End Role="Rol" EntitySet="Rol" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Localidad_Provincia" Association="Agenda_Model.FK_Localidad_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Localidad" EntitySet="Localidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Personas_Localidades1" Association="Agenda_Model.FK_Personas_Localidades1">
-            <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Persona" EntitySet="Persona" />
           </AssociationSet>
           <AssociationSet Name="FK_Notificacion_Persona" Association="Agenda_Model.FK_Notificacion_Persona">
             <End Role="Persona" EntitySet="Persona" />
@@ -755,27 +804,26 @@
             <End Role="MenuSidebar" EntitySet="MenuSidebar" />
           </AssociationSet>
           <EntitySet Name="Prioridad" EntityType="Agenda_Model.Prioridad" />
-=======
->>>>>>> Stashed changes
           <AssociationSet Name="FK_Evento_Prioridad" Association="Agenda_Model.FK_Evento_Prioridad">
             <End Role="Prioridad" EntitySet="Prioridad" />
             <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
-<<<<<<< Updated upstream
           <EntitySet Name="Proveedor" EntityType="Agenda_Model.Proveedor" />
-        </EntityContainer>
-=======
-          <AssociationSet Name="FK_Evento_Usuario" Association="Agenda_Model.FK_Evento_Usuario">
-            <End Role="Usuario" EntitySet="Usuario" />
-            <End Role="Evento" EntitySet="Evento" />
+          <EntitySet Name="AfipRegimen" EntityType="Agenda_Model.AfipRegimen" />
+          <EntitySet Name="GrupoCuenta" EntityType="Agenda_Model.GrupoCuenta" />
+          <EntitySet Name="Imputacion" EntityType="Agenda_Model.Imputacion" />
+          <EntitySet Name="Rubros" EntityType="Agenda_Model.Rubros" />
+          <EntitySet Name="SubRubro" EntityType="Agenda_Model.SubRubro" />
+          <EntitySet Name="TipoIva" EntityType="Agenda_Model.TipoIva" />
+          <EntitySet Name="TipoMoneda" EntityType="Agenda_Model.TipoMoneda" />
+          <EntitySet Name="TipoProveedor" EntityType="Agenda_Model.TipoProveedor" />
+          <AssociationSet Name="FK_Proveedor_AfipRegimen" Association="Agenda_Model.FK_Proveedor_AfipRegimen">
+            <End Role="AfipRegimen" EntitySet="AfipRegimen" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           <AssociationSet Name="FK_Rubros_GrupoCuenta" Association="Agenda_Model.FK_Rubros_GrupoCuenta">
             <End Role="GrupoCuenta" EntitySet="GrupoCuenta" />
             <End Role="Rubros" EntitySet="Rubros" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Roles_HomePorRol" Association="Agenda_Model.FK_Roles_HomePorRol">
-            <End Role="homePorRol" EntitySet="homePorRol" />
-            <End Role="Rol" EntitySet="Rol" />
           </AssociationSet>
           <AssociationSet Name="FK_Imputacion_SubRubro" Association="Agenda_Model.FK_Imputacion_SubRubro">
             <End Role="SubRubro" EntitySet="SubRubro" />
@@ -789,26 +837,6 @@
             <End Role="Imputacion" EntitySet="Imputacion" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Localidad_Pais" Association="Agenda_Model.FK_Localidad_Pais">
-            <End Role="Pais" EntitySet="Pais" />
-            <End Role="Localidad" EntitySet="Localidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MenuSidebar_MenuSidebar" Association="Agenda_Model.FK_MenuSidebar_MenuSidebar">
-            <End Role="MenuSidebar" EntitySet="MenuSidebar" />
-            <End Role="MenuSidebar1" EntitySet="MenuSidebar" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Notificacion_Persona" Association="Agenda_Model.FK_Notificacion_Persona">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="Notificacion" EntitySet="Notificacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Pais" Association="Agenda_Model.FK_Proveedor_Pais">
-            <End Role="Pais" EntitySet="Pais" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Persona" Association="Agenda_Model.FK_Usuario_Persona">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
           <AssociationSet Name="FK_Proveedor_TipoIva" Association="Agenda_Model.FK_Proveedor_TipoIva">
             <End Role="TipoIva" EntitySet="TipoIva" />
             <End Role="Proveedor" EntitySet="Proveedor" />
@@ -821,43 +849,25 @@
             <End Role="TipoProveedor" EntitySet="TipoProveedor" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Roles" Association="Agenda_Model.FK_Usuarios_Roles">
-            <End Role="Rol" EntitySet="Rol" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
           <AssociationSet Name="FK_SubRubro_Rubros" Association="Agenda_Model.FK_SubRubro_Rubros">
             <End Role="Rubros" EntitySet="Rubros" />
             <End Role="SubRubro" EntitySet="SubRubro" />
           </AssociationSet>
-          <EntitySet Name="Provincia" EntityType="Agenda_Model.Provincia" />
+          <EntitySet Name="Localidad" EntityType="Agenda_Model.Localidad" />
           <AssociationSet Name="FK_Localidad_Provincia" Association="Agenda_Model.FK_Localidad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <EntitySet Name="Pais" EntityType="Agenda_Model.Pais" />
+          <AssociationSet Name="FK_Localidad_Pais" Association="Agenda_Model.FK_Localidad_Pais">
+            <End Role="Pais" EntitySet="Pais" />
             <End Role="Localidad" EntitySet="Localidad" />
           </AssociationSet>
           <AssociationSet Name="FK_Provincia_Pais" Association="Agenda_Model.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Provincia" Association="Agenda_Model.FK_Proveedor_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Accion">
-          <Key>
-            <PropertyRef Name="IdAccion" />
-          </Key>
-          <Property Name="IdAccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Controlador" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="IdModulo" Type="Int32" Nullable="false" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <Property Name="fechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="AccionPorRol" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="Accion" ToRole="AccionPorRol" />
-          <NavigationProperty Name="MenuSidebar" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="Accion" ToRole="MenuSidebar" />
-        </EntityType>
->>>>>>> Stashed changes
+          </EntityContainer>
         <EntityType Name="AccionPorRol">
           <Key>
             <PropertyRef Name="idRolPorAccion" />
@@ -865,24 +875,8 @@
           <Property Name="idRolPorAccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idRol" Type="Int32" Nullable="false" />
           <Property Name="idAccion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="AccionPorRol" ToRole="Accion" />
           <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_AccionesPorRoles_Roles" FromRole="AccionPorRol" ToRole="Rol" />
-        </EntityType>
-        <EntityType Name="AfipRegimen">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Aliri" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Alirni" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Minimo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Imputacion" Type="Byte" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_AfipRegimen" FromRole="AfipRegimen" ToRole="Proveedor" />
+          <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="AccionPorRol" ToRole="Accion" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -894,14 +888,6 @@
           <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Contacto_Evento" FromRole="Contacto" ToRole="Evento" />
           <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Contacto" ToRole="Persona" />
         </EntityType>
-        <EntityType Name="EstadoCivil">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="Evento">
           <Key>
             <PropertyRef Name="Id" />
@@ -912,33 +898,21 @@
           <Property Name="HoraInicio" Type="Time" Precision="7" />
           <Property Name="FechaFin" Type="DateTime" Precision="3" />
           <Property Name="HoraFin" Type="Time" Precision="7" />
-          <Property Name="IdPrioridad" Type="Int32" />
           <Property Name="TodoElDia" Type="Boolean" />
           <Property Name="Asisten" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Recibido" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Enviado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Pasado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Ubicacion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Organizador" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Obs" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Evento" FromRole="Evento" ToRole="Contacto" />
-          <NavigationProperty Name="Prioridad" Relationship="Agenda_Model.FK_Evento_Prioridad" FromRole="Evento" ToRole="Prioridad" />
           <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Evento_Usuario" FromRole="Evento" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="GrupoCuenta">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Rubros" Relationship="Agenda_Model.FK_Rubros_GrupoCuenta" FromRole="GrupoCuenta" ToRole="Rubros" />
+          <Property Name="Organizador" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Obs" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdPrioridad" Type="Int32" />
+          <NavigationProperty Name="Prioridad" Relationship="Agenda_Model.FK_Evento_Prioridad" FromRole="Evento" ToRole="Prioridad" />
         </EntityType>
         <EntityType Name="homePorRol">
           <Key>
@@ -948,19 +922,6 @@
           <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_Roles_HomePorRol" FromRole="homePorRol" ToRole="Rol" />
-        </EntityType>
-<<<<<<< Updated upstream
-        <EntityType Name="Localidad">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdProvincia" Type="Int32" Nullable="false" />
-          <Property Name="Departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
-          <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Personas_Localidades1" FromRole="Localidad" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Notificacion">
           <Key>
@@ -975,57 +936,49 @@
           <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Notificacion" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Persona">
-=======
-        <EntityType Name="Imputacion">
->>>>>>> Stashed changes
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdSubRubro" Type="Int32" />
-          <Property Name="SaldoInicial" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="SaldoFin" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IdTipo" Type="Int32" />
-          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Enero" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Febrero" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Marzo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Abril" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Mayo" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Junio" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Julio" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Agosto" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Septiembre" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Octubre" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Noviembre" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Diciembre" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Cuil" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="TelefonoMovil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoFijo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoAlternativo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Domicilio" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="IdProvinciaDomicilio" Type="Int32" />
+          <Property Name="IdLocalidadDomicilio" Type="Int32" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="CodigoValidacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Activo" Type="Boolean" />
-<<<<<<< Updated upstream
           <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Persona" ToRole="Contacto" />
-          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Personas_Localidades1" FromRole="Persona" ToRole="Localidad" />
           <NavigationProperty Name="Notificacion" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Persona" ToRole="Notificacion" />
           <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Personas_Provincias1" FromRole="Persona" ToRole="Provincia" />
           <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
-=======
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="SubRubro" Relationship="Agenda_Model.FK_Imputacion_SubRubro" FromRole="Imputacion" ToRole="SubRubro" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Imputacion" ToRole="Proveedor" />
-          <NavigationProperty Name="Proveedor1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Imputacion" ToRole="Proveedor" />
->>>>>>> Stashed changes
         </EntityType>
-        <EntityType Name="Localidad">
+        <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-<<<<<<< Updated upstream
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
           <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Personas_Provincias1" FromRole="Provincia" ToRole="Persona" />
+          <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoNumero" Type="Int32" />
+          <Property Name="IdPais" Type="Int32" />
+          <Property Name="CodigoAfip" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -1114,30 +1067,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Localidad_Provincia">
-          <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="1" />
-          <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Localidad">
-              <PropertyRef Name="IdProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Personas_Localidades1">
-          <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Persona">
-              <PropertyRef Name="IdLocalidadDomicilio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Notificacion_Persona">
           <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="1" />
           <End Type="Agenda_Model.Notificacion" Role="Notificacion" Multiplicity="*" />
@@ -1186,25 +1115,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-=======
-          <Property Name="Codigo" Type="Int32" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Altini" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AltFin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CodigoProvincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NombreSucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CodigoSucursal" Type="Int32" />
-          <Property Name="OfDistLocal" Type="Int32" />
-          <Property Name="codposchr" Type="Int32" />
-          <Property Name="IdPais" Type="Int32" />
-          <Property Name="IdProvincia" Type="Int32" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Localidad" ToRole="Pais" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
-        </EntityType>
->>>>>>> Stashed changes
         <EntityType Name="MenuSidebar">
           <Key>
             <PropertyRef Name="IdMenuSidebar" />
@@ -1213,69 +1123,65 @@
           <Property Name="Icono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdParent" Type="Int32" />
           <Property Name="IdAccion" Type="Int32" />
-          <Property Name="Orden" Type="Int32" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="MenuSidebar" ToRole="Accion" />
+          <Property Name="IdParent" Type="Int32" />
           <NavigationProperty Name="MenuSidebar1" Relationship="Agenda_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar" ToRole="MenuSidebar1" />
           <NavigationProperty Name="MenuSidebar2" Relationship="Agenda_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar1" ToRole="MenuSidebar" />
+          <Property Name="Orden" Type="Int32" />
+          <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="MenuSidebar" ToRole="Accion" />
         </EntityType>
-        <EntityType Name="Notificacion">
+        <Association Name="FK_MenuSidebar_MenuSidebar">
+          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="0..1" />
+          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuSidebar">
+              <PropertyRef Name="IdMenuSidebar" />
+            </Principal>
+            <Dependent Role="MenuSidebar1">
+              <PropertyRef Name="IdParent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Accion">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAccion" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdPersona" Type="Int32" Nullable="false" />
-          <Property Name="EnvioEmail" Type="Boolean" />
-          <Property Name="Obs" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IdAccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Controlador" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IdModulo" Type="Int32" Nullable="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Notificacion" ToRole="Persona" />
+          <Property Name="fechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AccionPorRol" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="Accion" ToRole="AccionPorRol" />
+          <NavigationProperty Name="MenuSidebar" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="Accion" ToRole="MenuSidebar" />
         </EntityType>
-        <EntityType Name="Pais">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoAfip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Pais" ToRole="Localidad" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Pais" ToRole="Proveedor" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
-        </EntityType>
-        <EntityType Name="Persona">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Documento" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Cuil" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="TelefonoMovil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TelefonoFijo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TelefonoAlternativo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Domicilio" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="IdProvinciaDomicilio" Type="Int32" Nullable="false" />
-          <Property Name="IdLocalidadDomicilio" Type="Int32" Nullable="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="CodigoValidacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Activo" Type="Boolean" />
-          <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Persona" ToRole="Contacto" />
-          <NavigationProperty Name="Notificacion" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Persona" ToRole="Notificacion" />
-          <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
-        </EntityType>
+        <Association Name="FK_AccionesPorRoles_Acciones">
+          <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="1" />
+          <End Type="Agenda_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="IdAccion" />
+            </Principal>
+            <Dependent Role="AccionPorRol">
+              <PropertyRef Name="idAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuSidebar_Accion">
+          <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="0..1" />
+          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accion">
+              <PropertyRef Name="IdAccion" />
+            </Principal>
+            <Dependent Role="MenuSidebar">
+              <PropertyRef Name="IdAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Prioridad">
           <Key>
             <PropertyRef Name="Id" />
@@ -1286,19 +1192,26 @@
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Evento_Prioridad" FromRole="Prioridad" ToRole="Evento" />
         </EntityType>
+        <Association Name="FK_Evento_Prioridad">
+          <End Type="Agenda_Model.Prioridad" Role="Prioridad" Multiplicity="0..1" />
+          <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prioridad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="IdPrioridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-<<<<<<< Updated upstream
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-        </EntityType>
-=======
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdPais" Type="Int32" />
           <Property Name="IdProvincia" Type="Int32" />
@@ -1321,29 +1234,73 @@
           <Property Name="PorcentajePeceptor" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IdGrupoPresupuesto" Type="Int32" />
           <Property Name="IdPuntoVenta" Type="Int32" />
-          <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AfipRegimen" Relationship="Agenda_Model.FK_Proveedor_AfipRegimen" FromRole="Proveedor" ToRole="AfipRegimen" />
           <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
           <NavigationProperty Name="Imputacion1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
-          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Proveedor" ToRole="Pais" />
           <NavigationProperty Name="TipoIva" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
           <NavigationProperty Name="TipoMoneda" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
           <NavigationProperty Name="TipoProveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
         </EntityType>
-        <EntityType Name="Rol">
+        <EntityType Name="AfipRegimen">
           <Key>
-            <PropertyRef Name="IdRol" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="EsAdministrador" Type="Boolean" Nullable="false" />
-          <Property Name="IdHome" Type="Int32" />
-          <NavigationProperty Name="AccionPorRol" Relationship="Agenda_Model.FK_AccionesPorRoles_Roles" FromRole="Rol" ToRole="AccionPorRol" />
-          <NavigationProperty Name="homePorRol" Relationship="Agenda_Model.FK_Roles_HomePorRol" FromRole="Rol" ToRole="homePorRol" />
-          <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuarios_Roles" FromRole="Rol" ToRole="Usuario" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Aliri" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Alirni" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Minimo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Imputacion" Type="Byte" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_AfipRegimen" FromRole="AfipRegimen" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="GrupoCuenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Rubros" Relationship="Agenda_Model.FK_Rubros_GrupoCuenta" FromRole="GrupoCuenta" ToRole="Rubros" />
+        </EntityType>
+        <EntityType Name="Imputacion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdSubRubro" Type="Int32" />
+          <Property Name="SaldoInicial" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SaldoFin" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdTipo" Type="Int32" />
+          <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Enero" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Febrero" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Marzo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Abril" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Mayo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Junio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Julio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Agosto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Septiembre" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Octubre" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Noviembre" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Diciembre" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SubRubro" Relationship="Agenda_Model.FK_Imputacion_SubRubro" FromRole="Imputacion" ToRole="SubRubro" />
+          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Imputacion" ToRole="Proveedor" />
+          <NavigationProperty Name="Proveedor1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Imputacion" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Rubros">
           <Key>
@@ -1406,58 +1363,6 @@
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="TipoProveedor" ToRole="Proveedor" />
         </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="IdUsuario" />
-          </Key>
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Int32" />
-          <Property Name="IdRol" Type="Int32" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <Property Name="Creado" Type="DateTime" Precision="3" />
-          <Property Name="Actualizado" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Evento_Usuario" FromRole="Usuario" ToRole="Evento" />
-          <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
-          <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_Usuarios_Roles" FromRole="Usuario" ToRole="Rol" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_AccionesPorRoles_Acciones">
-          <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="1" />
-          <End Type="Agenda_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accion">
-              <PropertyRef Name="IdAccion" />
-            </Principal>
-            <Dependent Role="AccionPorRol">
-              <PropertyRef Name="idAccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuSidebar_Accion">
-          <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="0..1" />
-          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accion">
-              <PropertyRef Name="IdAccion" />
-            </Principal>
-            <Dependent Role="MenuSidebar">
-              <PropertyRef Name="IdAccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AccionesPorRoles_Roles">
-          <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="1" />
-          <End Type="Agenda_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="IdRol" />
-            </Principal>
-            <Dependent Role="AccionPorRol">
-              <PropertyRef Name="idRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Proveedor_AfipRegimen">
           <End Type="Agenda_Model.AfipRegimen" Role="AfipRegimen" Multiplicity="0..1" />
           <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
@@ -1470,54 +1375,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contacto_Evento">
-          <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="1" />
-          <End Type="Agenda_Model.Contacto" Role="Contacto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Evento">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contacto">
-              <PropertyRef Name="IdEvento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contacto_Persona">
-          <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="1" />
-          <End Type="Agenda_Model.Contacto" Role="Contacto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Contacto">
-              <PropertyRef Name="IdPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Evento_Prioridad">
-          <End Type="Agenda_Model.Prioridad" Role="Prioridad" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Prioridad">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Evento">
-              <PropertyRef Name="IdPrioridad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Evento_Usuario">
-          <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Evento">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Rubros_GrupoCuenta">
           <End Type="Agenda_Model.GrupoCuenta" Role="GrupoCuenta" Multiplicity="0..1" />
           <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="*" />
@@ -1527,18 +1384,6 @@
             </Principal>
             <Dependent Role="Rubros">
               <PropertyRef Name="IdGrupoCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Roles_HomePorRol">
-          <End Type="Agenda_Model.homePorRol" Role="homePorRol" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="homePorRol">
-              <PropertyRef Name="IdHome" />
-            </Principal>
-            <Dependent Role="Rol">
-              <PropertyRef Name="IdHome" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1578,66 +1423,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Localidad_Pais">
-          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pais">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Localidad">
-              <PropertyRef Name="IdPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MenuSidebar_MenuSidebar">
-          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="0..1" />
-          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MenuSidebar">
-              <PropertyRef Name="IdMenuSidebar" />
-            </Principal>
-            <Dependent Role="MenuSidebar1">
-              <PropertyRef Name="IdParent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Notificacion_Persona">
-          <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="1" />
-          <End Type="Agenda_Model.Notificacion" Role="Notificacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Notificacion">
-              <PropertyRef Name="IdPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_Pais">
-          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pais">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Persona">
-          <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persona">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="IdPersona" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Proveedor_TipoIva">
           <End Type="Agenda_Model.TipoIva" Role="TipoIva" Multiplicity="0..1" />
           <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
@@ -1674,18 +1459,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuarios_Roles">
-          <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="IdRol" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="IdRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SubRubro_Rubros">
           <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="0..1" />
           <End Type="Agenda_Model.SubRubro" Role="SubRubro" Multiplicity="*" />
@@ -1698,22 +1471,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Provincia">
+        <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoNumero" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Altini" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AltFin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoProvincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreSucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoSucursal" Type="Int32" />
+          <Property Name="OfDistLocal" Type="Int32" />
+          <Property Name="codposchr" Type="Int32" />
           <Property Name="IdPais" Type="Int32" />
-          <Property Name="CodigoAfip" Type="Int32" />
+          <Property Name="IdProvincia" Type="Int32" />
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
-          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
+          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
+          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Localidad" ToRole="Pais" />
         </EntityType>
         <Association Name="FK_Localidad_Provincia">
           <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
@@ -1724,6 +1502,32 @@
             </Principal>
             <Dependent Role="Localidad">
               <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoAfip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Pais" ToRole="Localidad" />
+          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+        </EntityType>
+        <Association Name="FK_Localidad_Pais">
+          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Localidad">
+              <PropertyRef Name="IdPais" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1739,60 +1543,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedor_Provincia">
-          <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
->>>>>>> Stashed changes
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Agenda_ModelStoreContainer" CdmEntityContainer="SAC_Entities">
-          <EntitySetMapping Name="Accion">
-            <EntityTypeMapping TypeName="Agenda_Model.Accion">
-              <MappingFragment StoreEntitySet="Accion">
-                <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="IdModulo" ColumnName="IdModulo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
-                <ScalarProperty Name="IdAccion" ColumnName="IdAccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AccionPorRol">
             <EntityTypeMapping TypeName="Agenda_Model.AccionPorRol">
               <MappingFragment StoreEntitySet="AccionPorRol">
                 <ScalarProperty Name="idAccion" ColumnName="idAccion" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="idRolPorAccion" ColumnName="idRolPorAccion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AfipRegimen">
-            <EntityTypeMapping TypeName="Agenda_Model.AfipRegimen">
-              <MappingFragment StoreEntitySet="AfipRegimen">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Imputacion" ColumnName="Imputacion" />
-                <ScalarProperty Name="Minimo" ColumnName="Minimo" />
-                <ScalarProperty Name="Alirni" ColumnName="Alirni" />
-                <ScalarProperty Name="Aliri" ColumnName="Aliri" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1805,47 +1567,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EstadoCivil">
-            <EntityTypeMapping TypeName="Agenda_Model.EstadoCivil">
-              <MappingFragment StoreEntitySet="EstadoCivil">
-                <ScalarProperty Name="activo" ColumnName="activo" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Evento">
             <EntityTypeMapping TypeName="Agenda_Model.Evento">
               <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="IdPrioridad" ColumnName="IdPrioridad" />
+                <ScalarProperty Name="Obs" ColumnName="Obs" />
+                <ScalarProperty Name="Organizador" ColumnName="Organizador" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Obs" ColumnName="Obs" />
-                <ScalarProperty Name="Organizador" ColumnName="Organizador" />
                 <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
                 <ScalarProperty Name="Pasado" ColumnName="Pasado" />
                 <ScalarProperty Name="Enviado" ColumnName="Enviado" />
                 <ScalarProperty Name="Recibido" ColumnName="Recibido" />
                 <ScalarProperty Name="Asisten" ColumnName="Asisten" />
                 <ScalarProperty Name="TodoElDia" ColumnName="TodoElDia" />
-                <ScalarProperty Name="IdPrioridad" ColumnName="IdPrioridad" />
                 <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
                 <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
                 <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
                 <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
                 <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GrupoCuenta">
-            <EntityTypeMapping TypeName="Agenda_Model.GrupoCuenta">
-              <MappingFragment StoreEntitySet="GrupoCuenta">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1859,84 +1600,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-<<<<<<< Updated upstream
-          <EntitySetMapping Name="Localidad">
-            <EntityTypeMapping TypeName="Agenda_Model.Localidad">
-              <MappingFragment StoreEntitySet="Localidad">
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-=======
-          <EntitySetMapping Name="Imputacion">
-            <EntityTypeMapping TypeName="Agenda_Model.Imputacion">
-              <MappingFragment StoreEntitySet="Imputacion">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
-                <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
-                <ScalarProperty Name="Octubre" ColumnName="Octubre" />
-                <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
-                <ScalarProperty Name="Agosto" ColumnName="Agosto" />
-                <ScalarProperty Name="Julio" ColumnName="Julio" />
-                <ScalarProperty Name="Junio" ColumnName="Junio" />
-                <ScalarProperty Name="Mayo" ColumnName="Mayo" />
-                <ScalarProperty Name="Abril" ColumnName="Abril" />
-                <ScalarProperty Name="Marzo" ColumnName="Marzo" />
-                <ScalarProperty Name="Febrero" ColumnName="Febrero" />
-                <ScalarProperty Name="Enero" ColumnName="Enero" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
-                <ScalarProperty Name="SaldoFin" ColumnName="SaldoFin" />
-                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
-                <ScalarProperty Name="IdSubRubro" ColumnName="IdSubRubro" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Localidad">
-            <EntityTypeMapping TypeName="Agenda_Model.Localidad">
-              <MappingFragment StoreEntitySet="Localidad">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-                <ScalarProperty Name="codposchr" ColumnName="codposchr" />
-                <ScalarProperty Name="OfDistLocal" ColumnName="OfDistLocal" />
-                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
-                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
-                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
-                <ScalarProperty Name="AltFin" ColumnName="AltFin" />
-                <ScalarProperty Name="Altini" ColumnName="Altini" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
->>>>>>> Stashed changes
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-<<<<<<< Updated upstream
-=======
-          <EntitySetMapping Name="MenuSidebar">
-            <EntityTypeMapping TypeName="Agenda_Model.MenuSidebar">
-              <MappingFragment StoreEntitySet="MenuSidebar">
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Orden" ColumnName="Orden" />
-                <ScalarProperty Name="IdAccion" ColumnName="IdAccion" />
-                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Url" ColumnName="Url" />
-                <ScalarProperty Name="Icono" ColumnName="Icono" />
-                <ScalarProperty Name="IdMenuSidebar" ColumnName="IdMenuSidebar" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
->>>>>>> Stashed changes
           <EntitySetMapping Name="Notificacion">
             <EntityTypeMapping TypeName="Agenda_Model.Notificacion">
               <MappingFragment StoreEntitySet="Notificacion">
@@ -1945,19 +1608,6 @@
                 <ScalarProperty Name="Obs" ColumnName="Obs" />
                 <ScalarProperty Name="EnvioEmail" ColumnName="EnvioEmail" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pais">
-            <EntityTypeMapping TypeName="Agenda_Model.Pais">
-              <MappingFragment StoreEntitySet="Pais">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
-                <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1987,10 +1637,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-<<<<<<< Updated upstream
           <EntitySetMapping Name="Provincia">
             <EntityTypeMapping TypeName="Agenda_Model.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="CodigoNumero" ColumnName="CodigoNumero" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2048,8 +1703,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-=======
->>>>>>> Stashed changes
           <EntitySetMapping Name="Prioridad">
             <EntityTypeMapping TypeName="Agenda_Model.Prioridad">
               <MappingFragment StoreEntitySet="Prioridad">
@@ -2063,12 +1716,8 @@
           <EntitySetMapping Name="Proveedor">
             <EntityTypeMapping TypeName="Agenda_Model.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
-<<<<<<< Updated upstream
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-=======
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdPuntoVenta" ColumnName="IdPuntoVenta" />
                 <ScalarProperty Name="IdGrupoPresupuesto" ColumnName="IdGrupoPresupuesto" />
                 <ScalarProperty Name="PorcentajePeceptor" ColumnName="PorcentajePeceptor" />
@@ -2091,19 +1740,67 @@
                 <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
                 <ScalarProperty Name="IdPais" ColumnName="IdPais" />
                 <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rol">
-            <EntityTypeMapping TypeName="Agenda_Model.Rol">
-              <MappingFragment StoreEntitySet="Rol">
-                <ScalarProperty Name="IdHome" ColumnName="IdHome" />
-                <ScalarProperty Name="EsAdministrador" ColumnName="EsAdministrador" />
+          <EntitySetMapping Name="AfipRegimen">
+            <EntityTypeMapping TypeName="Agenda_Model.AfipRegimen">
+              <MappingFragment StoreEntitySet="AfipRegimen">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Imputacion" ColumnName="Imputacion" />
+                <ScalarProperty Name="Minimo" ColumnName="Minimo" />
+                <ScalarProperty Name="Alirni" ColumnName="Alirni" />
+                <ScalarProperty Name="Aliri" ColumnName="Aliri" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoCuenta">
+            <EntityTypeMapping TypeName="Agenda_Model.GrupoCuenta">
+              <MappingFragment StoreEntitySet="GrupoCuenta">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imputacion">
+            <EntityTypeMapping TypeName="Agenda_Model.Imputacion">
+              <MappingFragment StoreEntitySet="Imputacion">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
+                <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
+                <ScalarProperty Name="Octubre" ColumnName="Octubre" />
+                <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
+                <ScalarProperty Name="Agosto" ColumnName="Agosto" />
+                <ScalarProperty Name="Julio" ColumnName="Julio" />
+                <ScalarProperty Name="Junio" ColumnName="Junio" />
+                <ScalarProperty Name="Mayo" ColumnName="Mayo" />
+                <ScalarProperty Name="Abril" ColumnName="Abril" />
+                <ScalarProperty Name="Marzo" ColumnName="Marzo" />
+                <ScalarProperty Name="Febrero" ColumnName="Febrero" />
+                <ScalarProperty Name="Enero" ColumnName="Enero" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="SaldoFin" ColumnName="SaldoFin" />
+                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
+                <ScalarProperty Name="IdSubRubro" ColumnName="IdSubRubro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2166,31 +1863,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="Agenda_Model.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Actualizado" ColumnName="Actualizado" />
-                <ScalarProperty Name="Creado" ColumnName="Creado" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Provincia">
-            <EntityTypeMapping TypeName="Agenda_Model.Provincia">
-              <MappingFragment StoreEntitySet="Provincia">
+          <EntitySetMapping Name="Localidad">
+            <EntityTypeMapping TypeName="Agenda_Model.Localidad">
+              <MappingFragment StoreEntitySet="Localidad">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
                 <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-                <ScalarProperty Name="CodigoNumero" ColumnName="CodigoNumero" />
+                <ScalarProperty Name="codposchr" ColumnName="codposchr" />
+                <ScalarProperty Name="OfDistLocal" ColumnName="OfDistLocal" />
+                <ScalarProperty Name="CodigoSucursal" ColumnName="CodigoSucursal" />
+                <ScalarProperty Name="NombreSucursal" ColumnName="NombreSucursal" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="AltFin" ColumnName="AltFin" />
+                <ScalarProperty Name="Altini" ColumnName="Altini" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
->>>>>>> Stashed changes
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="Agenda_Model.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

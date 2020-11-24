@@ -19,6 +19,13 @@ namespace SAC.Controllers
         private String JsonTreeView;
        
         private JavaScriptSerializer jsonString = new JavaScriptSerializer();
+
+        public RolController()
+        {
+            servicioConfiguracion._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
+        }
+
+
         // GET: Rol
         public ActionResult Index()
         {

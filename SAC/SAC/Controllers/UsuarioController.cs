@@ -24,15 +24,8 @@ namespace SAC.Controllers
         public UsuarioController()
         {
             servicioUsuario = new ServicioUsuarios();
-            servicioUsuario._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);
+            servicioUsuario._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
-
-        [NonAction]
-        private void CrearTempData(string msg_, string tipo_)
-        {
-            TempData[tipo_] = msg_;
-        }
-
 
 
         // GET: Usuario
@@ -52,26 +45,26 @@ namespace SAC.Controllers
         public ActionResult Crear(String DniUniformado)
         {
           
-            if(!String.IsNullOrEmpty(DniUniformado))
-            {
-                var uniformado = Helpers.SGPHelper.ObtenerPersonaSGP(DniUniformado);
+            //if(!String.IsNullOrEmpty(DniUniformado))
+            //{
+            //    var uniformado = null; //Helpers.SGPHelper.ObtenerPersonaSGP(DniUniformado);
 
 
-                usuario.Persona = new PersonaModel()
-                {
-                    Documento = uniformado.Documento,
-                    Nombre = uniformado.Nombre,
-                    Apellido = uniformado.Apellido
-                };
-                usuario.Grado = uniformado.Grado;
-                usuario.Unidad = uniformado.Unidad;
+            //    usuario.Persona = new PersonaModel()
+            //    {
+            //        Documento = uniformado.Documento,
+            //        Nombre = uniformado.Nombre,
+            //        Apellido = uniformado.Apellido
+            //    };
+            //    usuario.Grado = uniformado.Grado;
+            //    usuario.Unidad = uniformado.Unidad;
 
 
-            }
-            else
-            {
-                usuario = null;
-            }
+            //}
+            //else
+            //{
+            //    usuario = null;
+            //}
 
             ViewBag.Roles = selectListRoles();
             return View("Crear", usuario);

@@ -15,12 +15,9 @@ namespace Datos.ModeloDeDatos
     public partial class Proveedor
     {
         public int Id { get; set; }
-<<<<<<< Updated upstream
         public string Nombre { get; set; }
-        public bool Activo { get; set; }
-=======
+        public Nullable<bool> Activo { get; set; }
         public string Cuit { get; set; }
-        public string Nombre { get; set; }
         public string Direccion { get; set; }
         public Nullable<int> IdPais { get; set; }
         public Nullable<int> IdProvincia { get; set; }
@@ -43,18 +40,14 @@ namespace Datos.ModeloDeDatos
         public Nullable<decimal> PorcentajePeceptor { get; set; }
         public Nullable<int> IdGrupoPresupuesto { get; set; }
         public Nullable<int> IdPuntoVenta { get; set; }
-        public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual AfipRegimen AfipRegimen { get; set; }
         public virtual Imputacion Imputacion { get; set; }
         public virtual Imputacion Imputacion1 { get; set; }
-        public virtual Pais Pais { get; set; }
         public virtual TipoIva TipoIva { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
         public virtual TipoProveedor TipoProveedor { get; set; }
-        public virtual Provincia Provincia { get; set; }
->>>>>>> Stashed changes
     }
 }

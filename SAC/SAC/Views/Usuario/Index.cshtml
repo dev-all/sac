@@ -10,20 +10,6 @@
 <link href="/Content/assets/css/pages/inbox.css" rel="stylesheet">-->
 <link href="~/Content/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" />
 
-<!-- ============================================================== -->
-<!-- Start Page Content -->
-<!-- ============================================================== -->
-
-<div>
-    @if (TempData["sucesso"] != null)
-    {
-        @Html.Partial("_PartialMsgSucesso");
-    }
-    else if (TempData["erro"] != null)
-    {
-        @Html.Partial("_PartialMsgErro");
-    }
-</div>
 
 
 

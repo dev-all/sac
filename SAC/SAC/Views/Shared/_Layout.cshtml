@@ -14,6 +14,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="~/Content/assets/plugins/toastr/toastr.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="/Content/assets/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -46,12 +48,18 @@
 </head>
 
 <body class="fix-header card-no-border fix-sidebar">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 
 
 
 >>>>>>> Stashed changes
+=======
+
+
+    
+>>>>>>> desarrollo
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -108,14 +116,14 @@
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
-                                                            
+
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user"></i>
-                              
+
                             </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <ul class="dropdown-user">
@@ -146,9 +154,9 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Inicio</li>
-               
-                            @Html.Partial("_PartialMenu")
-                 
+
+                        @Html.Partial("_PartialMenu")
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -166,6 +174,7 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                 <div class="container">
                     <div class="row justify-content-center">
@@ -194,11 +203,15 @@
 =======
 
 >>>>>>> Stashed changes
+=======
+                
+>>>>>>> desarrollo
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 @RenderBody()
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                 @*<div class="row ">
                         <div class="col-md-12">
@@ -222,6 +235,9 @@
 =======
 >>>>>>> Stashed changes
 
+=======
+               
+>>>>>>> desarrollo
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -259,17 +275,22 @@
     @RenderSection("Scripts", false)
     <!--Custom JavaScript -->
     <script src="~/Scripts/js/custom.js"></script>
+    <script src="~/Content/assets/plugins/toastr/toastr.min.js"></script>
+
     <!-- ============================================================== -->
     <!--Style switcher-- >
     <!-- ============================================================== -->
     <script src="/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
     @* esto agregue bre 21/11/2020 *@
      <script src="/Content/assets/plugins/jquery-unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
      <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.js"></script>
 
+=======
+>>>>>>> desarrollo
     <div>
         @if (TempData["ok"] != null)
         {
@@ -285,7 +306,10 @@
             </script>
         }
     </div>
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> desarrollo
 
 </body>
 

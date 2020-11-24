@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-﻿// La generación de código T4 está habilitada para el modelo 'G:\.Net ASP\Agenda\Agenda\Datos\ModeloDeDatos\Entidades.edmx'. 
-=======
-﻿// La generación de código T4 está habilitada para el modelo 'E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Datos\ModeloDeDatos\Entidades.edmx'. 
->>>>>>> Stashed changes
+﻿// La generación de código T4 está habilitada para el modelo 'D:\DESARROLLO_WEB\SAC\Datos\ModeloDeDatos\Entidades.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

@@ -18,7 +18,7 @@ namespace Datos.ModeloDeDatos
         public int idRol { get; set; }
         public int idAccion { get; set; }
     
-        public virtual Accion Accion { get; set; }
         public virtual Rol Rol { get; set; }
+        public virtual Accion Accion { get; set; }
     }
 }

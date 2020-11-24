@@ -24,6 +24,8 @@ public abstract class RepositorioBase<T> : Interfaces.IRepositorio<T> where T : 
         this.Contexto = contexto;
     }
 
+
+        // METODOS ACTUALIZADOR
     public T Insertar(T entidad)
     {
         T nuevaEntidad;
@@ -32,7 +34,9 @@ public abstract class RepositorioBase<T> : Interfaces.IRepositorio<T> where T : 
         return nuevaEntidad;
     }
 
-    public IQueryable<T> Obtener()
+
+        
+        public IQueryable<T> Obtener()
     {
         return DbSet;
     }
