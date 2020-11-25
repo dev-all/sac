@@ -71,7 +71,7 @@ namespace SAC.Controllers
             //bool hasErrors = ViewData.ModelState.Values.Any(x => x.Errors.Count > 1);
             //foreach (ModelState state in ViewData.ModelState.Values.Where(x => x.Errors.Count > 0))
             //{
-            //    servicioConfiguracion._mensaje(state.Value.ToString(),"ok");
+            //    servicioConfiguracion._mensaje(state.Value.ToString(), "ok");
             //}
             if (ModelState.IsValid)
             {
