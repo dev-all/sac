@@ -131,10 +131,12 @@ namespace Datos.Repositorios
         {
              Insertar(usuario);
         }
+       
         public void UpdateUsuario(Usuario model)
         {
           
             contexto.Usuario.Attach(model);
+
             contexto.Entry(model).Property(x => x.UserName).IsModified = true;
             contexto.Entry(model).Property(x => x.Password).IsModified = true;
             contexto.Entry(model).Property(x => x.IdRol).IsModified = true;
@@ -146,6 +148,7 @@ namespace Datos.Repositorios
             contexto.Entry(model).Property(x => x.Persona.Cuil).IsModified = true;
             contexto.Entry(model).Property(x => x.Persona.TelefonoMovil).IsModified = true;
             contexto.Entry(model).Property(x => x.Persona.Activo).IsModified = true;
+
             contexto.SaveChanges();
 
         }

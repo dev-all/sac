@@ -141,6 +141,7 @@ namespace Negocio.Servicios
                 usuarioModel.Password = StringHelper.ObtenerMD5(usuarioModel.Password);
                 usuarioModel.Actualizado = Convert.ToDateTime(DateTime.Now.ToString());
                 usuarioModel.Persona.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Persona.Activo = usuarioModel.Activo;
                 repositorio.UpdateUsuario(Mapper.Map<UsuarioModel, Usuario>(usuarioModel));
                 _mensaje("Se registro correctamente", "ok");
             }
@@ -155,7 +156,11 @@ namespace Negocio.Servicios
         {
             try
             {
+                usuarioModel.Actualizado = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Creado = Convert.ToDateTime(DateTime.Now.ToString());                           
                 usuarioModel.Password = StringHelper.ObtenerMD5(usuarioModel.Password);
+                usuarioModel.Persona.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Persona.Activo = usuarioModel.Activo;
                 repositorio.CreateUsuario(Mapper.Map < UsuarioModel, Usuario>( usuarioModel));
                 _mensaje("Se registro correctamente", "ok");
             }

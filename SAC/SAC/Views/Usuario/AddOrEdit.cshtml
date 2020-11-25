@@ -20,7 +20,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.idUsuario)
     @Html.HiddenFor(model => model.idPersona)
-    @Html.HiddenFor(model => model.Persona.Id)
+    @Html.HiddenFor(model => model.Persona.id)
     <div class="row">
         <!-- Column -->
         <div class="col-lg-12">
@@ -48,14 +48,18 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Rol De Usuario</label>
+                                      
+                                        @Html.LabelFor(model => model.idRol, new { @class = "control-label" })
 
+                                        @Html.ValidationMessageFor(m => m.idRol, "", new { @class = "text-danger" })
                                         @Html.DropDownListFor(model => model.idRol,
-                                                   (IEnumerable<SelectListItem>)(new SelectList(ViewBag.Roles,
-                                                                  "Value", "Text"))
-                                                   , "Seleccionar Rol...", new { @class = "form-control" })
+                                        (IEnumerable<SelectListItem>)(new SelectList(Model.Roles.Select(x => new { Value = x.idRol, Text = x.descripcion }),
+                                                       "Value",
+                                                       "Text"))
+                                        , "Seleccionar Rol...", new { @class = "form-control" })
+
                                     </div>
-                                </div>
+                                    </div>
                             </div>
                             <!--/row-->
                             <div class="row">
@@ -93,11 +97,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.Email,
+                                        @Html.LabelFor(m => m.Persona.email,
                                           new { @class = "control-label" })
 
-                                        @Html.ValidationMessageFor(m => m.Persona.Email, "", new { @class = "text-danger" })
-                                        @Html.TextBoxFor(m => m.Persona.Email, new
+                                        @Html.ValidationMessageFor(m => m.Persona.email, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Persona.email, new
                                         {
                                             @class = "form-control",
                                             @placeholder = "permitirá el accceso al sistema"
@@ -106,11 +110,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.Documento,
+                                        @Html.LabelFor(m => m.Persona.documento,
                                        new { @class = "control-label" })
 
-                                        @Html.ValidationMessageFor(m => m.Persona.Documento, "", new { @class = "text-danger" })
-                                        @Html.TextBoxFor(m => m.Persona.Documento, new
+                                        @Html.ValidationMessageFor(m => m.Persona.documento, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Persona.documento, new
                                         {
                                             @class = "form-control",
                                             @placeholder = ""
@@ -121,11 +125,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.Nombre,
+                                        @Html.LabelFor(m => m.Persona.nombre,
                                       new { @class = "control-label" })
 
-                                        @Html.ValidationMessageFor(m => m.Persona.Nombre, "", new { @class = "text-danger" })
-                                        @Html.TextBoxFor(m => m.Persona.Nombre, new
+                                        @Html.ValidationMessageFor(m => m.Persona.nombre, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Persona.nombre, new
                                         {
                                             @class = "form-control",
                                             @placeholder = ""
@@ -134,11 +138,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.Apellido,
+                                        @Html.LabelFor(m => m.Persona.apellido,
                                     new { @class = "control-label" })
 
-                                        @Html.ValidationMessageFor(m => m.Persona.Apellido, "", new { @class = "text-danger" })
-                                        @Html.TextBoxFor(m => m.Persona.Apellido, new
+                                        @Html.ValidationMessageFor(m => m.Persona.apellido, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Persona.apellido, new
                                         {
                                             @class = "form-control",
                                             @placeholder = ""
@@ -150,11 +154,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.Cuil,
+                                        @Html.LabelFor(m => m.Persona.cuil,
                                   new { @class = "control-label" })
 
-                                        @Html.ValidationMessageFor(m => m.Persona.Cuil, "", new { @class = "text-danger" })
-                                        @Html.TextBoxFor(m => m.Persona.Cuil, new
+                                        @Html.ValidationMessageFor(m => m.Persona.cuil, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Persona.cuil, new
                                         {
                                             @class = "form-control",
                                             @placeholder = ""
@@ -163,11 +167,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.TelefonoMovil,
+                                        @Html.LabelFor(m => m.Persona.telefono,
                    new { @class = "control-label" })
 
-                                        @Html.ValidationMessageFor(m => m.Persona.TelefonoMovil, "", new { @class = "text-danger" })
-                                        @Html.TextBoxFor(m => m.Persona.TelefonoMovil, new
+                                        @Html.ValidationMessageFor(m => m.Persona.telefono, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(m => m.Persona.telefono, new
                                         {
                                             @class = "form-control",
                                             @placeholder = ""

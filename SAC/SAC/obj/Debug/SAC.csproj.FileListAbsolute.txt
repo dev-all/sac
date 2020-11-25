@@ -534,10 +534,14 @@ E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.csproj.Copy
 E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.dll
 E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.pdb
 D:\SAC\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\SAC\SAC\SAC\bin\roslyn\csc.exe
+D:\SAC\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\SAC\SAC\SAC\bin\roslyn\System.IO.Compression.dll
+D:\SAC\SAC\SAC\bin\roslyn\System.Reflection.Metadata.dll
+D:\SAC\SAC\SAC\bin\roslyn\System.ValueTuple.dll
 D:\SAC\SAC\SAC\bin\SAC.dll.config
 D:\SAC\SAC\SAC\bin\SAC.dll
 D:\SAC\SAC\SAC\bin\SAC.pdb
-D:\SAC\SAC\SAC\bin\roslyn\csc.exe
 D:\SAC\SAC\SAC\bin\roslyn\csc.exe.config
 D:\SAC\SAC\SAC\bin\roslyn\csc.rsp
 D:\SAC\SAC\SAC\bin\roslyn\csi.exe
@@ -545,7 +549,6 @@ D:\SAC\SAC\SAC\bin\roslyn\csi.exe.config
 D:\SAC\SAC\SAC\bin\roslyn\csi.rsp
 D:\SAC\SAC\SAC\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\SAC\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
-D:\SAC\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\SAC\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
 D:\SAC\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\SAC\SAC\SAC\bin\roslyn\Microsoft.CSharp.Core.targets
@@ -558,12 +561,10 @@ D:\SAC\SAC\SAC\bin\roslyn\System.Collections.Immutable.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Console.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Diagnostics.StackTrace.dll
-D:\SAC\SAC\SAC\bin\roslyn\System.IO.Compression.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.IO.FileSystem.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.IO.FileSystem.Primitives.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.IO.Pipes.AccessControl.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.IO.Pipes.dll
-D:\SAC\SAC\SAC\bin\roslyn\System.Reflection.Metadata.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Security.AccessControl.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Security.Claims.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Security.Cryptography.Algorithms.dll
@@ -572,7 +573,6 @@ D:\SAC\SAC\SAC\bin\roslyn\System.Security.Cryptography.Primitives.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Security.Principal.Windows.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Text.Encoding.CodePages.dll
-D:\SAC\SAC\SAC\bin\roslyn\System.ValueTuple.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Xml.ReaderWriter.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Xml.XmlDocument.dll
 D:\SAC\SAC\SAC\bin\roslyn\System.Xml.XPath.dll
