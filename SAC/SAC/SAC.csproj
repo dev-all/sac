@@ -171,8 +171,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Agenda.dll" />
-    <Content Include="bin\Agenda.pdb" />
     <Content Include="Content\assets\css\animate.css" />
     <Content Include="Content\assets\css\colors\blue-dark.css" />
     <Content Include="Content\assets\css\colors\blue.css" />
@@ -2791,6 +2789,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
