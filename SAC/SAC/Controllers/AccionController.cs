@@ -13,6 +13,12 @@ namespace SAC.Controllers
     {
 
         private ServicioConfiguracion servicioConfiguracion = new ServicioConfiguracion();
+
+        public AccionController()
+        {
+            servicioConfiguracion._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
+        }
+   
         // GET: Accion
         public ActionResult Index()
         {

@@ -14,6 +14,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="/Content/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="~/Content/assets/plugins/toastr/toastr.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="/Content/assets/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -46,6 +48,9 @@
 </head>
 
 <body class="fix-header card-no-border fix-sidebar">
+
+
+    
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -102,14 +107,14 @@
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
-                                                            
+
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-user"></i>
-                              
+
                             </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <ul class="dropdown-user">
@@ -140,9 +145,9 @@
                     <ul id="sidebarnav">
                         <li class="nav-devider"></li>
                         <li class="nav-small-cap">Inicio</li>
-               
-                            @Html.Partial("_PartialMenu")
-                 
+
+                        @Html.Partial("_PartialMenu")
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -160,55 +165,13 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xs-12 ">
-                            @if (@ViewBag.info != null)
-                            {
-                                <div class="alert alert-info m-3">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                                    <h3 class="text-info"><i class="fa fa-exclamation-circle"></i> Información</h3>
-                                    <h4 class="card-title"> @ViewBag.info</h4>
-                                </div>
-                            }
-                            @if (@ViewBag.success != null)
-                            {
-                                <div class="alert alert-success m-3">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                                    <h3 class="text-success"><i class="fa fa-exclamation-circle"></i> </h3>
-                                    <h4 class="card-title"> @ViewBag.success</h4>
-                                </div>
-                            }
-                        </div>
-
-                    </div>
-
-                </div>
+                
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 @RenderBody()
 
-                @*<div class="row ">
-                        <div class="col-md-12">
-
-
-                            <div class="card">
-
-                                <div class="row">
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>*@
-
-
-
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-
+               
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -246,11 +209,28 @@
     @RenderSection("Scripts", false)
     <!--Custom JavaScript -->
     <script src="~/Scripts/js/custom.js"></script>
+    <script src="~/Content/assets/plugins/toastr/toastr.min.js"></script>
+
     <!-- ============================================================== -->
     <!--Style switcher-- >
     <!-- ============================================================== -->
     <script src="/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 
+    <div>
+        @if (TempData["ok"] != null)
+        {
+            <script type="text/javascript">
+            toastr.success("@Html.Raw(@TempData["ok"].ToString())");
+            </script>
+
+        }
+        else if (TempData["error"] != null)
+        {
+            <script type="text/javascript">
+                toastr.error("@Html.Raw(@TempData["error"].ToString())");
+            </script>
+        }
+    </div>
 
 </body>
 

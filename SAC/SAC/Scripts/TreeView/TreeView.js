@@ -133,18 +133,30 @@ $('#btn-clear-search').on('click', function (e) {
 });
 
 
+//-----------------------------------------------------------------------
 var initSelectableTree = function () {
     return $('#treeview-selectable').treeview({
-        data: defaultData,
+        data: json,
         multiSelect: $('#chk-select-multi').is(':checked'),
         onNodeSelected: function (event, node) {
-            $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
-        },
-        onNodeUnselected: function (event, node) {
-            $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
-        }
+            document.location.href = node.href;
+            //$('#selectable-output').prepend('<p>' + node.href + ' was selected</p>');
+       } //,
+        //onNodeUnselected: function (event, node) {
+
+        //   // $('#selectable-output').prepend('<p>' + node.href + ' was unselected</p>');
+        //}
     });
 };
+
+function call(node) {
+    let form = document.createElement('form');
+    form.action = node;
+    form.method = 'GET';
+    form.submit();
+}
+
+
 var $selectableTree = initSelectableTree();
 
 var findSelectableNodes = function () {
@@ -177,6 +189,7 @@ $('#btn-toggle-selected.select-node').on('click', function (e) {
 });
 
 
+//-----------------------------------------------------------------
 
 var $expandibleTree = $('#treeview-expandible').treeview({
     data: defaultData,

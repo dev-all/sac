@@ -319,3 +319,324 @@ D:\SAC\SAC\SAC\obj\Debug\SAC.csproj.CoreCompileInputs.cache
 D:\SAC\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
 D:\SAC\SAC\SAC\obj\Debug\SAC.dll
 D:\SAC\SAC\SAC\obj\Debug\SAC.pdb
+D:\DESARROLLO_WEB\SAC\SAC\bin\Z.EntityFramework.Extensions.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\SAC.dll.config
+D:\DESARROLLO_WEB\SAC\SAC\bin\SAC.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\SAC.pdb
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\csc.exe
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\csc.exe.config
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\csc.rsp
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\csi.exe
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\csi.exe.config
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\csi.rsp
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.Managed.Core.targets
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.AppContext.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Collections.Immutable.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Console.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.IO.Compression.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.IO.FileSystem.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.IO.Pipes.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Reflection.Metadata.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Security.AccessControl.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Security.Claims.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Security.Principal.Windows.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.ValueTuple.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Xml.XmlDocument.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Xml.XPath.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\vbc.exe
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\vbc.exe.config
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\vbc.rsp
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\VBCSCompiler.exe
+D:\DESARROLLO_WEB\SAC\SAC\bin\roslyn\VBCSCompiler.exe.config
+D:\DESARROLLO_WEB\SAC\SAC\bin\Antlr3.Runtime.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\AutoMapper.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Datos.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Entidad.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\EntityFramework.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\EntityFramework.SqlServer.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Microsoft.Web.Infrastructure.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Negocio.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Newtonsoft.Json.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.ValueTuple.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Helpers.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Mvc.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Optimization.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Razor.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.WebPages.Deployment.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.WebPages.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.WebPages.Razor.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\WebGrease.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Z.EntityFramework.Plus.EF6.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Ninject.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Z.EntityFramework.Extensions.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Z.Expressions.Eval.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\Datos.pdb
+D:\DESARROLLO_WEB\SAC\SAC\bin\Datos.dll.config
+D:\DESARROLLO_WEB\SAC\SAC\bin\Entidad.pdb
+D:\DESARROLLO_WEB\SAC\SAC\bin\Negocio.pdb
+D:\DESARROLLO_WEB\SAC\SAC\bin\Negocio.dll.config
+D:\DESARROLLO_WEB\SAC\SAC\bin\AutoMapper.pdb
+D:\DESARROLLO_WEB\SAC\SAC\bin\AutoMapper.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\EntityFramework.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\EntityFramework.SqlServer.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.ValueTuple.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Helpers.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Mvc.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Optimization.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.Razor.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.WebPages.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.WebPages.Deployment.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\System.Web.WebPages.Razor.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\Newtonsoft.Json.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\Antlr3.Runtime.pdb
+D:\DESARROLLO_WEB\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\Z.EntityFramework.Plus.EF6.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\Z.Expressions.Eval.xml
+D:\DESARROLLO_WEB\SAC\SAC\bin\es\System.Web.Helpers.resources.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\es\System.Web.Mvc.resources.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\es\System.Web.Optimization.resources.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\es\System.Web.Razor.resources.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\es\System.Web.WebPages.resources.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\es\System.Web.WebPages.Deployment.resources.dll
+D:\DESARROLLO_WEB\SAC\SAC\bin\es\System.Web.WebPages.Razor.resources.dll
+D:\DESARROLLO_WEB\SAC\SAC\obj\Debug\SAC.csprojAssemblyReference.cache
+D:\DESARROLLO_WEB\SAC\SAC\obj\Debug\SAC.csproj.CoreCompileInputs.cache
+D:\DESARROLLO_WEB\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
+D:\DESARROLLO_WEB\SAC\SAC\obj\Debug\SAC.dll
+D:\DESARROLLO_WEB\SAC\SAC\obj\Debug\SAC.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\SAC.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\SAC.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\SAC.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\csc.exe
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\csc.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\csc.rsp
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\csi.exe
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\csi.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\csi.rsp
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.Managed.Core.targets
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.AppContext.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Collections.Immutable.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Console.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.IO.Compression.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.IO.FileSystem.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.IO.Pipes.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Reflection.Metadata.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Security.AccessControl.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Security.Claims.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Security.Principal.Windows.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.ValueTuple.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Xml.XmlDocument.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Xml.XPath.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\vbc.exe
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\vbc.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\vbc.rsp
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\VBCSCompiler.exe
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\roslyn\VBCSCompiler.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Antlr3.Runtime.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\AutoMapper.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Datos.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Entidad.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\EntityFramework.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\EntityFramework.SqlServer.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Microsoft.Web.Infrastructure.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Negocio.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Newtonsoft.Json.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.ValueTuple.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Helpers.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Mvc.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Optimization.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Razor.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.WebPages.Deployment.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.WebPages.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.WebPages.Razor.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\WebGrease.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Z.EntityFramework.Plus.EF6.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Ninject.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Z.EntityFramework.Extensions.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Z.Expressions.Eval.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Datos.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Datos.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Entidad.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Negocio.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Negocio.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\AutoMapper.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\AutoMapper.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\EntityFramework.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\EntityFramework.SqlServer.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.ValueTuple.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Helpers.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Mvc.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Optimization.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.Razor.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.WebPages.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.WebPages.Deployment.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\System.Web.WebPages.Razor.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Newtonsoft.Json.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Antlr3.Runtime.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Z.EntityFramework.Plus.EF6.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Z.EntityFramework.Extensions.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\Z.Expressions.Eval.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\es\System.Web.Helpers.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\es\System.Web.Mvc.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\es\System.Web.Optimization.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\es\System.Web.Razor.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\es\System.Web.WebPages.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\es\System.Web.WebPages.Deployment.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\bin\es\System.Web.WebPages.Razor.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.csprojAssemblyReference.cache
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.csproj.CoreCompileInputs.cache
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\SAC.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\SAC.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\SAC.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\csc.exe
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\csc.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\csc.rsp
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\csi.exe
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\csi.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\csi.rsp
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.Managed.Core.targets
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.AppContext.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Collections.Immutable.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Console.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.IO.Compression.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.IO.FileSystem.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.IO.Pipes.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Reflection.Metadata.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Security.AccessControl.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Security.Claims.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Security.Principal.Windows.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.ValueTuple.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Xml.XmlDocument.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Xml.XPath.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\vbc.exe
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\vbc.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\vbc.rsp
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\VBCSCompiler.exe
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\roslyn\VBCSCompiler.exe.config
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Antlr3.Runtime.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\AutoMapper.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Datos.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Entidad.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\EntityFramework.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\EntityFramework.SqlServer.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Microsoft.Web.Infrastructure.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Negocio.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Newtonsoft.Json.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.ValueTuple.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Helpers.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Mvc.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Optimization.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Razor.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.WebPages.Deployment.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.WebPages.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.WebPages.Razor.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\WebGrease.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Z.EntityFramework.Plus.EF6.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Ninject.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Z.EntityFramework.Extensions.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Z.Expressions.Eval.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Datos.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Datos.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Entidad.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Negocio.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Negocio.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\AutoMapper.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\AutoMapper.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\EntityFramework.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\EntityFramework.SqlServer.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.ValueTuple.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Helpers.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Mvc.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Optimization.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.Razor.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.WebPages.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.WebPages.Deployment.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\System.Web.WebPages.Razor.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Newtonsoft.Json.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Antlr3.Runtime.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Z.EntityFramework.Plus.EF6.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Z.EntityFramework.Extensions.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\Z.Expressions.Eval.xml
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\es\System.Web.Helpers.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\es\System.Web.Mvc.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\es\System.Web.Optimization.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\es\System.Web.Razor.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\es\System.Web.WebPages.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\es\System.Web.WebPages.Deployment.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\es\System.Web.WebPages.Razor.resources.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.csprojAssemblyReference.cache
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.csproj.CoreCompileInputs.cache
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\obj\Debug\SAC.pdb
