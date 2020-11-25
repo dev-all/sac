@@ -137,11 +137,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocalidadController.cs" />
+    <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\MenusidebarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\AccionController.cs" />
+    <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -154,10 +157,13 @@
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
     <Compile Include="Models\ConfiguracionModelView.cs" />
+    <Compile Include="Models\LocalidadModelView.cs" />
     <Compile Include="Models\MenuSideBarModelView.cs" />
+    <Compile Include="Models\PaisModelView.cs" />
     <Compile Include="Models\ProveedorModelView.cs" />
     <Compile Include="Models\PersonaModelView.cs" />
     <Compile Include="Models\PrioridadModelView.cs" />
+    <Compile Include="Models\ProvinciaModelView.cs" />
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
@@ -2774,14 +2780,9 @@
     <Content Include="Views\Rol\Create.cshtml" />
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Unauthorised\Index.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
-    <Content Include="Views\Usuario\Details.cshtml" />
-    <Content Include="Views\Usuario\Edit.cshtml" />
-    <Content Include="Views\Usuario\Evento.cshtml" />
     <Content Include="Views\Base\card.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Rol\DeleteAccionPorRol.cshtml" />
-    <Content Include="Views\Usuario\Crear.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Menusidebar\TreeItem.cshtml" />
     <Content Include="Views\Accion\Edit.cshtml" />
@@ -2791,6 +2792,14 @@
     <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\Localidad\Index.cshtml" />
+    <Content Include="Views\Pais\Agregar.cshtml" />
+    <Content Include="Views\Pais\Editar.cshtml" />
+    <Content Include="Views\Pais\Index.cshtml" />
+    <Content Include="Views\Provincia\Agregar.cshtml" />
+    <Content Include="Views\Provincia\Editar.cshtml" />
+    <Content Include="Views\Provincia\Index.cshtml" />
+    <Content Include="Views\Usuario\AddOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

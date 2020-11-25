@@ -32,8 +32,6 @@ namespace SAC.Controllers
         }
 
 
-
-
         // GET: 
         [AutorizacionDeSistema]
         public ActionResult Index()
@@ -80,7 +78,6 @@ namespace SAC.Controllers
         }
 
 
-
         public ActionResult Edit(int id)
         {
 
@@ -91,10 +88,12 @@ namespace SAC.Controllers
                 menuSideBar = Mapper.Map<MenuSideBarModel, MenuSideBarModelView>(servicioConfiguracion.GetMenuSidebarPorIdFull(id))
             };
            
+
             return View(configAccionModelView);
 
         }
        
+        // edit menusider
         [HttpPost]
         public ActionResult Edit(ConfigMenuSidebarModelView configMenuSidebarModelView)
         {
@@ -109,7 +108,7 @@ namespace SAC.Controllers
         }
 
 
-        //  [AutorizacionDeSistema]
+        [AutorizacionDeSistema]
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
         public ActionResult Create(MenuSideBarModelView menusidebar)
@@ -129,15 +128,17 @@ namespace SAC.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: menusidebar/DeleteMenusidebar        [AutorizacionDeSistema]
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id)
-        //{
-        //    servicioConfiguracion.DeleteMenusidebar(id);
-        //    return RedirectToAction("Index");
+        // POST: menusidebar/DeleteMenusidebar
+        [AutorizacionDeSistema]
+        [HttpPost, ActionName("Delete")]
+       [ValidateAntiForgeryToken]
+        public ActionResult DeleteX(int id)
+        {
+            servicioConfiguracion.DeleteMenusidebar(id);
+            return RedirectToAction("Index");
 
-        //}
+        }
+      
         [HttpPost, ActionName("Delete")]
         public JsonResult Delete(int Id)
         {

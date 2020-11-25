@@ -21,7 +21,9 @@ namespace Datos.Interfaces
         void ActualizarRolDeUsaurio(int idUsuario, int idRol, int idUsuarioLogueado);
         object logLogin(int idUsuario, string IP);
         Rol ObtenerRol(int idUsuario);
-      
+        void CreateUsuario(Usuario usuario);        
+        void UpdateUsuario(Usuario usuario);
+
 
 
 

@@ -16,7 +16,7 @@ namespace SAC.Models
         public int? IdAccion { get; set; }
         public bool Activo { get; set; }
         public System.DateTime FechaModificacion { get; set; }
-
+        public int? Orden { get; set; }
         public virtual AccionModel Accion { get; set; }
         
         public virtual ICollection<MenuSideBarModelView> Group { get; set; }

@@ -7,7 +7,6 @@
     <EntitySet Name="homePorRol" EntityType="Agenda_Model.homePorRol" />
     <EntitySet Name="Notificacion" EntityType="Agenda_Model.Notificacion" />
     <EntitySet Name="Persona" EntityType="Agenda_Model.Persona" />
-    <EntitySet Name="Provincia" EntityType="Agenda_Model.Provincia" />
     <EntitySet Name="Rol" EntityType="Agenda_Model.Rol" />
     <EntitySet Name="Usuario" EntityType="Agenda_Model.Usuario" />
     <AssociationSet Name="FK_AccionesPorRoles_Roles" Association="Agenda_Model.FK_AccionesPorRoles_Roles">
@@ -33,10 +32,6 @@
     <AssociationSet Name="FK_Notificacion_Persona" Association="Agenda_Model.FK_Notificacion_Persona">
       <End Role="Persona" EntitySet="Persona" />
       <End Role="Notificacion" EntitySet="Notificacion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Personas_Provincias1" Association="Agenda_Model.FK_Personas_Provincias1">
-      <End Role="Provincia" EntitySet="Provincia" />
-      <End Role="Persona" EntitySet="Persona" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuario_Persona" Association="Agenda_Model.FK_Usuario_Persona">
       <End Role="Persona" EntitySet="Persona" />
@@ -111,18 +106,27 @@
       <End Role="SubRubro" EntitySet="SubRubro" />
     </AssociationSet>
     <EntitySet Name="Localidad" EntityType="Agenda_Model.Localidad" />
-    <AssociationSet Name="FK_Localidad_Provincia" Association="Agenda_Model.FK_Localidad_Provincia">
-      <End Role="Provincia" EntitySet="Provincia" />
-      <End Role="Localidad" EntitySet="Localidad" />
-    </AssociationSet>
     <EntitySet Name="Pais" EntityType="Agenda_Model.Pais" />
     <AssociationSet Name="FK_Localidad_Pais" Association="Agenda_Model.FK_Localidad_Pais">
       <End Role="Pais" EntitySet="Pais" />
       <End Role="Localidad" EntitySet="Localidad" />
     </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Pais" Association="Agenda_Model.FK_Proveedor_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <EntitySet Name="Provincia" EntityType="Agenda_Model.Provincia" />
+    <AssociationSet Name="FK_Localidad_Provincia" Association="Agenda_Model.FK_Localidad_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
+      <End Role="Localidad" EntitySet="Localidad" />
+    </AssociationSet>
     <AssociationSet Name="FK_Provincia_Pais" Association="Agenda_Model.FK_Provincia_Pais">
       <End Role="Pais" EntitySet="Pais" />
       <End Role="Provincia" EntitySet="Provincia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Provincia" Association="Agenda_Model.FK_Proveedor_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AccionPorRol">
@@ -197,10 +201,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Documento" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Documento" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="Cuil" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
     <Property Name="TelefonoMovil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -214,28 +218,10 @@
     <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="CodigoValidacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Persona" ToRole="Contacto" />
     <NavigationProperty Name="Notificacion" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Persona" ToRole="Notificacion" />
-    <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Personas_Provincias1" FromRole="Persona" ToRole="Provincia" />
     <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="Provincia">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Activo" Type="Boolean" />
-    <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Personas_Provincias1" FromRole="Provincia" ToRole="Persona" />
-    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="CodigoNumero" Type="Int32" />
-    <Property Name="IdPais" Type="Int32" />
-    <Property Name="CodigoAfip" Type="Int32" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
-    <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -263,6 +249,7 @@
     <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Evento_Usuario" FromRole="Usuario" ToRole="Evento" />
     <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
     <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_Usuarios_Roles" FromRole="Usuario" ToRole="Rol" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_AccionesPorRoles_Roles">
     <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="1" />
@@ -333,18 +320,6 @@
       </Principal>
       <Dependent Role="Notificacion">
         <PropertyRef Name="IdPersona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Personas_Provincias1">
-    <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
-    <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincia">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Persona">
-        <PropertyRef Name="IdProvinciaDomicilio" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -499,6 +474,8 @@
     <NavigationProperty Name="TipoIva" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
     <NavigationProperty Name="TipoMoneda" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
     <NavigationProperty Name="TipoProveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
+    <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Proveedor" ToRole="Pais" />
+    <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
   </EntityType>
   <EntityType Name="AfipRegimen">
     <Key>
@@ -747,26 +724,14 @@
     <Property Name="Activo" Type="Boolean" />
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
     <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Localidad" ToRole="Pais" />
+    <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
   </EntityType>
-  <Association Name="FK_Localidad_Provincia">
-    <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
-    <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincia">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Localidad">
-        <PropertyRef Name="IdProvincia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Pais">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="CodigoAfip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -774,6 +739,7 @@
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Pais" ToRole="Localidad" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Pais" ToRole="Proveedor" />
     <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
   </EntityType>
   <Association Name="FK_Localidad_Pais">
@@ -788,6 +754,47 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Proveedor_Pais">
+    <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Provincia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoNumero" Type="Int32" />
+    <Property Name="IdPais" Type="Int32" />
+    <Property Name="CodigoAfip" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+    <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
+  </EntityType>
+  <Association Name="FK_Localidad_Provincia">
+    <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Localidad">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Provincia_Pais">
     <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
     <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="*" />
@@ -797,6 +804,18 @@
       </Principal>
       <Dependent Role="Provincia">
         <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Provincia">
+    <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdProvincia" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

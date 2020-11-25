@@ -89,21 +89,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Provincia">
-      <EntityTypeMapping TypeName="Agenda_Model.Provincia">
-        <MappingFragment StoreEntitySet="Provincia">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
-          <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-          <ScalarProperty Name="CodigoNumero" ColumnName="CodigoNumero" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Rol">
       <EntityTypeMapping TypeName="Agenda_Model.Rol">
         <MappingFragment StoreEntitySet="Rol">
@@ -117,6 +102,7 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="Agenda_Model.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Actualizado" ColumnName="Actualizado" />
           <ScalarProperty Name="Creado" ColumnName="Creado" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -344,6 +330,21 @@
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="Cuit" ColumnName="Cuit" />
           <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provincia">
+      <EntityTypeMapping TypeName="Agenda_Model.Provincia">
+        <MappingFragment StoreEntitySet="Provincia">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
+          <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+          <ScalarProperty Name="CodigoNumero" ColumnName="CodigoNumero" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

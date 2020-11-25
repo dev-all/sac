@@ -21,9 +21,6 @@ namespace Negocio.Servicios
             menuSidebarRepositorio = kernel.Get<MenuSidebarRepositorio>();
 
         }
-
-
-       
         /// <summary>
         ///  meodos para gestion de acciones
         /// </summary>
@@ -33,25 +30,21 @@ namespace Negocio.Servicios
             return Mapper.Map < List<Accion>,  List<Modelos.AccionModel>>(accionRepositorio.GetAccion());    
         }    
         public AccionModel CreateAccion(Modelos.AccionModel Accion)
-        {
-          
+        {          
             try
             {
                 Accion acc = Mapper.Map<Modelos.AccionModel, Accion>(Accion);
+                acc.Nombre = Accion.Nombre.ToLower();
                 acc.Activo = true;
                 acc.fechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
-
                 _mensaje("Se guardo Correctamente", "ok");
-                return Mapper.Map<Accion, AccionModel>(accionRepositorio.CreateAccion(acc));
-
-         
+                return Mapper.Map<Accion, AccionModel>(accionRepositorio.CreateAccion(acc));         
             }
             catch (Exception)
             {
                 _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
                 return null;
             }
-
         }
         public AccionModel GetAccionPorId(int idAccion)
         {
@@ -73,9 +66,7 @@ namespace Negocio.Servicios
                 return null;
             }
          
-        }
-
-      
+        }      
         public void DeleteAccion(int idAccion)
         {
             try
@@ -96,9 +87,18 @@ namespace Negocio.Servicios
         ///  meodos para gestion de roles
         /// </summary>
         /// <returns></returns>
-        public List<Modelos.RolModel> GetRol()
-        { 
-            return Mapper.Map<List<Rol>, List<Modelos.RolModel>>(rolRepositorio.GetRol());            
+        public List<Modelos.RolModel> GetAllRoles()
+        {
+            try
+            {
+                return Mapper.Map<List<Rol>, List<Modelos.RolModel>>(rolRepositorio.GetAllRol());
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
+                return null;
+            }
+                   
         }    
         public Modelos.RolModel CrearRol(Modelos.RolModel rol)
         {
@@ -119,6 +119,8 @@ namespace Negocio.Servicios
         {
             return Mapper.Map<Rol, Modelos.RolModel>(rolRepositorio.GetRolPorId(idRol));
         }
+
+      
         public void ActualizarRol(RolModel rol)
         {
             try
@@ -254,23 +256,16 @@ namespace Negocio.Servicios
 
         }
         public void ActualizarMenusidebar(MenuSideBarModel menuSideBarModel)
-        {
-           
-
-
+        {           
             try
             {
-
-            MenuSidebar menu = Mapper.Map<MenuSideBarModel, MenuSidebar>(menuSideBarModel);
-          _mensaje("Se Actualizo Correctamente", "ok");
-            menuSidebarRepositorio.ActualizarMenusidebar(menu);
-      
-
+                MenuSidebar menu = Mapper.Map<MenuSideBarModel, MenuSidebar>(menuSideBarModel);               
+                menuSidebarRepositorio.ActualizarMenusidebar(menu);   
+                 _mensaje("Se Actualizo Correctamente", "ok");
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
-              
+                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");              
             }
         }
 

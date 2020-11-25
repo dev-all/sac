@@ -19,6 +19,14 @@ namespace Agenda.Infrastructure
             CreateMap<PrioridadModel, Prioridad>();
             CreateMap<Prioridad, PrioridadModel>();
 
+            CreateMap<Pais, PaisModel>();
+            CreateMap<PaisModel, Pais>();
+
+            CreateMap<Provincia, ProvinciaModel>();
+            CreateMap<ProvinciaModel, Provincia>();
+
+
+
             CreateMap<Evento, EventoModel>();
             CreateMap<EventoModel, Evento>();
 
