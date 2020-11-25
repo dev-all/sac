@@ -63,9 +63,11 @@
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
     <Compile Include="Modelos\MenuSideBarModel.cs" />
+    <Compile Include="Modelos\PaisModel.cs" />
     <Compile Include="Modelos\PersonaModel.cs" />
     <Compile Include="Modelos\PrioridadModel.cs" />
     <Compile Include="Modelos\ProveedorModel.cs" />
+    <Compile Include="Modelos\ProvinciaModel.cs" />
     <Compile Include="Modelos\RolModel.cs" />
     <Compile Include="Modelos\UsuarioModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
@@ -82,8 +84,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioPais.cs" />
     <Compile Include="Servicios\ServicioPersona.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />
+    <Compile Include="Servicios\ServicioProvincia.cs" />
     <Compile Include="Servicios\ServicioUsuario.cs" />
     <Compile Include="Servicios\ServicioConfiguracion.cs" />
     <Compile Include="Servicios\ServicioBase.cs" />

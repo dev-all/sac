@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Agenda_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SAC_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AccionPorRol" EntityType="Agenda_Model.AccionPorRol" />
+    <EntitySet Name="Contacto" EntityType="Agenda_Model.Contacto" />
+    <EntitySet Name="Evento" EntityType="Agenda_Model.Evento" />
+    <EntitySet Name="homePorRol" EntityType="Agenda_Model.homePorRol" />
+    <EntitySet Name="Notificacion" EntityType="Agenda_Model.Notificacion" />
+    <EntitySet Name="Persona" EntityType="Agenda_Model.Persona" />
+    <EntitySet Name="Rol" EntityType="Agenda_Model.Rol" />
+    <EntitySet Name="Usuario" EntityType="Agenda_Model.Usuario" />
+    <AssociationSet Name="FK_AccionesPorRoles_Roles" Association="Agenda_Model.FK_AccionesPorRoles_Roles">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="AccionPorRol" EntitySet="AccionPorRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contacto_Evento" Association="Agenda_Model.FK_Contacto_Evento">
+      <End Role="Evento" EntitySet="Evento" />
+      <End Role="Contacto" EntitySet="Contacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Contacto_Persona" Association="Agenda_Model.FK_Contacto_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Contacto" EntitySet="Contacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Evento_Usuario" Association="Agenda_Model.FK_Evento_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Evento" EntitySet="Evento" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Roles_HomePorRol" Association="Agenda_Model.FK_Roles_HomePorRol">
+      <End Role="homePorRol" EntitySet="homePorRol" />
+      <End Role="Rol" EntitySet="Rol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificacion_Persona" Association="Agenda_Model.FK_Notificacion_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Notificacion" EntitySet="Notificacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Persona" Association="Agenda_Model.FK_Usuario_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Roles" Association="Agenda_Model.FK_Usuarios_Roles">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <EntitySet Name="MenuSidebar" EntityType="Agenda_Model.MenuSidebar" />
+    <AssociationSet Name="FK_MenuSidebar_MenuSidebar" Association="Agenda_Model.FK_MenuSidebar_MenuSidebar">
+      <End Role="MenuSidebar" EntitySet="MenuSidebar" />
+      <End Role="MenuSidebar1" EntitySet="MenuSidebar" />
+    </AssociationSet>
+    <EntitySet Name="Accion" EntityType="Agenda_Model.Accion" />
+    <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="Agenda_Model.FK_AccionesPorRoles_Acciones">
+      <End Role="Accion" EntitySet="Accion" />
+      <End Role="AccionPorRol" EntitySet="AccionPorRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MenuSidebar_Accion" Association="Agenda_Model.FK_MenuSidebar_Accion">
+      <End Role="Accion" EntitySet="Accion" />
+      <End Role="MenuSidebar" EntitySet="MenuSidebar" />
+    </AssociationSet>
+    <EntitySet Name="Prioridad" EntityType="Agenda_Model.Prioridad" />
+    <AssociationSet Name="FK_Evento_Prioridad" Association="Agenda_Model.FK_Evento_Prioridad">
+      <End Role="Prioridad" EntitySet="Prioridad" />
+      <End Role="Evento" EntitySet="Evento" />
+    </AssociationSet>
+    <EntitySet Name="Proveedor" EntityType="Agenda_Model.Proveedor" />
+    <EntitySet Name="AfipRegimen" EntityType="Agenda_Model.AfipRegimen" />
+    <EntitySet Name="GrupoCuenta" EntityType="Agenda_Model.GrupoCuenta" />
+    <EntitySet Name="Imputacion" EntityType="Agenda_Model.Imputacion" />
+    <EntitySet Name="Rubros" EntityType="Agenda_Model.Rubros" />
+    <EntitySet Name="SubRubro" EntityType="Agenda_Model.SubRubro" />
+    <EntitySet Name="TipoIva" EntityType="Agenda_Model.TipoIva" />
+    <EntitySet Name="TipoMoneda" EntityType="Agenda_Model.TipoMoneda" />
+    <EntitySet Name="TipoProveedor" EntityType="Agenda_Model.TipoProveedor" />
+    <AssociationSet Name="FK_Proveedor_AfipRegimen" Association="Agenda_Model.FK_Proveedor_AfipRegimen">
+      <End Role="AfipRegimen" EntitySet="AfipRegimen" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rubros_GrupoCuenta" Association="Agenda_Model.FK_Rubros_GrupoCuenta">
+      <End Role="GrupoCuenta" EntitySet="GrupoCuenta" />
+      <End Role="Rubros" EntitySet="Rubros" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Imputacion_SubRubro" Association="Agenda_Model.FK_Imputacion_SubRubro">
+      <End Role="SubRubro" EntitySet="SubRubro" />
+      <End Role="Imputacion" EntitySet="Imputacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Imputacion" Association="Agenda_Model.FK_Proveedor_Imputacion">
+      <End Role="Imputacion" EntitySet="Imputacion" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Imputacion1" Association="Agenda_Model.FK_Proveedor_Imputacion1">
+      <End Role="Imputacion" EntitySet="Imputacion" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_TipoIva" Association="Agenda_Model.FK_Proveedor_TipoIva">
+      <End Role="TipoIva" EntitySet="TipoIva" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_TipoMoneda" Association="Agenda_Model.FK_Proveedor_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_TipoProveedor" Association="Agenda_Model.FK_Proveedor_TipoProveedor">
+      <End Role="TipoProveedor" EntitySet="TipoProveedor" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubRubro_Rubros" Association="Agenda_Model.FK_SubRubro_Rubros">
+      <End Role="Rubros" EntitySet="Rubros" />
+      <End Role="SubRubro" EntitySet="SubRubro" />
+    </AssociationSet>
+    <EntitySet Name="Localidad" EntityType="Agenda_Model.Localidad" />
+    <EntitySet Name="Pais" EntityType="Agenda_Model.Pais" />
+    <AssociationSet Name="FK_Localidad_Pais" Association="Agenda_Model.FK_Localidad_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Localidad" EntitySet="Localidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Pais" Association="Agenda_Model.FK_Proveedor_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <EntitySet Name="Provincia" EntityType="Agenda_Model.Provincia" />
+    <AssociationSet Name="FK_Localidad_Provincia" Association="Agenda_Model.FK_Localidad_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
+      <End Role="Localidad" EntitySet="Localidad" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Provincia_Pais" Association="Agenda_Model.FK_Provincia_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="Provincia" EntitySet="Provincia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_Provincia" Association="Agenda_Model.FK_Proveedor_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AccionPorRol">
+    <Key>
+      <PropertyRef Name="idRolPorAccion" />
+    </Key>
+    <Property Name="idRolPorAccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idRol" Type="Int32" Nullable="false" />
+    <Property Name="idAccion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_AccionesPorRoles_Roles" FromRole="AccionPorRol" ToRole="Rol" />
+    <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="AccionPorRol" ToRole="Accion" />
+  </EntityType>
+  <EntityType Name="Contacto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdEvento" Type="Int32" Nullable="false" />
+    <Property Name="IdPersona" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Contacto_Evento" FromRole="Contacto" ToRole="Evento" />
+    <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Contacto" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Evento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="3" />
+    <Property Name="HoraInicio" Type="Time" Precision="7" />
+    <Property Name="FechaFin" Type="DateTime" Precision="3" />
+    <Property Name="HoraFin" Type="Time" Precision="7" />
+    <Property Name="TodoElDia" Type="Boolean" />
+    <Property Name="Asisten" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Recibido" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Enviado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Pasado" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Ubicacion" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Evento" FromRole="Evento" ToRole="Contacto" />
+    <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Evento_Usuario" FromRole="Evento" ToRole="Usuario" />
+    <Property Name="Organizador" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Obs" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IdPrioridad" Type="Int32" />
+    <NavigationProperty Name="Prioridad" Relationship="Agenda_Model.FK_Evento_Prioridad" FromRole="Evento" ToRole="Prioridad" />
+  </EntityType>
+  <EntityType Name="homePorRol">
+    <Key>
+      <PropertyRef Name="IdHome" />
+    </Key>
+    <Property Name="IdHome" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_Roles_HomePorRol" FromRole="homePorRol" ToRole="Rol" />
+  </EntityType>
+  <EntityType Name="Notificacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPersona" Type="Int32" Nullable="false" />
+    <Property Name="EnvioEmail" Type="Boolean" />
+    <Property Name="Obs" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Notificacion" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Documento" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Cuil" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="TelefonoMovil" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TelefonoFijo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TelefonoAlternativo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Domicilio" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="IdProvinciaDomicilio" Type="Int32" />
+    <Property Name="IdLocalidadDomicilio" Type="Int32" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="CodigoValidacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Persona" ToRole="Contacto" />
+    <NavigationProperty Name="Notificacion" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Persona" ToRole="Notificacion" />
+    <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="EsAdministrador" Type="Boolean" Nullable="false" />
+    <Property Name="IdHome" Type="Int32" />
+    <NavigationProperty Name="AccionPorRol" Relationship="Agenda_Model.FK_AccionesPorRoles_Roles" FromRole="Rol" ToRole="AccionPorRol" />
+    <NavigationProperty Name="homePorRol" Relationship="Agenda_Model.FK_Roles_HomePorRol" FromRole="Rol" ToRole="homePorRol" />
+    <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuarios_Roles" FromRole="Rol" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdPersona" Type="Int32" />
+    <Property Name="IdRol" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="Creado" Type="DateTime" Precision="3" />
+    <Property Name="Actualizado" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Evento_Usuario" FromRole="Usuario" ToRole="Evento" />
+    <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
+    <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_Usuarios_Roles" FromRole="Usuario" ToRole="Rol" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_AccionesPorRoles_Roles">
+    <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="1" />
+    <End Type="Agenda_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="AccionPorRol">
+        <PropertyRef Name="idRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contacto_Evento">
+    <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="1" />
+    <End Type="Agenda_Model.Contacto" Role="Contacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Evento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contacto">
+        <PropertyRef Name="IdEvento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Contacto_Persona">
+    <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="Agenda_Model.Contacto" Role="Contacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contacto">
+        <PropertyRef Name="IdPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Evento_Usuario">
+    <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Evento">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Roles_HomePorRol">
+    <End Type="Agenda_Model.homePorRol" Role="homePorRol" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="homePorRol">
+        <PropertyRef Name="IdHome" />
+      </Principal>
+      <Dependent Role="Rol">
+        <PropertyRef Name="IdHome" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificacion_Persona">
+    <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="Agenda_Model.Notificacion" Role="Notificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notificacion">
+        <PropertyRef Name="IdPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Persona">
+    <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IdPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Roles">
+    <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MenuSidebar">
+    <Key>
+      <PropertyRef Name="IdMenuSidebar" />
+    </Key>
+    <Property Name="IdMenuSidebar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Icono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Titulo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdAccion" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdParent" Type="Int32" />
+    <NavigationProperty Name="MenuSidebar1" Relationship="Agenda_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar" ToRole="MenuSidebar1" />
+    <NavigationProperty Name="MenuSidebar2" Relationship="Agenda_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar1" ToRole="MenuSidebar" />
+    <Property Name="Orden" Type="Int32" />
+    <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="MenuSidebar" ToRole="Accion" />
+  </EntityType>
+  <Association Name="FK_MenuSidebar_MenuSidebar">
+    <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="0..1" />
+    <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MenuSidebar">
+        <PropertyRef Name="IdMenuSidebar" />
+      </Principal>
+      <Dependent Role="MenuSidebar1">
+        <PropertyRef Name="IdParent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Accion">
+    <Key>
+      <PropertyRef Name="IdAccion" />
+    </Key>
+    <Property Name="IdAccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Controlador" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="IdModulo" Type="Int32" Nullable="false" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="fechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AccionPorRol" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="Accion" ToRole="AccionPorRol" />
+    <NavigationProperty Name="MenuSidebar" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="Accion" ToRole="MenuSidebar" />
+  </EntityType>
+  <Association Name="FK_AccionesPorRoles_Acciones">
+    <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="1" />
+    <End Type="Agenda_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accion">
+        <PropertyRef Name="IdAccion" />
+      </Principal>
+      <Dependent Role="AccionPorRol">
+        <PropertyRef Name="idAccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MenuSidebar_Accion">
+    <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="0..1" />
+    <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accion">
+        <PropertyRef Name="IdAccion" />
+      </Principal>
+      <Dependent Role="MenuSidebar">
+        <PropertyRef Name="IdAccion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Evento_Prioridad" FromRole="Prioridad" ToRole="Evento" />
+  </EntityType>
+  <Association Name="FK_Evento_Prioridad">
+    <End Type="Agenda_Model.Prioridad" Role="Prioridad" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prioridad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Evento">
+        <PropertyRef Name="IdPrioridad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdPais" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdTipoIva" Type="Int32" />
+    <Property Name="DiasFactura" Type="Int32" />
+    <Property Name="IdImputacionProveedor" Type="Int32" />
+    <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SaldoCuentaCorriente" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdCodigoPostal" Type="Int32" />
+    <Property Name="IdAfipRegimen" Type="Int32" />
+    <Property Name="IdTipoProveedor" Type="Int32" />
+    <Property Name="IdImputacionFactura" Type="Int32" />
+    <Property Name="IdMonedaFactura" Type="Int32" />
+    <Property Name="DescripcionFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdTipoMoneda" Type="Int32" />
+    <Property Name="Perceptor" Type="Int32" />
+    <Property Name="MontoMinimo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PorcentajePeceptor" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdGrupoPresupuesto" Type="Int32" />
+    <Property Name="IdPuntoVenta" Type="Int32" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AfipRegimen" Relationship="Agenda_Model.FK_Proveedor_AfipRegimen" FromRole="Proveedor" ToRole="AfipRegimen" />
+    <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
+    <NavigationProperty Name="Imputacion1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
+    <NavigationProperty Name="TipoIva" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
+    <NavigationProperty Name="TipoMoneda" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
+    <NavigationProperty Name="TipoProveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
+    <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Proveedor" ToRole="Pais" />
+    <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
+  </EntityType>
+  <EntityType Name="AfipRegimen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Aliri" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Alirni" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Minimo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Imputacion" Type="Byte" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_AfipRegimen" FromRole="AfipRegimen" ToRole="Proveedor" />
+  </EntityType>
+  <EntityType Name="GrupoCuenta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Rubros" Relationship="Agenda_Model.FK_Rubros_GrupoCuenta" FromRole="GrupoCuenta" ToRole="Rubros" />
+  </EntityType>
+  <EntityType Name="Imputacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdSubRubro" Type="Int32" />
+    <Property Name="SaldoInicial" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SaldoFin" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdTipo" Type="Int32" />
+    <Property Name="Alias" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Enero" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Febrero" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Marzo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Abril" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Mayo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Junio" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Julio" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Agosto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Septiembre" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Octubre" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Noviembre" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Diciembre" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SubRubro" Relationship="Agenda_Model.FK_Imputacion_SubRubro" FromRole="Imputacion" ToRole="SubRubro" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Imputacion" ToRole="Proveedor" />
+    <NavigationProperty Name="Proveedor1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Imputacion" ToRole="Proveedor" />
+  </EntityType>
+  <EntityType Name="Rubros">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdGrupoCuenta" Type="Int32" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="GrupoCuenta" Relationship="Agenda_Model.FK_Rubros_GrupoCuenta" FromRole="Rubros" ToRole="GrupoCuenta" />
+    <NavigationProperty Name="SubRubro" Relationship="Agenda_Model.FK_SubRubro_Rubros" FromRole="Rubros" ToRole="SubRubro" />
+  </EntityType>
+  <EntityType Name="SubRubro">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdRubro" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_Imputacion_SubRubro" FromRole="SubRubro" ToRole="Imputacion" />
+    <NavigationProperty Name="Rubros" Relationship="Agenda_Model.FK_SubRubro_Rubros" FromRole="SubRubro" ToRole="Rubros" />
+  </EntityType>
+  <EntityType Name="TipoIva">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="TipoIva" ToRole="Proveedor" />
+  </EntityType>
+  <EntityType Name="TipoMoneda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="TipoMoneda" ToRole="Proveedor" />
+  </EntityType>
+  <EntityType Name="TipoProveedor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="TipoProveedor" ToRole="Proveedor" />
+  </EntityType>
+  <Association Name="FK_Proveedor_AfipRegimen">
+    <End Type="Agenda_Model.AfipRegimen" Role="AfipRegimen" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AfipRegimen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdAfipRegimen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rubros_GrupoCuenta">
+    <End Type="Agenda_Model.GrupoCuenta" Role="GrupoCuenta" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoCuenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Rubros">
+        <PropertyRef Name="IdGrupoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Imputacion_SubRubro">
+    <End Type="Agenda_Model.SubRubro" Role="SubRubro" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubRubro">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Imputacion">
+        <PropertyRef Name="IdSubRubro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Imputacion">
+    <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imputacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdImputacionProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Imputacion1">
+    <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imputacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdImputacionFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_TipoIva">
+    <End Type="Agenda_Model.TipoIva" Role="TipoIva" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIva">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdTipoIva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_TipoMoneda">
+    <End Type="Agenda_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdTipoMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_TipoProveedor">
+    <End Type="Agenda_Model.TipoProveedor" Role="TipoProveedor" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoProveedor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdTipoProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubRubro_Rubros">
+    <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="0..1" />
+    <End Type="Agenda_Model.SubRubro" Role="SubRubro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rubros">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SubRubro">
+        <PropertyRef Name="IdRubro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Localidad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Codigo" Type="Int32" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Altini" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AltFin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoProvincia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NombreSucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoSucursal" Type="Int32" />
+    <Property Name="OfDistLocal" Type="Int32" />
+    <Property Name="codposchr" Type="Int32" />
+    <Property Name="IdPais" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Localidad" ToRole="Pais" />
+    <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoAfip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cuit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Pais" ToRole="Localidad" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Pais" ToRole="Proveedor" />
+    <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+  </EntityType>
+  <Association Name="FK_Localidad_Pais">
+    <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Localidad">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Pais">
+    <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Provincia">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Codigo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoNumero" Type="Int32" />
+    <Property Name="IdPais" Type="Int32" />
+    <Property Name="CodigoAfip" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+    <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
+    <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
+  </EntityType>
+  <Association Name="FK_Localidad_Provincia">
+    <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Localidad">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Provincia_Pais">
+    <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Provincia">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_Provincia">
+    <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+    <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,56 @@
+c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Entidad\bin\Debug\Entidad.dll
+c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Entidad\bin\Debug\Entidad.pdb
+c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Entidad\obj\Debug\Entidad.dll
+c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Entidad\obj\Debug\Entidad.pdb
+F:\Agenda\Agenda\Entidad\bin\Debug\Entidad.dll
+F:\Agenda\Agenda\Entidad\bin\Debug\Entidad.pdb
+F:\Agenda\Agenda\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+F:\Agenda\Agenda\Entidad\obj\Debug\Entidad.dll
+F:\Agenda\Agenda\Entidad\obj\Debug\Entidad.pdb
+F:\Agenda\Agenda\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+F:\.Net ASP\Agenda\Agenda\Entidad\bin\Debug\Entidad.dll
+F:\.Net ASP\Agenda\Agenda\Entidad\bin\Debug\Entidad.pdb
+F:\.Net ASP\Agenda\Agenda\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+F:\.Net ASP\Agenda\Agenda\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+F:\.Net ASP\Agenda\Agenda\Entidad\obj\Debug\Entidad.dll
+F:\.Net ASP\Agenda\Agenda\Entidad\obj\Debug\Entidad.pdb
+E:\Agenda\Agenda\Entidad\bin\Debug\Entidad.dll
+E:\Agenda\Agenda\Entidad\bin\Debug\Entidad.pdb
+E:\Agenda\Agenda\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+E:\Agenda\Agenda\Entidad\obj\Debug\Entidad.dll
+E:\Agenda\Agenda\Entidad\obj\Debug\Entidad.pdb
+E:\Agenda\Agenda\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+G:\.Net ASP\Agenda\Agenda\Entidad\bin\Debug\Entidad.dll
+G:\.Net ASP\Agenda\Agenda\Entidad\bin\Debug\Entidad.pdb
+G:\.Net ASP\Agenda\Agenda\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+G:\.Net ASP\Agenda\Agenda\Entidad\obj\Debug\Entidad.dll
+G:\.Net ASP\Agenda\Agenda\Entidad\obj\Debug\Entidad.pdb
+G:\.Net ASP\SAC\SAC\Entidad\bin\Debug\Entidad.dll
+G:\.Net ASP\SAC\SAC\Entidad\bin\Debug\Entidad.pdb
+G:\.Net ASP\SAC\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+G:\.Net ASP\SAC\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+G:\.Net ASP\SAC\SAC\Entidad\obj\Debug\Entidad.dll
+G:\.Net ASP\SAC\SAC\Entidad\obj\Debug\Entidad.pdb
+D:\SAC\SAC\Entidad\bin\Debug\Entidad.dll
+D:\SAC\SAC\Entidad\bin\Debug\Entidad.pdb
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.dll
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.pdb
+D:\DESARROLLO_WEB\SAC\Entidad\bin\Debug\Entidad.dll
+D:\DESARROLLO_WEB\SAC\Entidad\bin\Debug\Entidad.pdb
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.dll
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.pdb
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\bin\Debug\Entidad.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\bin\Debug\Entidad.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\obj\Debug\Entidad.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\obj\Debug\Entidad.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\bin\Debug\Entidad.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\bin\Debug\Entidad.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.dll
+E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.pdb
