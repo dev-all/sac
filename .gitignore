@@ -1,4 +1,5 @@
 SAC/.vs/*
+*.vs/
 SAC/SAC/obj/*
 SAC/Negocio/obj/*
 SAC/Datos/obj/*
@@ -8,3 +9,9 @@ SAC/Entidad/obj/*
 SAC/Negocio/bin/*
 SAC/Datos/bin/*
 SAC/Entidad/bin/*
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
