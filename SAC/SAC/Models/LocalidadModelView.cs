@@ -1,35 +1,32 @@
-﻿using Datos.ModeloDeDatos;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
+using Datos.ModeloDeDatos;
+using System.ComponentModel.DataAnnotations;
 
 namespace SAC.Models
 {
     public class LocalidadModelView
     {
 
-
         public int Id { get; set; }
 
+        [Display(Name = "Codigo Postal")]
+        [Required]
+        [Range(1, 10000, ErrorMessage = "El valor del pais no corresponde")]
+        //hace referencia al codigo postal
         public Nullable<int> Codigo { get; set; }
 
+        [Display(Name = "Nombre localidad")]
+        [Required]
+        [StringLength(100, ErrorMessage = "La longitud máxima es 100")]
         public string Nombre { get; set; }
 
-        public string Altini { get; set; }
-
-        public string AltFin { get; set; }
-
+        //no se que significa va ir con un dato fijo
         public string CodigoProvincia { get; set; }
-
-        public string NombreSucursal { get; set; }
-
-        public Nullable<int> CodigoSucursal { get; set; }
-
-        public Nullable<int> OfDistLocal { get; set; }
-
-        public Nullable<int> codposchr { get; set; }
-
+       
         public Nullable<int> IdPais { get; set; }
 
         public Nullable<int> IdProvincia { get; set; }
@@ -41,13 +38,18 @@ namespace SAC.Models
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
 
-
         public virtual Pais Pais { get; set; }
 
         public virtual Provincia Provincia { get; set; }
 
 
+        //agregados para tomar valor de los combo
 
+        [Required]
+        public int idCmbPais { get; set; }
+
+        [Required]
+        public int idCmbProvincia { get; set; }
 
 
     }

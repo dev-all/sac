@@ -48,9 +48,3 @@ E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\bin\De
 E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
 E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\obj\Debug\Entidad.dll
 E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Entidad\obj\Debug\Entidad.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\bin\Debug\Entidad.dll
-E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\bin\Debug\Entidad.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
-E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
-E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.dll
-E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\Entidad\obj\Debug\Entidad.pdb

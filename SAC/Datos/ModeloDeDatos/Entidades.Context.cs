@@ -72,11 +72,11 @@ public partial class SAC_Entities : DbContext
 
     public virtual DbSet<TipoProveedor> TipoProveedor { get; set; }
 
-    public virtual DbSet<Localidad> Localidad { get; set; }
-
     public virtual DbSet<Pais> Pais { get; set; }
 
     public virtual DbSet<Provincia> Provincia { get; set; }
+
+    public virtual DbSet<Localidad> Localidad { get; set; }
 
 }
 

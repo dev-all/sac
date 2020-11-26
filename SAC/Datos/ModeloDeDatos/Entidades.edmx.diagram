@@ -46,14 +46,14 @@
         <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoMoneda" />
         <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoProveedor" />
         <AssociationConnector Association="Agenda_Model.FK_SubRubro_Rubros" />
-        <EntityTypeShape EntityType="Agenda_Model.Localidad" Width="1.5" PointX="9" PointY="0.75" />
         <EntityTypeShape EntityType="Agenda_Model.Pais" Width="1.5" PointX="0.75" PointY="2.75" />
-        <AssociationConnector Association="Agenda_Model.FK_Localidad_Pais" />
         <AssociationConnector Association="Agenda_Model.FK_Proveedor_Pais" />
         <EntityTypeShape EntityType="Agenda_Model.Provincia" Width="1.5" PointX="3" PointY="18.75" />
-        <AssociationConnector Association="Agenda_Model.FK_Localidad_Provincia" />
         <AssociationConnector Association="Agenda_Model.FK_Provincia_Pais" />
         <AssociationConnector Association="Agenda_Model.FK_Proveedor_Provincia" />
+        <EntityTypeShape EntityType="Agenda_Model.Localidad" Width="1.5" PointX="9.25" PointY="15.25" />
+        <AssociationConnector Association="Agenda_Model.FK_Localidad_Pais" />
+        <AssociationConnector Association="Agenda_Model.FK_Localidad_Provincia" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

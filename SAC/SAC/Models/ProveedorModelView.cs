@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Datos.ModeloDeDatos;
+
+
 namespace SAC.Models
 {
     public class ProveedorModelView

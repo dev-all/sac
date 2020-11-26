@@ -22,9 +22,9 @@ public partial class Provincia
     public Provincia()
     {
 
-        this.Localidad = new HashSet<Localidad>();
-
         this.Proveedor = new HashSet<Proveedor>();
+
+        this.Localidad = new HashSet<Localidad>();
 
     }
 
@@ -49,15 +49,15 @@ public partial class Provincia
 
 
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Localidad> Localidad { get; set; }
-
     public virtual Pais Pais { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Proveedor> Proveedor { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Localidad> Localidad { get; set; }
 
 }
 
