@@ -62,6 +62,7 @@
     <Compile Include="Modelos\ConfiguracionModel.cs" />
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
+    <Compile Include="Modelos\LocalidadModel.cs" />
     <Compile Include="Modelos\MenuSideBarModel.cs" />
     <Compile Include="Modelos\PaisModel.cs" />
     <Compile Include="Modelos\PersonaModel.cs" />
@@ -81,6 +82,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioLocalidad.cs" />
     <Compile Include="Servicios\ServicioPais.cs" />
     <Compile Include="Servicios\ServicioPersona.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />

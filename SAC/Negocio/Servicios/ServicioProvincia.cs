@@ -24,6 +24,21 @@ namespace Negocio.Servicios
             provinciaRepositorio = kernel.Get<ProvinciaRepositorio>();
         }
 
+        public List<ProvinciaModel> GetAllProvinciasNombreId(int idPais)
+        {
+            try
+            {
+                var Provincias = Mapper.Map<List<Provincia>, List<ProvinciaModel>>(provinciaRepositorio.GetAllProvinciasNombreId(idPais));
+                return Provincias;
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                return null;
+            }
+        }
+
+
         public List<ProvinciaModel> GetAllProvincias(int idPais)
         {
             try
@@ -37,6 +52,7 @@ namespace Negocio.Servicios
                 return null;
             }
         }
+
 
         public List<ProvinciaModel> GetAllProvincias()
         {

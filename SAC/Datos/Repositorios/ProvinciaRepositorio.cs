@@ -3,6 +3,7 @@ using Datos.ModeloDeDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace Datos.Repositorios
 {
     public class ProvinciaRepositorio : RepositorioBase<Provincia>
@@ -25,15 +26,6 @@ namespace Datos.Repositorios
             Provincia Provincia = context.Provincia.Where(p => p.Id == idProvincia).First();
             return Provincia;
         }
-
-
-
-        //public List<Provincia> ObtenerProvincia(int idProvincia)
-        //{
-        //    List<Provincia> Provincia = context.Provincia.Where(p => p.Id == idProvincia).ToList();
-        //    return Provincia;
-        //}
-
 
 
         public Provincia ObtenerProvinciaPorId(int idProvincia)
@@ -89,6 +81,14 @@ namespace Datos.Repositorios
         }
 
 
+        public List<Provincia> GetAllProvinciasNombreId(int idPais)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            List<Provincia> listaProvincia = context.Provincia.Where(p => p.Activo == true && p.IdPais == idPais).ToList();
+            return listaProvincia;
+        }
+
+
         public List<Provincia> GetAllProvincia()
         {
             List<Provincia> listaProvincia = context.Provincia.Where(p => p.Activo == true).ToList();
@@ -96,7 +96,9 @@ namespace Datos.Repositorios
         }
         public List<Provincia> GetAllProvincia(int idPais)
         {
-            List<Provincia> listaProvincia = context.Provincia.Where(p => p.Activo == true && p.IdPais == idPais).ToList();
+            
+            List<Provincia> listaProvincia = context.Provincia
+                                            .Where(p => p.Activo == true && p.IdPais == idPais).ToList();
             return listaProvincia;
         }
 

@@ -26,7 +26,8 @@ namespace SAC.Infrastructure
             CreateMap<ProvinciaModel, ProvinciaModelView>();
             CreateMap<ProvinciaModelView, ProvinciaModel>();
 
-
+            CreateMap<LocalidadModel, LocalidadModelView>();
+            CreateMap<LocalidadModelView, LocalidadModel>();
 
             CreateMap<AccionModel, AccionModelView>();
             CreateMap<AccionModelView, AccionModel>();

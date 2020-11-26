@@ -426,6 +426,7 @@ E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\
 E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
 E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.dll
 E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\SAC\obj\Debug\SAC.pdb
+<<<<<<< HEAD
 E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\SAC.dll.config
 E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\SAC.dll
 E:\TRABAJOS DE PROGRAMACION\sac\aplicacion mvc\SAC\SAC\bin\SAC.pdb
@@ -641,3 +642,5 @@ D:\SAC\SAC\SAC\obj\Debug\SAC.csproj.CoreCompileInputs.cache
 D:\SAC\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
 D:\SAC\SAC\SAC\obj\Debug\SAC.dll
 D:\SAC\SAC\SAC\obj\Debug\SAC.pdb
+=======
+>>>>>>> dev-m

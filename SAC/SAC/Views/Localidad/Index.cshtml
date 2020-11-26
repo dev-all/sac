@@ -1,20 +1,31 @@
 ﻿@model List<SAC.Models.LocalidadModelView>
 
 @{
-    ViewBag.Title = "Lista Provincia";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
 
-    List<SelectListItem> ListaPais = (List<SelectListItem>)ViewBag.Listapagina;
+                ViewBag.Title = "Lista Provincia";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+
+                List<SelectListItem> ListaPais = (List<SelectListItem>)ViewBag.ListaPais;
+                List<SelectListItem> ListaProvincia = (List<SelectListItem>)ViewBag.ListaProvincia;
 
 }
 
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.1em 1em;
+    }
 
+    .table td, .table th {
+        padding: .25rem;
+    }
+</style>
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
 <div class="row page-titles m-t-40">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Lista de Provincias</h3>
+        <h3 class="text-themecolor">Lista de Localidades</h3>
     </div>
 </div>
 <div class="row">
@@ -25,11 +36,16 @@
                 <h6 class="card-subtitle">Formato de salida: PDF</h6>
                 <div class="table-responsive m-t-40">
 
-                    @Html.ActionLink("Nuevo", "Agregar", "Provincia", new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Nuevo", "Agregar", "Localidad", new { @class = "btn btn-primary" })
 
 
-
-                    @using (Html.BeginForm("Index", "Provincia", FormMethod.Get, new { @id = "frmBusqueda" }))
+                    @using (Ajax.BeginForm("ObtenerLocalidades", "", new AjaxOptions
+                    {
+                        HttpMethod = "GET",
+                        UpdateTargetId = "divPagina",
+                        OnComplete="fntabla",
+                        InsertionMode = InsertionMode.Replace,
+                    }, new { @id = "frmBusqueda" }))
                     {
                         <br />
                         <div class="row">
@@ -37,38 +53,27 @@
                                 <div class="form-group">
                                     @Html.Label("Seleccione un país")
                                     @Html.DropDownList("idCmbPais", ListaPais, null, new { @class = "form-control" })
+                                    @*@Html.Hidden("IdComboPais")*@
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    @Html.Label("Seleccione una provincia")
+                                    @Html.DropDownList("idCmbProvincia", new List<SelectListItem>(), " -- Seleccionar Localidad --", new { @class = "form-control" })
+
                                 </div>
                             </div>
                         </div>
 
 
-                        <table id="tblPais" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th> Nombre</th>
-                                    <th> Codigo</th>
-                                    <th>Pais</th>
-                                    <th>Operaciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Pais.Nombre)</td>
-                                        <td>
-                                            @Html.ActionLink(" ", "Editar", "Provincia", new { _id = @item.Id }, new { @class = "btn btn-primary fa fa-pencil-square-o" })
-                                            @Html.ActionLink(" ", "Eliminar", "Provincia", new { _id = @item.Id }, new { @class = "btn btn-danger fa fa-trash-o", onclick = "AsigarConfirmacion(" + @item.Id + ")" })
-
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-
+                        <div id="divPagina">
+                            @Html.Partial("_Tabla", Model)
+                        </div>
                     }
+
                 </div>
             </div>
         </div>
@@ -86,7 +91,7 @@
             </div>
 
             <div class="modal-body">
-                <h3> ¿Está seguro que desea eliminar la Provincia seleccionada?</h3>
+                <h3> ¿Está seguro que desea eliminar la localidad seleccionada?</h3>
             </div>
 
 
@@ -102,24 +107,164 @@
 
 
 @* crea un formulario para ir al controlador *@
-@using (Html.BeginForm("Eliminar", "Provincia", FormMethod.Post, new { @id = "frmEliminar" }))
+@using (Html.BeginForm("Eliminar", "Localidad", FormMethod.Post, new { @id = "frmEliminar" }))
 {
-    @Html.Hidden("idProvincia");
+    @Html.Hidden("idLocalidad");
 }
 
 
 <script>
 
-    var idtipoUsuario = document.getElementById("idCmbPais")
-    idtipoUsuario.onchange = function () {
-        var frmBusquda = document.getElementById("frmBusqueda");
-        frmBusquda.submit();
+    var idCmbProvincia = document.getElementById("idCmbProvincia")
+    idCmbProvincia.onchange = function () {
+     $("#frmBusqueda").trigger("submit");
+    }
+
+    function fntabla() {
+        $('#tblLocalidad').DataTable({
+            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            'dom': 'Bfrtip',
+            'buttons': [
+                'pdf'
+            ]
+        });
     }
 
 
-    function AsigarConfirmacion(idProvincia) {
+
+    //idCmbProvincia.onchange = function () {
+
+
+    //    // $("#frmBusqueda").trigger("submit");
+
+    //    $.ajax({
+    //        type: 'get',
+    //        url: '/Localidad/getLocalidadesJson/',
+    //        data: {
+    //            idPais: $("#idCmbPais").val() || 0,
+    //            idProvincia: $("#idCmbProvincia").val() || 0,
+    //        },
+    //        cache: false,
+    //        dataType: 'json',
+    //        success: function (r) {
+    //            if (r.data != "null" && r.result) {
+    //                bindTabla(r.data, 'tbllocalidad');
+    //            } else {
+    //                alert('No se encontraron datos, reintente.')
+    //            }
+    //        },
+    //        error: function (jqXHR, textStatus, errorThrown) {
+    //            alert('Error - ' + errorThrown);
+    //        }
+    //    });
+
+
+    //}
+    function bindInforme(datosJson,oTable) {
+        datosJson = JSON.parse(datosJson);
+   
+        var th_ini = "";
+        var tr_ini = "";
+        var thjson = "";
+
+        if ((typeof (datosJson) !== 'undefined') && (datosJson.length > 0)) {
+
+            // CABECERA DE TABLA
+            for (h in datosJson[0]) { thjson += "<th> " + h + " </th>"; }
+            th_ini += "<tr>" + thjson + "</tr>";
+            var valor = 0;
+            // CUERPO DE TABLA
+            for (x in datosJson) {
+                tr_ini += "<tr>";
+                for (y in datosJson[x]) {
+                    valor = datosJson[x][y];
+                    tr_ini += "<td> " + valor + " </td>";
+                }
+                tr_ini += " </tr>";
+            }
+
+
+            if ($.fn.dataTable.isDataTable('#' + oTable)) {
+                table = $('#' + oTable).DataTable();
+                table.destroy();
+                $('#' + oTable + ' thead tr').remove();
+                $('#' + oTable + ' thead').append(th_ini);
+                $('#' + oTable + ' tbody tr').remove();
+                $('#' + oTable + ' tbody').append(tr_ini);
+                tablaAd(oTable);
+               
+            } else {
+                $('#' + oTable + ' thead').append(th_ini);
+                $('#' + oTable + ' tbody').append(tr_ini);
+                tablaAd(oTable);
+            }
+            var valores = '';
+            $('#tblInforme thead tr').each(function (index) {
+                $(this).children("th").each(function (index2) {
+                    switch (index2) {
+                        case 0: valores = $(this).text();
+                            break;
+                        default:
+                            valores = valores + ',' + $(this).text();
+                    }
+                })
+            })
+            $("#infomeColum").val('' + valores + '');
+
+        } else {
+           
+            toastr.warning('No se encontraron datos...');
+          
+        }   
+    };
+
+function tablaAd(oTable) {
+       
+        var table = $('#' + oTable).DataTable({
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+                "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            'dom': 'Bfrtip',
+            'buttons': [
+                'pdf'
+            ]
+        });
+    }
+
+
+
+    $(document).ready(function () {
+        $("#idCmbPais").change(function () {
+            $.get("/Localidad/GetlistaProvincias/", { idPais: $("#idCmbPais").val() }, function (data) {
+                // VACIAMOS EL DropDownList
+                $("#idCmbProvincia").empty();
+                // AÑADIMOS UN NUEVO label CON EL NOMBRE DEL ELEMENTO SELECCIONADO
+                $("#idCmbProvincia").append("<option value> -- Seleccionar Provincias de " + $("#idCmbPais option:selected").text() + " --</option>")
+                // CONSTRUIMOS EL DropDownList A PARTIR DEL RESULTADO Json (data)
+                $.each(data, function (index, row) {
+                    $("#idCmbProvincia").append("<option value='" + row.Id + "'>" + row.Nombre + "</option>")
+                });
+            });
+        });
+
+    });
+
+
+    function AsigarConfirmacion(idLocalidad) {
         event.preventDefault();
-        document.getElementById("idProvincia").value = idProvincia;
+        document.getElementById("idLocalidad").value = idLocalidad;
         //console.log(idPais);
         $("#ModalConfirmacion").modal('show');
     }
@@ -132,10 +277,9 @@
 
 </script>
 
-@section Scripts{
 
-    <!-- This is data table -->
-    <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+@section Scripts{
+    <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
@@ -145,22 +289,55 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
-
-
     <script type="text/javascript">
-        $(document).ready(function () {
+
+
+        $(function () {
+
             $('#tblPais').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+                "order": [[2, 'asc']],
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                'dom': 'Bfrtip',
+                'buttons': [
                     'pdf'
                 ]
             });
         });
-
-
-
     </script>
 
+
+    @*<!-- This is data table -->
+            <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+            <!-- start - This is for export functionality only -->
+
+            <script src="~/Content/assets/plugins/datatables/jsTable/dataTables.buttons.min.js"></script>
+            <script src="~/Content/assets/plugins/datatables/jsTable/buttons.flash.min.js"></script>
+            <script src="~/Content/assets/plugins/datatables/jsTable/jszip.min.js"></script>
+            <script src="~/Content/assets/plugins/datatables/jsTable/pdfmake.min.js"></script>
+            <script src="~/Content/assets/plugins/datatables/jsTable/vfs_fonts.js"></script>
+            <script src="~/Content/assets/plugins/datatables/jsTable/buttons.html5.min.js"></script>
+
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#tblPais').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'pdf'
+                        ]
+                    });
+                });
+
+
+        </script>*@
+
 }
+
 
 
