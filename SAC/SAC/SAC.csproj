@@ -292,8 +292,6 @@
     <Content Include="Content\assets\images\logo-light-icon.png" />
     <Content Include="Content\assets\images\logo-light-text.png" />
     <Content Include="Content\assets\images\logo-text.png" />
-    <Content Include="Content\assets\images\logo.ico" />
-    <Content Include="Content\assets\images\sables.png" />
     <Content Include="Content\assets\images\tooltip\Euclid.png" />
     <Content Include="Content\assets\images\tooltip\shape1.svg" />
     <Content Include="Content\assets\images\tooltip\shape2.svg" />

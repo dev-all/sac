@@ -9,6 +9,7 @@ namespace Datos.Interfaces
 {
    public interface IUsuarioRepositorio : IRepositorio<Usuario>, IDisposable
     {
+        Usuario ObtenerUsuarioPorUserNameEmail(string documento);
         Usuario ObtenerPorDocumento(string documento);
         Usuario ObtenerPorID(int idUsuario);
         List<Usuario> GetAllUsuario();

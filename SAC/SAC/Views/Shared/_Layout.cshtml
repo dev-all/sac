@@ -111,21 +111,21 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user"></i>
 
+                        
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark"
+                               href="">
+                                <i class="fa fa-user"></i>   @Html.Raw(ViewBag.UserCompleteName)
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right animated flipInY">
-                                <ul class="dropdown-user">
 
-                                    <li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark"
+                               href="@Url.Action("Logout", "Cuenta")">
+                                <i class="fa fa-times"></i> Salir
+                            </a>
 
-                                        <a href="@Url.Action("Logout", "Cuenta")"><i class="fa fa-times"></i> Salir </a>
-                                    </li>
-
-                                </ul>
-                            </div>
                         </li>
                     </ul>
                 </div>

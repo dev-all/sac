@@ -89,6 +89,21 @@ namespace SAC.Controllers
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RestablecerCuenta(int id )
+        {           
+                UsuarioModel usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+               
+                if (id > 0)
+                {
+                    servicioUsuario.RestablecerCuenta(id , usuario.IdUsuario);
+                }                
+                return RedirectToAction(nameof(Index));           
+        }
+
+
+
         // POST: Usuario/Create
         //[HttpPost, ActionName("Guardar")]
         //[ValidateAntiForgeryToken]

@@ -17,11 +17,15 @@ namespace SAC.Models
 
         [Display(Name = "Email: ")]
         [Required(ErrorMessage = "Ops!, complete el campo Usuario.")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string email { get; set; }
         public string sexo { get; set; }
         public string cuil { get; set; }
+        [Display(Name = "Teléfono: ")]
         public string telefono { get; set; }
         public string telefonoFijo { get; set; }
+        [Display(Name = "Teléfono Alternativo: ")]
         public string telefonoAlternativo { get; set; }
         public string codigoPostal { get; set; }
         public string domicilio { get; set; }

@@ -14,7 +14,7 @@ namespace SAC.Models
         [Display(Name = "Usuario: ")]
         [Required(ErrorMessage = "Ops!, complete el campo Usuario.")]      
         public string userName { get; set; }
-        [Required(ErrorMessage = "Ops!, complete el campo clave.")]
+       
         public string password { get; set; }
         public bool activo { get; set; }
         public DateTime Creado { get; set; }

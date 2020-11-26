@@ -48,14 +48,21 @@ namespace Datos.Repositorios
             throw new NotImplementedException();
         }
 
-        public bool Obtener(string documento, string password, int idRolInvitado)
+        public bool Obtener(string usuario, string password, int idRolInvitado)
         {
             return !( contexto.Usuario
-                              .Where(x => x.Persona.Documento == documento
+                              .Where(x => x.UserName == usuario || x.Persona.Email == usuario
                               &&  x.Password  == password 
                               && x.IdRol != idRolInvitado).Count() == 0);           
         }
-
+        public Usuario ObtenerUsuarioPorUserNameEmail(String usuariologin)
+        {
+            Usuario usuario = contexto.Usuario
+                             .Include(x => x.Persona)
+                             .Include(x => x.Rol)
+                             .Where(x => x.UserName.Equals(usuariologin) || x.Persona.Email.Equals(usuariologin)).FirstOrDefault();
+            return usuario;
+        }
         public List<Usuario> GetAllUsuario()
         {
             return contexto.Usuario
@@ -141,13 +148,15 @@ namespace Datos.Repositorios
             contexto.Entry(model).Property(x => x.Password).IsModified = true;
             contexto.Entry(model).Property(x => x.IdRol).IsModified = true;
             contexto.Entry(model).Property(x => x.Activo).IsModified = true;
-            contexto.Entry(model).Property(x => x.Persona.Email).IsModified = true;
-            contexto.Entry(model).Property(x => x.Persona.Documento).IsModified = true;
-            contexto.Entry(model).Property(x => x.Persona.Nombre).IsModified = true;
-            contexto.Entry(model).Property(x => x.Persona.Apellido).IsModified = true;
-            contexto.Entry(model).Property(x => x.Persona.Cuil).IsModified = true;
-            contexto.Entry(model).Property(x => x.Persona.TelefonoMovil).IsModified = true;
-            contexto.Entry(model).Property(x => x.Persona.Activo).IsModified = true;
+
+            contexto.Persona.Attach(model.Persona);
+            contexto.Entry(model.Persona).Property(x => x.Email).IsModified = true;
+            contexto.Entry(model.Persona).Property(x => x.Documento).IsModified = true;
+            contexto.Entry(model.Persona).Property(x => x.Nombre).IsModified = true;
+            contexto.Entry(model.Persona).Property(x => x.Apellido).IsModified = true;
+            contexto.Entry(model.Persona).Property(x => x.Cuil).IsModified = true;
+            contexto.Entry(model.Persona).Property(x => x.TelefonoMovil).IsModified = true;
+            contexto.Entry(model.Persona).Property(x => x.Activo).IsModified = true;
 
             contexto.SaveChanges();
 
