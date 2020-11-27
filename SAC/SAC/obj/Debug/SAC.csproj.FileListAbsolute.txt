@@ -91,7 +91,6 @@ D:\SAC\SAC\SAC\bin\Newtonsoft.Json.xml
 D:\SAC\SAC\SAC\bin\Antlr3.Runtime.pdb
 D:\SAC\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\SAC\SAC\SAC\bin\Z.EntityFramework.Plus.EF6.xml
-D:\SAC\SAC\SAC\bin\Ninject.xml
 D:\SAC\SAC\SAC\bin\Z.EntityFramework.Extensions.xml
 D:\SAC\SAC\SAC\bin\Z.Expressions.Eval.xml
 D:\SAC\SAC\SAC\bin\es\System.Web.Helpers.resources.dll

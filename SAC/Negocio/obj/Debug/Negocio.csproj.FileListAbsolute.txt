@@ -9,11 +9,6 @@ D:\SAC\SAC\Negocio\bin\Debug\Z.Expressions.Eval.dll
 D:\SAC\SAC\Negocio\bin\Debug\Datos.pdb
 D:\SAC\SAC\Negocio\bin\Debug\Datos.dll.config
 D:\SAC\SAC\Negocio\bin\Debug\Entidad.pdb
-D:\SAC\SAC\Negocio\bin\Debug\AutoMapper.pdb
-D:\SAC\SAC\Negocio\bin\Debug\AutoMapper.xml
-D:\SAC\SAC\Negocio\bin\Debug\EntityFramework.xml
-D:\SAC\SAC\Negocio\bin\Debug\Ninject.xml
-D:\SAC\SAC\Negocio\bin\Debug\System.ValueTuple.xml
 D:\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.xml
 D:\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.xml
 D:\SAC\SAC\Negocio\bin\Debug\Z.Expressions.Eval.xml

@@ -136,6 +136,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
@@ -151,8 +152,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BcraHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
+    <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
@@ -2801,7 +2804,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\" />
+    <Folder Include="Views\Compras\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
