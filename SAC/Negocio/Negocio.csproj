@@ -58,6 +58,7 @@
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
     <Compile Include="Modelos\AccionPorRol.cs" />
+    <Compile Include="Modelos\AfipRegimenModel.cs" />
     <Compile Include="Modelos\ConfiguracionModel.cs" />
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
@@ -69,6 +70,9 @@
     <Compile Include="Modelos\ProveedorModel.cs" />
     <Compile Include="Modelos\ProvinciaModel.cs" />
     <Compile Include="Modelos\RolModel.cs" />
+    <Compile Include="Modelos\SubRubroModel.cs" />
+    <Compile Include="Modelos\TipoIvaModel.cs" />
+    <Compile Include="Modelos\TipoMonedaModel.cs" />
     <Compile Include="Modelos\UsuarioModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
@@ -89,6 +93,9 @@
     <Compile Include="Servicios\ServicioPersona.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />
     <Compile Include="Servicios\ServicioProvincia.cs" />
+    <Compile Include="Servicios\ServicioSubRubro.cs" />
+    <Compile Include="Servicios\ServicioTipoIva.cs" />
+    <Compile Include="Servicios\ServicioTipoMoneda.cs" />
     <Compile Include="Servicios\ServicioUsuario.cs" />
     <Compile Include="Servicios\ServicioConfiguracion.cs" />
     <Compile Include="Servicios\ServicioBase.cs" />

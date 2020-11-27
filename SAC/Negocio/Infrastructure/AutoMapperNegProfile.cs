@@ -28,6 +28,16 @@ namespace Agenda.Infrastructure
             CreateMap<Localidad, LocalidadModel > ();
             CreateMap< LocalidadModel, Localidad>();
 
+            CreateMap<TipoIva, TipoIvaModel>();
+            CreateMap<TipoIvaModel, TipoIva>();
+
+            CreateMap<SubRubro, SubRubroModel>();
+            CreateMap<SubRubroModel, SubRubro>();
+
+
+            CreateMap<TipoMoneda, TipoMonedaModel>();
+            CreateMap<TipoMonedaModel, TipoMoneda>();
+
             CreateMap<Evento, EventoModel>();
             CreateMap<EventoModel, Evento>();
 

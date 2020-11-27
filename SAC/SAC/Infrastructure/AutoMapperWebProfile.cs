@@ -29,6 +29,19 @@ namespace SAC.Infrastructure
             CreateMap<LocalidadModel, LocalidadModelView>();
             CreateMap<LocalidadModelView, LocalidadModel>();
 
+            CreateMap<ProveedorModel, ProveedorModelView>();
+            CreateMap<ProveedorModelView, ProveedorModel>();
+
+            CreateMap<AfipRegimenModel,AfipRegimenModelView >();
+            CreateMap<AfipRegimenModelView, AfipRegimenModel>();
+
+            CreateMap<TipoIvaModel, TipoIvaViewModel>();
+            CreateMap<TipoIvaViewModel, TipoIvaModel>();
+
+
+            CreateMap<SubRubroModel, SubRubroModelView>();
+            CreateMap<SubRubroModelView, SubRubroModel>();
+
             CreateMap<AccionModel, AccionModelView>();
             CreateMap<AccionModelView, AccionModel>();
           
