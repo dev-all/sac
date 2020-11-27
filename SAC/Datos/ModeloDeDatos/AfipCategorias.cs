@@ -15,17 +15,8 @@ namespace Datos.ModeloDeDatos
 using System;
     using System.Collections.Generic;
     
-public partial class TipoProveedor
+public partial class AfipCategorias
 {
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public TipoProveedor()
-    {
-
-        this.Proveedor = new HashSet<Proveedor>();
-
-    }
-
 
     public int Id { get; set; }
 
@@ -36,14 +27,6 @@ public partial class TipoProveedor
     public Nullable<int> IdUsuario { get; set; }
 
     public Nullable<System.DateTime> UltimaModificacion { get; set; }
-
-    public string Codigo { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Proveedor> Proveedor { get; set; }
 
 }
 

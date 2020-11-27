@@ -15,21 +15,18 @@ namespace Datos.ModeloDeDatos
 using System;
     using System.Collections.Generic;
     
-public partial class TipoProveedor
+public partial class CompraFacturaPago
 {
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public TipoProveedor()
-    {
-
-        this.Proveedor = new HashSet<Proveedor>();
-
-    }
-
 
     public int Id { get; set; }
 
-    public string Descripcion { get; set; }
+    public Nullable<int> IdFacturaCompra { get; set; }
+
+    public Nullable<int> IdTipoPago { get; set; }
+
+    public Nullable<decimal> Monto { get; set; }
+
+    public string Observaciones { get; set; }
 
     public Nullable<bool> Activo { get; set; }
 
@@ -37,13 +34,11 @@ public partial class TipoProveedor
 
     public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-    public string Codigo { get; set; }
 
 
+    public virtual CompraFactura CompraFactura { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Proveedor> Proveedor { get; set; }
+    public virtual TipoPago TipoPago { get; set; }
 
 }
 

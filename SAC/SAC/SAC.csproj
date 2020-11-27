@@ -153,6 +153,7 @@
     </Compile>
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
+    <Compile Include="Models\AfipRegimenModelView.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
@@ -166,6 +167,9 @@
     <Compile Include="Models\ProvinciaModelView.cs" />
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
+    <Compile Include="Models\SubRubroModelView.cs" />
+    <Compile Include="Models\TipoIvaViewModel.cs" />
+    <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
     <Compile Include="Models\EventoModelView.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -177,8 +181,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Agenda.dll" />
-    <Content Include="bin\Agenda.pdb" />
     <Content Include="Content\assets\css\animate.css" />
     <Content Include="Content\assets\css\colors\blue-dark.css" />
     <Content Include="Content\assets\css\colors\blue.css" />
@@ -2815,9 +2817,11 @@
     <Content Include="Views\Localidad\_Tabla.cshtml" />
     <Content Include="Views\Localidad\Agregar.cshtml" />
     <Content Include="Views\Localidad\Editar.cshtml" />
+    <Content Include="Views\Proveedor\Agregar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>

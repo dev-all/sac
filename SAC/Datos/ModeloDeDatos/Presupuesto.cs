@@ -15,11 +15,11 @@ namespace Datos.ModeloDeDatos
 using System;
     using System.Collections.Generic;
     
-public partial class AfipRegimen
+public partial class Presupuesto
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public AfipRegimen()
+    public Presupuesto()
     {
 
         this.Proveedor = new HashSet<Proveedor>();
@@ -29,17 +29,25 @@ public partial class AfipRegimen
 
     public int Id { get; set; }
 
-    public string Descripcion { get; set; }
+    public string Codigo { get; set; }
 
     public string Concepto { get; set; }
 
-    public Nullable<decimal> Aliri { get; set; }
+    public decimal Actual { get; set; }
 
-    public Nullable<decimal> Alirni { get; set; }
+    public decimal Ejecutado { get; set; }
 
-    public Nullable<decimal> Minimo { get; set; }
+    public decimal Historico { get; set; }
 
-    public Nullable<byte> Imputacion { get; set; }
+    public int IdImputacion { get; set; }
+
+    public string CodigoCaja { get; set; }
+
+    public string Visible { get; set; }
+
+    public string Costos { get; set; }
+
+    public int Periodo { get; set; }
 
     public Nullable<bool> Activo { get; set; }
 

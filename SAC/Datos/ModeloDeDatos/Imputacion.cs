@@ -22,6 +22,8 @@ public partial class Imputacion
     public Imputacion()
     {
 
+        this.CompraFactura = new HashSet<CompraFactura>();
+
         this.Proveedor = new HashSet<Proveedor>();
 
         this.Proveedor1 = new HashSet<Proveedor>();
@@ -30,8 +32,6 @@ public partial class Imputacion
 
 
     public int Id { get; set; }
-
-    public string Codigo { get; set; }
 
     public string Descripcion { get; set; }
 
@@ -76,6 +76,10 @@ public partial class Imputacion
     public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
 
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<CompraFactura> CompraFactura { get; set; }
 
     public virtual SubRubro SubRubro { get; set; }
 

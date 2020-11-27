@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="109">
+      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="Agenda_Model.AccionPorRol" Width="1.5" PointX="1.25" PointY="13.875" />
         <EntityTypeShape EntityType="Agenda_Model.Contacto" Width="1.5" PointX="10.5" PointY="6" />
         <EntityTypeShape EntityType="Agenda_Model.Evento" Width="1.5" PointX="8.875" PointY="9.375" />
@@ -28,32 +28,43 @@
         <AssociationConnector Association="Agenda_Model.FK_MenuSidebar_Accion" />
         <EntityTypeShape EntityType="Agenda_Model.Prioridad" Width="1.5" PointX="11.625" PointY="9.75" />
         <AssociationConnector Association="Agenda_Model.FK_Evento_Prioridad" />
-        <EntityTypeShape EntityType="Agenda_Model.Proveedor" Width="1.5" PointX="6.375" PointY="0.75" />
-        <EntityTypeShape EntityType="Agenda_Model.AfipRegimen" Width="1.5" PointX="6.375" PointY="21.875" />
-        <EntityTypeShape EntityType="Agenda_Model.GrupoCuenta" Width="1.5" PointX="2.625" PointY="26.5" />
-        <EntityTypeShape EntityType="Agenda_Model.Imputacion" Width="1.5" PointX="6.375" PointY="28.75" />
-        <EntityTypeShape EntityType="Agenda_Model.Rubros" Width="1.5" PointX="1.875" PointY="30.25" />
-        <EntityTypeShape EntityType="Agenda_Model.SubRubro" Width="1.5" PointX="4.125" PointY="30.375" />
         <EntityTypeShape EntityType="Agenda_Model.TipoIva" Width="1.5" PointX="4.5" PointY="1.125" />
         <EntityTypeShape EntityType="Agenda_Model.TipoMoneda" Width="1.5" PointX="6.375" PointY="19" />
         <EntityTypeShape EntityType="Agenda_Model.TipoProveedor" Width="1.5" PointX="6.375" PointY="25.75" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_AfipRegimen" />
+        <EntityTypeShape EntityType="Agenda_Model.Pais" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="Agenda_Model.Provincia" Width="1.5" PointX="3" PointY="18.75" />
+        <AssociationConnector Association="Agenda_Model.FK_Provincia_Pais" />
+        <EntityTypeShape EntityType="Agenda_Model.Localidad" Width="1.5" PointX="9.25" PointY="15.25" />
+        <AssociationConnector Association="Agenda_Model.FK_Localidad_Pais" />
+        <AssociationConnector Association="Agenda_Model.FK_Localidad_Provincia" />
+        <EntityTypeShape EntityType="Agenda_Model.AfipCategorias" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Agenda_Model.CompraFactura" Width="1.5" PointX="14.25" PointY="21.125" />
+        <EntityTypeShape EntityType="Agenda_Model.CompraFacturaPago" Width="1.5" PointX="16.5" PointY="23.25" />
+        <EntityTypeShape EntityType="Agenda_Model.CompraIva" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Agenda_Model.Diario" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Agenda_Model.Proveedor" Width="1.5" PointX="12" PointY="14.5" />
+        <EntityTypeShape EntityType="Agenda_Model.TipoComprobante" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Agenda_Model.TipoPago" Width="1.5" PointX="14.25" PointY="17.625" />
+        <AssociationConnector Association="Agenda_Model.FK_CompraFactura_Proveedor" />
+        <AssociationConnector Association="Agenda_Model.FK_CompraFacturaPago_CompraFactura" />
+        <AssociationConnector Association="Agenda_Model.FK_CompraFacturaPago_TipoPago" />
+        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Pais" />
+        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Provincia" />
+        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoIva" />
+        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoMoneda" />
+        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoProveedor" />
+        <EntityTypeShape EntityType="Agenda_Model.GrupoCuenta" Width="1.5" PointX="16.375" PointY="15" />
+        <EntityTypeShape EntityType="Agenda_Model.Imputacion" Width="1.5" PointX="23.125" PointY="13.125" />
+        <EntityTypeShape EntityType="Agenda_Model.Presupuesto" Width="1.5" PointX="9.75" PointY="21.125" />
+        <EntityTypeShape EntityType="Agenda_Model.Rubros" Width="1.5" PointX="18.625" PointY="14.75" />
+        <EntityTypeShape EntityType="Agenda_Model.SubRubro" Width="1.5" PointX="20.875" PointY="14.875" />
+        <AssociationConnector Association="Agenda_Model.FK_CompraFactura_Imputacion" />
         <AssociationConnector Association="Agenda_Model.FK_Rubros_GrupoCuenta" />
         <AssociationConnector Association="Agenda_Model.FK_Imputacion_SubRubro" />
         <AssociationConnector Association="Agenda_Model.FK_Proveedor_Imputacion" />
         <AssociationConnector Association="Agenda_Model.FK_Proveedor_Imputacion1" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoIva" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoMoneda" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoProveedor" />
-        <AssociationConnector Association="Agenda_Model.FK_SubRubro_Rubros" />
-        <EntityTypeShape EntityType="Agenda_Model.Pais" Width="1.5" PointX="0.75" PointY="2.75" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Pais" />
-        <EntityTypeShape EntityType="Agenda_Model.Provincia" Width="1.5" PointX="3" PointY="18.75" />
-        <AssociationConnector Association="Agenda_Model.FK_Provincia_Pais" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Provincia" />
-        <EntityTypeShape EntityType="Agenda_Model.Localidad" Width="1.5" PointX="9.25" PointY="15.25" />
-        <AssociationConnector Association="Agenda_Model.FK_Localidad_Pais" />
-        <AssociationConnector Association="Agenda_Model.FK_Localidad_Provincia" />
+        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Presupuesto1" />
+        <AssociationConnector Association="Agenda_Model.FK_SubRubro_Rubros_1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
