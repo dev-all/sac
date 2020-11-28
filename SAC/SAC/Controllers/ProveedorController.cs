@@ -1,10 +1,17 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+//agregadas
+using AutoMapper;
 using Negocio.Modelos;
 using Negocio.Servicios;
+using SAC.Atributos;
 using SAC.Models;
-using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
+using System.Web.Routing;
+
+
 namespace SAC.Controllers
 {
     public class ProveedorController : BaseController
@@ -20,114 +27,114 @@ namespace SAC.Controllers
         // GET: Accion
         public ActionResult Index()
         {
-
             List<ProveedorModelView> model = Mapper.Map<List<ProveedorModel>, List<ProveedorModelView>>(servicioProveedor.GetAllProveedor());
-            return View(model);
+  return View(model);
+        
+            
         }
 
-        // GET: Accion/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+       
         // GET: Accion/Create
-        public ActionResult Create()
+        public ActionResult Agregar()
         {
+            CargarCombos();
             return View();
         }
 
-        // POST: Accion/Create
-        [HttpPost]
-        [Authorize]
-        public ActionResult Create(AccionModelView accionModelView)
-        {
-            try
-            {
-               // var evento = servicioConfiguracion.CreateAccion(Mapper.Map<AccionModelView, AccionModel>(accionModelView));
-               
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.info = ex.InnerException;
-                return View();
-            }
-        }
 
-        [HttpPost, ActionName("Create")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(ConfiguracionModelView configuracionModelView)
+        public void CargarCombos()
         {
-            try
-            {
-               // AccionModelView accionModelView = configuracionModelView.accion;
-                //var evento = servicioConfiguracion.CreateAccion(Mapper.Map<AccionModelView, AccionModel>(accionModelView));
-                //var evento = servicioConfiguracion.CreateAccion(Mapper.Map<AccionModelView, AccionModel>(accionModelView));
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.info = ex.InnerException;
-                return View();
-            }
-        }
-
-   
-        // GET: Accion/Edit/5
-        public ActionResult Edit(int id)
-        {
-            try
-            {
-               // AccionModel accionModel = servicioConfiguracion.GetAccionPorId(id);
-               // var accion = Mapper.Map<AccionModel, AccionModelView>(accionModel);
-                return View();
-            }
-            catch (Exception ex)
-            {
-                ViewBag.info = ex.InnerException;
-                return View();
-            }
-        }
-
-        // POST: Accion/Edit/5
-        [HttpPost]
-        public ActionResult Edit(AccionModelView accionModelView)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                 //   var accionModel = servicioConfiguracion.ActualizarAccion(Mapper.Map<AccionModelView, AccionModel>(accionModelView));
-                }
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.info = ex.InnerException;
-                return View();
-            }
+            CargarPais();
+            CargarTipoIva();
+            CargarSubRubro();
+            CargarTipoMoneda();
         }
 
 
-        // POST: Accion/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, FormCollection collection)
+        public void CargarPais()
         {
-            try
-            {
-              //  servicioConfiguracion.DeleteAccion(id);
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            ServicioPais servicioPais = new ServicioPais();
+            List<PaisModelView> ListaPais = Mapper.Map<List<PaisModel>, List<PaisModelView>>(servicioPais.GetAllPais());
+
+            //esto es para pasarlo a select list (drop down list)
+            List<SelectListItem> retornoListaPais = null;
+            retornoListaPais = (ListaPais.Select(x =>
+                                  new SelectListItem()
+                                  {
+                                      Value = x.Id.ToString(),
+                                      Text = x.Nombre
+                                  })).ToList();
+            retornoListaPais.Insert(0, new SelectListItem { Text = "--Seleccione País--", Value = "" });
+            ViewBag.ListaPais = retornoListaPais;
         }
 
+        public void CargarTipoIva()
+        {
+            ServicioTipoIva servicioTipoIva = new ServicioTipoIva();
+            List<TipoIvaViewModel> ListaPais = Mapper.Map<List<TipoIvaModel>, List<TipoIvaViewModel>>(servicioTipoIva.GetAllTipoIva());
 
+            //esto es para pasarlo a select list (drop down list)
+            List<SelectListItem> retornoListaTipoIva = null;
+            retornoListaTipoIva = (ListaPais.Select(x =>
+                                  new SelectListItem()
+                                  {
+                                      Value = x.Id.ToString(),
+                                      Text = x.Descripcion
+                                  })).ToList();
+            retornoListaTipoIva.Insert(0, new SelectListItem { Text = "--Seleccione País--", Value = "" });
+            ViewBag.ListaTipoIva = retornoListaTipoIva;
+        }
 
+        public void CargarSubRubro()
+        {
+            ServicioSubRubro servicioSubRubro = new ServicioSubRubro();
+            List<SubRubroModelView> ListaSubRubro = Mapper.Map<List<SubRubroModel>, List<SubRubroModelView>>(servicioSubRubro.GetAllSubRubro());
+
+            //esto es para pasarlo a select list (drop down list)
+            List<SelectListItem> retornoListaSubRubro = null;
+            retornoListaSubRubro = (ListaSubRubro.Select(x =>
+                                  new SelectListItem()
+                                  {
+                                      Value = x.Id.ToString(),
+                                      Text = x.Descripcion
+                                  })).ToList();
+            retornoListaSubRubro.Insert(0, new SelectListItem { Text = "--Seleccione País--", Value = "" });
+            ViewBag.ListaSubRubro = retornoListaSubRubro;
+        }
+
+        //public void CargarAfipRegimen()
+        //{
+        //    ServicioAfipRegimen servicioSubRubro = new ServicioAfipRegimen();
+        //    List<AfipRegimenModelView> ListaSubRubro = Mapper.Map<List<AfipRegimenModel>, List<AfipRegimenModelView>>(servicioSubRubro.GetAllAfipRegimen());
+
+        //    //esto es para pasarlo a select list (drop down list)
+        //    List<SelectListItem> retornoListaAfipRegimen = null;
+        //    retornoListaAfipRegimen = (ListaSubRubro.Select(x =>
+        //                          new SelectListItem()
+        //                          {
+        //                              Value = x.Id.ToString(),
+        //                              Text = x.Descripcion
+        //                          })).ToList();
+        //    retornoListaAfipRegimen.Insert(0, new SelectListItem { Text = "--Seleccione País--", Value = "" });
+        //    ViewBag.ListaAfipRegimen = retornoListaAfipRegimen;
+        //}
+
+        public void CargarTipoMoneda()
+        {
+            ServicioTipoMoneda servicioTipoMoneda = new ServicioTipoMoneda();
+            List<TipoMonedaModelView> ListaTipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(servicioTipoMoneda.GetAllTipoMonedas());
+
+            //esto es para pasarlo a select list (drop down list)
+            List<SelectListItem> retornoListaAfipRegimen = null;
+            retornoListaAfipRegimen = (ListaTipoMoneda.Select(x =>
+                                  new SelectListItem()
+                                  {
+                                      Value = x.Id.ToString(),
+                                      Text = x.Descripcion
+                                  })).ToList();
+            retornoListaAfipRegimen.Insert(0, new SelectListItem { Text = "--Seleccione País--", Value = "" });
+            ViewBag.ListaTipoMoneda = retornoListaAfipRegimen;
+        }
 
 
     }

@@ -29,15 +29,13 @@ public partial class SubRubro
 
     public int Id { get; set; }
 
-    public string codigo { get; set; }
-
     public string Descripcion { get; set; }
 
-    public Nullable<int> IdRubro { get; set; }
+    public int IdRubro { get; set; }
 
     public Nullable<bool> Activo { get; set; }
 
-    public Nullable<int> IdUsuario { get; set; }
+    public Nullable<int> Idusuario { get; set; }
 
     public Nullable<System.DateTime> UltimaModificacion { get; set; }
 

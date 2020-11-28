@@ -54,18 +54,6 @@ public partial class SAC_Entities : DbContext
 
     public virtual DbSet<Prioridad> Prioridad { get; set; }
 
-    public virtual DbSet<Proveedor> Proveedor { get; set; }
-
-    public virtual DbSet<AfipRegimen> AfipRegimen { get; set; }
-
-    public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
-
-    public virtual DbSet<Imputacion> Imputacion { get; set; }
-
-    public virtual DbSet<Rubros> Rubros { get; set; }
-
-    public virtual DbSet<SubRubro> SubRubro { get; set; }
-
     public virtual DbSet<TipoIva> TipoIva { get; set; }
 
     public virtual DbSet<TipoMoneda> TipoMoneda { get; set; }
@@ -77,6 +65,32 @@ public partial class SAC_Entities : DbContext
     public virtual DbSet<Provincia> Provincia { get; set; }
 
     public virtual DbSet<Localidad> Localidad { get; set; }
+
+    public virtual DbSet<AfipCategorias> AfipCategorias { get; set; }
+
+    public virtual DbSet<CompraFactura> CompraFactura { get; set; }
+
+    public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
+
+    public virtual DbSet<CompraIva> CompraIva { get; set; }
+
+    public virtual DbSet<Diario> Diario { get; set; }
+
+    public virtual DbSet<Proveedor> Proveedor { get; set; }
+
+    public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
+
+    public virtual DbSet<TipoPago> TipoPago { get; set; }
+
+    public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
+
+    public virtual DbSet<Imputacion> Imputacion { get; set; }
+
+    public virtual DbSet<Presupuesto> Presupuesto { get; set; }
+
+    public virtual DbSet<Rubros> Rubros { get; set; }
+
+    public virtual DbSet<SubRubro> SubRubro { get; set; }
 
 }
 

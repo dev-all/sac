@@ -1,0 +1,95 @@
+﻿@model SAC.Models.ProveedorModelView
+
+@{
+    ViewBag.Title = "Agregar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //combos
+
+    List<SelectListItem> ListaPais = (List<SelectListItem>)ViewBag.ListaPais;
+    List<SelectListItem> ListaTipoIva = (List<SelectListItem>)ViewBag.ListaTipoIva;
+    List<SelectListItem> ListaSubRubro = (List<SelectListItem>)ViewBag.ListaSubRubro;
+    List<SelectListItem> ListaAfipRegimen = (List<SelectListItem>)ViewBag.ListaAfipRegimen;
+    List<SelectListItem> ListaTipoMoneda = (List<SelectListItem>)ViewBag.ListaTipoMoneda;
+
+}
+
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles m-t-40">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Agregar Proveedor</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xlg-12 col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+
+                        @using (Html.BeginForm("Agregar", "Proveedor", FormMethod.Post, new { @id = "frmBusqueda" }))
+                        {
+
+                            <div>
+                                @Html.LabelFor(p => p.Cuit)
+                                @Html.TextBoxFor(p => p.Cuit, new { @class = "form-control", @placeholder = "Ej: Lituania" })
+                                @Html.ValidationMessage("Cuit", new { @class = "text-danger" })
+
+                            </div>
+                            <div>
+                                @Html.LabelFor(p => p.Nombre)
+                                @Html.TextBoxFor(p => p.Nombre, new { @class = "form-control", @placeholder = "Ej: Lituania" })
+                                @Html.ValidationMessage("Nombre", new { @class = "text-danger" })
+
+                            </div>
+                            <div style="margin-top:1em">
+                                <div class="form-group">
+                                    @Html.Label("Seleccione un país")
+                                    @Html.DropDownList("idCmbPais", ListaPais, null, new { @class = "form-control" })
+                                    @Html.Hidden("IdComboPais")
+                                </div>
+                            </div>
+                            <div style="margin-top:1em">
+                                <div class="form-group">
+                                    @Html.Label("Seleccione una provincia")
+                                    @Html.DropDownList("idCmbProvincia", new List<SelectListItem>(), " -- Seleccionar Localidad --", new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                                <div style="margin-top:1em">
+                                    @Html.LabelFor(p => p.Direccion)
+                                    @Html.EditorFor(p => p.Direccion, new { htmlAttributes = new { @class = "form-control", @placeholder = "00-0000-00" } })
+                                    @Html.ValidationMessage("Direccion", new { @class = "text-danger" })
+                                </div>
+                                <div style="margin-top:1em">
+                                    @Html.LabelFor(p => p.Telefono)
+                                    @Html.EditorFor(p => p.Telefono, new { htmlAttributes = new { @type = "number", @min = "0", @class = "form-control", @placeholder = "00-0000-00" } })
+                                    @Html.ValidationMessage("Telefono", new { @class = "text-danger" })
+                                </div>
+
+                                <div style="margin-top:1em">
+                                    <div class="form-group">
+                                        @Html.Label("Seleccione tipo iva")
+                                        @Html.DropDownList("idTipoIva", ListaTipoIva, null, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <br />
+                                <div style="margin:auto">
+                                    <input type="submit" class="btn btn-primary" value="Guardar" />
+                                    @Html.ActionLink("Volver", "Index", "Provincia", null, new { @class = "btn btn-primary" })
+                                </div>
+
+                                }
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+

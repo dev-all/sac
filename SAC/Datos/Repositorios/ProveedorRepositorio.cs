@@ -16,19 +16,30 @@ namespace Datos.Repositorios
             this.context = contexto;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Proveedor"></param>
-        /// <returns></returns>
-        public Proveedor CreateProveedor(Proveedor proveedor)
+      
+        public Proveedor InsertarProveedor(Proveedor proveedor)
         {
            return  Insertar(proveedor);
         }
 
         public List<Proveedor> GetAllProveedor()
         {
-            return context.Proveedor.OrderBy(x => x.Nombre ).ToList();
+
+            return context.Proveedor.Where( p=> p.Activo == true).ToList();
+
+
+
+
+            //anda
+            //context.Configuration.LazyLoadingEnabled = false;
+            //var items = context.Proveedor
+            //              .Include(x => x.Pais)
+            //              .Include(x => x.Provincia)
+            //              .Include(x => x.TipoIva)                        
+            //              .Include(x => x.TipoProveedor)
+            //              .Include(x => x.TipoMoneda).Where(x => x.Activo == true).ToList();
+            //return items;
+
         }
 
         public Proveedor GetProveedorPorId(int id)
@@ -36,7 +47,20 @@ namespace Datos.Repositorios
             return context.Proveedor.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault(); 
         }
 
-      
+        public Proveedor ObtenerProveedorPorNombre(string nombre)
+        {
+            return context.Proveedor.Where(p => p.Nombre == nombre).FirstOrDefault();
+        }
+        public Proveedor ObtenerProveedorPorNombre(string oNombre, string oCuit)
+        {
+            return context.Proveedor.Where(p => p.Nombre == oNombre && p.Cuit == oCuit).FirstOrDefault();
+        }
+
+        public Proveedor ObtenerProveedorPorNombre(string oNombre, string oCuit, int oId)
+        {
+            return context.Proveedor.Where(p => p.Nombre == oNombre && p.Cuit == oCuit && p.Id != oId).FirstOrDefault();
+        }
+
         public Proveedor ActualizarProveedor(Proveedor ProveedorParaActualizar)
         {
             Proveedor Proveedor = GetProveedorPorId(ProveedorParaActualizar.Id);            
@@ -46,15 +70,6 @@ namespace Datos.Repositorios
         }
 
 
-
-
-        public void ActualizarProveedorNotReturn(Proveedor proveedor)
-        {
-            context.Proveedor.Attach(proveedor);
-            context.Entry(proveedor).Property(x => x.Nombre).IsModified = true;
-            context.Entry(proveedor).Property(x => x.Activo).IsModified = true;
-            context.SaveChanges();
-        }
 
         public void DeleteProveedor(int IdProveedor)
         {

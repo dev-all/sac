@@ -67,10 +67,22 @@
     <Compile Include="ModeloDeDatos\AccionPorRol.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloDeDatos\AfipRegimen.cs">
+    <Compile Include="ModeloDeDatos\AfipCategorias.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\CompraFactura.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\CompraFacturaPago.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\CompraIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Contacto.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Diario.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Entidades.Context.cs">
@@ -115,6 +127,9 @@
     <Compile Include="ModeloDeDatos\Persona.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\Presupuesto.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Prioridad.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -133,10 +148,16 @@
     <Compile Include="ModeloDeDatos\SubRubro.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\TipoComprobante.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\TipoIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\TipoMoneda.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\TipoPago.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\TipoProveedor.cs">
@@ -158,6 +179,9 @@
     <Compile Include="Repositorios\PersonaRepositorio.cs" />
     <Compile Include="Repositorios\EventoRepositorio.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />
+    <Compile Include="Repositorios\SubRubroRepositorio.cs" />
+    <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoMonedaRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,14 +222,14 @@
     <Content Include="Interfaces\IUsuarioRepositorio.vb" />
     <Content Include="ModeloDeDatos\Entidades.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Entidades.Context.cs</LastGenOutput>
       <DependentUpon>Entidades.edmx</DependentUpon>
+      <LastGenOutput>Entidades.Context.cs</LastGenOutput>
     </Content>
     <Content Include="ModeloDeDatos\Entidades.edmx.sql" />
     <Content Include="ModeloDeDatos\Entidades.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Entidades.cs</LastGenOutput>
       <DependentUpon>Entidades.edmx</DependentUpon>
+      <LastGenOutput>Entidades.cs</LastGenOutput>
     </Content>
     <Content Include="obj\Debug\Datos.csproj.FileListAbsolute.txt" />
   </ItemGroup>
