@@ -58,6 +58,7 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\CompraFacturaModel.cs" />
     <Compile Include="Modelos\AccionPorRol.cs" />
     <Compile Include="Modelos\AfipRegimenModel.cs" />
     <Compile Include="Modelos\ConfiguracionModel.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Servicios\ServicioSubRubro.cs" />
     <Compile Include="Servicios\ServicioTipoIva.cs" />
     <Compile Include="Servicios\ServicioTipoMoneda.cs" />
+    <Compile Include="Servicios\ServicioCompra.cs" />
     <Compile Include="Servicios\ServicioUsuario.cs" />
     <Compile Include="Servicios\ServicioConfiguracion.cs" />
     <Compile Include="Servicios\ServicioBase.cs" />
@@ -154,7 +156,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modelos\NewFolder1\" />
     <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>

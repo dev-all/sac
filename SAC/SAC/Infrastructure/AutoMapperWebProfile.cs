@@ -32,7 +32,7 @@ namespace SAC.Infrastructure
             CreateMap<ProveedorModel, ProveedorModelView>();
             CreateMap<ProveedorModelView, ProveedorModel>();
 
-            CreateMap<AfipRegimenModel,AfipRegimenModelView >();
+            CreateMap<AfipRegimenModel, AfipRegimenModelView>();
             CreateMap<AfipRegimenModelView, AfipRegimenModel>();
 
             CreateMap<TipoIvaModel, TipoIvaViewModel>();

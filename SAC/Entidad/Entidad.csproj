@@ -46,8 +46,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\MenuItemModel.cs" />
-    <Compile Include="Modelos\PersonaRenaperModel.cs" />
-    <Compile Include="Modelos\PersonaSGPModel.cs" />
     <Compile Include="Modelos\TreeViewModel.cs" />
     <Compile Include="Notificaciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>

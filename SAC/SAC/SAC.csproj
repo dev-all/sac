@@ -155,6 +155,7 @@
     <Compile Include="Helpers\BcraHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
+    <Compile Include="Models\AfipRegimenModelView.cs" />
     <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
@@ -169,6 +170,9 @@
     <Compile Include="Models\ProvinciaModelView.cs" />
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
+    <Compile Include="Models\SubRubroModelView.cs" />
+    <Compile Include="Models\TipoIvaViewModel.cs" />
+    <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
     <Compile Include="Models\EventoModelView.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -180,8 +184,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Agenda.dll" />
-    <Content Include="bin\Agenda.pdb" />
     <Content Include="Content\assets\css\animate.css" />
     <Content Include="Content\assets\css\colors\blue-dark.css" />
     <Content Include="Content\assets\css\colors\blue.css" />
@@ -2801,10 +2803,12 @@
     <Content Include="Views\Provincia\Editar.cshtml" />
     <Content Include="Views\Provincia\Index.cshtml" />
     <Content Include="Views\Usuario\AddOrEdit.cshtml" />
+    <Content Include="Views\Proveedor\Agregar.cshtml" />
+    <Content Include="Views\Compras\FacturaCompras.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Compras\" />
+    <Folder Include="bin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-
-namespace SAC.Models
+using System.Text;
+using System.Threading.Tasks;
+using Datos.ModeloDeDatos;
+namespace Negocio.Modelos
 {
-    public class CompraFacturaViewModel
+    public class CompraFacturaModel
     {
 
         public int Id { get; set; }
@@ -38,8 +39,9 @@ namespace SAC.Models
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public ProveedorModelView Proveedor { get; set; }
-        //public List<CompraFacturaPago> CompraFacturaPago { get; set; }
-        //public Imputacion Imputacion { get; set; }
+        public  Proveedor Proveedor { get; set; }       
+        public  List<CompraFacturaPago> CompraFacturaPago { get; set; }
+        public  Imputacion Imputacion { get; set; }
     }
+
 }
