@@ -75,16 +75,26 @@ namespace Datos.Repositorios
             List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true).ToList();
             return listaLocalidad;
         }
-        public List<Localidad> GetAllLocalidad(int idPais)
+
+
+        public List<Localidad> GetAllLocalidad(int idProvincia)
         {
-            List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdPais == idPais).ToList();
+            List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdProvincia == idProvincia).ToList();
             return listaLocalidad;
         }
+
         public List<Localidad> GetAllLocalidad(int idPais, int idProvincia)
         {
-            List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdPais == idPais && p.IdProvincia == idProvincia ).ToList();
+            List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdPais == idPais && p.IdProvincia == idProvincia).ToList();
             return listaLocalidad;
         }
+
+        public Localidad GetCodigoPostal(int idProvincia)
+        {
+            Localidad oLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdProvincia == idProvincia).First();
+            return oLocalidad;
+        }
+
 
         public int EliminarLocalidad(int idLocalidad)
         {

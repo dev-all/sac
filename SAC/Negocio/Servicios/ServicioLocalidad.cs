@@ -37,6 +37,51 @@ namespace Negocio.Servicios
             }
         }
 
+         public List<LocalidadModel> GetAllLocalidads(int idProvincia)
+        {
+            try
+            {
+                var Localidads = Mapper.Map<List<Localidad>, List<LocalidadModel>>(LocalidadRepositorio.GetAllLocalidad(idProvincia));
+                
+                return Localidads;
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                return null;
+            }
+        }
+
+
+        public int GetCodigoPostal(int idLocalidad)
+        {
+            try
+            {
+                var Localidads = LocalidadRepositorio.GetCodigoPostal(idLocalidad);
+                return Localidads.Codigo ?? 0;
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                return 0;
+            }
+        }
+
+        public int GetIdLocalidadCodigoPostal(int oCodigoPostal)
+        {
+            try
+            {
+                var Localidads = LocalidadRepositorio.GetCodigoPostal(oCodigoPostal);
+                return Localidads.Codigo ?? 0;
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                return 0;
+            }
+        }
+
+
         public List<LocalidadModel> GetAllLocalidads()
         {
             try

@@ -72,7 +72,7 @@ namespace Datos.Repositorios
 
         public List<SubRubro> GetAllSubRubro()
         {
-            List<SubRubro> listaSubRubro = context.SubRubro.Where(p => p.Activo == true).ToList();
+            List<SubRubro> listaSubRubro = context.SubRubro.ToList();
             return listaSubRubro;
         }
        

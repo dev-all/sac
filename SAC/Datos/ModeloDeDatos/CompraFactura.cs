@@ -24,6 +24,8 @@ public partial class CompraFactura
 
         this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
 
+        this.CompraIva = new HashSet<CompraIva>();
+
     }
 
 
@@ -87,13 +89,17 @@ public partial class CompraFactura
 
 
 
-    public virtual Proveedor Proveedor { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
 
     public virtual Imputacion Imputacion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<CompraIva> CompraIva { get; set; }
+
+    public virtual Proveedor Proveedor { get; set; }
 
 }
 

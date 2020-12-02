@@ -158,6 +158,7 @@
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
     <Compile Include="Models\ConfiguracionModelView.cs" />
+    <Compile Include="Models\ImputacionModelView.cs" />
     <Compile Include="Models\LocalidadModelView.cs" />
     <Compile Include="Models\MenuSideBarModelView.cs" />
     <Compile Include="Models\PaisModelView.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="Models\SubRubroModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
+    <Compile Include="Models\TipoProveedorModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
     <Compile Include="Models\EventoModelView.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -2818,11 +2820,14 @@
     <Content Include="Views\Localidad\Agregar.cshtml" />
     <Content Include="Views\Localidad\Editar.cshtml" />
     <Content Include="Views\Proveedor\Agregar.cshtml" />
+    <Content Include="Views\Proveedor\Editar.cshtml" />
+    <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Views\TipoProveedor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

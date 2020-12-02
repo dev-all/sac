@@ -24,9 +24,7 @@ public partial class TipoComprobante
 
     public string Abreviatura { get; set; }
 
-    public Nullable<int> Numero { get; set; }
-
-    public Nullable<int> PuntoVenta { get; set; }
+    public Nullable<int> IdAfipCategoria { get; set; }
 
     public Nullable<bool> Activo { get; set; }
 
