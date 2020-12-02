@@ -52,7 +52,7 @@ namespace Datos.Repositorios
 
         public Proveedor GetProveedorPorId(int id)
         {
-            context.Configuration.LazyLoadingEnabled = false;
+           // context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault(); 
         }
 

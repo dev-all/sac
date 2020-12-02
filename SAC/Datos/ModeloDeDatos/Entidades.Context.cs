@@ -45,7 +45,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CompraFactura> CompraFactura { get; set; }
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual DbSet<Diario> Diario { get; set; }
-        public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<TipoPago> TipoPago { get; set; }
         public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
         public virtual DbSet<Imputacion> Imputacion { get; set; }
@@ -56,5 +55,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
         public virtual DbSet<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
         public virtual DbSet<TipoIva> TipoIva { get; set; }
+        public virtual DbSet<Proveedor> Proveedor { get; set; }
     }
 }
