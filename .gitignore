@@ -2,7 +2,7 @@
 *.vs/*
 
 *SAC/.vs/*
-*SAC/.vs*
+*SAC/.vs/SAC/*
 
 *SAC/SAC/obj/*
 *SAC/Negocio/obj/*
