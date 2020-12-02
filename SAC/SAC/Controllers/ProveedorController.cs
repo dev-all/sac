@@ -49,6 +49,7 @@ namespace SAC.Controllers
             //ServicioLocalidad oServicioLocalidad = new ServicioLocalidad();
             CargarProvincia(oProveedorModel.IdPais ?? 0);
             CargarLocalidad(oProveedorModel.IdProvincia ?? 0 );
+
             return View(oProveedorModel);
         }
         
@@ -115,7 +116,7 @@ namespace SAC.Controllers
             }
             catch (Exception ex)
             {
-                servicioProveedor._mensaje(ex.Message, "error");
+                servicioProveedor._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return View(oProveedorModelView);
             }
         }
@@ -167,7 +168,7 @@ namespace SAC.Controllers
 
             catch (Exception ex)
             {
-                servicioProveedor._mensaje(ex.Message, "error");
+                servicioProveedor._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return View(oProveedorModelView);
             }
         }
@@ -234,7 +235,7 @@ namespace SAC.Controllers
             }
             catch (Exception ex)
             {
-                servicioProveedor._mensaje(ex.Message, "error");
+               servicioProveedor._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
             }
 
             return RedirectToAction("Index");

@@ -115,7 +115,7 @@ namespace SAC.Models
 
         public DateTime UltimaModificacion { get; set; }
 
-
+        public List<TipoComprobanteModelView>  ListTipoComprobante { get; set; }
         //public  Imputacion Imputacion { get; set; }
 
         //public  Imputacion Imputacion1 { get; set; }

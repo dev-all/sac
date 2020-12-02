@@ -8,10 +8,7 @@
                     id: item.id,
                     value: item.label
                 }
-                //return {
-                //    label: item,
-                //    value: item + ""
-                //}
+               
             }))
         })
     },
@@ -27,16 +24,18 @@
 });
 
 $("#IdTipoComprobante").change(function () {    
-    // check class
-    alert($(this).val());
-    alert($(this).html());
-    if ($("#AplicaFactura").hasClass('invisible')) {
-        $("#AplicaFactura").removeClass("invisible");
-        $("#AplicaFactura").addClass("visible");
-    } else {
-        $("#AplicaFactura").removeClass("visible");
-        $("#AplicaFactura").addClass("invisible");
-    }
+   
+    var select_text = $("#IdTipoComprobante option:selected").text();
+    if (select_text.indexOf("NOTAS") > -1) {
+        //if ($("#AplicaFactura").hasClass('invisible') ) {
+                $("#AplicaFactura").removeClass("invisible");
+                $("#AplicaFactura").addClass("visible");
+            } else {
+                $("#AplicaFactura").removeClass("visible");
+                $("#AplicaFactura").addClass("invisible");
+            }
+    //}
+    
 
 });
 
@@ -56,7 +55,7 @@ function getProvedor(prov) {
             $('#telProv').html(proveedor.Telefono);
             $('#dirProv').html(proveedor.Direccion);
 
-            $('#IdImputacion').val(proveedor.Direccion);
+            $('#IdImputacion').val(proveedor.IdImputacionFactura);
             
             $("#IdTipoComprobante").empty();
             $("#IdTipoComprobante").append("<option value> Seleccionar ...</option>")

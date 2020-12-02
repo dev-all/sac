@@ -81,7 +81,7 @@ namespace SAC.Controllers
         {
             string strJson;
             try {
-                ProveedorModelView proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedorPorID(idProveedor));
+                ProveedorModelView proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedor(idProveedor));
              
                 //ProveedorModelView proveedor = new ProveedorModelView { Id = 1, Nombre = "Responsable Inscripto " };
 

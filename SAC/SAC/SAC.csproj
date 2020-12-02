@@ -162,6 +162,7 @@
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
     <Compile Include="Models\ConfiguracionModelView.cs" />
+    <Compile Include="Models\ImputacionModelView.cs" />
     <Compile Include="Models\LocalidadModelView.cs" />
     <Compile Include="Models\MenuSideBarModelView.cs" />
     <Compile Include="Models\PaisModelView.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Models\TipoComprobanteModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
+    <Compile Include="Models\TipoProveedorModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
     <Compile Include="Models\EventoModelView.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -2809,6 +2811,8 @@
     <Content Include="Views\Usuario\AddOrEdit.cshtml" />
     <Content Include="Views\Proveedor\Agregar.cshtml" />
     <Content Include="Views\Compras\FacturaCompras.cshtml" />
+    <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
+    <Content Include="Views\Proveedor\Editar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
