@@ -191,7 +191,7 @@ namespace SAC.Controllers
 
             ServicioPais servicioPais = new ServicioPais();
             List<PaisModelView> ListaPais = Mapper.Map<List<PaisModel>, List<PaisModelView>>(servicioPais.GetAllPais());
-
+            //ListaPais = ListaPais.OrderBy(p => p.Nombre).ToList();
             //esto es para pasarlo a select list (drop down list)
             List<SelectListItem> retornoListaPais = null;
             retornoListaPais = (ListaPais.Select(x =>

@@ -19,12 +19,20 @@ namespace Datos.Repositorios
       
         public Proveedor InsertarProveedor(Proveedor proveedor)
         {
-           return  Insertar(proveedor);
+            Proveedor a = new Proveedor();
+            try {
+                return Insertar(proveedor);
+            }
+            catch (Exception ex)
+            {
+                return a;
+            }
+          
         }
 
         public List<Proveedor> GetAllProveedor()
         {
-
+           // context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where( p=> p.Activo == true).ToList();
 
 
@@ -64,20 +72,41 @@ namespace Datos.Repositorios
 
         public Proveedor ActualizarProveedor(Proveedor ProveedorParaActualizar)
         {
-            Proveedor Proveedor = GetProveedorPorId(ProveedorParaActualizar.Id);            
-            Proveedor.Nombre = ProveedorParaActualizar.Nombre ?? Proveedor.Nombre;            
+            Proveedor Proveedor = GetProveedorPorId(ProveedorParaActualizar.Id);
+
+            Proveedor.Id = ProveedorParaActualizar.Id;   
+            Proveedor.Nombre = ProveedorParaActualizar.Nombre;
+            Proveedor.Direccion = ProveedorParaActualizar.Direccion;
+            Proveedor.Telefono = ProveedorParaActualizar.Telefono;
+            Proveedor.IdPais = ProveedorParaActualizar.IdPais;
+            Proveedor.IdProvincia = ProveedorParaActualizar.IdProvincia;
+            Proveedor.IdLocalidad = ProveedorParaActualizar.IdLocalidad;
+            Proveedor.IdCodigoPostal = ProveedorParaActualizar.IdCodigoPostal;
+            Proveedor.IdImputacionProveedor = ProveedorParaActualizar.IdImputacionProveedor;
+            Proveedor.Email = ProveedorParaActualizar.Email;
+            Proveedor.IdTipoIva = ProveedorParaActualizar.IdTipoIva;
+            Proveedor.Cuit = ProveedorParaActualizar.Cuit;
+            Proveedor.IdImputacionFactura = ProveedorParaActualizar.IdImputacionFactura;
+            Proveedor.IdTipoProveedor = ProveedorParaActualizar.IdTipoProveedor;
+            Proveedor.IdTipoMoneda = ProveedorParaActualizar.IdTipoMoneda;
+            Proveedor.Observaciones = ProveedorParaActualizar.Observaciones;
+
+            Proveedor.Activo = true;
+            Proveedor.IdUsuario = ProveedorParaActualizar.IdUsuario;//hay que poner el id del usuario logueado
+            Proveedor.UltimaModificacion = ProveedorParaActualizar.UltimaModificacion;
+                   
             context.SaveChanges();
             return Proveedor;
         }
 
 
 
-        public void DeleteProveedor(int IdProveedor)
+        public int EliminarProveedor(int IdProveedor)
         {
             Proveedor Proveedor = GetProveedorPorId(IdProveedor);
             Proveedor.Activo = false;
             // Proveedor.fechaModificacion = Convert.ToDateTime(DateTime.Now.ToString()); ;
-            context.SaveChanges();
+            return context.SaveChanges();
         }
 
       

@@ -38,6 +38,8 @@ namespace Agenda.Infrastructure
             CreateMap<SubRubro, SubRubroModel>();
             CreateMap<SubRubroModel, SubRubro>();
 
+            CreateMap<TipoProveedor, TipoProveedorModel>();
+            CreateMap<TipoProveedorModel, TipoProveedor>();
 
             CreateMap<TipoMoneda, TipoMonedaModel>();
             CreateMap<TipoMonedaModel, TipoMoneda>();

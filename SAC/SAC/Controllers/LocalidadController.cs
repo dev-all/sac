@@ -30,7 +30,6 @@ namespace SAC.Controllers
             ServicioProvincia servicioProvincia = new ServicioProvincia();
             List<ProvinciaModelView> ListaProvincia = Mapper.Map<List<ProvinciaModel>, List<ProvinciaModelView>>(servicioProvincia.GetAllProvinciasNombreId(idPais));
             return Json(ListaProvincia, JsonRequestBehavior.AllowGet);
-
         }
 
        public ActionResult ObtenerLocalidades (LocalidadModelView vm)

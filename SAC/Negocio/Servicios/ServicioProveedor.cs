@@ -31,88 +31,151 @@ namespace Negocio.Servicios
             return Mapper.Map<List<Proveedor>, List<ProveedorModel>>(pProveedorRepositorio.GetAllProveedor());             
         }
 
-        public int ActualizarProveedor(ProveedorModel oProveedorModel)
+        public ProveedorModel GetProveedor(int _id)
         {
-            //controlar que no exista 
-            Proveedor oProveedor = pProveedorRepositorio.ObtenerProveedorPorNombre(oProveedorModel.Nombre, oProveedorModel.Cuit, oProveedorModel.Id);
-            if (oProveedor != null) //significa que existe
+           
+            Proveedor oProveedor = pProveedorRepositorio.GetProveedorPorId(_id);
+     
+            ProveedorModel oProveedorModel = new ProveedorModel();
+
+            oProveedorModel.Id = oProveedor.Id;
+            oProveedorModel.Nombre = oProveedor.Nombre;
+            oProveedorModel.Direccion = oProveedor.Direccion;
+            oProveedorModel.Telefono = oProveedor.Telefono;
+            oProveedorModel.IdPais = oProveedor.IdPais;
+            oProveedorModel.IdProvincia = oProveedor.IdProvincia;
+            oProveedorModel.IdLocalidad = oProveedor.IdLocalidad;
+            oProveedorModel.IdCodigoPostal = oProveedor.IdCodigoPostal;
+            oProveedorModel.IdImputacionProveedor = oProveedor.IdImputacionProveedor;
+            oProveedorModel.IdTipoIva = oProveedor.IdTipoIva;
+            oProveedorModel.Cuit = oProveedor.Cuit;
+            oProveedorModel.IdImputacionFactura = oProveedor.IdImputacionFactura;
+            oProveedorModel.IdTipoProveedor = oProveedor.IdTipoProveedor;
+            oProveedorModel.IdTipoMoneda = oProveedor.IdTipoMoneda;
+            oProveedorModel.Email= oProveedor.Email;
+            oProveedorModel.Observaciones = oProveedor.Observaciones;
+
+            return oProveedorModel;
+        }
+
+
+        public ProveedorModel ActualizarProveedor(ProveedorModel oProveedorModel)
+        {
+            try
             {
-                return -2;
+                //controlar que no exista 
+                Proveedor oProveedor = pProveedorRepositorio.ObtenerProveedorPorNombre(oProveedorModel.Nombre, oProveedorModel.Cuit, oProveedorModel.Id);
+                if (oProveedor != null) //significa que existe
+                {
+                    //return -2;
+                    _mensaje("El proveedor que intenta resitrar ya se encuentra cargado", "error");
+                    return null;
+                }
+                else //significa que no existe el dato a ingresar
+                {
+                    Proveedor oProveedorNuevo = new Proveedor();
+
+                    oProveedorNuevo.Id = oProveedorModel.Id;
+                    oProveedorNuevo.Nombre = oProveedorModel.Nombre;
+                    oProveedorNuevo.Direccion = oProveedorModel.Direccion;
+                    oProveedorNuevo.Telefono = oProveedorModel.Telefono;
+                    oProveedorNuevo.IdPais = oProveedorModel.IdPais;
+                    oProveedorNuevo.IdProvincia = oProveedorModel.IdProvincia;
+                    oProveedorNuevo.IdLocalidad = oProveedorModel.IdLocalidad;
+                    oProveedorNuevo.IdCodigoPostal = oProveedorModel.IdCodigoPostal;
+                    oProveedorNuevo.IdImputacionProveedor = oProveedorModel.IdImputacionProveedor;
+                    oProveedorNuevo.Email = oProveedorModel.Email;
+                    oProveedorNuevo.IdTipoIva = oProveedorModel.IdTipoIva;
+                    oProveedorNuevo.Cuit = oProveedorModel.Cuit;
+                    oProveedorNuevo.IdImputacionFactura = oProveedorModel.IdImputacionFactura;
+                    oProveedorNuevo.IdTipoProveedor = oProveedorModel.IdTipoProveedor;
+                    oProveedorNuevo.IdTipoMoneda = oProveedorModel.IdTipoMoneda;
+                    oProveedorNuevo.Observaciones = oProveedorModel.Observaciones;
+
+                    oProveedorNuevo.Activo = true;
+                    oProveedorNuevo.IdUsuario = oProveedorModel.IdUsuario;//hay que poner el id del usuario logueado
+                    oProveedorNuevo.UltimaModificacion = oProveedorModel.UltimaModificacion;
+
+                    _mensaje("El proveedor se registró correctamente", "ok");
+
+                    return Mapper.Map<Proveedor, ProveedorModel>( pProveedorRepositorio.ActualizarProveedor(oProveedorNuevo));
+                   
+                }
+
             }
-            else //significa que no existe el dato a ingresar
+            catch(Exception ex)
             {
-                Proveedor oPaisNuevo = new Proveedor();
-                Proveedor oPaisRespuesta = new Proveedor();
-
-                oPaisNuevo.Id = oProveedorModel.Id;
-                oPaisNuevo.Nombre = oProveedorModel.Nombre;
-                oPaisNuevo.Activo = true;
-
-                oPaisRespuesta = pProveedorRepositorio.ActualizarProveedor(oPaisNuevo);
-
-                if (oPaisRespuesta == null)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
-
+                _mensaje("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
+                return null;
             }
+           
         }
 
         public int GuardarProveedor(ProveedorModel oProveedorModel)
         {
-            //controlar que no exista 
-            Proveedor oProveedor = pProveedorRepositorio.ObtenerProveedorPorNombre(oProveedorModel.Nombre, oProveedorModel.Cuit);
-            if (oProveedor != null)
+            try
             {
-                return -2;
-            }
-            else
-            {
-                Proveedor oProveedorNuevo = new Proveedor();
-                Proveedor oProveedorRespuesta = new Proveedor();
-
-                oProveedorNuevo.Nombre = oProveedorModel.Nombre;
-               
-                //oProveedorNuevo.IdPais = oProveedorModel.IdPais;
-              
-                //oProveedorNuevo.Activo = oProveedorModel.Activo;
-                //oProveedorNuevo.IdUsuario = oProveedorModel.IdUsuario;
-                //oProveedorNuevo.UltimaModificacion = oProveedorModel.UltimaModificacion;
-
-                oProveedorRespuesta = pProveedorRepositorio.InsertarProveedor(oProveedorNuevo);
-                if (oProveedorRespuesta == null)
+                //controlar que no exista 
+                Proveedor oProveedor = pProveedorRepositorio.ObtenerProveedorPorNombre(oProveedorModel.Nombre, oProveedorModel.Cuit);
+                if (oProveedor != null)
                 {
-                    return -1;
+                    return -2;
                 }
                 else
                 {
-                    return 0;
-                }
+                    Proveedor oProveedorNuevo = new Proveedor();
+                    Proveedor oProveedorRespuesta = new Proveedor();
 
+                    oProveedorNuevo.Nombre = oProveedorModel.Nombre;
+                    oProveedorNuevo.Direccion = oProveedorModel.Direccion;
+                    oProveedorNuevo.Telefono = oProveedorModel.Telefono;
+                    oProveedorNuevo.IdPais = oProveedorModel.IdPais;
+                    oProveedorNuevo.IdProvincia = oProveedorModel.IdProvincia;
+                    oProveedorNuevo.IdLocalidad = oProveedorModel.IdLocalidad;
+                    oProveedorNuevo.IdCodigoPostal = oProveedorModel.IdCodigoPostal;
+                    oProveedorNuevo.IdImputacionProveedor = oProveedorModel.IdImputacionProveedor;
+                    oProveedorNuevo.Email = oProveedorModel.Email;
+                    oProveedorNuevo.IdTipoIva = oProveedorModel.IdTipoIva;
+                    oProveedorNuevo.Cuit = oProveedorModel.Cuit;
+                    oProveedorNuevo.IdImputacionFactura = oProveedorModel.IdImputacionFactura;
+                    oProveedorNuevo.IdTipoProveedor = oProveedorModel.IdTipoProveedor;
+                    oProveedorNuevo.IdTipoMoneda = oProveedorModel.IdTipoMoneda;
+                    oProveedorNuevo.Observaciones = oProveedorModel.Observaciones;
+
+                    oProveedorNuevo.Activo = true;
+                    oProveedorNuevo.IdUsuario = oProveedorModel.IdUsuario;//hay que poner el id del usuario logueado
+                    oProveedorNuevo.UltimaModificacion = oProveedorModel.UltimaModificacion;
+
+                    oProveedorRespuesta = pProveedorRepositorio.InsertarProveedor(oProveedorNuevo);
+                    if (oProveedorRespuesta == null)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+           
+        }
+
+        public int Eliminar(int idProveedor)
+        {
+            var retorno = pProveedorRepositorio.EliminarProveedor(idProveedor);
+            if (retorno == 1)
+            {
+                return 0; //ok
+            }
+            else
+            {
+                return -1;//paso algo
             }
         }
-
-        public ProveedorModel GetProveedorPorID(int idProveedor)
-        {
-            return Mapper.Map<Proveedor, ProveedorModel>(pProveedorRepositorio.GetProveedorPorId(idProveedor));
-        }
-
-        //public int Eliminar(int idProveedor)
-        //{
-        //    var retorno = pProveedorRepositorio.EliminarProveedor(idProveedor);
-        //    if (retorno == 1)
-        //    {
-        //        return 0; //ok
-        //    }
-        //    else
-        //    {
-        //        return -1;//paso algo
-        //    }
-        //}
 
     }
 

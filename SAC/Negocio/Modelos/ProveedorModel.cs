@@ -21,6 +21,8 @@ namespace Negocio.Modelos
 
         public Nullable<int> IdProvincia { get; set; }
 
+        public Nullable<int> IdLocalidad { get; set; }
+
         public string Telefono { get; set; }
 
         public Nullable<int> IdTipoIva { get; set; }
@@ -31,13 +33,13 @@ namespace Negocio.Modelos
 
         public string Observaciones { get; set; }
 
-        public Nullable<decimal> SaldoCuentaCorriente { get; set; }
+     //   public Nullable<decimal> SaldoCuentaCorriente { get; set; }
 
         public string Email { get; set; }
 
         public Nullable<int> IdCodigoPostal { get; set; }
 
-        public Nullable<int> IdAfipRegimen { get; set; }
+     //   public Nullable<int> IdAfipRegimen { get; set; }
 
         public Nullable<int> IdTipoProveedor { get; set; }
 
@@ -49,15 +51,9 @@ namespace Negocio.Modelos
 
         public Nullable<int> IdTipoMoneda { get; set; }
 
-        public Nullable<int> Perceptor { get; set; }
+        public int idPresupuesto { get; set; }
 
-        public Nullable<decimal> MontoMinimo { get; set; }
-
-        public Nullable<decimal> PorcentajePeceptor { get; set; }
-
-        public Nullable<int> IdGrupoPresupuesto { get; set; }
-
-        public Nullable<int> IdPuntoVenta { get; set; }
+        public Nullable<int> UltimoPuntoVenta { get; set; }
 
         public Nullable<bool> Activo { get; set; }
 
@@ -66,20 +62,19 @@ namespace Negocio.Modelos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
 
-
        // public virtual AfipRegimen AfipRegimen { get; set; }
 
-        public virtual Imputacion Imputacion { get; set; }
+        //public virtual Imputacion Imputacion { get; set; }
 
-        public virtual Imputacion Imputacion1 { get; set; }
+        //public virtual Imputacion Imputacion1 { get; set; }
 
-        public virtual Pais Pais { get; set; }
+        //public virtual Pais Pais { get; set; }
 
-        public virtual Provincia Provincia { get; set; }
+        //public virtual Provincia Provincia { get; set; }
 
-        public virtual TipoIva TipoIva { get; set; }
+        //public virtual TipoIva TipoIva { get; set; }
 
-        public virtual TipoMoneda TipoMoneda { get; set; }
+        //public virtual TipoMoneda TipoMoneda { get; set; }
 
         public virtual TipoProveedor TipoProveedor { get; set; }
 
