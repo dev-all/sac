@@ -18,6 +18,7 @@ namespace Datos.ModeloDeDatos
         public CompraFactura()
         {
             this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
+            this.CompraIva = new HashSet<CompraIva>();
         }
     
         public int Id { get; set; }
@@ -54,5 +55,7 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual Imputacion Imputacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompraIva> CompraIva { get; set; }
     }
 }

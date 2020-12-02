@@ -56,7 +56,19 @@ namespace Negocio.Servicios
          
         }
 
-      
+        public List<ProveedorModel> GetProveedorPorNombre(string strProveedor)
+        {
+            try
+            {
+                return Mapper.Map<List<Proveedor>, List<ProveedorModel>>(repositorio.GetProveedorPorNombre(strProveedor));
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
+
         public CompraFacturaModel ObtenerPorID(int id)
         {
             try

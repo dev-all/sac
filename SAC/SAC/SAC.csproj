@@ -156,6 +156,7 @@
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
+    <Compile Include="Models\AutoCompletarViewModel.cs" />
     <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\SubRubroModelView.cs" />
+    <Compile Include="Models\TipoComprobanteModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
@@ -2765,6 +2767,8 @@
     <Content Include="Scripts\js\widget-data.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\TreeView\TreeView.js" />
+    <Content Include="Scripts\view\calcularporcentaje.js" />
+    <Content Include="Scripts\view\FacturaCompraScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

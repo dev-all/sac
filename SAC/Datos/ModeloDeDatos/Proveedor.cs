@@ -48,11 +48,11 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<CompraFactura> CompraFactura { get; set; }
         public virtual Pais Pais { get; set; }
         public virtual Provincia Provincia { get; set; }
-        public virtual TipoIva TipoIva { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
         public virtual TipoProveedor TipoProveedor { get; set; }
         public virtual Imputacion Imputacion { get; set; }
         public virtual Imputacion Imputacion1 { get; set; }
         public virtual Presupuesto Presupuesto { get; set; }
+        public virtual TipoIva TipoIva { get; set; }
     }
 }

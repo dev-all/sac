@@ -74,6 +74,7 @@
     <Compile Include="Modelos\RolModel.cs" />
     <Compile Include="Modelos\SubRubroModel.cs" />
     <Compile Include="Modelos\TipoIvaModel.cs" />
+    <Compile Include="Modelos\TipoComprobanteModel.cs" />
     <Compile Include="Modelos\TipoMonedaModel.cs" />
     <Compile Include="Modelos\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Servicios\ServicioProvincia.cs" />
     <Compile Include="Servicios\ServicioSubRubro.cs" />
     <Compile Include="Servicios\ServicioTipoIva.cs" />
+    <Compile Include="Servicios\ServicioTipoComprobante.cs" />
     <Compile Include="Servicios\ServicioTipoMoneda.cs" />
     <Compile Include="Servicios\ServicioCompra.cs" />
     <Compile Include="Servicios\ServicioUsuario.cs" />

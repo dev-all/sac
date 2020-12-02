@@ -15,9 +15,7 @@ namespace Datos.ModeloDeDatos
     public partial class CompraIva
     {
         public int Id { get; set; }
-        public string IdTipoComprobante { get; set; }
-        public string PuntoVenta { get; set; }
-        public int NumeroFactura { get; set; }
+        public Nullable<int> IdFacturaCompra { get; set; }
         public int AuxiliarNumero { get; set; }
         public string NumeroEmpresa { get; set; }
         public string Empesa { get; set; }
@@ -67,5 +65,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> Idusuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
+    
+        public virtual CompraFactura CompraFactura { get; set; }
     }
 }

@@ -87,9 +87,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdTipoComprobante" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PuntoVenta" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NumeroFactura" Type="int" Nullable="false" />
+          <Property Name="IdFacturaCompra" Type="int" />
           <Property Name="AuxiliarNumero" Type="int" Nullable="false" />
           <Property Name="NumeroEmpresa" Type="nvarchar" MaxLength="50" />
           <Property Name="Empesa" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -432,11 +430,18 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Denominacion" Type="varchar" MaxLength="250" />
           <Property Name="Abreviatura" Type="varchar" MaxLength="10" />
-          <Property Name="Numero" Type="int" />
-          <Property Name="PuntoVenta" Type="int" />
+          <Property Name="IdAfipCategoria" Type="int" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoComprobanteTipoIva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoIva" Type="int" Nullable="false" />
+          <Property Name="IdTipoComprobante" Type="int" />
         </EntityType>
         <EntityType Name="TipoIva">
           <Key>
@@ -560,6 +565,18 @@
             </Principal>
             <Dependent Role="CompraFacturaPago">
               <PropertyRef Name="IdTipoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraIva_CompraFactura">
+          <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="0..1" />
+          <End Role="CompraIva" Type="Self.CompraIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraIva">
+              <PropertyRef Name="IdFacturaCompra" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -803,6 +820,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TipoComprobanteTipoIva_TipoComprobante">
+          <End Role="TipoComprobante" Type="Self.TipoComprobante" Multiplicity="0..1" />
+          <End Role="TipoComprobanteTipoIva" Type="Self.TipoComprobanteTipoIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComprobante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoComprobanteTipoIva">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoComprobanteTipoIva_TipoIva">
+          <End Role="TipoIva" Type="Self.TipoIva" Multiplicity="1" />
+          <End Role="TipoComprobanteTipoIva" Type="Self.TipoComprobanteTipoIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoIva">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoComprobanteTipoIva">
+              <PropertyRef Name="IdTipoIva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuario_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -853,6 +894,7 @@
           <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubRubro" EntityType="Self.SubRubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoComprobante" EntityType="Self.TipoComprobante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoComprobanteTipoIva" EntityType="Self.TipoComprobanteTipoIva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoIva" EntityType="Self.TipoIva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoMoneda" EntityType="Self.TipoMoneda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoPago" EntityType="Self.TipoPago" Schema="dbo" store:Type="Tables" />
@@ -881,6 +923,10 @@
           <AssociationSet Name="FK_CompraFacturaPago_TipoPago" Association="Self.FK_CompraFacturaPago_TipoPago">
             <End Role="TipoPago" EntitySet="TipoPago" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraIva_CompraFactura" Association="Self.FK_CompraIva_CompraFactura">
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+            <End Role="CompraIva" EntitySet="CompraIva" />
           </AssociationSet>
           <AssociationSet Name="FK_Contacto_Evento" Association="Self.FK_Contacto_Evento">
             <End Role="Evento" EntitySet="Evento" />
@@ -962,6 +1008,14 @@
             <End Role="Rubros" EntitySet="Rubros" />
             <End Role="SubRubro" EntitySet="SubRubro" />
           </AssociationSet>
+          <AssociationSet Name="FK_TipoComprobanteTipoIva_TipoComprobante" Association="Self.FK_TipoComprobanteTipoIva_TipoComprobante">
+            <End Role="TipoComprobante" EntitySet="TipoComprobante" />
+            <End Role="TipoComprobanteTipoIva" EntitySet="TipoComprobanteTipoIva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoComprobanteTipoIva_TipoIva" Association="Self.FK_TipoComprobanteTipoIva_TipoIva">
+            <End Role="TipoIva" EntitySet="TipoIva" />
+            <End Role="TipoComprobanteTipoIva" EntitySet="TipoComprobanteTipoIva" />
+          </AssociationSet>
           <AssociationSet Name="FK_Usuario_Persona" Association="Self.FK_Usuario_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Usuario" EntitySet="Usuario" />
@@ -974,157 +1028,170 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Agenda_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="SAC_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SAC_Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AccionPorRol" EntityType="Agenda_Model.AccionPorRol" />
-          <EntitySet Name="Contacto" EntityType="Agenda_Model.Contacto" />
-          <EntitySet Name="Evento" EntityType="Agenda_Model.Evento" />
-          <EntitySet Name="homePorRol" EntityType="Agenda_Model.homePorRol" />
-          <EntitySet Name="Notificacion" EntityType="Agenda_Model.Notificacion" />
-          <EntitySet Name="Persona" EntityType="Agenda_Model.Persona" />
-          <EntitySet Name="Rol" EntityType="Agenda_Model.Rol" />
-          <EntitySet Name="Usuario" EntityType="Agenda_Model.Usuario" />
-          <AssociationSet Name="FK_AccionesPorRoles_Roles" Association="Agenda_Model.FK_AccionesPorRoles_Roles">
+          <EntitySet Name="AccionPorRol" EntityType="SAC_Model.AccionPorRol" />
+          <EntitySet Name="Contacto" EntityType="SAC_Model.Contacto" />
+          <EntitySet Name="Evento" EntityType="SAC_Model.Evento" />
+          <EntitySet Name="homePorRol" EntityType="SAC_Model.homePorRol" />
+          <EntitySet Name="Notificacion" EntityType="SAC_Model.Notificacion" />
+          <EntitySet Name="Persona" EntityType="SAC_Model.Persona" />
+          <EntitySet Name="Rol" EntityType="SAC_Model.Rol" />
+          <EntitySet Name="Usuario" EntityType="SAC_Model.Usuario" />
+          <AssociationSet Name="FK_AccionesPorRoles_Roles" Association="SAC_Model.FK_AccionesPorRoles_Roles">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="AccionPorRol" EntitySet="AccionPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contacto_Evento" Association="Agenda_Model.FK_Contacto_Evento">
+          <AssociationSet Name="FK_Contacto_Evento" Association="SAC_Model.FK_Contacto_Evento">
             <End Role="Evento" EntitySet="Evento" />
             <End Role="Contacto" EntitySet="Contacto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Contacto_Persona" Association="Agenda_Model.FK_Contacto_Persona">
+          <AssociationSet Name="FK_Contacto_Persona" Association="SAC_Model.FK_Contacto_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Contacto" EntitySet="Contacto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Evento_Usuario" Association="Agenda_Model.FK_Evento_Usuario">
+          <AssociationSet Name="FK_Evento_Usuario" Association="SAC_Model.FK_Evento_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
-          <AssociationSet Name="FK_Roles_HomePorRol" Association="Agenda_Model.FK_Roles_HomePorRol">
+          <AssociationSet Name="FK_Roles_HomePorRol" Association="SAC_Model.FK_Roles_HomePorRol">
             <End Role="homePorRol" EntitySet="homePorRol" />
             <End Role="Rol" EntitySet="Rol" />
           </AssociationSet>
-          <AssociationSet Name="FK_Notificacion_Persona" Association="Agenda_Model.FK_Notificacion_Persona">
+          <AssociationSet Name="FK_Notificacion_Persona" Association="SAC_Model.FK_Notificacion_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Notificacion" EntitySet="Notificacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Persona" Association="Agenda_Model.FK_Usuario_Persona">
+          <AssociationSet Name="FK_Usuario_Persona" Association="SAC_Model.FK_Usuario_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Roles" Association="Agenda_Model.FK_Usuarios_Roles">
+          <AssociationSet Name="FK_Usuarios_Roles" Association="SAC_Model.FK_Usuarios_Roles">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <EntitySet Name="MenuSidebar" EntityType="Agenda_Model.MenuSidebar" />
-          <AssociationSet Name="FK_MenuSidebar_MenuSidebar" Association="Agenda_Model.FK_MenuSidebar_MenuSidebar">
+          <EntitySet Name="MenuSidebar" EntityType="SAC_Model.MenuSidebar" />
+          <AssociationSet Name="FK_MenuSidebar_MenuSidebar" Association="SAC_Model.FK_MenuSidebar_MenuSidebar">
             <End Role="MenuSidebar" EntitySet="MenuSidebar" />
             <End Role="MenuSidebar1" EntitySet="MenuSidebar" />
           </AssociationSet>
-          <EntitySet Name="Accion" EntityType="Agenda_Model.Accion" />
-          <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="Agenda_Model.FK_AccionesPorRoles_Acciones">
+          <EntitySet Name="Accion" EntityType="SAC_Model.Accion" />
+          <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="SAC_Model.FK_AccionesPorRoles_Acciones">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AccionPorRol" EntitySet="AccionPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK_MenuSidebar_Accion" Association="Agenda_Model.FK_MenuSidebar_Accion">
+          <AssociationSet Name="FK_MenuSidebar_Accion" Association="SAC_Model.FK_MenuSidebar_Accion">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="MenuSidebar" EntitySet="MenuSidebar" />
           </AssociationSet>
-          <EntitySet Name="Prioridad" EntityType="Agenda_Model.Prioridad" />
-          <AssociationSet Name="FK_Evento_Prioridad" Association="Agenda_Model.FK_Evento_Prioridad">
+          <EntitySet Name="Prioridad" EntityType="SAC_Model.Prioridad" />
+          <AssociationSet Name="FK_Evento_Prioridad" Association="SAC_Model.FK_Evento_Prioridad">
             <End Role="Prioridad" EntitySet="Prioridad" />
             <End Role="Evento" EntitySet="Evento" />
           </AssociationSet>
-          <EntitySet Name="TipoIva" EntityType="Agenda_Model.TipoIva" />
-          <EntitySet Name="TipoMoneda" EntityType="Agenda_Model.TipoMoneda" />
-          <EntitySet Name="TipoProveedor" EntityType="Agenda_Model.TipoProveedor" />
-          <EntitySet Name="Pais" EntityType="Agenda_Model.Pais" />
-          <EntitySet Name="Provincia" EntityType="Agenda_Model.Provincia" />
-          <AssociationSet Name="FK_Provincia_Pais" Association="Agenda_Model.FK_Provincia_Pais">
+          <EntitySet Name="TipoMoneda" EntityType="SAC_Model.TipoMoneda" />
+          <EntitySet Name="TipoProveedor" EntityType="SAC_Model.TipoProveedor" />
+          <EntitySet Name="Pais" EntityType="SAC_Model.Pais" />
+          <EntitySet Name="Provincia" EntityType="SAC_Model.Provincia" />
+          <AssociationSet Name="FK_Provincia_Pais" Association="SAC_Model.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
           </AssociationSet>
-          <EntitySet Name="Localidad" EntityType="Agenda_Model.Localidad" />
-          <AssociationSet Name="FK_Localidad_Pais" Association="Agenda_Model.FK_Localidad_Pais">
+          <EntitySet Name="Localidad" EntityType="SAC_Model.Localidad" />
+          <AssociationSet Name="FK_Localidad_Pais" Association="SAC_Model.FK_Localidad_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Localidad" EntitySet="Localidad" />
           </AssociationSet>
-          <AssociationSet Name="FK_Localidad_Provincia" Association="Agenda_Model.FK_Localidad_Provincia">
+          <AssociationSet Name="FK_Localidad_Provincia" Association="SAC_Model.FK_Localidad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Localidad" EntitySet="Localidad" />
           </AssociationSet>
-          <EntitySet Name="AfipCategorias" EntityType="Agenda_Model.AfipCategorias" />
-          <EntitySet Name="CompraFactura" EntityType="Agenda_Model.CompraFactura" />
-          <EntitySet Name="CompraFacturaPago" EntityType="Agenda_Model.CompraFacturaPago" />
-          <EntitySet Name="CompraIva" EntityType="Agenda_Model.CompraIva" />
-          <EntitySet Name="Diario" EntityType="Agenda_Model.Diario" />
-          <EntitySet Name="Proveedor" EntityType="Agenda_Model.Proveedor" />
-          <EntitySet Name="TipoComprobante" EntityType="Agenda_Model.TipoComprobante" />
-          <EntitySet Name="TipoPago" EntityType="Agenda_Model.TipoPago" />
-          <AssociationSet Name="FK_CompraFactura_Proveedor" Association="Agenda_Model.FK_CompraFactura_Proveedor">
+          <EntitySet Name="AfipCategorias" EntityType="SAC_Model.AfipCategorias" />
+          <EntitySet Name="CompraFactura" EntityType="SAC_Model.CompraFactura" />
+          <EntitySet Name="CompraFacturaPago" EntityType="SAC_Model.CompraFacturaPago" />
+          <EntitySet Name="Diario" EntityType="SAC_Model.Diario" />
+          <EntitySet Name="Proveedor" EntityType="SAC_Model.Proveedor" />
+          <EntitySet Name="TipoPago" EntityType="SAC_Model.TipoPago" />
+          <AssociationSet Name="FK_CompraFactura_Proveedor" Association="SAC_Model.FK_CompraFactura_Proveedor">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="CompraFactura" EntitySet="CompraFactura" />
           </AssociationSet>
-          <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="Agenda_Model.FK_CompraFacturaPago_CompraFactura">
+          <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="SAC_Model.FK_CompraFacturaPago_CompraFactura">
             <End Role="CompraFactura" EntitySet="CompraFactura" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
           </AssociationSet>
-          <AssociationSet Name="FK_CompraFacturaPago_TipoPago" Association="Agenda_Model.FK_CompraFacturaPago_TipoPago">
+          <AssociationSet Name="FK_CompraFacturaPago_TipoPago" Association="SAC_Model.FK_CompraFacturaPago_TipoPago">
             <End Role="TipoPago" EntitySet="TipoPago" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Pais" Association="Agenda_Model.FK_Proveedor_Pais">
+          <AssociationSet Name="FK_Proveedor_Pais" Association="SAC_Model.FK_Proveedor_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Provincia" Association="Agenda_Model.FK_Proveedor_Provincia">
+          <AssociationSet Name="FK_Proveedor_Provincia" Association="SAC_Model.FK_Proveedor_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_TipoIva" Association="Agenda_Model.FK_Proveedor_TipoIva">
-            <End Role="TipoIva" EntitySet="TipoIva" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_TipoMoneda" Association="Agenda_Model.FK_Proveedor_TipoMoneda">
+          <AssociationSet Name="FK_Proveedor_TipoMoneda" Association="SAC_Model.FK_Proveedor_TipoMoneda">
             <End Role="TipoMoneda" EntitySet="TipoMoneda" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_TipoProveedor" Association="Agenda_Model.FK_Proveedor_TipoProveedor">
+          <AssociationSet Name="FK_Proveedor_TipoProveedor" Association="SAC_Model.FK_Proveedor_TipoProveedor">
             <End Role="TipoProveedor" EntitySet="TipoProveedor" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <EntitySet Name="GrupoCuenta" EntityType="Agenda_Model.GrupoCuenta" />
-          <EntitySet Name="Imputacion" EntityType="Agenda_Model.Imputacion" />
-          <EntitySet Name="Presupuesto" EntityType="Agenda_Model.Presupuesto" />
-          <EntitySet Name="Rubros" EntityType="Agenda_Model.Rubros" />
-          <EntitySet Name="SubRubro" EntityType="Agenda_Model.SubRubro" />
-          <AssociationSet Name="FK_CompraFactura_Imputacion" Association="Agenda_Model.FK_CompraFactura_Imputacion">
+          <EntitySet Name="GrupoCuenta" EntityType="SAC_Model.GrupoCuenta" />
+          <EntitySet Name="Imputacion" EntityType="SAC_Model.Imputacion" />
+          <EntitySet Name="Presupuesto" EntityType="SAC_Model.Presupuesto" />
+          <EntitySet Name="Rubros" EntityType="SAC_Model.Rubros" />
+          <EntitySet Name="SubRubro" EntityType="SAC_Model.SubRubro" />
+          <AssociationSet Name="FK_CompraFactura_Imputacion" Association="SAC_Model.FK_CompraFactura_Imputacion">
             <End Role="Imputacion" EntitySet="Imputacion" />
             <End Role="CompraFactura" EntitySet="CompraFactura" />
           </AssociationSet>
-          <AssociationSet Name="FK_Rubros_GrupoCuenta" Association="Agenda_Model.FK_Rubros_GrupoCuenta">
+          <AssociationSet Name="FK_Rubros_GrupoCuenta" Association="SAC_Model.FK_Rubros_GrupoCuenta">
             <End Role="GrupoCuenta" EntitySet="GrupoCuenta" />
             <End Role="Rubros" EntitySet="Rubros" />
           </AssociationSet>
-          <AssociationSet Name="FK_Imputacion_SubRubro" Association="Agenda_Model.FK_Imputacion_SubRubro">
+          <AssociationSet Name="FK_Imputacion_SubRubro" Association="SAC_Model.FK_Imputacion_SubRubro">
             <End Role="SubRubro" EntitySet="SubRubro" />
             <End Role="Imputacion" EntitySet="Imputacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Imputacion" Association="Agenda_Model.FK_Proveedor_Imputacion">
+          <AssociationSet Name="FK_Proveedor_Imputacion" Association="SAC_Model.FK_Proveedor_Imputacion">
             <End Role="Imputacion" EntitySet="Imputacion" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Imputacion1" Association="Agenda_Model.FK_Proveedor_Imputacion1">
+          <AssociationSet Name="FK_Proveedor_Imputacion1" Association="SAC_Model.FK_Proveedor_Imputacion1">
             <End Role="Imputacion" EntitySet="Imputacion" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Presupuesto1" Association="Agenda_Model.FK_Proveedor_Presupuesto1">
+          <AssociationSet Name="FK_Proveedor_Presupuesto1" Association="SAC_Model.FK_Proveedor_Presupuesto1">
             <End Role="Presupuesto" EntitySet="Presupuesto" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_SubRubro_Rubros_1" Association="Agenda_Model.FK_SubRubro_Rubros_1">
+          <AssociationSet Name="FK_SubRubro_Rubros_1" Association="SAC_Model.FK_SubRubro_Rubros_1">
             <End Role="Rubros" EntitySet="Rubros" />
             <End Role="SubRubro" EntitySet="SubRubro" />
+          </AssociationSet>
+          <EntitySet Name="CompraIva" EntityType="SAC_Model.CompraIva" />
+          <AssociationSet Name="FK_CompraIva_CompraFactura" Association="SAC_Model.FK_CompraIva_CompraFactura">
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+            <End Role="CompraIva" EntitySet="CompraIva" />
+          </AssociationSet>
+          <EntitySet Name="TipoComprobante" EntityType="SAC_Model.TipoComprobante" />
+          <EntitySet Name="TipoComprobanteTipoIva" EntityType="SAC_Model.TipoComprobanteTipoIva" />
+          <EntitySet Name="TipoIva" EntityType="SAC_Model.TipoIva" />
+          <AssociationSet Name="FK_Proveedor_TipoIva" Association="SAC_Model.FK_Proveedor_TipoIva">
+            <End Role="TipoIva" EntitySet="TipoIva" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoComprobanteTipoIva_TipoComprobante" Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante">
+            <End Role="TipoComprobante" EntitySet="TipoComprobante" />
+            <End Role="TipoComprobanteTipoIva" EntitySet="TipoComprobanteTipoIva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TipoComprobanteTipoIva_TipoIva" Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva">
+            <End Role="TipoIva" EntitySet="TipoIva" />
+            <End Role="TipoComprobanteTipoIva" EntitySet="TipoComprobanteTipoIva" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccionPorRol">
@@ -1134,8 +1201,8 @@
           <Property Name="idRolPorAccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idRol" Type="Int32" Nullable="false" />
           <Property Name="idAccion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_AccionesPorRoles_Roles" FromRole="AccionPorRol" ToRole="Rol" />
-          <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="AccionPorRol" ToRole="Accion" />
+          <NavigationProperty Name="Rol" Relationship="SAC_Model.FK_AccionesPorRoles_Roles" FromRole="AccionPorRol" ToRole="Rol" />
+          <NavigationProperty Name="Accion" Relationship="SAC_Model.FK_AccionesPorRoles_Acciones" FromRole="AccionPorRol" ToRole="Accion" />
         </EntityType>
         <EntityType Name="Contacto">
           <Key>
@@ -1144,8 +1211,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdEvento" Type="Int32" Nullable="false" />
           <Property Name="IdPersona" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Contacto_Evento" FromRole="Contacto" ToRole="Evento" />
-          <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Contacto" ToRole="Persona" />
+          <NavigationProperty Name="Evento" Relationship="SAC_Model.FK_Contacto_Evento" FromRole="Contacto" ToRole="Evento" />
+          <NavigationProperty Name="Persona" Relationship="SAC_Model.FK_Contacto_Persona" FromRole="Contacto" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Evento">
           <Key>
@@ -1166,12 +1233,12 @@
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="IdUsuario" Type="Int32" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Evento" FromRole="Evento" ToRole="Contacto" />
-          <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Evento_Usuario" FromRole="Evento" ToRole="Usuario" />
+          <NavigationProperty Name="Contacto" Relationship="SAC_Model.FK_Contacto_Evento" FromRole="Evento" ToRole="Contacto" />
+          <NavigationProperty Name="Usuario" Relationship="SAC_Model.FK_Evento_Usuario" FromRole="Evento" ToRole="Usuario" />
           <Property Name="Organizador" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Obs" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IdPrioridad" Type="Int32" />
-          <NavigationProperty Name="Prioridad" Relationship="Agenda_Model.FK_Evento_Prioridad" FromRole="Evento" ToRole="Prioridad" />
+          <NavigationProperty Name="Prioridad" Relationship="SAC_Model.FK_Evento_Prioridad" FromRole="Evento" ToRole="Prioridad" />
         </EntityType>
         <EntityType Name="homePorRol">
           <Key>
@@ -1180,7 +1247,7 @@
           <Property Name="IdHome" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_Roles_HomePorRol" FromRole="homePorRol" ToRole="Rol" />
+          <NavigationProperty Name="Rol" Relationship="SAC_Model.FK_Roles_HomePorRol" FromRole="homePorRol" ToRole="Rol" />
         </EntityType>
         <EntityType Name="Notificacion">
           <Key>
@@ -1192,7 +1259,7 @@
           <Property Name="Obs" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Notificacion" ToRole="Persona" />
+          <NavigationProperty Name="Persona" Relationship="SAC_Model.FK_Notificacion_Persona" FromRole="Notificacion" ToRole="Persona" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -1217,9 +1284,9 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="CodigoValidacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Contacto" Relationship="Agenda_Model.FK_Contacto_Persona" FromRole="Persona" ToRole="Contacto" />
-          <NavigationProperty Name="Notificacion" Relationship="Agenda_Model.FK_Notificacion_Persona" FromRole="Persona" ToRole="Notificacion" />
-          <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
+          <NavigationProperty Name="Contacto" Relationship="SAC_Model.FK_Contacto_Persona" FromRole="Persona" ToRole="Contacto" />
+          <NavigationProperty Name="Notificacion" Relationship="SAC_Model.FK_Notificacion_Persona" FromRole="Persona" ToRole="Notificacion" />
+          <NavigationProperty Name="Usuario" Relationship="SAC_Model.FK_Usuario_Persona" FromRole="Persona" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -1229,9 +1296,9 @@
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="EsAdministrador" Type="Boolean" Nullable="false" />
           <Property Name="IdHome" Type="Int32" />
-          <NavigationProperty Name="AccionPorRol" Relationship="Agenda_Model.FK_AccionesPorRoles_Roles" FromRole="Rol" ToRole="AccionPorRol" />
-          <NavigationProperty Name="homePorRol" Relationship="Agenda_Model.FK_Roles_HomePorRol" FromRole="Rol" ToRole="homePorRol" />
-          <NavigationProperty Name="Usuario" Relationship="Agenda_Model.FK_Usuarios_Roles" FromRole="Rol" ToRole="Usuario" />
+          <NavigationProperty Name="AccionPorRol" Relationship="SAC_Model.FK_AccionesPorRoles_Roles" FromRole="Rol" ToRole="AccionPorRol" />
+          <NavigationProperty Name="homePorRol" Relationship="SAC_Model.FK_Roles_HomePorRol" FromRole="Rol" ToRole="homePorRol" />
+          <NavigationProperty Name="Usuario" Relationship="SAC_Model.FK_Usuarios_Roles" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -1244,14 +1311,14 @@
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="Creado" Type="DateTime" Precision="3" />
           <Property Name="Actualizado" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Evento_Usuario" FromRole="Usuario" ToRole="Evento" />
-          <NavigationProperty Name="Persona" Relationship="Agenda_Model.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
-          <NavigationProperty Name="Rol" Relationship="Agenda_Model.FK_Usuarios_Roles" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Evento" Relationship="SAC_Model.FK_Evento_Usuario" FromRole="Usuario" ToRole="Evento" />
+          <NavigationProperty Name="Persona" Relationship="SAC_Model.FK_Usuario_Persona" FromRole="Usuario" ToRole="Persona" />
+          <NavigationProperty Name="Rol" Relationship="SAC_Model.FK_Usuarios_Roles" FromRole="Usuario" ToRole="Rol" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_AccionesPorRoles_Roles">
-          <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="1" />
-          <End Type="Agenda_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
+          <End Type="SAC_Model.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="SAC_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="IdRol" />
@@ -1262,8 +1329,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contacto_Evento">
-          <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="1" />
-          <End Type="Agenda_Model.Contacto" Role="Contacto" Multiplicity="*" />
+          <End Type="SAC_Model.Evento" Role="Evento" Multiplicity="1" />
+          <End Type="SAC_Model.Contacto" Role="Contacto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Evento">
               <PropertyRef Name="Id" />
@@ -1274,8 +1341,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Contacto_Persona">
-          <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="1" />
-          <End Type="Agenda_Model.Contacto" Role="Contacto" Multiplicity="*" />
+          <End Type="SAC_Model.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="SAC_Model.Contacto" Role="Contacto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
               <PropertyRef Name="Id" />
@@ -1286,8 +1353,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Evento_Usuario">
-          <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="*" />
+          <End Type="SAC_Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SAC_Model.Evento" Role="Evento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
               <PropertyRef Name="IdUsuario" />
@@ -1298,8 +1365,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Roles_HomePorRol">
-          <End Type="Agenda_Model.homePorRol" Role="homePorRol" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="*" />
+          <End Type="SAC_Model.homePorRol" Role="homePorRol" Multiplicity="0..1" />
+          <End Type="SAC_Model.Rol" Role="Rol" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="homePorRol">
               <PropertyRef Name="IdHome" />
@@ -1310,8 +1377,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Notificacion_Persona">
-          <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="1" />
-          <End Type="Agenda_Model.Notificacion" Role="Notificacion" Multiplicity="*" />
+          <End Type="SAC_Model.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="SAC_Model.Notificacion" Role="Notificacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
               <PropertyRef Name="Id" />
@@ -1322,8 +1389,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuario_Persona">
-          <End Type="Agenda_Model.Persona" Role="Persona" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="SAC_Model.Persona" Role="Persona" Multiplicity="0..1" />
+          <End Type="SAC_Model.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
               <PropertyRef Name="Id" />
@@ -1334,8 +1401,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Usuarios_Roles">
-          <End Type="Agenda_Model.Rol" Role="Rol" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="SAC_Model.Rol" Role="Rol" Multiplicity="0..1" />
+          <End Type="SAC_Model.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rol">
               <PropertyRef Name="IdRol" />
@@ -1357,14 +1424,14 @@
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdParent" Type="Int32" />
-          <NavigationProperty Name="MenuSidebar1" Relationship="Agenda_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar" ToRole="MenuSidebar1" />
-          <NavigationProperty Name="MenuSidebar2" Relationship="Agenda_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar1" ToRole="MenuSidebar" />
+          <NavigationProperty Name="MenuSidebar1" Relationship="SAC_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar" ToRole="MenuSidebar1" />
+          <NavigationProperty Name="MenuSidebar2" Relationship="SAC_Model.FK_MenuSidebar_MenuSidebar" FromRole="MenuSidebar1" ToRole="MenuSidebar" />
           <Property Name="Orden" Type="Int32" />
-          <NavigationProperty Name="Accion" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="MenuSidebar" ToRole="Accion" />
+          <NavigationProperty Name="Accion" Relationship="SAC_Model.FK_MenuSidebar_Accion" FromRole="MenuSidebar" ToRole="Accion" />
         </EntityType>
         <Association Name="FK_MenuSidebar_MenuSidebar">
-          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="0..1" />
-          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar1" Multiplicity="*" />
+          <End Type="SAC_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="0..1" />
+          <End Type="SAC_Model.MenuSidebar" Role="MenuSidebar1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="MenuSidebar">
               <PropertyRef Name="IdMenuSidebar" />
@@ -1385,12 +1452,12 @@
           <Property Name="IdModulo" Type="Int32" Nullable="false" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="fechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="AccionPorRol" Relationship="Agenda_Model.FK_AccionesPorRoles_Acciones" FromRole="Accion" ToRole="AccionPorRol" />
-          <NavigationProperty Name="MenuSidebar" Relationship="Agenda_Model.FK_MenuSidebar_Accion" FromRole="Accion" ToRole="MenuSidebar" />
+          <NavigationProperty Name="AccionPorRol" Relationship="SAC_Model.FK_AccionesPorRoles_Acciones" FromRole="Accion" ToRole="AccionPorRol" />
+          <NavigationProperty Name="MenuSidebar" Relationship="SAC_Model.FK_MenuSidebar_Accion" FromRole="Accion" ToRole="MenuSidebar" />
         </EntityType>
         <Association Name="FK_AccionesPorRoles_Acciones">
-          <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="1" />
-          <End Type="Agenda_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
+          <End Type="SAC_Model.Accion" Role="Accion" Multiplicity="1" />
+          <End Type="SAC_Model.AccionPorRol" Role="AccionPorRol" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accion">
               <PropertyRef Name="IdAccion" />
@@ -1401,8 +1468,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_MenuSidebar_Accion">
-          <End Type="Agenda_Model.Accion" Role="Accion" Multiplicity="0..1" />
-          <End Type="Agenda_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="*" />
+          <End Type="SAC_Model.Accion" Role="Accion" Multiplicity="0..1" />
+          <End Type="SAC_Model.MenuSidebar" Role="MenuSidebar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Accion">
               <PropertyRef Name="IdAccion" />
@@ -1420,11 +1487,11 @@
           <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Evento" Relationship="Agenda_Model.FK_Evento_Prioridad" FromRole="Prioridad" ToRole="Evento" />
+          <NavigationProperty Name="Evento" Relationship="SAC_Model.FK_Evento_Prioridad" FromRole="Prioridad" ToRole="Evento" />
         </EntityType>
         <Association Name="FK_Evento_Prioridad">
-          <End Type="Agenda_Model.Prioridad" Role="Prioridad" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Evento" Role="Evento" Multiplicity="*" />
+          <End Type="SAC_Model.Prioridad" Role="Prioridad" Multiplicity="0..1" />
+          <End Type="SAC_Model.Evento" Role="Evento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Prioridad">
               <PropertyRef Name="Id" />
@@ -1434,16 +1501,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TipoIva">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="TipoIva" ToRole="Proveedor" />
-        </EntityType>
         <EntityType Name="TipoMoneda">
           <Key>
             <PropertyRef Name="Id" />
@@ -1453,7 +1510,7 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="TipoMoneda" ToRole="Proveedor" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="TipoMoneda" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="TipoProveedor">
           <Key>
@@ -1465,7 +1522,7 @@
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <Property Name="Codigo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="TipoProveedor" ToRole="Proveedor" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoProveedor" FromRole="TipoProveedor" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Pais">
           <Key>
@@ -1478,9 +1535,9 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
-          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Pais" ToRole="Localidad" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Pais" ToRole="Proveedor" />
+          <NavigationProperty Name="Provincia" Relationship="SAC_Model.FK_Provincia_Pais" FromRole="Pais" ToRole="Provincia" />
+          <NavigationProperty Name="Localidad" Relationship="SAC_Model.FK_Localidad_Pais" FromRole="Pais" ToRole="Localidad" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Pais" FromRole="Pais" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -1495,13 +1552,13 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
-          <NavigationProperty Name="Localidad" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
+          <NavigationProperty Name="Pais" Relationship="SAC_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
+          <NavigationProperty Name="Localidad" Relationship="SAC_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
         </EntityType>
         <Association Name="FK_Provincia_Pais">
-          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="*" />
+          <End Type="SAC_Model.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="SAC_Model.Provincia" Role="Provincia" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pais">
               <PropertyRef Name="Id" />
@@ -1530,12 +1587,12 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Localidad_Pais" FromRole="Localidad" ToRole="Pais" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
+          <NavigationProperty Name="Pais" Relationship="SAC_Model.FK_Localidad_Pais" FromRole="Localidad" ToRole="Pais" />
+          <NavigationProperty Name="Provincia" Relationship="SAC_Model.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
         </EntityType>
         <Association Name="FK_Localidad_Pais">
-          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
+          <End Type="SAC_Model.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="SAC_Model.Localidad" Role="Localidad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pais">
               <PropertyRef Name="Id" />
@@ -1546,8 +1603,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Localidad_Provincia">
-          <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Localidad" Role="Localidad" Multiplicity="*" />
+          <End Type="SAC_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+          <End Type="SAC_Model.Localidad" Role="Localidad" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Provincia">
               <PropertyRef Name="Id" />
@@ -1600,9 +1657,10 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
-          <NavigationProperty Name="CompraFacturaPago" Relationship="Agenda_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
-          <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
+          <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
+          <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
+          <NavigationProperty Name="CompraIva" Relationship="SAC_Model.FK_CompraIva_CompraFactura" FromRole="CompraFactura" ToRole="CompraIva" />
         </EntityType>
         <EntityType Name="CompraFacturaPago">
           <Key>
@@ -1616,66 +1674,8 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CompraFactura" Relationship="Agenda_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFacturaPago" ToRole="CompraFactura" />
-          <NavigationProperty Name="TipoPago" Relationship="Agenda_Model.FK_CompraFacturaPago_TipoPago" FromRole="CompraFacturaPago" ToRole="TipoPago" />
-        </EntityType>
-        <EntityType Name="CompraIva">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdTipoComprobante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PuntoVenta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
-          <Property Name="AuxiliarNumero" Type="Int32" Nullable="false" />
-          <Property Name="NumeroEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Empesa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IvaAri" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IvaRes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Neto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Especial" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Res" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdTipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TipoFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResDgr" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Cuit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dolar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Diferencia" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Clase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NombreEmple" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Periodo" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="AbreviaturaFactura" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoMoneda" Type="Int32" Nullable="false" />
-          <Property Name="Isib" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdDiario" Type="Int32" Nullable="false" />
-          <Property Name="Cae" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Impint" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
-          <Property Name="Tnogra" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Texento" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PerGeneral" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Perib" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PerMun" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Tnocat" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Pernac" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Ivan5" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total21" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total27" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total105" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total5" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="Idusuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFacturaPago" ToRole="CompraFactura" />
+          <NavigationProperty Name="TipoPago" Relationship="SAC_Model.FK_CompraFacturaPago_TipoPago" FromRole="CompraFacturaPago" ToRole="TipoPago" />
         </EntityType>
         <EntityType Name="Diario">
           <Key>
@@ -1729,29 +1729,16 @@
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CompraFactura" Relationship="Agenda_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
-          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Proveedor" ToRole="Pais" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
-          <NavigationProperty Name="TipoIva" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
-          <NavigationProperty Name="TipoMoneda" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
-          <NavigationProperty Name="TipoProveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
-          <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
-          <NavigationProperty Name="Imputacion1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
-          <NavigationProperty Name="Presupuesto" Relationship="Agenda_Model.FK_Proveedor_Presupuesto1" FromRole="Proveedor" ToRole="Presupuesto" />
+          <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
+          <NavigationProperty Name="Pais" Relationship="SAC_Model.FK_Proveedor_Pais" FromRole="Proveedor" ToRole="Pais" />
+          <NavigationProperty Name="Provincia" Relationship="SAC_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
+          <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
+          <NavigationProperty Name="TipoProveedor" Relationship="SAC_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
+          <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
+          <NavigationProperty Name="Imputacion1" Relationship="SAC_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
+          <NavigationProperty Name="Presupuesto" Relationship="SAC_Model.FK_Proveedor_Presupuesto1" FromRole="Proveedor" ToRole="Presupuesto" />
+          <NavigationProperty Name="TipoIva" Relationship="SAC_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
           </EntityType>
-        <EntityType Name="TipoComprobante">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Denominacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Abreviatura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Numero" Type="Int32" />
-          <Property Name="PuntoVenta" Type="Int32" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="TipoPago">
           <Key>
             <PropertyRef Name="Id" />
@@ -1761,11 +1748,11 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CompraFacturaPago" Relationship="Agenda_Model.FK_CompraFacturaPago_TipoPago" FromRole="TipoPago" ToRole="CompraFacturaPago" />
+          <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_TipoPago" FromRole="TipoPago" ToRole="CompraFacturaPago" />
         </EntityType>
         <Association Name="FK_CompraFactura_Proveedor">
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
-          <End Type="Agenda_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
+          <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
               <PropertyRef Name="Id" />
@@ -1776,8 +1763,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CompraFacturaPago_CompraFactura">
-          <End Type="Agenda_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
-          <End Type="Agenda_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
+          <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
+          <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CompraFactura">
               <PropertyRef Name="Id" />
@@ -1788,8 +1775,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CompraFacturaPago_TipoPago">
-          <End Type="Agenda_Model.TipoPago" Role="TipoPago" Multiplicity="0..1" />
-          <End Type="Agenda_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
+          <End Type="SAC_Model.TipoPago" Role="TipoPago" Multiplicity="0..1" />
+          <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoPago">
               <PropertyRef Name="Id" />
@@ -1800,8 +1787,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Pais">
-          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <End Type="SAC_Model.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pais">
               <PropertyRef Name="Id" />
@@ -1812,8 +1799,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Provincia">
-          <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <End Type="SAC_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Provincia">
               <PropertyRef Name="Id" />
@@ -1823,21 +1810,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedor_TipoIva">
-          <End Type="Agenda_Model.TipoIva" Role="TipoIva" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoIva">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdTipoIva" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Proveedor_TipoMoneda">
-          <End Type="Agenda_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoMoneda">
               <PropertyRef Name="Id" />
@@ -1848,8 +1823,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_TipoProveedor">
-          <End Type="Agenda_Model.TipoProveedor" Role="TipoProveedor" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <End Type="SAC_Model.TipoProveedor" Role="TipoProveedor" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoProveedor">
               <PropertyRef Name="Id" />
@@ -1869,7 +1844,7 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Rubros" Relationship="Agenda_Model.FK_Rubros_GrupoCuenta" FromRole="GrupoCuenta" ToRole="Rubros" />
+          <NavigationProperty Name="Rubros" Relationship="SAC_Model.FK_Rubros_GrupoCuenta" FromRole="GrupoCuenta" ToRole="Rubros" />
         </EntityType>
         <EntityType Name="Imputacion">
           <Key>
@@ -1897,10 +1872,10 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CompraFactura" Relationship="Agenda_Model.FK_CompraFactura_Imputacion" FromRole="Imputacion" ToRole="CompraFactura" />
-          <NavigationProperty Name="SubRubro" Relationship="Agenda_Model.FK_Imputacion_SubRubro" FromRole="Imputacion" ToRole="SubRubro" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Imputacion" ToRole="Proveedor" />
-          <NavigationProperty Name="Proveedor1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Imputacion" ToRole="Proveedor" />
+          <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="Imputacion" ToRole="CompraFactura" />
+          <NavigationProperty Name="SubRubro" Relationship="SAC_Model.FK_Imputacion_SubRubro" FromRole="Imputacion" ToRole="SubRubro" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Imputacion" FromRole="Imputacion" ToRole="Proveedor" />
+          <NavigationProperty Name="Proveedor1" Relationship="SAC_Model.FK_Proveedor_Imputacion1" FromRole="Imputacion" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Presupuesto">
           <Key>
@@ -1920,7 +1895,7 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_Proveedor_Presupuesto1" FromRole="Presupuesto" ToRole="Proveedor" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Presupuesto1" FromRole="Presupuesto" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Rubros">
           <Key>
@@ -1933,8 +1908,8 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="GrupoCuenta" Relationship="Agenda_Model.FK_Rubros_GrupoCuenta" FromRole="Rubros" ToRole="GrupoCuenta" />
-          <NavigationProperty Name="SubRubro" Relationship="Agenda_Model.FK_SubRubro_Rubros_1" FromRole="Rubros" ToRole="SubRubro" />
+          <NavigationProperty Name="GrupoCuenta" Relationship="SAC_Model.FK_Rubros_GrupoCuenta" FromRole="Rubros" ToRole="GrupoCuenta" />
+          <NavigationProperty Name="SubRubro" Relationship="SAC_Model.FK_SubRubro_Rubros_1" FromRole="Rubros" ToRole="SubRubro" />
         </EntityType>
         <EntityType Name="SubRubro">
           <Key>
@@ -1946,12 +1921,12 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="Idusuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_Imputacion_SubRubro" FromRole="SubRubro" ToRole="Imputacion" />
-          <NavigationProperty Name="Rubros" Relationship="Agenda_Model.FK_SubRubro_Rubros_1" FromRole="SubRubro" ToRole="Rubros" />
+          <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_Imputacion_SubRubro" FromRole="SubRubro" ToRole="Imputacion" />
+          <NavigationProperty Name="Rubros" Relationship="SAC_Model.FK_SubRubro_Rubros_1" FromRole="SubRubro" ToRole="Rubros" />
         </EntityType>
         <Association Name="FK_CompraFactura_Imputacion">
-          <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="1" />
-          <End Type="Agenda_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+          <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="1" />
+          <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Imputacion">
               <PropertyRef Name="Id" />
@@ -1962,8 +1937,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rubros_GrupoCuenta">
-          <End Type="Agenda_Model.GrupoCuenta" Role="GrupoCuenta" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="*" />
+          <End Type="SAC_Model.GrupoCuenta" Role="GrupoCuenta" Multiplicity="0..1" />
+          <End Type="SAC_Model.Rubros" Role="Rubros" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GrupoCuenta">
               <PropertyRef Name="Id" />
@@ -1974,8 +1949,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Imputacion_SubRubro">
-          <End Type="Agenda_Model.SubRubro" Role="SubRubro" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="*" />
+          <End Type="SAC_Model.SubRubro" Role="SubRubro" Multiplicity="0..1" />
+          <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SubRubro">
               <PropertyRef Name="Id" />
@@ -1986,8 +1961,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Imputacion">
-          <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Imputacion">
               <PropertyRef Name="Id" />
@@ -1998,8 +1973,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Imputacion1">
-          <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Imputacion">
               <PropertyRef Name="Id" />
@@ -2010,8 +1985,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Proveedor_Presupuesto1">
-          <End Type="Agenda_Model.Presupuesto" Role="Presupuesto" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <End Type="SAC_Model.Presupuesto" Role="Presupuesto" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Presupuesto">
               <PropertyRef Name="Id" />
@@ -2022,14 +1997,153 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SubRubro_Rubros_1">
-          <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="1" />
-          <End Type="Agenda_Model.SubRubro" Role="SubRubro" Multiplicity="*" />
+          <End Type="SAC_Model.Rubros" Role="Rubros" Multiplicity="1" />
+          <End Type="SAC_Model.SubRubro" Role="SubRubro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rubros">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="SubRubro">
               <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CompraIva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFacturaCompra" Type="Int32" />
+          <Property Name="AuxiliarNumero" Type="Int32" Nullable="false" />
+          <Property Name="NumeroEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Empesa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IvaAri" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IvaRes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Neto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Especial" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Res" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdTipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TipoFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResDgr" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Cuit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dolar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Diferencia" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Clase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreEmple" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Periodo" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="AbreviaturaFactura" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoMoneda" Type="Int32" Nullable="false" />
+          <Property Name="Isib" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdDiario" Type="Int32" Nullable="false" />
+          <Property Name="Cae" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Impint" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+          <Property Name="Tnogra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Texento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PerGeneral" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Perib" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PerMun" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Tnocat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Pernac" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Ivan5" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total21" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total27" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total105" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total5" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Idusuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraIva_CompraFactura" FromRole="CompraIva" ToRole="CompraFactura" />
+        </EntityType>
+        <Association Name="FK_CompraIva_CompraFactura">
+          <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
+          <End Type="SAC_Model.CompraIva" Role="CompraIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraIva">
+              <PropertyRef Name="IdFacturaCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoComprobante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Denominacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Abreviatura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdAfipCategoria" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TipoComprobanteTipoIva" Relationship="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante" FromRole="TipoComprobante" ToRole="TipoComprobanteTipoIva" />
+        </EntityType>
+        <EntityType Name="TipoComprobanteTipoIva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoIva" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoComprobante" Type="Int32" />
+          <NavigationProperty Name="TipoComprobante" Relationship="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante" FromRole="TipoComprobanteTipoIva" ToRole="TipoComprobante" />
+          <NavigationProperty Name="TipoIva" Relationship="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva" FromRole="TipoComprobanteTipoIva" ToRole="TipoIva" />
+        </EntityType>
+        <EntityType Name="TipoIva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoIva" FromRole="TipoIva" ToRole="Proveedor" />
+          <NavigationProperty Name="TipoComprobanteTipoIva" Relationship="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva" FromRole="TipoIva" ToRole="TipoComprobanteTipoIva" />
+        </EntityType>
+        <Association Name="FK_Proveedor_TipoIva">
+          <End Type="SAC_Model.TipoIva" Role="TipoIva" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoIva">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdTipoIva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoComprobanteTipoIva_TipoComprobante">
+          <End Type="SAC_Model.TipoComprobante" Role="TipoComprobante" Multiplicity="0..1" />
+          <End Type="SAC_Model.TipoComprobanteTipoIva" Role="TipoComprobanteTipoIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComprobante">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoComprobanteTipoIva">
+              <PropertyRef Name="IdTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TipoComprobanteTipoIva_TipoIva">
+          <End Type="SAC_Model.TipoIva" Role="TipoIva" Multiplicity="1" />
+          <End Type="SAC_Model.TipoComprobanteTipoIva" Role="TipoComprobanteTipoIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoIva">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TipoComprobanteTipoIva">
+              <PropertyRef Name="IdTipoIva" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2040,7 +2154,7 @@
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Agenda_ModelStoreContainer" CdmEntityContainer="SAC_Entities">
           <EntitySetMapping Name="AccionPorRol">
-            <EntityTypeMapping TypeName="Agenda_Model.AccionPorRol">
+            <EntityTypeMapping TypeName="SAC_Model.AccionPorRol">
               <MappingFragment StoreEntitySet="AccionPorRol">
                 <ScalarProperty Name="idAccion" ColumnName="idAccion" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
@@ -2049,7 +2163,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contacto">
-            <EntityTypeMapping TypeName="Agenda_Model.Contacto">
+            <EntityTypeMapping TypeName="SAC_Model.Contacto">
               <MappingFragment StoreEntitySet="Contacto">
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdEvento" ColumnName="IdEvento" />
@@ -2058,7 +2172,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Evento">
-            <EntityTypeMapping TypeName="Agenda_Model.Evento">
+            <EntityTypeMapping TypeName="SAC_Model.Evento">
               <MappingFragment StoreEntitySet="Evento">
                 <ScalarProperty Name="IdPrioridad" ColumnName="IdPrioridad" />
                 <ScalarProperty Name="Obs" ColumnName="Obs" />
@@ -2082,7 +2196,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="homePorRol">
-            <EntityTypeMapping TypeName="Agenda_Model.homePorRol">
+            <EntityTypeMapping TypeName="SAC_Model.homePorRol">
               <MappingFragment StoreEntitySet="homePorRol">
                 <ScalarProperty Name="Controller" ColumnName="Controller" />
                 <ScalarProperty Name="Metodo" ColumnName="Metodo" />
@@ -2091,7 +2205,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Notificacion">
-            <EntityTypeMapping TypeName="Agenda_Model.Notificacion">
+            <EntityTypeMapping TypeName="SAC_Model.Notificacion">
               <MappingFragment StoreEntitySet="Notificacion">
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -2103,7 +2217,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Persona">
-            <EntityTypeMapping TypeName="Agenda_Model.Persona">
+            <EntityTypeMapping TypeName="SAC_Model.Persona">
               <MappingFragment StoreEntitySet="Persona">
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="CodigoValidacion" ColumnName="CodigoValidacion" />
@@ -2128,7 +2242,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rol">
-            <EntityTypeMapping TypeName="Agenda_Model.Rol">
+            <EntityTypeMapping TypeName="SAC_Model.Rol">
               <MappingFragment StoreEntitySet="Rol">
                 <ScalarProperty Name="IdHome" ColumnName="IdHome" />
                 <ScalarProperty Name="EsAdministrador" ColumnName="EsAdministrador" />
@@ -2138,7 +2252,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="Agenda_Model.Usuario">
+            <EntityTypeMapping TypeName="SAC_Model.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Actualizado" ColumnName="Actualizado" />
@@ -2152,7 +2266,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MenuSidebar">
-            <EntityTypeMapping TypeName="Agenda_Model.MenuSidebar">
+            <EntityTypeMapping TypeName="SAC_Model.MenuSidebar">
               <MappingFragment StoreEntitySet="MenuSidebar">
                 <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="IdParent" ColumnName="IdParent" />
@@ -2167,7 +2281,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Accion">
-            <EntityTypeMapping TypeName="Agenda_Model.Accion">
+            <EntityTypeMapping TypeName="SAC_Model.Accion">
               <MappingFragment StoreEntitySet="Accion">
                 <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -2180,7 +2294,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Prioridad">
-            <EntityTypeMapping TypeName="Agenda_Model.Prioridad">
+            <EntityTypeMapping TypeName="SAC_Model.Prioridad">
               <MappingFragment StoreEntitySet="Prioridad">
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -2189,18 +2303,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TipoIva">
-            <EntityTypeMapping TypeName="Agenda_Model.TipoIva">
-              <MappingFragment StoreEntitySet="TipoIva">
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoMoneda">
-            <EntityTypeMapping TypeName="Agenda_Model.TipoMoneda">
+            <EntityTypeMapping TypeName="SAC_Model.TipoMoneda">
               <MappingFragment StoreEntitySet="TipoMoneda">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2211,7 +2315,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoProveedor">
-            <EntityTypeMapping TypeName="Agenda_Model.TipoProveedor">
+            <EntityTypeMapping TypeName="SAC_Model.TipoProveedor">
               <MappingFragment StoreEntitySet="TipoProveedor">
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
@@ -2223,7 +2327,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pais">
-            <EntityTypeMapping TypeName="Agenda_Model.Pais">
+            <EntityTypeMapping TypeName="SAC_Model.Pais">
               <MappingFragment StoreEntitySet="Pais">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2236,7 +2340,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provincia">
-            <EntityTypeMapping TypeName="Agenda_Model.Provincia">
+            <EntityTypeMapping TypeName="SAC_Model.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2251,7 +2355,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Localidad">
-            <EntityTypeMapping TypeName="Agenda_Model.Localidad">
+            <EntityTypeMapping TypeName="SAC_Model.Localidad">
               <MappingFragment StoreEntitySet="Localidad">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2272,7 +2376,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AfipCategorias">
-            <EntityTypeMapping TypeName="Agenda_Model.AfipCategorias">
+            <EntityTypeMapping TypeName="SAC_Model.AfipCategorias">
               <MappingFragment StoreEntitySet="AfipCategorias">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2283,7 +2387,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CompraFactura">
-            <EntityTypeMapping TypeName="Agenda_Model.CompraFactura">
+            <EntityTypeMapping TypeName="SAC_Model.CompraFactura">
               <MappingFragment StoreEntitySet="CompraFactura">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2318,7 +2422,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CompraFacturaPago">
-            <EntityTypeMapping TypeName="Agenda_Model.CompraFacturaPago">
+            <EntityTypeMapping TypeName="SAC_Model.CompraFacturaPago">
               <MappingFragment StoreEntitySet="CompraFacturaPago">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
@@ -2331,8 +2435,159 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Diario">
+            <EntityTypeMapping TypeName="SAC_Model.Diario">
+              <MappingFragment StoreEntitySet="Diario">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Asiento" ColumnName="Asiento" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="IdTipoFactura" ColumnName="IdTipoFactura" />
+                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
+                <ScalarProperty Name="Cotiza" ColumnName="Cotiza" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="DescripcionMa" ColumnName="DescripcionMa" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="SAC_Model.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="UltimoPuntoVenta" ColumnName="UltimoPuntoVenta" />
+                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
+                <ScalarProperty Name="DescripcionFactura" ColumnName="DescripcionFactura" />
+                <ScalarProperty Name="IdMonedaFactura" ColumnName="IdMonedaFactura" />
+                <ScalarProperty Name="IdImputacionFactura" ColumnName="IdImputacionFactura" />
+                <ScalarProperty Name="IdTipoProveedor" ColumnName="IdTipoProveedor" />
+                <ScalarProperty Name="IdCodigoPostal" ColumnName="IdCodigoPostal" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdImputacionProveedor" ColumnName="IdImputacionProveedor" />
+                <ScalarProperty Name="DiasFactura" ColumnName="DiasFactura" />
+                <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoPago">
+            <EntityTypeMapping TypeName="SAC_Model.TipoPago">
+              <MappingFragment StoreEntitySet="TipoPago">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoCuenta">
+            <EntityTypeMapping TypeName="SAC_Model.GrupoCuenta">
+              <MappingFragment StoreEntitySet="GrupoCuenta">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imputacion">
+            <EntityTypeMapping TypeName="SAC_Model.Imputacion">
+              <MappingFragment StoreEntitySet="Imputacion">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
+                <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
+                <ScalarProperty Name="Octubre" ColumnName="Octubre" />
+                <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
+                <ScalarProperty Name="Agosto" ColumnName="Agosto" />
+                <ScalarProperty Name="Julio" ColumnName="Julio" />
+                <ScalarProperty Name="Junio" ColumnName="Junio" />
+                <ScalarProperty Name="Mayo" ColumnName="Mayo" />
+                <ScalarProperty Name="Abril" ColumnName="Abril" />
+                <ScalarProperty Name="Marzo" ColumnName="Marzo" />
+                <ScalarProperty Name="Febrero" ColumnName="Febrero" />
+                <ScalarProperty Name="Enero" ColumnName="Enero" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+                <ScalarProperty Name="SaldoFin" ColumnName="SaldoFin" />
+                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
+                <ScalarProperty Name="IdSubRubro" ColumnName="IdSubRubro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presupuesto">
+            <EntityTypeMapping TypeName="SAC_Model.Presupuesto">
+              <MappingFragment StoreEntitySet="Presupuesto">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Costos" ColumnName="Costos" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="CodigoCaja" ColumnName="CodigoCaja" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="Historico" ColumnName="Historico" />
+                <ScalarProperty Name="Ejecutado" ColumnName="Ejecutado" />
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rubros">
+            <EntityTypeMapping TypeName="SAC_Model.Rubros">
+              <MappingFragment StoreEntitySet="Rubros">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="IdGrupoCuenta" ColumnName="IdGrupoCuenta" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubRubro">
+            <EntityTypeMapping TypeName="SAC_Model.SubRubro">
+              <MappingFragment StoreEntitySet="SubRubro">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CompraIva">
-            <EntityTypeMapping TypeName="Agenda_Model.CompraIva">
+            <EntityTypeMapping TypeName="SAC_Model.CompraIva">
               <MappingFragment StoreEntitySet="CompraIva">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
@@ -2383,173 +2638,38 @@
                 <ScalarProperty Name="Empesa" ColumnName="Empesa" />
                 <ScalarProperty Name="NumeroEmpresa" ColumnName="NumeroEmpresa" />
                 <ScalarProperty Name="AuxiliarNumero" ColumnName="AuxiliarNumero" />
-                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
-                <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
-                <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Diario">
-            <EntityTypeMapping TypeName="Agenda_Model.Diario">
-              <MappingFragment StoreEntitySet="Diario">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Asiento" ColumnName="Asiento" />
-                <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="IdTipoFactura" ColumnName="IdTipoFactura" />
-                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
-                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
-                <ScalarProperty Name="Cotiza" ColumnName="Cotiza" />
-                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
-                <ScalarProperty Name="DescripcionMa" ColumnName="DescripcionMa" />
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Proveedor">
-            <EntityTypeMapping TypeName="Agenda_Model.Proveedor">
-              <MappingFragment StoreEntitySet="Proveedor">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="UltimoPuntoVenta" ColumnName="UltimoPuntoVenta" />
-                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
-                <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
-                <ScalarProperty Name="DescripcionFactura" ColumnName="DescripcionFactura" />
-                <ScalarProperty Name="IdMonedaFactura" ColumnName="IdMonedaFactura" />
-                <ScalarProperty Name="IdImputacionFactura" ColumnName="IdImputacionFactura" />
-                <ScalarProperty Name="IdTipoProveedor" ColumnName="IdTipoProveedor" />
-                <ScalarProperty Name="IdCodigoPostal" ColumnName="IdCodigoPostal" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="IdImputacionProveedor" ColumnName="IdImputacionProveedor" />
-                <ScalarProperty Name="DiasFactura" ColumnName="DiasFactura" />
-                <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="IdFacturaCompra" ColumnName="IdFacturaCompra" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TipoComprobante">
-            <EntityTypeMapping TypeName="Agenda_Model.TipoComprobante">
+            <EntityTypeMapping TypeName="SAC_Model.TipoComprobante">
               <MappingFragment StoreEntitySet="TipoComprobante">
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="IdAfipCategoria" ColumnName="IdAfipCategoria" />
                 <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
                 <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TipoPago">
-            <EntityTypeMapping TypeName="Agenda_Model.TipoPago">
-              <MappingFragment StoreEntitySet="TipoPago">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <EntitySetMapping Name="TipoComprobanteTipoIva">
+            <EntityTypeMapping TypeName="SAC_Model.TipoComprobanteTipoIva">
+              <MappingFragment StoreEntitySet="TipoComprobanteTipoIva">
+                <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+                <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="GrupoCuenta">
-            <EntityTypeMapping TypeName="Agenda_Model.GrupoCuenta">
-              <MappingFragment StoreEntitySet="GrupoCuenta">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Imputacion">
-            <EntityTypeMapping TypeName="Agenda_Model.Imputacion">
-              <MappingFragment StoreEntitySet="Imputacion">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
-                <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
-                <ScalarProperty Name="Octubre" ColumnName="Octubre" />
-                <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
-                <ScalarProperty Name="Agosto" ColumnName="Agosto" />
-                <ScalarProperty Name="Julio" ColumnName="Julio" />
-                <ScalarProperty Name="Junio" ColumnName="Junio" />
-                <ScalarProperty Name="Mayo" ColumnName="Mayo" />
-                <ScalarProperty Name="Abril" ColumnName="Abril" />
-                <ScalarProperty Name="Marzo" ColumnName="Marzo" />
-                <ScalarProperty Name="Febrero" ColumnName="Febrero" />
-                <ScalarProperty Name="Enero" ColumnName="Enero" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
-                <ScalarProperty Name="SaldoFin" ColumnName="SaldoFin" />
-                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
-                <ScalarProperty Name="IdSubRubro" ColumnName="IdSubRubro" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Presupuesto">
-            <EntityTypeMapping TypeName="Agenda_Model.Presupuesto">
-              <MappingFragment StoreEntitySet="Presupuesto">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="Costos" ColumnName="Costos" />
-                <ScalarProperty Name="Visible" ColumnName="Visible" />
-                <ScalarProperty Name="CodigoCaja" ColumnName="CodigoCaja" />
-                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-                <ScalarProperty Name="Historico" ColumnName="Historico" />
-                <ScalarProperty Name="Ejecutado" ColumnName="Ejecutado" />
-                <ScalarProperty Name="Actual" ColumnName="Actual" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Rubros">
-            <EntityTypeMapping TypeName="Agenda_Model.Rubros">
-              <MappingFragment StoreEntitySet="Rubros">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="IdGrupoCuenta" ColumnName="IdGrupoCuenta" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SubRubro">
-            <EntityTypeMapping TypeName="Agenda_Model.SubRubro">
-              <MappingFragment StoreEntitySet="SubRubro">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+          <EntitySetMapping Name="TipoIva">
+            <EntityTypeMapping TypeName="SAC_Model.TipoIva">
+              <MappingFragment StoreEntitySet="TipoIva">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

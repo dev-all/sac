@@ -4,67 +4,71 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="81">
-        <EntityTypeShape EntityType="Agenda_Model.AccionPorRol" Width="1.5" PointX="1.25" PointY="13.875" />
-        <EntityTypeShape EntityType="Agenda_Model.Contacto" Width="1.5" PointX="10.5" PointY="6" />
-        <EntityTypeShape EntityType="Agenda_Model.Evento" Width="1.5" PointX="8.875" PointY="9.375" />
-        <EntityTypeShape EntityType="Agenda_Model.homePorRol" Width="1.5" PointX="1" PointY="11.5" />
-        <EntityTypeShape EntityType="Agenda_Model.Notificacion" Width="1.5" PointX="2.75" PointY="2.5" />
-        <EntityTypeShape EntityType="Agenda_Model.Persona" Width="1.5" PointX="4.625" PointY="4.125" />
-        <EntityTypeShape EntityType="Agenda_Model.Rol" Width="1.5" PointX="3.375" PointY="10.875" />
-        <EntityTypeShape EntityType="Agenda_Model.Usuario" Width="1.5" PointX="8.25" PointY="5.5" />
-        <AssociationConnector Association="Agenda_Model.FK_AccionesPorRoles_Roles" />
-        <AssociationConnector Association="Agenda_Model.FK_Contacto_Evento" />
-        <AssociationConnector Association="Agenda_Model.FK_Contacto_Persona" />
-        <AssociationConnector Association="Agenda_Model.FK_Evento_Usuario" />
-        <AssociationConnector Association="Agenda_Model.FK_Roles_HomePorRol" />
-        <AssociationConnector Association="Agenda_Model.FK_Notificacion_Persona" />
-        <AssociationConnector Association="Agenda_Model.FK_Usuario_Persona" />
-        <AssociationConnector Association="Agenda_Model.FK_Usuarios_Roles" />
-        <EntityTypeShape EntityType="Agenda_Model.MenuSidebar" Width="1.5" PointX="6.125" PointY="14.125" />
-        <AssociationConnector Association="Agenda_Model.FK_MenuSidebar_MenuSidebar" />
-        <EntityTypeShape EntityType="Agenda_Model.Accion" Width="1.5" PointX="4" PointY="14.125" />
-        <AssociationConnector Association="Agenda_Model.FK_AccionesPorRoles_Acciones" />
-        <AssociationConnector Association="Agenda_Model.FK_MenuSidebar_Accion" />
-        <EntityTypeShape EntityType="Agenda_Model.Prioridad" Width="1.5" PointX="11.625" PointY="9.75" />
-        <AssociationConnector Association="Agenda_Model.FK_Evento_Prioridad" />
-        <EntityTypeShape EntityType="Agenda_Model.TipoIva" Width="1.5" PointX="4.5" PointY="1.125" />
-        <EntityTypeShape EntityType="Agenda_Model.TipoMoneda" Width="1.5" PointX="6.375" PointY="19" />
-        <EntityTypeShape EntityType="Agenda_Model.TipoProveedor" Width="1.5" PointX="6.375" PointY="25.75" />
-        <EntityTypeShape EntityType="Agenda_Model.Pais" Width="1.5" PointX="0.75" PointY="2.75" />
-        <EntityTypeShape EntityType="Agenda_Model.Provincia" Width="1.5" PointX="3" PointY="18.75" />
-        <AssociationConnector Association="Agenda_Model.FK_Provincia_Pais" />
-        <EntityTypeShape EntityType="Agenda_Model.Localidad" Width="1.5" PointX="9.25" PointY="15.25" />
-        <AssociationConnector Association="Agenda_Model.FK_Localidad_Pais" />
-        <AssociationConnector Association="Agenda_Model.FK_Localidad_Provincia" />
-        <EntityTypeShape EntityType="Agenda_Model.AfipCategorias" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="Agenda_Model.CompraFactura" Width="2" PointX="15.625" PointY="21" />
-        <EntityTypeShape EntityType="Agenda_Model.CompraFacturaPago" Width="2.5" PointX="18.875" PointY="22.375" />
-        <EntityTypeShape EntityType="Agenda_Model.CompraIva" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Agenda_Model.Diario" Width="1.5" PointX="16.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Agenda_Model.Proveedor" Width="1.5" PointX="12" PointY="14.5" />
-        <EntityTypeShape EntityType="Agenda_Model.TipoComprobante" Width="1.5" PointX="10.125" PointY="0.625" />
-        <EntityTypeShape EntityType="Agenda_Model.TipoPago" Width="1.5" PointX="14.25" PointY="17.625" />
-        <AssociationConnector Association="Agenda_Model.FK_CompraFactura_Proveedor" />
-        <AssociationConnector Association="Agenda_Model.FK_CompraFacturaPago_CompraFactura" />
-        <AssociationConnector Association="Agenda_Model.FK_CompraFacturaPago_TipoPago" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Pais" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Provincia" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoIva" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoMoneda" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_TipoProveedor" />
-        <EntityTypeShape EntityType="Agenda_Model.GrupoCuenta" Width="1.5" PointX="16.375" PointY="15" />
-        <EntityTypeShape EntityType="Agenda_Model.Imputacion" Width="2" PointX="22" PointY="17.625" />
-        <EntityTypeShape EntityType="Agenda_Model.Presupuesto" Width="1.5" PointX="9.75" PointY="21.125" />
-        <EntityTypeShape EntityType="Agenda_Model.Rubros" Width="1.5" PointX="18.625" PointY="14.75" />
-        <EntityTypeShape EntityType="Agenda_Model.SubRubro" Width="1.5" PointX="20.875" PointY="14.875" />
-        <AssociationConnector Association="Agenda_Model.FK_CompraFactura_Imputacion" />
-        <AssociationConnector Association="Agenda_Model.FK_Rubros_GrupoCuenta" />
-        <AssociationConnector Association="Agenda_Model.FK_Imputacion_SubRubro" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Imputacion" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Imputacion1" />
-        <AssociationConnector Association="Agenda_Model.FK_Proveedor_Presupuesto1" />
-        <AssociationConnector Association="Agenda_Model.FK_SubRubro_Rubros_1" />
+      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="124">
+        <EntityTypeShape EntityType="SAC_Model.AccionPorRol" Width="1.5" PointX="1.25" PointY="13.875" />
+        <EntityTypeShape EntityType="SAC_Model.Contacto" Width="1.5" PointX="10.5" PointY="6" />
+        <EntityTypeShape EntityType="SAC_Model.Evento" Width="1.5" PointX="8.875" PointY="9.375" />
+        <EntityTypeShape EntityType="SAC_Model.homePorRol" Width="1.5" PointX="1" PointY="11.5" />
+        <EntityTypeShape EntityType="SAC_Model.Notificacion" Width="1.5" PointX="2.75" PointY="2.5" />
+        <EntityTypeShape EntityType="SAC_Model.Persona" Width="1.5" PointX="4.625" PointY="4.125" />
+        <EntityTypeShape EntityType="SAC_Model.Rol" Width="1.5" PointX="3.375" PointY="10.875" />
+        <EntityTypeShape EntityType="SAC_Model.Usuario" Width="1.5" PointX="8.25" PointY="5.5" />
+        <AssociationConnector Association="SAC_Model.FK_AccionesPorRoles_Roles" />
+        <AssociationConnector Association="SAC_Model.FK_Contacto_Evento" />
+        <AssociationConnector Association="SAC_Model.FK_Contacto_Persona" />
+        <AssociationConnector Association="SAC_Model.FK_Evento_Usuario" />
+        <AssociationConnector Association="SAC_Model.FK_Roles_HomePorRol" />
+        <AssociationConnector Association="SAC_Model.FK_Notificacion_Persona" />
+        <AssociationConnector Association="SAC_Model.FK_Usuario_Persona" />
+        <AssociationConnector Association="SAC_Model.FK_Usuarios_Roles" />
+        <EntityTypeShape EntityType="SAC_Model.MenuSidebar" Width="1.5" PointX="6.125" PointY="14.125" />
+        <AssociationConnector Association="SAC_Model.FK_MenuSidebar_MenuSidebar" />
+        <EntityTypeShape EntityType="SAC_Model.Accion" Width="1.5" PointX="4" PointY="14.125" />
+        <AssociationConnector Association="SAC_Model.FK_AccionesPorRoles_Acciones" />
+        <AssociationConnector Association="SAC_Model.FK_MenuSidebar_Accion" />
+        <EntityTypeShape EntityType="SAC_Model.Prioridad" Width="1.5" PointX="11.625" PointY="9.75" />
+        <AssociationConnector Association="SAC_Model.FK_Evento_Prioridad" />
+        <EntityTypeShape EntityType="SAC_Model.TipoMoneda" Width="1.5" PointX="6.375" PointY="19" />
+        <EntityTypeShape EntityType="SAC_Model.TipoProveedor" Width="1.5" PointX="6.375" PointY="25.75" />
+        <EntityTypeShape EntityType="SAC_Model.Pais" Width="1.5" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="SAC_Model.Provincia" Width="1.5" PointX="3" PointY="18.75" />
+        <AssociationConnector Association="SAC_Model.FK_Provincia_Pais" />
+        <EntityTypeShape EntityType="SAC_Model.Localidad" Width="1.5" PointX="9.25" PointY="15.25" />
+        <AssociationConnector Association="SAC_Model.FK_Localidad_Pais" />
+        <AssociationConnector Association="SAC_Model.FK_Localidad_Provincia" />
+        <EntityTypeShape EntityType="SAC_Model.AfipCategorias" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SAC_Model.CompraFactura" Width="2" PointX="16.375" PointY="18.625" />
+        <EntityTypeShape EntityType="SAC_Model.CompraFacturaPago" Width="2" PointX="19.625" PointY="22.125" />
+        <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="19.5" PointY="9.375" />
+        <EntityTypeShape EntityType="SAC_Model.Proveedor" Width="1.5" PointX="12" PointY="14.5" />
+        <EntityTypeShape EntityType="SAC_Model.TipoPago" Width="1.5" PointX="22.75" PointY="24.875" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Proveedor" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_CompraFactura" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_TipoPago" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Pais" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Provincia" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_TipoMoneda" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_TipoProveedor" />
+        <EntityTypeShape EntityType="SAC_Model.GrupoCuenta" Width="1.5" PointX="23" PointY="21.75" />
+        <EntityTypeShape EntityType="SAC_Model.Imputacion" Width="2" PointX="19.625" PointY="15.25" />
+        <EntityTypeShape EntityType="SAC_Model.Presupuesto" Width="1.5" PointX="9.75" PointY="21.125" />
+        <EntityTypeShape EntityType="SAC_Model.Rubros" Width="1.5" PointX="22.875" PointY="18.25" />
+        <EntityTypeShape EntityType="SAC_Model.SubRubro" Width="1.5" PointX="22.875" PointY="15.125" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Imputacion" />
+        <AssociationConnector Association="SAC_Model.FK_Rubros_GrupoCuenta" />
+        <AssociationConnector Association="SAC_Model.FK_Imputacion_SubRubro" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion1" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Presupuesto1" />
+        <AssociationConnector Association="SAC_Model.FK_SubRubro_Rubros_1" />
+        <EntityTypeShape EntityType="SAC_Model.CompraIva" Width="1.5" PointX="19.125" PointY="26.75" />
+        <AssociationConnector Association="SAC_Model.FK_CompraIva_CompraFactura" />
+        <EntityTypeShape EntityType="SAC_Model.TipoComprobante" Width="1.5" PointX="18.25" PointY="5.625" />
+        <EntityTypeShape EntityType="SAC_Model.TipoComprobanteTipoIva" Width="1.5" PointX="14.5" PointY="5.625" />
+        <EntityTypeShape EntityType="SAC_Model.TipoIva" Width="1.5" PointX="14.375" PointY="9.875" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_TipoIva" />
+        <AssociationConnector Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante" />
+        <AssociationConnector Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

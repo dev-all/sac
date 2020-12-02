@@ -14,13 +14,21 @@ namespace Datos.ModeloDeDatos
     
     public partial class TipoComprobante
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoComprobante()
+        {
+            this.TipoComprobanteTipoIva = new HashSet<TipoComprobanteTipoIva>();
+        }
+    
         public int Id { get; set; }
         public string Denominacion { get; set; }
         public string Abreviatura { get; set; }
-        public Nullable<int> Numero { get; set; }
-        public Nullable<int> PuntoVenta { get; set; }
+        public Nullable<int> IdAfipCategoria { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public System.DateTime UltimaModificacion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
     }
 }

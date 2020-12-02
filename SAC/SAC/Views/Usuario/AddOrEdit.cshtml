@@ -7,9 +7,8 @@
 
 <div class="row page-titles">
     <div class="col-md-5 col-12 align-self-center">
-        <h3 class="text-themecolor mb-0">Cuenta de Usuario</h3>
+        <h3 class="text-themecolor mb-0">Cuentas de Usuario </h3>
     </div>
-
 </div>
 
 @using (Html.BeginForm("AddOrEdit", "Usuario", FormMethod.Post))
@@ -28,8 +27,8 @@
                 <div class="card-body">
                     <form action="#">
                         <div class="form-body">
-                            <h5 class="card-title">Datos del Usuario</h5>
-                            <hr>
+                            @*<h5 class="card-title">Datos del Usuario</h5>
+                                <hr>*@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -48,7 +47,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                      
+
                                         @Html.LabelFor(model => model.idRol, new { @class = "control-label" })
 
                                         @Html.ValidationMessageFor(m => m.idRol, "", new { @class = "text-danger" })
@@ -59,7 +58,7 @@
      , "Seleccionar Rol...", new { @class = "form-control" })
 
                                     </div>
-                                    </div>
+                                </div>
                             </div>
                             <!--/row-->
                             <div class="row">
@@ -92,8 +91,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.nombre,
-   new { @class = "control-label" })
+                                        @Html.LabelFor(m => m.Persona.nombre, new { @class = "control-label" })
 
                                         @Html.ValidationMessageFor(m => m.Persona.nombre, "", new { @class = "text-danger" })
                                         @Html.TextBoxFor(m => m.Persona.nombre, new
@@ -118,8 +116,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -163,7 +161,7 @@ new { @class = "control-label" })
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        @Html.LabelFor(m => m.Persona.telefonoAlternativo,new { @class = "control-label" })
+                                        @Html.LabelFor(m => m.Persona.telefonoAlternativo, new { @class = "control-label" })
                                         @Html.ValidationMessageFor(m => m.Persona.telefonoAlternativo, "", new { @class = "text-danger" })
                                         @Html.TextBoxFor(m => m.Persona.telefonoAlternativo, new
                                    {
@@ -181,10 +179,10 @@ new { @class = "control-label" })
                             <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
 
                             @{
-                                
+
                                 if (Model.idUsuario != null)
                                 {
-                                    <input type="submit" value="Restablecer Password" 
+                                    <input type="submit" value="Restablecer Password"
                                            formaction="@Url.Action("RestablecerCuenta", "Usuario", new { id = Model.idUsuario })"
                                            class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Se actualiza la clave..." />
 

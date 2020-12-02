@@ -6,20 +6,17 @@ using System.Threading.Tasks;
 //agregado
 using Datos.ModeloDeDatos;
 
-namespace Negocio.Modelos
+namespace SAC.Models
 {
-    public class TipoMonedaModel
+    public class TipoComprobanteModelView
     {
         public int Id { get; set; }
-
-        public string Descripcion { get; set; }
-
+        public string Denominacion { get; set; }
+        public string Abreviatura { get; set; }
+        public Nullable<int> IdAfipCategoria { get; set; }
         public Nullable<bool> Activo { get; set; }
-
         public Nullable<int> IdUsuario { get; set; }
+        public System.DateTime UltimaModificacion { get; set; }
 
-        public Nullable<System.DateTime> UltimaModificacion { get; set; }
-
-        public ICollection<Proveedor> Proveedor { get; set; }
     }
 }

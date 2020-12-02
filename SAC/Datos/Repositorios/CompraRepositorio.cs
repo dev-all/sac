@@ -53,6 +53,13 @@ namespace Datos.Repositorios
 
             return CompraFactura;
         }
-             
+
+        public List<Proveedor> GetProveedorPorNombre(string strProveedor)
+        {
+            List<Proveedor> p = (from c in context.Proveedor
+                                 where c.Activo == true && c.Nombre.Contains(strProveedor)
+                                 select c).ToList();
+            return p;                
+        }
     }
 }

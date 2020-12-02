@@ -96,6 +96,11 @@ namespace Negocio.Servicios
             }
         }
 
+        public ProveedorModel GetProveedorPorID(int idProveedor)
+        {
+            return Mapper.Map<Proveedor, ProveedorModel>(pProveedorRepositorio.GetProveedorPorId(idProveedor));
+        }
+
         //public int Eliminar(int idProveedor)
         //{
         //    var retorno = pProveedorRepositorio.EliminarProveedor(idProveedor);

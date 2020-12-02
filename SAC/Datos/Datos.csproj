@@ -151,6 +151,9 @@
     <Compile Include="ModeloDeDatos\TipoComprobante.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\TipoComprobanteTipoIva.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\TipoIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -182,6 +185,7 @@
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\SubRubroRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoComprobanteRepositorio.cs" />
     <Compile Include="Repositorios\TipoMonedaRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
   </ItemGroup>

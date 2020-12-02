@@ -1,257 +1,437 @@
 ﻿@model SAC.Models.CompraFacturaViewModel
 
 @{
-    ViewBag.Title = "FacturaCompras";
+    ViewBag.Title = "Factura Compras";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!-- Date picker plugins css -->
+<link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 
-<h2>FacturaCompras</h2>
 
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("FacturaCompras", "Compras", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>CompraFacturaViewModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdTipoComprobante, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdTipoComprobante, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdTipoComprobante, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PuntoVenta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PuntoVenta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PuntoVenta, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    @Html.HiddenFor(model => model.IdProveedor)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NumeroFactura, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NumeroFactura, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumeroFactura, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdProveedor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdProveedor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdProveedor, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    <div class="form-body">
+                        <h5 class="card-title">Registro Facturas de Compras</h5>
+                        <hr>
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.IdProveedor, new { @class = "control-label form-control-sm", @for = "IdProveedor" })
+                                        @Html.TextBoxFor(m => m.Proveedor.Nombre, new
+                                        {
+                                            @class = "form-control form-control-sm",
+                                            @id = "NombreProveedor",
+                                            @placeholder = "Ingrese parte del nombre del proveedor"
+                                        })
+                                        @Html.ValidationMessageFor(m => m.Proveedor.Nombre, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Total, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtImputacion" class="control-label form-control-sm">Imputación</label>
+                                        @Html.TextBoxFor(m => m.IdImputacion, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                        @Html.ValidationMessageFor(m => m.IdImputacion, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Saldo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Saldo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Saldo, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="col-md-4">
+                                    <div class="form-group bg-light">
+                                        @*<h3 class="box-title m-b-0">Johnathan Doe</h3>*@
+                                        <small>Iva:</small> <small id="ivaProv">Web Designer</small><br />
+                                        <small>Teléfono:</small> <small id="telProv"></small><br />
+                                        <small>Dirección:</small> <small id="dirProv"></small><br />
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        @*@Html.Label("Seleccione una provincia")
+                                            @Html.DropDownList("idCmbProvincia", new List<SelectListItem>(), " -- Seleccionar Localidad --", new { @class = "form-control" })*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Vencimiento, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Vencimiento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Vencimiento, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                        <label for="txtIdTipoComprobante" class="control-label form-control-sm">Comprobante</label>
+                                        @Html.DropDownListFor(model => model.IdTipoComprobante, new List<SelectListItem>(),
+                                            "Seleccionar...", new { @class = "form-control form-control-sm" })
+                                        @*@Html.DropDownListFor(model => model.IdTipoComprobante,
+                                            (IEnumerable<SelectListItem>)(new SelectList(Model.TipoComprobante.Select(x => new { Value = x.Id, Text = x.Denominacion }),
+                                                           "Value", "Text")), "Seleccionar...", new { @class = "form-control form-control-sm" })*@
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TotalDolares, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalDolares, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalDolares, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                        @Html.ValidationMessageFor(m => m.IdTipoComprobante, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cotiza, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cotiza, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cotiza, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.PuntoVenta, new { @class = "control-label form-control-sm" })
+                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FechaPago, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FechaPago, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FechaPago, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.NumeroFactura, new { @class = "control-label form-control-sm" })
+                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                        @Html.ValidationMessageFor(m => m.NumeroFactura, "", new { @class = "text-danger form-control-sm" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Periodo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Periodo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Periodo, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Grupo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Grupo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Grupo, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Marca, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Marca, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Marca, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Pase, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Pase, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pase, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                        @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
+                                        @Html.TextBoxFor(m => m.Fecha, new
+                                        {
+                                                                            @class = "form-control form-control-sm fechadatepicker",
+                                                                            @placeholder = ""
+                                                                        })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Cotiza1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Cotiza1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Cotiza1, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                        @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger form-control-sm " })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Vencimiento, new { @class = "control-label form-control-sm" })
+                                        @Html.TextBoxFor(m => m.Vencimiento, new { @class = "form-control form-control-sm fechadatepicker", @placeholder = "" })
+                                        @Html.ValidationMessageFor(m => m.Vencimiento, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group invisible" id="AplicaFactura">
+                                        @*@Html.LabelFor(m => m.NumeroFactura, new { @class = "control-label form-control-sm" })*@
+                                        <label for="txtImputacion" class="control-label form-control-sm">Aplica Factura Nº</label>
+                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                        @Html.ValidationMessageFor(m => m.NumeroFactura, "", new { @class = "text-danger form-control-sm" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdImputacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdImputacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdImputacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="row m-b-10">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        @Html.LabelFor(m => m.Concepto, new { @class = "col-md-2 control-label form-control-sm" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.Concepto, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            @Html.ValidationMessageFor(m => m.Concepto, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row">
+                                    
+                                            <label for="txtIdTipoMoneda" class=" col-md-4 control-label form-control-sm">Moneda</label>
+                                            <div class="col-md-8">
+                                                @Html.DropDownListFor(model => model.IdTipoComprobante, (IEnumerable<SelectListItem>)
+                                               (new SelectList(Model.TipoMonedas.Select(x => new { Value = x.Id, Text = x.Descripcion }),
+                                                "Value", "Text")), "Seleccionar...", new { @class = "form-control form-control-sm" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdMoneda, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdMoneda, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdMoneda, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                                @Html.ValidationMessageFor(m => m.IdMoneda, "", new { @class = "text-danger form-control-sm" })
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+                                    <div class="col-md-3">
+                                        <div class="row">
+                                            @Html.LabelFor(m => m.Cotiza, new { @class = "col-md-3 control-label form-control-sm" })
+                                            <div class="col-md-9">
+                                                @Html.TextBoxFor(m => m.Cotiza, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                @Html.ValidationMessageFor(m => m.Cotiza, "", new { @class = "text-danger form-control-sm" })
+                                            </div>
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Parcial, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Parcial, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Parcial, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Recibo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Recibo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Recibo, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.NumeroPago, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NumeroPago, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumeroPago, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                            <div class="row">
+                                <div class="col-md-4 bg-light ">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdDiario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdDiario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdDiario, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Auxiliar, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Auxiliar, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Auxiliar, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center m-t-15">
+                                            <h6 class="box-title">Neto y Alicuotas de IVA</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.NumeroFactura, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">IVA 2.5%</label>
+                                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.NumeroFactura, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.AxiliarNumero, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AxiliarNumero, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AxiliarNumero, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">IVA 5%</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Activo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">IVA 10.5%</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">IVA 21%</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group  text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">IVA 27%</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.UltimaModificacion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UltimaModificacion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UltimaModificacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="row">
+                                                <div class="col-md-12 text-center m-t-15">
+                                                    <h6 class="box-title">Percepciones</h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">% IVA </label>
+                                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">% I.B. Capital</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">% I.B. Prov.</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Importe</label>
+                                                        @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group text-center">
+                                                        <label for="txtImputacion" class="control-label form-control-sm">Otros Importes</label>
+                                                        @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 bg-light ">
+
+
+                                    <div class="row">
+                                        <div class="col-md-12 text-center m-t-15 m-b-20">
+                                            <h6 class="box-title">Totales de Facturas</h6>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="NetoGravado" class="col-md-6 col-form-label">Neto Gravado</label>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="NetoGravado" class="col-md-6 col-form-label">Neto No Gravado</label>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <label for="NetoGravado" class="col-md-6 col-form-label">Sub Total</label>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="NetoGravado" class="col-md-6 col-form-label">Total IVA</label>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="NetoGravado" class="col-md-6 col-form-label">Total Percepciones</label>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <label for="NetoGravado" class="col-md-6 col-form-label">Total</label>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="text-right m-t-10">
+                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
+
+                            @*@{
+
+                                    if (Model.idUsuario != null)
+                                    {
+                                        <input type="submit" value="Restablecer Password"
+                                               formaction="@Url.Action("RestablecerCuenta", "Usuario", new { id = Model.idUsuario })"
+                                               class="btn btn-primary btn-sm" data-toggle="tooltip" data-original-title="Se actualiza la clave..." />
+
+                                    }
+                                }
+                              <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>*@
+                        </div>
+
+
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
+
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
+
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
     @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script src="~/Scripts/view/FacturaCompraScript.js"></script>
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,7 +13,9 @@ namespace SAC.Models
         public Nullable<int> IdTipoComprobante { get; set; }
         public Nullable<int> PuntoVenta { get; set; }
         public Nullable<int> NumeroFactura { get; set; }
-        public Nullable<int> IdProveedor { get; set; }
+        [Display(Name = "Proveedor ")]
+        [Required(ErrorMessage = "Ops!, complete el campo Usuario.")]
+        public int IdProveedor { get; set; }
         public Nullable<decimal> Total { get; set; }
         public decimal Saldo { get; set; }
         public System.DateTime Fecha { get; set; }
@@ -41,5 +44,8 @@ namespace SAC.Models
         public ProveedorModelView Proveedor { get; set; }
         //public List<CompraFacturaPago> CompraFacturaPago { get; set; }
         //public Imputacion Imputacion { get; set; }
+
+        public List<TipoMonedaModelView> TipoMonedas { get; set; }
+        public List<TipoComprobanteModelView> TipoComprobante { get; set; }
     }
 }

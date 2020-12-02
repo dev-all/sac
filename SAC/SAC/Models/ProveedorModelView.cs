@@ -43,17 +43,14 @@ namespace SAC.Models
 
 
         [Display(Name = "Tipo de iva")]
-        [Required]
-        [Range(1, 1000, ErrorMessage = "El valor del Telefono no corresponde")]
-        public Nullable<int> IdTipoIva { get; set; }
+ 
+        public int IdTipoIva { get; set; }
 
         [Display(Name = "Dias factura")]
         public Nullable<int> DiasFactura { get; set; }
 
-        [Display(Name = "Nro imputación")]
-        [Required]
-        [Range(1, 1000, ErrorMessage = "El valor del Telefono no corresponde")]
-        public Nullable<int> IdImputacionProveedor { get; set; }
+        [Display(Name = "Nro imputación")]      
+        public int IdImputacionProveedor { get; set; }
 
         [Display(Name = "Observaciones")]
         [StringLength(50, ErrorMessage = "La longitud máxima es 50")]
@@ -132,10 +129,12 @@ namespace SAC.Models
         public  Provincia Provincia { get; set; }
 
         public  TipoIva TipoIva { get; set; }
-
+       
         public  TipoMoneda TipoMoneda { get; set; }
 
-        public virtual TipoProveedor TipoProveedor { get; set; }
+        public  TipoProveedor TipoProveedor { get; set; }
+
+        public List<TipoComprobanteModelView> ListTipoComprobante { get; set; }
     }
 
 }

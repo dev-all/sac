@@ -33,7 +33,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
            
@@ -49,7 +49,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
          
@@ -82,7 +82,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
             
@@ -117,7 +117,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }         
         }
@@ -132,7 +132,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return false;
             }
            
@@ -184,7 +184,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                
             }
             
@@ -197,7 +197,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
             
@@ -211,7 +211,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             { 
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
 
@@ -227,7 +227,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
 
             }
         }
@@ -241,7 +241,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
 
             }
           
@@ -254,7 +254,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
 
@@ -269,7 +269,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
 
             }
            

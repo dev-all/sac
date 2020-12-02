@@ -42,7 +42,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
         }
@@ -62,7 +62,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
          
@@ -76,7 +76,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");               
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");               
             }
             
         }
@@ -95,7 +95,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
                    
@@ -110,7 +110,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
            
@@ -130,7 +130,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                
             }
          
@@ -250,7 +250,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
 
@@ -265,7 +265,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Pongase en contacto con el administrador del sistema", "error");              
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");              
             }
         }
 
