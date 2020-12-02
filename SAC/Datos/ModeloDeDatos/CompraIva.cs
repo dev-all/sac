@@ -20,11 +20,7 @@ public partial class CompraIva
 
     public int Id { get; set; }
 
-    public string IdTipoComprobante { get; set; }
-
-    public string PuntoVenta { get; set; }
-
-    public int NumeroFactura { get; set; }
+    public Nullable<int> IdFacturaCompra { get; set; }
 
     public int AuxiliarNumero { get; set; }
 
@@ -123,6 +119,10 @@ public partial class CompraIva
     public Nullable<int> Idusuario { get; set; }
 
     public Nullable<System.DateTime> UltimaModificacion { get; set; }
+
+
+
+    public virtual CompraFactura CompraFactura { get; set; }
 
 }
 

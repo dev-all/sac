@@ -38,9 +38,9 @@ namespace SAC.Models
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
 
-        public virtual Pais Pais { get; set; }
+        //public virtual Pais Pais { get; set; }
 
-        public virtual Provincia Provincia { get; set; }
+        //public virtual Provincia Provincia { get; set; }
 
 
         //agregados para tomar valor de los combo

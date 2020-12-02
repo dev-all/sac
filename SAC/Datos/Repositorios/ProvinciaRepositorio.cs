@@ -85,6 +85,7 @@ namespace Datos.Repositorios
         {
             context.Configuration.LazyLoadingEnabled = false;
             List<Provincia> listaProvincia = context.Provincia.Where(p => p.Activo == true && p.IdPais == idPais).ToList();
+            listaProvincia = listaProvincia.OrderBy(p => p.Nombre).ToList();
             return listaProvincia;
         }
 
@@ -92,6 +93,7 @@ namespace Datos.Repositorios
         public List<Provincia> GetAllProvincia()
         {
             List<Provincia> listaProvincia = context.Provincia.Where(p => p.Activo == true).ToList();
+            listaProvincia = listaProvincia.OrderBy(p => p.Nombre).ToList();
             return listaProvincia;
         }
         public List<Provincia> GetAllProvincia(int idPais)
@@ -99,6 +101,7 @@ namespace Datos.Repositorios
             
             List<Provincia> listaProvincia = context.Provincia
                                             .Where(p => p.Activo == true && p.IdPais == idPais).ToList();
+            listaProvincia = listaProvincia.OrderBy(p => p.Nombre).ToList();
             return listaProvincia;
         }
 

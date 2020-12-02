@@ -167,10 +167,10 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorios\LocalidadRespositorio.cs" />
+    <Compile Include="Repositorios\ImputacionRepositorio.cs" />
+    <Compile Include="Repositorios\LocalidadRepositorio.cs" />
     <Compile Include="Repositorios\PaisRepositorio.cs" />
     <Compile Include="Repositorios\ProvinciaRepositorio.cs" />
-    <Compile Include="Repositorios\LocalidadRepositorio.cs" />
     <Compile Include="Repositorios\ProveedorRepositorio.cs" />
     <Compile Include="Repositorios\AccionRepositorio.cs" />
     <Compile Include="Repositorios\RolRepositorio.cs" />
@@ -181,6 +181,7 @@
     <Compile Include="Repositorios\SubRubroRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
     <Compile Include="Repositorios\TipoMonedaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoProveedorRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>

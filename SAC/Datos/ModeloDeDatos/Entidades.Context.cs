@@ -72,13 +72,7 @@ public partial class SAC_Entities : DbContext
 
     public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
 
-    public virtual DbSet<CompraIva> CompraIva { get; set; }
-
     public virtual DbSet<Diario> Diario { get; set; }
-
-    public virtual DbSet<Proveedor> Proveedor { get; set; }
-
-    public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
 
     public virtual DbSet<TipoPago> TipoPago { get; set; }
 
@@ -91,6 +85,12 @@ public partial class SAC_Entities : DbContext
     public virtual DbSet<Rubros> Rubros { get; set; }
 
     public virtual DbSet<SubRubro> SubRubro { get; set; }
+
+    public virtual DbSet<CompraIva> CompraIva { get; set; }
+
+    public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
+
+    public virtual DbSet<Proveedor> Proveedor { get; set; }
 
 }
 

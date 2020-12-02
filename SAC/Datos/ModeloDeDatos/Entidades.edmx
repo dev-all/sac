@@ -87,9 +87,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdTipoComprobante" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PuntoVenta" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="NumeroFactura" Type="int" Nullable="false" />
+          <Property Name="IdFacturaCompra" Type="int" />
           <Property Name="AuxiliarNumero" Type="int" Nullable="false" />
           <Property Name="NumeroEmpresa" Type="nvarchar" MaxLength="50" />
           <Property Name="Empesa" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -361,6 +359,7 @@
           <Property Name="Direccion" Type="varchar" MaxLength="50" />
           <Property Name="IdPais" Type="int" />
           <Property Name="IdProvincia" Type="int" />
+          <Property Name="IdLocalidad" Type="int" />
           <Property Name="Telefono" Type="varchar" MaxLength="50" />
           <Property Name="IdTipoIva" Type="int" />
           <Property Name="DiasFactura" Type="int" />
@@ -432,8 +431,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Denominacion" Type="varchar" MaxLength="250" />
           <Property Name="Abreviatura" Type="varchar" MaxLength="10" />
-          <Property Name="Numero" Type="int" />
-          <Property Name="PuntoVenta" Type="int" />
+          <Property Name="IdAfipCategoria" Type="int" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" Nullable="false" />
@@ -560,6 +558,18 @@
             </Principal>
             <Dependent Role="CompraFacturaPago">
               <PropertyRef Name="IdTipoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraIva_CompraFactura">
+          <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="0..1" />
+          <End Role="CompraIva" Type="Self.CompraIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraIva">
+              <PropertyRef Name="IdFacturaCompra" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -882,6 +892,10 @@
             <End Role="TipoPago" EntitySet="TipoPago" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
           </AssociationSet>
+          <AssociationSet Name="FK_CompraIva_CompraFactura" Association="Self.FK_CompraIva_CompraFactura">
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+            <End Role="CompraIva" EntitySet="CompraIva" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contacto_Evento" Association="Self.FK_Contacto_Evento">
             <End Role="Evento" EntitySet="Evento" />
             <End Role="Contacto" EntitySet="Contacto" />
@@ -1056,15 +1070,8 @@
           <EntitySet Name="AfipCategorias" EntityType="Agenda_Model.AfipCategorias" />
           <EntitySet Name="CompraFactura" EntityType="Agenda_Model.CompraFactura" />
           <EntitySet Name="CompraFacturaPago" EntityType="Agenda_Model.CompraFacturaPago" />
-          <EntitySet Name="CompraIva" EntityType="Agenda_Model.CompraIva" />
           <EntitySet Name="Diario" EntityType="Agenda_Model.Diario" />
-          <EntitySet Name="Proveedor" EntityType="Agenda_Model.Proveedor" />
-          <EntitySet Name="TipoComprobante" EntityType="Agenda_Model.TipoComprobante" />
           <EntitySet Name="TipoPago" EntityType="Agenda_Model.TipoPago" />
-          <AssociationSet Name="FK_CompraFactura_Proveedor" Association="Agenda_Model.FK_CompraFactura_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="CompraFactura" EntitySet="CompraFactura" />
-          </AssociationSet>
           <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="Agenda_Model.FK_CompraFacturaPago_CompraFactura">
             <End Role="CompraFactura" EntitySet="CompraFactura" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
@@ -1072,26 +1079,6 @@
           <AssociationSet Name="FK_CompraFacturaPago_TipoPago" Association="Agenda_Model.FK_CompraFacturaPago_TipoPago">
             <End Role="TipoPago" EntitySet="TipoPago" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Pais" Association="Agenda_Model.FK_Proveedor_Pais">
-            <End Role="Pais" EntitySet="Pais" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Provincia" Association="Agenda_Model.FK_Proveedor_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_TipoIva" Association="Agenda_Model.FK_Proveedor_TipoIva">
-            <End Role="TipoIva" EntitySet="TipoIva" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_TipoMoneda" Association="Agenda_Model.FK_Proveedor_TipoMoneda">
-            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_TipoProveedor" Association="Agenda_Model.FK_Proveedor_TipoProveedor">
-            <End Role="TipoProveedor" EntitySet="TipoProveedor" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           <EntitySet Name="GrupoCuenta" EntityType="Agenda_Model.GrupoCuenta" />
           <EntitySet Name="Imputacion" EntityType="Agenda_Model.Imputacion" />
@@ -1110,6 +1097,21 @@
             <End Role="SubRubro" EntitySet="SubRubro" />
             <End Role="Imputacion" EntitySet="Imputacion" />
           </AssociationSet>
+          <AssociationSet Name="FK_SubRubro_Rubros_1" Association="Agenda_Model.FK_SubRubro_Rubros_1">
+            <End Role="Rubros" EntitySet="Rubros" />
+            <End Role="SubRubro" EntitySet="SubRubro" />
+          </AssociationSet>
+          <EntitySet Name="CompraIva" EntityType="Agenda_Model.CompraIva" />
+          <AssociationSet Name="FK_CompraIva_CompraFactura" Association="Agenda_Model.FK_CompraIva_CompraFactura">
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+            <End Role="CompraIva" EntitySet="CompraIva" />
+          </AssociationSet>
+          <EntitySet Name="TipoComprobante" EntityType="Agenda_Model.TipoComprobante" />
+          <EntitySet Name="Proveedor" EntityType="Agenda_Model.Proveedor" />
+          <AssociationSet Name="FK_CompraFactura_Proveedor" Association="Agenda_Model.FK_CompraFactura_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+          </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Imputacion" Association="Agenda_Model.FK_Proveedor_Imputacion">
             <End Role="Imputacion" EntitySet="Imputacion" />
             <End Role="Proveedor" EntitySet="Proveedor" />
@@ -1118,13 +1120,29 @@
             <End Role="Imputacion" EntitySet="Imputacion" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
+          <AssociationSet Name="FK_Proveedor_Pais" Association="Agenda_Model.FK_Proveedor_Pais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Presupuesto1" Association="Agenda_Model.FK_Proveedor_Presupuesto1">
             <End Role="Presupuesto" EntitySet="Presupuesto" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_SubRubro_Rubros_1" Association="Agenda_Model.FK_SubRubro_Rubros_1">
-            <End Role="Rubros" EntitySet="Rubros" />
-            <End Role="SubRubro" EntitySet="SubRubro" />
+          <AssociationSet Name="FK_Proveedor_Provincia" Association="Agenda_Model.FK_Proveedor_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedor_TipoIva" Association="Agenda_Model.FK_Proveedor_TipoIva">
+            <End Role="TipoIva" EntitySet="TipoIva" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedor_TipoMoneda" Association="Agenda_Model.FK_Proveedor_TipoMoneda">
+            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedor_TipoProveedor" Association="Agenda_Model.FK_Proveedor_TipoProveedor">
+            <End Role="TipoProveedor" EntitySet="TipoProveedor" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccionPorRol">
@@ -1600,9 +1618,10 @@
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
           <NavigationProperty Name="CompraFacturaPago" Relationship="Agenda_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
           <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
+          <NavigationProperty Name="CompraIva" Relationship="Agenda_Model.FK_CompraIva_CompraFactura" FromRole="CompraFactura" ToRole="CompraIva" />
+          <NavigationProperty Name="Proveedor" Relationship="Agenda_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="CompraFacturaPago">
           <Key>
@@ -1618,64 +1637,6 @@
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CompraFactura" Relationship="Agenda_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFacturaPago" ToRole="CompraFactura" />
           <NavigationProperty Name="TipoPago" Relationship="Agenda_Model.FK_CompraFacturaPago_TipoPago" FromRole="CompraFacturaPago" ToRole="TipoPago" />
-        </EntityType>
-        <EntityType Name="CompraIva">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdTipoComprobante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PuntoVenta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
-          <Property Name="AuxiliarNumero" Type="Int32" Nullable="false" />
-          <Property Name="NumeroEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Empesa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IvaAri" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IvaRes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Neto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Especial" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Res" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdTipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TipoFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ResDgr" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Cuit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="dolar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Diferencia" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="Clase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NombreEmple" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Periodo" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="AbreviaturaFactura" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoMoneda" Type="Int32" Nullable="false" />
-          <Property Name="Isib" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdDiario" Type="Int32" Nullable="false" />
-          <Property Name="Cae" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Impint" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
-          <Property Name="Tnogra" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Texento" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PerGeneral" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Perib" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PerMun" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Tnocat" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Pernac" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Ivan5" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total21" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total27" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total105" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Total5" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="Idusuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Diario">
           <Key>
@@ -1702,56 +1663,6 @@
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Proveedor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdPais" Type="Int32" />
-          <Property Name="IdProvincia" Type="Int32" />
-          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoIva" Type="Int32" />
-          <Property Name="DiasFactura" Type="Int32" />
-          <Property Name="IdImputacionProveedor" Type="Int32" />
-          <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdCodigoPostal" Type="Int32" />
-          <Property Name="IdTipoProveedor" Type="Int32" />
-          <Property Name="IdImputacionFactura" Type="Int32" />
-          <Property Name="IdMonedaFactura" Type="Int32" />
-          <Property Name="DescripcionFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoMoneda" Type="Int32" />
-          <Property Name="IdPresupuesto" Type="Int32" />
-          <Property Name="UltimoPuntoVenta" Type="Int32" />
-          <Property Name="Activo" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CompraFactura" Relationship="Agenda_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
-          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Proveedor" ToRole="Pais" />
-          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
-          <NavigationProperty Name="TipoIva" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
-          <NavigationProperty Name="TipoMoneda" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
-          <NavigationProperty Name="TipoProveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
-          <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
-          <NavigationProperty Name="Imputacion1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
-          <NavigationProperty Name="Presupuesto" Relationship="Agenda_Model.FK_Proveedor_Presupuesto1" FromRole="Proveedor" ToRole="Presupuesto" />
-          </EntityType>
-        <EntityType Name="TipoComprobante">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Denominacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Abreviatura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Numero" Type="Int32" />
-          <Property Name="PuntoVenta" Type="Int32" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
         <EntityType Name="TipoPago">
           <Key>
             <PropertyRef Name="Id" />
@@ -1763,18 +1674,6 @@
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CompraFacturaPago" Relationship="Agenda_Model.FK_CompraFacturaPago_TipoPago" FromRole="TipoPago" ToRole="CompraFacturaPago" />
         </EntityType>
-        <Association Name="FK_CompraFactura_Proveedor">
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
-          <End Type="Agenda_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CompraFactura">
-              <PropertyRef Name="IdProveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CompraFacturaPago_CompraFactura">
           <End Type="Agenda_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
           <End Type="Agenda_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
@@ -1796,66 +1695,6 @@
             </Principal>
             <Dependent Role="CompraFacturaPago">
               <PropertyRef Name="IdTipoPago" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_Pais">
-          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pais">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_Provincia">
-          <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_TipoIva">
-          <End Type="Agenda_Model.TipoIva" Role="TipoIva" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoIva">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdTipoIva" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_TipoMoneda">
-          <End Type="Agenda_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoMoneda">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdTipoMoneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_TipoProveedor">
-          <End Type="Agenda_Model.TipoProveedor" Role="TipoProveedor" Multiplicity="0..1" />
-          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoProveedor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="IdTipoProveedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1985,6 +1824,149 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SubRubro_Rubros_1">
+          <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="1" />
+          <End Type="Agenda_Model.SubRubro" Role="SubRubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rubros">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubRubro">
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CompraIva">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFacturaCompra" Type="Int32" />
+          <Property Name="AuxiliarNumero" Type="Int32" Nullable="false" />
+          <Property Name="NumeroEmpresa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Empesa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Iva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IvaAri" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IvaRes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Neto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Especial" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Res" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdTipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TipoFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResDgr" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Cuit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dolar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Diferencia" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Clase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NombreEmple" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Periodo" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="AbreviaturaFactura" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoMoneda" Type="Int32" Nullable="false" />
+          <Property Name="Isib" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdDiario" Type="Int32" Nullable="false" />
+          <Property Name="Cae" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Impint" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+          <Property Name="Tnogra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Texento" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PerGeneral" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Perib" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PerMun" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Tnocat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Pernac" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Ivan5" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total21" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total27" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total105" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total5" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Idusuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompraFactura" Relationship="Agenda_Model.FK_CompraIva_CompraFactura" FromRole="CompraIva" ToRole="CompraFactura" />
+        </EntityType>
+        <Association Name="FK_CompraIva_CompraFactura">
+          <End Type="Agenda_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
+          <End Type="Agenda_Model.CompraIva" Role="CompraIva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraIva">
+              <PropertyRef Name="IdFacturaCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoComprobante">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Denominacion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Abreviatura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdAfipCategoria" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPais" Type="Int32" />
+          <Property Name="IdProvincia" Type="Int32" />
+          <Property Name="IdLocalidad" Type="Int32" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoIva" Type="Int32" />
+          <Property Name="DiasFactura" Type="Int32" />
+          <Property Name="IdImputacionProveedor" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCodigoPostal" Type="Int32" />
+          <Property Name="IdTipoProveedor" Type="Int32" />
+          <Property Name="IdImputacionFactura" Type="Int32" />
+          <Property Name="IdMonedaFactura" Type="Int32" />
+          <Property Name="DescripcionFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoMoneda" Type="Int32" />
+          <Property Name="IdPresupuesto" Type="Int32" />
+          <Property Name="UltimoPuntoVenta" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompraFactura" Relationship="Agenda_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
+          <NavigationProperty Name="Imputacion" Relationship="Agenda_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
+          <NavigationProperty Name="Imputacion1" Relationship="Agenda_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
+          <NavigationProperty Name="Pais" Relationship="Agenda_Model.FK_Proveedor_Pais" FromRole="Proveedor" ToRole="Pais" />
+          <NavigationProperty Name="Presupuesto" Relationship="Agenda_Model.FK_Proveedor_Presupuesto1" FromRole="Proveedor" ToRole="Presupuesto" />
+          <NavigationProperty Name="Provincia" Relationship="Agenda_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
+          <NavigationProperty Name="TipoIva" Relationship="Agenda_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
+          <NavigationProperty Name="TipoMoneda" Relationship="Agenda_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
+          <NavigationProperty Name="TipoProveedor" Relationship="Agenda_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
+        </EntityType>
+        <Association Name="FK_CompraFactura_Proveedor">
+          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
+          <End Type="Agenda_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraFactura">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Proveedor_Imputacion">
           <End Type="Agenda_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
           <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
@@ -2009,6 +1991,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Proveedor_Pais">
+          <End Type="Agenda_Model.Pais" Role="Pais" Multiplicity="0..1" />
+          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Proveedor_Presupuesto1">
           <End Type="Agenda_Model.Presupuesto" Role="Presupuesto" Multiplicity="0..1" />
           <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
@@ -2021,15 +2015,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SubRubro_Rubros_1">
-          <End Type="Agenda_Model.Rubros" Role="Rubros" Multiplicity="1" />
-          <End Type="Agenda_Model.SubRubro" Role="SubRubro" Multiplicity="*" />
+        <Association Name="FK_Proveedor_Provincia">
+          <End Type="Agenda_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Rubros">
+            <Principal Role="Provincia">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="SubRubro">
-              <PropertyRef Name="IdRubro" />
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedor_TipoIva">
+          <End Type="Agenda_Model.TipoIva" Role="TipoIva" Multiplicity="0..1" />
+          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoIva">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdTipoIva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedor_TipoMoneda">
+          <End Type="Agenda_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMoneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdTipoMoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedor_TipoProveedor">
+          <End Type="Agenda_Model.TipoProveedor" Role="TipoProveedor" Multiplicity="0..1" />
+          <End Type="Agenda_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdTipoProveedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2331,65 +2361,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CompraIva">
-            <EntityTypeMapping TypeName="Agenda_Model.CompraIva">
-              <MappingFragment StoreEntitySet="CompraIva">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Total5" ColumnName="Total5" />
-                <ScalarProperty Name="Total105" ColumnName="Total105" />
-                <ScalarProperty Name="Total27" ColumnName="Total27" />
-                <ScalarProperty Name="Total21" ColumnName="Total21" />
-                <ScalarProperty Name="Iva25" ColumnName="Iva25" />
-                <ScalarProperty Name="Ivan5" ColumnName="Ivan5" />
-                <ScalarProperty Name="Iva105" ColumnName="Iva105" />
-                <ScalarProperty Name="Iva21" ColumnName="Iva21" />
-                <ScalarProperty Name="Iva27" ColumnName="Iva27" />
-                <ScalarProperty Name="Pernac" ColumnName="Pernac" />
-                <ScalarProperty Name="Tnocat" ColumnName="Tnocat" />
-                <ScalarProperty Name="OtrosImpuestos" ColumnName="OtrosImpuestos" />
-                <ScalarProperty Name="PerMun" ColumnName="PerMun" />
-                <ScalarProperty Name="Perib" ColumnName="Perib" />
-                <ScalarProperty Name="PerGeneral" ColumnName="PerGeneral" />
-                <ScalarProperty Name="Texento" ColumnName="Texento" />
-                <ScalarProperty Name="Tnogra" ColumnName="Tnogra" />
-                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-                <ScalarProperty Name="Impint" ColumnName="Impint" />
-                <ScalarProperty Name="Cae" ColumnName="Cae" />
-                <ScalarProperty Name="IdDiario" ColumnName="IdDiario" />
-                <ScalarProperty Name="Isib" ColumnName="Isib" />
-                <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
-                <ScalarProperty Name="AbreviaturaFactura" ColumnName="AbreviaturaFactura" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="NombreEmple" ColumnName="NombreEmple" />
-                <ScalarProperty Name="Clase" ColumnName="Clase" />
-                <ScalarProperty Name="Diferencia" ColumnName="Diferencia" />
-                <ScalarProperty Name="dolar" ColumnName="dolar" />
-                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
-                <ScalarProperty Name="ResDgr" ColumnName="ResDgr" />
-                <ScalarProperty Name="TipoFactura" ColumnName="TipoFactura" />
-                <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
-                <ScalarProperty Name="Res" ColumnName="Res" />
-                <ScalarProperty Name="Especial" ColumnName="Especial" />
-                <ScalarProperty Name="Neto" ColumnName="Neto" />
-                <ScalarProperty Name="Gasto" ColumnName="Gasto" />
-                <ScalarProperty Name="TotalIva" ColumnName="TotalIva" />
-                <ScalarProperty Name="IvaRes" ColumnName="IvaRes" />
-                <ScalarProperty Name="IvaAri" ColumnName="IvaAri" />
-                <ScalarProperty Name="Iva" ColumnName="Iva" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Empesa" ColumnName="Empesa" />
-                <ScalarProperty Name="NumeroEmpresa" ColumnName="NumeroEmpresa" />
-                <ScalarProperty Name="AuxiliarNumero" ColumnName="AuxiliarNumero" />
-                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
-                <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
-                <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Diario">
             <EntityTypeMapping TypeName="Agenda_Model.Diario">
               <MappingFragment StoreEntitySet="Diario">
@@ -2412,49 +2383,6 @@
                 <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Proveedor">
-            <EntityTypeMapping TypeName="Agenda_Model.Proveedor">
-              <MappingFragment StoreEntitySet="Proveedor">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="UltimoPuntoVenta" ColumnName="UltimoPuntoVenta" />
-                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
-                <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
-                <ScalarProperty Name="DescripcionFactura" ColumnName="DescripcionFactura" />
-                <ScalarProperty Name="IdMonedaFactura" ColumnName="IdMonedaFactura" />
-                <ScalarProperty Name="IdImputacionFactura" ColumnName="IdImputacionFactura" />
-                <ScalarProperty Name="IdTipoProveedor" ColumnName="IdTipoProveedor" />
-                <ScalarProperty Name="IdCodigoPostal" ColumnName="IdCodigoPostal" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="IdImputacionProveedor" ColumnName="IdImputacionProveedor" />
-                <ScalarProperty Name="DiasFactura" ColumnName="DiasFactura" />
-                <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoComprobante">
-            <EntityTypeMapping TypeName="Agenda_Model.TipoComprobante">
-              <MappingFragment StoreEntitySet="TipoComprobante">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
-                <ScalarProperty Name="Numero" ColumnName="Numero" />
-                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
-                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2551,6 +2479,106 @@
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompraIva">
+            <EntityTypeMapping TypeName="Agenda_Model.CompraIva">
+              <MappingFragment StoreEntitySet="CompraIva">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Total5" ColumnName="Total5" />
+                <ScalarProperty Name="Total105" ColumnName="Total105" />
+                <ScalarProperty Name="Total27" ColumnName="Total27" />
+                <ScalarProperty Name="Total21" ColumnName="Total21" />
+                <ScalarProperty Name="Iva25" ColumnName="Iva25" />
+                <ScalarProperty Name="Ivan5" ColumnName="Ivan5" />
+                <ScalarProperty Name="Iva105" ColumnName="Iva105" />
+                <ScalarProperty Name="Iva21" ColumnName="Iva21" />
+                <ScalarProperty Name="Iva27" ColumnName="Iva27" />
+                <ScalarProperty Name="Pernac" ColumnName="Pernac" />
+                <ScalarProperty Name="Tnocat" ColumnName="Tnocat" />
+                <ScalarProperty Name="OtrosImpuestos" ColumnName="OtrosImpuestos" />
+                <ScalarProperty Name="PerMun" ColumnName="PerMun" />
+                <ScalarProperty Name="Perib" ColumnName="Perib" />
+                <ScalarProperty Name="PerGeneral" ColumnName="PerGeneral" />
+                <ScalarProperty Name="Texento" ColumnName="Texento" />
+                <ScalarProperty Name="Tnogra" ColumnName="Tnogra" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="Impint" ColumnName="Impint" />
+                <ScalarProperty Name="Cae" ColumnName="Cae" />
+                <ScalarProperty Name="IdDiario" ColumnName="IdDiario" />
+                <ScalarProperty Name="Isib" ColumnName="Isib" />
+                <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
+                <ScalarProperty Name="AbreviaturaFactura" ColumnName="AbreviaturaFactura" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="NombreEmple" ColumnName="NombreEmple" />
+                <ScalarProperty Name="Clase" ColumnName="Clase" />
+                <ScalarProperty Name="Diferencia" ColumnName="Diferencia" />
+                <ScalarProperty Name="dolar" ColumnName="dolar" />
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="ResDgr" ColumnName="ResDgr" />
+                <ScalarProperty Name="TipoFactura" ColumnName="TipoFactura" />
+                <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
+                <ScalarProperty Name="Res" ColumnName="Res" />
+                <ScalarProperty Name="Especial" ColumnName="Especial" />
+                <ScalarProperty Name="Neto" ColumnName="Neto" />
+                <ScalarProperty Name="Gasto" ColumnName="Gasto" />
+                <ScalarProperty Name="TotalIva" ColumnName="TotalIva" />
+                <ScalarProperty Name="IvaRes" ColumnName="IvaRes" />
+                <ScalarProperty Name="IvaAri" ColumnName="IvaAri" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Empesa" ColumnName="Empesa" />
+                <ScalarProperty Name="NumeroEmpresa" ColumnName="NumeroEmpresa" />
+                <ScalarProperty Name="AuxiliarNumero" ColumnName="AuxiliarNumero" />
+                <ScalarProperty Name="IdFacturaCompra" ColumnName="IdFacturaCompra" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoComprobante">
+            <EntityTypeMapping TypeName="Agenda_Model.TipoComprobante">
+              <MappingFragment StoreEntitySet="TipoComprobante">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdAfipCategoria" ColumnName="IdAfipCategoria" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="Agenda_Model.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="UltimoPuntoVenta" ColumnName="UltimoPuntoVenta" />
+                <ScalarProperty Name="IdPresupuesto" ColumnName="IdPresupuesto" />
+                <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
+                <ScalarProperty Name="DescripcionFactura" ColumnName="DescripcionFactura" />
+                <ScalarProperty Name="IdMonedaFactura" ColumnName="IdMonedaFactura" />
+                <ScalarProperty Name="IdImputacionFactura" ColumnName="IdImputacionFactura" />
+                <ScalarProperty Name="IdTipoProveedor" ColumnName="IdTipoProveedor" />
+                <ScalarProperty Name="IdCodigoPostal" ColumnName="IdCodigoPostal" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdImputacionProveedor" ColumnName="IdImputacionProveedor" />
+                <ScalarProperty Name="DiasFactura" ColumnName="DiasFactura" />
+                <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

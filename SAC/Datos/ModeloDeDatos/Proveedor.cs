@@ -39,6 +39,8 @@ public partial class Proveedor
 
     public Nullable<int> IdProvincia { get; set; }
 
+    public Nullable<int> IdLocalidad { get; set; }
+
     public string Telefono { get; set; }
 
     public Nullable<int> IdTipoIva { get; set; }
@@ -79,7 +81,13 @@ public partial class Proveedor
 
     public virtual ICollection<CompraFactura> CompraFactura { get; set; }
 
+    public virtual Imputacion Imputacion { get; set; }
+
+    public virtual Imputacion Imputacion1 { get; set; }
+
     public virtual Pais Pais { get; set; }
+
+    public virtual Presupuesto Presupuesto { get; set; }
 
     public virtual Provincia Provincia { get; set; }
 
@@ -88,12 +96,6 @@ public partial class Proveedor
     public virtual TipoMoneda TipoMoneda { get; set; }
 
     public virtual TipoProveedor TipoProveedor { get; set; }
-
-    public virtual Imputacion Imputacion { get; set; }
-
-    public virtual Imputacion Imputacion1 { get; set; }
-
-    public virtual Presupuesto Presupuesto { get; set; }
 
 }
 

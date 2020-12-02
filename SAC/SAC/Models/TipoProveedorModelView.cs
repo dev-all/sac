@@ -7,16 +7,15 @@ using Datos.ModeloDeDatos;
 
 namespace SAC.Models
 {
-    public class SubRubroModelView
+    public class TipoProveedorModelView
     {
-        [Display(Name = "Codigo imputación")]
+      
         public int Id { get; set; }
 
-        public string codigo { get; set; }
-
+        [Display(Name = "Tipo de proveedor")]
+        [Required]
+        [StringLength(50, ErrorMessage = "La longitud máxima es 50")]
         public string Descripcion { get; set; }
-
-        public Nullable<int> IdRubro { get; set; }
 
         public Nullable<bool> Activo { get; set; }
 
@@ -24,10 +23,9 @@ namespace SAC.Models
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-
-        public virtual ICollection<Imputacion> Imputacion { get; set; }
-
-        public virtual Rubros Rubros { get; set; }
-
+        [Display(Name = "Codigo")]
+        [Required]
+        [StringLength(50, ErrorMessage = "La longitud máxima es 50")]
+        public string Codigo { get; set; }
     }
 }

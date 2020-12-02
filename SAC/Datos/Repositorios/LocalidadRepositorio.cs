@@ -7,67 +7,53 @@ namespace Datos.Repositorios
 {
     public class LocalidadRepositorio : RepositorioBase<Localidad>
     {
-       private SAC_Entities context;
+        private SAC_Entities context;
 
         public LocalidadRepositorio(SAC_Entities contexto) : base(contexto)
         {
             this.context = contexto;
         }
 
-        // INSERTAR
-
-        public Localidad InsertarLocalidad(Localidad localidad)
+        public Localidad InsertarLocalidad(Localidad Localidad)
         {
-            return Insertar(localidad);
+            return Insertar(Localidad);
         }
 
-        public Localidad ActualizarLocalidad(Localidad oLocalidad)
+
+        public Localidad ObtenerLocalidad(int idLocalidad)
         {
-
-            Localidad oLocalidadExistente = ObtenerLocalidadPorId(oLocalidad.Id);
-
-            oLocalidadExistente.Id = oLocalidad.Id;
-            oLocalidadExistente.Nombre = oLocalidad.Nombre;
-            oLocalidadExistente.Codigo = oLocalidad.Codigo;
-            oLocalidadExistente.CodigoProvincia = oLocalidad.CodigoProvincia;
-            oLocalidadExistente.IdPais = oLocalidad.IdPais;
-            oLocalidadExistente.IdProvincia = oLocalidad.IdProvincia;
-            oLocalidadExistente.Activo = oLocalidad.Activo;
-
-            context.SaveChanges();
-            return oLocalidadExistente;
-
+            Localidad Localidad = context.Localidad.Where(p => p.Id == idLocalidad).First();
+            return Localidad;
         }
 
-        public int EliminarLocalidad(int idLocalidad)
-        {
-            Localidad LocalidadExistente = ObtenerLocalidadPorId(idLocalidad);
-            LocalidadExistente.Activo = false;
-            context.SaveChanges();
-            return 1;
-        }
-
-        //public void EliminarLocalidad(Localidad localidad)
-        //{
-        //    localidad.IdUsuario = localidad.IdUsuario;
-        //    localidad.Activo = false;
-        //    localidad.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString()); ;
-        //    context.SaveChanges();
-        //}
-
-        public Localidad ModificarLocalidad(Localidad localidad)
-        {
-            return Insertar(localidad);
-        }
 
         public Localidad ObtenerLocalidadPorId(int idLocalidad)
         {
-            return context.Localidad.FirstOrDefault(l => l.Id == idLocalidad && l.Activo == true);
+            return context.Localidad.Where(p => p.Id == idLocalidad).FirstOrDefault();
         }
 
-        public Localidad ObtenerporCodigoPostal(int codigopostal)
+        public Localidad ActualizarLocalidad(Localidad model)
         {
-            return context.Localidad.FirstOrDefault(l => l.Codigo == codigopostal);
+            Localidad LocalidadExistente = ObtenerLocalidadPorId(model.Id);
+
+            LocalidadExistente.Id = model.Id;
+            LocalidadExistente.Nombre = model.Nombre;
+            LocalidadExistente.Codigo = model.Codigo;
+            LocalidadExistente.IdPais = model.IdPais;
+            LocalidadExistente.Activo = model.Activo;
+
+            context.SaveChanges();
+            return LocalidadExistente;
+        }
+
+        public Localidad ObtenerLocalidadPorNombre(string nombre)
+        {
+            return context.Localidad.Where(p => p.Nombre == nombre).FirstOrDefault();
+        }
+
+        public Localidad ObtenerLocalidadPorNombre(string nombre, int codigo)
+        {
+            return context.Localidad.Where(p => p.Nombre == nombre && p.Codigo == codigo).FirstOrDefault();
         }
 
 
@@ -75,7 +61,6 @@ namespace Datos.Repositorios
         /// verifica que el nombre ingresado no exista para otro id que no sea el enviado
         /// </summary>
         /// <param name="nombre"></param>
-        /// <param name="codigo"></param>
         /// <param name="idLocalidad"></param>
         /// <returns></returns>
         public Localidad ObtenerLocalidadPorNombre(string nombre, int codigo, int idLocalidad)
@@ -83,24 +68,54 @@ namespace Datos.Repositorios
             return context.Localidad.Where(p => p.Nombre == nombre && p.Codigo == codigo && p.Id != idLocalidad).FirstOrDefault();
         }
 
+
         public List<Localidad> GetAllLocalidad()
         {
-            List<Localidad> listaProvincia = context.Localidad.Where(p => p.Activo == true).ToList();
-            return listaProvincia;
+            List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true).ToList();
+            listaLocalidad = listaLocalidad.OrderBy(p => p.Nombre).ToList();
+            return listaLocalidad;
         }
-        public List<Localidad> GetAllLocalidad(int idPais)
+
+
+        public List<Localidad> GetAllLocalidad(int idProvincia)
         {
-            List<Localidad> listaProvincia = context.Localidad.Where(p => p.Activo == true && p.IdPais == idPais).ToList();
-            return listaProvincia;
+            List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdProvincia == idProvincia).ToList();
+            listaLocalidad = listaLocalidad.OrderBy(p => p.Nombre).ToList();
+            return listaLocalidad;
         }
 
         public List<Localidad> GetAllLocalidad(int idPais, int idProvincia)
         {
-            List<Localidad> listaProvincia = context.Localidad.Where(p => p.Activo == true && p.IdPais == idPais && p.IdProvincia == idProvincia).ToList();
+            List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdPais == idPais && p.IdProvincia == idProvincia).ToList();
+            listaLocalidad = listaLocalidad.OrderBy(p => p.Nombre).ToList();
+            return listaLocalidad;
+        }
 
-            List<Localidad> listaProvinciaOdernada = listaProvincia.OrderBy(P => P.Nombre).ToList();
- 
-            return listaProvinciaOdernada;
+        public Localidad GetCodigoPostal(int idLocalidad)
+        {
+            Localidad oLocalidad = context.Localidad.Where(p => p.Activo == true && p.Id == idLocalidad).First();
+            return oLocalidad;
+        }
+
+        public Localidad GetIdLocalidadCodigoPostal(int oCodigoPostal)
+        {
+            Localidad oLocalidad = context.Localidad.Where(p => p.Activo == true && p.Codigo == oCodigoPostal).First();
+            return oLocalidad;
+        }
+
+        
+
+        public int EliminarLocalidad(int idLocalidad)
+        {
+            Localidad LocalidadExistente = ObtenerLocalidadPorId(idLocalidad);
+            LocalidadExistente.Activo = false;
+            context.SaveChanges();
+            return 1;
+
+            //var oLocalidad = context.Localidad.Where(r => r.Id == idLocalidad).FirstOrDefault();
+            //context.Localidad.Remove(oLocalidad);
+            //var retorno = context.SaveChanges();
+            //return retorno;
         }
 
     }

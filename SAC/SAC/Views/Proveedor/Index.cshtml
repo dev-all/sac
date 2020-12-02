@@ -49,25 +49,28 @@
                         <thead>
                             <tr>
                                 <th> Nombre</th>
-                                <th> CodigoAfip</th>
                                 <th> Cuit</th>
+                                <th> Tipo</th>
+                                <th>Telefono</th>
+                                <th>Email</th>
                                 <th>Operaciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Cuit)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Cuit)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TipoProveedor.Descripcion)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Telefono)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Email)</td>
 
-                                    <td>
-                                        @Html.ActionLink(" ", "Editar", "Proveedor", new { _id = @item.Id }, new { @class = "btn btn-primary fa fa-pencil-square-o" })
-                                        @Html.ActionLink(" ", "Eliminar", "Proveedor", new { _id = @item.Id }, new { @class = "btn btn-danger fa fa-trash-o", onclick = "AsigarConfirmacion(" + @item.Id + ")" })
-                                    </td>
-                                </tr>
+                                <td>
+                                    @Html.ActionLink(" ", "Editar", "Proveedor", new { _id = @item.Id }, new { @class = "btn btn-primary fa fa-pencil-square-o" })
+                                    @Html.ActionLink(" ", "Eliminar", "Proveedor", new { _id = @item.Id }, new { @class = "btn btn-danger fa fa-trash-o", onclick = "AsigarConfirmacion(" + @item.Id + ")" })
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -90,12 +93,12 @@
             </div>
 
             <div class="modal-body">
-                <h3> ¿Está seguro que desea eliminar el país seleccionado?</h3>
+                <h3> ¿Está seguro que desea eliminar el proveedor seleccionado?</h3>
             </div>
 
 
             <div style="padding:1em;">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="button" onclick="Eliminar()" class="btn btn-primary">Aceptar</button>
 
             </div>
@@ -103,21 +106,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="ModalAlerta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="exampleModalLabel">Aviso Importante</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
+            <div class="modal-body">
+                <h2> El proveedor seleccionado no puede ser eliminado porque la cuenta corriente tiene saldo favorable o desfavorable</h2>
+            </div>
+
+            <div class="modal-footer text-right">
+                <div style="padding:1em;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
 
 @* crea un formulario para ir al controlador *@
 @using (Html.BeginForm("Eliminar", "Proveedor", FormMethod.Post, new { @id = "frmEliminar" }))
 {
-    @Html.Hidden("idPais");
+    @Html.Hidden("idProveedor");
 }
 
 
 <script>
-    function AsigarConfirmacion(idPais) {
+    function AsigarConfirmacion(idProveedor) {
         event.preventDefault();
-        document.getElementById("idPais").value = idPais;
-        console.log(idPais);
-        $("#ModalConfirmacion").modal('show');
+
+        $.get("/Proveedor/GetCuentaCorriente/", { oIdProveedor: idProveedor }, function (data) {
+            if (data == 0) {
+                document.getElementById("idProveedor").value = idProveedor;
+                $("#ModalConfirmacion").modal('show');
+            }
+            else {
+                $("#ModalConfirmacion").modal('hide');
+                $("#ModalAlerta").modal('show');
+            }
+        });
     }
 
     //esto es para mostrar el modal con ajaxlink
@@ -127,8 +160,6 @@
     //    parameter = $("#deleteActionLink").data("parameter");
     //    document.getElementById("idPais").value = parameter;
     //});
-
-
 
     function Eliminar() {
         var frmEliminar = document.getElementById("frmEliminar");
@@ -154,7 +185,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tblPais').DataTable({
+            $('#TblProveedor').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'pdf'
