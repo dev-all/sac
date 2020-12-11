@@ -15,6 +15,9 @@ namespace SAC.Infrastructure
         {
 
 
+            CreateMap<CajaGrupoModel, CajaGrupoModelView>();
+            CreateMap<CajaGrupoModelView, CajaGrupoModel>();
+
 
             CreateMap<TipoMonedaModel, TipoMonedaModelView>();
             CreateMap<TipoMonedaModelView, TipoMonedaModel>();

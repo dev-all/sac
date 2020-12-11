@@ -22,6 +22,8 @@ namespace Negocio.Servicios
         {
             repositorio = kernel.Get<IUsuarioRepositorio>();
         }
+     
+        
         public UsuarioModel Agregar(UsuarioModel usuario)
         {
             try

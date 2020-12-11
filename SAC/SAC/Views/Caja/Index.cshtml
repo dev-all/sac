@@ -1,0 +1,144 @@
+﻿@model List<SAC.Models.CajaGrupoModelView>
+
+@{
+    ViewBag.Title = "Caja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.1em 1em;
+    }
+
+    .table td, .table th {
+        padding: .25rem;
+    }
+</style>
+<!-- page css
+<link href="/Content/assets/css/pages/inbox.css" rel="stylesheet">
+<link href="~/Content/assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+
+-->
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+        <h4 class="text-themecolor">Grupo Cajas</h4>
+    </div>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-xlg-12 col-lg-12 col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Lista de Grupos de Caja</h5>
+                <h6 class="card-subtitle"> </h6>
+                <a href="@Url.Action("AddOrEdit", "Caja")" class="btn btn-sm btn-secondary "><i class="mdi mdi-calendar-plus"></i> Nuevo Grupo</a>
+                <div class="table-responsive m-t-40">
+
+                    <table id="example23" class="table stylish-table">
+
+                        <thead>
+                            <tr>
+                                <th>Acciones</th>
+
+                                <th>
+                                    Codigo
+                                </th>
+                                <th>
+                                    Descripcion
+                                </th>
+                                <th>
+                                    Imputacion
+                                </th>
+                               
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="@("table-" + item.Id)">
+
+                                    <td style="width:50px;">
+                                                   <a href="@Url.Action("AddOrEdit", "Caja",new { id = item.Id })" data-toggle="tooltip" data-original-title="Editar" class="btn waves-effect waves-light btn-rounded btn-xs btn-dark"><i class="fa fa-pencil text-success"></i>  Editar</a>
+                                              </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Codigo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Concepto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdImputacion)
+                                    </td>
+                                   
+
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+
+
+
+@section Scripts{
+
+    <!-- ============================================================== -->
+    <!-- Plugins for this page -->
+    <!-- ============================================================== -->
+    <!-- This is data table -->
+
+    <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+    <script type="text/javascript">
+
+
+        $(function () {
+
+            $('#example23').DataTable({
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+                "order": [[2, 'asc']],
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    'pdf'
+                ]
+            });
+        });
+    </script>
+}
+

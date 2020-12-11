@@ -11,6 +11,12 @@ namespace Agenda.Infrastructure
     {
         public AutoMapperNegProfile()
         {
+
+
+            CreateMap<CajaGrupoModel, GrupoCaja>();
+            CreateMap<GrupoCaja, CajaGrupoModel>();
+
+
             CreateMap<TipoMonedaModel, TipoMoneda>();
             CreateMap<TipoMoneda, TipoMonedaModel>();
 
@@ -84,6 +90,10 @@ namespace Agenda.Infrastructure
                 );
 
             CreateMap<MenuSideBarModel, MenuSidebar>();
+
+
+
+
 
 
 

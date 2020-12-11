@@ -151,6 +151,7 @@
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
+    <Compile Include="Controllers\CajaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -182,6 +183,7 @@
     <Compile Include="Models\SubRubroModelView.cs" />
     <Compile Include="Models\TipoComprobanteModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
+    <Compile Include="Models\CajaGrupoModelView.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\TipoProveedorModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
@@ -2820,10 +2822,14 @@
     <Content Include="Views\Compras\FacturaCompras.cshtml" />
     <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
     <Content Include="Views\Proveedor\Editar.cshtml" />
+    <Content Include="Views\Caja\Index.cshtml" />
+    <Content Include="Views\Caja\AddOrEdit.cshtml" />
+    <Content Include="Views\Caja\_TablaImputacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
+    <Folder Include="Views\CajaGrupo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

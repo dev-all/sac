@@ -175,6 +175,31 @@
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="GrupoCaja">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="250" />
+          <Property Name="NetoTotalP" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalD" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalC" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalB" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialP" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialD" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialC" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NParcialB" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Ltraa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ltram" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdImputacion" Type="int" />
+          <Property Name="Especial" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="GrupoCuenta">
           <Key>
             <PropertyRef Name="Id" />
@@ -841,6 +866,7 @@
           <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupoCaja" EntityType="Self.GrupoCaja" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrupoCuenta" EntityType="Self.GrupoCuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="homePorRol" EntityType="Self.homePorRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Imputacion" EntityType="Self.Imputacion" Schema="dbo" store:Type="Tables" />
@@ -1148,6 +1174,7 @@
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
           </AssociationSet>
           <EntitySet Name="Diario" EntityType="SAC_Model.Diario" />
+          <EntitySet Name="GrupoCaja" EntityType="SAC_Model.GrupoCaja" />
           </EntityContainer>
         <EntityType Name="AccionPorRol">
           <Key>
@@ -2063,6 +2090,31 @@
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="GrupoCaja">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Concepto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NetoTotalP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalD" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoTotalB" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialD" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialC" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NetoParcialT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NParcialB" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Ltraa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ltram" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdImputacion" Type="Int32" />
+          <Property Name="Especial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2561,6 +2613,32 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoCaja">
+            <EntityTypeMapping TypeName="SAC_Model.GrupoCaja">
+              <MappingFragment StoreEntitySet="GrupoCaja">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Especial" ColumnName="Especial" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="Ltram" ColumnName="Ltram" />
+                <ScalarProperty Name="Ltraa" ColumnName="Ltraa" />
+                <ScalarProperty Name="NParcialB" ColumnName="NParcialB" />
+                <ScalarProperty Name="NetoParcialT" ColumnName="NetoParcialT" />
+                <ScalarProperty Name="NetoParcialC" ColumnName="NetoParcialC" />
+                <ScalarProperty Name="NetoParcialD" ColumnName="NetoParcialD" />
+                <ScalarProperty Name="NetoParcialP" ColumnName="NetoParcialP" />
+                <ScalarProperty Name="NetoTotalB" ColumnName="NetoTotalB" />
+                <ScalarProperty Name="NetoTotalT" ColumnName="NetoTotalT" />
+                <ScalarProperty Name="NetoTotalC" ColumnName="NetoTotalC" />
+                <ScalarProperty Name="NetoTotalD" ColumnName="NetoTotalD" />
+                <ScalarProperty Name="NetoTotalP" ColumnName="NetoTotalP" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

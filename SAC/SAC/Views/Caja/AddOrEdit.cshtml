@@ -1,0 +1,188 @@
+﻿@model SAC.Models.CajaGrupoModelView
+
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Grupos de Caja</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="col-md-3">
+        @Html.LabelFor(p => p.IdImputacion)
+        <div class="input-group">
+            @Html.TextBoxFor(p => p.IdImputacion, new { @type = "number", @min = "0", @class = "form-control", @placeholder = "Ej: 00000", @readonly = true })
+            <button type="button" id="btnImpProvBuscar" class="btn btn-primary fa fa-search" onclick="BuscarImputacion(1)"></button>
+            <button id="btnCargando" class="btn btn-primary" type="button" disabled style="display:none">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </button>
+        </div>
+        @Html.ValidationMessage("IdImputacion", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-actions mt-5">
+
+        <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
+
+
+
+        <button type="button" class="btn btn-dark btn-sm">Cancel</button>
+    </div>
+
+
+
+
+
+</div>
+
+<div class="modal fade" id="exampleModal" style="overflow-y: auto;" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="TituloModal">Seleccione un número de imputación</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="SubRubro">  </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+
+<link href="~/Content/assets/css/materialadmin.css" rel="stylesheet" />
+
+<script>
+
+
+    function AgregarImputacion(idSubRubro)
+    {
+        var Seleccion = document.getElementById("BotonSeleccion").value;
+
+        if (Seleccion == "1")
+        {
+            document.getElementById("IdImputacion").value = idSubRubro;
+        }
+        
+
+        $("#exampleModal").modal('hide');
+    }
+
+
+    function BuscarImputacion(boton)
+    {
+      //  document.getElementById("BotonSeleccion").value = boton;
+
+       // var botonBuscar = "";
+       // var botonCargando = "";
+
+        if (boton == "1")
+        {
+            botonBuscar = "#btnImpProvBuscar";
+            botonCargando = "#btnCargando";
+        }
+       
+
+        $.ajax({
+            type: "POST",
+            url: "/Proveedor/CargarImputacion",
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            beforeSend: function () {
+                $(botonBuscar).css("display", "none");
+                $(botonCargando).css("display", "block");
+            }, complete: function () {
+                $(botonBuscar).css("display", "block");
+                $(botonCargando).css("display", "none");
+
+            },
+            success: function (response)
+            {
+                $('#SubRubro').html(response);
+                $("#exampleModal").modal('show');
+                fntabla();
+            },
+            failure: function (response) {
+                Console.log(response.responseText);
+            },
+            error: function (response) {
+                Console.log(response.responseText);
+            }
+        });
+
+    }
+
+
+
+
+    function fntabla() {
+
+        if ($.fn.dataTable.isDataTable('#tblImputacion'))
+        {
+            table = $('#tblImputacion').DataTable();
+            table.destroy();
+            fntablaRenderizar();
+        } else {
+            fntablaRenderizar();
+        }
+    }
+    function fntablaRenderizar()
+    {
+        $('#tblImputacion').DataTable({
+            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'pageLength': 15,
+            'searching': true,
+            'ordering': true,
+            'info': false,
+            'autoWidth': true,
+            'dom': 'Bfrtip',
+            'buttons': []
+        });
+    }
+
+</script>
