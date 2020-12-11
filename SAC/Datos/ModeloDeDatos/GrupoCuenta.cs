@@ -17,7 +17,7 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GrupoCuenta()
         {
-            this.Rubros = new HashSet<Rubros>();
+            this.Rubro = new HashSet<Rubro>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Rubros> Rubros { get; set; }
+        public virtual ICollection<Rubro> Rubro { get; set; }
     }
 }

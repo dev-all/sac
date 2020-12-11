@@ -55,6 +55,7 @@ D:\SAC\SAC\SAC\bin\Datos.dll
 D:\SAC\SAC\SAC\bin\Entidad.dll
 D:\SAC\SAC\SAC\bin\EntityFramework.dll
 D:\SAC\SAC\SAC\bin\EntityFramework.SqlServer.dll
+D:\SAC\SAC\SAC\bin\HtmlAgilityPack.dll
 D:\SAC\SAC\SAC\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\SAC\SAC\SAC\bin\Microsoft.Web.Infrastructure.dll
 D:\SAC\SAC\SAC\bin\Negocio.dll
@@ -81,6 +82,8 @@ D:\SAC\SAC\SAC\bin\AutoMapper.pdb
 D:\SAC\SAC\SAC\bin\AutoMapper.xml
 D:\SAC\SAC\SAC\bin\EntityFramework.xml
 D:\SAC\SAC\SAC\bin\EntityFramework.SqlServer.xml
+D:\SAC\SAC\SAC\bin\HtmlAgilityPack.pdb
+D:\SAC\SAC\SAC\bin\HtmlAgilityPack.xml
 D:\SAC\SAC\SAC\bin\System.ValueTuple.xml
 D:\SAC\SAC\SAC\bin\System.Web.Helpers.xml
 D:\SAC\SAC\SAC\bin\System.Web.Mvc.xml

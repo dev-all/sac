@@ -106,7 +106,7 @@ namespace SAC.Models
         public int idPresupuesto { get; set; }
 
         [Display(Name = "Punto Venta")]
-        public Nullable<int> UltimoPuntoVenta { get; set; }
+        public int UltimoPuntoVenta { get; set; }
 
 
         public bool Activo { get; set; }
@@ -116,17 +116,19 @@ namespace SAC.Models
         public DateTime UltimaModificacion { get; set; }
 
         public List<TipoComprobanteModelView>  ListTipoComprobante { get; set; }
-        //public  Imputacion Imputacion { get; set; }
 
-        //public  Imputacion Imputacion1 { get; set; }
 
-        //public  Pais Pais { get; set; }
+        public Imputacion Imputacion { get; set; }
 
-        //public  Provincia Provincia { get; set; }
+        public Imputacion Imputacion1 { get; set; }
 
-        //public  TipoIva TipoIva { get; set; }
+        public Pais Pais { get; set; }
 
-        //public  TipoMoneda TipoMoneda { get; set; }
+        public Provincia Provincia { get; set; }
+
+        public TipoIva TipoIva { get; set; }
+
+        public TipoMoneda TipoMoneda { get; set; }
 
         public virtual TipoProveedor TipoProveedor { get; set; }
 

@@ -61,5 +61,39 @@ namespace Datos.Repositorios
                                  select c).ToList();
             return p;                
         }
+
+        public CompraFactura GetCompraFacturaPorNroFacturaIdProveedor(int numeroFactura, int idProveedor)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            var fact = context.CompraFactura
+                            .Include("CompraIva")
+                            .Where(f => f.Activo == true
+                            && f.NumeroFactura==numeroFactura
+                            && f.IdProveedor == idProveedor
+                            ).FirstOrDefault();
+            return fact;
+        }
+
+        public List<CompraFactura> GetAllCompraFacturaPorNro(int nroFactura)
+        {
+          var fact =   context.CompraFactura.Where(f => f.Activo == true && f.NumeroFactura.ToString().Contains(nroFactura.ToString())).OrderBy(acc => acc.NumeroFactura).ToList();
+            return fact;
+
+        }
+        public CompraFactura GetCompraFacturaIVAPorNro(int nroFactura)
+        {
+            var fact = context.CompraFactura.Where(f => f.Activo == true && f.NumeroFactura == nroFactura).OrderBy(acc => acc.NumeroFactura).FirstOrDefault();            
+            return fact;
+
+        }
+        //public CompraIva GetCompraFacturaIVAPorNro(int nroFactura)
+        //{
+        //    var fact = context.CompraFactura.Where(f => f.Activo == true && f.NumeroFactura == nroFactura).OrderBy(acc => acc.NumeroFactura).FirstOrDefault();
+        //    var cfi = (from f in context.CompraFactura
+        //               where f.NumeroFactura == nroFactura
+        //               select f.CompraIva).FirstOrDefault();
+        //    return cfi;
+
+        //}
     }
 }

@@ -56,6 +56,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.28.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.28\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -157,6 +160,8 @@
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
     <Compile Include="Models\AutoCompletarViewModel.cs" />
+    <Compile Include="Models\CompraIvaModelView.cs" />
+    <Compile Include="Models\Request\bcraRequest.cs" />
     <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
@@ -170,6 +175,8 @@
     <Compile Include="Models\PersonaModelView.cs" />
     <Compile Include="Models\PrioridadModelView.cs" />
     <Compile Include="Models\ProvinciaModelView.cs" />
+    <Compile Include="Models\Request\CotizacionAFIP.cs" />
+    <Compile Include="Models\Request\CotizacionBNA.cs" />
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\SubRubroModelView.cs" />

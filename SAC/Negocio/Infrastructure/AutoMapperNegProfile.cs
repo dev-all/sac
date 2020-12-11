@@ -11,6 +11,22 @@ namespace Agenda.Infrastructure
     {
         public AutoMapperNegProfile()
         {
+            CreateMap<TipoMonedaModel, TipoMoneda>();
+            CreateMap<TipoMoneda, TipoMonedaModel>();
+
+
+            CreateMap<TipoComprobanteModel, TipoComprobante>();
+            CreateMap<TipoComprobante, TipoComprobanteModel>();
+            
+            CreateMap<CompraFacturaModel, CompraFactura>();
+            CreateMap<CompraFactura, CompraFacturaModel>();
+
+            CreateMap<CompraIvaModel, CompraIva>();
+            CreateMap<CompraIva, CompraIvaModel>();
+          
+
+            CreateMap<ValorCotizacionModel, ValorCotizacion>();
+            CreateMap<ValorCotizacion, ValorCotizacionModel>();
 
             CreateMap<ProveedorModel, Proveedor>();
             CreateMap<Proveedor, ProveedorModel>();
