@@ -8,64 +8,74 @@
 <h2>Grupos de Caja</h2>
 
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddOrEdit", "Caja", FormMethod.Post, new { @id = "frmBusqueda" }))
 {
+
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
 
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+        @Html.Hidden("BotonSeleccion")
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
 
 
 
-    <div class="col-md-3">
-        @Html.LabelFor(p => p.IdImputacion)
-        <div class="input-group">
-            @Html.TextBoxFor(p => p.IdImputacion, new { @type = "number", @min = "0", @class = "form-control", @placeholder = "Ej: 00000", @readonly = true })
-            <button type="button" id="btnImpProvBuscar" class="btn btn-primary fa fa-search" onclick="BuscarImputacion(1)"></button>
-            <button id="btnCargando" class="btn btn-primary" type="button" disabled style="display:none">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Loading...
-            </button>
+        <div class="col-md-3">
+            @Html.LabelFor(p => p.IdImputacion)
+            <div class="input-group">
+                @Html.TextBoxFor(p => p.IdImputacion, new { @type = "number", @min = "0", @class = "form-control", @placeholder = "Ej: 00000", @readonly = true })
+                <button type="button" id="btnImputacionBuscar" class="btn btn-primary fa fa-search" onclick="BuscarImputacion(1)"></button>
+                <button id="btnCargando" class="btn btn-primary" type="button" disabled style="display:none">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Cargando ....
+                </button>
+            </div>
+            @Html.ValidationMessage("IdImputacion", new { @class = "text-danger" })
         </div>
-        @Html.ValidationMessage("IdImputacion", new { @class = "text-danger" })
+
+
+        <div class="form-actions mt-5">
+
+           
+            <div class="row" style="text-align:right">
+                <p>
+                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
+                    @Html.ActionLink("Cancelar", "Index", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })
+                </p>
+            </div>
+
+          
+        </div>
+
+        @*<div style="margin:auto; text-align:center">
+                <input type="submit" class="btn btn-success" value="Guardar" />
+                @Html.ActionLink("Volver", "Index", "Caja", null, new { @class = "btn btn-primary" })
+            </div>*@
     </div>
 
 
-    <div class="form-actions mt-5">
 
-        <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
+}
 
-
-
-        <button type="button" class="btn btn-dark btn-sm">Cancel</button>
-    </div>
-
-
-
-
-
-</div>
 
 <div class="modal fade" id="exampleModal" style="overflow-y: auto;" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -90,40 +100,36 @@
     </div>
 </div>
 
-}
-
 <link href="~/Content/assets/css/materialadmin.css" rel="stylesheet" />
 
 <script>
 
 
-    function AgregarImputacion(idSubRubro)
-    {
-        var Seleccion = document.getElementById("BotonSeleccion").value;
 
-        if (Seleccion == "1")
-        {
-            document.getElementById("IdImputacion").value = idSubRubro;
-        }
-        
+
+    function AgregarImputacion(idSubRubro) {
+        // var Seleccion = document.getElementById("BotonSeleccion").value;
+
+        //  if (Seleccion == "1")
+        //{
+        document.getElementById("IdImputacion").value = idSubRubro;
+        // }
+
 
         $("#exampleModal").modal('hide');
     }
 
+    function BuscarImputacion(boton) {
+        //  document.getElementById("BotonSeleccion").value = boton;
 
-    function BuscarImputacion(boton)
-    {
-      //  document.getElementById("BotonSeleccion").value = boton;
+        // var botonBuscar = "";
+        // var botonCargando = "";
 
-       // var botonBuscar = "";
-       // var botonCargando = "";
-
-        if (boton == "1")
-        {
+        if (boton == "1") {
             botonBuscar = "#btnImpProvBuscar";
             botonCargando = "#btnCargando";
         }
-       
+
 
         $.ajax({
             type: "POST",
@@ -138,8 +144,7 @@
                 $(botonCargando).css("display", "none");
 
             },
-            success: function (response)
-            {
+            success: function (response) {
                 $('#SubRubro').html(response);
                 $("#exampleModal").modal('show');
                 fntabla();
@@ -159,8 +164,7 @@
 
     function fntabla() {
 
-        if ($.fn.dataTable.isDataTable('#tblImputacion'))
-        {
+        if ($.fn.dataTable.isDataTable('#tblImputacion')) {
             table = $('#tblImputacion').DataTable();
             table.destroy();
             fntablaRenderizar();
@@ -168,10 +172,9 @@
             fntablaRenderizar();
         }
     }
-    function fntablaRenderizar()
-    {
+    function fntablaRenderizar() {
         $('#tblImputacion').DataTable({
-            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "language": { "url": "/Content/assets/plugins/datatables/es.txt" },
             "order": [[2, 'asc']],
             'paging': true,
             'lengthChange': false,
@@ -186,3 +189,17 @@
     }
 
 </script>
+
+@section Scripts{
+    <a href="~/Views/Caja/AddOrEdit.cshtml">~/Views/Caja/AddOrEdit.cshtml</a>
+    <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+}

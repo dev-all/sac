@@ -2824,7 +2824,6 @@
     <Content Include="Views\Proveedor\Editar.cshtml" />
     <Content Include="Views\Caja\Index.cshtml" />
     <Content Include="Views\Caja\AddOrEdit.cshtml" />
-    <Content Include="Views\Caja\_TablaImputacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

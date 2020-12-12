@@ -31,6 +31,9 @@ namespace SAC.Controllers
 
 
 
+
+
+     
         public ActionResult AddOrEdit(int id = 0)
         {
             CajaGrupoModelView model;
@@ -51,24 +54,21 @@ namespace SAC.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken] 
+        
         public ActionResult AddOrEdit(CajaGrupoModelView model)
         {
-           
-
+            try
+            {        
             if (ModelState.IsValid)
             {
-              
-                var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
 
-
-
-
-                model.IdUsuario= OUsuario.IdUsuario;
-
-                if (model.IdUsuario == null)
+                    var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+                    model.IdUsuario= OUsuario.IdUsuario;
+                    //serviciocajagrupo._mensaje("","ok");
+               if (model.Id <= 0)
                 {
-                    serviciocajagrupo.GuardarGrupoCaja(Mapper.Map<CajaGrupoModelView, CajaGrupoModel>(model));
+                   serviciocajagrupo.GuardarGrupoCaja(Mapper.Map<CajaGrupoModelView, CajaGrupoModel>(model));
                 }
                 else
                 {
@@ -77,7 +77,32 @@ namespace SAC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(model);
+
+            }
+            catch (Exception)
+            {
+                return View(model);
+            }
         }
+
+
+
+        [HttpPost]
+        public ActionResult Eliminar(int id)
+        {
+            try
+            {
+                serviciocajagrupo.Eliminar(id);
+               
+            }
+            catch (Exception ex)
+            {
+                serviciocajagrupo._mensaje(ex.Message, "error");
+            }
+
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

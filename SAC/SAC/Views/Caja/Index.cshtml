@@ -49,7 +49,7 @@
 
                         <thead>
                             <tr>
-                                <th>Acciones</th>
+
 
                                 <th>
                                     Codigo
@@ -60,31 +60,41 @@
                                 <th>
                                     Imputacion
                                 </th>
-                               
+
+                                <th>Acciones</th>
+
 
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr class="@("table-" + item.Id)">
+                            <tr class="@("table-" + item.Id)">
 
-                                    <td style="width:50px;">
-                                                   <a href="@Url.Action("AddOrEdit", "Caja",new { id = item.Id })" data-toggle="tooltip" data-original-title="Editar" class="btn waves-effect waves-light btn-rounded btn-xs btn-dark"><i class="fa fa-pencil text-success"></i>  Editar</a>
-                                              </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Codigo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Concepto)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdImputacion)
-                                    </td>
+                               
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Codigo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Concepto)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdImputacion)
+                                </td>
+
+                                <td>
+                                    <a href="@Url.Action("AddOrEdit", "Caja",new { id = item.Id })" data-toggle="tooltip" data-original-title="Editar" class="btn btn-primary fa fa-pencil-square-o"></a>
+
                                    
+                                    <span data-toggle="modal" data-target="#myModalEliminar" data-id="@Html.DisplayFor(modelItem =>item.Id)">
+                                        <a class="btn btn-danger fa fa-trash-o" role='button' data-toggle="tooltip" data-placement="top" title="Eliminar">.</a>
+                                    </span>
+                                </td>
 
 
-                                </tr>
+
+
+                            </tr>
                             }
 
                         </tbody>
@@ -101,6 +111,27 @@
 <!-- ============================================================== -->
 
 
+
+
+<div class="modal fade" id="myModalEliminar" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" role="form" action="Eliminar">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="simpleModalLabel">Eliminar Grupo Caja</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="ID" id="Id" value="" />
+                    <p>Esta seguro de que desea eliminar permanentemente el grupo de Caja ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-raised btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-raised btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
 
@@ -139,6 +170,19 @@
                 ]
             });
         });
+
+
+        jQuery(function ($)
+        {
+            $('#myModalEliminar').on('show.bs.modal', function (e)
+            {
+                var id = $(e.relatedTarget).data().id;
+                $(e.currentTarget).find('#Id').val(id);
+            });
+        });
+
+
+
     </script>
 }
 

@@ -16,11 +16,11 @@ namespace Negocio.Servicios
 {
    public class ServicioCajaGrupo : ServicioBase
     {
-        private CajaGrupoRepositorio oCajaGrupoRepositorio;
+        private CajaGrupoRepositorio cajaGrupoRepositorio;
       
         public ServicioCajaGrupo()
         {
-            oCajaGrupoRepositorio = kernel.Get<CajaGrupoRepositorio>();
+            cajaGrupoRepositorio = kernel.Get<CajaGrupoRepositorio>();
             
         }
 
@@ -33,7 +33,7 @@ namespace Negocio.Servicios
         {
             try
             {
-                var CajaGrupo = Mapper.Map<List<GrupoCaja>, List<CajaGrupoModel>>(oCajaGrupoRepositorio.GetAllGrupoCaja());
+                var CajaGrupo = Mapper.Map<List<GrupoCaja>, List<CajaGrupoModel>>(cajaGrupoRepositorio.GetAllGrupoCaja());
                 return CajaGrupo;
 
             }
@@ -50,7 +50,7 @@ namespace Negocio.Servicios
         {
             try
             {
-                return Mapper.Map<GrupoCaja, CajaGrupoModel>(oCajaGrupoRepositorio.GetGrupoCajaPorId(id));
+                return Mapper.Map<GrupoCaja, CajaGrupoModel>(cajaGrupoRepositorio.GetGrupoCajaPorId(id));
             }
             catch (Exception)
             {
@@ -64,7 +64,7 @@ namespace Negocio.Servicios
         {
             try
             {
-                return Mapper.Map<GrupoCaja, CajaGrupoModel>(oCajaGrupoRepositorio.GetGrupoCajaPorCodigo(codigo));
+                return Mapper.Map<GrupoCaja, CajaGrupoModel>(cajaGrupoRepositorio.GetGrupoCajaPorCodigo(codigo));
             }
             catch (Exception)
             {
@@ -77,111 +77,78 @@ namespace Negocio.Servicios
 
         #region "Metodos de Actualizacion de Datos"
 
-        public int Eliminar(int IdGrupoCaja)
+        public void Eliminar(int IdGrupoCaja)
         {
-            var retorno = oCajaGrupoRepositorio.DeleteGrupoCaja(IdGrupoCaja);
+            try
+            {
 
-            if (retorno == 1)
-            {
-                return 0; //ok
+
+                var retorno = cajaGrupoRepositorio.DeleteGrupoCaja(IdGrupoCaja);
+                _mensaje("Se eliminó correctamente", "ok");
+
             }
-            else
+            catch (Exception)
             {
-                return -1;//paso algo
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+
             }
+
         }
 
 
 
      
 
-        public int GuardarGrupoCaja(CajaGrupoModel oGrupoCajaModel)
+        public CajaGrupoModel GuardarGrupoCaja(CajaGrupoModel model)
         {
-            //controlar que no exista 
-            GrupoCaja oCodigo = oCajaGrupoRepositorio.GetGrupoCajaPorCodigo(oGrupoCajaModel.Codigo);
 
-           
-
-            if (oCodigo != null)
+            try
             {
-                return -2;
+                
+                model.Activo = true;               
+                model.UltimaModificacion = DateTime.Now;
+                var newModel = cajaGrupoRepositorio.Insertar(Mapper.Map< CajaGrupoModel,GrupoCaja>(model));
+                _mensaje("Se registro correctamente", "ok");
+                return Mapper.Map<GrupoCaja,CajaGrupoModel> (newModel);               
             }
-            else
+            catch (Exception )
             {
-                GrupoCaja oGrupoCajaNuevo = new GrupoCaja();
-                GrupoCaja oGrupoCajaRespuesta = new GrupoCaja();
-
-                oGrupoCajaNuevo.Codigo = oGrupoCajaModel.Codigo;
-                oGrupoCajaNuevo.Concepto = oGrupoCajaModel.Concepto;
-
-                oGrupoCajaNuevo.Activo = true;
-                oGrupoCajaNuevo.IdUsuario = oGrupoCajaModel.IdUsuario;
-                oGrupoCajaNuevo.UltimaModificacion = oGrupoCajaModel.UltimaModificacion;
-
-                oGrupoCajaRespuesta = oCajaGrupoRepositorio.Insertar(oGrupoCajaNuevo);
-
-                if (oGrupoCajaRespuesta == null)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
 
             }
+
+
         }
 
 
 
-        public int ActualizarGrupoCaja(CajaGrupoModel oGrupoCajaModel)
+        public CajaGrupoModel ActualizarGrupoCaja(CajaGrupoModel model)
         {
-            //controlar que no exista 
 
-
-
-
-                GrupoCaja oCodigo = oCajaGrupoRepositorio.GetGrupoCajaPorId(oGrupoCajaModel.Id);
-
-
-
-            if (oCodigo == null)  //significa que no existe
+            try
             {
-                return -2;
+
+                model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                var newModel = cajaGrupoRepositorio.ActualizarGrupoCaja(Mapper.Map<CajaGrupoModel, GrupoCaja>(model));              
+                _mensaje("Se actualizo correctamente", "ok");
+                
+                return Mapper.Map<GrupoCaja, CajaGrupoModel>(newModel);
             }
-            else //significa que  existe el dato a ingresar
+            catch (Exception)
             {
-                GrupoCaja oGrupoCajaNuevo = new GrupoCaja();
-                GrupoCaja oGrupoCajaRespuesta = new GrupoCaja();
-                oGrupoCajaNuevo.Id = oGrupoCajaModel.Id;
-                oGrupoCajaNuevo.Codigo = oGrupoCajaModel.Codigo ;
-                oGrupoCajaNuevo.Concepto = oGrupoCajaModel.Concepto;
-                oGrupoCajaNuevo.IdImputacion = oGrupoCajaModel.IdImputacion;
-
-
-                oGrupoCajaNuevo.Activo = true;
-                oGrupoCajaNuevo.IdUsuario = oGrupoCajaModel.IdUsuario;
-                oGrupoCajaNuevo.UltimaModificacion = oGrupoCajaModel.UltimaModificacion;
-
-                oGrupoCajaRespuesta = oCajaGrupoRepositorio.ActualizarGrupoCaja(oGrupoCajaNuevo);
-
-                if (oGrupoCajaRespuesta == null)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
 
             }
+
         }
-
-
+   
 
         #endregion
+ }
 
-
-
-    }
 }
+
+
