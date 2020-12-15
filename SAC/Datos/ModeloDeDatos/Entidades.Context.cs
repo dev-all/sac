@@ -42,9 +42,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<AfipCategorias> AfipCategorias { get; set; }
-        public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
-        public virtual DbSet<TipoPago> TipoPago { get; set; }
         public virtual DbSet<Imputacion> Imputacion { get; set; }
         public virtual DbSet<SubRubro> SubRubro { get; set; }
         public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
@@ -57,5 +55,8 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CompraIva> CompraIva { get; set; }
         public virtual DbSet<Diario> Diario { get; set; }
         public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
+        public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
+        public virtual DbSet<Caja> Caja { get; set; }
+        public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\CajaModel.cs" />
     <Compile Include="Modelos\CajaGrupoModel.cs" />
     <Compile Include="Modelos\DiarioModel.cs" />
     <Compile Include="Modelos\CompraFacturaModel.cs" />
@@ -94,6 +95,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioCaja.cs" />
     <Compile Include="Servicios\ServicioImputacion.cs" />
     <Compile Include="Servicios\ServicioContable.cs" />
     <Compile Include="Servicios\ServicioLocalidad.cs" />

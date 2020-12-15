@@ -1,4 +1,4 @@
-﻿@model List<SAC.Models.CajaModelView>
+﻿@model List<SAC.Models.CajaChicaModelView>
 
 @{
     ViewBag.Title = "Index";
@@ -24,7 +24,7 @@
 <!-- ============================================================== -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">Consulta de Caja</h4>
+        <h4 class="text-themecolor">Caja Chica</h4>
     </div>
 
 </div>
@@ -37,58 +37,31 @@
 
         <div class="card">
             <div class="card-body">
-
+                <h5 class="card-title">Lista de Item de Caja Chica</h5>
                 <h6 class="card-subtitle"> </h6>
-                <a href="@Url.Action("AddOrEdit", "Caja")" class="btn btn-sm btn-secondary "><i class="mdi mdi-calendar-plus"></i>Agregar Item a la Caja Chica</a>
-               <hr>
-
+                <a href="@Url.Action("AddOrEdit", "CajaChica")" class="btn btn-sm btn-secondary "><i class="mdi mdi-calendar-plus"></i> Nuevo Item</a>
                 <div class="table-responsive m-t-40">
 
-
-
-                    <table id="example23" class="table stylish-table"  borde="2">
-
+                    <table id="example23" class="table stylish-table">
 
                         <thead>
-
-                            <tr>
-                                <td align="center">
-                                    <strong>Saldo Inicial</strong>
-
-                                </td>
-                                <td align="center">
-                                    <strong>Pesos</strong>
-                                </td>
-                                <td align="center">
-                                    <strong>Dolares</strong>
-                                </td>
-                                <td align="center">
-                                    <strong>Cheques</strong>
-                                </td>
-                                <td align="center">
-                                    <strong>Tarjeta</strong>
-                                </td>
-
-                            </tr>
-
-
                             <tr>
 
 
-                                <th  class="sort-alpha">Concepto</th>
-                                <th class="sort-numeric">Pesos</th>
-                                <th>Dolares</th>
-                                <th>Cheques</th>
-                                <th>Tarjeta</th>
-                                <th>Fecha</th>
-                                <th>Grupo Caja</th>
+                                <th>
+                                    Concepto
+                                </th>
+                                <th>
+                                    Grupo Caja
+                                </th>
+
+
                                 <th>Acciones</th>
 
 
-                            </t>
+                            </tr>
                         </thead>
                         <tbody>
-                          
                             @foreach (var item in Model)
                             {
                                 <tr class="@("table-" + item.Id)">
@@ -98,47 +71,16 @@
                                         @Html.DisplayFor(modelItem => item.Concepto)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.ImportePesos)
+                                        @Html.DisplayFor(modelItem => item.GrupoCaja)
                                     </td>
+                                    
 
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.ImporteDolar)
-
-
-
-
-                                    </td>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ImporteCheque)
-                                    </td>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ImporteTarjeta)
-                                    </td>
-
-                                    <td>
-
-
-                                        @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
-
-
-
-
-                                    </td>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
-                                    </td>
-
-
-
-                                    <td>
-                                        <a href="@Url.Action("AddOrEdit", "Caja",new { id = item.Id })" data-toggle="tooltip" data-original-title="Editar" class="btn btn-primary fa fa-1x fa-pencil-square-o"></a>
+                                        <a href="@Url.Action("AddOrEdit", "CajaChica",new { id = item.Id })" data-toggle="tooltip" data-original-title="Editar" class="btn btn-primary fa fa-pencil-square-o"></a>
 
 
                                         <span data-toggle="modal" data-target="#myModalEliminar" data-id="@Html.DisplayFor(modelItem =>item.Id)">
-                                            <a class="btn btn-danger fa fa-trash-o fa-1x" role='button' data-toggle="tooltip" data-placement="top" title="Eliminar">.</a>
+                                            <a class="btn btn-danger fa fa-trash-o" role='button' data-toggle="tooltip" data-placement="top" title="Eliminar">.</a>
                                         </span>
                                     </td>
 
@@ -146,36 +88,10 @@
 
 
                                 </tr>
-
-
-
-
-
                             }
-
-
 
                         </tbody>
 
-                        <tr>
-                            <td align="center">
-                                <strong>Saldo Procesado</strong>
-
-                            </td>
-                            <td align="center">
-                                <strong>Pesos</strong>
-                            </td>
-                            <td align="center">
-                                <strong>Dolares</strong>
-                            </td>
-                            <td align="center">
-                                <strong>Cheques</strong>
-                            </td>
-                            <td align="center">
-                                <strong>Tarjeta</strong>
-                            </td>
-
-                        </tr>
 
                     </table>
                 </div>

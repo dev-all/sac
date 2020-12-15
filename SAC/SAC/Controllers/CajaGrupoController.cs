@@ -11,11 +11,11 @@ using Negocio.Modelos;
 
 namespace SAC.Controllers
 {
-    public class CajaController : BaseController
+    public class CajaGrupoController : BaseController
     {
 
         private ServicioCajaGrupo serviciocajagrupo = new ServicioCajaGrupo();
-        public CajaController()
+        public CajaGrupoController()
         {            
             serviciocajagrupo._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }

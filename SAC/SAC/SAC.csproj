@@ -139,6 +139,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="Controllers\CajaControllers.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
@@ -151,7 +152,7 @@
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
-    <Compile Include="Controllers\CajaController.cs" />
+    <Compile Include="Controllers\CajaGrupoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -161,6 +162,7 @@
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
     <Compile Include="Models\AutoCompletarViewModel.cs" />
+    <Compile Include="Models\CajaModelView.cs" />
     <Compile Include="Models\CompraIvaModelView.cs" />
     <Compile Include="Models\Request\bcraRequest.cs" />
     <Compile Include="Models\CompraFacturaViewModel.cs" />
@@ -2779,6 +2781,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\TreeView\TreeView.js" />
     <Content Include="Scripts\view\calcularporcentaje.js" />
+    <Content Include="Scripts\view\CajaScript.js" />
     <Content Include="Scripts\view\FacturaCompraScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2822,13 +2825,16 @@
     <Content Include="Views\Compras\FacturaCompras.cshtml" />
     <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
     <Content Include="Views\Proveedor\Editar.cshtml" />
+    <Content Include="Views\CajaGrupo\Index.cshtml" />
+    <Content Include="Views\AddOrEdit.cshtml" />
+    <Content Include="Views\Index.cshtml" />
     <Content Include="Views\Caja\Index.cshtml" />
     <Content Include="Views\Caja\AddOrEdit.cshtml" />
+    <Content Include="Views\CajaGrupo\AddOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="Views\CajaGrupo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
