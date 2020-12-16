@@ -1,0 +1,357 @@
+﻿@model SAC.Models.CajaGrupoModelView
+
+@{
+    ViewBag.Title = "Grupo de Caja";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+  
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    @Html.Hidden("BotonSeleccion")
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <h3 class="card-title">Grupos de Caja</h3>
+                    <h6 class="card-subtitle"> </h6>
+                    <form action="#">
+                        <div class="form-body">
+
+                            <div class="row">
+                                <div class="col-3">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label" })
+
+                                        @Html.EditorFor(model => model.Codigo, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Codigo, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label" })
+
+                                        @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    @Html.LabelFor(model => model.IdImputacion)
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.IdImputacion, new { @class = "form-control", @placeholder = "Ej: 00000", @readonly = true })
+                                        <button type="button" id="btnImpProvBuscarFact" class="btn btn-primary fa fa-search" onclick="BuscarImputacion(1)"></button>
+                                        <button id="btnCargandoFact" class="btn btn-primary" type="button" disabled style="display:none">
+                                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            Loading...
+                                        </button>
+                                    </div>
+                                    @Html.ValidationMessage("IdImputacion", new { @class = "text-danger" })
+                                </div>
+
+
+                            </div>
+                            <hr>
+                            <div class="form-actions mt-5">
+
+                                <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
+
+                                <a href="@Url.Action("Index", "CajaGrupo" )" class="btn btn-dark btn-sm"> Volver </a>
+                                @*<button type="button" class="btn btn-dark btn-sm">Cancel</button>*@
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+
+
+    <div class="row" style="display:none">
+        <div class="row col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoTotalP, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoTotalP, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoTotalP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoTotalD, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoTotalD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoTotalD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoTotalC, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoTotalC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoTotalC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoTotalT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoTotalT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoTotalT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoTotalB, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoTotalB, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoTotalB, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoParcialP, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoParcialP, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoParcialP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoParcialD, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoParcialD, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoParcialD, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoParcialC, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoParcialC, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoParcialC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NetoParcialT, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NetoParcialT, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NetoParcialT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NParcialB, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NParcialB, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NParcialB, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ltraa, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ltraa, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ltraa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Ltram, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Ltram, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Ltram, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Especial, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Especial, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Especial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Activo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Activo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Activo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IdUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UltimaModificacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UltimaModificacion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UltimaModificacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+    }
+
+    <div class="modal fade" id="exampleModal" style="overflow-y: auto;" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="TituloModal">Seleccione un número de imputación</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="SubRubro">  </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+        function AgregarImputacion(idSubRubro) {
+            var Seleccion = document.getElementById("BotonSeleccion").value;
+            if (Seleccion == "1") {
+                document.getElementById("IdImputacion").value = idSubRubro;
+            }
+
+
+            $("#exampleModal").modal('hide');
+        }
+
+        function BuscarImputacion(boton) {
+            document.getElementById("BotonSeleccion").value = boton;
+
+            var botonBuscar = "";
+            var botonCargando = "";
+
+            if (boton == "1") {
+                botonBuscar = "#btnImpProvBuscar";
+                botonCargando = "#btnCargando";
+            }
+            if (boton == "2") {
+                botonBuscar = "#btnImpProvBuscarFact";
+                botonCargando = "#btnCargandoFact";
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Proveedor/CargarImputacion",
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                beforeSend: function () {
+                    $(botonBuscar).css("display", "none");
+                    $(botonCargando).css("display", "block");
+                }, complete: function () {
+                    $(botonBuscar).css("display", "block");
+                    $(botonCargando).css("display", "none");
+
+                },
+                success: function (response) {
+                    $('#SubRubro').html(response);
+                    $("#exampleModal").modal('show');
+                    fntabla();
+                },
+                failure: function (response) {
+                    Console.log(response.responseText);
+                },
+                error: function (response) {
+                    Console.log(response.responseText);
+                }
+            });
+
+        }
+        function fntabla() {
+
+            if ($.fn.dataTable.isDataTable('#tblImputacion')) {
+                table = $('#tblImputacion').DataTable();
+                table.destroy();
+                fntablaRenderizar();
+            } else {
+                fntablaRenderizar();
+            }
+        }
+        function fntablaRenderizar() {
+            $('#tblImputacion').DataTable({
+                "language": { "url": "/Content/assets/plugins/datatables/es.txt" },
+                "order": [[2, 'asc']],
+                'paging': true,
+                'lengthChange': false,
+                'pageLength': 15,
+                'searching': true,
+                'ordering': true,
+                'info': false,
+                'autoWidth': true,
+                'dom': 'Bfrtip',
+                'buttons': []
+            });
+        }
+
+
+    </script>
+
+    @section Scripts{
+        <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <!-- start - This is for export functionality only -->
+        <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+        <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+        <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+    }
+
+
+
+
