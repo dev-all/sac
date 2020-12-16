@@ -20,6 +20,6 @@ namespace Negocio.Modelos
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public virtual ICollection<Proveedor> Proveedor { get; set; }
+        public ICollection<Proveedor> Proveedor { get; set; }
     }
 }

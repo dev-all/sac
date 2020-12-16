@@ -115,18 +115,8 @@ namespace SAC.Models
 
         public DateTime UltimaModificacion { get; set; }
 
+        public List<TipoComprobanteModelView>  ListTipoComprobante { get; set; }
 
-        //public  Imputacion Imputacion { get; set; }
-
-        //public  Imputacion Imputacion1 { get; set; }
-
-        //public  Pais Pais { get; set; }
-
-        //public  Provincia Provincia { get; set; }
-
-        //public  TipoIva TipoIva { get; set; }
-
-        //public  TipoMoneda TipoMoneda { get; set; }
 
         public virtual TipoProveedor TipoProveedor { get; set; }
 

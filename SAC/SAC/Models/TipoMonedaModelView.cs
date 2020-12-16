@@ -14,13 +14,12 @@ namespace SAC.Models
 
         public string Descripcion { get; set; }
 
-        public Nullable<bool> Activo { get; set; }
+        public bool Activo { get; set; }
 
-        public Nullable<int> IdUsuario { get; set; }
+        public int IdUsuario { get; set; }
 
-        public Nullable<System.DateTime> UltimaModificacion { get; set; }
-
-        public virtual ICollection<Proveedor> Proveedor { get; set; }
+        public DateTime UltimaModificacion { get; set; }
+       
 
     }
 }

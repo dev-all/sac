@@ -45,7 +45,7 @@ public partial class SubRubro
 
     public virtual ICollection<Imputacion> Imputacion { get; set; }
 
-    public virtual Rubros Rubros { get; set; }
+    public virtual Rubro Rubro { get; set; }
 
 }
 

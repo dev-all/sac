@@ -22,7 +22,7 @@ public partial class GrupoCuenta
     public GrupoCuenta()
     {
 
-        this.Rubros = new HashSet<Rubros>();
+        this.Rubro = new HashSet<Rubro>();
 
     }
 
@@ -43,7 +43,7 @@ public partial class GrupoCuenta
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Rubros> Rubros { get; set; }
+    public virtual ICollection<Rubro> Rubro { get; set; }
 
 }
 

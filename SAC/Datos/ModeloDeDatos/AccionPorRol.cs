@@ -26,9 +26,9 @@ public partial class AccionPorRol
 
 
 
-    public virtual Rol Rol { get; set; }
-
     public virtual Accion Accion { get; set; }
+
+    public virtual Rol Rol { get; set; }
 
 }
 

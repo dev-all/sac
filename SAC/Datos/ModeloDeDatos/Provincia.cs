@@ -49,11 +49,11 @@ public partial class Provincia
 
 
 
-    public virtual Pais Pais { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Localidad> Localidad { get; set; }
+
+    public virtual Pais Pais { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

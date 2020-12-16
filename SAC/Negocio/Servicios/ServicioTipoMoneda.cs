@@ -51,8 +51,7 @@ namespace Negocio.Servicios
                 return null;
             }
         }
-
-
+       
         public TipoMonedaModel GetTipoMoneda(int _id)
         {
             TipoMoneda oTipoMoneda = oTipoMonedaRepositorio.ObtenerTipoMonedaPorId(_id);

@@ -22,6 +22,8 @@ public partial class TipoMoneda
     public TipoMoneda()
     {
 
+        this.CompraFactura = new HashSet<CompraFactura>();
+
         this.Proveedor = new HashSet<Proveedor>();
 
     }
@@ -38,6 +40,10 @@ public partial class TipoMoneda
     public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
 
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<CompraFactura> CompraFactura { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

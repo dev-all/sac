@@ -186,9 +186,6 @@
                                     <div class="floating-labels m-t-30">
                                         <div class="form-group m-b-30">
 
-                                            @*@Html.DropDownListFor(model => model.idAccionPorRol, (IEnumerable<SelectListItem>)(Model.selectListAccion), "", new { @class = "form-control" })
-                                    <label for="inputControlador">Controlador - Acción</label>*@
-
                                             @Html.DropDownListFor(model => model.idAccionPorRol,
                                                           (IEnumerable<SelectListItem>)(new SelectList(Model.Acciones.Select(x => new { Value = x.IdAccion, Text = x.Descripcion }),
                                                                          "Value", "Text"))

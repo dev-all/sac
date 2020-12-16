@@ -12,9 +12,44 @@ namespace Agenda.Infrastructure
         public AutoMapperNegProfile()
         {
 
+            CreateMap<PresupuestoActualModel, PrespuestoActual>();
+            CreateMap<PrespuestoActual, PresupuestoActualModel>();
+
+            CreateMap<CompraFacturaPagoModel, CompraFacturaPago>();
+            CreateMap<CompraFacturaPago, CompraFacturaPagoModel>();
+
+            CreateMap<TarjetaModel, Tarjetas>();
+            CreateMap<Tarjetas, TarjetaModel>();
+
+            CreateMap<BancoCuentaModel, BancoCuenta>();
+            CreateMap<BancoCuenta, BancoCuentaModel>();
+
+            CreateMap<BancoCuentaBancariaModel, BancoCuentaBancaria>();
+            CreateMap<BancoCuentaBancaria, BancoCuentaBancariaModel>();
+
+            CreateMap<ChequeraModel, Chequera>();
+            CreateMap<Chequera, ChequeraModel>();
+
+            CreateMap<ChequeModel, Cheque>();
+            CreateMap<Cheque, ChequeModel>();
+
+            CreateMap<ImputacionModel, Imputacion>();
+            CreateMap<Imputacion, ImputacionModel>();
+
+            CreateMap<TipoComprobanteModel, TipoComprobante>();
+            CreateMap<TipoComprobante, TipoComprobanteModel>();
+
+            CreateMap<CompraFacturaModel, CompraFactura>();
+            CreateMap<CompraFactura, CompraFacturaModel>();
+
+            CreateMap< CuentaCteProveedorModel, CuentaCorriente>();
+            CreateMap<CuentaCorriente, CuentaCteProveedorModel>();
+
+            CreateMap<ProveedorModel, Proveedor>();
+            CreateMap<Proveedor, ProveedorModel>();
+
             CreateMap<PersonaModel, Persona>();
             CreateMap<Persona, PersonaModel>();
-
 
             CreateMap<PrioridadModel, Prioridad>();
             CreateMap<Prioridad, PrioridadModel>();
@@ -48,7 +83,6 @@ namespace Agenda.Infrastructure
 
             CreateMap<AccionPorRol, AccionPorRolModel>();
             CreateMap<AccionPorRolModel, AccionPorRol>();
-
 
             CreateMap<UsuarioModel, Usuario>();
             CreateMap<Usuario, UsuarioModel>();

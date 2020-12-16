@@ -9,6 +9,7 @@ namespace Datos.Interfaces
 {
    public interface IUsuarioRepositorio : IRepositorio<Usuario>, IDisposable
     {
+        Usuario ObtenerUsuarioPorUserNameEmail(string documento);
         Usuario ObtenerPorDocumento(string documento);
         Usuario ObtenerPorID(int idUsuario);
         List<Usuario> GetAllUsuario();
@@ -21,7 +22,9 @@ namespace Datos.Interfaces
         void ActualizarRolDeUsaurio(int idUsuario, int idRol, int idUsuarioLogueado);
         object logLogin(int idUsuario, string IP);
         Rol ObtenerRol(int idUsuario);
-      
+        void CreateUsuario(Usuario usuario);        
+        void UpdateUsuario(Usuario usuario);
+
 
 
 

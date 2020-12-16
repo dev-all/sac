@@ -24,6 +24,8 @@ public partial class TipoIva
 
         this.Proveedor = new HashSet<Proveedor>();
 
+        this.TipoComprobanteTipoIva = new HashSet<TipoComprobanteTipoIva>();
+
     }
 
 
@@ -40,6 +42,10 @@ public partial class TipoIva
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Proveedor> Proveedor { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
 
 }
 

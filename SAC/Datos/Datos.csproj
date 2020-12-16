@@ -70,6 +70,24 @@
     <Compile Include="ModeloDeDatos\AfipCategorias.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\BancoCuenta.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\BancoCuentaBancaria.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Caja.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\CajaTipoMovimiento.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Cheque.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Chequera.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\CompraFactura.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -82,7 +100,7 @@
     <Compile Include="ModeloDeDatos\Contacto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloDeDatos\Diario.cs">
+    <Compile Include="ModeloDeDatos\CuentaCorriente.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Entidades.Context.cs">
@@ -101,6 +119,9 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="ModeloDeDatos\Evento.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\GrupoCaja.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\GrupoCuenta.cs">
@@ -127,7 +148,7 @@
     <Compile Include="ModeloDeDatos\Persona.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloDeDatos\Presupuesto.cs">
+    <Compile Include="ModeloDeDatos\PrespuestoActual.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Prioridad.cs">
@@ -142,13 +163,22 @@
     <Compile Include="ModeloDeDatos\Rol.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloDeDatos\Rubros.cs">
+    <Compile Include="ModeloDeDatos\Rubro.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\SubRubro.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\Tarjetas.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\TipoComprobante.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\TipoComprobanteTipoIva.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\TipoComprobanteVenta.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\TipoIva.cs">
@@ -167,10 +197,17 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorios\BancoCuentaBancariaRepositorio.cs" />
+    <Compile Include="Repositorios\ChequeraRepositorio.cs" />
+    <Compile Include="Repositorios\ChequeRepositorio.cs" />
+    <Compile Include="Repositorios\CompraFacturaPagoRepositorio.cs" />
+    <Compile Include="Repositorios\CompraRepositorio.cs" />
+    <Compile Include="Repositorios\BancoCuentaRepositorio.cs" />
     <Compile Include="Repositorios\ImputacionRepositorio.cs" />
-    <Compile Include="Repositorios\LocalidadRepositorio.cs" />
     <Compile Include="Repositorios\PaisRepositorio.cs" />
+    <Compile Include="Repositorios\PresupuestoActualRepositorio.cs" />
     <Compile Include="Repositorios\ProvinciaRepositorio.cs" />
+    <Compile Include="Repositorios\LocalidadRepositorio.cs" />
     <Compile Include="Repositorios\ProveedorRepositorio.cs" />
     <Compile Include="Repositorios\AccionRepositorio.cs" />
     <Compile Include="Repositorios\RolRepositorio.cs" />
@@ -179,7 +216,10 @@
     <Compile Include="Repositorios\EventoRepositorio.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\SubRubroRepositorio.cs" />
+    <Compile Include="Repositorios\TarjetaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoComprovanteVentaRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoComprobanteRepositorio.cs" />
     <Compile Include="Repositorios\TipoMonedaRepositorio.cs" />
     <Compile Include="Repositorios\TipoProveedorRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
@@ -207,11 +247,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Debug\" />
-    <Folder Include="bin\Release\" />
     <Folder Include="MockRepositorios\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Datos.dll" />
+    <Content Include="bin\Debug\Datos.pdb" />
+    <Content Include="bin\Debug\Entidad.dll" />
+    <Content Include="bin\Debug\Entidad.pdb" />
     <Content Include="Interfaces\IUsuarioRepositorio.vb" />
     <Content Include="ModeloDeDatos\Entidades.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

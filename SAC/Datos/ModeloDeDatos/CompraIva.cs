@@ -18,101 +18,64 @@ using System;
 public partial class CompraIva
 {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public CompraIva()
+    {
+
+        this.CompraFactura = new HashSet<CompraFactura>();
+
+    }
+
+
     public int Id { get; set; }
 
-    public Nullable<int> IdFacturaCompra { get; set; }
+    public Nullable<int> CodigoDiario { get; set; }
 
-    public int AuxiliarNumero { get; set; }
+    public decimal NetoGravado { get; set; }
 
-    public string NumeroEmpresa { get; set; }
+    public decimal NetoNoGravado { get; set; }
 
-    public string Empesa { get; set; }
-
-    public System.DateTime Fecha { get; set; }
-
-    public decimal Total { get; set; }
-
-    public decimal Iva { get; set; }
-
-    public decimal IvaAri { get; set; }
-
-    public decimal IvaRes { get; set; }
+    public decimal SubTotal { get; set; }
 
     public decimal TotalIva { get; set; }
 
-    public decimal Gasto { get; set; }
+    public decimal TotalPercepciones { get; set; }
 
-    public decimal Neto { get; set; }
+    public decimal Total { get; set; }
 
-    public string Especial { get; set; }
+    public Nullable<decimal> Importe25 { get; set; }
 
-    public decimal Res { get; set; }
+    public Nullable<decimal> Importe5 { get; set; }
 
-    public string IdTipoIva { get; set; }
+    public Nullable<decimal> Importe105 { get; set; }
 
-    public string TipoFactura { get; set; }
+    public Nullable<decimal> Importe21 { get; set; }
 
-    public decimal ResDgr { get; set; }
-
-    public string Cuit { get; set; }
-
-    public decimal dolar { get; set; }
-
-    public string Diferencia { get; set; }
-
-    public string Clase { get; set; }
-
-    public string NombreEmple { get; set; }
-
-    public string Periodo { get; set; }
-
-    public string AbreviaturaFactura { get; set; }
-
-    public int IdTipoMoneda { get; set; }
-
-    public decimal Isib { get; set; }
-
-    public int IdDiario { get; set; }
-
-    public string Cae { get; set; }
-
-    public decimal Impint { get; set; }
-
-    public int IdImputacion { get; set; }
-
-    public Nullable<decimal> Tnogra { get; set; }
-
-    public Nullable<decimal> Texento { get; set; }
-
-    public Nullable<decimal> PerGeneral { get; set; }
-
-    public Nullable<decimal> Perib { get; set; }
-
-    public Nullable<decimal> PerMun { get; set; }
-
-    public Nullable<decimal> OtrosImpuestos { get; set; }
-
-    public Nullable<decimal> Tnocat { get; set; }
-
-    public Nullable<decimal> Pernac { get; set; }
-
-    public Nullable<decimal> Iva27 { get; set; }
-
-    public Nullable<decimal> Iva21 { get; set; }
-
-    public Nullable<decimal> Iva105 { get; set; }
-
-    public Nullable<decimal> Ivan5 { get; set; }
+    public Nullable<decimal> Importe27 { get; set; }
 
     public Nullable<decimal> Iva25 { get; set; }
 
-    public Nullable<decimal> Total21 { get; set; }
+    public Nullable<decimal> Iva5 { get; set; }
 
-    public Nullable<decimal> Total27 { get; set; }
+    public Nullable<decimal> Iva105 { get; set; }
 
-    public Nullable<decimal> Total105 { get; set; }
+    public Nullable<decimal> Iva21 { get; set; }
 
-    public Nullable<decimal> Total5 { get; set; }
+    public Nullable<decimal> Iva27 { get; set; }
+
+    public Nullable<decimal> PercepcionIva { get; set; }
+
+    public Nullable<decimal> PercepcionIB { get; set; }
+
+    public Nullable<decimal> PercepcionProvincia { get; set; }
+
+    public Nullable<decimal> PercepcionImporteIva { get; set; }
+
+    public Nullable<decimal> PercepcionImporteIB { get; set; }
+
+    public Nullable<decimal> PercepcionImporteProvincia { get; set; }
+
+    public Nullable<decimal> OtrosImpuestos { get; set; }
 
     public Nullable<bool> Activo { get; set; }
 
@@ -122,7 +85,9 @@ public partial class CompraIva
 
 
 
-    public virtual CompraFactura CompraFactura { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<CompraFactura> CompraFactura { get; set; }
 
 }
 

@@ -136,6 +136,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
+    <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
@@ -151,17 +153,28 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\BcraHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
+    <Compile Include="Models\AutoCompletarViewModel.cs" />
+    <Compile Include="Models\BancoCuentaBancariaModelView.cs" />
+    <Compile Include="Models\ChequeModelView.cs" />
+    <Compile Include="Models\ChequeraModelView.cs" />
+    <Compile Include="Models\FacturaPagoViewModel.cs" />
+    <Compile Include="Models\CompraIvaModelView.cs" />
+    <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
     <Compile Include="Models\ConfiguracionModelView.cs" />
+    <Compile Include="Models\CuentaCteProveedorModelView.cs" />
+    <Compile Include="Models\BancoCuentaModelView.cs" />
     <Compile Include="Models\ImputacionModelView.cs" />
     <Compile Include="Models\LocalidadModelView.cs" />
     <Compile Include="Models\MenuSideBarModelView.cs" />
     <Compile Include="Models\PaisModelView.cs" />
+    <Compile Include="Models\PresupuestoActualModelView.cs" />
     <Compile Include="Models\ProveedorModelView.cs" />
     <Compile Include="Models\PersonaModelView.cs" />
     <Compile Include="Models\PrioridadModelView.cs" />
@@ -169,6 +182,8 @@
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\SubRubroModelView.cs" />
+    <Compile Include="Models\TarjetaModelView.cs" />
+    <Compile Include="Models\TipoComprobanteModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\TipoProveedorModelView.cs" />
@@ -296,8 +311,6 @@
     <Content Include="Content\assets\images\logo-light-icon.png" />
     <Content Include="Content\assets\images\logo-light-text.png" />
     <Content Include="Content\assets\images\logo-text.png" />
-    <Content Include="Content\assets\images\logo.ico" />
-    <Content Include="Content\assets\images\sables.png" />
     <Content Include="Content\assets\images\tooltip\Euclid.png" />
     <Content Include="Content\assets\images\tooltip\shape1.svg" />
     <Content Include="Content\assets\images\tooltip\shape2.svg" />
@@ -1002,13 +1015,6 @@
     <Content Include="Content\assets\plugins\datatables\es.txt" />
     <Content Include="Content\assets\plugins\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\assets\plugins\datatables\jquery.dataTables.min.js" />
-    <Content Include="Content\assets\plugins\datatables\jsTable\buttons.flash.min.js" />
-    <Content Include="Content\assets\plugins\datatables\jsTable\buttons.html5.min.js" />
-    <Content Include="Content\assets\plugins\datatables\jsTable\buttons.print.min.js" />
-    <Content Include="Content\assets\plugins\datatables\jsTable\dataTables.buttons.min.js" />
-    <Content Include="Content\assets\plugins\datatables\jsTable\jszip.min.js" />
-    <Content Include="Content\assets\plugins\datatables\jsTable\pdfmake.min.js" />
-    <Content Include="Content\assets\plugins\datatables\jsTable\vfs_fonts.js" />
     <Content Include="Content\assets\plugins\datatables\license.txt" />
     <Content Include="Content\assets\plugins\datatables\media\css\dataTables.bootstrap.css" />
     <Content Include="Content\assets\plugins\datatables\media\css\dataTables.bootstrap.min.css" />
@@ -1619,7 +1625,6 @@
     <Content Include="Content\assets\plugins\jqueryui\jquery-ui.theme.min.css" />
     <Content Include="Content\assets\plugins\jqueryui\LICENSE.txt" />
     <Content Include="Content\assets\plugins\jquery\jquery.min.js" />
-    <Content Include="Content\assets\plugins\jqueyr-unobtrusive-ajax\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\assets\plugins\moment\min\locales.js" />
     <Content Include="Content\assets\plugins\moment\min\locales.min.js" />
     <Content Include="Content\assets\plugins\moment\min\moment-with-locales.js" />
@@ -2774,6 +2779,8 @@
     <Content Include="Scripts\js\widget-data.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\TreeView\TreeView.js" />
+    <Content Include="Scripts\view\calcularporcentaje.js" />
+    <Content Include="Scripts\view\FacturaCompraScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -2792,14 +2799,9 @@
     <Content Include="Views\Rol\Create.cshtml" />
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Unauthorised\Index.cshtml" />
-    <Content Include="Views\Usuario\Delete.cshtml" />
-    <Content Include="Views\Usuario\Details.cshtml" />
-    <Content Include="Views\Usuario\Edit.cshtml" />
-    <Content Include="Views\Usuario\Evento.cshtml" />
     <Content Include="Views\Base\card.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Rol\DeleteAccionPorRol.cshtml" />
-    <Content Include="Views\Usuario\Crear.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Menusidebar\TreeItem.cshtml" />
     <Content Include="Views\Accion\Edit.cshtml" />
@@ -2816,18 +2818,24 @@
     <Content Include="Views\Provincia\Agregar.cshtml" />
     <Content Include="Views\Provincia\Editar.cshtml" />
     <Content Include="Views\Provincia\Index.cshtml" />
+    <Content Include="Views\Usuario\AddOrEdit.cshtml" />
+    <Content Include="Views\Proveedor\Agregar.cshtml" />
+    <Content Include="Views\Compras\FacturaCompras.cshtml" />
+    <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
+    <Content Include="Views\Proveedor\Editar.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\Index.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_Tabla.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\PagarFactura.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_tablaCheques.cshtml" />
     <Content Include="Views\Localidad\_Tabla.cshtml" />
     <Content Include="Views\Localidad\Agregar.cshtml" />
     <Content Include="Views\Localidad\Editar.cshtml" />
-    <Content Include="Views\Proveedor\Agregar.cshtml" />
-    <Content Include="Views\Proveedor\Editar.cshtml" />
-    <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaCuentasBancaria.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaTarjetas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Views\TipoProveedor\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

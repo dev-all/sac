@@ -18,18 +18,11 @@ using System;
 public partial class Usuario
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Usuario()
-    {
-
-        this.Evento = new HashSet<Evento>();
-
-    }
-
-
     public int IdUsuario { get; set; }
 
     public string Password { get; set; }
+
+    public string UserName { get; set; }
 
     public Nullable<int> IdPersona { get; set; }
 
@@ -41,13 +34,7 @@ public partial class Usuario
 
     public Nullable<System.DateTime> Actualizado { get; set; }
 
-    public string UserName { get; set; }
 
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Evento> Evento { get; set; }
 
     public virtual Persona Persona { get; set; }
 

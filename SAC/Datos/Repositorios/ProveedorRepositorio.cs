@@ -35,9 +35,6 @@ namespace Datos.Repositorios
            // context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where( p=> p.Activo == true).ToList();
 
-
-
-
             //anda
             //context.Configuration.LazyLoadingEnabled = false;
             //var items = context.Proveedor
@@ -50,8 +47,23 @@ namespace Datos.Repositorios
 
         }
 
+
+        public List<CuentaCorriente> GetAllCuentaCorriente()
+        {
+            return context.CuentaCorriente.ToList();
+        }
+        //busqueda por fecha
+        public List<CuentaCorriente> GetAllCuentaCorriente(string inicio,string fin)
+        {
+            var dInicio = Convert.ToDateTime(inicio);
+            var dFin = Convert.ToDateTime(fin);
+
+            return context.CuentaCorriente.Where(p=> p.UltimoMovimiento >= dInicio && p.UltimoMovimiento <= dFin ).ToList();
+        }
+
         public Proveedor GetProveedorPorId(int id)
-        {           
+        {
+           // context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault(); 
         }
 
@@ -108,9 +120,6 @@ namespace Datos.Repositorios
             return context.SaveChanges();
         }
 
-     
-        
-
-
+      
     }
 }

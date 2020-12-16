@@ -33,7 +33,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
            
@@ -49,7 +49,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
          
@@ -64,7 +64,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor" + ex.Message, "erro");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
 
@@ -75,25 +75,28 @@ namespace Negocio.Servicios
         {
             try
             {
-                var usuario = repositorio.ObtenerPorID(idUsuario);
-                UsuarioModel usuarioModel = new UsuarioModel() { IdUsuario = usuario.IdUsuario };
-                return usuarioModel;
+                var usuario = Mapper.Map<Usuario, UsuarioModel>(repositorio.ObtenerPorID(idUsuario));
+                //UsuarioModel usuarioModel = new UsuarioModel() { IdUsuario = usuario.IdUsuario };
+
+                return usuario;
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
             
         }
-        public UsuarioModel ObtenerUsuario(string documento, int IdModulo)
+        public UsuarioModel ObtenerUsuario(string usuarioLogin, int IdModulo)
         {
 
             try
             {
-   var usuario = repositorio.ObtenerPorDocumento(documento);
+            var usuario = repositorio.ObtenerUsuarioPorUserNameEmail(usuarioLogin);
 
-            UsuarioModel usuarioModel = new UsuarioModel() { IdUsuario = usuario.IdUsuario, Documento = documento };
+            UsuarioModel usuarioModel = new UsuarioModel() { IdUsuario = usuario.IdUsuario
+                                                            , UserName =  usuario.Persona.Email                                                          
+                                                            };
 
             var rolModel = Mapper.Map<Rol, RolModel>(usuario.Rol);
             rolModel.Acciones = new Dictionary<string, List<string>>();
@@ -114,34 +117,77 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
-            }
-         
+            }         
         }
-        public bool Obtener(string documento, string password, int idRolInvitado)
+
+      
+
+        public bool Obtener(string usuario, string password, int idRolInvitado)
         {
             try
             {
-                return this.repositorio.Obtener(documento, StringHelper.ObtenerMD5(password), idRolInvitado);
+                return this.repositorio.Obtener(usuario, StringHelper.ObtenerMD5(password), idRolInvitado);
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return false;
             }
            
         }
-        public void ActualizarRolDeUsaurio(int idUsuario, int idRol, int idUsuarioLogueado)
+
+        public void UpdateUsuario(UsuarioModel usuarioModel)
         {
-              try
+            try
             {
-                repositorio.ActualizarRolDeUsaurio(idUsuario, idRol, idUsuarioLogueado);         
-                _mensaje("Se Actualizo correctamente", "sucesso");
+               
+                usuarioModel.Actualizado = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Persona.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Persona.Activo = usuarioModel.Activo;
+                repositorio.UpdateUsuario(Mapper.Map<UsuarioModel, Usuario>(usuarioModel));
+                _mensaje("Se registro correctamente", "ok");
+               
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+               throw new Exception();  
+            }
+        }
+
+        public void CreateUsuario(UsuarioModel usuarioModel)
+        {
+            try
+            {
+                usuarioModel.Actualizado = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Creado = Convert.ToDateTime(DateTime.Now.ToString());                           
+                usuarioModel.Password = StringHelper.ObtenerMD5("12345678");
+                usuarioModel.Persona.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                usuarioModel.Persona.Activo = usuarioModel.Activo;
+                repositorio.CreateUsuario(Mapper.Map < UsuarioModel, Usuario>( usuarioModel));
+                _mensaje("Se registro correctamente", "ok");
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+            }
+
+
+        }
+
+        public void ActualizarRolDeUsaurio(int idUsuario, int idRol, int idUsuarioLogueado)
+        {
+          try
+            {
+                repositorio.ActualizarRolDeUsaurio(idUsuario, idRol, idUsuarioLogueado);         
+                _mensaje("Se Actualizo correctamente", "ok");
+            }
+            catch (Exception ex)
+            {
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                
             }
             
@@ -154,7 +200,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
             
@@ -168,10 +214,25 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             { 
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
 
+        }
+
+        public void RestablecerCuenta(int id, int idUsuario)
+        {
+            try
+            {
+                var passwordHasheado = StringHelper.ObtenerMD5("12345678");
+                repositorio.CambiarPassword(id, passwordHasheado);
+                _mensaje("Se Actualizo correctamente", "ok");
+            }
+            catch (Exception ex)
+            {
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+
+            }
         }
         public void CambiarPassword(int idUsuario, string password)
         {
@@ -179,11 +240,11 @@ namespace Negocio.Servicios
             {
             var passwordHasheado = StringHelper.ObtenerMD5(password);
             repositorio.CambiarPassword(idUsuario, passwordHasheado);
-                _mensaje("Se Actualizo correctamente", "sucesso");
+                _mensaje("Se Actualizo correctamente", "ok");
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
 
             }
           
@@ -196,7 +257,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
 
@@ -206,12 +267,12 @@ namespace Negocio.Servicios
         {
             try
             {
- repositorio.logLogin(idUsuario, ip);
+                 repositorio.logLogin(idUsuario, ip);
                
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
 
             }
            

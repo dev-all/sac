@@ -31,7 +31,7 @@ namespace SAC.Controllers
         {
             ConfigRolModelView model = new ConfigRolModelView
             {
-                Roles = Mapper.Map<List<RolModel>, List<RolModelView>>(servicioConfiguracion.GetRol())               
+                Roles = Mapper.Map<List<RolModel>, List<RolModelView>>(servicioConfiguracion.GetAllRoles())               
             };
             return View(model);
         }

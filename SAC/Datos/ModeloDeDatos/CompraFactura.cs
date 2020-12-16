@@ -24,36 +24,38 @@ public partial class CompraFactura
 
         this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
 
-        this.CompraIva = new HashSet<CompraIva>();
-
     }
 
 
     public int Id { get; set; }
 
-    public Nullable<int> IdTipoComprobante { get; set; }
+    public int IdTipoComprobante { get; set; }
 
-    public Nullable<int> PuntoVenta { get; set; }
+    public int PuntoVenta { get; set; }
 
-    public Nullable<int> NumeroFactura { get; set; }
+    public int NumeroFactura { get; set; }
 
-    public Nullable<int> IdProveedor { get; set; }
+    public int IdProveedor { get; set; }
+
+    public string IdTipoIva { get; set; }
+
+    public string CAE { get; set; }
 
     public Nullable<decimal> Total { get; set; }
 
-    public decimal Saldo { get; set; }
+    public Nullable<decimal> Saldo { get; set; }
 
     public System.DateTime Fecha { get; set; }
 
     public System.DateTime Vencimiento { get; set; }
 
-    public decimal TotalDolares { get; set; }
+    public Nullable<decimal> TotalDolares { get; set; }
 
-    public decimal Cotiza { get; set; }
+    public decimal Cotizacion { get; set; }
 
-    public System.DateTime FechaPago { get; set; }
+    public Nullable<System.DateTime> FechaPago { get; set; }
 
-    public int Periodo { get; set; }
+    public Nullable<int> Periodo { get; set; }
 
     public Nullable<decimal> Grupo { get; set; }
 
@@ -61,21 +63,23 @@ public partial class CompraFactura
 
     public string Pase { get; set; }
 
-    public decimal Cotiza1 { get; set; }
+    public Nullable<decimal> CotizacionDePago { get; set; }
 
     public string Concepto { get; set; }
 
-    public int IdImputacion { get; set; }
+    public Nullable<int> IdImputacion { get; set; }
 
-    public int IdMoneda { get; set; }
+    public Nullable<int> IdMoneda { get; set; }
 
-    public decimal Parcial { get; set; }
+    public Nullable<int> IdCompraIva { get; set; }
 
-    public int Recibo { get; set; }
+    public Nullable<decimal> Parcial { get; set; }
+
+    public Nullable<int> Recibo { get; set; }
 
     public string NumeroPago { get; set; }
 
-    public int IdDiario { get; set; }
+    public Nullable<int> IdCompraFacturaAplica { get; set; }
 
     public Nullable<int> Auxiliar { get; set; }
 
@@ -89,17 +93,17 @@ public partial class CompraFactura
 
 
 
+    public virtual Imputacion Imputacion { get; set; }
+
+    public virtual Proveedor Proveedor { get; set; }
+
+    public virtual CompraIva CompraIva { get; set; }
+
+    public virtual TipoMoneda TipoMoneda { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
-
-    public virtual Imputacion Imputacion { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<CompraIva> CompraIva { get; set; }
-
-    public virtual Proveedor Proveedor { get; set; }
 
 }
 

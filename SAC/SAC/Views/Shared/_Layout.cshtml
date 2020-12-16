@@ -16,6 +16,10 @@
     <link href="~/Content/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
     <!-- toast CSS -->
     <link href="~/Content/assets/plugins/toastr/toastr.min.css" rel="stylesheet" />
+
+  
+    <link href="~/Content/assets/plugins/jqueryui/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/assets/plugins/jqueryui/jquery-ui.theme.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="/Content/assets/css/style.css" rel="stylesheet">
     <!-- You can change the theme colors from here -->
@@ -26,18 +30,16 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <!--  Jquery -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="~/Content/assets/plugins/jquery/jquery.min.js"></script>
-    <script src="/Content/assets/plugins/calendar/jquery-ui.min.js"></script>
+    @*<script src="/Content/assets/plugins/calendar/jquery-ui.min.js"></script>*@
+<script src="~/Content/assets/plugins/jqueryui/jquery-ui.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="~/Content/assets/plugins/bootstrap/js/popper.min.js"></script>
 
     @* agegue para el ajax bre 24/11/2020 *@
-     <script src="~/Content/assets/plugins/jqueyr-unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Content/assets/plugins/jqueyr-unobtrusive-ajax/jquery.unobtrusive-ajax.js"></script>
     @* ---------------------------------- *@
     <script src="~/Content/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/Content/assets/plugins/moment/moment.js"></script>
@@ -54,7 +56,7 @@
 <body class="fix-header card-no-border fix-sidebar">
 
 
-    
+
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -115,21 +117,21 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-user"></i>
 
+                        
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark"
+                               href="">
+                                <i class="fa fa-user"></i>   @Html.Raw(ViewBag.UserCompleteName)
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right animated flipInY">
-                                <ul class="dropdown-user">
 
-                                    <li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-dark"
+                               href="@Url.Action("Logout", "Cuenta")">
+                                <i class="fa fa-times"></i> Salir
+                            </a>
 
-                                        <a href="@Url.Action("Logout", "Cuenta")"><i class="fa fa-times"></i> Salir </a>
-                                    </li>
-
-                                </ul>
-                            </div>
                         </li>
                     </ul>
                 </div>
@@ -169,13 +171,13 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
-                
+
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 @RenderBody()
 
-               
+
             </div>
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
@@ -222,7 +224,9 @@
     <!--Style switcher-- >
     <!-- ============================================================== -->
     <script src="/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-
+    
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <div>
         @if (TempData["ok"] != null)
         {
@@ -237,8 +241,14 @@
                 toastr.error("@Html.Raw(@TempData["error"].ToString())");
             </script>
         }
+        else if (TempData["war"] != null)
+        {
+            <script type="text/javascript">
+                toastr.warning("@Html.Raw(@TempData["war"].ToString())");
+            </script>
+        }
     </div>
 
 </body>
-
-</html>
+dfsadsa
+safdsfsds

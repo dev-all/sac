@@ -1,161 +1,21 @@
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\Negocio.dll
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\Negocio.pdb
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\Datos.dll
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\Entidad.dll
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\EntityFramework.dll
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\Datos.pdb
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\Entidad.pdb
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\bin\Debug\EntityFramework.xml
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\obj\Debug\Negocio.dll
-c:\users\services\documents\visual studio 2013\Projects\EntityFrameworkCapas\Negocio\obj\Debug\Negocio.pdb
-F:\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll.config
-F:\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll
-F:\Agenda\Agenda\Negocio\bin\Debug\Negocio.pdb
-F:\Agenda\Agenda\Negocio\bin\Debug\Datos.dll
-F:\Agenda\Agenda\Negocio\bin\Debug\Entidad.dll
-F:\Agenda\Agenda\Negocio\bin\Debug\Datos.pdb
-F:\Agenda\Agenda\Negocio\bin\Debug\Datos.dll.config
-F:\Agenda\Agenda\Negocio\bin\Debug\Entidad.pdb
-F:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-F:\Agenda\Agenda\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-F:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-F:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-F:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-F:\Agenda\Agenda\Negocio\obj\Debug\Negocio.dll
-F:\Agenda\Agenda\Negocio\obj\Debug\Negocio.pdb
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll.config
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Negocio.pdb
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Datos.dll
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Entidad.dll
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Datos.pdb
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Datos.dll.config
-F:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Entidad.pdb
-F:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-F:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-F:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-F:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-F:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-F:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.dll
-F:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.pdb
-E:\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll.config
-E:\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll
-E:\Agenda\Agenda\Negocio\bin\Debug\Negocio.pdb
-E:\Agenda\Agenda\Negocio\bin\Debug\Datos.dll
-E:\Agenda\Agenda\Negocio\bin\Debug\Entidad.dll
-E:\Agenda\Agenda\Negocio\bin\Debug\Datos.pdb
-E:\Agenda\Agenda\Negocio\bin\Debug\Datos.dll.config
-E:\Agenda\Agenda\Negocio\bin\Debug\Entidad.pdb
-E:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-E:\Agenda\Agenda\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-E:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-E:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-E:\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-E:\Agenda\Agenda\Negocio\obj\Debug\Negocio.dll
-E:\Agenda\Agenda\Negocio\obj\Debug\Negocio.pdb
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll.config
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Negocio.dll
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Negocio.pdb
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Datos.dll
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Entidad.dll
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Datos.pdb
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Datos.dll.config
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Entidad.pdb
-G:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-G:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-G:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-G:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-G:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-G:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.dll
-G:\.Net ASP\Agenda\Agenda\Negocio\obj\Debug\Negocio.pdb
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.dll
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Z.EntityFramework.Extensions.dll
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Z.Expressions.Eval.dll
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.xml
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Z.EntityFramework.Extensions.xml
-G:\.Net ASP\Agenda\Agenda\Negocio\bin\Debug\Z.Expressions.Eval.xml
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Negocio.dll.config
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Negocio.dll
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Negocio.pdb
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Datos.dll
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Entidad.dll
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.dll
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.dll
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Z.Expressions.Eval.dll
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Datos.pdb
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Datos.dll.config
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Entidad.pdb
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.xml
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.xml
-G:\.Net ASP\SAC\SAC\Negocio\bin\Debug\Z.Expressions.Eval.xml
-G:\.Net ASP\SAC\SAC\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-G:\.Net ASP\SAC\SAC\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-G:\.Net ASP\SAC\SAC\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-G:\.Net ASP\SAC\SAC\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-G:\.Net ASP\SAC\SAC\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-G:\.Net ASP\SAC\SAC\Negocio\obj\Debug\Negocio.dll
-G:\.Net ASP\SAC\SAC\Negocio\obj\Debug\Negocio.pdb
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Negocio.dll.config
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Negocio.dll
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Negocio.pdb
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Datos.dll
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Entidad.dll
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.dll
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.dll
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Z.Expressions.Eval.dll
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Datos.pdb
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Datos.dll.config
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Entidad.pdb
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.xml
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.xml
-D:\DESARROLLO_WEB\SAC\Negocio\bin\Debug\Z.Expressions.Eval.xml
-D:\DESARROLLO_WEB\SAC\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-D:\DESARROLLO_WEB\SAC\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-D:\DESARROLLO_WEB\SAC\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-D:\DESARROLLO_WEB\SAC\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-D:\DESARROLLO_WEB\SAC\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-D:\DESARROLLO_WEB\SAC\Negocio\obj\Debug\Negocio.dll
-D:\DESARROLLO_WEB\SAC\Negocio\obj\Debug\Negocio.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Negocio.dll.config
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Negocio.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Negocio.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Datos.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Entidad.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Z.Expressions.Eval.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Datos.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Datos.dll.config
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Entidad.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\bin\Debug\Z.Expressions.Eval.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\obj\Debug\Negocio.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac-desarrollo\sac-desarrollo\SAC\Negocio\obj\Debug\Negocio.pdb
-D:\SAC\SAC\Negocio\bin\Debug\Negocio.dll.config
-D:\SAC\SAC\Negocio\bin\Debug\Negocio.dll
-D:\SAC\SAC\Negocio\bin\Debug\Negocio.pdb
-D:\SAC\SAC\Negocio\bin\Debug\Datos.dll
-D:\SAC\SAC\Negocio\bin\Debug\Entidad.dll
-D:\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.dll
-D:\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.dll
-D:\SAC\SAC\Negocio\bin\Debug\Z.Expressions.Eval.dll
-D:\SAC\SAC\Negocio\bin\Debug\Datos.pdb
-D:\SAC\SAC\Negocio\bin\Debug\Datos.dll.config
-D:\SAC\SAC\Negocio\bin\Debug\Entidad.pdb
-D:\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.xml
-D:\SAC\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.xml
-D:\SAC\SAC\Negocio\bin\Debug\Z.Expressions.Eval.xml
-D:\SAC\SAC\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
-D:\SAC\SAC\Negocio\obj\Debug\Negocio.Properties.Resources.resources
-D:\SAC\SAC\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
-D:\SAC\SAC\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
-D:\SAC\SAC\Negocio\obj\Debug\Negocio.csproj.CopyComplete
-D:\SAC\SAC\Negocio\obj\Debug\Negocio.dll
-D:\SAC\SAC\Negocio\obj\Debug\Negocio.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Negocio.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Negocio.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Negocio.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Datos.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Entidad.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Z.Expressions.Eval.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Datos.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Datos.dll.config
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Entidad.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Z.EntityFramework.Plus.EF6.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Z.EntityFramework.Extensions.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\bin\Debug\Z.Expressions.Eval.xml
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\obj\Debug\Negocio.csprojAssemblyReference.cache
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\obj\Debug\Negocio.Properties.Resources.resources
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\obj\Debug\Negocio.csproj.GenerateResource.cache
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\obj\Debug\Negocio.csproj.CoreCompileInputs.cache
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\obj\Debug\Negocio.csproj.CopyComplete
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\obj\Debug\Negocio.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Negocio\obj\Debug\Negocio.pdb

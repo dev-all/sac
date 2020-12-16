@@ -18,15 +18,6 @@ using System;
 public partial class Prioridad
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Prioridad()
-    {
-
-        this.Evento = new HashSet<Evento>();
-
-    }
-
-
     public int Id { get; set; }
 
     public string Color { get; set; }
@@ -34,12 +25,6 @@ public partial class Prioridad
     public bool Activo { get; set; }
 
     public string Nombre { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Evento> Evento { get; set; }
 
 }
 

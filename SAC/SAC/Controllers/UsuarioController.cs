@@ -35,109 +35,102 @@ namespace SAC.Controllers
             return View(usuarioModelView);
         }
 
-        // GET: Usuario/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Usuario/Create
-        public ActionResult Crear(String DniUniformado)
-        {
-          
-            //if(!String.IsNullOrEmpty(DniUniformado))
-            //{
-            //    var uniformado = null; //Helpers.SGPHelper.ObtenerPersonaSGP(DniUniformado);
-
-
-            //    usuario.Persona = new PersonaModel()
-            //    {
-            //        Documento = uniformado.Documento,
-            //        Nombre = uniformado.Nombre,
-            //        Apellido = uniformado.Apellido
-            //    };
-            //    usuario.Grado = uniformado.Grado;
-            //    usuario.Unidad = uniformado.Unidad;
-
-
-            //}
-            //else
-            //{
-            //    usuario = null;
-            //}
-
-            ViewBag.Roles = selectListRoles();
-            return View("Crear", usuario);
-
-        }
         private SelectList selectListRoles()
         {
             Dictionary<int, string> dic = new Dictionary<int, string>();
-            var roles = servicioConfiguracion.GetRol();
+            var roles = servicioConfiguracion.GetAllRoles();
             foreach (var item in roles)
             {
                 dic.Add(item.IdRol, item.descripcion);
             }
             return new SelectList(dic, "Key", "Value");
         }
+       
+     
+        public ActionResult AddOrEdit(int id = 0)
+        {
+            UsuarioModelView model;
+            if (id == 0)
+            {
+                model = new UsuarioModelView();               
+            }
+            else
+            {
+                model = Mapper.Map<UsuarioModel, UsuarioModelView>(servicioUsuario.ObtenerPorID(id));
+                model.password = "";               
+            }      
+            model.Roles = Mapper.Map<List<RolModel>,List<RolModelView>>(servicioConfiguracion.GetAllRoles());
+            return View(model);                 
+        }
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddOrEdit(UsuarioModelView model)
+        {
+            //bool hasErrors = ViewData.ModelState.Values.Any(x => x.Errors.Count > 1);
+            //foreach (ModelState state in ViewData.ModelState.Values.Where(x => x.Errors.Count > 0))
+            //{
+            //    servicioConfiguracion._mensaje(state.Value.ToString(), "ok");
+            //}
+            if (ModelState.IsValid)
+            {
+                UsuarioModel usuario = (UsuarioModel) System.Web.HttpContext.Current.Session["currentUser"];
+                model.idUsuarioLogin = usuario.IdUsuario;
+                if (model.idUsuario == null) {                   
+                    servicioUsuario.CreateUsuario(Mapper.Map< UsuarioModelView, UsuarioModel>(model));
+                }
+                else {
+                    servicioUsuario.UpdateUsuario(Mapper.Map<UsuarioModelView, UsuarioModel>(model));
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RestablecerCuenta(int id )
+        {           
+                UsuarioModel usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+               
+                if (id > 0)
+                {
+                    servicioUsuario.RestablecerCuenta(id , usuario.IdUsuario);
+                }                
+                return RedirectToAction(nameof(Index));           
+        }
+
+
+
         // POST: Usuario/Create
-
-
         //[HttpPost, ActionName("Guardar")]
         //[ValidateAntiForgeryToken]
-        public ActionResult Guardar(UsuarioModelView usuarioGuardar)
-        {
+        //public ActionResult Guardar(UsuarioModelView usuarioGuardar)
+        //{
 
 
 
-            var personaModel = usuarioGuardar.Persona;
-            personaModel.FechaCreacion = Convert.ToDateTime(DateTime.Now.ToString());
-            personaModel.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
-            personaModel.Activo = true;
-            var persona = servicioPersona.CrearPersona(personaModel);
+        //    var personaModel = usuarioGuardar.Persona;
+        //    personaModel.FechaCreacion = Convert.ToDateTime(DateTime.Now.ToString());
+        //    personaModel.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+        //    personaModel.Activo = true;
+        //    var persona = servicioPersona.CrearPersona(personaModel);
 
+        //    var usuario = Mapper.Map<UsuarioModelView, UsuarioModel>(usuarioGuardar);
+        //    usuario.IdPersona = persona.Id;
+        //    usuario.IdRol = usuarioGuardar.idRol;
+        //    usuario.Password = Negocio.Helpers.StringHelper.ObtenerMD5(persona.Documento);
+        //    usuario.Actualizado = Convert.ToDateTime(DateTime.Now.ToString());
+        //    usuario.Creado = Convert.ToDateTime(DateTime.Now.ToString());
+        //    usuario.Activo = true;
+        //    var evento = servicioUsuario.Agregar(usuario);
 
-                                 
-            var usuario = Mapper.Map<UsuarioModelView, UsuarioModel>(usuarioGuardar);
-            usuario.IdPersona = persona.Id;
-            usuario.IdRol = usuarioGuardar.idRol;
-            usuario.Password = Negocio.Helpers.StringHelper.ObtenerMD5(persona.Documento);
-            usuario.Actualizado = Convert.ToDateTime(DateTime.Now.ToString());
-            usuario.Creado = Convert.ToDateTime(DateTime.Now.ToString());
-            usuario.Activo = true;
-           var evento = servicioUsuario.Agregar(usuario);
+        //    return RedirectToAction("Index");
 
+        //}
 
-
-
-            return RedirectToAction("Index");
-
-
-
-        }
-
-
-        // GET: Usuario/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Usuario/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Usuario/Delete/5
         public ActionResult Delete(int id)
@@ -160,5 +153,7 @@ namespace SAC.Controllers
                 return View();
             }
         }
+    
+    
     }
 }

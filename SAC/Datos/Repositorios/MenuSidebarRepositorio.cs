@@ -23,10 +23,14 @@ namespace Datos.Repositorios
         /// </summary>
         public List<MenuSidebar> GetMenuSidebar()
         {
-            var side = (from menu in context.MenuSidebar
-                        where menu.Activo == true && menu.IdParent == null
-                        orderby menu.Titulo
-                        select menu).ToList();
+            //var side = (from menu in context.MenuSidebar
+            //            where menu.Activo == true && menu.IdParent == null
+            //            orderby menu.Orden
+            //            select menu).ToList();
+            var side = context.MenuSidebar.
+                           IncludeFilter(m => m.MenuSidebar1.Where(p => p.Activo == true))
+                           .Where(menu => menu.Activo == true && menu.IdParent == null)
+                           .OrderBy(acc => acc.Orden).ToList();
             return side;
         }
       
@@ -103,6 +107,7 @@ namespace Datos.Repositorios
             context.Entry(menuSideBarModel).Property(x => x.Icono).IsModified = true;
             context.Entry(menuSideBarModel).Property(x => x.Titulo).IsModified = true;
             context.Entry(menuSideBarModel).Property(x => x.Url).IsModified = true;
+            context.Entry(menuSideBarModel).Property(x => x.Orden).IsModified = true;
             context.Entry(menuSideBarModel).Property(x => x.IdParent).IsModified = true;
             context.Entry(menuSideBarModel).Property(x => x.IdAccion).IsModified = true;
             context.SaveChanges();

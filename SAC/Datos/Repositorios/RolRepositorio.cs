@@ -21,7 +21,7 @@ namespace Datos.Repositorios
             return Insertar(rol);
         }
 
-        public List<Rol> GetRol()
+        public List<Rol> GetAllRol()
         {
             return context.Rol
                 .Include(r => r.AccionPorRol)                

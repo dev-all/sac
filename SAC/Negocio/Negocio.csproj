@@ -39,6 +39,7 @@
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -57,9 +58,18 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\BancoCuentaBancariaModel.cs" />
+    <Compile Include="Modelos\ChequeModel.cs" />
+    <Compile Include="Modelos\ChequeraModel.cs" />
+    <Compile Include="Modelos\CompraFacturaPagoModel.cs" />
+    <Compile Include="Modelos\FacturaPagoModel.cs" />
+    <Compile Include="Modelos\CompraIvaModel.cs" />
+    <Compile Include="Modelos\CompraFacturaModel.cs" />
     <Compile Include="Modelos\AccionPorRol.cs" />
     <Compile Include="Modelos\AfipRegimenModel.cs" />
     <Compile Include="Modelos\ConfiguracionModel.cs" />
+    <Compile Include="Modelos\CuentaCteProveedorModel.cs" />
+    <Compile Include="Modelos\BancoCuentaModel.cs" />
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
     <Compile Include="Modelos\ImputacionModel.cs" />
@@ -67,18 +77,19 @@
     <Compile Include="Modelos\MenuSideBarModel.cs" />
     <Compile Include="Modelos\PaisModel.cs" />
     <Compile Include="Modelos\PersonaModel.cs" />
+    <Compile Include="Modelos\PresupuestoActualModel.cs" />
     <Compile Include="Modelos\PrioridadModel.cs" />
     <Compile Include="Modelos\ProveedorModel.cs" />
     <Compile Include="Modelos\ProvinciaModel.cs" />
     <Compile Include="Modelos\RolModel.cs" />
     <Compile Include="Modelos\SubRubroModel.cs" />
+    <Compile Include="Modelos\TarjetaModel.cs" />
+    <Compile Include="Modelos\TipoComprobanteVentaModel.cs" />
     <Compile Include="Modelos\TipoIvaModel.cs" />
+    <Compile Include="Modelos\TipoComprobanteModel.cs" />
     <Compile Include="Modelos\TipoMonedaModel.cs" />
     <Compile Include="Modelos\TipoProveedorModel.cs" />
     <Compile Include="Modelos\UsuarioModel.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -90,15 +101,26 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioBancoCuentaBancaria.cs" />
+    <Compile Include="Servicios\ServicioChequera.cs" />
+    <Compile Include="Servicios\ServicioCheque.cs" />
+    <Compile Include="Servicios\ServicioCompraFacturaPago.cs" />
+    <Compile Include="Servicios\ServicioBancoCuenta.cs" />
+    <Compile Include="Servicios\ServicioCuentaCteProveedor.cs" />
     <Compile Include="Servicios\ServicioImputacion.cs" />
     <Compile Include="Servicios\ServicioLocalidad.cs" />
     <Compile Include="Servicios\ServicioPais.cs" />
     <Compile Include="Servicios\ServicioPersona.cs" />
+    <Compile Include="Servicios\ServicioPresupuestoActual.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />
     <Compile Include="Servicios\ServicioProvincia.cs" />
     <Compile Include="Servicios\ServicioSubRubro.cs" />
+    <Compile Include="Servicios\ServicioTarjeta.cs" />
+    <Compile Include="Servicios\ServicioTipoComprobanteVenta.cs" />
     <Compile Include="Servicios\ServicioTipoIva.cs" />
+    <Compile Include="Servicios\ServicioTipoComprobante.cs" />
     <Compile Include="Servicios\ServicioTipoMoneda.cs" />
+    <Compile Include="Servicios\ServicioCompra.cs" />
     <Compile Include="Servicios\ServicioTipoProveedor.cs" />
     <Compile Include="Servicios\ServicioUsuario.cs" />
     <Compile Include="Servicios\ServicioConfiguracion.cs" />
@@ -145,9 +167,6 @@
     <Content Include="bin\Release\Ninject.xml" />
     <Content Include="bin\Release\System.ValueTuple.dll" />
     <Content Include="bin\Release\System.ValueTuple.xml" />
-    <Content Include="obj\Debug\Negocio.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\Negocio.dll" />
-    <Content Include="obj\Debug\Negocio.pdb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -156,11 +175,6 @@
     <None Include="bin\Debug\Datos.dll.config" />
     <None Include="bin\Debug\Negocio.dll.config" />
     <None Include="bin\Release\Datos.dll.config" />
-    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="obj\Debug\Negocio.csproj.CopyComplete" />
-    <None Include="obj\Debug\Negocio.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\Negocio.csprojAssemblyReference.cache" />
-    <None Include="obj\Debug\Negocio.csprojResolveAssemblyReference.cache" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -168,8 +182,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modelos\NewFolder1\" />
-    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\" />
+    <Folder Include="System\Web\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
