@@ -10,14 +10,12 @@ using Negocio.Servicios;
 using SAC.Atributos;
 using SAC.Models;
 using System.Web.Routing;
+using System.Globalization;
 
 namespace SAC.Controllers
 {
     public class CuentaCteProveedorController : BaseController
     {
-
-        
-
 
         private ServicioCompra oServicioCompra = new ServicioCompra();
         private ServicioProveedor servicioProveedor = new ServicioProveedor();
@@ -39,8 +37,6 @@ namespace SAC.Controllers
                 List<CuentaCteProveedorModelView> model = Mapper.Map<List<CuentaCteProveedorModel>, List<CuentaCteProveedorModelView>>(servicioCuentaCteProveedor.GetAllCuentasCteProveedor());
                 return View(model);
         }
-
-
 
 
         public ActionResult PagarFactura(int idProveedor)
@@ -194,7 +190,10 @@ namespace SAC.Controllers
             }
             else
             {
-               model = Mapper.Map<List<CuentaCteProveedorModel>, List<CuentaCteProveedorModelView>>(servicioCuentaCteProveedor.GetAllCuentasCteProveedor(inicio, fin));
+                var dInicio = DateTime.ParseExact(inicio, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var dFin = DateTime.ParseExact(fin, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                model = Mapper.Map<List<CuentaCteProveedorModel>, List<CuentaCteProveedorModelView>>(servicioCuentaCteProveedor.GetAllCuentasCteProveedor(dInicio, dFin));
             }
             return PartialView("_Tabla", model);
             

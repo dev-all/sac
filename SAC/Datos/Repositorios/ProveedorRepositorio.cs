@@ -53,12 +53,12 @@ namespace Datos.Repositorios
             return context.CuentaCorriente.ToList();
         }
         //busqueda por fecha
-        public List<CuentaCorriente> GetAllCuentaCorriente(string inicio,string fin)
+        public List<CuentaCorriente> GetAllCuentaCorriente(DateTime inicio,DateTime fin)
         {
-            var dInicio = Convert.ToDateTime(inicio);
-            var dFin = Convert.ToDateTime(fin);
+            //var dInicio = DateTime.Parse(inicio);
+            //var dFin    = DateTime.Parse(fin);
 
-            return context.CuentaCorriente.Where(p=> p.UltimoMovimiento >= dInicio && p.UltimoMovimiento <= dFin ).ToList();
+            return context.CuentaCorriente.Where(p=> p.UltimoMovimiento >= inicio && p.UltimoMovimiento <= fin ).ToList();
         }
 
         public Proveedor GetProveedorPorId(int id)

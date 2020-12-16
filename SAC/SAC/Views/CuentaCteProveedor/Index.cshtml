@@ -12,25 +12,20 @@
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
-<div class="row page-titles m-t-40">
+@*<div class="row page-titles m-t-40">
     <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor">Lista de Proveedores</h3>
     </div>
 
-</div>
+</div>*@
 <div class="row">
     <div class="col-xlg-12 col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Exportar datos</h4>
-                <h6 class="card-subtitle">Formato de salida: PDF</h6>
-
-                <div class="row m-t-20 m-b-40">
-                    <div class="col-md-12">
-                        @*@Html.ActionLink("Nuevo", "Agregar", "Proveedor", new { @class = "btn btn-secondary btn-sm" })*@
-                    </div>
-                </div>
+                <h4 class="card-title">Lista de Proveedores</h4>
+                <h6 class="card-subtitle">Puede buscar ingresando la fecha inicio y fin </h6>
+               
                 @using (Ajax.BeginForm("Filtrado", "", new AjaxOptions
                 {
                     HttpMethod = "POST",
@@ -40,16 +35,13 @@
                 }, new { @id = "frmFiltrado" }))
                 {
                     <div class="row">
-                        <div class="card card-body">
-                            <h4 class="card-title">Busqueda</h4>
-                            <h6 class="card-subtitle"> Puede buscar ingresando la fecha inicio y fin </h6>
-                            <br />
+                    
                             <div class="form-group row col-8">
                                 @Html.TextBox("inicio", null, new { @class = "col-sm-2 offset-sm-1 form-control", @placeholder = "Fecha inicio" })
-                                @Html.TextBox("fin", null, new { @class = "col-sm-2 offset-sm-1 form-control", @placeholder = "Fecha fin" })
+                                @Html.TextBox("fin", null, new { @class = "col-sm-2 offset-sm-1 form-control ", @placeholder = "Fecha fin" })
                                 <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary  mb-2 offset-sm-1">Buscar</button>
                             </div>
-                        </div>
+                   
                     </div>
 
                     <div id="divPagina">
