@@ -72,7 +72,7 @@ namespace Negocio.Modelos
 
         //public virtual Provincia Provincia { get; set; }
 
-        //public virtual TipoIva TipoIva { get; set; }
+       public TipoIva TipoIva { get; set; }
 
         //public virtual TipoMoneda TipoMoneda { get; set; }
 

@@ -17,10 +17,11 @@ namespace Negocio.Servicios
    public class ServicioTipoMoneda : ServicioBase
     {
         private TipoMonedaRepositorio oTipoMonedaRepositorio;
-
+        private ValorCotizacionRepositorio valorCotizacionRepositorio;
         public ServicioTipoMoneda()
         {
             oTipoMonedaRepositorio = kernel.Get<TipoMonedaRepositorio>();
+            valorCotizacionRepositorio = kernel.Get<ValorCotizacionRepositorio>();
         }
 
         public List<TipoMonedaModel> GetAllTipoMonedas(int id)
@@ -32,11 +33,51 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
 
+        public TipoMonedaModel ObtenerTipoMonedaPorNombre(string moneda)
+        {
+            try
+            {
+                return Mapper.Map<TipoMoneda, TipoMonedaModel>(oTipoMonedaRepositorio.ObtenerTipoMonedaPorNombre(moneda));
+            }
+            catch (Exception)
+            {
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
+
+        public void GuardarCotizacionMoneda(ValorCotizacionModel valorCotizacionModel)
+        {
+            try
+            {
+                valorCotizacionRepositorio.Insertar(Mapper.Map<ValorCotizacionModel, ValorCotizacion>(valorCotizacionModel));
+                _mensaje("Se Actualizo la Cotizacion de Monedas segun BNA", "ok");
+
+            }
+            catch (Exception)
+            {
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+               
+            }
+        }
+
+        public List<ValorCotizacionModel> ObtenerCotizacion(DateTime fecha)
+        {
+            try
+            {
+                return Mapper.Map<List<ValorCotizacion>, List<ValorCotizacionModel>>(valorCotizacionRepositorio.GetCotizacionMoneda(fecha));
+            }
+            catch (Exception)
+            {
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
 
         public List<TipoMonedaModel> GetAllTipoMonedas()
         {
@@ -93,6 +134,19 @@ namespace Negocio.Servicios
                 }
 
             }
+        }
+
+        public ValorCotizacionModel GetCotizacionPorIdMoneda(DateTime f, int idMoneda)
+        {
+            try
+            {
+                return Mapper.Map<ValorCotizacion, ValorCotizacionModel>(valorCotizacionRepositorio.GetCotizacionPorIdMoneda(f, idMoneda));
+            }
+            catch (Exception ex)
+            {
+                _mensaje(ex.Message, "error");
+                return null;
+            }           
         }
 
         public int GuardarTipoMoneda(TipoMonedaModel oTipoMonedaModel)

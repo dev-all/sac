@@ -32,7 +32,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -47,7 +47,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -62,7 +62,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return 0;
             }
         }
@@ -76,7 +76,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return 0;
             }
         }

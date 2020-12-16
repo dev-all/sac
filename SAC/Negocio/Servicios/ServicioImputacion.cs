@@ -121,6 +121,116 @@ namespace Negocio.Servicios
             }
         }
 
+
+
+
+
+        public void ActualizarAsientoImputacion(ImputacionModel model)
+        {
+            try
+            {                                
+               
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+            }
+               
+        }
+        public void AsintoContableGeneral(Diario model)
+        {
+            try
+            {
+                /// BUSCAR LA CTA            
+                ImputacionModel cta = GetImputacion(model.IdImputacion);
+                /// UPDATE
+                /// SALDO FIN 
+                /// SALDO MES 
+                switch (model.Fecha.Month)
+                {
+                    case 1:
+                        cta.Enero = cta.Enero ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 2:
+                        cta.Febrero = cta.Febrero ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 3:
+                        cta.Marzo = cta.Marzo ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 4:
+                        cta.Abril = cta.Abril ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 5:
+                        cta.Mayo = cta.Mayo ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 6:
+                        cta.Junio = cta.Junio ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 7:
+                        cta.Julio = cta.Julio ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 8:
+                        cta.Agosto = cta.Agosto ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 9:
+                        cta.Septiembre = cta.Septiembre ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 10:
+                        cta.Octubre = cta.Octubre ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 11:
+                        cta.Noviembre = cta.Noviembre ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    case 12:
+                        cta.Diciembre = cta.Diciembre ?? 0 + model.Importe;
+                        cta.SaldoFin += model.Importe;
+                        break;
+                    default:
+                        throw new InvalidOperationException("unknown item type");
+                }
+
+                cta.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                cta.Activo = true;
+                ImputacionRepositorio.ActualizarAsientoImputacion(Mapper.Map<ImputacionModel, Imputacion>(cta));
+                _mensaje("Se registro eñ asineto contable correctamente", "ok");
+
+
+
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                throw new Exception();
+            }
+        }
+
+
+
+        public ImputacionModel GetImputacionPorAlias(string alias)
+        {
+            try
+            {
+                return Mapper.Map<Imputacion, ImputacionModel>(ImputacionRepositorio.GetImputacionPorAlias(alias));
+            }
+            catch (Exception)
+            {
+                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
+
         public int GuardarImputacion(ImputacionModel oImputacionModel)
         {
             //controlar que no exista 
@@ -169,6 +279,8 @@ namespace Negocio.Servicios
             }
         }
 
+     
+        
         public int Eliminar(int idImputacion)
         {
             var retorno = ImputacionRepositorio.EliminarImputacion(idImputacion);

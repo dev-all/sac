@@ -58,9 +58,11 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\DiarioModel.cs" />
     <Compile Include="Modelos\CompraFacturaModel.cs" />
     <Compile Include="Modelos\AccionPorRol.cs" />
     <Compile Include="Modelos\AfipRegimenModel.cs" />
+    <Compile Include="Modelos\CompraIvaModel.cs" />
     <Compile Include="Modelos\ConfiguracionModel.cs" />
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Modelos\TipoMonedaModel.cs" />
     <Compile Include="Modelos\TipoProveedorModel.cs" />
     <Compile Include="Modelos\UsuarioModel.cs" />
+    <Compile Include="Modelos\ValorCotizacionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -91,6 +94,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Servicios\ServicioImputacion.cs" />
+    <Compile Include="Servicios\ServicioContable.cs" />
     <Compile Include="Servicios\ServicioLocalidad.cs" />
     <Compile Include="Servicios\ServicioPais.cs" />
     <Compile Include="Servicios\ServicioPersona.cs" />

@@ -25,9 +25,9 @@ namespace SAC.Models
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
 
-        public virtual ICollection<Imputacion> Imputacion { get; set; }
+        public  ICollection<Imputacion> Imputacion { get; set; }
 
-        public virtual Rubros Rubros { get; set; }
+        public  Rubro Rubros { get; set; }
 
     }
 }

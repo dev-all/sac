@@ -4,12 +4,13 @@ using Negocio.Modelos;
 using Entidad.Modelos;
 using System.Collections.Generic;
 using System.Globalization;
+using Negocio.Servicios;
 
 namespace SAC.Controllers
 {
     public class BaseController : Controller
     {
-
+       
         public BaseController()
         {                      
             UsuarioModel datosUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
@@ -23,7 +24,7 @@ namespace SAC.Controllers
             else
             {
                 RedirectToAction("Acceder","Cuenta");
-            }
+            }        
         }
         [NonAction]
         public void CrearTempData(string msg_, string tipo_)

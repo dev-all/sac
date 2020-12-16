@@ -12,6 +12,7 @@ using System.Configuration;
 using AutoMapper;
 using Entidad.Modelos;
 
+
 namespace SAC.Controllers
 {
     public class CuentaController : BaseController
@@ -29,6 +30,9 @@ namespace SAC.Controllers
         // GET: Cuenta
         public ActionResult Acceder()
         {
+
+          
+            
             if ((System.Web.HttpContext.Current.Session["currentUser"] != null))
             {
                 if ((System.Web.HttpContext.Current.Session["controller"] != null & System.Web.HttpContext.Current.Session["metodo"] != null))
@@ -76,6 +80,7 @@ namespace SAC.Controllers
                             return RedirectToAction(rol.Metodo, rol.Controller);
                         }                        
                     }
+
                     return RedirectToAction("Index", "Home");
                 }                
             }

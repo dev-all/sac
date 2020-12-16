@@ -20,15 +20,12 @@ namespace Datos.ModeloDeDatos
         public int IdImputacion { get; set; }
         public string Descripcion { get; set; }
         public decimal Importe { get; set; }
-        public byte[] Titulo { get; set; }
+        public string Titulo { get; set; }
         public string Periodo { get; set; }
         public string Tipo { get; set; }
         public string DescripcionMa { get; set; }
         public string Moneda { get; set; }
         public decimal Cotiza { get; set; }
-        public string IdArticulo { get; set; }
-        public Nullable<byte> NumeroFactura { get; set; }
-        public string IdTipoFactura { get; set; }
         public Nullable<int> Balance { get; set; }
         public Nullable<int> Asiento { get; set; }
         public Nullable<bool> Activo { get; set; }

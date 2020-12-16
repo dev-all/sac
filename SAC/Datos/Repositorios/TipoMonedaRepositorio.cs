@@ -19,7 +19,6 @@ namespace Datos.Repositorios
             return Insertar(TipoMoneda);
         }
 
-
         public TipoMoneda ObtenerTipoMonedaPorId(int idTipoMoneda)
         {
             var TipoMoneda = context.TipoMoneda.Where(p => p.Id == idTipoMoneda).FirstOrDefault();
@@ -42,6 +41,10 @@ namespace Datos.Repositorios
         {
             return context.TipoMoneda.Where(p => p.Descripcion == nombre).FirstOrDefault();
         }
+
+       
+
+      
 
         /// <summary>
         /// verifica que el nombre ingresado no exista para otro id que no sea el enviado

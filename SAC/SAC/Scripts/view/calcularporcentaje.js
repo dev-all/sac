@@ -20,13 +20,11 @@ function redondeo(num,precision)
 }
 
 //El 70% de 10 es 7.
-function calculoporcentaje1(ciento1, cantidad1)
+function calculoporcentaje(ciento1, cantidad1)
 {	
-
 	ciento1=ciento1.toString().replace(',','.');	
 	cantidad1=cantidad1.toString().replace(',','.');	
-	return ciento1*cantidad1/100;
-	 
+	return ciento1*cantidad1/100;	 
 }
 function calculoporcentaje2(ciento2, cantidad2)
 {
