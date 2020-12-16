@@ -14,7 +14,7 @@ namespace SAC.Models
         public int IdTipoComprobante { get; set; }
 
         public int PuntoVenta { get; set; }
-
+        [Display(Name = "Numero")]
         public int NumeroFactura { get; set; }
 
         public int IdProveedor { get; set; }
@@ -27,6 +27,7 @@ namespace SAC.Models
 
         public Nullable<decimal> Saldo { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Fecha { get; set; }
 
         public System.DateTime Vencimiento { get; set; }
@@ -34,7 +35,7 @@ namespace SAC.Models
         public Nullable<decimal> TotalDolares { get; set; }
 
         public decimal Cotizacion { get; set; }
-
+        [Display(Name = "Fecha Pago")]
         public Nullable<System.DateTime> FechaPago { get; set; }
 
         public Nullable<int> Periodo { get; set; }

@@ -23,7 +23,7 @@ namespace SAC.Models
      
         public decimal TotalAPagar { get; set; }
 
-        //fecha
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FechaPago { get; set; }
 
         //resto

@@ -5,12 +5,11 @@
 }
 
 
-<div class="row page-titles m-t-40">
+@*<div class="row page-titles m-t-40">
     <div class="col-md-5 align-self-center">
         <h3 class="text-themecolor">Listado de facturas a pagar</h3>
     </div>
-
-</div>
+</div>*@
 
 
 
@@ -22,14 +21,8 @@
                 <div class="row m-t-20 m-b-40">
                     <div class="col-md-12">
 
-
-
-
-
-                        @*@Html.LabelFor(m => m.Proveedor.Nombre, new { @class = "control-label form-control-sm" })*@
-
-                        <label class="control-label form-control-sm"> @Html.Raw(Model.Proveedor.Nombre)</label>
-
+                      
+                        <h4 class="card-title">Proveedor:  @Html.Raw(Model.Proveedor.Nombre) </h4>
                         @using (Html.BeginForm("FacturaPago", "CuentaCteProveedor", FormMethod.Post, new { @id = "frmPagar" }))
                         {
                             @Html.AntiForgeryToken()
@@ -41,11 +34,11 @@
 
                                     <thead>
                                         <tr>
-                                            <th> Seleccion</th>
+                                            <th> </th>
                                             <th> Codigo</th>
                                             <th> Fecha</th>
-                                            <th> Punto Venta</th>
-                                            <th> NumeroFactura</th>
+                                            <th> Pto Venta</th>
+                                            <th> Numero</th>
                                             <th> Total</th>
                                             <th> Saldo</th>
                                             <th> Moneda</th>
@@ -323,8 +316,6 @@
 
 <script>
 
-
-
     function fnVerModalCheques() {
         $.ajax({
             type: "POST",
@@ -426,8 +417,6 @@
         $("#Diferencia").val(parseFloat(resultado));
 
     }
-
-
 
     $("#efectivo").keyup(function () {
         fnCalcularDirefencia()
@@ -588,7 +577,28 @@
                 'pdf'
             ]
         });
+
     }
+
+    $(function () {
+        // Instrucciones de JQuery
+        $('#TblFacturas').DataTable({
+            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            'dom': 'Bfrtip',
+            'buttons': [ ]
+        });
+    });
+ 
+
+
+
 
 </script>
 
@@ -598,12 +608,12 @@
     <!-- This is data table -->
     <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <!-- start - This is for export functionality only -->
-    @*<script src="~/Content/assets/plugins/datatables/jsTable/dataTables.buttons.min.js"></script>
-        <script src="~/Content/assets/plugins/datatables/jsTable/buttons.flash.min.js"></script>*@
-    @*<script src="~/Content/assets/plugins/datatables/jsTable/jszip.min.js"></script>*@
+    <script src="~/Content/assets/plugins/datatables/jsTable/dataTables.buttons.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.flash.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/jszip.min.js"></script>
     <script src="~/Content/assets/plugins/datatables/jsTable/pdfmake.min.js"></script>
     <script src="~/Content/assets/plugins/datatables/jsTable/vfs_fonts.js"></script>
-    @*<script src="~/Content/assets/plugins/datatables/jsTable/buttons.html5.min.js"></script>
-        <script src="~/Content/assets/plugins/datatables/jsTable/buttons.print.min.js"></script>*@
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.html5.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.print.min.js"></script>
 
 }
