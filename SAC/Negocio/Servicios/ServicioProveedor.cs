@@ -19,7 +19,7 @@ namespace Negocio.Servicios
     public class ServicioProveedor : ServicioBase
     {
         private ProveedorRepositorio pProveedorRepositorio;
-        public Action<string, string> _mensaje;
+
 
         public ServicioProveedor()
         {
@@ -32,33 +32,16 @@ namespace Negocio.Servicios
         }
 
         public ProveedorModel GetProveedor(int _id)
-        {
-           
+        {           
             Proveedor oProveedor = pProveedorRepositorio.GetProveedorPorId(_id);
-     
-            ProveedorModel oProveedorModel = new ProveedorModel();
-
-            oProveedorModel.Id = oProveedor.Id;
-            oProveedorModel.Nombre = oProveedor.Nombre;
-            oProveedorModel.Direccion = oProveedor.Direccion;
-            oProveedorModel.Telefono = oProveedor.Telefono;
-            oProveedorModel.IdPais = oProveedor.IdPais;
-            oProveedorModel.IdProvincia = oProveedor.IdProvincia;
-            oProveedorModel.IdLocalidad = oProveedor.IdLocalidad;
-            oProveedorModel.IdCodigoPostal = oProveedor.IdCodigoPostal;
-            oProveedorModel.IdImputacionProveedor = oProveedor.IdImputacionProveedor;
-            oProveedorModel.IdTipoIva = oProveedor.IdTipoIva;
-            oProveedorModel.Cuit = oProveedor.Cuit;
-            oProveedorModel.IdImputacionFactura = oProveedor.IdImputacionFactura;
-            oProveedorModel.IdTipoProveedor = oProveedor.IdTipoProveedor;
-            oProveedorModel.IdTipoMoneda = oProveedor.IdTipoMoneda;
-            oProveedorModel.Email= oProveedor.Email;
-            oProveedorModel.Observaciones = oProveedor.Observaciones;
-
-            return oProveedorModel;
+            return Mapper.Map<Proveedor, ProveedorModel>(oProveedor);
         }
 
-
+        public ProveedorModel GetProveedorCompleto(int _id)
+        {
+            Proveedor oProveedor = pProveedorRepositorio.GetProveedorPorIdCompleto(_id);
+            return Mapper.Map<Proveedor, ProveedorModel>(oProveedor);
+        }
         public ProveedorModel ActualizarProveedor(ProveedorModel oProveedorModel)
         {
             try
@@ -91,7 +74,7 @@ namespace Negocio.Servicios
                     oProveedorNuevo.IdTipoProveedor = oProveedorModel.IdTipoProveedor;
                     oProveedorNuevo.IdTipoMoneda = oProveedorModel.IdTipoMoneda;
                     oProveedorNuevo.Observaciones = oProveedorModel.Observaciones;
-
+                    oProveedorNuevo.UltimoPuntoVenta = oProveedorModel.UltimoPuntoVenta;
                     oProveedorNuevo.Activo = true;
                     oProveedorNuevo.IdUsuario = oProveedorModel.IdUsuario;//hay que poner el id del usuario logueado
                     oProveedorNuevo.UltimaModificacion = oProveedorModel.UltimaModificacion;
@@ -107,10 +90,10 @@ namespace Negocio.Servicios
             {
                 _mensaje("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
                 return null;
-            }
-           
+            }           
         }
 
+     
         public int GuardarProveedor(ProveedorModel oProveedorModel)
         {
             try

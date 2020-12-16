@@ -27,8 +27,8 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> Idusuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual Rubro Rubro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Imputacion> Imputacion { get; set; }
-        public virtual Rubro Rubro { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace Datos.ModeloDeDatos
         }
     
         public int Id { get; set; }
+        public Nullable<int> CodigoDiario { get; set; }
         public decimal NetoGravado { get; set; }
         public decimal NetoNoGravado { get; set; }
         public decimal SubTotal { get; set; }
@@ -44,7 +45,6 @@ namespace Datos.ModeloDeDatos
         public Nullable<decimal> PercepcionImporteIB { get; set; }
         public Nullable<decimal> PercepcionImporteProvincia { get; set; }
         public Nullable<decimal> OtrosImpuestos { get; set; }
-        public Nullable<decimal> ISIB { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> Idusuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }

@@ -26,9 +26,6 @@ namespace Datos.ModeloDeDatos
         public string DescripcionMa { get; set; }
         public string Moneda { get; set; }
         public decimal Cotiza { get; set; }
-        public string IdArticulo { get; set; }
-        public Nullable<long> NumeroFactura { get; set; }
-        public string IdTipoFactura { get; set; }
         public Nullable<int> Balance { get; set; }
         public Nullable<int> Asiento { get; set; }
         public Nullable<bool> Activo { get; set; }

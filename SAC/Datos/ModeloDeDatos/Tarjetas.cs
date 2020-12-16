@@ -12,24 +12,24 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoMoneda
+    public partial class Tarjetas
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoMoneda()
+        public Tarjetas()
         {
-            this.Proveedor = new HashSet<Proveedor>();
-            this.CompraFactura = new HashSet<CompraFactura>();
+            this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
         }
     
         public int Id { get; set; }
+        public string Codigo { get; set; }
         public string Descripcion { get; set; }
+        public int IdImputacion { get; set; }
+        public string Numero { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedor> Proveedor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompraFactura> CompraFactura { get; set; }
+        public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
     }
 }

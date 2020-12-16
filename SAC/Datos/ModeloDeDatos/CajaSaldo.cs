@@ -12,24 +12,32 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoMoneda
+    public partial class CajaSaldo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoMoneda()
+        public CajaSaldo()
         {
-            this.Proveedor = new HashSet<Proveedor>();
-            this.CompraFactura = new HashSet<CompraFactura>();
+            this.Caja = new HashSet<Caja>();
         }
     
         public int Id { get; set; }
-        public string Descripcion { get; set; }
+        public string NumeroCierrre { get; set; }
+        public decimal ImporteInicialPesos { get; set; }
+        public Nullable<decimal> ImporteInicialDolares { get; set; }
+        public decimal ImporteInicialCheques { get; set; }
+        public decimal ImporteInicialTarjetas { get; set; }
+        public decimal ImporteInicialDepositos { get; set; }
+        public decimal ImporteFinalPesos { get; set; }
+        public Nullable<decimal> ImporteFinalDolares { get; set; }
+        public decimal ImporteFinalCheques { get; set; }
+        public decimal ImporteFinalTarjetas { get; set; }
+        public decimal ImporteFinalDepositos { get; set; }
+        public System.DateTime Fecha { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedor> Proveedor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompraFactura> CompraFactura { get; set; }
+        public virtual ICollection<Caja> Caja { get; set; }
     }
 }

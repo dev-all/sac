@@ -102,7 +102,7 @@ function getProvedor(prov) {
         function (data) {
             var proveedor = JSON.parse(data);
 
-            $('#ivaProv').html(proveedor.Nombre);
+            $('#ivaProv').html(proveedor.TipoIva.Descripcion);
             $('#telProv').html(proveedor.Telefono);
             $('#dirProv').html(proveedor.Direccion);
             $('#IdTipoIva').val(proveedor.IdTipoIva);
@@ -122,7 +122,8 @@ function getProvedor(prov) {
 jQuery('.fechadatepicker').datepicker({
     language: 'es',
     autoclose: true,
-    format: 'dd/mm/yyyy',
+    //format: 'dd/mm/yyyy',dateFormat: "yy-mm-dd"
+    format: 'mm-dd-yyyy',
     todayHighlight: true
 
 }).datepicker('setDate', new Date());

@@ -70,6 +70,27 @@
     <Compile Include="ModeloDeDatos\AfipCategorias.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\BancoCuenta.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\BancoCuentaBancaria.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Caja.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\CajaSaldo.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\CajaTipoMovimiento.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Cheque.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Chequera.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\CompraFactura.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -101,6 +122,9 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="ModeloDeDatos\Evento.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\GrupoCaja.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\GrupoCuenta.cs">
@@ -143,6 +167,9 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\SubRubro.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Tarjetas.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\TipoComprobante.cs">
@@ -234,7 +261,6 @@
       <DependentUpon>Entidades.edmx</DependentUpon>
       <LastGenOutput>Entidades.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ModeloDeDatos\Entidades.edmx.sql" />
     <Content Include="ModeloDeDatos\Entidades.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Entidades.edmx</DependentUpon>

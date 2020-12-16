@@ -55,7 +55,13 @@ namespace Datos.Repositorios
             context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault(); 
         }
-
+        public Proveedor GetProveedorPorIdCompleto(int id)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.Proveedor
+                .Include("TipoIva")
+                .Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault();
+        }
         public Proveedor ObtenerProveedorPorNombre(string nombre)
         {
             return context.Proveedor.Where(p => p.Nombre == nombre).FirstOrDefault();
@@ -90,11 +96,10 @@ namespace Datos.Repositorios
             Proveedor.IdTipoProveedor = ProveedorParaActualizar.IdTipoProveedor;
             Proveedor.IdTipoMoneda = ProveedorParaActualizar.IdTipoMoneda;
             Proveedor.Observaciones = ProveedorParaActualizar.Observaciones;
-
+            Proveedor.UltimoPuntoVenta = ProveedorParaActualizar.UltimoPuntoVenta;
             Proveedor.Activo = true;
             Proveedor.IdUsuario = ProveedorParaActualizar.IdUsuario;//hay que poner el id del usuario logueado
-            Proveedor.UltimaModificacion = ProveedorParaActualizar.UltimaModificacion;
-                   
+            Proveedor.UltimaModificacion = ProveedorParaActualizar.UltimaModificacion;                   
             context.SaveChanges();
             return Proveedor;
         }

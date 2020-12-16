@@ -12,26 +12,24 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class CompraFacturaPago
+    public partial class BancoCuentaBancaria
     {
         public int Id { get; set; }
-        public Nullable<int> IdFacturaCompra { get; set; }
-        public Nullable<int> IdTipoPago { get; set; }
-        public Nullable<int> IdCheque { get; set; }
-        public Nullable<int> IdChequera { get; set; }
-        public Nullable<int> IdTarjeta { get; set; }
-        public Nullable<int> IdBancoCuenta { get; set; }
-        public Nullable<decimal> Monto { get; set; }
-        public string Observaciones { get; set; }
+        public int NumeroOperacion { get; set; }
+        public int IdBancoCuenta { get; set; }
+        public string CuentaDescripcion { get; set; }
+        public double Fecha { get; set; }
+        public Nullable<System.DateTime> FechaEfectiva { get; set; }
+        public string DiaClearing { get; set; }
+        public decimal Importe { get; set; }
+        public string IdCliente { get; set; }
+        public string Conciliacion { get; set; }
+        public double FechaIngreso { get; set; }
+        public string IdImputacion { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual BancoCuenta BancoCuenta { get; set; }
-        public virtual Cheque Cheque { get; set; }
-        public virtual Chequera Chequera { get; set; }
-        public virtual Tarjetas Tarjetas { get; set; }
-        public virtual TipoPago TipoPago { get; set; }
-        public virtual CompraFactura CompraFactura { get; set; }
     }
 }

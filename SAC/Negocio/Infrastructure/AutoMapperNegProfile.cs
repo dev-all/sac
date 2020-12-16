@@ -11,6 +11,9 @@ namespace Agenda.Infrastructure
     {
         public AutoMapperNegProfile()
         {
+            CreateMap<ImputacionModel, Imputacion>();
+            CreateMap<Imputacion, ImputacionModel>();
+
             CreateMap<TipoMonedaModel, TipoMoneda>();
             CreateMap<TipoMoneda, TipoMonedaModel>();
 
