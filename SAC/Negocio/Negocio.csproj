@@ -58,10 +58,18 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\BancoCuentaBancariaModel.cs" />
+    <Compile Include="Modelos\ChequeModel.cs" />
+    <Compile Include="Modelos\ChequeraModel.cs" />
+    <Compile Include="Modelos\CompraFacturaPagoModel.cs" />
+    <Compile Include="Modelos\FacturaPagoModel.cs" />
+    <Compile Include="Modelos\CompraIvaModel.cs" />
     <Compile Include="Modelos\CompraFacturaModel.cs" />
     <Compile Include="Modelos\AccionPorRol.cs" />
     <Compile Include="Modelos\AfipRegimenModel.cs" />
     <Compile Include="Modelos\ConfiguracionModel.cs" />
+    <Compile Include="Modelos\CuentaCteProveedorModel.cs" />
+    <Compile Include="Modelos\BancoCuentaModel.cs" />
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
     <Compile Include="Modelos\ImputacionModel.cs" />
@@ -69,11 +77,14 @@
     <Compile Include="Modelos\MenuSideBarModel.cs" />
     <Compile Include="Modelos\PaisModel.cs" />
     <Compile Include="Modelos\PersonaModel.cs" />
+    <Compile Include="Modelos\PresupuestoActualModel.cs" />
     <Compile Include="Modelos\PrioridadModel.cs" />
     <Compile Include="Modelos\ProveedorModel.cs" />
     <Compile Include="Modelos\ProvinciaModel.cs" />
     <Compile Include="Modelos\RolModel.cs" />
     <Compile Include="Modelos\SubRubroModel.cs" />
+    <Compile Include="Modelos\TarjetaModel.cs" />
+    <Compile Include="Modelos\TipoComprobanteVentaModel.cs" />
     <Compile Include="Modelos\TipoIvaModel.cs" />
     <Compile Include="Modelos\TipoComprobanteModel.cs" />
     <Compile Include="Modelos\TipoMonedaModel.cs" />
@@ -90,13 +101,22 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioBancoCuentaBancaria.cs" />
+    <Compile Include="Servicios\ServicioChequera.cs" />
+    <Compile Include="Servicios\ServicioCheque.cs" />
+    <Compile Include="Servicios\ServicioCompraFacturaPago.cs" />
+    <Compile Include="Servicios\ServicioBancoCuenta.cs" />
+    <Compile Include="Servicios\ServicioCuentaCteProveedor.cs" />
     <Compile Include="Servicios\ServicioImputacion.cs" />
     <Compile Include="Servicios\ServicioLocalidad.cs" />
     <Compile Include="Servicios\ServicioPais.cs" />
     <Compile Include="Servicios\ServicioPersona.cs" />
+    <Compile Include="Servicios\ServicioPresupuestoActual.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />
     <Compile Include="Servicios\ServicioProvincia.cs" />
     <Compile Include="Servicios\ServicioSubRubro.cs" />
+    <Compile Include="Servicios\ServicioTarjeta.cs" />
+    <Compile Include="Servicios\ServicioTipoComprobanteVenta.cs" />
     <Compile Include="Servicios\ServicioTipoIva.cs" />
     <Compile Include="Servicios\ServicioTipoComprobante.cs" />
     <Compile Include="Servicios\ServicioTipoMoneda.cs" />
@@ -163,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
+    <Folder Include="System\Web\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

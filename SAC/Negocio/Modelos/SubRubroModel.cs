@@ -27,7 +27,7 @@ namespace Negocio.Modelos
 
         public virtual ICollection<Imputacion> Imputacion { get; set; }
 
-        public virtual Rubros Rubros { get; set; }
+        public virtual Rubro Rubros { get; set; }
 
     }
 }

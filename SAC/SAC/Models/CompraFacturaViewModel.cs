@@ -10,42 +10,83 @@ namespace SAC.Models
     {
 
         public int Id { get; set; }
-        public Nullable<int> IdTipoComprobante { get; set; }
-        public Nullable<int> PuntoVenta { get; set; }
-        public Nullable<int> NumeroFactura { get; set; }
-        [Display(Name = "Proveedor ")]
-        [Required(ErrorMessage = "Ops!, complete el campo Usuario.")]
+
+        public int IdTipoComprobante { get; set; }
+
+        public int PuntoVenta { get; set; }
+
+        public int NumeroFactura { get; set; }
+
         public int IdProveedor { get; set; }
+
+        public string IdTipoIva { get; set; }
+
+        public string CAE { get; set; }
+
         public Nullable<decimal> Total { get; set; }
-        public decimal Saldo { get; set; }
+
+        public Nullable<decimal> Saldo { get; set; }
+
         public System.DateTime Fecha { get; set; }
+
         public System.DateTime Vencimiento { get; set; }
-        public decimal TotalDolares { get; set; }
-        public decimal Cotiza { get; set; }
-        public System.DateTime FechaPago { get; set; }
-        public int Periodo { get; set; }
+
+        public Nullable<decimal> TotalDolares { get; set; }
+
+        public decimal Cotizacion { get; set; }
+
+        public Nullable<System.DateTime> FechaPago { get; set; }
+
+        public Nullable<int> Periodo { get; set; }
+
         public Nullable<decimal> Grupo { get; set; }
+
         public string Marca { get; set; }
+
         public string Pase { get; set; }
-        public decimal Cotiza1 { get; set; }
+
+        public Nullable<decimal> CotizacionDePago { get; set; }
+
         public string Concepto { get; set; }
-        public int IdImputacion { get; set; }
-        public int IdMoneda { get; set; }
-        public decimal Parcial { get; set; }
-        public int Recibo { get; set; }
+
+        public Nullable<int> IdImputacion { get; set; }
+
+        public Nullable<int> IdMoneda { get; set; }
+
+        public Nullable<int> IdCompraIva { get; set; }
+
+        public Nullable<decimal> Parcial { get; set; }
+
+        public Nullable<int> Recibo { get; set; }
+
         public string NumeroPago { get; set; }
-        public int IdDiario { get; set; }
+
+        public Nullable<int> IdCompraFacturaAplica { get; set; }
+
         public Nullable<int> Auxiliar { get; set; }
+
         public string AxiliarNumero { get; set; }
+
         public Nullable<bool> Activo { get; set; }
+
         public Nullable<int> IdUsuario { get; set; }
+
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
+        public string tipoMonedaDescripcion { get; set; }
+
+
+        public CompraIvaModelView CompraIva { get; set; }
         public ProveedorModelView Proveedor { get; set; }
-        //public List<CompraFacturaPago> CompraFacturaPago { get; set; }
-        //public Imputacion Imputacion { get; set; }
+        public TipoMonedaModelView TipoMoneda { get; set; }
 
         public List<TipoMonedaModelView> TipoMonedas { get; set; }
         public List<TipoComprobanteModelView> TipoComprobante { get; set; }
+
+       
+
+
+
+
     }
 }

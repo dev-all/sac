@@ -30,17 +30,31 @@ namespace Datos.Repositorios
         {           
             return context.CompraFactura.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault(); 
         }
-    
-        public CompraFactura ActualizarGetCompraFactura(CompraFactura model)
+
+        public List<CompraFactura> GetCompraFacturaListaPorId(int id)
+        {
+            List<CompraFactura> oListaFacturas =context.CompraFactura.Where(acc => acc.Id == id && acc.Activo == true).ToList();
+            return oListaFacturas;
+        }
+
+        public List<CompraFactura> GetCompraFacturaPorIdProveedor(int idProveedor)
+        {
+            return context.CompraFactura.Where(p => p.IdProveedor == idProveedor && p.IdTipoComprobante == 11 &&  p.NumeroPago == "0"  ).ToList();
+            
+        }
+
+        //esta actualizacion es solo para el pago de facturas
+        public CompraFactura ActualizarCompraFacturaPago(CompraFactura model)
         {
 
-            //CompraFactura CompraFactura = GetAccionPorId(AccionParaActualizar.IdAccion);
-            //CompraFactura.Controlador = AccionParaActualizar.Controlador ?? CompraFactura.Controlador;
-            //CompraFactura.Nombre = AccionParaActualizar.Nombre ?? CompraFactura.Nombre;
-            //CompraFactura.Descripcion = AccionParaActualizar.Descripcion ?? CompraFactura.Descripcion;
-            //context.SaveChanges();
+            CompraFactura CompraFactura = GetCompraFacturaPorId(model.Id);
 
-            return null;
+            CompraFactura.FechaPago= model.FechaPago;
+            CompraFactura.NumeroPago = model.NumeroPago;
+            CompraFactura.CotizacionDePago= model.CotizacionDePago;
+            context.SaveChanges();
+
+            return CompraFactura;
         }
         
         public CompraFactura DeleteCompraFactura(int id)

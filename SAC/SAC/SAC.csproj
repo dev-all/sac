@@ -137,6 +137,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
+    <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
@@ -157,15 +158,23 @@
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
     <Compile Include="Models\AutoCompletarViewModel.cs" />
+    <Compile Include="Models\BancoCuentaBancariaModelView.cs" />
+    <Compile Include="Models\ChequeModelView.cs" />
+    <Compile Include="Models\ChequeraModelView.cs" />
+    <Compile Include="Models\FacturaPagoViewModel.cs" />
+    <Compile Include="Models\CompraIvaModelView.cs" />
     <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
     <Compile Include="Models\ConfigMenuSidebarModelView.cs" />
     <Compile Include="Models\ConfigRolModelView.cs" />
     <Compile Include="Models\ConfiguracionModelView.cs" />
+    <Compile Include="Models\CuentaCteProveedorModelView.cs" />
+    <Compile Include="Models\BancoCuentaModelView.cs" />
     <Compile Include="Models\ImputacionModelView.cs" />
     <Compile Include="Models\LocalidadModelView.cs" />
     <Compile Include="Models\MenuSideBarModelView.cs" />
     <Compile Include="Models\PaisModelView.cs" />
+    <Compile Include="Models\PresupuestoActualModelView.cs" />
     <Compile Include="Models\ProveedorModelView.cs" />
     <Compile Include="Models\PersonaModelView.cs" />
     <Compile Include="Models\PrioridadModelView.cs" />
@@ -173,6 +182,7 @@
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\SubRubroModelView.cs" />
+    <Compile Include="Models\TarjetaModelView.cs" />
     <Compile Include="Models\TipoComprobanteModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
@@ -2813,6 +2823,15 @@
     <Content Include="Views\Compras\FacturaCompras.cshtml" />
     <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
     <Content Include="Views\Proveedor\Editar.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\Index.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_Tabla.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\PagarFactura.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_tablaCheques.cshtml" />
+    <Content Include="Views\Localidad\_Tabla.cshtml" />
+    <Content Include="Views\Localidad\Agregar.cshtml" />
+    <Content Include="Views\Localidad\Editar.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaCuentasBancaria.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaTarjetas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
