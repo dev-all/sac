@@ -29,8 +29,7 @@ namespace Negocio.Servicios
 
         private CompraRepositorio repositorio { get; set; }
 
-
-        public Action<string, string> _mensaje;
+        //public Action<string, string> _mensaje;
         public ServicioCompra()
         {
             repositorio = kernel.Get<CompraRepositorio>();
@@ -39,17 +38,23 @@ namespace Negocio.Servicios
         {
             try
             {
-               var compraFactura = Mapper.Map<CompraFacturaModel, CompraFactura>(model);
+                model.Proveedor = null;
+                model.CompraFacturaPago = null;
+                model.FechaPago = DateTime.Now;
+                model.UltimaModificacion = DateTime.Now;
+                model.CompraIva.UltimaModificacion = DateTime.Now;
+                model.Activo = true;
+                CompraFactura compraFactura = Mapper.Map<CompraFacturaModel, CompraFactura>(model);
                 compraFactura = repositorio.Insertar(compraFactura);
-                //model.IdUsuario = compraFactura.IdUsuario;
-                return model;
+                _mensaje("Se guardo la factura Correctamente", "ok");
+                return Mapper.Map<CompraFactura, CompraFacturaModel>(compraFactura);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                return null;
+                throw new Exception();
             }
-           
+
         }
 
         public CompraFacturaModel RegistrarPago(CompraFacturaModel model)
@@ -84,6 +89,27 @@ namespace Negocio.Servicios
             }
          
         }
+    public bool ValidarFacturaPorNroFacturaIdProveedor(int numeroFactura, int idProveedor)
+        {
+            try
+            {
+                // validar numero de factura para el proveedor no debe existir
+                var factura = Mapper.Map<CompraFactura, CompraFacturaModel>(repositorio.GetCompraFacturaPorNroFacturaIdProveedor(numeroFactura,idProveedor));
+                if (factura != null)
+                {
+                    _mensaje("Ya existe el número de Factura para el Proveedor", "error");
+                    return true;
+                }                
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                throw new Exception();
+            }
+            return false;
+        }
+
+
 
         public List<ProveedorModel> GetProveedorPorNombre(string strProveedor)
         {
@@ -111,6 +137,34 @@ namespace Negocio.Servicios
             }
             
         }
+
+  public List<CompraFacturaModel> GetAllCompraFacturaPorNro(int NroFactura)
+        {
+            try
+            {
+                return Mapper.Map<List<CompraFactura>, List<CompraFacturaModel>>(repositorio.GetAllCompraFacturaPorNro(NroFactura));
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                throw new Exception();
+            }
+        }
+
+        public CompraFacturaModel GetCompraFacturaIVAPorNro(int NroFactura)
+        {
+            try
+            {
+                return Mapper.Map<CompraFactura, CompraFacturaModel>(repositorio.GetCompraFacturaIVAPorNro(NroFactura));
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                throw new Exception();
+            }
+        }
+      
+
         public List<CompraFacturaModel> ObtenerListaPorID(int id)
         {
             try
@@ -384,6 +438,8 @@ namespace Negocio.Servicios
                 _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
             }
         }
+
+
 
     }
 

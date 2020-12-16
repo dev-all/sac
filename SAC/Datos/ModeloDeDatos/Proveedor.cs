@@ -54,5 +54,6 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<CompraFactura> CompraFactura { get; set; }
         public virtual Imputacion Imputacion { get; set; }
         public virtual Imputacion Imputacion1 { get; set; }
+        public virtual PrespuestoActual PrespuestoActual { get; set; }
     }
 }

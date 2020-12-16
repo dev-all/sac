@@ -20,10 +20,10 @@ namespace Negocio.Modelos
         public DateTime FechaPago { get; set; }
 
         //resto
-        public Nullable<decimal> Diferencia { get; set; }
+        public decimal Diferencia { get; set; }
 
         //medios de pago
-        public Nullable<decimal> efectivo { get; set; }
+        public decimal efectivo { get; set; }
 
 
         public int idTarjeta { get; set; }

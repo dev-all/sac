@@ -464,6 +464,25 @@
           <Property Name="CodigoValidacion" Type="nchar" MaxLength="10" />
           <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="PrespuestoActual">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Concepto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Actual" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Ejecutado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Historico" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IdImputacion" Type="int" Nullable="false" />
+          <Property Name="CodigoCaja" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Visible" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Costos" Type="nvarchar" MaxLength="50" />
+          <Property Name="Periodo" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Prioridad">
           <Key>
             <PropertyRef Name="Id" />
@@ -581,6 +600,20 @@
           <Property Name="IdTipoIva" Type="int" Nullable="false" />
           <Property Name="IdTipoComprobante" Type="int" />
         </EntityType>
+        <EntityType Name="TipoComprobanteVenta">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PuntoVenta" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PuntoVenta" Type="int" Nullable="false" />
+          <Property Name="Denominacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Abreviatura" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="TipoIva">
           <Key>
             <PropertyRef Name="Id" />
@@ -645,6 +678,21 @@
           <Property Name="IdTipoMoneda" Type="int" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAC.dbo.CompraIvaVista' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="CuentaCorriente">
+          <Key>
+            <PropertyRef Name="ProveedorCodigo" />
+          </Key>
+          <Property Name="ProveedorCodigo" Type="int" Nullable="false" />
+          <Property Name="ProveedorNombre" Type="varchar" MaxLength="50" />
+          <Property Name="MontoPesos" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="MontoDolares" Type="decimal" Precision="38" Scale="5" />
+          <Property Name="TotalDeuda" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="UltimoMovimiento" Type="datetime" />
         </EntityType>
         <Association Name="FK_AccionesPorRoles_Acciones">
           <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
@@ -994,6 +1042,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Proveedor_Presupuesto1">
+          <End Role="PrespuestoActual" Type="Self.PrespuestoActual" Multiplicity="0..1" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrespuestoActual">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Proveedor_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
@@ -1164,6 +1224,7 @@
           <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrespuestoActual" EntityType="Self.PrespuestoActual" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prioridad" EntityType="Self.Prioridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
@@ -1173,12 +1234,23 @@
           <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoComprobante" EntityType="Self.TipoComprobante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoComprobanteTipoIva" EntityType="Self.TipoComprobanteTipoIva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoComprobanteVenta" EntityType="Self.TipoComprobanteVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoIva" EntityType="Self.TipoIva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoMoneda" EntityType="Self.TipoMoneda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoPago" EntityType="Self.TipoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProveedor" EntityType="Self.TipoProveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValorCotizacion" EntityType="Self.ValorCotizacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuentaCorriente" EntityType="Self.CuentaCorriente" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CuentaCorriente].[ProveedorCodigo] AS [ProveedorCodigo], 
+    [CuentaCorriente].[ProveedorNombre] AS [ProveedorNombre], 
+    [CuentaCorriente].[MontoPesos] AS [MontoPesos], 
+    [CuentaCorriente].[MontoDolares] AS [MontoDolares], 
+    [CuentaCorriente].[TotalDeuda] AS [TotalDeuda], 
+    [CuentaCorriente].[UltimoMovimiento] AS [UltimoMovimiento]
+    FROM [dbo].[CuentaCorriente] AS [CuentaCorriente]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="Self.FK_AccionesPorRoles_Acciones">
             <End Role="Accion" EntitySet="Accion" />
             <End Role="AccionPorRol" EntitySet="AccionPorRol" />
@@ -1293,6 +1365,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Pais" Association="Self.FK_Proveedor_Pais">
             <End Role="Pais" EntitySet="Pais" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedor_Presupuesto1" Association="Self.FK_Proveedor_Presupuesto1">
+            <End Role="PrespuestoActual" EntitySet="PrespuestoActual" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Provincia" Association="Self.FK_Proveedor_Provincia">
@@ -1559,6 +1635,13 @@
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Imputacion1" Association="SAC_Model.FK_Proveedor_Imputacion1">
             <End Role="Imputacion" EntitySet="Imputacion" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <EntitySet Name="PrespuestoActual" EntityType="SAC_Model.PrespuestoActual" />
+          <EntitySet Name="TipoComprobanteVenta" EntityType="SAC_Model.TipoComprobanteVenta" />
+          <EntitySet Name="CuentaCorriente" EntityType="SAC_Model.CuentaCorriente" />
+          <AssociationSet Name="FK_Proveedor_Presupuesto1" Association="SAC_Model.FK_Proveedor_Presupuesto1">
+            <End Role="PrespuestoActual" EntitySet="PrespuestoActual" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
           </EntityContainer>
@@ -2029,6 +2112,7 @@
           <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
           <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
           <NavigationProperty Name="Imputacion1" Relationship="SAC_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
+          <NavigationProperty Name="PrespuestoActual" Relationship="SAC_Model.FK_Proveedor_Presupuesto1" FromRole="Proveedor" ToRole="PrespuestoActual" />
           </EntityType>
         <Association Name="FK_Proveedor_Pais">
           <End Type="SAC_Model.Pais" Role="Pais" Multiplicity="0..1" />
@@ -2805,6 +2889,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PrespuestoActual">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Actual" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Ejecutado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Historico" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+          <Property Name="CodigoCaja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Visible" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Costos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Periodo" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Presupuesto1" FromRole="PrespuestoActual" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="TipoComprobanteVenta">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="PuntoVenta" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PuntoVenta" Type="Int32" Nullable="false" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Abreviatura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CuentaCorriente">
+          <Key>
+            <PropertyRef Name="ProveedorCodigo" />
+          </Key>
+          <Property Name="ProveedorCodigo" Type="Int32" Nullable="false" />
+          <Property Name="ProveedorNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MontoPesos" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="MontoDolares" Type="Decimal" Precision="38" Scale="5" />
+          <Property Name="TotalDeuda" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="UltimoMovimiento" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Proveedor_Presupuesto1">
+          <End Type="SAC_Model.PrespuestoActual" Role="PrespuestoActual" Multiplicity="0..1" />
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrespuestoActual">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proveedor">
+              <PropertyRef Name="IdPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3489,6 +3630,52 @@
                 <ScalarProperty Name="IdSubRubro" ColumnName="IdSubRubro" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrespuestoActual">
+            <EntityTypeMapping TypeName="SAC_Model.PrespuestoActual">
+              <MappingFragment StoreEntitySet="PrespuestoActual">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Costos" ColumnName="Costos" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="CodigoCaja" ColumnName="CodigoCaja" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="Historico" ColumnName="Historico" />
+                <ScalarProperty Name="Ejecutado" ColumnName="Ejecutado" />
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoComprobanteVenta">
+            <EntityTypeMapping TypeName="SAC_Model.TipoComprobanteVenta">
+              <MappingFragment StoreEntitySet="TipoComprobanteVenta">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuentaCorriente">
+            <EntityTypeMapping TypeName="SAC_Model.CuentaCorriente">
+              <MappingFragment StoreEntitySet="CuentaCorriente">
+                <ScalarProperty Name="UltimoMovimiento" ColumnName="UltimoMovimiento" />
+                <ScalarProperty Name="TotalDeuda" ColumnName="TotalDeuda" />
+                <ScalarProperty Name="MontoDolares" ColumnName="MontoDolares" />
+                <ScalarProperty Name="MontoPesos" ColumnName="MontoPesos" />
+                <ScalarProperty Name="ProveedorNombre" ColumnName="ProveedorNombre" />
+                <ScalarProperty Name="ProveedorCodigo" ColumnName="ProveedorCodigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

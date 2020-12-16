@@ -103,6 +103,9 @@
     <Compile Include="ModeloDeDatos\Contacto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\CuentaCorriente.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Diario.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -151,6 +154,9 @@
     <Compile Include="ModeloDeDatos\Persona.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\PrespuestoActual.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Prioridad.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -178,6 +184,9 @@
     <Compile Include="ModeloDeDatos\TipoComprobanteTipoIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\TipoComprobanteVenta.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\TipoIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -198,11 +207,17 @@
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.6.1.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorios\BancoCuentaBancariaRepositorio.cs" />
+    <Compile Include="Repositorios\BancoCuentaRepositorio.cs" />
+    <Compile Include="Repositorios\ChequeraRepositorio.cs" />
+    <Compile Include="Repositorios\ChequeRepositorio.cs" />
+    <Compile Include="Repositorios\CompraFacturaPagoRepositorio.cs" />
     <Compile Include="Repositorios\CompraRepositorio.cs" />
     <Compile Include="Repositorios\ImputacionRepositorio.cs" />
     <Compile Include="Repositorios\LocalidadRespositorio.cs" />
     <Compile Include="Repositorios\DiarioRepositorio.cs" />
     <Compile Include="Repositorios\PaisRepositorio.cs" />
+    <Compile Include="Repositorios\PresupuestoActualRepositorio.cs" />
     <Compile Include="Repositorios\ProvinciaRepositorio.cs" />
     <Compile Include="Repositorios\LocalidadRepositorio.cs" />
     <Compile Include="Repositorios\ProveedorRepositorio.cs" />
@@ -213,6 +228,8 @@
     <Compile Include="Repositorios\EventoRepositorio.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\SubRubroRepositorio.cs" />
+    <Compile Include="Repositorios\TarjetaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoComprovanteVentaRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
     <Compile Include="Repositorios\TipoComprobanteRepositorio.cs" />
     <Compile Include="Repositorios\ValorCotizacionRepositorio.cs" />

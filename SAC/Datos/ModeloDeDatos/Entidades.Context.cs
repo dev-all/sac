@@ -65,5 +65,8 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CajaSaldo> CajaSaldo { get; set; }
         public virtual DbSet<Diario> Diario { get; set; }
         public virtual DbSet<Imputacion> Imputacion { get; set; }
+        public virtual DbSet<PrespuestoActual> PrespuestoActual { get; set; }
+        public virtual DbSet<TipoComprobanteVenta> TipoComprobanteVenta { get; set; }
+        public virtual DbSet<CuentaCorriente> CuentaCorriente { get; set; }
     }
 }

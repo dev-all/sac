@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="75">
+      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="SAC_Model.AccionPorRol" Width="1.5" PointX="1.25" PointY="13.875" />
         <EntityTypeShape EntityType="SAC_Model.Contacto" Width="1.5" PointX="10.5" PointY="6" />
         <EntityTypeShape EntityType="SAC_Model.Evento" Width="1.5" PointX="8.875" PointY="9.375" />
@@ -35,35 +35,21 @@
         <AssociationConnector Association="SAC_Model.FK_Provincia_Pais" />
         <EntityTypeShape EntityType="SAC_Model.Localidad" Width="1.5" PointX="9.25" PointY="15.25" />
         <AssociationConnector Association="SAC_Model.FK_Localidad_Pais" ManuallyRouted="true" >
-          <ConnectorPoint PointX="2.25" PointY="5.6917936197916656" />
-          <ConnectorPoint PointX="2.625" PointY="55.410393682327388" />
+          <ConnectorPoint PointX="2.25" PointY="4.2254070002701667" />
+          <ConnectorPoint PointX="2.4942258066654666" PointY="7.7416098268294977" />
+          <ConnectorPoint PointX="2.5057741933345339" PointY="7.9078759164061747" />
           <ConnectorPoint PointX="2.625" PointY="9.6244108072916656" />
           <ConnectorPoint PointX="8.2870368095337064" PointY="9.6244108072916656" />
           <ConnectorPoint PointX="8.2870368095337064" PointY="14.682109375" />
+          <ConnectorPoint PointX="8.5416666666666661" PointY="14.682109375" />
+          <ConnectorPoint PointX="8.7083333333333339" PointY="14.682109375" />
           <ConnectorPoint PointX="10" PointY="14.682109375" />
-          <ConnectorPoint PointX="10" PointY="15.250000000000002" />
+          <ConnectorPoint PointX="10" PointY="15.250000000000062" />
         </AssociationConnector>
         <AssociationConnector Association="SAC_Model.FK_Localidad_Provincia" />
         <EntityTypeShape EntityType="SAC_Model.AfipCategorias" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SAC_Model.Proveedor" Width="1.5" PointX="13.25" PointY="14.5" />
-        <AssociationConnector Association="SAC_Model.FK_Proveedor_Pais" ManuallyRouted="true" >
-          <ConnectorPoint PointX="2.25" PointY="5.6917936197916656" />
-          <ConnectorPoint PointX="2.4166666666666665" PointY="19.32280392924822" />
-          <ConnectorPoint PointX="2.4166666666666665" PointY="9.8744108072916656" />
-          <ConnectorPoint PointX="2.4166666666666665" PointY="9.8744108072916639" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="9.8744108072916656" />
-          <ConnectorPoint PointX="8.0092588588288685" PointY="9.8744108072916656" />
-          <ConnectorPoint PointX="8.0092588588288685" PointY="14.619609375" />
-          <ConnectorPoint PointX="13" PointY="14.619609375" />
-          <ConnectorPoint PointX="13" PointY="14.25" />
-          <ConnectorPoint PointX="13.307288166666666" PointY="14.25" />
-          <ConnectorPoint PointX="13.473954833333334" PointY="14.25" />
-          <ConnectorPoint PointX="13.510414666666666" PointY="14.25" />
-          <ConnectorPoint PointX="13.677081333333334" PointY="14.25" />
-          <ConnectorPoint PointX="13.713540666666665" PointY="14.25" />
-          <ConnectorPoint PointX="13.880207333333333" PointY="14.25" />
-          <ConnectorPoint PointX="14" PointY="14.25" />
-          <ConnectorPoint PointX="14" PointY="14.500000000000004" />
+        <EntityTypeShape EntityType="SAC_Model.Proveedor" Width="1.5" PointX="14.625" PointY="18.125" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Pais" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Provincia" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_TipoMoneda" />
@@ -115,6 +101,10 @@
         <AssociationConnector Association="SAC_Model.FK_Imputacion_SubRubro" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion1" />
+        <EntityTypeShape EntityType="SAC_Model.PrespuestoActual" Width="1.5" PointX="12.125" PointY="28.5" />
+        <EntityTypeShape EntityType="SAC_Model.TipoComprobanteVenta" Width="1.5" PointX="7.125" PointY="28.25" />
+        <EntityTypeShape EntityType="SAC_Model.CuentaCorriente" Width="1.5" PointX="9.125" PointY="28.25" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Presupuesto1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
