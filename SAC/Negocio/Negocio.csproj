@@ -117,7 +117,6 @@
     <Compile Include="Servicios\ServicioPresupuestoActual.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />
     <Compile Include="Servicios\ServicioProvincia.cs" />
-    <Compile Include="Servicios\ServicioRol.cs" />
     <Compile Include="Servicios\ServicioSubRubro.cs" />
     <Compile Include="Servicios\ServicioTarjeta.cs" />
     <Compile Include="Servicios\ServicioTipoComprobanteVenta.cs" />
