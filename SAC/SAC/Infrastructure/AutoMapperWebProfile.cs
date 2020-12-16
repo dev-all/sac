@@ -9,7 +9,7 @@ using Negocio.Modelos;
 
 namespace SAC.Infrastructure
 {
-    public class AutoMapperWebProfile: AutoMapper.Profile
+    public class AutoMapperWebProfile : AutoMapper.Profile
     {
         public AutoMapperWebProfile()
         {
@@ -30,10 +30,48 @@ namespace SAC.Infrastructure
             CreateMap<CompraIvaModelView, CompraIvaModel>();
 
 
+            CreateMap< PresupuestoActualModel, PresupuestoActualModelView>();
+            CreateMap<PresupuestoActualModelView, PresupuestoActualModel>();
+
+            CreateMap<TarjetaModel, TarjetaModelView>();
+            CreateMap<TarjetaModelView, TarjetaModel>();
+
+            CreateMap<BancoCuentaModel, BancoCuentaModelView>();
+            CreateMap<BancoCuentaModelView, BancoCuentaModel>();
+
+            CreateMap<BancoCuentaBancariaModel, BancoCuentaBancariaModelView>();
+            CreateMap<BancoCuentaBancariaModelView, BancoCuentaBancariaModel>();
+
+            CreateMap<ChequeraModel, ChequeraModelView>();
+            CreateMap<ChequeraModelView, ChequeraModel>();
+
+            CreateMap<ChequeModel, ChequeModelView>();
+            CreateMap<ChequeModelView, ChequeModel>();
+     
+            CreateMap<FacturaPagoModel, FacturaPagoViewModel>();
+            CreateMap<FacturaPagoViewModel, FacturaPagoModel>();
+
+            CreateMap <ImputacionModel, ImputacionModelView>();
+            CreateMap <ImputacionModelView, ImputacionModel>();
+
+            CreateMap<TipoComprobanteModel, TipoComprobanteModelView>();
+            CreateMap<TipoComprobanteModelView, TipoComprobanteModel>();
+
+            CreateMap<TipoMonedaModel, TipoMonedaModelView>();
+            CreateMap<TipoMonedaModelView, TipoMonedaModel>();
+
+            CreateMap<CompraFacturaModel, CompraFacturaViewModel>();
+            CreateMap<CompraFacturaViewModel, CompraFacturaModel>();
+
+            CreateMap<CuentaCteProveedorModel, CuentaCteProveedorModelView>();
+            CreateMap<CuentaCteProveedorModelView, CuentaCteProveedorModel>();
+
             CreateMap<PersonaModel,PersonaModelView>();
             CreateMap<PersonaModelView,PersonaModel >();
+
             CreateMap<PrioridadModel, PrioridadModelView>();
             CreateMap<PrioridadModelView , PrioridadModel>();
+
             CreateMap<EventoModel, EventoModelView>();             
             CreateMap<EventoModelView, EventoModel>();
 
@@ -81,11 +119,6 @@ namespace SAC.Infrastructure
              .ForMember(mi => mi.Titulo, msb => msb.MapFrom(i => i.Titulo))
              .ForMember(mi => mi.Metodo, msb => msb.MapFrom(i => i.Accion.Nombre))
             .ForMember(mi => mi.Controller, msb => msb.MapFrom(i => i.Accion.Controlador));
-
-
-           
-
-
         }
 
         public static void Run()

@@ -1,0 +1,619 @@
+﻿@model SAC.Models.FacturaPagoViewModel
+@{
+    ViewBag.Title = "Pagar Factura";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<div class="row page-titles m-t-40">
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-themecolor">Listado de facturas a pagar</h3>
+    </div>
+</div>*@
+
+
+
+
+<div class="row">
+    <div class="col-xlg-12 col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row m-t-20 m-b-40">
+                    <div class="col-md-12">
+
+                      
+                        <h4 class="card-title">Proveedor:  @Html.Raw(Model.Proveedor.Nombre) </h4>
+                        @using (Html.BeginForm("FacturaPago", "CuentaCteProveedor", FormMethod.Post, new { @id = "frmPagar" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(model => model.Proveedor.Id)
+
+
+                            <div class="table-responsive">
+                                <table id="TblFacturas" class="table stylish-table">
+
+                                    <thead>
+                                        <tr>
+                                            <th> </th>
+                                            <th> Codigo</th>
+                                            <th> Fecha</th>
+                                            <th> Pto Venta</th>
+                                            <th> Numero</th>
+                                            <th> Total</th>
+                                            <th> Saldo</th>
+                                            <th> Moneda</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.ListaFacturas)
+                                        {
+                                            <tr>
+                                                <td class="text-center"><input type="checkbox" class="check" id=@item.Id value=@item.Saldo></td>
+                                                @*<td>@Html.CheckBoxFor(modelItem => item.chkSeleccion) </td>*@
+                                                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Saldo)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.TipoMoneda.Descripcion)</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                            <h3>Medios de pago</h3>
+
+
+
+
+
+                            @Html.Hidden("idFacturas")
+                            @Html.Hidden("idChequesPropios")
+                            @Html.Hidden("idChequesTerceros")
+                            @Html.Hidden("idCuentasBancarias")
+                            @Html.Hidden("idTarjeta")
+
+                            <div class="row col-md-12 justify-content-md-center">
+                                @* efectivo *@
+                                <div class="row col-md-12 ">
+                                    <div class="col-md-6 text-right"></div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row ">
+                                            <div class="col-6"><label class="">Total de Saldos</label></div>
+                                            <div class="col-6">@Html.TextBox("TotalSaldo", Model.ListaFacturas.Sum(x => x.Saldo).ToString(), new { @class = "form-control", @readOnly = true })</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* efectivo *@
+                                <div class="row col-md-12 m-t-20">
+                                    <div class="col-md-6 text-right"></div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row ">
+                                            <div class="col-6">
+                                                @Html.LabelFor(m => m.TotalAPagar, new { @class = "control-label form-control-sm" })
+                                                @*<label class="">@Html.LabelFor(p => p.TotalAPagar)</label>*@
+                                            </div>
+                                            <div class="col-6">
+
+                                                @Html.TextBoxFor(m => m.TotalAPagar, new { @class = "form-control form-control-sm", @placeholder = "", @readonly = true })
+                                                @Html.ValidationMessageFor(m => m.TotalAPagar, "", new { @class = "text-danger form-control-sm" })
+
+                                                @*@Html.EditorFor(p => p.TotalAPagar, new { @id = "TotalAPagar", htmlAttributes = new { @type = "number", @min = "1", @class = "form-control", @placeholder = "Sin valor", @readOnly = true } })
+                                @Html.ValidationMessage("TotalAPagar", new { @class = "text-danger" })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* efectivo *@
+                                <div class="row col-md-12 m-t-20">
+                                    <div class="col-md-6 text-right"></div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row ">
+                                            <div class="col-6"><label class="">@Html.LabelFor(p => p.efectivo)</label></div>
+                                            <div class="col-6">
+
+                                                @Html.EditorFor(p => p.efectivo, new { htmlAttributes = new { @type = "number", @min = "1", @class = "form-control", @placeholder = "Sin valor", @id = "efectivo" } })
+                                                @Html.ValidationMessage("efectivo", new { @class = "text-danger" })
+                                                @*<input type="text" class="form-control " id="montoEfectivoSeleccionado" placeholder="Sin valor">*@
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                @* cheque *@
+                                <div class="row col-md-12 m-t-20">
+                                    <div class="col-md-6 text-right">
+                                        <input type="button" class="btn btn-secondary" id="btnSelCheque" onclick="fnVerModalCheques();" value="Cheque" disabled>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="">@Html.LabelFor(p => p.montoChequesSeleccionados)</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(p => p.montoChequesSeleccionados, new { htmlAttributes = new { @class = "form-control", @placeholder = "Sin valor", @readOnly = true } })
+                                                @Html.ValidationMessage("montoChequesSeleccionados", new { @class = "text-danger" })
+                                                @*<input type="text" class="form-control" id="montoChequesSeleccionados" placeholder="Sin valor" readonly="readonly">*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+                                @* tranferencia *@
+                                <div class="row col-md-12 m-t-20">
+                                    <div class="col-md-6 text-right">
+                                        <input type="button" class="btn btn-secondary" id="btnSelTransferencia" onclick="fnVerModalTranferencia();" value="Transferencia" disabled>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>@Html.LabelFor(p => p.montoTranferencia)</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(p => p.montoTranferencia, new { htmlAttributes = new { @class = "form-control", @placeholder = "Sin valor", @readOnly = true } })
+                                                @Html.ValidationMessage("montoTranferencia", new { @class = "text-danger" })
+                                                @*<input type="text" class="form-control" id="montoTranferenciaSeleccionados" placeholder="Sin valor" readonly="readonly">*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                @* tarjeta *@
+                                <div class="row col-md-12 m-t-20">
+                                    <div class="col-md-6 text-right">
+                                        <input type="button" class="btn btn-secondary" id="btnSelTarjeta" onclick="fnVerModalTarjetas();" value="Tarjeta" disabled>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row">
+                                            <div class="col-md-6"><label>@Html.LabelFor(p => p.montoTarjetaSeleccionados)</label></div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(p => p.montoTarjetaSeleccionados, new { htmlAttributes = new { @class = "form-control", @placeholder = "Sin valor", @readOnly = true } })
+                                                @Html.ValidationMessage("montoTarjetaSeleccionados", new { @class = "text-danger" })
+                                                @*<input type="text" class="form-control" id="montoTarjetaSeleccionados" placeholder="Sin valor" readonly="readonly">*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @* diferencia *@
+                                <div class="row col-md-12 m-t-20">
+                                    <div class="col-md-6 text-right">
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>@Html.LabelFor(p => p.Diferencia)</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(p => p.Diferencia, new { htmlAttributes = new { @class = "form-control", @placeholder = "Sin valor", @readOnly = true } })
+                                                @Html.ValidationMessage("Diferencia", new { @class = "text-danger" })
+                                                @*<input type="text" class="form-control" id="Diferencia" placeholder="Sin valor"  readonly="readonly">*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @* diferencia *@
+                                <div class="row col-md-12 m-t-20">
+                                    <div class="col-md-6 text-right">
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label> @Html.Label("Seleccione Presupuesto")</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.DropDownList("idPresupuesto", Model.ListaPresupuestoActual, null, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <br />
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="col-2 text-center">
+                                        <button type="submit" id="btnConfirmar" class="btn btn-success">Confirmar</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" id="ModalCheques" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Seleccione cheques</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="Resultados">  </div>
+            </div>
+
+            <div class="modal-footer text-right">
+                <div style="padding:1em;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" onclick="fnAsignarCheque()">Asignar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="ModalTranferencia" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Seleccione Cuenta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="Resultados1"></div>
+            </div>
+
+            <div class="modal-footer text-right">
+                <div style="padding:1em;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" onclick="fnAsignarCuentaBancaria()">Asignar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" id="ModalTarjetas" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Seleccione Tarjeta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="Resultados2"></div>
+            </div>
+
+            <div class="modal-footer text-right">
+                <div style="padding:1em;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" onclick="fnAsignarTarjeta()">Asignar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function fnVerModalCheques() {
+        $.ajax({
+            type: "POST",
+            url: "/CuentaCteProveedor/CargarCheques",
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            beforeSend: function () {
+            }, complete: function () {
+            },
+            success: function (response) {
+                $('#Resultados').html(response);
+                $("#ModalCheques").modal('show');
+                $("#montoChequesSeleccionados").val("");
+                fntabla();
+            },
+            failure: function (response) {
+                Console.log(response.responseText);
+            },
+            error: function (response) {
+                Console.log(response.responseText);
+            }
+        });
+    }
+
+    function fnAsignarCheque() {
+        var total = 0;
+        //cheques propios
+        $('.checkChequePropio:checked').each(function () {
+            valor = parseFloat($(this)[0].value);
+            if (total == 0) {
+                total = valor
+            }
+            else {
+                total += valor;
+            }
+            $("#idChequesPropios").val($(this)[0].id);
+        });
+
+        //cheques terceros
+        $('.checkChequeTercero:checked').each(function () {
+            valor = parseFloat($(this)[0].value);
+            if (total == 0) {
+                total = valor
+            }
+            else {
+                total += valor;
+            }
+            $("#idChequesTerceros").val($(this)[0].id);
+        });
+
+        $("#montoChequesSeleccionados").val(total.toFixed(2));
+        $("#ModalCheques").modal('hide');
+        fnCalcularDirefencia();
+    }
+
+    function fnVerModalTarjetas() {
+
+        $.ajax({
+            type: "POST",
+            url: "/CuentaCteProveedor/CargarTarjetas",
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            beforeSend: function () {
+            }, complete: function () {
+            },
+            success: function (response) {
+                $('#Resultados2').html(response);
+                $("#ModalTarjetas").modal('show');
+                $("#montoTarjetaSeleccionados").val('');
+            },
+            failure: function (response) {
+                Console.log(response.responseText);
+            },
+            error: function (response) {
+                Console.log(response.responseText);
+            }
+        });
+    }
+
+    function fnAsignarTarjeta() {
+        $("#idTarjeta").val($("#idTarjetasdrop").val());
+        $("#montoTarjetaSeleccionados").val(parseFloat($("#MontoTarjeta").val()).toFixed(2));
+        $("#ModalTarjetas").modal('hide');
+
+        //console.log($("#idTarjeta").val());
+
+        fnCalcularDirefencia()
+    }
+
+    function fnCalcularDirefencia() {
+        var TotalaPagar = isNaN($("#TotalAPagar").val()) ? 0 : parseFloat($("#TotalAPagar").val());
+        var Efectivo = isNaN(parseFloat($("#efectivo").val())) ? 0 : parseFloat($("#efectivo").val());
+        var Cheque = isNaN(parseFloat($("#montoChequesSeleccionados").val())) ? 0 : parseFloat($("#montoChequesSeleccionados").val());
+        var tranferencia = isNaN(parseFloat($("#montoTranferenciaSeleccionados").val())) ? 0 : parseFloat($("#montoTranferenciaSeleccionados").val());
+        var tarjeta = isNaN(parseFloat($("#montoTarjetaSeleccionados").val())) ? 0 : parseFloat($("#montoTarjetaSeleccionados").val());
+
+        var resultado = TotalaPagar - (Efectivo + Cheque + tranferencia + tarjeta);
+
+        $("#Diferencia").val(parseFloat(resultado));
+
+    }
+
+    $("#efectivo").keyup(function () {
+        fnCalcularDirefencia()
+    });
+
+
+    function fnVerModalTranferencia() {
+        $("#montoTranferenciaSeleccionados").val("");
+        $("#idCuentasBancarias").val("");
+
+        $.ajax({
+            type: "POST",
+            url: "/CuentaCteProveedor/CargarCuentas",
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            beforeSend: function () {
+            }, complete: function () {
+            },
+            success: function (response) {
+                $('#Resultados1').html(response);
+                $("#ModalTranferencia").modal('show');
+            },
+            failure: function (response) {
+                Console.log(response.responseText);
+            },
+            error: function (response) {
+                Console.log(response.responseText);
+            }
+        });
+    }
+
+    function fnAsignarCuentaBancaria() {
+        $("#montoTranferencia").val(parseFloat($("#MontoCuenta").val()).toFixed(2));
+        $("#idCuentasBancarias").val($("#idCuentaBancaria").val());
+        $("#ModalTranferencia").modal('hide');
+        fnCalcularDirefencia();
+    }
+
+    //maneja los check
+    $(".check").on("click", function () {
+
+
+        $("#btnSelCheque").removeAttr("disabled");
+        $("#btnSelTransferencia").removeAttr("disabled");
+        $("#btnSelTarjeta").removeAttr("disabled");
+
+
+        var total = 0;
+        var valortotalSincoma = $("#TotalAPagar").val().replace(",", ".");
+        var idFacturas = $("#idFacturas").val();
+        if (idFacturas.length == 1) {
+            $("#idFacturas").val("");
+        }
+        var valor = 0;
+
+        if ($(this).is(":checked")) {
+            var valorSincoma = "";
+            valorSincoma = this.value.replace(",", ".");
+            valor = parseFloat(valorSincoma);
+
+            if ((valortotalSincoma != "")) {
+
+                if (isNaN(valortotalSincoma)) {
+                    valortotalSincoma = 0;
+                }
+                total = parseFloat(valortotalSincoma);
+                total = total + valor;
+                $("#TotalAPagar").val(total.toFixed(2));
+                // $("#TotalAPagar").val(total);
+                if (valortotalSincoma == 0) {
+                    idFacturas = this.id;
+                }
+                else {
+                    idFacturas = idFacturas + ";" + this.id;
+                }
+            }
+            else {
+                $("#TotalAPagar").val(valor.toFixed(2));
+                //$("#TotalAPagar").val(valor);
+                idFacturas = this.id;
+            }
+
+            //agrego de la lista de facturas a pagar el registro seleccionado
+            $("#idFacturas").val(idFacturas);
+        }
+        else {
+            valorSincoma = this.value.replace(",", ".");
+            valor = parseFloat(valorSincoma);
+            var arr = idFacturas;
+            var arrayDeCadenas = arr.split(";");
+
+            if (valortotalSincoma != "0") {
+                total = parseFloat(valortotalSincoma);
+                total -= valor;
+                if (isNaN(total) || total == 0) {
+                    $("#TotalAPagar").val("0");
+                    console.log("0", arrayDeCadenas);
+                    removeItemFromArr(arrayDeCadenas, this.id);
+                    $("#btnSelCheque").attr('disabled', 'disabled');
+                    $("#btnSelTransferencia").attr('disabled', 'disabled');
+                    $("#btnSelTarjeta").attr('disabled', 'disabled');
+
+                }
+                else {
+                    $("#TotalAPagar").val(total.toFixed(2));
+                    console.log("1", arrayDeCadenas);
+                    removeItemFromArr(arrayDeCadenas, this.id);
+                }
+                $("#idFacturas").val(arrayDeCadenas.join(';'));
+            }
+            else {
+                $("#TotalAPagar").val(this.value);
+            }
+            //quito de la lista de facturas a pagar el registro eliminado
+            //$.get("/CuentaCteProveedor/QuitarFacturaAPagar/?idFactura=" + this.id, function (data) {
+            //    if (data == "0") {
+            //        alert("Error, algo no salio bien");
+            //    }
+            //});
+        }
+
+        console.log($("#idFacturas").val());
+    });
+
+    //elimina elemento de array por elemento
+    function removeItemFromArr(arr, item) {
+        var i = arr.indexOf(item);
+        arr.splice(i, 1);
+    }
+
+    function fntabla() {
+        $('#TblChequesPropios').DataTable({
+            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            'dom': 'Bfrtip',
+            'buttons': [
+                'pdf'
+            ]
+        });
+
+        $('#TblChequesTerceros').DataTable({
+            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            'dom': 'Bfrtip',
+            'buttons': [
+                'pdf'
+            ]
+        });
+
+    }
+
+    $(function () {
+        // Instrucciones de JQuery
+        $('#TblFacturas').DataTable({
+            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+            "order": [[2, 'asc']],
+            'paging': true,
+            'lengthChange': false,
+            'searching': true,
+            'ordering': true,
+            'info': true,
+            'autoWidth': true,
+            'dom': 'Bfrtip',
+            'buttons': [ ]
+        });
+    });
+ 
+
+
+
+
+</script>
+
+
+@section Scripts{
+
+    <!-- This is data table -->
+    <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="~/Content/assets/plugins/datatables/jsTable/dataTables.buttons.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.flash.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/jszip.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/pdfmake.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/vfs_fonts.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.html5.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.print.min.js"></script>
+
+}

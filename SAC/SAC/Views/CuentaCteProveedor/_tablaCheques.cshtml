@@ -1,0 +1,74 @@
+﻿@model SAC.Models.FacturaPagoViewModel
+
+
+<div class="table-responsive">
+    <h3>Cheques propios</h3>
+    <table id="TblChequesPropios" class="table stylish-table">
+        <thead>
+            <tr>
+                <th> Selección</th>
+                <th> Id</th>
+                <th> Banco</th>
+                <th> NumeroCheque</th>
+                <th> Fecha</th>
+                <th> Importe</th>
+                <th> Moneda</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListaChequesPropios)
+            {
+            <tr>
+                <td><input type="checkbox" class="checkChequePropio" id=@item.Id value=@item.Importes></td>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Banco)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumeroCheque)</td>
+                <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                <td>@Html.DisplayFor(modelItem => item.Importes)</td>
+                <td>@Html.DisplayFor(modelItem => item.tipoMonedaDescripcion)</td>
+                @*<td>@Html.CheckBoxFor(modelItem => item.seleccionado, new { @class = "checkChequePropio" })</td>*@
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <h3>Cheques de terceros</h3>
+    <table id="TblChequesTerceros" class="table stylish-table" style="margin-top:50px">
+        <thead>
+            <tr>
+                <th> Selección</th>
+                <th> Id</th>
+                <th> Descripcion</th>
+                <th> NumeroCheque</th>
+                <th> Fecha</th>
+                <th> Importe</th>
+                <th> Moneda</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListaChequesTerceros)
+            {
+            <tr>
+                <td><input type="checkbox" class="checkChequeTercero" id=@item.Id value=@item.Importe></td>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumeroCheque)</td>
+                <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                <td>@Html.DisplayFor(modelItem => item.Importe)</td>
+                <td>@Html.DisplayFor(modelItem => item.tipoMonedaDescripcion)</td>
+                @*<td>@Html.CheckBoxFor(modelItem => item.seleccionado, new { @class = "checkChequeTercero", @id = item.Id })</td>*@
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+
+        </tfoot>
+    </table>
+</div>

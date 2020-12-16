@@ -3908,9 +3908,10 @@ form p:last-child {
 
 [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
-    position: absolute;
+    /*esto cambi porque no se mostraban - bre - 07/12/2020*/
+    /* position: absolute;
     left: -9999px;
-    opacity: 0;
+    opacity: 0;*/
 }
 
 [type="checkbox"] {
