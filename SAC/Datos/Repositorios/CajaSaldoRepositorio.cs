@@ -21,7 +21,7 @@ namespace Datos.Repositorios
            return  Insertar(model);
         }
 
-        public List<CajaSaldo> GetAllGrupoCaja()
+        public List<CajaSaldo> GetAllCajaSaldo()
         {
             return context.CajaSaldo.Where(acc => acc.Activo == true).OrderBy(acc => acc.Fecha).ToList();
         }
