@@ -16,11 +16,14 @@ namespace SAC.Models
 
         public int Id { get; set; }
         public Nullable<int> IdTipoMovimiento { get; set; }
-        public string Concepto { get; set; }
 
+        [Required]       
+        public string Concepto { get; set; }
+       
+        
 
         [Display(Name = "Fecha")]
-        [Required]
+        [Required]       
         public Nullable<System.DateTime> Fecha { get; set; }
        
         public string Tipo { get; set; }
