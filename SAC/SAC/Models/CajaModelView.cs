@@ -17,20 +17,31 @@ namespace SAC.Models
         public int Id { get; set; }
         public Nullable<int> IdTipoMovimiento { get; set; }
         public string Concepto { get; set; }
+
+
+        [Display(Name = "Fecha")]
+        [Required]
         public Nullable<System.DateTime> Fecha { get; set; }
+       
         public string Tipo { get; set; }
         public string Saldo { get; set; }
         public Nullable<int> IdGrupoCaja { get; set; }
 
 
           public string Recibo { get; set; }
-        public Nullable<decimal> ImportePesos { get; set; }
 
-       
+        [Display(Name = "Importe Pesos")]
+               public Nullable<decimal> ImportePesos { get; set; }
+
+        [Display(Name = "Importe Depósito")]
         public Nullable<decimal> ImporteDeposito { get; set; }
+
         public Nullable<int> IdCuentaBanco { get; set; }
+        [Display(Name = "Importe Dolar")]
         public Nullable<decimal> ImporteDolar { get; set; }
+        [Display(Name = "Importe Tarjeta")]
         public Nullable<decimal> ImporteTarjeta { get; set; }
+        [Display(Name = "Importe Cheque")]
         public Nullable<decimal> ImporteCheque { get; set; }
         public Nullable<int> IdCajaSaldo { get; set; }
         public Nullable<bool> Activo { get; set; }

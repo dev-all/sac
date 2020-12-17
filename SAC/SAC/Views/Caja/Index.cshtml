@@ -154,10 +154,10 @@
 
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label" })
+                                                    @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label form-control-sm" })
 
-                                                    @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                                    @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger form-control-sm" })
 
                                                 </div>
 
@@ -175,8 +175,8 @@
 
                                                 <div class="form-group">
 
-                                                    @Html.LabelFor(m => m.Fecha, new { @class = "control-label" })
-                                                    @Html.TextBoxFor(m => m.Fecha, new { @class = "form-control" })
+                                                    @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
+                                                    @Html.TextBoxFor(m => m.Fecha, new { @class = "form-control form-control-sm" })
                                                     @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger form-control-sm " })
                                                 </div>
 
@@ -186,10 +186,10 @@
 
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.ImportePesos, htmlAttributes: new { @class = "control-label" })
+                                                    @Html.LabelFor(model => model.ImportePesos, htmlAttributes: new { @class = "control-label form-control-sm" })
 
-                                                    @Html.EditorFor(model => model.ImportePesos, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ImportePesos, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.ImportePesos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                                    @Html.ValidationMessageFor(model => model.ImportePesos, "", new { @class = "text-danger form-control-sm" })
 
                                                 </div>
 
@@ -197,10 +197,10 @@
 
                                             <div class="col-3">
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.ImporteDolar, htmlAttributes: new { @class = "control-label" })
+                                                    @Html.LabelFor(model => model.ImporteDolar, htmlAttributes: new { @class = "control-label form-control-sm" })
 
-                                                    @Html.EditorFor(model => model.ImporteDolar, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ImporteDolar, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.ImporteDolar, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                                    @Html.ValidationMessageFor(model => model.ImporteDolar, "", new { @class = "text-danger form-control-sm" })
 
                                                 </div>
 
@@ -209,10 +209,10 @@
                                             <div class="col-3">
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.ImporteDeposito, htmlAttributes: new { @class = "control-label" })
+                                                    @Html.LabelFor(model => model.ImporteDeposito, htmlAttributes: new { @class = "control-label form-control-sm" })
 
-                                                    @Html.EditorFor(model => model.ImporteDeposito, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ImporteDeposito, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.ImporteDeposito, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                                    @Html.ValidationMessageFor(model => model.ImporteDeposito, "", new { @class = "text-danger form-control-sm" })
 
                                                 </div>
 
@@ -224,8 +224,8 @@
                                                 <div class="form-group">
 
                                                     <label for="readonly5">Grupo Caja</label>
-                                                    @Html.DropDownList("IdGrupoCaja", ListaCodigoCaja, null, new { @class = "form-control" })
-                                                    @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger" })
+                                                    @Html.DropDownList("IdGrupoCaja", ListaCodigoCaja, null, new { @class = "form-control form-control-sm" })
+                                                    @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
 
                                                 </div>
                                             </div>
@@ -234,10 +234,10 @@
                                             <div class="col-3">
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.ImporteTarjeta, htmlAttributes: new { @class = "control-label" })
+                                                    @Html.LabelFor(model => model.ImporteTarjeta, htmlAttributes: new { @class = "control-label form-control-sm" })
 
-                                                    @Html.EditorFor(model => model.ImporteTarjeta, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.ImporteTarjeta, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                                    @Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger form-control-sm" })
 
                                                 </div>
                                             </div>
@@ -245,10 +245,10 @@
                                             <div class="col-3">
 
                                                 <div class="form-group">
-                                                    @Html.LabelFor(model => model.ImporteCheque, htmlAttributes: new { @class = "control-label" })
+                                                    @Html.LabelFor(model => model.ImporteCheque, htmlAttributes: new { @class = "control-label form-control-sm" })
 
-                                                    @Html.EditorFor(model => model.ImporteCheque, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ImporteCheque, "", new { @class = "text-danger" })
+                                                    @Html.EditorFor(model => model.ImporteCheque, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                                    @Html.ValidationMessageFor(model => model.ImporteCheque, "", new { @class = "text-danger form-control-sm" })
 
                                                 </div>
                                             </div>
