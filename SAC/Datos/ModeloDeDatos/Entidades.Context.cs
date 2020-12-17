@@ -56,7 +56,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Diario> Diario { get; set; }
         public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
-        public virtual DbSet<Caja> Caja { get; set; }
         public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
+        public virtual DbSet<Caja> Caja { get; set; }
     }
 }

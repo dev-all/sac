@@ -25,13 +25,55 @@ namespace SAC.Controllers
         }
 
 
-        // GET: Usuario
+        
+
+
+        //}
+
+
         public ActionResult Index()
         {
-            List<CajaModelView> cajaGrupoModelViews = new List<CajaModelView>();
-             cajaGrupoModelViews = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
-            return View(cajaGrupoModelViews);
 
+           
+            CajaModelView  model = new CajaModelView();
+            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
+                             
+
+            CargarCajaGrupo();
+            return View(model);
+
+
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(CajaModelView model)
+        {
+
+            {
+                try
+                {
+
+
+                    var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+                    model.IdUsuario = OUsuario.IdUsuario;
+                    model.IdTipoMovimiento = 2;
+                    model.IdCajaSaldo = 0;
+
+                    servicioCaja.GuardarCaja(Mapper.Map<CajaModelView, CajaModel>(model));
+
+                    return RedirectToAction(nameof(Index));
+
+
+                }
+                catch (Exception)
+                {
+                    return View(model);
+                }
+            }
 
 
         }
@@ -40,7 +82,6 @@ namespace SAC.Controllers
 
 
 
-     
         public ActionResult AddOrEdit(int id = 0)
         {
 
@@ -64,8 +105,7 @@ namespace SAC.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
-        
+        [ValidateAntiForgeryToken]         
         public ActionResult AddOrEdit(CajaModelView model)
         {
             try
@@ -95,8 +135,7 @@ namespace SAC.Controllers
             }
         }
 
-
-
+      
         [HttpPost]
         public ActionResult Eliminar(int id)
         {
@@ -113,48 +152,28 @@ namespace SAC.Controllers
             return RedirectToAction("Index");
         }
 
-
-      
-
+           
 
 
-        //combo pais
+
+        //combo cajagrupo
         public void CargarCajaGrupo()
-        {
-
-            ServicioCajaGrupo servicioCajaGrupo = new ServicioCajaGrupo();
-            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());
-            //ListaPais = ListaPais.OrderBy(p => p.Nombre).ToList();
-            //esto es para pasarlo a select list (drop down list)
+        {          
+            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());        
             List<SelectListItem> retornoListaCajaGrupo = null;
-            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x =>
-                                  new SelectListItem()
-                                  {
-                                      Value = x.Id.ToString(),
-                                      Text = x.Codigo
-                                  })).ToList();
+            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
+                                                                  {
+                                                                      Value = x.Id.ToString(),
+                                                                      Text = x.Codigo
+                                                                  })).ToList();
             retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "--Seleccione Codigo de Caja--", Value = "" });
-
-
             ViewBag.Listapagina = retornoListaCajaGrupo;
         }
 
 
 
 
-        //public ActionResult DateSales(string value)
-
-
-
-        //{
-        //    var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-        //    var view = db.SaleDetails.Include(s => s.Sale).Where(s => s.Sale.Warehouse.CompanyId == user.CompanyId && s.Sale.Date == DateTime.Today);
-        //    return View(view.ToList());
-
-        //    ViewBag.TotalPrice = view.Sum(m => m.Price);
-        //    ViewBag.TotalQuantity = view.Sum(m => m.Quantity);
-        //}
-
+       
 
     }
 

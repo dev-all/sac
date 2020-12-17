@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="57">
+      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="127">
         <EntityTypeShape EntityType="SAC_Model.AccionPorRol" Width="1.5" PointX="1.25" PointY="13.875" />
         <EntityTypeShape EntityType="SAC_Model.Contacto" Width="1.5" PointX="10.5" PointY="6" />
         <EntityTypeShape EntityType="SAC_Model.Evento" Width="1.5" PointX="8.875" PointY="9.375" />
@@ -69,10 +69,11 @@
         <EntityTypeShape EntityType="SAC_Model.GrupoCaja" Width="1.5" PointX="8.375" PointY="23" />
         <EntityTypeShape EntityType="SAC_Model.CompraFacturaPago" Width="1.5" PointX="26" PointY="17.25" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_CompraFactura" />
-        <EntityTypeShape EntityType="SAC_Model.Caja" Width="1.5" PointX="10.625" PointY="22.875" />
         <EntityTypeShape EntityType="SAC_Model.CajaTipoMovimiento" Width="1.5" PointX="8.375" PointY="29.5" />
+        <EntityTypeShape EntityType="SAC_Model.Caja" Width="1.5" PointX="10.625" PointY="24.75" />
         <AssociationConnector Association="SAC_Model.FK_Caja_CajaTipoMovimiento" />
         <AssociationConnector Association="SAC_Model.FK_Caja_GrupoCaja" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFactura_TipoMoneda" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

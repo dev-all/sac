@@ -41,6 +41,7 @@ namespace SAC.Models
         public virtual GrupoCaja GrupoCaja { get; set; }
 
 
+        public  List<CajaModelView> ListaCaja { get; set; }
 
         //public decimal TotalPesos { get; set; }
         //public decimal TotalDolar { get; set; }

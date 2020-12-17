@@ -118,9 +118,9 @@ namespace Negocio.Servicios
                 _mensaje("Se registro correctamente", "ok");
                 return Mapper.Map<Caja,CajaModel> (newModel);               
             }
-            catch (Exception )
+            catch (Exception  ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
                 throw new Exception();
 
             }

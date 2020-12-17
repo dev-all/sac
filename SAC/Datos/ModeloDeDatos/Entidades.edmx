@@ -97,7 +97,6 @@
           <Property Name="Recibo" Type="int" />
           <Property Name="NumeroPago" Type="nvarchar" MaxLength="50" />
           <Property Name="IdCompraFacturaAplica" Type="int" />
-          <Property Name="IdDiario" Type="int" />
           <Property Name="Auxiliar" Type="int" />
           <Property Name="AxiliarNumero" Type="nvarchar" MaxLength="50" />
           <Property Name="Activo" Type="bit" />
@@ -126,6 +125,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoDiario" Type="int" />
           <Property Name="NetoGravado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="NetoNoGravado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -149,7 +149,6 @@
           <Property Name="PercepcionImporteIB" Type="decimal" Precision="18" Scale="2" />
           <Property Name="PercepcionImporteProvincia" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OtrosImpuestos" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ISIB" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Activo" Type="bit" />
           <Property Name="Idusuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
@@ -178,9 +177,6 @@
           <Property Name="DescripcionMa" Type="nvarchar" MaxLength="100" />
           <Property Name="Moneda" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cotiza" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="IdArticulo" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="NumeroFactura" Type="bigint" />
-          <Property Name="IdTipoFactura" Type="nvarchar" MaxLength="1" />
           <Property Name="Balance" Type="int" />
           <Property Name="Asiento" Type="int" />
           <Property Name="Activo" Type="bit" />
@@ -603,6 +599,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CompraFactura_TipoMoneda">
+          <End Role="TipoMoneda" Type="Self.TipoMoneda" Multiplicity="0..1" />
+          <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMoneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraFactura">
+              <PropertyRef Name="IdMoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CompraFacturaPago_CompraFactura">
           <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="0..1" />
           <End Role="CompraFacturaPago" Type="Self.CompraFacturaPago" Multiplicity="*" />
@@ -953,6 +961,10 @@
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="CompraFactura" EntitySet="CompraFactura" />
           </AssociationSet>
+          <AssociationSet Name="FK_CompraFactura_TipoMoneda" Association="Self.FK_CompraFactura_TipoMoneda">
+            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+          </AssociationSet>
           <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="Self.FK_CompraFacturaPago_CompraFactura">
             <End Role="CompraFactura" EntitySet="CompraFactura" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
@@ -1210,8 +1222,8 @@
             <End Role="CompraFactura" EntitySet="CompraFactura" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
           </AssociationSet>
-          <EntitySet Name="Caja" EntityType="SAC_Model.Caja" />
           <EntitySet Name="CajaTipoMovimiento" EntityType="SAC_Model.CajaTipoMovimiento" />
+          <EntitySet Name="Caja" EntityType="SAC_Model.Caja" />
           <AssociationSet Name="FK_Caja_CajaTipoMovimiento" Association="SAC_Model.FK_Caja_CajaTipoMovimiento">
             <End Role="CajaTipoMovimiento" EntitySet="CajaTipoMovimiento" />
             <End Role="Caja" EntitySet="Caja" />
@@ -1219,6 +1231,10 @@
           <AssociationSet Name="FK_Caja_GrupoCaja" Association="SAC_Model.FK_Caja_GrupoCaja">
             <End Role="GrupoCaja" EntitySet="GrupoCaja" />
             <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraFactura_TipoMoneda" Association="SAC_Model.FK_CompraFactura_TipoMoneda">
+            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccionPorRol">
@@ -1538,6 +1554,7 @@
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="TipoMoneda" ToRole="Proveedor" />
+          <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="TipoMoneda" ToRole="CompraFactura" />
         </EntityType>
         <EntityType Name="TipoProveedor">
           <Key>
@@ -1989,6 +2006,7 @@
           <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
           <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
           <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
+          <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="CompraFactura" ToRole="TipoMoneda" />
         </EntityType>
         <EntityType Name="CompraIva">
           <Key>
@@ -2023,6 +2041,7 @@
           <Property Name="Idusuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_CompraIva" FromRole="CompraIva" ToRole="CompraFactura" />
+          <Property Name="CodigoDiario" Type="Int32" />
         </EntityType>
         <Association Name="FK_CompraFactura_CompraIva">
           <End Type="SAC_Model.CompraIva" Role="CompraIva" Multiplicity="0..1" />
@@ -2139,6 +2158,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CajaTipoMovimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_CajaTipoMovimiento" FromRole="CajaTipoMovimiento" ToRole="Caja" />
+        </EntityType>
         <EntityType Name="Caja">
           <Key>
             <PropertyRef Name="Id" />
@@ -2164,15 +2192,6 @@
           <NavigationProperty Name="CajaTipoMovimiento" Relationship="SAC_Model.FK_Caja_CajaTipoMovimiento" FromRole="Caja" ToRole="CajaTipoMovimiento" />
           <NavigationProperty Name="GrupoCaja" Relationship="SAC_Model.FK_Caja_GrupoCaja" FromRole="Caja" ToRole="GrupoCaja" />
         </EntityType>
-        <EntityType Name="CajaTipoMovimiento">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Activo" Type="Boolean" />
-          <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_CajaTipoMovimiento" FromRole="CajaTipoMovimiento" ToRole="Caja" />
-        </EntityType>
         <Association Name="FK_Caja_CajaTipoMovimiento">
           <End Type="SAC_Model.CajaTipoMovimiento" Role="CajaTipoMovimiento" Multiplicity="0..1" />
           <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
@@ -2194,6 +2213,18 @@
             </Principal>
             <Dependent Role="Caja">
               <PropertyRef Name="IdGrupoCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraFactura_TipoMoneda">
+          <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+          <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMoneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraFactura">
+              <PropertyRef Name="IdMoneda" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2584,7 +2615,6 @@
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="AxiliarNumero" ColumnName="AxiliarNumero" />
                 <ScalarProperty Name="Auxiliar" ColumnName="Auxiliar" />
-                <ScalarProperty Name="IdDiario" ColumnName="IdDiario" />
                 <ScalarProperty Name="IdCompraFacturaAplica" ColumnName="IdCompraFacturaAplica" />
                 <ScalarProperty Name="NumeroPago" ColumnName="NumeroPago" />
                 <ScalarProperty Name="Recibo" ColumnName="Recibo" />
@@ -2618,10 +2648,10 @@
           <EntitySetMapping Name="CompraIva">
             <EntityTypeMapping TypeName="SAC_Model.CompraIva">
               <MappingFragment StoreEntitySet="CompraIva">
+                <ScalarProperty Name="CodigoDiario" ColumnName="CodigoDiario" />
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="ISIB" ColumnName="ISIB" />
                 <ScalarProperty Name="OtrosImpuestos" ColumnName="OtrosImpuestos" />
                 <ScalarProperty Name="PercepcionImporteProvincia" ColumnName="PercepcionImporteProvincia" />
                 <ScalarProperty Name="PercepcionImporteIB" ColumnName="PercepcionImporteIB" />
@@ -2657,9 +2687,6 @@
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="Asiento" ColumnName="Asiento" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
-                <ScalarProperty Name="IdTipoFactura" ColumnName="IdTipoFactura" />
-                <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
-                <ScalarProperty Name="IdArticulo" ColumnName="IdArticulo" />
                 <ScalarProperty Name="Cotiza" ColumnName="Cotiza" />
                 <ScalarProperty Name="Moneda" ColumnName="Moneda" />
                 <ScalarProperty Name="DescripcionMa" ColumnName="DescripcionMa" />
@@ -2717,6 +2744,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CajaTipoMovimiento">
+            <EntityTypeMapping TypeName="SAC_Model.CajaTipoMovimiento">
+              <MappingFragment StoreEntitySet="CajaTipoMovimiento">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Caja">
             <EntityTypeMapping TypeName="SAC_Model.Caja">
               <MappingFragment StoreEntitySet="Caja">
@@ -2737,15 +2773,6 @@
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Concepto" ColumnName="Concepto" />
                 <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CajaTipoMovimiento">
-            <EntityTypeMapping TypeName="SAC_Model.CajaTipoMovimiento">
-              <MappingFragment StoreEntitySet="CajaTipoMovimiento">
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

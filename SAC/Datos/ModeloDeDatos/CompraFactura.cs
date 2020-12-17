@@ -59,5 +59,6 @@ namespace Datos.ModeloDeDatos
         public virtual Proveedor Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
     }
 }
