@@ -139,6 +139,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="Controllers\CajaControllers.cs" />
+    <Compile Include="Controllers\CajaGrupoController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -163,6 +165,8 @@
     <Compile Include="Models\AutoCompletarViewModel.cs" />
     <Compile Include="Models\BancoCuentaBancariaModelView.cs" />
     <Compile Include="Models\BancoCuentaModelView.cs" />
+    <Compile Include="Models\CajaGrupoModelView.cs" />
+    <Compile Include="Models\CajaModelView.cs" />
     <Compile Include="Models\ChequeModelView.cs" />
     <Compile Include="Models\ChequeraModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
@@ -2836,6 +2840,10 @@
     <Content Include="Views\CuentaCteProveedor\_tablaCheques.cshtml" />
     <Content Include="Views\CuentaCteProveedor\_TablaCuentasBancaria.cshtml" />
     <Content Include="Views\CuentaCteProveedor\_TablaTarjetas.cshtml" />
+    <Content Include="Views\Caja\AddOrEdit.cshtml" />
+    <Content Include="Views\Caja\Index.cshtml" />
+    <Content Include="Views\CajaGrupo\AddOrEdit.cshtml" />
+    <Content Include="Views\CajaGrupo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

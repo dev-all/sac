@@ -209,6 +209,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\BancoCuentaBancariaRepositorio.cs" />
     <Compile Include="Repositorios\BancoCuentaRepositorio.cs" />
+    <Compile Include="Repositorios\CajaGrupoRepositorio.cs" />
+    <Compile Include="Repositorios\CajaRepositorio.cs" />
     <Compile Include="Repositorios\ChequeraRepositorio.cs" />
     <Compile Include="Repositorios\ChequeRepositorio.cs" />
     <Compile Include="Repositorios\CompraFacturaPagoRepositorio.cs" />

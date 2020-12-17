@@ -60,6 +60,8 @@
     <Compile Include="Interfaces\IServicioUsuario.cs" />
     <Compile Include="Modelos\BancoCuentaBancariaModel.cs" />
     <Compile Include="Modelos\BancoCuentaModel.cs" />
+    <Compile Include="Modelos\CajaGrupoModel.cs" />
+    <Compile Include="Modelos\CajaModel.cs" />
     <Compile Include="Modelos\ChequeModel.cs" />
     <Compile Include="Modelos\ChequeraModel.cs" />
     <Compile Include="Modelos\CompraFacturaPagoModel.cs" />
@@ -105,6 +107,8 @@
     </Compile>
     <Compile Include="Servicios\ServicioBancoCuenta.cs" />
     <Compile Include="Servicios\ServicioBancoCuentaBancaria.cs" />
+    <Compile Include="Servicios\ServicioCaja.cs" />
+    <Compile Include="Servicios\ServicioCajaGrupo.cs" />
     <Compile Include="Servicios\ServicioCheque.cs" />
     <Compile Include="Servicios\ServicioChequera.cs" />
     <Compile Include="Servicios\ServicioCompraFacturaPago.cs" />
