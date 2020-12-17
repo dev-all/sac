@@ -2,37 +2,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using AutoMapper;
-using SAC.Models.Request;
 using Negocio.Servicios;
 using Negocio.Modelos;
-
+using AutoMapper;
+using Newtonsoft.Json;
+using SAC.Models.Request;
 
 namespace SAC.Controllers
 {
     public class ComprasController : BaseController
     {
-        private ServicioImputacion servicioImputacion = new ServicioImputacion();
         private ServicioContable servicioContable = new ServicioContable();
         private ServicioCompra servicioCompra = new ServicioCompra();
         private ServicioTipoComprobante servicioTipoComprobante = new ServicioTipoComprobante();
         private ServicioTipoMoneda servicioTipoMoneda = new ServicioTipoMoneda();
         private ServicioProveedor servicioProveedor = new ServicioProveedor();
 
-        //si factura es C o B el unico importe que se registra es noto no gravado
-
-        //CompraIva REgistra valores en pesos Cuando la factura es en dolares se realiza la conversion
-        //y los valores en dolares se registran en la tabla CompraFactura
-
-
-
         public ComprasController()
         {
-            servicioCompra._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);
-            servicioProveedor._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);
-            servicioImputacion._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);
-            servicioContable._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);
+            servicioCompra._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
 
         // GET: Compras
@@ -40,7 +30,6 @@ namespace SAC.Controllers
         {
             CompraFacturaViewModel model = new CompraFacturaViewModel();
             getTipo(model);
-
             return View(model);
         }
 
@@ -48,108 +37,55 @@ namespace SAC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FacturaCompras(CompraFacturaViewModel model)
         {
-
-            try
-            {
-                // validar numero de cactura para el proveedor no debe existir            
-                if (servicioCompra.ValidarFacturaPorNroFacturaIdProveedor(model.NumeroFactura, model.IdProveedor))
-                {
-                    throw new Exception();
-                }
-                //deveria ser unico en la db
-                model.CompraIva.CodigoDiario = servicioContable.GetNuevoCodigoAsiento() + 1;
-
-                CompraFacturaModel facturaRegistrada = servicioCompra.CreateFactura(Mapper.Map<CompraFacturaViewModel, CompraFacturaModel>(model));
-                // update proveedor
-                ProveedorModel proveedor = servicioProveedor.GetProveedor(facturaRegistrada.IdProveedor);
-                if (proveedor.UltimoPuntoVenta != facturaRegistrada.PuntoVenta)
-                {
-                    proveedor.UltimoPuntoVenta = facturaRegistrada.PuntoVenta;
-                    proveedor.UltimaModificacion = DateTime.Now;
-                    servicioProveedor.ActualizarProveedor(proveedor);
-                }
+            //bool hasErrors = ViewData.ModelState.Values.Any(x => x.Errors.Count > 1);
+            //foreach (ModelState state in ViewData.ModelState.Values.Where(x => x.Errors.Count > 0))
+            //{
+            //   servicioCompra._mensaje("noValido", "ok");
+            //}
 
 
-                // inicio registro de asientos
-                DiarioModel asiento = new DiarioModel();
-                asiento.Codigo = facturaRegistrada.CompraIva.CodigoDiario;
-                asiento.Fecha = facturaRegistrada.Fecha;
-                asiento.Periodo = DateTime.Now.ToString("yyMM");
-                asiento.Tipo = "CF"; //Compras Facturas
-                asiento.Cotiza = facturaRegistrada.Cotizacion;
-                asiento.Asiento = facturaRegistrada.CompraIva.CodigoDiario;
-                asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
-                asiento.Moneda = servicioTipoMoneda.GetTipoMoneda(facturaRegistrada.IdMoneda).Descripcion;
-                asiento.DescripcionMa = "Ingreso Factura Proveedor";
-
-                /// asiento Inputacion Proveedor en valor - negativo
-                var asientoDiario = servicioContable.InsertAsientoContable(null
-                                                          , (facturaRegistrada.CompraIva.Total) * (-1)
-                                                          , asiento
-                                                          , facturaRegistrada
-                                                          , proveedor.IdImputacionProveedor ?? -1);
-                /// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
-                servicioImputacion.AsintoContableGeneral(asientoDiario);
-                
-
-                decimal ImporteImputacionFactura = (facturaRegistrada.CompraIva.Total);
-                /// asiento Inputacion Total IVA               
-                if (facturaRegistrada.CompraIva.TotalIva > 0)
-                {                    
-                    ImporteImputacionFactura -= facturaRegistrada.CompraIva.TotalIva;
-                    servicioImputacion.AsintoContableGeneral(servicioContable.InsertAsientoContable("IVA", facturaRegistrada.CompraIva.TotalIva, asiento, facturaRegistrada, 0));                   
-                }
-
-                /// asiento Inputacion IVA provincia Factura Proveedor
-                if (facturaRegistrada.CompraIva.PercepcionImporteIva > 0)
-                {                   
-                   ImporteImputacionFactura -= facturaRegistrada.CompraIva.PercepcionImporteIva;
-                   servicioImputacion.AsintoContableGeneral( servicioContable.InsertAsientoContable("IVA", facturaRegistrada.CompraIva.PercepcionImporteIva, asiento, facturaRegistrada, 0));
-                }
-
-                /// asiento Inputacion IB capital Factura Proveedor         
-                if (facturaRegistrada.CompraIva.PercepcionImporteIB > 0)
-                {
-                    ImporteImputacionFactura -= facturaRegistrada.CompraIva.PercepcionImporteIB;
-                     servicioImputacion.AsintoContableGeneral(servicioContable.InsertAsientoContable("ISIBC", facturaRegistrada.CompraIva.PercepcionImporteIB, asiento, facturaRegistrada, 0));                   
-                }
-
-                /// asiento Inputacion ganancias capital Factura Proveedor
-                if (facturaRegistrada.CompraIva.OtrosImpuestos > 0)
-                {
-                    ImporteImputacionFactura -= facturaRegistrada.CompraIva.OtrosImpuestos;
-                    servicioImputacion.AsintoContableGeneral(servicioContable.InsertAsientoContable("GANAN", facturaRegistrada.CompraIva.OtrosImpuestos, asiento, facturaRegistrada, 0));
-                }
-
-                /// asiento Inputacion Factura Proveedor
-                servicioImputacion.AsintoContableGeneral(servicioContable.InsertAsientoContable(null
-                                                                                                  , ImporteImputacionFactura
-                                                                                                  , asiento
-                                                                                                  , facturaRegistrada
-                                                                                                  , facturaRegistrada.IdImputacion));
-
-                return RedirectToAction("FacturaCompras");
-
-            }
-            catch (Exception ex)
-            {
+            // validar numero de cactura para el proveedor no debe existir            
+            if (servicioCompra.ValidarFacturaPorNroFacturaIdProveedor(model.NumeroFactura, model.IdProveedor))
+            {               
                 getTipo(model);
                 return View("FacturaCompras", model);
             }
+
+
+            CompraFacturaModel facturaRegistrada = servicioCompra.CreateFactura(Mapper.Map<CompraFacturaViewModel, CompraFacturaModel>(model));
+           
+           
+            //DiarioModel asiento = new DiarioModel();
+            //var codigo =servicioContable.GetNuevoCodigoAsiento();
+            //asiento.Codigo = codigo;
+            //asiento.Fecha = facturaRegistrada.Fecha;
+            //asiento.Periodo = DateTime.Now.ToString("yyMM");
+            //asiento.Tipo = "CF"; //Compras Facturas
+            //asiento.Cotiza = facturaRegistrada.Cotizacion;
+            //asiento.Asiento = codigo;
+            //asiento.Balance =int.Parse(DateTime.Now.ToString("yyyy"));
+            //asiento.Moneda = servicioTipoMoneda.GetTipoMoneda(facturaRegistrada.IdMoneda).Descripcion;
+            //asiento.DescripcionMa = "Asiento Ingreso Factura Proveedor";
+
+            //ImputacionModel imputacion = servicioContable.GetImputacionPorAlias("xxx");
+            //asiento.IdImputacion = imputacion.Id;           
+            //asiento.Importe = (facturaRegistrada.IdMoneda == 1) ? (asiento.Importe = facturaRegistrada.Total ?? 0) :(facturaRegistrada.Total ?? 0 * facturaRegistrada.Cotizacion); 
+            //asiento.Descripcion = imputacion.Descripcion;
+
+
+            //servicioContable.InsertAsientoContable(asiento);
+
+
+            return RedirectToAction("FacturaCompras");
+
+
         }
 
 
         private void getTipo(CompraFacturaViewModel model)
         {
-            try
-            {
-                model.TipoMonedas = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(servicioTipoMoneda.GetAllTipoMonedas());
-                model.TipoComprobante = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetAllTipoComprobante());
-            }
-            catch (Exception)
-            {
-
-            }
+            model.TipoMonedas = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(servicioTipoMoneda.GetAllTipoMonedas());
+            model.TipoComprobante = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetAllTipoComprobante());        
         }
 
         [HttpGet()]
@@ -180,10 +116,8 @@ namespace SAC.Controllers
             string strJson;
             try
             {
-
-                ProveedorModelView proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedorCompleto(idProveedor));
+                ProveedorModelView proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedor(idProveedor));
                 proveedor.ListTipoComprobante = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetTipoComprobantePorTipoIvaProveedor(proveedor.IdTipoIva));
-               
                 strJson = Newtonsoft.Json.JsonConvert.SerializeObject(proveedor);
                 if ((strJson != null))
                 {

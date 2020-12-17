@@ -47,6 +47,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> Recibo { get; set; }
         public string NumeroPago { get; set; }
         public Nullable<int> IdCompraFacturaAplica { get; set; }
+        public Nullable<int> IdDiario { get; set; }
         public Nullable<int> Auxiliar { get; set; }
         public string AxiliarNumero { get; set; }
         public Nullable<bool> Activo { get; set; }
@@ -54,10 +55,9 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual CompraIva CompraIva { get; set; }
+        public virtual Imputacion Imputacion { get; set; }
         public virtual Proveedor Proveedor { get; set; }
-        public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
-        public virtual Imputacion Imputacion { get; set; }
     }
 }

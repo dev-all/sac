@@ -1,20 +1,40 @@
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Datos.dll.config
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Datos.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Datos.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Entidad.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\EntityFramework.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\EntityFramework.SqlServer.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Z.EntityFramework.Extensions.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Z.EntityFramework.Plus.EF6.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Z.Expressions.Eval.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Entidad.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\EntityFramework.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\EntityFramework.SqlServer.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Z.EntityFramework.Extensions.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Z.EntityFramework.Plus.EF6.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\bin\Debug\Z.Expressions.Eval.xml
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\obj\Debug\Datos.csprojAssemblyReference.cache
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\obj\Debug\Datos.csproj.CoreCompileInputs.cache
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\obj\Debug\Datos.csproj.CopyComplete
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\obj\Debug\Datos.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Datos\obj\Debug\Datos.pdb
+D:\SAC\SAC\Datos\bin\Debug\Datos.dll.config
+D:\SAC\SAC\Datos\bin\Debug\Datos.dll
+D:\SAC\SAC\Datos\bin\Debug\Datos.pdb
+D:\SAC\SAC\Datos\bin\Debug\Entidad.dll
+D:\SAC\SAC\Datos\bin\Debug\EntityFramework.dll
+D:\SAC\SAC\Datos\bin\Debug\EntityFramework.SqlServer.dll
+D:\SAC\SAC\Datos\bin\Debug\Z.EntityFramework.Extensions.dll
+D:\SAC\SAC\Datos\bin\Debug\Z.EntityFramework.Plus.EF6.dll
+D:\SAC\SAC\Datos\bin\Debug\Z.Expressions.Eval.dll
+D:\SAC\SAC\Datos\bin\Debug\Entidad.pdb
+D:\SAC\SAC\Datos\bin\Debug\EntityFramework.xml
+D:\SAC\SAC\Datos\bin\Debug\EntityFramework.SqlServer.xml
+D:\SAC\SAC\Datos\bin\Debug\Z.EntityFramework.Extensions.xml
+D:\SAC\SAC\Datos\bin\Debug\Z.EntityFramework.Plus.EF6.xml
+D:\SAC\SAC\Datos\bin\Debug\Z.Expressions.Eval.xml
+D:\SAC\SAC\Datos\obj\Debug\Datos.csprojAssemblyReference.cache
+D:\SAC\SAC\Datos\obj\Debug\Datos.csproj.CoreCompileInputs.cache
+D:\SAC\SAC\Datos\obj\Debug\Datos.csproj.CopyComplete
+D:\SAC\SAC\Datos\obj\Debug\Datos.dll
+D:\SAC\SAC\Datos\obj\Debug\Datos.pdb
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Datos.dll.config
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Datos.dll
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Datos.pdb
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Entidad.dll
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\EntityFramework.dll
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\EntityFramework.SqlServer.dll
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Z.EntityFramework.Extensions.dll
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Z.EntityFramework.Plus.EF6.dll
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Z.Expressions.Eval.dll
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Entidad.pdb
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\EntityFramework.xml
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\EntityFramework.SqlServer.xml
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Z.EntityFramework.Extensions.xml
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Z.EntityFramework.Plus.EF6.xml
+D:\DESARROLLO_WEB\SAC\Datos\bin\Debug\Z.Expressions.Eval.xml
+D:\DESARROLLO_WEB\SAC\Datos\obj\Debug\Datos.csprojAssemblyReference.cache
+D:\DESARROLLO_WEB\SAC\Datos\obj\Debug\Datos.csproj.CoreCompileInputs.cache
+D:\DESARROLLO_WEB\SAC\Datos\obj\Debug\Datos.csproj.CopyComplete
+D:\DESARROLLO_WEB\SAC\Datos\obj\Debug\Datos.dll
+D:\DESARROLLO_WEB\SAC\Datos\obj\Debug\Datos.pdb

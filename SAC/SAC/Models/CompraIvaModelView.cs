@@ -8,10 +8,8 @@ namespace SAC.Models
 {
     public class CompraIvaModelView
     {
-        public int Id { get; set; }
-
-        public int CodigoDiario { get; set; }
-
+        public int Id { get; set; }  
+       
         public decimal NetoGravado { get; set; }
 
         [Display(Name = "Neto No Gravado")]
@@ -103,7 +101,9 @@ namespace SAC.Models
         public decimal? OtrosImpuestos { get; set; }
         
         [Display(Name = " Percepcion ISIB")]
-              
+       
+        public decimal? ISIB { get; set; }
+
         public bool Activo { get; set; }
         public int Idusuario { get; set; }
         public DateTime UltimaModificacion { get; set; }

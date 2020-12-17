@@ -32,7 +32,6 @@ namespace Negocio.Servicios
                 model.FechaPago = DateTime.Now;
                 model.UltimaModificacion = DateTime.Now;
                 model.CompraIva.UltimaModificacion = DateTime.Now;
-                model.Activo = true;
                 CompraFactura compraFactura = Mapper.Map<CompraFacturaModel, CompraFactura>(model);
                 compraFactura = repositorio.Insertar(compraFactura);                        
                 _mensaje("Se guardo la factura Correctamente", "ok");
@@ -41,7 +40,7 @@ namespace Negocio.Servicios
             catch (Exception ex)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
+                return null;
             }
            
         }
@@ -49,12 +48,14 @@ namespace Negocio.Servicios
         {
             try
             {
-               return  Mapper.Map <List<CompraFactura>, List<CompraFacturaModel> > (repositorio.GetAllCompraFactura());             
+
+               return  Mapper.Map <List<CompraFactura>, List<CompraFacturaModel> > (repositorio.GetAllCompraFactura());
+             
             }
             catch (Exception)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
+                return null;
             }
          
         }
@@ -73,8 +74,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");                
             }
             return false;
         }
@@ -88,7 +88,7 @@ namespace Negocio.Servicios
             catch (Exception ex)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
+                return null;
             }
         }
 
@@ -101,7 +101,7 @@ namespace Negocio.Servicios
             catch (Exception)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
+                return null;
             }
             
         }
@@ -115,7 +115,7 @@ namespace Negocio.Servicios
             catch (Exception ex)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
+                return null;
             }
         }
 
@@ -128,10 +128,11 @@ namespace Negocio.Servicios
             catch (Exception ex)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
+                return null;
             }
         }
-      
+
+
     }
 
 }

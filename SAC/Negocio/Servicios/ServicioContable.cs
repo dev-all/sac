@@ -16,8 +16,8 @@ namespace Negocio.Servicios
 {
    public class ServicioContable : ServicioBase
     {
-        private DiarioRepositorio diarioRepositorio;      
-        private ServicioImputacion servicioImputacion = new ServicioImputacion();
+        private DiarioRepositorio diarioRepositorio;
+
         public ServicioContable()
         {
             diarioRepositorio = kernel.Get<DiarioRepositorio>();
@@ -32,58 +32,20 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
-            }
-        }
-      
-        public Diario InsertAsientoContable(string alias, decimal total, DiarioModel asiento, CompraFacturaModel facturaRegistrada, int idImputacion = 0)
-        {
-            try
-            {
-                ImputacionModel imputacionModel;
-                if (idImputacion > 0)
-                {
-                    imputacionModel = servicioImputacion.GetImputacion(idImputacion);
-                }
-                else
-                {
-                    imputacionModel = servicioImputacion.GetImputacionPorAlias(alias);
-                }
-                if (imputacionModel !=null) { 
-                asiento.IdImputacion = imputacionModel.Id;
-                asiento.Importe = (facturaRegistrada.IdMoneda == 1) ? ( total) : (total * facturaRegistrada.Cotizacion);
-                asiento.Descripcion = imputacionModel.Descripcion;
-                asiento.Titulo = imputacionModel.Descripcion;
-                Diario asientoContable = diarioRepositorio.InsertarDiario(Mapper.Map<DiarioModel, Diario>(asiento));
-
-                return asientoContable;
-                }
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
                 return null;
             }
-            catch (Exception ex)
-            {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
-            }
         }
-
-      
-
-
-        public int GetNuevoCodigoAsiento()
+        
+        public void InsertAsientoContable(DiarioModel model)
         {
-            try
-            {
-                return diarioRepositorio.GetNuevoCodigoAsiento();
+           // insert en diario
 
-            }
-            catch (Exception ex)
-            {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                throw new Exception();
-            }
         }
-       
+
+        public object GetNuevoCodigoAsiento()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

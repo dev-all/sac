@@ -8,8 +8,8 @@ namespace Negocio.Modelos
 {
    public class CompraIvaModel
     {
-        public int Id { get; set; }        
-        public int CodigoDiario { get; set; }
+        public int Id { get; set; }
+        public int IdFacturaCompra { get; set; }
         public decimal NetoGravado { get; set; }
         public decimal NetoNoGravado { get; set; }
         public decimal SubTotal { get; set; }
@@ -32,7 +32,8 @@ namespace Negocio.Modelos
         public decimal PercepcionImporteIva { get; set; }
         public decimal PercepcionImporteIB { get; set; }
         public decimal PercepcionImporteProvincia { get; set; }
-        public decimal OtrosImpuestos { get; set; }       
+        public decimal OtrosImpuestos { get; set; }
+        public decimal ISIB { get; set; }
         public bool Activo { get; set; }
         public int Idusuario { get; set; }
         public System.DateTime UltimaModificacion { get; set; }

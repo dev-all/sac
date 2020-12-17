@@ -8,10 +8,6 @@ namespace SAC.Models
 {
     public class CompraFacturaViewModel
     {
-        public CompraFacturaViewModel()
-        {
-            Cotizacion = 1;
-        }
 
         public int Id { get; set; }
         [Display(Name = "Tipo Comprobante")]
@@ -39,7 +35,7 @@ namespace SAC.Models
         public string Concepto { get; set; }
         public int IdImputacion { get; set; }
         public int IdMoneda { get; set; }
-        public int IdCompraIva { get; set; }
+        public decimal IdCompraIva { get; set; }
         public decimal Parcial { get; set; }
         public int Recibo { get; set; }
         public string NumeroPago { get; set; }

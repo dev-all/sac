@@ -1,6 +1,12 @@
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\bin\Debug\Entidad.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\bin\Debug\Entidad.pdb
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\obj\Debug\Entidad.dll
-E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\obj\Debug\Entidad.pdb
+D:\SAC\SAC\Entidad\bin\Debug\Entidad.dll
+D:\SAC\SAC\Entidad\bin\Debug\Entidad.pdb
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.dll
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.pdb
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+D:\DESARROLLO_WEB\SAC\Entidad\bin\Debug\Entidad.dll
+D:\DESARROLLO_WEB\SAC\Entidad\bin\Debug\Entidad.pdb
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.dll
+D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.pdb

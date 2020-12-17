@@ -18,7 +18,6 @@ namespace Datos.Repositorios
 
         public Imputacion InsertarImputacion(Imputacion Imputacion)
         {
-            Imputacion.Activo = true;
             return Insertar(Imputacion);
         }
 
@@ -108,33 +107,7 @@ namespace Datos.Repositorios
 
         }
 
-        public Imputacion GetImputacionPorAlias(string alias)
-        {
-        return context.Imputacion.Where(p => p.Alias == alias).FirstOrDefault();
-             
-        }
 
-        public void ActualizarAsientoImputacion(Imputacion model)
-        {
-            Imputacion imputacion = ObtenerImputacionPorId(model.Id);           
-            imputacion.SaldoInicial = model.SaldoInicial;
-            imputacion.SaldoFin = model.SaldoFin;
-            imputacion.Enero = model.Enero;
-            imputacion.Febrero = model.Febrero;
-            imputacion.Marzo = model.Marzo;
-            imputacion.Abril = model.Abril;
-            imputacion.Mayo = model.Mayo;
-            imputacion.Junio = model.Junio;
-            imputacion.Julio = model.Julio;
-            imputacion.Agosto = model.Agosto;
-            imputacion.Septiembre = model.Septiembre;
-            imputacion.Octubre = model.Octubre;
-            imputacion.Noviembre = model.Noviembre;
-            imputacion.Diciembre = model.Diciembre;
-            imputacion.Activo = model.Activo;
-            imputacion.UltimaModificacion = model.UltimaModificacion;
-            context.SaveChanges();
 
-        }
     }
 }

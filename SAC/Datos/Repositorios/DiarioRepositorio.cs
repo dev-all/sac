@@ -16,8 +16,6 @@ namespace Datos.Repositorios
 
         public Diario InsertarDiario(Diario Diario)
         {
-            Diario.Activo = true;
-            Diario.UltimaModificacion = DateTime.Now;
             return Insertar(Diario);
         }
 
@@ -51,12 +49,6 @@ namespace Datos.Repositorios
             context.SaveChanges();            
         }
 
-        public int GetNuevoCodigoAsiento()
-        {
-             var nro = context.Diario.Where(o => o.Activo == true).Max(x => (int?)x.Codigo) ?? 0;
-            return nro;
-        }
 
-       
     }
 }

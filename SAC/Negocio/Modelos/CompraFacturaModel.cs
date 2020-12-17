@@ -16,7 +16,7 @@ namespace Negocio.Modelos
         public int IdProveedor { get; set; }
         public string IdTipoIva { get; set; }
         public string CAE { get; set; }
-        public decimal Total { get; set; }
+        public Nullable<decimal> Total { get; set; }
         public decimal Saldo { get; set; }
         public System.DateTime Fecha { get; set; }
         public System.DateTime Vencimiento { get; set; }
@@ -31,7 +31,7 @@ namespace Negocio.Modelos
         public string Concepto { get; set; }
         public int IdImputacion { get; set; }
         public int IdMoneda { get; set; }
-        public int IdCompraIva { get; set; }
+        public decimal IdCompraIva { get; set; }
         public decimal Parcial { get; set; }
         public int Recibo { get; set; }
         public string NumeroPago { get; set; }
