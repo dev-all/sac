@@ -51,12 +51,13 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<ValorCotizacion> ValorCotizacion { get; set; }
         public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
         public virtual DbSet<Rubro> Rubro { get; set; }
-        public virtual DbSet<CompraFactura> CompraFactura { get; set; }
-        public virtual DbSet<CompraIva> CompraIva { get; set; }
-        public virtual DbSet<Diario> Diario { get; set; }
         public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
         public virtual DbSet<Caja> Caja { get; set; }
+        public virtual DbSet<Tarjetas> Tarjetas { get; set; }
+        public virtual DbSet<CompraFactura> CompraFactura { get; set; }
+        public virtual DbSet<CompraIva> CompraIva { get; set; }
+        public virtual DbSet<Diario> Diario { get; set; }
     }
 }

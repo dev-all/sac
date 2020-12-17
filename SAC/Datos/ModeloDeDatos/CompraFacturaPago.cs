@@ -27,6 +27,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual Tarjetas Tarjetas { get; set; }
         public virtual CompraFactura CompraFactura { get; set; }
     }
 }

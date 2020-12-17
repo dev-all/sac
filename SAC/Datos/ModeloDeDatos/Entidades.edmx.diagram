@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="127">
+      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="SAC_Model.AccionPorRol" Width="1.5" PointX="1.25" PointY="13.875" />
         <EntityTypeShape EntityType="SAC_Model.Contacto" Width="1.5" PointX="10.5" PointY="6" />
         <EntityTypeShape EntityType="SAC_Model.Evento" Width="1.5" PointX="8.875" PointY="9.375" />
@@ -59,21 +59,22 @@
         <AssociationConnector Association="SAC_Model.FK_Rubros_GrupoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_SubRubro_Rubros_1" ManuallyRouted="false" >
         </AssociationConnector>
-        <EntityTypeShape EntityType="SAC_Model.CompraFactura" Width="1.5" PointX="23.75" PointY="15" />
-        <EntityTypeShape EntityType="SAC_Model.CompraIva" Width="1.5" PointX="23.125" PointY="6.75" />
-        <AssociationConnector Association="SAC_Model.FK_CompraFactura_CompraIva" ManuallyRouted="false" >
-        </AssociationConnector>
-        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Imputacion" />
-        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Proveedor" />
-        <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="20.375" PointY="0.75" />
         <EntityTypeShape EntityType="SAC_Model.GrupoCaja" Width="1.5" PointX="8.375" PointY="23" />
         <EntityTypeShape EntityType="SAC_Model.CompraFacturaPago" Width="1.5" PointX="26" PointY="17.25" />
-        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_CompraFactura" />
         <EntityTypeShape EntityType="SAC_Model.CajaTipoMovimiento" Width="1.5" PointX="8.375" PointY="29.5" />
         <EntityTypeShape EntityType="SAC_Model.Caja" Width="1.5" PointX="10.625" PointY="24.75" />
         <AssociationConnector Association="SAC_Model.FK_Caja_CajaTipoMovimiento" />
         <AssociationConnector Association="SAC_Model.FK_Caja_GrupoCaja" />
+        <EntityTypeShape EntityType="SAC_Model.Tarjetas" Width="1.5" PointX="7.375" PointY="1" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Tarjetas" />
+        <EntityTypeShape EntityType="SAC_Model.CompraFactura" Width="1.5" PointX="25.375" PointY="8.125" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Imputacion" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Proveedor" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_TipoMoneda" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_CompraFactura" />
+        <EntityTypeShape EntityType="SAC_Model.CompraIva" Width="1.5" PointX="20.375" PointY="20.125" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFactura_CompraIva" />
+        <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="10.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
