@@ -40,96 +40,203 @@
 
                                 <div class="table-responsive">
 
-                                    <table id="example23" class="table stylish-table" borde="2">
+                                    <div class="row">
+
+                                        <div class="col-4">
+
+                                            <div class="form-group">
+
+                                                Saldo Inicial
+                                            </div>
 
 
-                                        <thead>
+                                        </div>
+
+
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImportePesos, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImporteDolar, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImporteDeposito, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImporteTarjeta, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <hr />
+
+                                    <div class="row">
+
+                                        <table id="example23" class="table stylish-table" borde="2">
+
+
+                                            <thead>
 
 
 
 
-                                            <tr>
-
-
-                                                <th class="sort-alpha">Concepto</th>
-                                                <th class="sort-numeric">Pesos</th>
-                                                <th>Dolares</th>
-                                                <th>Cheques</th>
-                                                <th>Tarjeta</th>
-                                                <th>Fecha</th>
-                                                <th>Grupo Caja</th>
-
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @foreach (var item in Model.ListaCaja)
-                                            {
                                                 <tr>
 
 
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Concepto)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.ImportePesos)
-                                                    </td>
-
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.ImporteDolar)
-
-
-
-
-                                                    </td>
-
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.ImporteCheque)
-                                                    </td>
-
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.ImporteTarjeta)
-                                                    </td>
-
-                                                    <td>
-
-
-                                                        @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
-
-
-
-
-                                                    </td>
-
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
-                                                    </td>
-
-
-
-
-
+                                                    <th class="sort-alpha">Concepto</th>
+                                                    <th class="sort-numeric">Pesos</th>
+                                                    <th>Dolares</th>
+                                                    <th>Cheques</th>
+                                                    <th>Tarjeta</th>
+                                                    <th>Fecha</th>
+                                                    <th>Grupo Caja</th>
 
 
 
                                                 </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model.ListaCaja)
+                                                {
+                                                    <tr>
+
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Concepto)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ImportePesos)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ImporteDolar)
+
+
+
+
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ImporteCheque)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ImporteTarjeta)
+                                                        </td>
+
+                                                        <td>
+
+
+                                                            @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
+
+
+
+
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
+                                                        </td>
 
 
 
 
 
-                                            }
 
 
 
-                                        </tbody>
+                                                    </tr>
 
 
 
-                                    </table>
 
+
+                                                }
+
+
+
+                                            </tbody>
+
+
+
+                                        </table>
+
+                                    </div>
+
+                                 <hr />
+                                    <div class="row">
+
+                                        <div class="col-4">
+
+                                            <div class="form-group">
+
+                                                Saldo Procesado
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImportePesos, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImporteDolar, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImporteDeposito, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-2">
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ImporteTarjeta, htmlAttributes: new { @class = "control-label form-control-sm" })
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
 
                             </div>
