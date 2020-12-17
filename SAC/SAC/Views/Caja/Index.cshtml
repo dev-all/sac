@@ -1,9 +1,20 @@
 ﻿@model SAC.Models.CajaModelView
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Consulta e Ingresos de Caja";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.1em 1em;
+    }
+
+    .table td, .table th {
+        padding: .25rem;
+    }
+</style>
 
 <h2>Index</h2>
 
@@ -16,6 +27,110 @@
     <h4>CajaModelView</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+    <div class="table-responsive">
+
+        <table id="example23" class="table stylish-table" borde="2">
+
+
+            <thead>
+
+               
+
+
+                <tr>
+
+
+                    <th class="sort-alpha">Concepto</th>
+                    <th class="sort-numeric">Pesos</th>
+                    <th>Dolares</th>
+                    <th>Cheques</th>
+                    <th>Tarjeta</th>
+                    <th>Fecha</th>
+                    <th>Grupo Caja</th>
+                    <th>Acciones</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.ListaCaja)
+                {
+                    <tr>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Concepto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImportePesos)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImporteDolar)
+
+
+
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImporteCheque)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImporteTarjeta)
+                        </td>
+
+                        <td>
+
+
+                            @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
+
+
+
+
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
+                        </td>
+
+
+
+                        <td>
+                            <a href="@Url.Action("AddOrEdit", "Caja",new { id = item.Id })" data-toggle="tooltip" data-original-title="Editar" class="btn btn-primary fa fa-1x fa-pencil-square-o"></a>
+
+
+                            <span data-toggle="modal" data-target="#myModalEliminar" data-id="@Html.DisplayFor(modelItem =>item.Id)">
+                                <a class="btn btn-danger fa fa-trash-o fa-1x" role='button' data-toggle="tooltip" data-placement="top" title="Eliminar">.</a>
+                            </span>
+                        </td>
+
+
+
+
+                    </tr>
+
+
+
+
+
+                }
+
+
+
+            </tbody>
+
+           
+
+        </table>
+
+    </div>
+
 
     <div class="row">
         <!-- Column -->
