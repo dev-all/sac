@@ -35,5 +35,6 @@ namespace Datos.ModeloDeDatos
     
         public virtual CajaTipoMovimiento CajaTipoMovimiento { get; set; }
         public virtual GrupoCaja GrupoCaja { get; set; }
+        public virtual CajaSaldo CajaSaldo { get; set; }
     }
 }

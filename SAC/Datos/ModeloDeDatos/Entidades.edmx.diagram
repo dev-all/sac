@@ -75,6 +75,8 @@
         <EntityTypeShape EntityType="SAC_Model.CompraIva" Width="1.5" PointX="20.375" PointY="20.125" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_CompraIva" />
         <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SAC_Model.CajaSaldo" Width="1.5" PointX="8.375" PointY="32.125" />
+        <AssociationConnector Association="SAC_Model.FK_Caja_CajaSaldo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

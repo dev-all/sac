@@ -58,6 +58,27 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="CajaSaldo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroCierrre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImporteInicialPesos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteInicialDolares" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteInicialCheques" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteInicialTarjetas" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteInicialDepositos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteFinalPesos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteFinalDolares" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteFinalCheques" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteFinalTarjetas" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ImporteFinalDepositos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="CajaTipoMovimiento">
           <Key>
             <PropertyRef Name="Id" />
@@ -552,6 +573,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Caja_CajaSaldo">
+          <End Role="CajaSaldo" Type="Self.CajaSaldo" Multiplicity="0..1" />
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaSaldo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="IdCajaSaldo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Caja_CajaTipoMovimiento">
           <End Role="CajaTipoMovimiento" Type="Self.CajaTipoMovimiento" Multiplicity="0..1" />
           <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
@@ -929,6 +962,7 @@
           <EntitySet Name="AccionPorRol" EntityType="Self.AccionPorRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AfipCategorias" EntityType="Self.AfipCategorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Caja" EntityType="Self.Caja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CajaSaldo" EntityType="Self.CajaSaldo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CajaTipoMovimiento" EntityType="Self.CajaTipoMovimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompraFactura" EntityType="Self.CompraFactura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompraFacturaPago" EntityType="Self.CompraFacturaPago" Schema="dbo" store:Type="Tables" />
@@ -966,6 +1000,10 @@
           <AssociationSet Name="FK_AccionesPorRoles_Roles" Association="Self.FK_AccionesPorRoles_Roles">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="AccionPorRol" EntitySet="AccionPorRol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Caja_CajaSaldo" Association="Self.FK_Caja_CajaSaldo">
+            <End Role="CajaSaldo" EntitySet="CajaSaldo" />
+            <End Role="Caja" EntitySet="Caja" />
           </AssociationSet>
           <AssociationSet Name="FK_Caja_CajaTipoMovimiento" Association="Self.FK_Caja_CajaTipoMovimiento">
             <End Role="CajaTipoMovimiento" EntitySet="CajaTipoMovimiento" />
@@ -1271,6 +1309,11 @@
             <End Role="CompraFactura" EntitySet="CompraFactura" />
           </AssociationSet>
           <EntitySet Name="Diario" EntityType="SAC_Model.Diario" />
+          <EntitySet Name="CajaSaldo" EntityType="SAC_Model.CajaSaldo" />
+          <AssociationSet Name="FK_Caja_CajaSaldo" Association="SAC_Model.FK_Caja_CajaSaldo">
+            <End Role="CajaSaldo" EntitySet="CajaSaldo" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AccionPorRol">
           <Key>
@@ -2076,6 +2119,7 @@
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CajaTipoMovimiento" Relationship="SAC_Model.FK_Caja_CajaTipoMovimiento" FromRole="Caja" ToRole="CajaTipoMovimiento" />
           <NavigationProperty Name="GrupoCaja" Relationship="SAC_Model.FK_Caja_GrupoCaja" FromRole="Caja" ToRole="GrupoCaja" />
+          <NavigationProperty Name="CajaSaldo" Relationship="SAC_Model.FK_Caja_CajaSaldo" FromRole="Caja" ToRole="CajaSaldo" />
         </EntityType>
         <Association Name="FK_Caja_CajaTipoMovimiento">
           <End Type="SAC_Model.CajaTipoMovimiento" Role="CajaTipoMovimiento" Multiplicity="0..1" />
@@ -2285,6 +2329,40 @@
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="CajaSaldo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroCierrre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImporteInicialPesos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteInicialDolares" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteInicialCheques" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteInicialTarjetas" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteInicialDepositos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteFinalPesos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteFinalDolares" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteFinalCheques" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteFinalTarjetas" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ImporteFinalDepositos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_CajaSaldo" FromRole="CajaSaldo" ToRole="Caja" />
+        </EntityType>
+        <Association Name="FK_Caja_CajaSaldo">
+          <End Type="SAC_Model.CajaSaldo" Role="CajaSaldo" Multiplicity="0..1" />
+          <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CajaSaldo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="IdCajaSaldo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2844,6 +2922,28 @@
                 <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CajaSaldo">
+            <EntityTypeMapping TypeName="SAC_Model.CajaSaldo">
+              <MappingFragment StoreEntitySet="CajaSaldo">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="ImporteFinalDepositos" ColumnName="ImporteFinalDepositos" />
+                <ScalarProperty Name="ImporteFinalTarjetas" ColumnName="ImporteFinalTarjetas" />
+                <ScalarProperty Name="ImporteFinalCheques" ColumnName="ImporteFinalCheques" />
+                <ScalarProperty Name="ImporteFinalDolares" ColumnName="ImporteFinalDolares" />
+                <ScalarProperty Name="ImporteFinalPesos" ColumnName="ImporteFinalPesos" />
+                <ScalarProperty Name="ImporteInicialDepositos" ColumnName="ImporteInicialDepositos" />
+                <ScalarProperty Name="ImporteInicialTarjetas" ColumnName="ImporteInicialTarjetas" />
+                <ScalarProperty Name="ImporteInicialCheques" ColumnName="ImporteInicialCheques" />
+                <ScalarProperty Name="ImporteInicialDolares" ColumnName="ImporteInicialDolares" />
+                <ScalarProperty Name="ImporteInicialPesos" ColumnName="ImporteInicialPesos" />
+                <ScalarProperty Name="NumeroCierrre" ColumnName="NumeroCierrre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

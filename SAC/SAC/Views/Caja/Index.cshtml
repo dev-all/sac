@@ -22,7 +22,7 @@
 {
     @Html.AntiForgeryToken()
     List<SelectListItem> ListaCodigoCaja = (List<SelectListItem>)ViewBag.Listapagina;
- 
+
 
     <div class="form-horizontal">
 
@@ -186,7 +186,7 @@
 
                                     </div>
 
-                                 <hr />
+                                    <hr />
                                     <div class="row">
 
                                         <div class="col-4">
@@ -272,29 +272,19 @@
 
                                     </div>
 
-                                    <div class="col-2">
+                                    
+
+                                    @*<div class="col-md-6 m-t-30">
 
                                         <div class="checkbox">
-
-                                            <div class="form-group m-b-30">
-                                                Es Administrador ?
-                                                <input type="checkbox" id="General" class="js-switch js-check-esAdministrador" data-color="#26c6da" data-size="small" />
-
+                                            <div class="form-group ">
+                                                Habilitar acceso al usuario?
+                                                <input type="checkbox" @Html.Raw((Model.Tipo) ? "checked" : " ") id="activo" class="js-switch js-check-activo" data-color="#26c6da" data-size="small" />
+                                                @Html.HiddenFor(model => model.Tipo)
                                             </div>
-
                                         </div>
-                                    </div>
-                                    <div class="col-2">
+                                    </div>*@
 
-                                        <input data-val="true"
-                                               data-val-required="The isActive field is required."
-                                               id="isActive"
-                                               name="isActive"
-                                               type="checkbox"
-                                               value="true" />
-
-                                        <input name="isActive" type="hidden" value="false" />
-                                    </div>
                                 </div>
 
 
@@ -462,31 +452,34 @@
 
 </script>
 
-
-
 <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
-<!-- Treeview Plugin JavaScript -->
 
 <script>
-    jQuery(document).ready(function () {
+    jQuery(document).ready(function ()
+    {
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
         $('.js-switch').each(function () {
             new Switchery($(this)[0], $(this).data());
         });
 
-        var changeCheckbox = document.querySelector('.js-check-esAdministrador')
-            , changeField = document.querySelector('.js-check-esAdministrador-field');
-        changeCheckbox.onchange = function () {
-            $("input[type='hidden'][name='esAdministrador']").val(changeCheckbox.checked);
+        var changeCheckbox = document.querySelector('.js-check-activo')
+            , changeField = document.querySelector('.js-check-activo-field');
+        changeCheckbox.onchange = function ()
+        {
+            $("input[type='hidden'][name='tipo']").val(changeCheckbox.checked);
         };
 
 
-
-
-
+         
 
     });
 </script>
-<script src="~/Content/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+
+
+
+
+}
+
 
