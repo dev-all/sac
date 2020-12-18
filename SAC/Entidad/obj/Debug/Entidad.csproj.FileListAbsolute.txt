@@ -6,7 +6,6 @@ D:\SAC\SAC\Entidad\obj\Debug\Entidad.pdb
 D:\SAC\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
 D:\DESARROLLO_WEB\SAC\Entidad\bin\Debug\Entidad.dll
 D:\DESARROLLO_WEB\SAC\Entidad\bin\Debug\Entidad.pdb
-D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
 D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
 D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.dll
 D:\DESARROLLO_WEB\SAC\Entidad\obj\Debug\Entidad.pdb

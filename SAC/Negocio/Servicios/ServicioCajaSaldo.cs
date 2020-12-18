@@ -35,7 +35,7 @@ namespace Negocio.Servicios
         #region "Metodos de Lectura de Datos"
 
 
-        public List<CajaSaldoModel> GetAllCaja()
+        public List<CajaSaldoModel> GetAllCajaSaldo()
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Negocio.Servicios
 
 
 
-        public CajaSaldoModel GetCajaPorId(int id)
+        public CajaSaldoModel GetCajaSaldoPorId(int id)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace Negocio.Servicios
 
      
 
-        public CajaSaldoModel GuardarCaja(CajaSaldoModel model)
+        public CajaSaldoModel GuardarCajaSaldo(CajaSaldoModel model)
         {
 
             try
@@ -119,7 +119,7 @@ namespace Negocio.Servicios
 
 
 
-        public CajaSaldoModel ActualizarCaja(CajaSaldoModel model)
+        public CajaSaldoModel ActualizarCajaSaldo(CajaSaldoModel model)
         {
 
             try

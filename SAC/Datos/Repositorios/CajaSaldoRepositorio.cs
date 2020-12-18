@@ -79,7 +79,7 @@ namespace Datos.Repositorios
 
         public int DeleteCaja(int IdCaja)
         {
-            Caja CajaCaja = GetCajaPorId(IdCaja);
+            CajaSaldo CajaCaja = GetCajaSaldoPorId(IdCaja);
             CajaCaja.Activo = false;
             CajaCaja.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
             context.SaveChanges();
