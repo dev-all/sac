@@ -57,6 +57,12 @@ namespace SAC.Models
 
         public  List<CajaModelView> ListaCaja { get; set; }
 
+        public CajaSaldoModelView CajaSaldoInicial { get; set; }
+
+
+
+
+
         //public decimal TotalPesos { get; set; }
         //public decimal TotalDolar { get; set; }
         //public decimal TotalDepositos { get; set; }

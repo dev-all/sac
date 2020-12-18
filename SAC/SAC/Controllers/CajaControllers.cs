@@ -17,6 +17,7 @@ namespace SAC.Controllers
         private ServicioCaja servicioCaja = new ServicioCaja();
 
         private ServicioCajaGrupo servicioCajaGrupo = new ServicioCajaGrupo();
+        private ServicioCajaSaldo servicioCajaSaldo = new ServicioCajaSaldo();
 
 
         public CajaController()
@@ -37,7 +38,9 @@ namespace SAC.Controllers
            
             CajaModelView  model = new CajaModelView();
             model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
-                             
+            model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
+
+
 
             CargarCajaGrupo();
             return View(model);

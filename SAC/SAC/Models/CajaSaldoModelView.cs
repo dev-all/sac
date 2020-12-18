@@ -14,7 +14,7 @@ namespace SAC.Models
 
 
         public int Id { get; set; }
-        public string NumeroCierrre { get; set; }
+        public int NumeroCierrre { get; set; }
         [Display(Name = "Importe Inicial Pesos")]
         public decimal ImporteInicialPesos { get; set; }
         [Display(Name = "Importe Inicial Dolares")]

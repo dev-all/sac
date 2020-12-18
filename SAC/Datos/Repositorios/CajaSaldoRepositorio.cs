@@ -75,7 +75,13 @@ namespace Datos.Repositorios
 
         }
 
+        public CajaSaldo GetUltimoCierre()
+        {
 
+            return context.CajaSaldo.Where(acc=> acc.Activo == true).OrderByDescending(acc => acc.NumeroCierrre).FirstOrDefault();
+
+          
+        }
 
         public int DeleteCaja(int IdCaja)
         {

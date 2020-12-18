@@ -21,7 +21,7 @@ namespace Datos.ModeloDeDatos
         }
     
         public int Id { get; set; }
-        public string NumeroCierrre { get; set; }
+        public int NumeroCierrre { get; set; }
         public decimal ImporteInicialPesos { get; set; }
         public Nullable<decimal> ImporteInicialDolares { get; set; }
         public decimal ImporteInicialCheques { get; set; }

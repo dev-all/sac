@@ -38,75 +38,80 @@
                         <form action="#">
                             <div class="form-body">
 
-                                <div class="table-responsive">
+                                <div class="row">
 
-                                    <div class="row">
+                                    <div class="col-4">
 
-                                        <div class="col-4">
+                                        <div class="form-group">
 
-                                            <div class="form-group">
-
-                                                Saldo Inicial
-                                            </div>
-
-
+                                            Saldo Inicial
                                         </div>
 
 
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImportePesos, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                    </div>
 
 
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImporteDolar, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label> Pesos</label>
+                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalPesos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
 
 
-                                            </div>
 
-                                        </div>
-
-                                        <div class="col-2">
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImporteDeposito, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-2">
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImporteTarjeta, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            </div>
 
                                         </div>
 
                                     </div>
-                                    <hr />
 
-                                    <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
 
-                                        <table id="example23" class="table stylish-table" borde="2">
+                                            <label> Dolares</label>
+                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalDolares, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
 
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-2">
+
+                                        <div class="form-group">
+
+                                            <label>Depositos</label>
+                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalDepositos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-2">
+
+                                        <div class="form-group">
+
+                                            <label> Tarjetas</label>
+                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalTarjetas, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="table-responsive">
+                                                                    
+                                 <table id="example23" class="table stylish-table">
 
                                             <thead>
-
 
 
 
                                                 <tr>
 
 
-                                                    <th class="sort-alpha">Concepto</th>
-                                                    <th class="sort-numeric">Pesos</th>
+                                                    <th>Concepto</th>
+                                                    <th>Pesos</th>
                                                     <th>Dolares</th>
                                                     <th>Cheques</th>
                                                     <th>Tarjeta</th>
@@ -119,9 +124,29 @@
                                             </thead>
                                             <tbody>
 
+                                                @{
+                                                    decimal TotalPesos = 0;
+                                                    decimal TotalDolares = 0;
+                                                    decimal TotalCheque = 0;
+                                                    decimal TotalTarjeta = 0;
+                                                    decimal TotalDeposito = 0;
+
+
+                                                }
+
+
                                                 @foreach (var item in Model.ListaCaja)
                                                 {
+
+                                                    TotalPesos += item.ImportePesos ?? 0;
+                                                    TotalDolares += item.ImportePesos ?? 0;
+                                                    TotalCheque += item.ImporteCheque ?? 0;
+                                                    TotalTarjeta += item.ImporteTarjeta ?? 0;
+                                                    TotalDeposito += item.ImporteDeposito ?? 0;
+
                                                     <tr>
+
+
 
 
                                                         <td>
@@ -149,11 +174,7 @@
 
                                                         <td>
 
-
                                                             @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
-
-
-
 
                                                         </td>
 
@@ -183,60 +204,64 @@
 
 
                                         </table>
+                                                                
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-4">
+
+                                        <div class="form-group">
+
+                                            Saldo Procesado
+                                        </div>
+
 
                                     </div>
 
-                                    <hr />
-                                    <div class="row">
 
-                                        <div class="col-4">
-
-                                            <div class="form-group">
-
-                                                Saldo Procesado
-                                            </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class=""> Pesos</label>
+                                            <input type="text" value="@Html.Raw(TotalPesos)" class="form-control form-control-sm" />
 
 
-                                        </div>
-
-
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImportePesos, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImporteDolar, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-2">
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImporteDeposito, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-2">
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.ImporteTarjeta, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            </div>
 
                                         </div>
 
                                     </div>
+
+                                    <div class="col-2">
+                                        <div class="form-group">
+
+                                            <label> Dolares</label>
+                                            <input type="text" value="@Html.Raw(TotalDolares)"   class="form-control form-control-sm"/>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-2">
+
+                                        <div class="form-group">
+
+                                            <label>Depositos</label>
+                                            <input type="text" value="@Html.Raw(TotalDeposito)"  class="form-control form-control-sm" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-2">
+
+                                        <div class="form-group">
+
+                                            <label> Tarjetas</label>
+                                            <input type="text" value="@Html.Raw(TotalTarjeta)"  class="form-control form-control-sm" />
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                             </div>

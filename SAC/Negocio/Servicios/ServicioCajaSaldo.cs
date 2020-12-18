@@ -50,7 +50,21 @@ namespace Negocio.Servicios
             }
         }
 
+        public CajaSaldoModel GetUltimoCierre()
+        {
 
+            try
+            {
+                return Mapper.Map<CajaSaldo, CajaSaldoModel>(CajaSaldoRepositorio.GetUltimoCierre());
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                return null;
+            }
+
+
+        }
 
         public CajaSaldoModel GetCajaSaldoPorId(int id)
         {

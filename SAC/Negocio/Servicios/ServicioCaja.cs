@@ -50,7 +50,7 @@ namespace Negocio.Servicios
             }
         }
 
-
+   
 
         public CajaModel GetCajaPorId(int id)
         {

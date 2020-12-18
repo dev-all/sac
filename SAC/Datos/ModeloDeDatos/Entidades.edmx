@@ -46,13 +46,13 @@
           <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
           <Property Name="Saldo" Type="nvarchar" MaxLength="1" />
           <Property Name="IdGrupoCaja" Type="int" />
-          <Property Name="ImportePesos" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Recibo" Type="nvarchar" MaxLength="50" />
-          <Property Name="ImporteDeposito" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IdCuentaBanco" Type="int" />
+          <Property Name="ImportePesos" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImporteDolar" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="ImporteTarjeta" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImporteCheque" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteDeposito" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ImporteTarjeta" Type="decimal" Precision="18" Scale="2" />
           <Property Name="IdCajaSaldo" Type="int" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
@@ -63,7 +63,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NumeroCierrre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumeroCierrre" Type="int" Nullable="false" />
           <Property Name="ImporteInicialPesos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ImporteInicialDolares" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ImporteInicialCheques" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -2334,7 +2334,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NumeroCierrre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroCierrre" Type="Int32" Nullable="false" />
           <Property Name="ImporteInicialPesos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ImporteInicialDolares" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ImporteInicialCheques" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
