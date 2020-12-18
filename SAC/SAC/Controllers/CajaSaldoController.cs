@@ -51,6 +51,16 @@ namespace SAC.Controllers
             return View(model);
         }
 
+        public ActionResult Detalle(int id)
+        {
+            CajaSaldoModelView model;
+           
+                model = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(serviciocajasaldo.GetCajaSaldoPorId(id));         
+
+           
+            return View(model);
+        }
+
 
 
         [HttpPost]
@@ -84,6 +94,8 @@ namespace SAC.Controllers
                 return View(model);
             }
         }
+
+       
 
 
 

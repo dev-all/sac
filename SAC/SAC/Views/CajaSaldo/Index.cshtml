@@ -141,12 +141,15 @@
                                 </td>
 
                                 <td>
-                                    <a href="@Url.Action("AddOrEdit", "CajaSaldo",new { id = item.Id })" data-toggle="tooltip" data-original-title="Editar" class="btn btn-primary fa fa-pencil-square-o"></a>
+                                    @*@Html.ActionLink(".", "Detalle", "CajaSaldo", new { id = item.Id }, htmlAttributes: new { @class = "btn ink-reaction btn btn-primary fa fa-pencil-square-o", data_toggle = "tooltip", data_placement = "top", data_original_title = "Detalle" })*@
 
 
-                                    <span data-toggle="modal" data-target="#myModalEliminar" data-id="@Html.DisplayFor(modelItem =>item.Id)">
-                                        <a class="btn btn-danger fa fa-trash-o" role='button' data-toggle="tooltip" data-placement="top" title="Eliminar">.</a>
-                                    </span>
+                                   
+
+                                   <a href="@Url.Action("Detalle", "CajaSaldo",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detalle" class="btn btn-primary fa fa-pencil-square-o"></a>
+
+
+                                   
                                 </td>
 
 

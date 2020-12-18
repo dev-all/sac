@@ -2835,6 +2835,7 @@
     <Content Include="Views\Caja\_GrillaCaja.cshtml" />
     <Content Include="Views\Caja\Index.cshtml" />
     <Content Include="Views\CajaSaldo\Index.cshtml" />
+    <Content Include="Views\CajaSaldo\Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
