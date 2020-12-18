@@ -139,6 +139,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="Controllers\CajaCierreController.cs" />
     <Compile Include="Controllers\CajaControllers.cs" />
     <Compile Include="Controllers\CajaSaldoController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
@@ -2836,6 +2837,7 @@
     <Content Include="Views\Caja\Index.cshtml" />
     <Content Include="Views\CajaSaldo\Index.cshtml" />
     <Content Include="Views\CajaSaldo\Detalle.cshtml" />
+    <Content Include="Views\CajaCierre\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
