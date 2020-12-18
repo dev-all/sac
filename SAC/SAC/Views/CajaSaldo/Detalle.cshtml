@@ -22,193 +22,115 @@
 
                     <div class="row">
 
-                        <div class="col-4">
+                        <div class="col-2">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.ImporteInicialPesos, htmlAttributes: new { @class = "control-label form-control-sm" })
-                                @Html.DisplayFor(model => model.ImporteInicialPesos, "2", new { htmlAttributes = new { @class = "form-control form-control-sm"} }))
-                             
+                                @Html.DisplayFor(model => model.ImporteInicialPesos, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialDolares, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialDolares, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialCheques, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialCheques, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialTarjetas, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialTarjetas, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialDepositos, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialDepositos, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
                             </div>
 
 
                         </div>
                         <br />
                     </div>
-            </div>
+
+                    <div class="row">
+
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialPesos, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialPesos, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialDolares, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialDolares, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialCheques, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialCheques, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialTarjetas, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialTarjetas, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImporteInicialDepositos, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                @Html.DisplayFor(model => model.ImporteInicialDepositos, "2", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            </div>
+
+
+                        </div>
+                        <br />
+                    </div>
+                </div>
         </div>
 </div>
+        </section>
 
 
 
 
-<div class="row">
-    <div class="col-xs-12">
-
-        <ul id="facturador-detalle" class="list-group">
-            <li class="list-group-item">
-                <h3></h3>
-            </li>
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <b>Producto</b>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <b>Cantidad</b>
-                    </div>
-                    <div class="col-xs-2 text-right">
-                        <b>Precio Unitario</b>
-                    </div>
-                    <div class="col-xs-2 text-right">
-                        <b>Monto</b>
-                    </div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6">
-                        @Html.DisplayFor(model => model.NumeroCierrre)
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        @Html.DisplayFor(model => model.ImporteInicialPesos)
-                    </div>
-                    <div class="col-xs-2 text-right">
-                        @Html.DisplayFor(model => model.ImporteInicialDolares)
-                    </div>
-                    <div class="col-xs-2 text-right">
-                        @Html.DisplayFor(model => model.ImporteInicialCheques)
-                    </div>
-                </div>
-            </li>
-
-        </ul>
-    </div>
-</div>
 
 
 
-<dl class="dl-horizontal">
-    <dt>
 
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.NumeroCierrre)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteInicialPesos)
-    </dt>
-
-    <dd>
-
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteInicialDolares)
-    </dt>
-
-    <dd>
-
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteInicialCheques)
-    </dt>
-
-    <dd>
-
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteInicialTarjetas)
-    </dt>
-
-    <dd>
-
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteInicialDepositos)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ImporteInicialDepositos)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteFinalPesos)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ImporteFinalPesos)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteFinalDolares)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ImporteFinalDolares)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteFinalCheques)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ImporteFinalCheques)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteFinalTarjetas)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ImporteFinalTarjetas)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.ImporteFinalDepositos)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.ImporteFinalDepositos)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.Fecha)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.Fecha)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.Activo)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.Activo)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.IdUsuario)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.IdUsuario)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.UltimaModificacion)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.UltimaModificacion)
-    </dd>
-
-</dl>
                 </div>
 <p>
 
