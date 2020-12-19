@@ -33,13 +33,28 @@ $('#example23').DataTable({
     'buttons': []
 });
 
+    $("#Birthday").datepicker({ dateFormat: "dd/mm/yy" }).mask("99/99/9999");
+    $.validator.addMethod('date',
+        function (value, element, params) {
+            if (this.optional(element)) {
+                return true;
+            }
+            var ok = true;
+            try {
+                $.datepicker.parseDate('dd/mm/yy', value);
+            }
+            catch (err) {
+                ok = false;
+            }
+            return ok;
+        });
 
-$('.fechadatepicker').datepicker({
-    language: 'es',
-    autoclose: true,
-    format: 'dd/mm/yyyy',
-    todayHighlight: true
-}).datepicker('setDate', new Date());
+//$('.fechadatepicker').datepicker({
+//    language: 'es',
+//    autoclose: true,
+//    format: 'dd/mm/yyyy',
+//    todayHighlight: true
+//}).datepicker('setDate', new Date());
 
 });
 

@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="readonly5">Grupo Caja</label>
+                                        <label for="readonly5" class="control-label form-control-sm">Grupo Caja</label>
                                         @Html.DropDownList("IdGrupoCaja", ListaCodigoCaja, null, new { @class = "form-control form-control-sm" })
                                         @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
                                     </div>
@@ -219,10 +219,8 @@
                                 <div class="col-2">
                                     <div class="form-group">
 
-                                        @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })     
-                                
-                                        @Html.EditorFor(model => model.Fecha, new { @class = " form-control form-control-sm fechadatepicker " })                                
-
+                                        @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })                                    
+                                        @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control form-control-sm fechadatepicker" } })
                                         @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -300,7 +298,7 @@
     <!-- Date Picker Plugin JavaScript -->
     <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
-
+<script src="~/Scripts/js/mask.js"></script>
     <script src="~/Scripts/view/CajaScript.js"></script>
 
     <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>

@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Negocio.Modelos;
 using Datos.ModeloDeDatos;
+using System.ComponentModel;
 
 namespace SAC.Models
 {
@@ -18,8 +19,10 @@ namespace SAC.Models
         [Required(ErrorMessage = "El campo no puede estar vacio")]
         public string Concepto { get; set; }
 
+        
+        [DisplayName("Fecha"), Required(ErrorMessage = "Debe ingresar un fecha.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Fecha { get; set; }
 
         public string Tipo { get; set; }
