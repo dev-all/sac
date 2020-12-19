@@ -150,11 +150,12 @@ namespace Negocio.Servicios
                 usuarioModel.Persona.Activo = usuarioModel.Activo;
                 repositorio.UpdateUsuario(Mapper.Map<UsuarioModel, Usuario>(usuarioModel));
                 _mensaje("Se registro correctamente", "ok");
+               
             }
             catch (Exception ex)
             {
                 _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
-
+               throw new Exception();  
             }
         }
 
@@ -173,8 +174,10 @@ namespace Negocio.Servicios
             catch (Exception ex)
             {
                 _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
-
+                throw new Exception();
             }
+
+
         }
 
         public void ActualizarRolDeUsaurio(int idUsuario, int idRol, int idUsuarioLogueado)

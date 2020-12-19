@@ -12,15 +12,13 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Notificacion
+    public partial class CuentaCorriente
     {
-        public int Id { get; set; }
-        public int IdPersona { get; set; }
-        public Nullable<bool> EnvioEmail { get; set; }
-        public string Obs { get; set; }
-        public bool Activo { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-    
-        public virtual Persona Persona { get; set; }
+        public int ProveedorCodigo { get; set; }
+        public string ProveedorNombre { get; set; }
+        public Nullable<decimal> MontoPesos { get; set; }
+        public Nullable<decimal> MontoDolares { get; set; }
+        public Nullable<decimal> TotalDeuda { get; set; }
+        public Nullable<System.DateTime> UltimoMovimiento { get; set; }
     }
 }

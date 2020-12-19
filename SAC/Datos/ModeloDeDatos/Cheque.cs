@@ -32,7 +32,7 @@ namespace Datos.ModeloDeDatos
         public string FechaIngreso { get; set; }
         public string FechaEgreso { get; set; }
         public string Destino { get; set; }
-        public string IdMoneda { get; set; }
+        public Nullable<int> IdMoneda { get; set; }
         public string GrupoCaja { get; set; }
         public string IdFactura { get; set; }
         public string NumeroPago { get; set; }
@@ -43,6 +43,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
     }

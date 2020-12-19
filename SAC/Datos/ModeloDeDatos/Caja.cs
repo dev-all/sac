@@ -21,20 +21,21 @@ namespace Datos.ModeloDeDatos
         public string Tipo { get; set; }
         public string Saldo { get; set; }
         public Nullable<int> IdGrupoCaja { get; set; }
-        public Nullable<decimal> ImportePesos { get; set; }
         public string Recibo { get; set; }
-        public Nullable<decimal> ImporteDeposito { get; set; }
         public Nullable<int> IdCuentaBanco { get; set; }
+        public Nullable<decimal> ImportePesos { get; set; }
         public Nullable<decimal> ImporteDolar { get; set; }
-        public Nullable<decimal> ImporteTarjeta { get; set; }
         public Nullable<decimal> ImporteCheque { get; set; }
+        public Nullable<decimal> ImporteDeposito { get; set; }
+        public Nullable<decimal> ImporteTarjeta { get; set; }
         public Nullable<int> IdCajaSaldo { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual BancoCuenta BancoCuenta { get; set; }
+        public virtual CajaSaldo CajaSaldo { get; set; }
         public virtual CajaTipoMovimiento CajaTipoMovimiento { get; set; }
         public virtual GrupoCaja GrupoCaja { get; set; }
-        public virtual CajaSaldo CajaSaldo { get; set; }
     }
 }

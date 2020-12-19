@@ -141,8 +141,10 @@
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
     <Compile Include="Controllers\CajaCierreController.cs" />
     <Compile Include="Controllers\CajaControllers.cs" />
+    <Compile Include="Controllers\CajaGrupoController.cs" />
     <Compile Include="Controllers\CajaSaldoController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
+    <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
@@ -154,7 +156,6 @@
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
-    <Compile Include="Controllers\CajaGrupoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -164,9 +165,18 @@
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
     <Compile Include="Models\AutoCompletarViewModel.cs" />
-    <Compile Include="Models\CajaSaldoModelView.cs" />
+    <Compile Include="Models\BancoCuentaBancariaModelView.cs" />
+    <Compile Include="Models\BancoCuentaModelView.cs" />
+    <Compile Include="Models\CajaGrupoModelView.cs" />
     <Compile Include="Models\CajaModelView.cs" />
+    <Compile Include="Models\CajaSaldoModelView.cs" />
+    <Compile Include="Models\ChequeModelView.cs" />
+    <Compile Include="Models\ChequeraModelView.cs" />
+    <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
     <Compile Include="Models\CompraIvaModelView.cs" />
+    <Compile Include="Models\CuentaCteProveedorModelView.cs" />
+    <Compile Include="Models\FacturaPagoViewModel.cs" />
+    <Compile Include="Models\PresupuestoActualModelView.cs" />
     <Compile Include="Models\Request\bcraRequest.cs" />
     <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />
@@ -186,9 +196,9 @@
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\SubRubroModelView.cs" />
+    <Compile Include="Models\TarjetaModelView.cs" />
     <Compile Include="Models\TipoComprobanteModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
-    <Compile Include="Models\CajaGrupoModelView.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\TipoProveedorModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
@@ -2783,8 +2793,8 @@
     <Content Include="Scripts\js\widget-data.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\TreeView\TreeView.js" />
-    <Content Include="Scripts\view\calcularporcentaje.js" />
     <Content Include="Scripts\view\CajaScript.js" />
+    <Content Include="Scripts\view\calcularporcentaje.js" />
     <Content Include="Scripts\view\FacturaCompraScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2828,16 +2838,20 @@
     <Content Include="Views\Compras\FacturaCompras.cshtml" />
     <Content Include="Views\Proveedor\_TablaImputacion.cshtml" />
     <Content Include="Views\Proveedor\Editar.cshtml" />
-    <Content Include="Views\CajaGrupo\Index.cshtml" />
-    <Content Include="Views\AddOrEdit.cshtml" />
-    <Content Include="Views\Index.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\Index.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\PagarFactura.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_Tabla.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_tablaCheques.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaCuentasBancaria.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaTarjetas.cshtml" />
     <Content Include="Views\Caja\AddOrEdit.cshtml" />
-    <Content Include="Views\CajaGrupo\AddOrEdit.cshtml" />
-    <Content Include="Views\Caja\_GrillaCaja.cshtml" />
     <Content Include="Views\Caja\Index.cshtml" />
-    <Content Include="Views\CajaSaldo\Index.cshtml" />
-    <Content Include="Views\CajaSaldo\Detalle.cshtml" />
+    <Content Include="Views\CajaGrupo\AddOrEdit.cshtml" />
+    <Content Include="Views\CajaGrupo\Index.cshtml" />
     <Content Include="Views\CajaCierre\Index.cshtml" />
+    <Content Include="Views\CajaSaldo\Detalle.cshtml" />
+    <Content Include="Views\CajaSaldo\Index.cshtml" />
+    <Content Include="Views\Caja\_GrillaCaja.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

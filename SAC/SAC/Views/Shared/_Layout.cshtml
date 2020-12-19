@@ -241,6 +241,12 @@
                 toastr.error("@Html.Raw(@TempData["error"].ToString())");
             </script>
         }
+        else if (TempData["war"] != null)
+        {
+            <script type="text/javascript">
+                toastr.warning("@Html.Raw(@TempData["war"].ToString())");
+            </script>
+        }
     </div>
 
 </body>

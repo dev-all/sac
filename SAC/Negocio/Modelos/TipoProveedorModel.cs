@@ -14,16 +14,9 @@ namespace Negocio.Modelos
 
         public string Descripcion { get; set; }
 
-
-
         public Nullable<bool> Activo { get; set; }
 
-
-
-
         public Nullable<int> IdUsuario { get; set; }
-
-
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 

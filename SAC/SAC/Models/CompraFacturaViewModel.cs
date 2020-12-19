@@ -14,7 +14,7 @@ namespace SAC.Models
         public int IdTipoComprobante { get; set; }
         [Display(Name = "Punto Venta ")]
         public int PuntoVenta { get; set; }
-        [Display(Name = "Número Factura ")]
+        [Display(Name = "Número")]
         public int NumeroFactura { get; set; }       
         [Display(Name = "Proveedor")]
         public int IdProveedor { get; set; }   
@@ -22,6 +22,8 @@ namespace SAC.Models
         public string CAE { get; set; }
         public decimal Total { get; set; }
         public decimal Saldo { get; set; }
+
+        [Display(Name = "Fecha")]
         public DateTime Fecha { get; set; }
         public DateTime Vencimiento { get; set; }
         public decimal TotalDolares { get; set; }
@@ -52,7 +54,7 @@ namespace SAC.Models
         public ProveedorModelView Proveedor { get; set; }
         public ImputacionModelView Imputacion { get; set; }
         public CompraFacturaViewModel CompraFacturaAplicada { get; set; }
-
+        public TipoMonedaModelView TipoMoneda { get; set; }
         public List<TipoMonedaModelView> TipoMonedas { get; set; }
         public List<TipoComprobanteModelView> TipoComprobante { get; set; }
     }

@@ -17,8 +17,10 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TipoMoneda()
         {
-            this.Proveedor = new HashSet<Proveedor>();
+            this.Cheque = new HashSet<Cheque>();
+            this.Chequera = new HashSet<Chequera>();
             this.CompraFactura = new HashSet<CompraFactura>();
+            this.Proveedor = new HashSet<Proveedor>();
         }
     
         public int Id { get; set; }
@@ -28,8 +30,12 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedor> Proveedor { get; set; }
+        public virtual ICollection<Cheque> Cheque { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Chequera> Chequera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFactura> CompraFactura { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Proveedor> Proveedor { get; set; }
     }
 }

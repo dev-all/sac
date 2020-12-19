@@ -18,7 +18,6 @@ namespace Datos.ModeloDeDatos
         public Persona()
         {
             this.Contacto = new HashSet<Contacto>();
-            this.Notificacion = new HashSet<Notificacion>();
             this.Usuario = new HashSet<Usuario>();
         }
     
@@ -44,8 +43,6 @@ namespace Datos.ModeloDeDatos
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacto> Contacto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Notificacion> Notificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
     }

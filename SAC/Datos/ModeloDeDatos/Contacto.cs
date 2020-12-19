@@ -18,7 +18,6 @@ namespace Datos.ModeloDeDatos
         public int IdEvento { get; set; }
         public int IdPersona { get; set; }
     
-        public virtual Evento Evento { get; set; }
         public virtual Persona Persona { get; set; }
     }
 }

@@ -42,7 +42,7 @@ namespace Negocio.Servicios
             }
         }
 
-   
+
 
         public CajaModel GetCajaPorId(int id)
         {
@@ -79,6 +79,8 @@ namespace Negocio.Servicios
         {
             try
             {
+
+
                 var retorno = CajaRepositorio.DeleteCaja(IdCaja);
                 _mensaje("Se eliminó correctamente", "ok");
 
@@ -89,24 +91,36 @@ namespace Negocio.Servicios
                 throw new Exception();
 
             }
-        }     
+
+        }
+
+
+
+     
 
         public CajaModel GuardarCaja(CajaModel model)
         {
+
             try
-            {                
+            {
+                
                 model.Activo = true;               
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = CajaRepositorio.Insertar(Mapper.Map< CajaModel,Caja>(model));
                 _mensaje("Se registro correctamente", "ok");
                 return Mapper.Map<Caja,CajaModel> (newModel);               
             }
-            catch (Exception  ex)
+            catch (Exception )
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
+
             }
+
+
         }
+
+
 
         public CajaModel ActualizarCaja(CajaModel model)
         {

@@ -31,14 +31,15 @@ namespace Datos.ModeloDeDatos
         public string FechaEgreso { get; set; }
         public string Destino { get; set; }
         public Nullable<int> NumeroOperacion { get; set; }
-        public string IdMoneda { get; set; }
+        public Nullable<int> IdMoneda { get; set; }
         public string Registro { get; set; }
+        public Nullable<bool> Usado { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
-        public Nullable<bool> Usado { get; set; }
     
         public virtual BancoCuenta BancoCuenta { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
     }

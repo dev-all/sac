@@ -24,15 +24,15 @@ namespace Datos.ModeloDeDatos
         public string Icono { get; set; }
         public string Url { get; set; }
         public string Titulo { get; set; }
+        public Nullable<int> IdParent { get; set; }
         public Nullable<int> IdAccion { get; set; }
+        public Nullable<int> Orden { get; set; }
         public bool Activo { get; set; }
         public System.DateTime FechaModificacion { get; set; }
-        public Nullable<int> IdParent { get; set; }
-        public Nullable<int> Orden { get; set; }
     
+        public virtual Accion Accion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MenuSidebar> MenuSidebar1 { get; set; }
         public virtual MenuSidebar MenuSidebar2 { get; set; }
-        public virtual Accion Accion { get; set; }
     }
 }

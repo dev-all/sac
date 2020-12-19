@@ -53,11 +53,11 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual CompraIva CompraIva { get; set; }
         public virtual Imputacion Imputacion { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
-        public virtual CompraIva CompraIva { get; set; }
     }
 }

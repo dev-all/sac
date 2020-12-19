@@ -24,7 +24,7 @@ namespace Negocio.Modelos
         public decimal Cotizacion { get; set; }
         public System.DateTime FechaPago { get; set; }
         public int Periodo { get; set; }
-        public Nullable<decimal> Grupo { get; set; }
+        public decimal Grupo { get; set; }
         public string Marca { get; set; }
         public string Pase { get; set; }
         public decimal CotizacionDePago { get; set; }

@@ -12,20 +12,15 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Prioridad
+    public partial class TipoComprobanteVenta
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Prioridad()
-        {
-            this.Evento = new HashSet<Evento>();
-        }
-    
         public int Id { get; set; }
-        public string Color { get; set; }
-        public bool Activo { get; set; }
-        public string Nombre { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Evento> Evento { get; set; }
+        public int PuntoVenta { get; set; }
+        public string Denominacion { get; set; }
+        public string Numero { get; set; }
+        public string Abreviatura { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
+        public Nullable<System.DateTime> UltimaModificacion { get; set; }
     }
 }
