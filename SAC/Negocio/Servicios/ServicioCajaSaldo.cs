@@ -14,24 +14,32 @@ using System.Text;
 
 namespace Negocio.Servicios
 {
-   public class ServicioCaja : ServicioBase
+   public class ServicioCajaSaldo : ServicioBase
     {
-        private CajaRepositorio CajaRepositorio ;
+        private CajaSaldoRepositorio CajaSaldoRepositorio ;
       
-        public ServicioCaja()
+        public ServicioCajaSaldo()
         {
-            CajaRepositorio = kernel.Get<CajaRepositorio>();
+            CajaSaldoRepositorio = kernel.Get<CajaSaldoRepositorio>();
             
         }
+
+
+
+      
+
+
+
+
 
         #region "Metodos de Lectura de Datos"
 
 
-        public List<CajaModel> GetAllCaja()
+        public List<CajaSaldoModel> GetAllCajaSaldo()
         {
             try
             {
-                var Caja = Mapper.Map<List<Caja>, List<CajaModel>>(CajaRepositorio.GetAllCaja());
+                var Caja = Mapper.Map<List<CajaSaldo>, List<CajaSaldoModel>>(CajaSaldoRepositorio.GetAllCajaSaldo());
                 return Caja;
 
             }
@@ -42,13 +50,27 @@ namespace Negocio.Servicios
             }
         }
 
+        public CajaSaldoModel GetUltimoCierre()
+        {
+
+            try
+            {
+                return Mapper.Map<CajaSaldo, CajaSaldoModel>(CajaSaldoRepositorio.GetUltimoCierre());
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                return null;
+            }
 
 
-        public CajaModel GetCajaPorId(int id)
+        }
+
+        public CajaSaldoModel GetCajaSaldoPorId(int id)
         {
             try
             {
-                return Mapper.Map<Caja, CajaModel>(CajaRepositorio.GetCajaPorId(id));
+                return Mapper.Map<CajaSaldo, CajaSaldoModel>(CajaSaldoRepositorio.GetCajaSaldoPorId(id));
             }
             catch (Exception)
             {
@@ -58,18 +80,7 @@ namespace Negocio.Servicios
         }
 
 
-        public CajaModel GetCajaPorCodigo(int idcodigocaja )
-        {
-            try
-            {
-                return Mapper.Map<Caja, CajaModel>(CajaRepositorio.GetCajaPorGrupo(idcodigocaja));
-            }
-            catch (Exception)
-            {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
-                return null;
-            }
-        }
+      
 
         #endregion
 
@@ -81,7 +92,7 @@ namespace Negocio.Servicios
             {
 
 
-                var retorno = CajaRepositorio.DeleteCaja(IdCaja);
+                var retorno = CajaSaldoRepositorio.DeleteCaja(IdCaja);
                 _mensaje("Se eliminó correctamente", "ok");
 
             }
@@ -98,7 +109,7 @@ namespace Negocio.Servicios
 
      
 
-        public CajaModel GuardarCaja(CajaModel model)
+        public CajaSaldoModel GuardarCajaSaldo(CajaSaldoModel model)
         {
 
             try
@@ -106,13 +117,13 @@ namespace Negocio.Servicios
                 
                 model.Activo = true;               
                 model.UltimaModificacion = DateTime.Now;
-                var newModel = CajaRepositorio.Insertar(Mapper.Map< CajaModel,Caja>(model));
+                var newModel = CajaSaldoRepositorio.Insertar(Mapper.Map< CajaSaldoModel,CajaSaldo>(model));
                 _mensaje("Se registro correctamente", "ok");
-                return Mapper.Map<Caja,CajaModel> (newModel);               
+                return Mapper.Map<CajaSaldo,CajaSaldoModel> (newModel);               
             }
-            catch (Exception )
+            catch (Exception  ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
                 throw new Exception();
 
             }
@@ -122,17 +133,17 @@ namespace Negocio.Servicios
 
 
 
-        public CajaModel ActualizarCaja(CajaModel model)
+        public CajaSaldoModel ActualizarCajaSaldo(CajaSaldoModel model)
         {
 
             try
             {
 
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
-                var newModel = CajaRepositorio.ActualizarCaja(Mapper.Map<CajaModel, Caja>(model));              
+                var newModel = CajaSaldoRepositorio.ActualizarCajaSaldo(Mapper.Map<CajaSaldoModel, CajaSaldo>(model));              
                 _mensaje("Se actualizo correctamente", "ok");
                 
-                return Mapper.Map<Caja, CajaModel>(newModel);
+                return Mapper.Map<CajaSaldo, CajaSaldoModel>(newModel);
             }
             catch (Exception)
             {

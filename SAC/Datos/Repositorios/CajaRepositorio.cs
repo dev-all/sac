@@ -23,7 +23,7 @@ namespace Datos.Repositorios
 
         public List<Caja> GetAllCaja()
         {
-            return context.Caja.Where(acc => acc.Activo == true).OrderBy(acc => acc.Id).ToList();
+            return context.Caja.Where(acc => acc.Activo == true && acc.IdCajaSaldo==0).OrderBy(acc => acc.Id).ToList();
         }
 
         public Caja GetCajaPorId(int id)

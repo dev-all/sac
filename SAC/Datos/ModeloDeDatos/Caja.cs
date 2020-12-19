@@ -33,7 +33,6 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
-        public virtual BancoCuenta BancoCuenta { get; set; }
         public virtual CajaTipoMovimiento CajaTipoMovimiento { get; set; }
         public virtual GrupoCaja GrupoCaja { get; set; }
         public virtual CajaSaldo CajaSaldo { get; set; }

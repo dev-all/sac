@@ -14,14 +14,23 @@ namespace SAC.Models
         public string Codigo { get; set; }
         public string Concepto { get; set; }
         public decimal? NetoTotalP { get; set; }
+        [Display(Name = "Neto Total Pesos")]
         public decimal? NetoTotalD { get; set; }
+        [Display(Name = "Neto Total Dolarés")]
         public decimal? NetoTotalC { get; set; }
+        [Display(Name = "Neto Total Cheque")]
         public decimal? NetoTotalT { get; set; }
+        [Display(Name = "Neto Total Tarjeta")]
         public decimal? NetoTotalB { get; set; }
+        [Display(Name = "Neto Total Pesos")]
         public decimal? NetoParcialP { get; set; }
+        [Display(Name = "Neto Parcial Pesos")]
         public decimal? NetoParcialD { get; set; }
+        [Display(Name = "Neto Parcial Dolarés")]
         public decimal? NetoParcialC { get; set; }
+        [Display(Name = "Neto Parcial Cheques")]
         public decimal? NetoParcialT { get; set; }
+        [Display(Name = "Neto Parcial Tarjeta")]
         public decimal? NParcialB { get; set; }
         public string Ltraa { get; set; }
         public string Ltram { get; set; }

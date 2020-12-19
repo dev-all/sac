@@ -11,7 +11,7 @@ using Negocio.Modelos;
 
 namespace SAC.Controllers
 {
-    public class CajaController : BaseController
+    public class CajaCierreController : BaseController
     {
 
         private ServicioCaja servicioCaja = new ServicioCaja();
@@ -20,18 +20,34 @@ namespace SAC.Controllers
         private ServicioCajaSaldo servicioCajaSaldo = new ServicioCajaSaldo();
 
 
-        public CajaController()
+        public CajaCierreController()
         {            
             servicioCaja._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
 
 
-        // GET: Usuario
+        
+
+
+        //}
+
+
         public ActionResult Index()
         {
-            List<CajaModelView> cajaGrupoModelViews = new List<CajaModelView>();
-             cajaGrupoModelViews = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
-            return View(cajaGrupoModelViews);
+
+           
+            CajaModelView  model = new CajaModelView();
+            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
+            model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
+
+
+
+            CargarCajaGrupo();
+            return View(model);
+
+
+        }
+
 
 
 
@@ -43,6 +59,7 @@ namespace SAC.Controllers
             {
                 try
                 {
+
 
                     var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
                     model.IdUsuario = OUsuario.IdUsuario;
@@ -68,7 +85,6 @@ namespace SAC.Controllers
 
 
 
-     
         public ActionResult AddOrEdit(int id = 0)
         {
 
@@ -92,8 +108,7 @@ namespace SAC.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
-        
+        [ValidateAntiForgeryToken]         
         public ActionResult AddOrEdit(CajaModelView model)
         {
             try
@@ -123,8 +138,7 @@ namespace SAC.Controllers
             }
         }
 
-
-
+      
         [HttpPost]
         public ActionResult Eliminar(int id)
         {
@@ -141,47 +155,28 @@ namespace SAC.Controllers
             return RedirectToAction("Index");
         }
 
-
-      
-
+           
 
 
-        //combo pais
+
+        //combo cajagrupo
         public void CargarCajaGrupo()
-        {
-
-            ServicioCajaGrupo servicioCajaGrupo = new ServicioCajaGrupo();
-            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());
-            //ListaPais = ListaPais.OrderBy(p => p.Nombre).ToList();
-            //esto es para pasarlo a select list (drop down list)
+        {          
+            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());        
             List<SelectListItem> retornoListaCajaGrupo = null;
-            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x =>
-                                  new SelectListItem()
-                                  {
-                                      Value = x.Id.ToString(),
-                                      Text = x.Codigo
-                                  })).ToList();
+            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
+                                                                  {
+                                                                      Value = x.Id.ToString(),
+                                                                      Text = x.Codigo
+                                                                  })).ToList();
             retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "--Seleccione Codigo de Caja--", Value = "" });
-
-
             ViewBag.Listapagina = retornoListaCajaGrupo;
         }
 
 
 
+     
 
-        //public ActionResult DateSales(string value)
-
-
-
-        //{
-        //    var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-        //    var view = db.SaleDetails.Include(s => s.Sale).Where(s => s.Sale.Warehouse.CompanyId == user.CompanyId && s.Sale.Date == DateTime.Today);
-        //    return View(view.ToList());
-
-        //    ViewBag.TotalPrice = view.Sum(m => m.Price);
-        //    ViewBag.TotalQuantity = view.Sum(m => m.Quantity);
-        //}
 
 
     }
