@@ -16,110 +16,75 @@
     }
 </style>
 
-<h2>Caja</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     List<SelectListItem> ListaCodigoCaja = (List<SelectListItem>)ViewBag.Listapagina;
 
-
     <div class="form-horizontal">
 
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="row">
-            <!-- Column -->
             <div class="col-lg-12">
                 <div class="card">
-                    <h2 class="page-header">Grilla de Caja</h2>
+
                     <div class="card-body">
-                        <form action="#">
-                            <div class="form-body">
+                        <h4 class="card-title">Grilla de Caja</h4>
+                        <div class="form-body">
 
-                                <div class="row">
-
-                                    <div class="col-4">
-
-                                        <div class="form-group">
-
-                                            Saldo Inicial
-                                        </div>
-
-
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        Saldo Inicial
                                     </div>
+                                </div>
 
-
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label> Pesos</label>
-                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalPesos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-
-
-
-
-                                        </div>
-
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label> Pesos</label>
+                                        @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalPesos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
                                     </div>
+                                </div>
 
-                                    <div class="col-2">
-                                        <div class="form-group">
-
-                                            <label> Dolares</label>
-                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalDolares, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-2">
-
-                                        <div class="form-group">
-
-                                            <label>Depositos</label>
-                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalDepositos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-2">
-
-                                        <div class="form-group">
-
-                                            <label> Tarjetas</label>
-                                            @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalTarjetas, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-
-
-                                        </div>
-
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label> Dolares</label>
+                                        @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalDolares, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
                                     </div>
 
                                 </div>
 
-                                <div class="table-responsive">
-                                                                    
-                                 <table id="example23" class="table stylish-table">
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label>Cheques</label>
+                                        @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalDepositos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    </div>
+                                </div>
 
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label> Tarjetas</label>
+                                        @Html.EditorFor(model => model.CajaSaldoInicial.ImporteFinalTarjetas, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive-md">
+
+                                        <table id="example23" class="table stylish-table">
                                             <thead>
-
-
-
                                                 <tr>
-
-
-                                                    <th>Concepto</th>
-                                                    <th>Pesos</th>
-                                                    <th>Dolares</th>
-                                                    <th>Cheques</th>
-                                                    <th>Tarjeta</th>
+                                                    <th style="max-width: 33%;">Concepto</th>
+                                                    <th class="text-center">Pesos</th>
+                                                    <th class="text-center">Dolares</th>
+                                                    <th class="text-center">Cheques</th>
+                                                    <th class="text-center">Tarjeta</th>
                                                     <th>Fecha</th>
-                                                    <th>Grupo Caja</th>
-
-
-
+                                                    <th>Grupo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -130,45 +95,35 @@
                                                     decimal TotalCheque = 0;
                                                     decimal TotalTarjeta = 0;
                                                     decimal TotalDeposito = 0;
-
-
                                                 }
 
 
                                                 @foreach (var item in Model.ListaCaja)
                                                 {
 
-                                                    TotalPesos += item.ImportePesos ?? 0;
-                                                    TotalDolares += item.ImportePesos ?? 0;
-                                                    TotalCheque += item.ImporteCheque ?? 0;
-                                                    TotalTarjeta += item.ImporteTarjeta ?? 0;
-                                                    TotalDeposito += item.ImporteDeposito ?? 0;
+                                                    TotalPesos += item.ImportePesos;
+                                                    TotalDolares += item.ImportePesos;
+                                                    TotalCheque += item.ImporteCheque;
+                                                    TotalTarjeta += item.ImporteTarjeta;
+                                                    TotalDeposito += item.ImporteDeposito;
 
                                                     <tr>
-
-
-
-
-                                                        <td>
+                                                        <td style="max-width: 33%;">
                                                             @Html.DisplayFor(modelItem => item.Concepto)
                                                         </td>
-                                                        <td>
+                                                        <td class="text-right">
                                                             @Html.DisplayFor(modelItem => item.ImportePesos)
                                                         </td>
 
-                                                        <td>
+                                                        <td class="text-right">
                                                             @Html.DisplayFor(modelItem => item.ImporteDolar)
-
-
-
-
                                                         </td>
 
-                                                        <td>
+                                                        <td class="text-right">
                                                             @Html.DisplayFor(modelItem => item.ImporteCheque)
                                                         </td>
 
-                                                        <td>
+                                                        <td class="text-right">
                                                             @Html.DisplayFor(modelItem => item.ImporteTarjeta)
                                                         </td>
 
@@ -182,124 +137,98 @@
                                                             @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
                                                         </td>
 
-
-
-
-
-
-
-
                                                     </tr>
-
-
-
-
 
                                                 }
 
-
-
                                             </tbody>
 
-
-
                                         </table>
-                                                                
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row m-t-30">
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        Saldo Procesado
+                                    </div>
+                                </div>
+
+
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label class=""> Pesos</label>
+                                        <input type="text" value="@Html.Raw(TotalPesos)" class="form-control form-control-sm" />
+                                    </div>
 
                                 </div>
-                                <div class="row">
 
-                                    <div class="col-4">
-
-                                        <div class="form-group">
-
-                                            Saldo Procesado
-                                        </div>
-
-
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label> Dolares</label>
+                                        <input type="text" value="@Html.Raw(TotalDolares)" class="form-control form-control-sm" />
                                     </div>
 
+                                </div>
 
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label class=""> Pesos</label>
-                                            <input type="text" value="@Html.Raw(TotalPesos)" class="form-control form-control-sm" />
-
-
-
-                                        </div>
-
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label>Cheques</label>
+                                        <input type="text" value="@Html.Raw(TotalDeposito)" class="form-control form-control-sm" />
                                     </div>
+                                </div>
 
-                                    <div class="col-2">
-                                        <div class="form-group">
-
-                                            <label> Dolares</label>
-                                            <input type="text" value="@Html.Raw(TotalDolares)"   class="form-control form-control-sm"/>
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-2">
-
-                                        <div class="form-group">
-
-                                            <label>Depositos</label>
-                                            <input type="text" value="@Html.Raw(TotalDeposito)"  class="form-control form-control-sm" />
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-2">
-
-                                        <div class="form-group">
-
-                                            <label> Tarjetas</label>
-                                            <input type="text" value="@Html.Raw(TotalTarjeta)"  class="form-control form-control-sm" />
-
-                                        </div>
-
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label> Tarjetas</label>
+                                        <input type="text" value="@Html.Raw(TotalTarjeta)" class="form-control form-control-sm" />
                                     </div>
 
                                 </div>
 
                             </div>
+                           
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <!-- Column -->
             <div class="col-lg-12">
                 <div class="card">
-                    <h2 class="page-header">Ingreso de Caja</h2>
+
                     <div class="card-body">
-                        <form action="#">
-                            <div class="form-body">
-
-                                <div class="row col-12">
-
-
-
-                                    <div class="col-8">
-
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-
-
+                        <h4 class="card-title">Ingreso de Caja</h4>
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                        @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                        @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger form-control-sm" })
                                     </div>
-
-                                    
-
-                                    @*<div class="col-md-6 m-t-30">
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="readonly5">Grupo Caja</label>
+                                        @Html.DropDownList("IdGrupoCaja", ListaCodigoCaja, null, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                     
+                                        @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
+                                        @Html.TextBoxFor(m => m.Fecha, new { @class = "form-control form-control-sm fechadatepicker" })
+                                        @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger form-control-sm " })
+                                    </div>
+                                </div>
+                                
+                                @*<div class="col-md-6 m-t-30">
 
                                         <div class="checkbox">
                                             <div class="form-group ">
@@ -310,124 +239,69 @@
                                         </div>
                                     </div>*@
 
-                                </div>
-
-
-                                <div class="row col-12">
-
-                                    <div class="col-3">
-
-                                        <div class="form-group">
-
-                                            @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
-                                            @Html.TextBoxFor(m => m.Fecha, new { @class = "form-control form-control-sm" })
-                                            @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger form-control-sm " })
-                                        </div>
-
-
-                                    </div>
-
-
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.ImportePesos, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            @Html.EditorFor(model => model.ImportePesos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImportePesos, "", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.ImporteDolar, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            @Html.EditorFor(model => model.ImporteDolar, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteDolar, "", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-3">
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.ImporteDeposito, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            @Html.EditorFor(model => model.ImporteDeposito, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteDeposito, "", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="row col-12">
-                                    <div class="col-6">
-                                        <div class="form-group">
-
-                                            <label for="readonly5">Grupo Caja</label>
-                                            @Html.DropDownList("IdGrupoCaja", ListaCodigoCaja, null, new { @class = "form-control form-control-sm" })
-                                            @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-3">
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.ImporteTarjeta, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            @Html.EditorFor(model => model.ImporteTarjeta, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-3">
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.ImporteCheque, htmlAttributes: new { @class = "control-label form-control-sm" })
-
-                                            @Html.EditorFor(model => model.ImporteCheque, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteCheque, "", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-
-
-                                <div class="row col-12">
-                                    <p>
-                                        <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
-                                        @Html.ActionLink("Cancelar", "Index", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })
-                                    </p>
-                                </div>
-
-
-
-
                             </div>
 
+                            <div class="row">
 
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-control-sm"> Imp. Pesos </label>
+                                        
+                                        @Html.EditorFor(model => model.ImportePesos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                        @Html.ValidationMessageFor(model => model.ImportePesos, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
 
-                        </form>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-control-sm"> Imp. Dolar </label>
+                                        @Html.EditorFor(model => model.ImporteDolar, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                        @Html.ValidationMessageFor(model => model.ImporteDolar, "", new { @class = "text-danger form-control-sm" })
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-control-sm"> Imp. Depósito </label>
+                                        @Html.EditorFor(model => model.ImporteDeposito, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                        @Html.ValidationMessageFor(model => model.ImporteDeposito, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-control-sm"> Imp. Tarjeta </label>
+                                        @Html.EditorFor(model => model.ImporteTarjeta, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                        @Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label class="control-label form-control-sm"> Imp. Cheque </label>
+                                        @Html.EditorFor(model => model.ImporteCheque, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                        @Html.ValidationMessageFor(model => model.ImporteCheque, "", new { @class = "text-danger form-control-sm" })
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
+
+                                    @Html.ActionLink("Cancelar", "Index", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })
+                                </div>                               
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Column -->
         </div>
-
-
     </div>
-
-
-
 
 }
 
@@ -457,15 +331,25 @@
 
     $(function () {
 
+        $('.fechadatepicker').datepicker({
+            language: 'es',
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            todayHighlight: true
+
+        }).datepicker('setDate', new Date());
+
         $('#example23').DataTable({
             "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
             "order": [[2, 'asc']],
-            'paging': true,
+            'paging': false,
             'lengthChange': false,
             'searching': false,
             'ordering': false,
             'info': false,
             'autoWidth': true,
+            'scrollY': '200px',
+            'scrollCollapse': true,
             'dom': 'Bfrtip',
             'buttons': []
         });
@@ -480,8 +364,7 @@
 <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
 
 <script>
-    jQuery(document).ready(function ()
-    {
+    jQuery(document).ready(function () {
         // Switchery
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
         $('.js-switch').each(function () {
@@ -490,21 +373,13 @@
 
         var changeCheckbox = document.querySelector('.js-check-activo')
             , changeField = document.querySelector('.js-check-activo-field');
-        changeCheckbox.onchange = function ()
-        {
+        changeCheckbox.onchange = function () {
             $("input[type='hidden'][name='tipo']").val(changeCheckbox.checked);
         };
 
 
-         
+
 
     });
 </script>
-
-
-
-
-
-}
-
 

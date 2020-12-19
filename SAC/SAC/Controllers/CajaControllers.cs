@@ -21,27 +21,18 @@ namespace SAC.Controllers
 
 
         public CajaController()
-        {            
+        {
             servicioCaja._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
-
-
-        
-
-
-        //}
 
 
         public ActionResult Index()
         {
 
-           
-            CajaModelView  model = new CajaModelView();
+
+            CajaModelView model = new CajaModelView();
             model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
             model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
-
-
-
             CargarCajaGrupo();
             return View(model);
 
@@ -59,7 +50,6 @@ namespace SAC.Controllers
             {
                 try
                 {
-
 
                     var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
                     model.IdUsuario = OUsuario.IdUsuario;
@@ -98,38 +88,36 @@ namespace SAC.Controllers
             else
             {
                 model = Mapper.Map<CajaModel, CajaModelView>(servicioCaja.GetCajaPorId(id));
-                
+
             }
 
-           // model.Roles = Mapper.Map<List<RolModel>, List<RolModelView>>(servicioConfiguracion.GetAllRoles());
+            // model.Roles = Mapper.Map<List<RolModel>, List<RolModelView>>(servicioConfiguracion.GetAllRoles());
             return View(model);
         }
 
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]         
+        [ValidateAntiForgeryToken]
         public ActionResult AddOrEdit(CajaModelView model)
         {
             try
-            {        
-            if (ModelState.IsValid)
             {
-
+                if (ModelState.IsValid)
+                {
                     var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
-                    model.IdUsuario= OUsuario.IdUsuario;
-                    //servicioCaja._mensaje("","ok");
-               if (model.Id <= 0)
-                {
-                   servicioCaja.GuardarCaja(Mapper.Map<CajaModelView, CajaModel>(model));
+                    model.IdUsuario = OUsuario.IdUsuario;
+                    if (model.Id <= 0)
+                    {
+                        servicioCaja.GuardarCaja(Mapper.Map<CajaModelView, CajaModel>(model));
+                    }
+                    else
+                    {
+                        servicioCaja.ActualizarCaja(Mapper.Map<CajaModelView, CajaModel>(model));
+                    }
+                    return RedirectToAction(nameof(Index));
                 }
-                else
-                {
-                    servicioCaja.ActualizarCaja(Mapper.Map<CajaModelView, CajaModel>(model));
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
+                return View(model);
 
             }
             catch (Exception)
@@ -138,14 +126,14 @@ namespace SAC.Controllers
             }
         }
 
-      
+
         [HttpPost]
         public ActionResult Eliminar(int id)
         {
             try
             {
                 servicioCaja.Eliminar(id);
-               
+
             }
             catch (Exception ex)
             {
@@ -155,28 +143,23 @@ namespace SAC.Controllers
             return RedirectToAction("Index");
         }
 
-           
+
 
 
 
         //combo cajagrupo
         public void CargarCajaGrupo()
-        {          
-            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());        
+        {
+            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());
             List<SelectListItem> retornoListaCajaGrupo = null;
             retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
-                                                                  {
-                                                                      Value = x.Id.ToString(),
-                                                                      Text = x.Codigo
-                                                                  })).ToList();
-            retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "--Seleccione Codigo de Caja--", Value = "" });
+            {
+                Value = x.Id.ToString(),
+                Text = x.Codigo
+            })).ToList();
+            retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "Seleccionar Grupo", Value = "" });
             ViewBag.Listapagina = retornoListaCajaGrupo;
         }
-
-
-
-
-       
 
     }
 

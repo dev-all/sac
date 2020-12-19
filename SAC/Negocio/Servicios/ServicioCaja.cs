@@ -24,14 +24,6 @@ namespace Negocio.Servicios
             
         }
 
-
-
-      
-
-
-
-
-
         #region "Metodos de Lectura de Datos"
 
 
@@ -87,8 +79,6 @@ namespace Negocio.Servicios
         {
             try
             {
-
-
                 var retorno = CajaRepositorio.DeleteCaja(IdCaja);
                 _mensaje("Se eliminó correctamente", "ok");
 
@@ -99,19 +89,12 @@ namespace Negocio.Servicios
                 throw new Exception();
 
             }
-
-        }
-
-
-
-     
+        }     
 
         public CajaModel GuardarCaja(CajaModel model)
         {
-
             try
-            {
-                
+            {                
                 model.Activo = true;               
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = CajaRepositorio.Insertar(Mapper.Map< CajaModel,Caja>(model));
@@ -122,13 +105,8 @@ namespace Negocio.Servicios
             {
                 _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
                 throw new Exception();
-
             }
-
-
         }
-
-
 
         public CajaModel ActualizarCaja(CajaModel model)
         {

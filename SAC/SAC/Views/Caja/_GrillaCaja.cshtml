@@ -10,22 +10,13 @@
     }
 </style>
 
-<!-- ============================================================== -->
-<!-- Start Page Content -->
-<!-- ============================================================== -->
-
-
-
-
                     <table id="TablaCaja" class="table stylish-table" borde="2">
-
 
                         <thead>
 
                             <tr>
                                 <td align="center">
                                     <strong>Saldo Inicial</strong>
-
                                 </td>
                                 <td align="center">
                                     <strong>Pesos</strong>
@@ -42,82 +33,44 @@
 
                             </tr>
 
-
                             <tr>
-
-
                                 <th class="sort-alpha">Concepto</th>
                                 <th class="sort-numeric">Pesos</th>
                                 <th>Dolares</th>
                                 <th>Cheques</th>
                                 <th>Tarjeta</th>
                                 <th>Fecha</th>
-                                <th>Grupo Caja</th>
-                             
-
-
-                                </t>
+                                <th>Grupo Caja</th>                             
+                             </tr>
                         </thead>
                         <tbody>
 
                             @foreach (var item in Model)
                             {
                                 <tr class="@("table-" + item.Id)">
-
-
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Concepto)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ImportePesos)
                                     </td>
-
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ImporteDolar)
-
-
-
-
                                     </td>
-
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ImporteCheque)
                                     </td>
-
                                     <td>
                                         @Html.DisplayFor(modelItem => item.ImporteTarjeta)
                                     </td>
-
                                     <td>
-
-
                                         @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
-
-
-
-
                                     </td>
-
                                     <td>
                                         @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
                                     </td>
-
-
-
-                                    
-
-
-
-
                                 </tr>
-
-
-
-
-
                             }
-
-
 
                         </tbody>
 
