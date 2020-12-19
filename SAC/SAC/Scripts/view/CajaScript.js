@@ -33,7 +33,7 @@ $('#example23').DataTable({
     'buttons': []
 });
 
-    $("#Birthday").datepicker({ dateFormat: "dd/mm/yy" }).mask("99/99/9999");
+    $("#Birthday").datepicker({ dateFormat: "dd/mm/yyyy" }).mask("99/99/9999");
     $.validator.addMethod('date',
         function (value, element, params) {
             if (this.optional(element)) {
@@ -41,7 +41,7 @@ $('#example23').DataTable({
             }
             var ok = true;
             try {
-                $.datepicker.parseDate('dd/mm/yy', value);
+                $.datepicker.parseDate('dd/mm/yyyy', value);
             }
             catch (err) {
                 ok = false;
