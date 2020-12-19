@@ -1,15 +1,47 @@
 ﻿
+$(function () {
 
 
 
 
-jQuery('.fechadatepicker').datepicker({
+
+    // Switchery
+    //var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+    //$('.js-switch').each(function () {
+    //    new Switchery($(this)[0], $(this).data());
+    //});
+
+    //var changeCheckbox = document.querySelector('.js-check-activo')
+    //    , changeField = document.querySelector('.js-check-activo-field');
+    //changeCheckbox.onchange = function () {
+    //    $("input[type='hidden'][name='tipo']").val(changeCheckbox.checked);
+    //};
+
+
+$('#example23').DataTable({
+    "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+    "order": [[2, 'asc']],
+    'paging': false,
+    'lengthChange': false,
+    'searching': false,
+    'ordering': false,
+    'info': false,
+    'autoWidth': true,
+    'scrollY': '200px',
+    'scrollCollapse': true,
+    'dom': 'Bfrtip',
+    'buttons': []
+});
+
+
+$('.fechadatepicker').datepicker({
     language: 'es',
     autoclose: true,
     format: 'dd/mm/yyyy',
     todayHighlight: true
-
 }).datepicker('setDate', new Date());
+
+});
 
 
 

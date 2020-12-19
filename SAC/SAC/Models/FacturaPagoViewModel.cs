@@ -19,8 +19,7 @@ namespace SAC.Models
         public List<CompraFacturaViewModel> FacturasAPagar { get; set; }
 
         //monto total a pagas
-        [Display(Name = "Total Seleccionado")]
-     
+        [Display(Name = "Total Seleccionado")]     
         public decimal TotalAPagar { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
@@ -40,9 +39,6 @@ namespace SAC.Models
         public List<ChequeModelView> ListaChequesTerceros { get; set; }
         public List<ChequeraModelView> ListaChequesPropios { get; set; }
         public List<SelectListItem> ListaPresupuestoActual { get; set; }
-
-
-
 
         public int idTarjeta { get; set; }
 

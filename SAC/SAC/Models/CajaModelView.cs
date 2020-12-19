@@ -15,14 +15,16 @@ namespace SAC.Models
 
         public int IdTipoMovimiento { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El campo no puede estar vacio")]
         public string Concepto { get; set; }
-            
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]     
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Fecha { get; set; }
 
         public string Tipo { get; set; }
         public string Saldo { get; set; }
+        [Required(ErrorMessage = "Seleccione un items")]
         public int IdGrupoCaja { get; set; }
 
         public string Recibo { get; set; }
@@ -32,7 +34,7 @@ namespace SAC.Models
 
         [Display(Name = "Importe Depósito")]
         public decimal ImporteDeposito { get; set; }
-
+        [Required(ErrorMessage = "Seleccione un items")]
         public Nullable<int> IdCuentaBanco { get; set; }
         [Display(Name = "Importe Dolar")]
         public decimal ImporteDolar { get; set; }

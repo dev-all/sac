@@ -187,7 +187,7 @@
                                 </div>
 
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -218,14 +218,16 @@
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
-                                     
-                                        @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
-                                        @Html.TextBoxFor(m => m.Fecha, new { @class = "form-control form-control-sm fechadatepicker" })
-                                        @Html.ValidationMessageFor(m => m.Fecha, "", new { @class = "text-danger form-control-sm " })
+
+                                        @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })     
+                                
+                                        @Html.EditorFor(model => model.Fecha, new { @class = " form-control form-control-sm fechadatepicker " })                                
+
+                                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                
-                           
+
+
                             </div>
 
                             <div class="row">
@@ -233,7 +235,7 @@
                                 <div class="col-2">
                                     <div class="form-group">
                                         <label class="control-label form-control-sm"> Imp. Pesos </label>
-                                        
+
                                         @Html.EditorFor(model => model.ImportePesos, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
                                         @Html.ValidationMessageFor(model => model.ImportePesos, "", new { @class = "text-danger form-control-sm" })
                                     </div>
@@ -274,13 +276,13 @@
                                 </div>
 
                             </div>
-                           
+
                             <div class="row">
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
 
                                     @Html.ActionLink("Cancelar", "Index", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })
-                                </div>                               
+                                </div>
                             </div>
 
                         </div>
@@ -298,11 +300,10 @@
     <!-- Date Picker Plugin JavaScript -->
     <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
+
     <script src="~/Scripts/view/CajaScript.js"></script>
 
-
     <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -311,6 +312,8 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
+    <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
+
 }
 
 <script type="text/javascript">
@@ -318,51 +321,21 @@
 
     $(function () {
 
-        $('.fechadatepicker').datepicker({
-            language: 'es',
-            autoclose: true,
-            format: 'dd/mm/yyyy',
-            todayHighlight: true
-
-        }).datepicker('setDate', new Date());
-
-        $('#example23').DataTable({
-            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
-            "order": [[2, 'asc']],
-            'paging': false,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': false,
-            'info': false,
-            'autoWidth': true,
-            'scrollY': '200px',
-            'scrollCollapse': true,
-            'dom': 'Bfrtip',
-            'buttons': []
-        });
-    });
 
 
 
 
-
-</script>
-
-<script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
-
-<script>
-    jQuery(document).ready(function () {
         // Switchery
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-        $('.js-switch').each(function () {
-            new Switchery($(this)[0], $(this).data());
-        });
+        //var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        //$('.js-switch').each(function () {
+        //    new Switchery($(this)[0], $(this).data());
+        //});
 
-        var changeCheckbox = document.querySelector('.js-check-activo')
-            , changeField = document.querySelector('.js-check-activo-field');
-        changeCheckbox.onchange = function () {
-            $("input[type='hidden'][name='tipo']").val(changeCheckbox.checked);
-        };
+        //var changeCheckbox = document.querySelector('.js-check-activo')
+        //    , changeField = document.querySelector('.js-check-activo-field');
+        //changeCheckbox.onchange = function () {
+        //    $("input[type='hidden'][name='tipo']").val(changeCheckbox.checked);
+        //};
 
 
 
