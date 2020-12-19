@@ -70,6 +70,9 @@
     <Compile Include="ModeloDeDatos\AfipCategorias.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\Banco.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\BancoCuenta.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -124,13 +127,13 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="ModeloDeDatos\Evento.cs">
-      <DependentUpon>Entidades.tt</DependentUpon>
-    </Compile>
     <Compile Include="ModeloDeDatos\GrupoCaja.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\GrupoCuenta.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\GrupoPresupuesto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\homePorRol.cs">
@@ -145,9 +148,6 @@
     <Compile Include="ModeloDeDatos\MenuSidebar.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloDeDatos\Notificacion.cs">
-      <DependentUpon>Entidades.tt</DependentUpon>
-    </Compile>
     <Compile Include="ModeloDeDatos\Pais.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -155,9 +155,6 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\PrespuestoActual.cs">
-      <DependentUpon>Entidades.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ModeloDeDatos\Prioridad.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Proveedor.cs">
@@ -211,6 +208,7 @@
     <Compile Include="Repositorios\BancoCuentaRepositorio.cs" />
     <Compile Include="Repositorios\CajaGrupoRepositorio.cs" />
     <Compile Include="Repositorios\CajaRepositorio.cs" />
+    <Compile Include="Repositorios\CajaSaldoRepositorio.cs" />
     <Compile Include="Repositorios\ChequeraRepositorio.cs" />
     <Compile Include="Repositorios\ChequeRepositorio.cs" />
     <Compile Include="Repositorios\CompraFacturaPagoRepositorio.cs" />
@@ -227,7 +225,6 @@
     <Compile Include="Repositorios\RolRepositorio.cs" />
     <Compile Include="Repositorios\MenuSidebarRepositorio.cs" />
     <Compile Include="Repositorios\PersonaRepositorio.cs" />
-    <Compile Include="Repositorios\EventoRepositorio.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\SubRubroRepositorio.cs" />
     <Compile Include="Repositorios\TarjetaRepositorio.cs" />

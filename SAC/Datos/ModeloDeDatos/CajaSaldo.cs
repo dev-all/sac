@@ -22,6 +22,7 @@ namespace Datos.ModeloDeDatos
     
         public int Id { get; set; }
         public int NumeroCierrre { get; set; }
+        public System.DateTime Fecha { get; set; }
         public decimal ImporteInicialPesos { get; set; }
         public Nullable<decimal> ImporteInicialDolares { get; set; }
         public decimal ImporteInicialCheques { get; set; }
@@ -32,7 +33,6 @@ namespace Datos.ModeloDeDatos
         public decimal ImporteFinalCheques { get; set; }
         public decimal ImporteFinalTarjetas { get; set; }
         public decimal ImporteFinalDepositos { get; set; }
-        public System.DateTime Fecha { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }

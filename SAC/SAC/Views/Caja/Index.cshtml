@@ -4,8 +4,6 @@
     ViewBag.Title = "Consulta e Ingresos de Caja";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
 <style>
     .dataTables_wrapper .dataTables_paginate .paginate_button {
         padding: 0.1em 1em;
@@ -128,9 +126,8 @@
                                                         </td>
 
                                                         <td>
-
-                                                            @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
-
+                                                            @Html.DisplayFor(modelItem => item.Fecha)
+                                                            @*@Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")*@
                                                         </td>
 
                                                         <td>
@@ -228,17 +225,7 @@
                                     </div>
                                 </div>
                                 
-                                @*<div class="col-md-6 m-t-30">
-
-                                        <div class="checkbox">
-                                            <div class="form-group ">
-                                                Habilitar acceso al usuario?
-                                                <input type="checkbox" @Html.Raw((Model.Tipo) ? "checked" : " ") id="activo" class="js-switch js-check-activo" data-color="#26c6da" data-size="small" />
-                                                @Html.HiddenFor(model => model.Tipo)
-                                            </div>
-                                        </div>
-                                    </div>*@
-
+                           
                             </div>
 
                             <div class="row">

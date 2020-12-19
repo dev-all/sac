@@ -17,6 +17,7 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proveedor()
         {
+            this.Banco = new HashSet<Banco>();
             this.CompraFactura = new HashSet<CompraFactura>();
         }
     
@@ -26,6 +27,7 @@ namespace Datos.ModeloDeDatos
         public string Direccion { get; set; }
         public Nullable<int> IdPais { get; set; }
         public Nullable<int> IdProvincia { get; set; }
+        public Nullable<int> IdLocalidad { get; set; }
         public string Telefono { get; set; }
         public Nullable<int> IdTipoIva { get; set; }
         public Nullable<int> DiasFactura { get; set; }
@@ -43,17 +45,18 @@ namespace Datos.ModeloDeDatos
         public bool Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
-        public Nullable<int> IdLocalidad { get; set; }
     
-        public virtual Pais Pais { get; set; }
-        public virtual Provincia Provincia { get; set; }
-        public virtual TipoMoneda TipoMoneda { get; set; }
-        public virtual TipoProveedor TipoProveedor { get; set; }
-        public virtual TipoIva TipoIva { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Banco> Banco { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFactura> CompraFactura { get; set; }
         public virtual Imputacion Imputacion { get; set; }
         public virtual Imputacion Imputacion1 { get; set; }
+        public virtual Pais Pais { get; set; }
         public virtual PrespuestoActual PrespuestoActual { get; set; }
+        public virtual Provincia Provincia { get; set; }
+        public virtual TipoIva TipoIva { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
+        public virtual TipoProveedor TipoProveedor { get; set; }
     }
 }

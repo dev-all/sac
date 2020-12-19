@@ -139,8 +139,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="Controllers\CajaCierreController.cs" />
     <Compile Include="Controllers\CajaControllers.cs" />
     <Compile Include="Controllers\CajaGrupoController.cs" />
+    <Compile Include="Controllers\CajaSaldoController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -167,6 +169,7 @@
     <Compile Include="Models\BancoCuentaModelView.cs" />
     <Compile Include="Models\CajaGrupoModelView.cs" />
     <Compile Include="Models\CajaModelView.cs" />
+    <Compile Include="Models\CajaSaldoModelView.cs" />
     <Compile Include="Models\ChequeModelView.cs" />
     <Compile Include="Models\ChequeraModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
@@ -2844,6 +2847,10 @@
     <Content Include="Views\Caja\Index.cshtml" />
     <Content Include="Views\CajaGrupo\AddOrEdit.cshtml" />
     <Content Include="Views\CajaGrupo\Index.cshtml" />
+    <Content Include="Views\CajaCierre\Index.cshtml" />
+    <Content Include="Views\CajaSaldo\Detalle.cshtml" />
+    <Content Include="Views\CajaSaldo\Index.cshtml" />
+    <Content Include="Views\Caja\_GrillaCaja.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,11 +12,11 @@ namespace SAC.Models
     {
 
         public int Id { get; set; }
+
         public int IdTipoMovimiento { get; set; }
 
         [Required]
         public string Concepto { get; set; }
-
             
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]     
         public DateTime Fecha { get; set; }
@@ -46,15 +46,12 @@ namespace SAC.Models
         public DateTime UltimaModificacion { get; set; }
 
         public virtual CajaTipoMovimiento CajaTipoMovimiento { get; set; }
-        public virtual GrupoCaja GrupoCaja { get; set; }
 
+        public virtual GrupoCaja GrupoCaja { get; set; }
 
         public List<CajaModelView> ListaCaja { get; set; }
 
         public CajaSaldoModelView CajaSaldoInicial { get; set; }
-
-
-
 
     }
 }

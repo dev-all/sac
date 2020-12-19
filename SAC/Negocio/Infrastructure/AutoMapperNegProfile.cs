@@ -78,8 +78,8 @@ namespace Agenda.Infrastructure
             CreateMap<PersonaModel, Persona>();
             CreateMap<Persona, PersonaModel>();
 
-            CreateMap<PrioridadModel, Prioridad>();
-            CreateMap<Prioridad, PrioridadModel>();
+            //CreateMap<PrioridadModel, Prioridad>();
+            //CreateMap<Prioridad, PrioridadModel>();
 
             CreateMap<Pais, PaisModel>();
             CreateMap<PaisModel, Pais>();
@@ -102,8 +102,8 @@ namespace Agenda.Infrastructure
             CreateMap<TipoMoneda, TipoMonedaModel>();
             CreateMap<TipoMonedaModel, TipoMoneda>();
 
-            CreateMap<Evento, EventoModel>();
-            CreateMap<EventoModel, Evento>();
+            //CreateMap<Evento, EventoModel>();
+            //CreateMap<EventoModel, Evento>();
 
             CreateMap<Accion, AccionModel>();
             CreateMap<AccionModel, Accion>();
