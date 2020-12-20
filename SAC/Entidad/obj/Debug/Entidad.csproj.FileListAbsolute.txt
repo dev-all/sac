@@ -6,7 +6,7 @@ E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\obj\Debug\Entidad.dll
 E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\Entidad\obj\Debug\Entidad.pdb
 D:\SAC\SAC\Entidad\bin\Debug\Entidad.dll
 D:\SAC\SAC\Entidad\bin\Debug\Entidad.pdb
+D:\SAC\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
 D:\SAC\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
 D:\SAC\SAC\Entidad\obj\Debug\Entidad.dll
 D:\SAC\SAC\Entidad\obj\Debug\Entidad.pdb
-D:\SAC\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
