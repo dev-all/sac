@@ -65,13 +65,7 @@ namespace SAC.Controllers
             else
             {
                 RedirectToAction("Acceder","Cuenta");
-            }
-
-            //CultureInfo current = CultureInfo.CurrentUICulture;
-            //CultureInfo newUICulture = new CultureInfo("en-US");
-            //NumberFormatInfo formato = newUICulture.NumberFormat;
-            //formato.NumberDecimalSeparator = ".";
-            //CultureInfo.CurrentUICulture = newUICulture;
+            }        
         }
         [NonAction]
         public void CrearTempData(string msg_, string tipo_)

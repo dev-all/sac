@@ -130,7 +130,7 @@ namespace SAC.Models
 
         public TipoMoneda TipoMoneda { get; set; }
 
-        public virtual TipoProveedor TipoProveedor { get; set; }
+        public TipoProveedor TipoProveedor { get; set; }
 
 
 
