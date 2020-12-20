@@ -23,9 +23,16 @@ namespace SAC.Models
         public decimal Total { get; set; }
         public decimal Saldo { get; set; }
 
-        [Display(Name = "Fecha")]
+        //[DataType(DataType.Date)]
+        //[Display(Name = "Fecha"), Required(ErrorMessage = "Debe ingresar un fecha.")]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Fecha { get; set; }
+
+        //[Display(Name = "Fecha"), Required(ErrorMessage = "Debe ingresar un fecha.")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Vencimiento { get; set; }
+
         public decimal TotalDolares { get; set; }
         public decimal Cotizacion { get; set; }
         public DateTime FechaPago { get; set; }

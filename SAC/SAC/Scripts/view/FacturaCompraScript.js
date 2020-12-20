@@ -1,4 +1,28 @@
-﻿
+﻿$(function () {
+
+    //var formatDate = new Date();
+    //var responseDate = moment(new Date()).format('DD/MM/YYYY');
+
+    //$("#Fecha").attr("defaultValue",moment(new Date()).format('DD/MM/YYYY'));
+
+
+    //$(".birthday").datepicker({ dateFormat: "dd/mm/yyyy", 'setDate': new Date() }).mask("99/99/9999");
+    //$.validator.addMethod('date',
+    //    function (value, element, params) {
+    //        if (this.optional(element)) {
+    //            return true;
+    //        }
+    //        var ok = true;
+    //        try {
+    //            $.datepicker.parseDate('dd/mm/yyyy', value);
+    //        }
+    //        catch (err) {
+    //            ok = false;
+    //        }
+    //        return ok;
+    //    });
+
+});
 $('#NombreProveedor').autocomplete({  
     source: function (request, response) {
         $.getJSON("/Compras/GetListProveedorJson/", request, function (data) {
@@ -124,7 +148,6 @@ jQuery('.fechadatepicker').datepicker({
     autoclose: true,
     format: 'dd/mm/yyyy',
     todayHighlight: true
-
 }).datepicker('setDate', new Date());
 
 

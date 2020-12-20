@@ -29,6 +29,7 @@ namespace SAC.Controllers
         public ActionResult FacturaCompras()
         {
             CompraFacturaViewModel model = new CompraFacturaViewModel();
+            model.Fecha = DateTime.Now.Date;
             getTipo(model);
             return View(model);
         }
