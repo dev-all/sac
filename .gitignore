@@ -1,18 +1,12 @@
-*.vs*
-*.vs/*
+*.vs/
 
-*SAC/.vs/*
-*SAC/.vs/SAC/*
+*SAC/.vs/
 
-*SAC/SAC/obj/*
-*SAC/Negocio/obj/*
-*SAC/Datos/obj/*
-*SAC/Entidad/obj/*
 
-*SAC/SAC/obj*
-*SAC/Negocio/obj*
-*SAC/Datos/obj*
-*SAC/Entidad/obj*
+*SAC/SAC/obj/
+*SAC/Negocio/obj/
+*SAC/Datos/obj/
+*SAC/Entidad/obj/
 
 # User-specific files
 *.suo
