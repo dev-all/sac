@@ -1,5 +1,19 @@
 ﻿
-$(function () {
+$(function ()
+{
+    var TotalPesos = getNro($("#CajaSaldoInicial_ImporteFinalPesos").val()) + getNro($("#ProcesadoPesos").val());
+    var TotalDolares = getNro($("#CajaSaldoInicial_ImporteFinalDolares").val()) + getNro($("#ProcesadoDolares").val());
+    var TotalDepositos = getNro($("#CajaSaldoInicial_ImporteFinalDepositos").val()) + getNro($("#ProcesadoDepositos").val());
+    var TotalTarjetas = getNro($("#CajaSaldoInicial_ImporteFinalTarjetas").val()) + getNro($("#ProcesadoTarjetas").val());
+
+
+    $("#FinalPesos").val(TotalPesos)  ;
+    $("#FinalDolares").val(TotalDolares) ;
+    $("#FinalDepositos").val(TotalDepositos) ;
+    $("#FinalTarjetas").val(TotalTarjetas) ;
+
+
+
 
 
 
@@ -49,14 +63,18 @@ $('#example23').DataTable({
     //        return ok;
     //    });
 
-$('.fechadatepicker').datepicker({
-    language: 'es',
-    autoclose: true,
-    format: 'dd/mm/yyyy',
-    todayHighlight: true
-}).datepicker('setDate', new Date());
+
+
+//$('.fechadatepicker').datepicker({
+//    language: 'es',
+//    autoclose: true,
+//    format: 'dd/mm/yyyy',
+//    todayHighlight: true
+//}).datepicker('setDate', new Date());
+
 
 });
+
 
 
 

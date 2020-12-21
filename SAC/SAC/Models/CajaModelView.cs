@@ -20,7 +20,7 @@ namespace SAC.Models
         public string Concepto { get; set; }
 
         
-        [DisplayName("Fecha"), Required(ErrorMessage = "Debe ingresar un fecha.")]
+        [DisplayName("Fecha"), Required(ErrorMessage = "Debe ingresar una fecha.")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Fecha { get; set; }
@@ -57,6 +57,12 @@ namespace SAC.Models
         public List<CajaModelView> ListaCaja { get; set; }
 
         public CajaSaldoModelView CajaSaldoInicial { get; set; }
+
+        [DisplayName("Fecha Cierre"), Required(ErrorMessage = "Debe ingresar una Fecha.")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime FechaCierre { get; set; }
+
 
     }
 }

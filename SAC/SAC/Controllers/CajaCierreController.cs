@@ -39,13 +39,10 @@ namespace SAC.Controllers
             CajaModelView  model = new CajaModelView();
             model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
             model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
+            model.FechaCierre = DateTime.Now; //.ToString("dd/MM/yyyy");
+            CargarCierreCaja();
 
-
-
-            CargarCajaGrupo();
             return View(model);
-
-
         }
 
 
@@ -88,7 +85,7 @@ namespace SAC.Controllers
         public ActionResult AddOrEdit(int id = 0)
         {
 
-            CargarCajaGrupo();
+          //  CargarCajaGrupo();
 
             CajaModelView model;
             if (id == 0)
@@ -160,22 +157,40 @@ namespace SAC.Controllers
 
 
         //combo cajagrupo
-        public void CargarCajaGrupo()
-        {          
-            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());        
-            List<SelectListItem> retornoListaCajaGrupo = null;
-            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
-                                                                  {
-                                                                      Value = x.Id.ToString(),
-                                                                      Text = x.Codigo
-                                                                  })).ToList();
-            retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "--Seleccione Codigo de Caja--", Value = "" });
-            ViewBag.Listapagina = retornoListaCajaGrupo;
+        //public void CargarCajaGrupo()
+        //{
+        //    List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());
+        //    List<SelectListItem> retornoListaCajaGrupo = null;
+        //    retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
+        //    {
+        //        Value = x.Id.ToString(),
+        //        Text = x.Codigo
+        //    })).ToList();
+        //    retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "--Seleccione Codigo de Caja--", Value = "" });
+        //    ViewBag.Listapagina = retornoListaCajaGrupo;
+        //}
+
+
+
+
+        public void CargarCierreCaja()
+        {
+
+
+            List<CajaSaldoModelView> ListaCajaGrupo = Mapper.Map<List<CajaSaldoModel>, List<CajaSaldoModelView>>(servicioCajaSaldo.GetAllCajaSaldo());
+            List<SelectListItem> retornoListaCajaCierre = null;
+            retornoListaCajaCierre = (ListaCajaGrupo.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = "Nro: " + x.Id.ToString() + "- Fecha: " +  x.Fecha.ToString("dd/MM/yyyy")
+            })).ToList();
+            retornoListaCajaCierre.Insert(0, new SelectListItem { Text = "--Cierre Actual --", Value = "0" });
+            ViewBag.Listapagina = retornoListaCajaCierre;
+
+
+
+          
         }
-
-
-
-     
 
 
 
