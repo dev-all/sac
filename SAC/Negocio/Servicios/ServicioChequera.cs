@@ -28,27 +28,8 @@ namespace Negocio.Servicios
 
         public List<ChequeraModel> GetAllChequera()
         {
-            List<ChequeraModel> listaChequera = new List<ChequeraModel>();
-            listaChequera = Mapper.Map<List<Chequera>, List<ChequeraModel>>(pChequeraRepositorio.GetAllChequera());
-
-            foreach (var item in listaChequera)
-            {
-                switch (int.Parse(item.IdMoneda))
-                {
-                    case 1:
-                        item.tipoMonedaDescripcion = "Pesos";
-                        break;
-                    case 2:
-                        item.tipoMonedaDescripcion = "Dolares";
-                        break;
-                    case 3:
-                        item.tipoMonedaDescripcion = "Euros";
-                        break;
-                }
-            }
-
+            List<ChequeraModel> listaChequera =Mapper.Map<List<Chequera>, List<ChequeraModel>>(pChequeraRepositorio.GetAllChequera());
             return listaChequera;
-
         }
 
         public ChequeraModel obtenerCheque(int idCheque)

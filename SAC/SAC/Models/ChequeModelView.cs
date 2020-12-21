@@ -54,8 +54,10 @@ namespace SAC.Models
 
         //propiedad agregada
         public bool seleccionado { get; set; }
-   
-        public string tipoMonedaDescripcion { get; set; }
+
+        public TipoMoneda TipoMoneda { get; set; }
+
+        //public string tipoMonedaDescripcion { get; set; }
 
     }
 }

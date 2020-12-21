@@ -21,6 +21,7 @@ namespace Datos.Repositorios
         {
             List<Chequera> listaChequera = new List<Chequera>();
             listaChequera = context.Chequera.Where(p =>p.IdProveedor == null && p.NumeroRecibo ==null).ToList();
+            // listaChequera = context.Chequera.Where(p =>p.Usado == false && p.Activo==true).ToList();
             listaChequera = listaChequera.OrderBy(p => p.NumeroCheque).ToList();
             return listaChequera;
         }
@@ -46,6 +47,7 @@ namespace Datos.Repositorios
             nChequera.IdMoneda = oChequera.IdMoneda;
             nChequera.NumeroOperacion = oChequera.NumeroOperacion;
             nChequera.Registro = oChequera.Registro;
+            nChequera.Usado = oChequera.Usado;
             nChequera.Activo = oChequera.Activo;
             nChequera.IdUsuario = oChequera.IdUsuario;
             nChequera.UltimaModificacion = oChequera.UltimaModificacion;

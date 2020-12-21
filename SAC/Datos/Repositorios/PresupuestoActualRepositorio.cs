@@ -22,6 +22,34 @@ namespace Datos.Repositorios
             return context.PrespuestoActual.Where(p => p.Activo == true).ToList();
         }
 
+        public PrespuestoActual GetAllPresupuestos(int idPresupuesto)
+        {
+            return context.PrespuestoActual.Where(p => p.Activo == true && p.Id == idPresupuesto).First();
+        }
+
+
+        public PrespuestoActual ActualizarPresupuesto(PrespuestoActual oPresupuestoActual)
+        {
+
+            PrespuestoActual oPresupueActual = GetAllPresupuestos(oPresupuestoActual.Id);
+            oPresupueActual.Id = oPresupuestoActual.Id;
+            oPresupueActual.IdImputacion = oPresupuestoActual.IdImputacion;
+            oPresupueActual.IdUsuario = oPresupuestoActual.IdUsuario;
+            oPresupueActual.Periodo = oPresupuestoActual.Periodo;
+            oPresupueActual.Proveedor = oPresupuestoActual.Proveedor;
+            oPresupueActual.UltimaModificacion = oPresupuestoActual.UltimaModificacion;
+            oPresupueActual.Historico = oPresupuestoActual.Historico;
+            oPresupueActual.Ejecutado = oPresupuestoActual.Ejecutado;
+            oPresupueActual.Costos = oPresupuestoActual.Costos;
+            oPresupueActual.Concepto = oPresupuestoActual.Concepto;
+            oPresupueActual.CodigoCaja = oPresupuestoActual.CodigoCaja;
+            oPresupueActual.Codigo = oPresupuestoActual.Codigo;
+            oPresupueActual.Actual = oPresupuestoActual.Actual;
+            oPresupueActual.Activo = oPresupuestoActual.Activo;
+            context.SaveChanges();
+            return oPresupueActual;
+
+        }
 
 
     }

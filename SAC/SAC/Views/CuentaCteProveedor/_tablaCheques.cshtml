@@ -25,7 +25,7 @@
                 <td>@Html.DisplayFor(modelItem => item.NumeroCheque)</td>
                 <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
                 <td>@Html.DisplayFor(modelItem => item.Importes)</td>
-                <td>@Html.DisplayFor(modelItem => item.tipoMonedaDescripcion)</td>
+                <td>@Html.DisplayFor(modelItem => item.TipoMoneda.Descripcion)</td>
                 @*<td>@Html.CheckBoxFor(modelItem => item.seleccionado, new { @class = "checkChequePropio" })</td>*@
             </tr>
             }
@@ -62,7 +62,7 @@
                 <td>@Html.DisplayFor(modelItem => item.NumeroCheque)</td>
                 <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
                 <td>@Html.DisplayFor(modelItem => item.Importe)</td>
-                <td>@Html.DisplayFor(modelItem => item.tipoMonedaDescripcion)</td>
+                <td>@Html.DisplayFor(modelItem => item.TipoMoneda.Descripcion)</td>
                 @*<td>@Html.CheckBoxFor(modelItem => item.seleccionado, new { @class = "checkChequeTercero", @id = item.Id })</td>*@
             </tr>
             }

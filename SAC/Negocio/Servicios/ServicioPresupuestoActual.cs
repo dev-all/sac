@@ -31,6 +31,17 @@ namespace Negocio.Servicios
             return Mapper.Map<List<PrespuestoActual>, List<PresupuestoActualModel>>(oPresupuestoActualRepositorio.GetAllPresupuestos());
         }
 
+        public PresupuestoActualModel GetAllPresupuestos(int idPresupuesto)
+        {
+            return Mapper.Map<PrespuestoActual, PresupuestoActualModel>(oPresupuestoActualRepositorio.GetAllPresupuestos(idPresupuesto));
+        }
+
+
+        public PresupuestoActualModel ActualizarPresupuesto(PresupuestoActualModel oPresupuestoActualModel)
+        {
+            PrespuestoActual oPresupuestoActual = Mapper.Map<PresupuestoActualModel, PrespuestoActual>(oPresupuestoActualModel);
+            return Mapper.Map<PrespuestoActual, PresupuestoActualModel>(oPresupuestoActualRepositorio.ActualizarPresupuesto(oPresupuestoActual));
+        }
 
 
     }

@@ -20,6 +20,9 @@ namespace Datos.Repositorios
             List<Cheque> listaCheque = context.Cheque.Where(p => p.Activo == true && p.NumeroPago == null && p.IdFactura == null).ToList();
             //List<Cheque> listaCheque = context.Cheque.ToList();
             listaCheque = listaCheque.OrderBy(p => p.NumeroCheque).ToList();
+
+           // List<Cheque> listaCheque = context.Cheque.Where(p => p.Activo == true && p.Endosado == false ).ToList();
+           // return listaCheque.OrderBy(p => p.NumeroCheque).ToList();
             return listaCheque;
         }
 

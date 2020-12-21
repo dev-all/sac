@@ -19,7 +19,8 @@ namespace SAC.Models
         public List<CompraFacturaViewModel> FacturasAPagar { get; set; }
 
         //monto total a pagas
-        [Display(Name = "Total Seleccionado")]     
+        [Display(Name = "Total Seleccionado")]
+     
         public decimal TotalAPagar { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]

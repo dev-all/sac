@@ -48,10 +48,14 @@ namespace SAC.Models
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
+        public TipoMonedaModel TipoMoneda { get; set; }
+
 
         //propiedad agregada
         public bool seleccionado { get; set; }
 
-        public string tipoMonedaDescripcion { get; set; }
+
+
+       // public string tipoMonedaDescripcion { get; set; }
     }
 }

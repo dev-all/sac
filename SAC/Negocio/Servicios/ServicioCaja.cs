@@ -20,8 +20,7 @@ namespace Negocio.Servicios
       
         public ServicioCaja()
         {
-            CajaRepositorio = kernel.Get<CajaRepositorio>();
-            
+            CajaRepositorio = kernel.Get<CajaRepositorio>();            
         }
 
         #region "Metodos de Lectura de Datos"

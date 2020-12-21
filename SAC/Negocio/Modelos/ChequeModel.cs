@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Datos.ModeloDeDatos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,9 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
+
+
+        public TipoMoneda TipoMoneda { get; set; }
 
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }

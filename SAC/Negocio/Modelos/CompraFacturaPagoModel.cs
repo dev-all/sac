@@ -29,6 +29,8 @@ namespace Negocio.Modelos
 
         public string Observaciones { get; set; }
 
+        public bool Usado { get; set; }
+
         public Nullable<bool> Activo { get; set; }
 
         public Nullable<int> IdUsuario { get; set; }
