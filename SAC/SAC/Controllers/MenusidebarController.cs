@@ -127,31 +127,51 @@ namespace SAC.Controllers
             return RedirectToAction("Index");
         }
 
-        // POST: menusidebar/DeleteMenusidebar
-        [AutorizacionDeSistema]
-        [HttpPost, ActionName("Delete")]
+   
+       [HttpPost, ActionName("Delete")]
        [ValidateAntiForgeryToken]
-        public ActionResult DeleteX(int id)
+        public ActionResult Delete(int id)
         {
-            servicioConfiguracion.DeleteMenusidebar(id);
-            return RedirectToAction("Index");
+            try
+            {
+                servicioConfiguracion.DeleteMenusidebar(id);
+                servicioConfiguracion._mensaje("Se eliminó el registro", "ok");
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                servicioConfiguracion._mensaje("No se pudo eliminar el registro", "war");
+                return RedirectToAction("Index");
+            }
+           
 
         }
-      
-        [HttpPost, ActionName("Delete")]
-        public JsonResult Delete(int Id)
-        {
-            servicioConfiguracion.DeleteMenusidebar(Id);
-            return Json(new { status = "Success" });
-        }
+
+        //[HttpPost]
+        //public JsonResult Delete(int Id)
+        //{
+        //   // string strJson;
+        //    try
+        //    {
+        //        servicioConfiguracion.DeleteMenusidebar(Id);
+        //        // return Json(new { status = "Success" });
+        //        // return Json(new { data = strJson, result = true }, JsonRequestBehavior.AllowGet);
+        //        servicioConfiguracion._mensaje("Se eliminó el registro", "ok");              
+        //        return Json(new { result = true, msj = "Se eliminó el registro" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { result = false, msj = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         // GET: Accion/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
-      
+
 
 
     }

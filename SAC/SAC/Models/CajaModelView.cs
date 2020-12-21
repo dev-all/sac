@@ -32,17 +32,22 @@ namespace SAC.Models
 
         public string Recibo { get; set; }
 
+
         [Display(Name = "Importe Pesos")]
         public decimal ImportePesos { get; set; }
 
         [Display(Name = "Importe Depósito")]
         public decimal ImporteDeposito { get; set; }
+
         [Required(ErrorMessage = "Seleccione un items")]
         public Nullable<int> IdCuentaBanco { get; set; }
+
         [Display(Name = "Importe Dolar")]
         public decimal ImporteDolar { get; set; }
+
         [Display(Name = "Importe Tarjeta")]
         public decimal ImporteTarjeta { get; set; }
+
         [Display(Name = "Importe Cheque")]
         public decimal ImporteCheque { get; set; }
         public int IdCajaSaldo { get; set; }

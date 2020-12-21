@@ -94,29 +94,36 @@
             </div>
 
 
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Eliminar Registro</h3>
-                            <a href="#" class="close" data-dismiss="modal">&times;</a>
-                        </div>
-                        <div class="modal-body">
-                            <h4>¿Está seguro de que desea eliminar?</h4>
 
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" class="btn btn-default" data-dismiss="modal">Cancelar</a>
-                            <a id="btnConfirmEliminar" href="#" class="btn btn-success">Confirmar</a>
-                        </div>
 
+        }
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Eliminar Registro</h3>
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Delete", "Menusidebar", FormMethod.Post, new { @id = "frmEliminar" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("Id");
+                        }
+
+                        <h4>¿Está seguro de que desea eliminar?</h4>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Cancelar</a>
+                        <a id="btnConfirmEliminar" href="#" class="btn btn-success">Confirmar</a>
                     </div>
 
                 </div>
 
             </div>
 
-        }
+        </div>
     </div>
 </div>
 
@@ -127,21 +134,30 @@
 
             $("#btnEliminar").click(function (e) {
                 e.preventDefault();
+                $("#Id").val($("#menuSideBar_IdMenuSidebar").val());
                 $("#myModal").modal('show');
             });
 
             $("#btnConfirmEliminar").click(function (e) {
                 e.preventDefault();
-                var x = $("#menuSideBar_IdMenuSidebar").val();
-                $.ajax({
-                    type: "POST",
-                    url: "/Menusidebar/Delete",
-                    data: { Id: x },
-                    success: function (result) {
-                        $("#myModal").modal("hide");
-                        $("#row_" + x).remove();
-                    }
-                })
+                var frmEliminar = document.getElementById("frmEliminar");
+                frmEliminar.submit();
+
+                //var x = $("#menuSideBar_IdMenuSidebar").val();
+                //$.ajax({
+                //    type: "POST",
+                //    url: "/Menusidebar/Delete",
+                //    data: { Id: x },
+                //    success: function (r) {
+                //        if (r.result) {
+                //            //var x = JSON.parse(r.data);
+                //            toastr.success(r.msj)
+                //        } else {
+                //            toastr.warning(r.msj)
+                //        }
+                //        $("#myModal").modal("hide");
+                //    }
+                //})
             });
 
         });

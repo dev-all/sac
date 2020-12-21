@@ -278,6 +278,7 @@ namespace SAC.Controllers
                                           label = f.NumeroFactura.ToString()
                                       }).ToArray();
                 return Json(arrayProveedor, JsonRequestBehavior.AllowGet);
+              
             }
             catch (Exception ex)
             {

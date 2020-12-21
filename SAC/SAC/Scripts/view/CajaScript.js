@@ -72,12 +72,10 @@ $('#example23').DataTable({
 //    todayHighlight: true
 //}).datepicker('setDate', new Date());
 
-
+    if ($("#IdProveedor").val() > 0) {
+        getProvedor($("#IdProveedor").val());
+    }
 });
-
-
-
-
 
 
 function getTotales()
@@ -132,7 +130,7 @@ function setTotalPercepciones() {
     );
 
 }
-
+  
 function getNro(x)
 {
     x = parseFloat(x);
@@ -140,14 +138,25 @@ function getNro(x)
 }
 
 
-
-
-
-if ($("#IdProveedor").val() > 0) {
-  getProvedor($("#IdProveedor").val());
- }
-  
-
+//---- SCRIPT SUMA Y RESTA EN CAMPOS--------
+//function fncSumar() {
+//    caja = document.forms["sumar"].elements;
+//    var numero1 = Number(caja["numero1"].value);
+//    var numero2 = Number(caja["numero2"].value);
+//    var numero3 = Number(caja["numero3"].value);
+//    resultado = numero1 + numero2 - numero3;
+//    if (!isNaN(resultado)) {
+//        caja["resultado"].value = numero1 + numero2 - numero3;
+//    }
+//}
+//-----SCRIPT SEPARADOR DE MILES---------
+function format(input) {
+    var num = input.value.replace(/\./g, '');
+    if (isNaN(num)) {       
+        toastr.warning('Solo se permiten numeros');
+        input.value = input.value.replace(/[^\d\.]*/g, '');
+    }
+}
 
 
 
