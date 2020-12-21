@@ -9,6 +9,7 @@
 *SAC/Entidad/obj/
 
 # User-specific files
+*SAC/.vs/SAC/v16/.suo
 *.suo
 *.user
 *.userosscache
