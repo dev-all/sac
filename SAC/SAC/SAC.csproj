@@ -177,6 +177,8 @@
     <Compile Include="Models\CuentaCteProveedorModelView.cs" />
     <Compile Include="Models\FacturaPagoViewModel.cs" />
     <Compile Include="Models\PresupuestoActualModelView.cs" />
+    <Compile Include="Models\PresupuestoCostoModelView.cs" />
+    <Compile Include="Models\PresupuestoItemModelView.cs" />
     <Compile Include="Models\Request\bcraRequest.cs" />
     <Compile Include="Models\CompraFacturaViewModel.cs" />
     <Compile Include="Models\ConfigAccionModelView.cs" />

@@ -48,7 +48,7 @@ namespace SAC.Models
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public TipoMonedaModel TipoMoneda { get; set; }
+        public TipoMonedaModelView TipoMoneda { get; set; }
 
 
         //propiedad agregada

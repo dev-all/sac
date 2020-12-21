@@ -477,6 +477,36 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="PresupuestoCosto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Actual" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Ejecutado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Historico" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IdImputacion" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PresupuestoItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Importe" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pagado" Type="float" />
+          <Property Name="Periodo" Type="int" Nullable="false" />
+          <Property Name="Ejecutado" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="Id" />
@@ -1220,6 +1250,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PrespuestoActual" EntityType="Self.PrespuestoActual" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresupuestoCosto" EntityType="Self.PresupuestoCosto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresupuestoItem" EntityType="Self.PresupuestoItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
@@ -1637,6 +1669,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             <End Role="TipoComprobanteTipoIva" EntitySet="TipoComprobanteTipoIva" />
           </AssociationSet>
           <EntitySet Name="CuentaCorriente" EntityType="SAC_Model.CuentaCorriente" />
+          <EntitySet Name="PresupuestoCosto" EntityType="SAC_Model.PresupuestoCosto" />
+          <EntitySet Name="PresupuestoItem" EntityType="SAC_Model.PresupuestoItem" />
           </EntityContainer>
         <EntityType Name="GrupoPresupuesto">
           <Key>
@@ -2910,6 +2944,36 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="TotalDeuda" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="UltimoMovimiento" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="PresupuestoCosto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Actual" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Ejecutado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Historico" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PresupuestoItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Concepto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Importe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pagado" Type="Double" />
+          <Property Name="Periodo" Type="Int32" Nullable="false" />
+          <Property Name="Ejecutado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3624,6 +3688,38 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
                 <ScalarProperty Name="MontoPesos" ColumnName="MontoPesos" />
                 <ScalarProperty Name="ProveedorNombre" ColumnName="ProveedorNombre" />
                 <ScalarProperty Name="ProveedorCodigo" ColumnName="ProveedorCodigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresupuestoCosto">
+            <EntityTypeMapping TypeName="SAC_Model.PresupuestoCosto">
+              <MappingFragment StoreEntitySet="PresupuestoCosto">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="Historico" ColumnName="Historico" />
+                <ScalarProperty Name="Ejecutado" ColumnName="Ejecutado" />
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresupuestoItem">
+            <EntityTypeMapping TypeName="SAC_Model.PresupuestoItem">
+              <MappingFragment StoreEntitySet="PresupuestoItem">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Ejecutado" ColumnName="Ejecutado" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Pagado" ColumnName="Pagado" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

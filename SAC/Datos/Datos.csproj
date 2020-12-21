@@ -157,6 +157,12 @@
     <Compile Include="ModeloDeDatos\PrespuestoActual.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\PresupuestoCosto.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\PresupuestoItem.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Proveedor.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -218,6 +224,8 @@
     <Compile Include="Repositorios\DiarioRepositorio.cs" />
     <Compile Include="Repositorios\PaisRepositorio.cs" />
     <Compile Include="Repositorios\PresupuestoActualRepositorio.cs" />
+    <Compile Include="Repositorios\PresupuestoCostoRepositorio.cs" />
+    <Compile Include="Repositorios\PresupuestoItemRepositorio.cs" />
     <Compile Include="Repositorios\ProvinciaRepositorio.cs" />
     <Compile Include="Repositorios\LocalidadRepositorio.cs" />
     <Compile Include="Repositorios\ProveedorRepositorio.cs" />

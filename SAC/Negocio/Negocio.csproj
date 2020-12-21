@@ -82,6 +82,8 @@
     <Compile Include="Modelos\PaisModel.cs" />
     <Compile Include="Modelos\PersonaModel.cs" />
     <Compile Include="Modelos\PresupuestoActualModel.cs" />
+    <Compile Include="Modelos\PresupuestoCostoModel.cs" />
+    <Compile Include="Modelos\PresupuestoItemModel.cs" />
     <Compile Include="Modelos\PrioridadModel.cs" />
     <Compile Include="Modelos\ProveedorModel.cs" />
     <Compile Include="Modelos\ProvinciaModel.cs" />
@@ -121,6 +123,8 @@
     <Compile Include="Servicios\ServicioPais.cs" />
     <Compile Include="Servicios\ServicioPersona.cs" />
     <Compile Include="Servicios\ServicioPresupuestoActual.cs" />
+    <Compile Include="Servicios\ServicioPresupuestoCosto.cs" />
+    <Compile Include="Servicios\ServicioPresupuestoItem.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />
     <Compile Include="Servicios\ServicioProvincia.cs" />
     <Compile Include="Servicios\ServicioSubRubro.cs" />

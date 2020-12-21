@@ -90,6 +90,8 @@
         <AssociationConnector Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante" />
         <AssociationConnector Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva" />
         <EntityTypeShape EntityType="SAC_Model.CuentaCorriente" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SAC_Model.PresupuestoCosto" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SAC_Model.PresupuestoItem" Width="1.5" PointX="11.375" PointY="5.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

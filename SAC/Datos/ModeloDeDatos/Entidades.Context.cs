@@ -67,5 +67,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<ValorCotizacion> ValorCotizacion { get; set; }
         public virtual DbSet<CuentaCorriente> CuentaCorriente { get; set; }
+        public virtual DbSet<PresupuestoCosto> PresupuestoCosto { get; set; }
+        public virtual DbSet<PresupuestoItem> PresupuestoItem { get; set; }
     }
 }
