@@ -81,9 +81,31 @@ namespace Datos.Repositorios
 
         }
 
+        public List<Caja> getGrupoCajaFecha(int idgrupocaja, DateTime fechadesde, DateTime fechahasta)
+         {
 
-      
-    
-       
+            List<Caja> p = (from c in context.Caja
+                            where c.Activo == true && c.IdGrupoCaja == idgrupocaja && c.Fecha >= fechadesde && c.Fecha <= fechahasta
+                            select c).ToList();
+
+
+
+            // return context.Caja.Where(acc => acc.Activo == true && acc.IdGrupoCaja && acc.Fecha >=fechadesde && acc.Fecha <= fechahasta).OrderBy(acc => acc.Id).ToList();
+            return p;
+
+        }
+
+        public List<Caja> GetSaldoInicialCaja(int idgrupocaja, DateTime fechadesde)
+        {
+            List<Caja> p = (from c in context.Caja
+                            where c.Activo == true && c.IdGrupoCaja == idgrupocaja && c.Fecha <= fechadesde
+                            select c).ToList();
+            return p;
+
+            /*
+            return context.Caja.Where(acc => acc.Activo == true && acc => AccessViolationException. == idgrupocaja && c.Fecha <= fechadesde).OrderByDescending(acc => acc.NumeroCierrre).FirstOrDefault();
+
+            */
+        }
     }
 }

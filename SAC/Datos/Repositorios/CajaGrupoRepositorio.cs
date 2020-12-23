@@ -72,8 +72,38 @@ namespace Datos.Repositorios
         }
 
 
-      
-    
-       
+        private List<GrupoCaja> ListadoGrupoCaja()
+        {
+            return context.GrupoCaja.OrderBy(acc => acc.Codigo).ToList();
+        }
+
+        public int CerrarGrupoCaja()
+
+
+        {
+
+            //GrupoCaja GrupoCajaExistente = new GrupoCaja();
+
+            List<GrupoCaja> GrupoCajaExistente = GetAllGrupoCaja();
+
+            GrupoCajaExistente.ForEach(a =>
+            {
+                a.ParcialPesos = 0;
+                a.ParcialDolares = 0;
+                a.ParcialTarjetas = 0;
+                a.ParcialCheques= 0;
+                a.ParcialDepositos = 0;
+            });
+
+                     
+
+           
+            context.SaveChanges();
+
+            return 1;
+
+
+
+        }
     }
 }

@@ -69,5 +69,30 @@ namespace SAC.Models
         public DateTime FechaCierre { get; set; }
 
 
+        /* parametros para la consulta  */
+
+        [Display(Name = "Grupo Caja")]
+        public int cIdGrupoCaja { get; set; }
+
+        [Display(Name = "Fecha Desde")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+         public DateTime cFechaDesde { get; set; }
+
+        
+        [Display(Name = "Fecha Hasta")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime cFechaHasta { get; set; }
+
+        public bool CVisible { get; set; }
+
+        public CajaModelView CCajaSaldoInicial { get; set; }
+
+
+
+
+
+
     }
 }

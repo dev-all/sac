@@ -104,6 +104,48 @@ namespace SAC.Controllers
         }
 
 
+      
+        public ActionResult ConsultaGrupo()
+        {
+
+
+            List<CajaGrupoModelView> cajaGrupoModelViews = new List<CajaGrupoModelView>();
+            cajaGrupoModelViews = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(serviciocajagrupo.GetAllCajaGrupo());
+            return View(cajaGrupoModelViews);
+
+
+
+        }
+
+        [HttpPost]
+        public ActionResult CajaGrupoCerrar()
+        {
+
+
+            try
+            {
+               serviciocajagrupo.CerrarGrupoCaja();
+
+            }
+            catch (Exception ex)
+            {
+                serviciocajagrupo._mensaje(ex.Message, "error");
+            }
+
+            return RedirectToAction("ConsultaGrupo");
+
+   
+
+
+
+
+
+        }
+
+
+
+
+
     }
 }
 

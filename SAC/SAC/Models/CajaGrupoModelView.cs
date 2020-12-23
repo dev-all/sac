@@ -13,32 +13,38 @@ namespace SAC.Models
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Concepto { get; set; }
-        public decimal? NetoTotalP { get; set; }
+
         [Display(Name = "Neto Total Pesos")]
-        public decimal? NetoTotalD { get; set; }
-        [Display(Name = "Neto Total Dolarés")]
-        public decimal? NetoTotalC { get; set; }
-        [Display(Name = "Neto Total Cheque")]
-        public decimal? NetoTotalT { get; set; }
-        [Display(Name = "Neto Total Tarjeta")]
-        public decimal? NetoTotalB { get; set; }
-        [Display(Name = "Neto Total Pesos")]
-        public decimal? NetoParcialP { get; set; }
+        public decimal? TotalPesos { get; set; }
+        [Display(Name = "Neto Total Dólares")]
+        public decimal? TotalDolares { get; set; }
+
+        [Display(Name = "Neto Total Cheques")]
+        public decimal TotalCheques { get; set; }
+        [Display(Name = "Neto Total Tarjetas")]
+        public decimal? TotalTarjetas { get; set; }
+        [Display(Name = "Neto Total Depósitos")]
+        public decimal? TotalDepositos { get; set; }
+
         [Display(Name = "Neto Parcial Pesos")]
-        public decimal? NetoParcialD { get; set; }
-        [Display(Name = "Neto Parcial Dolarés")]
-        public decimal? NetoParcialC { get; set; }
+        public decimal? ParcialPesos { get; set; }
+        [Display(Name = "Neto Parcial Dólares")]
+        public decimal? ParcialDolares { get; set; }
         [Display(Name = "Neto Parcial Cheques")]
-        public decimal? NetoParcialT { get; set; }
-        [Display(Name = "Neto Parcial Tarjeta")]
-        public decimal? NParcialB { get; set; }
-        public string Ltraa { get; set; }
-        public string Ltram { get; set; }
-        public Nullable<int> IdImputacion { get; set; }
-        public string Especial { get; set; }
-        public Nullable<bool> Activo { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
-        public Nullable<System.DateTime> UltimaModificacion { get; set; }
+        public decimal? ParcialCheques { get; set; }
+        [Display(Name = "Neto Parcial Tajetas")]
+        public decimal? ParcialTarjetas { get; set; }
+        [Display(Name = "Neto Parcial Depósitos")]
+        public decimal? ParcialDepositos { get; set; }
+        public decimal? IdImputacion { get; set; }
+        public bool NoBorrar { get; set; }
+        public bool Activo { get; set; }
+        public int IdUsuario { get; set; }
+        public System.DateTime UltimaModificacion { get; set; }
+
+        public ICollection<Caja> Caja { get; set; }
+
+
 
 
     }

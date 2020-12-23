@@ -161,7 +161,70 @@ namespace SAC.Controllers
             ViewBag.Listapagina = retornoListaCajaGrupo;
         }
 
+
+        public ActionResult ConsultaCaja()
+        {
+
+
+            CajaModelView model = new CajaModelView();
+           model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
+           model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
+            model.CVisible = false;
+            model.cFechaDesde = DateTime.Now;
+            model.cFechaHasta = DateTime.Now;
+            CargarCajaGrupo();
+
+           // return View();
+            return View(model);
+
+
+
+        }
+       
+        
+        [HttpPost]
+        public ActionResult ConsultaCaja(int CIdGrupoCaja, DateTime Cfechadesde,DateTime Cfechahasta)
+        {
+
+
+            CajaModelView model = new CajaModelView();
+            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.getGrupoCajaFecha(CIdGrupoCaja, Cfechadesde,Cfechahasta));
+            //model.CCajaSaldoInicial = Mapper.Map<List<CajaModel>, ListCajaModelView>(servicioCaja.GetSaldoInicialCaja(CIdGrupoCaja,Cfechadesde));
+
+            model.CVisible = true;
+            CargarCajaGrupo();
+            return View(model);
+
+
+        }
+
+
+
+        public ActionResult ConsultaPorGrupo()
+        {
+
+
+            CajaModelView model = new CajaModelView();
+            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
+            model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
+            model.CVisible = false;
+            model.cFechaDesde = DateTime.Now;
+            model.cFechaHasta = DateTime.Now;
+            CargarCajaGrupo();
+
+            // return View();
+            return View(model);
+
+
+
+        }
+
+
+     
+
     }
+
+  
 
 
 

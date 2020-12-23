@@ -13,24 +13,23 @@ namespace Negocio.Modelos
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Concepto { get; set; }
-        public Nullable<decimal> NetoTotalP { get; set; }
-        public Nullable<decimal> NetoTotalD { get; set; }
-        public Nullable<decimal> NetoTotalC { get; set; }
-        public Nullable<decimal> NetoTotalT { get; set; }
-        public Nullable<decimal> NetoTotalB { get; set; }
-        public Nullable<decimal> NetoParcialP { get; set; }
-        public Nullable<decimal> NetoParcialD { get; set; }
-        public Nullable<decimal> NetoParcialC { get; set; }
-        public Nullable<decimal> NetoParcialT { get; set; }
-        public Nullable<decimal> NParcialB { get; set; }
-        public string Ltraa { get; set; }
-        public string Ltram { get; set; }
+        public Nullable<decimal> TotalPesos { get; set; }
+        public Nullable<decimal> TotalDolares { get; set; }
+        public Nullable<decimal> TotalCheques { get; set; }
+        public Nullable<decimal> TotalTarjetas { get; set; }
+        public Nullable<decimal> TotalDepositos { get; set; }
+        public Nullable<decimal> ParcialPesos { get; set; }
+        public Nullable<decimal> ParcialDolares { get; set; }
+        public Nullable<decimal> ParcialCheques { get; set; }
+        public Nullable<decimal> ParcialTarjetas { get; set; }
+        public Nullable<decimal> ParcialDepositos { get; set; }
         public Nullable<int> IdImputacion { get; set; }
-        public string Especial { get; set; }
+        public Nullable<bool> NoBorrar { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
+          public  ICollection<Caja> Caja { get; set; }
     }
 
 }

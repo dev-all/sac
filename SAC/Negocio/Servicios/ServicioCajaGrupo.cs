@@ -144,10 +144,30 @@ namespace Negocio.Servicios
             }
 
         }
-   
+
+        public void CerrarGrupoCaja()
+        {
+
+            try
+            {
+
+
+                var retorno = cajaGrupoRepositorio.CerrarGrupoCaja();
+            _mensaje("Se Cerro correctamente el Grupo Caja", "ok");
+
+
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+
+            }
+        }
+
 
         #endregion
- }
+    }
 
 }
 

@@ -141,10 +141,27 @@ namespace Negocio.Servicios
             }
 
         }
-   
+
+        public List<CajaModel> getGrupoCajaFecha(int idgrupocaja, DateTime fechadesde, DateTime fechahasta)
+        {
+
+            var Caja = Mapper.Map<List<Caja>, List<CajaModel>>(CajaRepositorio.getGrupoCajaFecha(idgrupocaja,fechadesde,fechahasta));
+            return Caja;
+
+        }
+
+        public List<CajaModel> GetSaldoInicialCaja(int cIdGrupoCaja, DateTime cfechadesde)
+
+        {
+
+            var Caja = Mapper.Map<List<Caja>, List<CajaModel>>(CajaRepositorio.GetSaldoInicialCaja(cIdGrupoCaja, cfechadesde));
+            return Caja;
+        }
+
+
 
         #endregion
- }
+    }
 
 }
 
