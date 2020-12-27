@@ -22,18 +22,18 @@ namespace Datos.ModeloDeDatos
     
         public int Id { get; set; }
         public int NumeroCheque { get; set; }
-        public string IdBanco { get; set; }
-        public double Fecha { get; set; }
+        public int IdBanco { get; set; }
+        public System.DateTime Fecha { get; set; }
         public string DiaClearing { get; set; }
         public decimal Importe { get; set; }
         public int IdCliente { get; set; }
         public string Descripcion { get; set; }
         public string NumeroRecibo { get; set; }
-        public string FechaIngreso { get; set; }
-        public string FechaEgreso { get; set; }
+        public Nullable<System.DateTime> FechaIngreso { get; set; }
+        public System.DateTime FechaEgreso { get; set; }
         public string Destino { get; set; }
         public Nullable<int> IdMoneda { get; set; }
-        public string GrupoCaja { get; set; }
+        public Nullable<int> IdGrupoCaja { get; set; }
         public string IdFactura { get; set; }
         public string NumeroPago { get; set; }
         public string Registro { get; set; }
@@ -43,6 +43,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual Banco Banco { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }

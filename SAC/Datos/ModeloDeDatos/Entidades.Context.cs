@@ -29,20 +29,16 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Accion> Accion { get; set; }
         public virtual DbSet<AccionPorRol> AccionPorRol { get; set; }
         public virtual DbSet<AfipCategorias> AfipCategorias { get; set; }
-        public virtual DbSet<Banco> Banco { get; set; }
         public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
         public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         public virtual DbSet<Caja> Caja { get; set; }
         public virtual DbSet<CajaSaldo> CajaSaldo { get; set; }
         public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
-        public virtual DbSet<Cheque> Cheque { get; set; }
-        public virtual DbSet<Chequera> Chequera { get; set; }
         public virtual DbSet<CompraFactura> CompraFactura { get; set; }
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual DbSet<CompraIva> CompraIva { get; set; }
         public virtual DbSet<Contacto> Contacto { get; set; }
         public virtual DbSet<Diario> Diario { get; set; }
-        public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
         public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
         public virtual DbSet<homePorRol> homePorRol { get; set; }
         public virtual DbSet<Imputacion> Imputacion { get; set; }
@@ -69,5 +65,11 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CuentaCorriente> CuentaCorriente { get; set; }
         public virtual DbSet<PresupuestoCosto> PresupuestoCosto { get; set; }
         public virtual DbSet<PresupuestoItem> PresupuestoItem { get; set; }
+        public virtual DbSet<Banco> Banco { get; set; }
+        public virtual DbSet<Chequera> Chequera { get; set; }
+        public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
+        public virtual DbSet<Cheque> Cheque { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<TipoCliente> TipoCliente { get; set; }
     }
 }

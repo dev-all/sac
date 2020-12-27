@@ -38,7 +38,6 @@ namespace Datos.Repositorios
         }
 
 
-
         public Caja ActualizarCaja(Caja Model)
         {
 
@@ -47,29 +46,25 @@ namespace Datos.Repositorios
             GrupoCajaExistente.Id = Model.Id;
             GrupoCajaExistente.Concepto = Model.Concepto;
             GrupoCajaExistente.IdGrupoCaja = Model.IdGrupoCaja;
-
             GrupoCajaExistente.UltimaModificacion = Model.UltimaModificacion;
             GrupoCajaExistente.IdUsuario= Model.IdUsuario;
-
             GrupoCajaExistente.ImporteCheque= Model.ImporteCheque;
             GrupoCajaExistente.ImporteDeposito = Model.ImporteDeposito;
             GrupoCajaExistente.ImporteDolar = Model.ImporteDolar;
             GrupoCajaExistente.ImporteTarjeta = Model.ImporteTarjeta;
             GrupoCajaExistente.ImportePesos = Model.ImportePesos;
 
-
-
             context.SaveChanges();
-
             return GrupoCajaExistente;
-
-
-
-
-
         }
 
-
+        public List<Caja> GetAllCajaPorIdCierre(int v)
+        {
+            return context.Caja
+                    .Where(x => x.Activo == true && x.IdCajaSaldo == v)
+                    .OrderByDescending(acc => acc.Fecha)
+                    .ToList();
+        }
 
         public int DeleteCaja(int IdCaja)
         {
@@ -85,11 +80,11 @@ namespace Datos.Repositorios
          {
 
             List<Caja> p = (from c in context.Caja
-                            where c.Activo == true && c.IdGrupoCaja == idgrupocaja && c.Fecha >= fechadesde && c.Fecha <= fechahasta
+                            where c.Activo == true 
+                            && c.IdGrupoCaja == idgrupocaja 
+                            && c.Fecha >= fechadesde 
+                            && c.Fecha <= fechahasta
                             select c).ToList();
-
-
-
             // return context.Caja.Where(acc => acc.Activo == true && acc.IdGrupoCaja && acc.Fecha >=fechadesde && acc.Fecha <= fechahasta).OrderBy(acc => acc.Id).ToList();
             return p;
 

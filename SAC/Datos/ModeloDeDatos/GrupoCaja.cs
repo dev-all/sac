@@ -23,7 +23,7 @@ namespace Datos.ModeloDeDatos
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Concepto { get; set; }
-        public Nullable<decimal> TotalPeso { get; set; }
+        public Nullable<decimal> TotalPesos { get; set; }
         public Nullable<decimal> TotalDolares { get; set; }
         public Nullable<decimal> TotalCheques { get; set; }
         public Nullable<decimal> TotalTarjetas { get; set; }

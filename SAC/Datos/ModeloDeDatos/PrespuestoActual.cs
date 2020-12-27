@@ -34,6 +34,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
+        public Nullable<int> IdGrupoCaja { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }

@@ -14,11 +14,20 @@ namespace Datos.ModeloDeDatos
     
     public partial class GrupoPresupuesto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public GrupoPresupuesto()
+        {
+            this.Cliente = new HashSet<Cliente>();
+        }
+    
         public int Id { get; set; }
         public string Descripcion { get; set; }
         public string Observaciones { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Cliente { get; set; }
     }
 }

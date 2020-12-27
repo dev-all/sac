@@ -28,10 +28,10 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual BancoCuenta BancoCuenta { get; set; }
-        public virtual Cheque Cheque { get; set; }
-        public virtual Chequera Chequera { get; set; }
         public virtual CompraFactura CompraFactura { get; set; }
         public virtual Tarjetas Tarjetas { get; set; }
         public virtual TipoPago TipoPago { get; set; }
+        public virtual Chequera Chequera { get; set; }
+        public virtual Cheque Cheque { get; set; }
     }
 }

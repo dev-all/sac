@@ -41,7 +41,18 @@ namespace Negocio.Servicios
             }
         }
 
-
+        public List<CajaModel> GetAllCajaPorIdCierre(int v)
+        {
+            try
+            {
+                return Mapper.Map<List<Caja>, List<CajaModel>>(CajaRepositorio.GetAllCajaPorIdCierre(v));               
+            }
+            catch (Exception e)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
+                return null;
+            }
+        }
 
         public CajaModel GetCajaPorId(int id)
         {

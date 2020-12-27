@@ -40,7 +40,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Recibo" Type="varchar" MaxLength="50" />
           <Property Name="IdProveedor" Type="int" />
           <Property Name="Fecha" Type="datetime" />
@@ -148,18 +148,18 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NumeroCheque" Type="int" Nullable="false" />
-          <Property Name="IdBanco" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Fecha" Type="float" Nullable="false" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="DiaClearing" Type="nchar" MaxLength="10" />
           <Property Name="Importe" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IdCliente" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NumeroRecibo" Type="nvarchar" MaxLength="50" />
-          <Property Name="FechaIngreso" Type="nvarchar" MaxLength="50" />
-          <Property Name="FechaEgreso" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="FechaEgreso" Type="datetime" Nullable="false" />
           <Property Name="Destino" Type="nvarchar" MaxLength="50" />
           <Property Name="IdMoneda" Type="int" />
-          <Property Name="GrupoCaja" Type="nvarchar" MaxLength="1" />
+          <Property Name="IdGrupoCaja" Type="int" />
           <Property Name="IdFactura" Type="nvarchar" MaxLength="50" />
           <Property Name="NumeroPago" Type="nvarchar" MaxLength="50" />
           <Property Name="Registro" Type="nvarchar" MaxLength="50" />
@@ -178,15 +178,46 @@
           <Property Name="IdBancoCuenta" Type="int" />
           <Property Name="Fecha" Type="datetime" />
           <Property Name="Importes" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="IdProveedor" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdProveedor" Type="int" />
           <Property Name="NumeroRecibo" Type="nvarchar" MaxLength="50" />
           <Property Name="FechaIngreso" Type="datetime" />
-          <Property Name="FechaEgreso" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaEgreso" Type="datetime" Nullable="false" />
           <Property Name="Destino" Type="nvarchar" MaxLength="1" />
           <Property Name="NumeroOperacion" Type="int" />
           <Property Name="IdMoneda" Type="int" />
           <Property Name="Registro" Type="nvarchar" MaxLength="50" />
           <Property Name="Usado" Type="bit" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+          <Property Name="IdProveedor" Type="int" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="Iva" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Cuit" Type="varchar" MaxLength="20" />
+          <Property Name="DiasFactura" Type="int" />
+          <Property Name="IdImputacion" Type="int" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="200" />
+          <Property Name="SaldoCuentaCorriente" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IdPais" Type="int" />
+          <Property Name="Especial" Type="bit" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="20" />
+          <Property Name="Pie" Type="varchar" MaxLength="50" />
+          <Property Name="CanFac" Type="int" />
+          <Property Name="IdIdioma" Type="int" />
+          <Property Name="IdTipoCliente" Type="int" />
+          <Property Name="Locala" Type="nchar" MaxLength="10" />
+          <Property Name="IdMoneda" Type="int" />
+          <Property Name="IdGrupoPresupuesto" Type="int" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
@@ -315,7 +346,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo" Type="nvarchar" MaxLength="50" />
           <Property Name="Concepto" Type="nvarchar" MaxLength="250" />
-          <Property Name="TotalPeso" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalPesos" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalDolares" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalCheques" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TotalTarjetas" Type="decimal" Precision="18" Scale="2" />
@@ -469,6 +500,7 @@
           <Property Name="Ejecutado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Historico" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IdImputacion" Type="int" Nullable="false" />
+          <Property Name="IdGrupoCaja" Type="int" />
           <Property Name="CodigoCaja" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Visible" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Costos" Type="nvarchar" MaxLength="50" />
@@ -591,6 +623,18 @@
           <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdImputacion" Type="int" Nullable="false" />
           <Property Name="Numero" Type="varchar" MaxLength="20" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="10" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Clase" Type="nchar" MaxLength="10" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
@@ -803,6 +847,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cheque_Banco">
+          <End Role="Banco" Type="Self.Banco" Multiplicity="1" />
+          <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cheque_TipoMoneda">
           <End Role="TipoMoneda" Type="Self.TipoMoneda" Multiplicity="0..1" />
           <End Role="Cheque" Type="Self.Cheque" Multiplicity="*" />
@@ -836,6 +892,30 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             </Principal>
             <Dependent Role="Chequera">
               <PropertyRef Name="IdMoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_GrupoPresupuesto">
+          <End Role="GrupoPresupuesto" Type="Self.GrupoPresupuesto" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoPresupuesto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdGrupoPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Role="TipoCliente" Type="Self.TipoCliente" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdTipoCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -932,18 +1012,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             </Principal>
             <Dependent Role="CompraFacturaPago">
               <PropertyRef Name="IdFacturaCompra" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompraFacturaPago_Tarjetas">
-          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="0..1" />
-          <End Role="CompraFacturaPago" Type="Self.CompraFacturaPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tarjetas">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CompraFacturaPago">
-              <PropertyRef Name="IdTarjeta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1235,6 +1303,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <EntitySet Name="CajaTipoMovimiento" EntityType="Self.CajaTipoMovimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Chequera" EntityType="Self.Chequera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompraFactura" EntityType="Self.CompraFactura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompraFacturaPago" EntityType="Self.CompraFacturaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompraIva" EntityType="Self.CompraIva" Schema="dbo" store:Type="Tables" />
@@ -1258,6 +1327,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <EntitySet Name="Rubro" EntityType="Self.Rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubRubro" EntityType="Self.SubRubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCliente" EntityType="Self.TipoCliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoComprobante" EntityType="Self.TipoComprobante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoComprobanteTipoIva" EntityType="Self.TipoComprobanteTipoIva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoComprobanteVenta" EntityType="Self.TipoComprobanteVenta" Schema="dbo" store:Type="Tables" />
@@ -1309,6 +1379,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             <End Role="GrupoCaja" EntitySet="GrupoCaja" />
             <End Role="Caja" EntitySet="Caja" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cheque_Banco" Association="Self.FK_Cheque_Banco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cheque_TipoMoneda" Association="Self.FK_Cheque_TipoMoneda">
             <End Role="TipoMoneda" EntitySet="TipoMoneda" />
             <End Role="Cheque" EntitySet="Cheque" />
@@ -1320,6 +1394,14 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <AssociationSet Name="FK_Chequera_TipoMoneda" Association="Self.FK_Chequera_TipoMoneda">
             <End Role="TipoMoneda" EntitySet="TipoMoneda" />
             <End Role="Chequera" EntitySet="Chequera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_GrupoPresupuesto" Association="Self.FK_Cliente_GrupoPresupuesto">
+            <End Role="GrupoPresupuesto" EntitySet="GrupoPresupuesto" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="Self.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_CompraFactura_CompraIva" Association="Self.FK_CompraFactura_CompraIva">
             <End Role="CompraIva" EntitySet="CompraIva" />
@@ -1351,10 +1433,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           </AssociationSet>
           <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="Self.FK_CompraFacturaPago_CompraFactura">
             <End Role="CompraFactura" EntitySet="CompraFactura" />
-            <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompraFacturaPago_Tarjetas" Association="Self.FK_CompraFacturaPago_Tarjetas">
-            <End Role="Tarjetas" EntitySet="Tarjetas" />
             <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
           </AssociationSet>
           <AssociationSet Name="FK_CompraFacturaPago_TipoPago" Association="Self.FK_CompraFacturaPago_TipoPago">
@@ -1459,20 +1537,16 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <EntitySet Name="Accion" EntityType="SAC_Model.Accion" />
           <EntitySet Name="AccionPorRol" EntityType="SAC_Model.AccionPorRol" />
           <EntitySet Name="AfipCategorias" EntityType="SAC_Model.AfipCategorias" />
-          <EntitySet Name="Banco" EntityType="SAC_Model.Banco" />
           <EntitySet Name="BancoCuenta" EntityType="SAC_Model.BancoCuenta" />
           <EntitySet Name="BancoCuentaBancaria" EntityType="SAC_Model.BancoCuentaBancaria" />
           <EntitySet Name="Caja" EntityType="SAC_Model.Caja" />
           <EntitySet Name="CajaSaldo" EntityType="SAC_Model.CajaSaldo" />
           <EntitySet Name="CajaTipoMovimiento" EntityType="SAC_Model.CajaTipoMovimiento" />
-          <EntitySet Name="Cheque" EntityType="SAC_Model.Cheque" />
-          <EntitySet Name="Chequera" EntityType="SAC_Model.Chequera" />
           <EntitySet Name="CompraFactura" EntityType="SAC_Model.CompraFactura" />
           <EntitySet Name="CompraFacturaPago" EntityType="SAC_Model.CompraFacturaPago" />
           <EntitySet Name="CompraIva" EntityType="SAC_Model.CompraIva" />
           <EntitySet Name="Contacto" EntityType="SAC_Model.Contacto" />
           <EntitySet Name="Diario" EntityType="SAC_Model.Diario" />
-          <EntitySet Name="GrupoCaja" EntityType="SAC_Model.GrupoCaja" />
           <EntitySet Name="GrupoCuenta" EntityType="SAC_Model.GrupoCuenta" />
           <EntitySet Name="homePorRol" EntityType="SAC_Model.homePorRol" />
           <EntitySet Name="Imputacion" EntityType="SAC_Model.Imputacion" />
@@ -1508,10 +1582,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             <End Role="Rol" EntitySet="Rol" />
             <End Role="AccionPorRol" EntitySet="AccionPorRol" />
           </AssociationSet>
-          <AssociationSet Name="FK_Banco_Proveedor" Association="SAC_Model.FK_Banco_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Banco" EntitySet="Banco" />
-          </AssociationSet>
           <AssociationSet Name="FK_BancoCuentaBancaria_BancoCuenta" Association="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta">
             <End Role="BancoCuenta" EntitySet="BancoCuenta" />
             <End Role="BancoCuentaBancaria" EntitySet="BancoCuentaBancaria" />
@@ -1519,10 +1589,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <AssociationSet Name="FK_Caja_BancoCuenta" Association="SAC_Model.FK_Caja_BancoCuenta">
             <End Role="BancoCuenta" EntitySet="BancoCuenta" />
             <End Role="Caja" EntitySet="Caja" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Chequera_BancoCuenta" Association="SAC_Model.FK_Chequera_BancoCuenta">
-            <End Role="BancoCuenta" EntitySet="BancoCuenta" />
-            <End Role="Chequera" EntitySet="Chequera" />
           </AssociationSet>
           <AssociationSet Name="FK_CompraFacturaPago_BancoCuenta" Association="SAC_Model.FK_CompraFacturaPago_BancoCuenta">
             <End Role="BancoCuenta" EntitySet="BancoCuenta" />
@@ -1535,26 +1601,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <AssociationSet Name="FK_Caja_CajaTipoMovimiento" Association="SAC_Model.FK_Caja_CajaTipoMovimiento">
             <End Role="CajaTipoMovimiento" EntitySet="CajaTipoMovimiento" />
             <End Role="Caja" EntitySet="Caja" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Caja_GrupoCaja" Association="SAC_Model.FK_Caja_GrupoCaja">
-            <End Role="GrupoCaja" EntitySet="GrupoCaja" />
-            <End Role="Caja" EntitySet="Caja" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cheque_TipoMoneda" Association="SAC_Model.FK_Cheque_TipoMoneda">
-            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-            <End Role="Cheque" EntitySet="Cheque" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompraFacturaPago_Cheque" Association="SAC_Model.FK_CompraFacturaPago_Cheque">
-            <End Role="Cheque" EntitySet="Cheque" />
-            <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Chequera_TipoMoneda" Association="SAC_Model.FK_Chequera_TipoMoneda">
-            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-            <End Role="Chequera" EntitySet="Chequera" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CompraFacturaPago_Chequera" Association="SAC_Model.FK_CompraFacturaPago_Chequera">
-            <End Role="Chequera" EntitySet="Chequera" />
-            <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
           </AssociationSet>
           <AssociationSet Name="FK_CompraFactura_CompraIva" Association="SAC_Model.FK_CompraFactura_CompraIva">
             <End Role="CompraIva" EntitySet="CompraIva" />
@@ -1671,6 +1717,52 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <EntitySet Name="CuentaCorriente" EntityType="SAC_Model.CuentaCorriente" />
           <EntitySet Name="PresupuestoCosto" EntityType="SAC_Model.PresupuestoCosto" />
           <EntitySet Name="PresupuestoItem" EntityType="SAC_Model.PresupuestoItem" />
+          <EntitySet Name="Banco" EntityType="SAC_Model.Banco" />
+          <EntitySet Name="Chequera" EntityType="SAC_Model.Chequera" />
+          <AssociationSet Name="FK_Banco_Proveedor" Association="SAC_Model.FK_Banco_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Banco" EntitySet="Banco" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chequera_BancoCuenta" Association="SAC_Model.FK_Chequera_BancoCuenta">
+            <End Role="BancoCuenta" EntitySet="BancoCuenta" />
+            <End Role="Chequera" EntitySet="Chequera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chequera_TipoMoneda" Association="SAC_Model.FK_Chequera_TipoMoneda">
+            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+            <End Role="Chequera" EntitySet="Chequera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraFacturaPago_Chequera" Association="SAC_Model.FK_CompraFacturaPago_Chequera">
+            <End Role="Chequera" EntitySet="Chequera" />
+            <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
+          </AssociationSet>
+          <EntitySet Name="GrupoCaja" EntityType="SAC_Model.GrupoCaja" />
+          <AssociationSet Name="FK_Caja_GrupoCaja" Association="SAC_Model.FK_Caja_GrupoCaja">
+            <End Role="GrupoCaja" EntitySet="GrupoCaja" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <EntitySet Name="Cheque" EntityType="SAC_Model.Cheque" />
+          <EntitySet Name="Cliente" EntityType="SAC_Model.Cliente" />
+          <EntitySet Name="TipoCliente" EntityType="SAC_Model.TipoCliente" />
+          <AssociationSet Name="FK_Cheque_Banco" Association="SAC_Model.FK_Cheque_Banco">
+            <End Role="Banco" EntitySet="Banco" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cheque_TipoMoneda" Association="SAC_Model.FK_Cheque_TipoMoneda">
+            <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+            <End Role="Cheque" EntitySet="Cheque" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompraFacturaPago_Cheque" Association="SAC_Model.FK_CompraFacturaPago_Cheque">
+            <End Role="Cheque" EntitySet="Cheque" />
+            <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_GrupoPresupuesto" Association="SAC_Model.FK_Cliente_GrupoPresupuesto">
+            <End Role="GrupoPresupuesto" EntitySet="GrupoPresupuesto" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="SAC_Model.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="GrupoPresupuesto">
           <Key>
@@ -1682,6 +1774,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cliente" Relationship="SAC_Model.FK_Cliente_GrupoPresupuesto" FromRole="GrupoPresupuesto" ToRole="Cliente" />
         </EntityType>
         <EntityType Name="Accion">
           <Key>
@@ -1717,24 +1810,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Banco">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="Int32" />
-          <Property Name="Recibo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdProveedor" Type="Int32" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <Property Name="FechaC" Type="DateTime" Precision="3" />
-          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="NumeroCheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Banco_Proveedor" FromRole="Banco" ToRole="Proveedor" />
-        </EntityType>
         <EntityType Name="BancoCuenta">
           <Key>
             <PropertyRef Name="Id" />
@@ -1754,8 +1829,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="BancoCuentaBancaria" Relationship="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" FromRole="BancoCuenta" ToRole="BancoCuentaBancaria" />
           <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_BancoCuenta" FromRole="BancoCuenta" ToRole="Caja" />
-          <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_BancoCuenta" FromRole="BancoCuenta" ToRole="Chequera" />
           <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_BancoCuenta" FromRole="BancoCuenta" ToRole="CompraFacturaPago" />
+          <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_BancoCuenta" FromRole="BancoCuenta" ToRole="Chequera" />
         </EntityType>
         <EntityType Name="BancoCuentaBancaria">
           <Key>
@@ -1836,60 +1911,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="Activo" Type="Boolean" />
           <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_CajaTipoMovimiento" FromRole="CajaTipoMovimiento" ToRole="Caja" />
         </EntityType>
-        <EntityType Name="Cheque">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NumeroCheque" Type="Int32" Nullable="false" />
-          <Property Name="IdBanco" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Fecha" Type="Double" Nullable="false" />
-          <Property Name="DiaClearing" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdCliente" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumeroRecibo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FechaIngreso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FechaEgreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Destino" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdMoneda" Type="Int32" />
-          <Property Name="GrupoCaja" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="IdFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumeroPago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Registro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Proveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Endosado" Type="Boolean" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="Cheque" ToRole="TipoMoneda" />
-          <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="Cheque" ToRole="CompraFacturaPago" />
-        </EntityType>
-        <EntityType Name="Chequera">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NumeroCheque" Type="Int32" Nullable="false" />
-          <Property Name="IdBancoCuenta" Type="Int32" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" />
-          <Property Name="Importes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdProveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumeroRecibo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
-          <Property Name="FechaEgreso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Destino" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-          <Property Name="NumeroOperacion" Type="Int32" />
-          <Property Name="IdMoneda" Type="Int32" />
-          <Property Name="Registro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Usado" Type="Boolean" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_Chequera_BancoCuenta" FromRole="Chequera" ToRole="BancoCuenta" />
-          <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="Chequera" ToRole="TipoMoneda" />
-          <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Chequera" FromRole="Chequera" ToRole="CompraFacturaPago" />
-        </EntityType>
         <EntityType Name="CompraFactura">
           <Key>
             <PropertyRef Name="Id" />
@@ -1949,11 +1970,11 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_CompraFacturaPago_BancoCuenta" FromRole="CompraFacturaPago" ToRole="BancoCuenta" />
-          <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="CompraFacturaPago" ToRole="Cheque" />
-          <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_CompraFacturaPago_Chequera" FromRole="CompraFacturaPago" ToRole="Chequera" />
           <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFacturaPago" ToRole="CompraFactura" />
           <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="CompraFacturaPago" ToRole="Tarjetas" />
           <NavigationProperty Name="TipoPago" Relationship="SAC_Model.FK_CompraFacturaPago_TipoPago" FromRole="CompraFacturaPago" ToRole="TipoPago" />
+          <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_CompraFacturaPago_Chequera" FromRole="CompraFacturaPago" ToRole="Chequera" />
+          <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="CompraFacturaPago" ToRole="Cheque" />
         </EntityType>
         <EntityType Name="CompraIva">
           <Key>
@@ -2019,30 +2040,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="GrupoCaja">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Concepto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="TotalPeso" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TotalDolares" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TotalCheques" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TotalTarjetas" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="TotalDepositos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ParcialPesos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ParcialDolares" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ParcialCheques" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ParcialTarjetas" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="ParcialDepositos" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IdImputacion" Type="Int32" />
-          <Property Name="NoBorrar" Type="Boolean" />
-          <Property Name="Activo" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_GrupoCaja" FromRole="GrupoCaja" ToRole="Caja" />
         </EntityType>
         <EntityType Name="GrupoCuenta">
           <Key>
@@ -2195,6 +2192,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Presupuesto1" FromRole="PrespuestoActual" ToRole="Proveedor" />
+          <Property Name="IdGrupoCaja" Type="Int32" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -2224,7 +2222,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Banco" Relationship="SAC_Model.FK_Banco_Proveedor" FromRole="Proveedor" ToRole="Banco" />
           <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
           <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
           <NavigationProperty Name="Imputacion1" Relationship="SAC_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
@@ -2234,6 +2231,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <NavigationProperty Name="TipoIva" Relationship="SAC_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
           <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
           <NavigationProperty Name="TipoProveedor" Relationship="SAC_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
+          <NavigationProperty Name="Banco" Relationship="SAC_Model.FK_Banco_Proveedor" FromRole="Proveedor" ToRole="Banco" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -2362,10 +2360,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="Activo" Type="Boolean" />
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="TipoMoneda" ToRole="Cheque" />
-          <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="TipoMoneda" ToRole="Chequera" />
           <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="TipoMoneda" ToRole="CompraFactura" />
           <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="TipoMoneda" ToRole="Proveedor" />
+          <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="TipoMoneda" ToRole="Chequera" />
+          <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="TipoMoneda" ToRole="Cheque" />
         </EntityType>
         <EntityType Name="TipoPago">
           <Key>
@@ -2453,18 +2451,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Banco_Proveedor">
-          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
-          <End Type="SAC_Model.Banco" Role="Banco" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Banco">
-              <PropertyRef Name="IdProveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_BancoCuentaBancaria_BancoCuenta">
           <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="1" />
           <End Type="SAC_Model.BancoCuentaBancaria" Role="BancoCuentaBancaria" Multiplicity="*" />
@@ -2486,18 +2472,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             </Principal>
             <Dependent Role="Caja">
               <PropertyRef Name="IdCuentaBanco" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Chequera_BancoCuenta">
-          <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
-          <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BancoCuenta">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Chequera">
-              <PropertyRef Name="IdBancoCuenta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2534,66 +2508,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             </Principal>
             <Dependent Role="Caja">
               <PropertyRef Name="IdTipoMovimiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Caja_GrupoCaja">
-          <End Type="SAC_Model.GrupoCaja" Role="GrupoCaja" Multiplicity="0..1" />
-          <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GrupoCaja">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Caja">
-              <PropertyRef Name="IdGrupoCaja" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cheque_TipoMoneda">
-          <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-          <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoMoneda">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Cheque">
-              <PropertyRef Name="IdMoneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompraFacturaPago_Cheque">
-          <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="0..1" />
-          <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cheque">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CompraFacturaPago">
-              <PropertyRef Name="IdCheque" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Chequera_TipoMoneda">
-          <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-          <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoMoneda">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Chequera">
-              <PropertyRef Name="IdMoneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CompraFacturaPago_Chequera">
-          <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="0..1" />
-          <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Chequera">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CompraFacturaPago">
-              <PropertyRef Name="IdChequera" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2974,6 +2888,270 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="IdUsuario" Type="Int32" />
           <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Banco">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Recibo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="FechaC" Type="DateTime" Precision="3" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NumeroCheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Banco_Proveedor" FromRole="Banco" ToRole="Proveedor" />
+          <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_Cheque_Banco" FromRole="Banco" ToRole="Cheque" />
+        </EntityType>
+        <EntityType Name="Chequera">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroCheque" Type="Int32" Nullable="false" />
+          <Property Name="IdBancoCuenta" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Importes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="NumeroRecibo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="FechaEgreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Destino" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroOperacion" Type="Int32" />
+          <Property Name="IdMoneda" Type="Int32" />
+          <Property Name="Registro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Usado" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_Chequera_BancoCuenta" FromRole="Chequera" ToRole="BancoCuenta" />
+          <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="Chequera" ToRole="TipoMoneda" />
+          <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Chequera" FromRole="Chequera" ToRole="CompraFacturaPago" />
+        </EntityType>
+        <Association Name="FK_Banco_Proveedor">
+          <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="0..1" />
+          <End Type="SAC_Model.Banco" Role="Banco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Banco">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chequera_BancoCuenta">
+          <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
+          <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BancoCuenta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chequera">
+              <PropertyRef Name="IdBancoCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chequera_TipoMoneda">
+          <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+          <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMoneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chequera">
+              <PropertyRef Name="IdMoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraFacturaPago_Chequera">
+          <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="0..1" />
+          <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chequera">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraFacturaPago">
+              <PropertyRef Name="IdChequera" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GrupoCaja">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Concepto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPesos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDolares" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalCheques" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalTarjetas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TotalDepositos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ParcialPesos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ParcialDolares" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ParcialCheques" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ParcialTarjetas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ParcialDepositos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdImputacion" Type="Int32" />
+          <Property Name="NoBorrar" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_GrupoCaja" FromRole="GrupoCaja" ToRole="Caja" />
+        </EntityType>
+        <Association Name="FK_Caja_GrupoCaja">
+          <End Type="SAC_Model.GrupoCaja" Role="GrupoCaja" Multiplicity="0..1" />
+          <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoCaja">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="IdGrupoCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cheque">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroCheque" Type="Int32" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiaClearing" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Importe" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroRecibo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="FechaEgreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Destino" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdMoneda" Type="Int32" />
+          <Property Name="IdGrupoCaja" Type="Int32" />
+          <Property Name="IdFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumeroPago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Registro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Proveedor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Endosado" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Banco" Relationship="SAC_Model.FK_Cheque_Banco" FromRole="Cheque" ToRole="Banco" />
+          <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="Cheque" ToRole="TipoMoneda" />
+          <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="Cheque" ToRole="CompraFacturaPago" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Iva" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Cuit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DiasFactura" Type="Int32" />
+          <Property Name="IdImputacion" Type="Int32" />
+          <Property Name="Observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SaldoCuentaCorriente" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdPais" Type="Int32" />
+          <Property Name="Especial" Type="Boolean" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CanFac" Type="Int32" />
+          <Property Name="IdIdioma" Type="Int32" />
+          <Property Name="IdTipoCliente" Type="Int32" />
+          <Property Name="Locala" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IdMoneda" Type="Int32" />
+          <Property Name="IdGrupoPresupuesto" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GrupoPresupuesto" Relationship="SAC_Model.FK_Cliente_GrupoPresupuesto" FromRole="Cliente" ToRole="GrupoPresupuesto" />
+          <NavigationProperty Name="TipoCliente" Relationship="SAC_Model.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
+        </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clase" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cliente" Relationship="SAC_Model.FK_Cliente_TipoCliente" FromRole="TipoCliente" ToRole="Cliente" />
+        </EntityType>
+        <Association Name="FK_Cheque_Banco">
+          <End Type="SAC_Model.Banco" Role="Banco" Multiplicity="1" />
+          <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banco">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cheque_TipoMoneda">
+          <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+          <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoMoneda">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cheque">
+              <PropertyRef Name="IdMoneda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompraFacturaPago_Cheque">
+          <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="0..1" />
+          <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cheque">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompraFacturaPago">
+              <PropertyRef Name="IdCheque" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_GrupoPresupuesto">
+          <End Type="SAC_Model.GrupoPresupuesto" Role="GrupoPresupuesto" Multiplicity="0..1" />
+          <End Type="SAC_Model.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupoPresupuesto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdGrupoPresupuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Type="SAC_Model.TipoCliente" Role="TipoCliente" Multiplicity="0..1" />
+          <End Type="SAC_Model.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="IdTipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3021,24 +3199,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Banco">
-            <EntityTypeMapping TypeName="SAC_Model.Banco">
-              <MappingFragment StoreEntitySet="Banco">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-                <ScalarProperty Name="NumeroCheque" ColumnName="NumeroCheque" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="FechaC" ColumnName="FechaC" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="Recibo" ColumnName="Recibo" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3134,57 +3294,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
               <MappingFragment StoreEntitySet="CajaTipoMovimiento">
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cheque">
-            <EntityTypeMapping TypeName="SAC_Model.Cheque">
-              <MappingFragment StoreEntitySet="Cheque">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Endosado" ColumnName="Endosado" />
-                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
-                <ScalarProperty Name="Registro" ColumnName="Registro" />
-                <ScalarProperty Name="NumeroPago" ColumnName="NumeroPago" />
-                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
-                <ScalarProperty Name="GrupoCaja" ColumnName="GrupoCaja" />
-                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-                <ScalarProperty Name="Destino" ColumnName="Destino" />
-                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="Importe" ColumnName="Importe" />
-                <ScalarProperty Name="DiaClearing" ColumnName="DiaClearing" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
-                <ScalarProperty Name="NumeroCheque" ColumnName="NumeroCheque" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Chequera">
-            <EntityTypeMapping TypeName="SAC_Model.Chequera">
-              <MappingFragment StoreEntitySet="Chequera">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="Usado" ColumnName="Usado" />
-                <ScalarProperty Name="Registro" ColumnName="Registro" />
-                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
-                <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
-                <ScalarProperty Name="Destino" ColumnName="Destino" />
-                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
-                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-                <ScalarProperty Name="Importes" ColumnName="Importes" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdBancoCuenta" ColumnName="IdBancoCuenta" />
-                <ScalarProperty Name="NumeroCheque" ColumnName="NumeroCheque" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3306,30 +3415,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="GrupoCaja">
-            <EntityTypeMapping TypeName="SAC_Model.GrupoCaja">
-              <MappingFragment StoreEntitySet="GrupoCaja">
-                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Activo" ColumnName="Activo" />
-                <ScalarProperty Name="NoBorrar" ColumnName="NoBorrar" />
-                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-                <ScalarProperty Name="ParcialDepositos" ColumnName="ParcialDepositos" />
-                <ScalarProperty Name="ParcialTarjetas" ColumnName="ParcialTarjetas" />
-                <ScalarProperty Name="ParcialCheques" ColumnName="ParcialCheques" />
-                <ScalarProperty Name="ParcialDolares" ColumnName="ParcialDolares" />
-                <ScalarProperty Name="ParcialPesos" ColumnName="ParcialPesos" />
-                <ScalarProperty Name="TotalDepositos" ColumnName="TotalDepositos" />
-                <ScalarProperty Name="TotalTarjetas" ColumnName="TotalTarjetas" />
-                <ScalarProperty Name="TotalCheques" ColumnName="TotalCheques" />
-                <ScalarProperty Name="TotalDolares" ColumnName="TotalDolares" />
-                <ScalarProperty Name="TotalPeso" ColumnName="TotalPeso" />
-                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -3461,6 +3546,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <EntitySetMapping Name="PrespuestoActual">
             <EntityTypeMapping TypeName="SAC_Model.PrespuestoActual">
               <MappingFragment StoreEntitySet="PrespuestoActual">
+                <ScalarProperty Name="IdGrupoCaja" ColumnName="IdGrupoCaja" />
                 <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
@@ -3718,6 +3804,144 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
                 <ScalarProperty Name="Pagado" ColumnName="Pagado" />
                 <ScalarProperty Name="Importe" ColumnName="Importe" />
                 <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banco">
+            <EntityTypeMapping TypeName="SAC_Model.Banco">
+              <MappingFragment StoreEntitySet="Banco">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="NumeroCheque" ColumnName="NumeroCheque" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="FechaC" ColumnName="FechaC" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Recibo" ColumnName="Recibo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chequera">
+            <EntityTypeMapping TypeName="SAC_Model.Chequera">
+              <MappingFragment StoreEntitySet="Chequera">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Usado" ColumnName="Usado" />
+                <ScalarProperty Name="Registro" ColumnName="Registro" />
+                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+                <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Importes" ColumnName="Importes" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdBancoCuenta" ColumnName="IdBancoCuenta" />
+                <ScalarProperty Name="NumeroCheque" ColumnName="NumeroCheque" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoCaja">
+            <EntityTypeMapping TypeName="SAC_Model.GrupoCaja">
+              <MappingFragment StoreEntitySet="GrupoCaja">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="NoBorrar" ColumnName="NoBorrar" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="ParcialDepositos" ColumnName="ParcialDepositos" />
+                <ScalarProperty Name="ParcialTarjetas" ColumnName="ParcialTarjetas" />
+                <ScalarProperty Name="ParcialCheques" ColumnName="ParcialCheques" />
+                <ScalarProperty Name="ParcialDolares" ColumnName="ParcialDolares" />
+                <ScalarProperty Name="ParcialPesos" ColumnName="ParcialPesos" />
+                <ScalarProperty Name="TotalDepositos" ColumnName="TotalDepositos" />
+                <ScalarProperty Name="TotalTarjetas" ColumnName="TotalTarjetas" />
+                <ScalarProperty Name="TotalCheques" ColumnName="TotalCheques" />
+                <ScalarProperty Name="TotalDolares" ColumnName="TotalDolares" />
+                <ScalarProperty Name="TotalPesos" ColumnName="TotalPesos" />
+                <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cheque">
+            <EntityTypeMapping TypeName="SAC_Model.Cheque">
+              <MappingFragment StoreEntitySet="Cheque">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Endosado" ColumnName="Endosado" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Registro" ColumnName="Registro" />
+                <ScalarProperty Name="NumeroPago" ColumnName="NumeroPago" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="IdGrupoCaja" ColumnName="IdGrupoCaja" />
+                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="FechaEgreso" ColumnName="FechaEgreso" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="NumeroRecibo" ColumnName="NumeroRecibo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="DiaClearing" ColumnName="DiaClearing" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="NumeroCheque" ColumnName="NumeroCheque" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="SAC_Model.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdGrupoPresupuesto" ColumnName="IdGrupoPresupuesto" />
+                <ScalarProperty Name="IdMoneda" ColumnName="IdMoneda" />
+                <ScalarProperty Name="Locala" ColumnName="Locala" />
+                <ScalarProperty Name="IdTipoCliente" ColumnName="IdTipoCliente" />
+                <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
+                <ScalarProperty Name="CanFac" ColumnName="CanFac" />
+                <ScalarProperty Name="Pie" ColumnName="Pie" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Especial" ColumnName="Especial" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="SaldoCuentaCorriente" ColumnName="SaldoCuentaCorriente" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+                <ScalarProperty Name="DiasFactura" ColumnName="DiasFactura" />
+                <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+                <ScalarProperty Name="Iva" ColumnName="Iva" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoCliente">
+            <EntityTypeMapping TypeName="SAC_Model.TipoCliente">
+              <MappingFragment StoreEntitySet="TipoCliente">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Clase" ColumnName="Clase" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

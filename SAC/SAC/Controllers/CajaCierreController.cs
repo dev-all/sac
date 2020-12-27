@@ -25,28 +25,16 @@ namespace SAC.Controllers
             servicioCaja._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
 
-
-        
-
-
-        //}
-
-
-        public ActionResult Index()
-        {
-
-           
+        public ActionResult Index(int id = 0)
+        {           
             CajaModelView  model = new CajaModelView();
-            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
+            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCajaPorIdCierre(id));
             model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
             model.FechaCierre = DateTime.Now; //.ToString("dd/MM/yyyy");
             CargarCierreCaja();
 
             return View(model);
         }
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

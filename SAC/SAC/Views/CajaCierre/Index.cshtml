@@ -3,13 +3,8 @@
 @{
     ViewBag.Title = "Cierre de Caja";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-
     List<SelectListItem> ListaCajaCierre = (List<SelectListItem>)ViewBag.Listapagina;
-
-
 }
-
 
 <style>
     .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -18,6 +13,12 @@
 
     .table td, .table th {
         padding: .25rem;
+    }
+    .dataTables_wrapper {
+        padding-top: 0px;
+    }
+    .form-group {
+        margin-bottom: 5px;
     }
 </style>
 
@@ -36,35 +37,23 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <h4 class="card-title">Cierre de Caja</h4>
+                        <h6 class="card-title">Cierre de Caja</h6>
                         <div class="form-body">
-
+                         
                             <div class="row">
-                                <div class="col-md-4">
-
-                                    <div class="form-group">
-
-                                        <div class="form-group">
-
-                                            <label class="form-control-sm">Seleccione un Cierre</label>
-                                            @Html.DropDownList("Fecha", ListaCajaCierre, null, new { @class = "form-control form-control-sm" })
-                                            @Html.ValidationMessage("Fecha", new { @class = "text-danger form-control-sm" })
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col-4">
+                                @*<div class="col-4">
                                     <div class="form-group text-right">
                                         Saldo Inicial
                                     </div>
+                                </div>*@
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label class="form-control-sm">Seleccione un Cierre</label>
+                                            @Html.DropDownList("Fecha", ListaCajaCierre, null, new { @class = "form-control form-control-sm" })
+                                        </div>
+                                    </div>
                                 </div>
-
                                 <div class="col-2">
                                     <div class="form-group">
                                         <label class="form-control-sm"> Pesos</label>
@@ -194,7 +183,7 @@
 
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label class=""> Pesos</label>
+                                        @*<label class=""> Pesos</label>*@
                                         <input type="text" id="ProcesadoPesos" value="@Html.Raw(TotalPesos)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
                                     </div>
 
@@ -202,7 +191,7 @@
 
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label> Dolares</label>
+                                        @*<label> Dolares</label>*@
                                         <input type="text" id="ProcesadoDolares" value="@Html.Raw(TotalDolares)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
                                     </div>
 
@@ -210,14 +199,14 @@
 
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label>Depositos</label>
+                                        @*<label>Depositos</label>*@
                                         <input type="text" id="ProcesadoDepositos" value="@Html.Raw(TotalDeposito)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
                                     </div>
                                 </div>
 
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label> Tarjetas</label>
+                                        @*<label> Tarjetas</label>*@
                                         <input type="text" id="ProcesadoTarjeta" value="@Html.Raw(TotalTarjeta)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
                                     </div>
                                 </div>
@@ -234,7 +223,7 @@
 
                                 <div class="col-2">
                                     <div>
-                                        <label class=""> Pesos</label>
+                                        @*<label class=""> Pesos</label>*@
                                         <input type="text" id="FinalPesos" value="@Html.Raw(TotalPesos)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
                                     </div>
 
@@ -242,7 +231,7 @@
 
                                 <div class="col-2">
                                     <div class="form-group">
-                                        <label> Dolares</label>
+                                        @*<label> Dolares</label>*@
                                         <input type="text" id="FinalDolares" value="@Html.Raw(TotalDolares)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
                                     </div>
 
@@ -252,7 +241,7 @@
 
                                     <div class="form-group">
 
-                                        <label>Depositos</label>
+                                        @*<label>Depositos</label>*@
                                         <input type="text" id="FinalDepositos" value="@Html.Raw(TotalDeposito)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
                                     </div>
 
@@ -262,7 +251,7 @@
 
                                     <div class="form-group">
 
-                                        <label> Tarjetas</label>
+                                        @*<label> Tarjetas</label>*@
                                         <input type="text" id="Final" value="@Html.Raw(TotalTarjeta)" class="form-control form-control-sm" onKeyUp="format(this)" onchange="format(this)" />
 
                                     </div>
@@ -285,7 +274,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Guardar</button>
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Confirmar Cierre de Caja</button>
 
                                     @*@Html.ActionLink("Cancelar", "Index", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })*@
                                
@@ -303,9 +292,6 @@
 
 
     </div>
-
-
-
 
 }
 
