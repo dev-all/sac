@@ -13,12 +13,9 @@ namespace SAC.Models
         public int Id { get; set; }
 
         public int NumeroCheque { get; set; }
-
-        public string IdBanco { get; set; }
-
-        public double Fecha { get; set; }
-
-        public string Clearing { get; set; }
+        public int IdBanco { get; set; }
+        public DateTime Fecha { get; set; }
+        public string DiaClearing { get; set; }
 
         public decimal Importe { get; set; }
 
@@ -27,17 +24,11 @@ namespace SAC.Models
         public string Descripcion { get; set; }
 
         public string NumeroRecibo { get; set; }
-
-        public string FechaIngreso { get; set; }
-
-        public string FechaEgreso { get; set; }
-
+        public DateTime FechaIngreso { get; set; }
+        public DateTime FechaEgreso { get; set; }
         public string Destino { get; set; }
-
-        public string IdMoneda { get; set; }
-
-        public string GrupoCaja { get; set; }
-
+        public int IdMoneda { get; set; }
+        public int IdGrupoCaja { get; set; }
         public string IdFactura { get; set; }
 
         public string NumeroPago { get; set; }
@@ -45,19 +36,20 @@ namespace SAC.Models
         public string Registro { get; set; }
 
         public string Proveedor { get; set; }
-
+        public Nullable<bool> Endosado { get; set; }
         public Nullable<bool> Activo { get; set; }
 
         public Nullable<int> IdUsuario { get; set; }
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        //propiedad agregada
-        public bool seleccionado { get; set; }
-
+        public Banco Banco { get; set; }
         public TipoMoneda TipoMoneda { get; set; }
 
-        //public string tipoMonedaDescripcion { get; set; }
+        public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+        //propiedad agregada
+        public string tipoMonedaDescripcion { get; set; }
+
 
     }
 }

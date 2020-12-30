@@ -13,8 +13,8 @@ namespace SAC.Models
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Concepto { get; set; }
-        public string Importe { get; set; }
-        public Nullable<double> Pagado { get; set; }
+        public Nullable<decimal> Importe { get; set; }
+        public Nullable<decimal> Pagado { get; set; }
         public int Periodo { get; set; }
         public string Ejecutado { get; set; }
         public Nullable<bool> Activo { get; set; }

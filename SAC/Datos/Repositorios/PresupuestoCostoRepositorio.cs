@@ -33,7 +33,7 @@ namespace Datos.Repositorios
         public PresupuestoCosto GetAllPresupuestoCosto(string codigo)
         {
             // context.Configuration.LazyLoadingEnabled = false;
-            return context.PresupuestoCosto.Where(p => p.Activo == true && p.Codigo== codigo).First();
+            return context.PresupuestoCosto.Where(p => p.Activo == true && p.Codigo== codigo).FirstOrDefault();
 
         }
 

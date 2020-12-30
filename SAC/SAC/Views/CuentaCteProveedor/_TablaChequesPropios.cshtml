@@ -1,0 +1,227 @@
+﻿@model SAC.Models.FacturaPagoViewModel
+
+
+<!-- Date picker plugins css -->
+<link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+
+<div id="PanelInsertar">
+    @using (Ajax.BeginForm("IngresarCheque", "", new AjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "divPagina",
+        OnComplete = "fntabla",
+        InsertionMode = InsertionMode.Replace
+    }, new { @id = "frmInsercion" }))
+    {
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="card" style="margin-bottom: 0px;">
+                <div class="card-body">
+                    <h6 class="card-title">Ingresar Cheque</h6>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(x => x.idCuentaBancariaSeleccionada, Model.listaCuentaBancariaDrop, null, new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(p => p.oChequera.NumeroCheque, new { @class = "form-control form-control-sm", @placeholder = "Nro cheque" })
+                            @Html.ValidationMessageFor(p => p.oChequera.NumeroCheque, "", new { @class = "text-danger form-control-sm" })
+                        </div>
+
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(p => p.oChequera.Importes, new { @class = "form-control form-control-sm", @placeholder = "importe" })
+                            @Html.ValidationMessageFor(p => p.oChequera.Importes, "", new { @class = "text-danger form-control-sm" })
+                        </div>
+
+                        <div class="col-md-2">
+                            @Html.DropDownListFor(x => x.idTipoMonedaSeleccionada, Model.ListaTipoMonedaDrop, null, new { @class = "form-control form-control-sm" })
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" id="btnBuscar" class="btn btn-sm btn-success">Guardar</button>
+                        </div>
+                    </div>
+
+                    <div class="row mt-1">
+                        <div class="col-md-3 text-right">
+                            <label for="FechaIngreso" class=" form-control-sm ">Fecha Ingreso</label>
+                        </div>
+                        <div class="col-md-2">
+
+                            @Html.EditorFor(Model => Model.oChequera.FechaIngreso, new { htmlAttributes = new { @class = "form-control form-control-sm  Calendario", @placeholder = "Fecha Emision", @readonly = true } })
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <label for="FechaEgreso" class=" form-control-sm  ">Fecha Efectivo</label>
+                        </div>
+                        <div class="col-md-2">
+
+                            @Html.EditorFor(Model => Model.oChequera.FechaEgreso, new { htmlAttributes = new { @class = "form-control form-control-sm  Calendario", @placeholder = "Fecha Emision", @readonly = true } })
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    <div class="table-responsive">
+        <div id="divPagina">
+            <table id="TblChequesPropios" class="table stylish-table">
+                <thead>
+                    <tr>
+                        <th class="text-center"> </th>
+                        <th class="text-center"> Número</th>
+                        <th class="text-center"> Banco</th>
+                        <th class="text-center"> Fecha</th>
+                        <th class="text-center"> Importe</th>
+                        <th class="text-center"> Moneda</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListaChequesPropios)
+                    {
+                        <tr>
+                            <td>
+
+                                @*@Html.ActionLink(" ", "Eliminar", "CuentaCteProveedor", new { _id = @item.Id }, new { @class = "btn btn-danger btn-xs fa fa-trash-o", onclick = "return confirm('¿Confirma que desea eliminar este registro??')" })*@
+
+                                @*@Html.ActionLink("", "#", new { _id = @item.Id },
+                                    new
+                                         {
+                                             @class = "btn btn-danger btn-xs fa fa-trash-o",
+                                        onclick = "ConfirmaEliminar(" + @item.Id + ")"
+                                    })*@
+
+
+                                <a href="#" data-toggle="tooltip" data-original-title="Eliminar "
+                                   class="btn btn-danger btn-xs fa fa-trash-o "
+                                   onclick="ConfirmaEliminar(@item.Id)">
+                                </a>
+
+                                @*   @Html.ActionLink(" ", "Eliminar", "Proveedor", new { _id = @item.Id },
+                                    new { @class = "btn btn-danger btn-xs fa fa-trash-o", onclick = "AsigarConfirmacion(" + @item.Id + ")" })
+
+                                                                    <input type="submit" value="Eliminar" onclick="return confirm('¿Confirma que desea eliminar este registro??')"
+                                                                           formaction="@Url.Action("Delete", "", new { id = item.Id })"
+                                                                           class="btn btn-primary font-10" data-toggle="tooltip" data-original-title="Se eliminara el registro..." />*@
+                            </td>
+                            <td class="text-right">@Html.DisplayFor(modelItem => item.NumeroCheque)</td>
+                            <td>@Html.DisplayFor(modelItem => item.BancoCuenta.Banco)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                            <td class="text-right">@Html.DisplayFor(modelItem => item.Importes)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TipoMoneda.Descripcion)</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="ModalConfirmaEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <h3> ¿Está seguro que desea eliminar el registro?</h3>
+                @using (Html.BeginForm("Eliminar", "CuentaCteProveedor", FormMethod.Post, new { @id = "frmEliminar" }))
+                {
+                    @Html.Hidden("IdCheque");
+                }
+            </div>
+            <div style="padding:1em;">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="Eliminar()" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    @section Scripts {
+
+        <!-- Date Picker Plugin JavaScript -->
+        <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+        @Scripts.Render("~/bundles/jqueryval")
+
+    }
+    <script>
+
+        $(function () {
+            $('.Calendario').datepicker({
+                format: "dd/mm/yyyy",
+                language: 'es',
+                autoclose: true,
+                todayHighlight: true
+            });
+
+
+
+            //$('.modal-child').on('show.bs.modal', function () {
+            //    var modalParent = $(this).attr('data-modal-parent');
+            //    $(modalParent).css('opacity', 0);
+            //});
+
+            //$('.modal-child').on('hidden.bs.modal', function () {
+            //    var modalParent = $(this).attr('data-modal-parent');
+            //    $(modalParent).css('opacity', 1);
+            //});
+        });
+
+
+       
+
+
+        function ConfirmaEliminar(valor) {
+            event.preventDefault();
+            document.getElementById("IdCheque").value = valor;
+            $("#ModalConfirmaEliminar").modal('show');
+        }
+        function Eliminar() {
+            var frmEliminar = document.getElementById("frmEliminar");
+            frmEliminar.submit();
+        }
+        function fntabla() {
+            $("#PanelInsertar").css("display", "none");
+            $.ajax({
+                type: "POST",
+                url: "/CuentaCteProveedor/CargarChequesPropios",
+                contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                beforeSend: function () {
+                }, complete: function () {
+                },
+                success: function (response) {
+                    $('#Propios').html(response);
+                },
+                failure: function (response) {
+                    Console.log(response.responseText);
+                },
+                error: function (response) {
+                    Console.log(response.responseText);
+                }
+            });
+        }
+
+    </script>
+
+
+
+
+

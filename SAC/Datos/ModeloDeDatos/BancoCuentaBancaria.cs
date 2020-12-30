@@ -18,7 +18,7 @@ namespace Datos.ModeloDeDatos
         public int NumeroOperacion { get; set; }
         public int IdBancoCuenta { get; set; }
         public string CuentaDescripcion { get; set; }
-        public double Fecha { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<System.DateTime> FechaEfectiva { get; set; }
         public string DiaClearing { get; set; }
         public decimal Importe { get; set; }

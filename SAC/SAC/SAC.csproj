@@ -199,6 +199,7 @@
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\SubRubroModelView.cs" />
     <Compile Include="Models\TarjetaModelView.cs" />
+    <Compile Include="Models\TarjetaOperacionModelView.cs" />
     <Compile Include="Models\TipoComprobanteModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
@@ -269,6 +270,7 @@
     <Content Include="Content\assets\css\pages\widget-page.css" />
     <Content Include="Content\assets\css\spinners.css" />
     <Content Include="Content\assets\css\style.css" />
+    <Content Include="Content\assets\css\styleSAC.css" />
     <Content Include="Content\assets\images\alert\alert.png" />
     <Content Include="Content\assets\images\alert\alert2.png" />
     <Content Include="Content\assets\images\alert\alert3.png" />
@@ -2798,6 +2800,7 @@
     <Content Include="Scripts\TreeView\TreeView.js" />
     <Content Include="Scripts\view\CajaScript.js" />
     <Content Include="Scripts\view\calcularporcentaje.js" />
+    <Content Include="Scripts\view\DatePickerReady.js" />
     <Content Include="Scripts\view\FacturaCompraScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2844,7 +2847,6 @@
     <Content Include="Views\CuentaCteProveedor\Index.cshtml" />
     <Content Include="Views\CuentaCteProveedor\PagarFactura.cshtml" />
     <Content Include="Views\CuentaCteProveedor\_Tabla.cshtml" />
-    <Content Include="Views\CuentaCteProveedor\_tablaCheques.cshtml" />
     <Content Include="Views\CuentaCteProveedor\_TablaCuentasBancaria.cshtml" />
     <Content Include="Views\CuentaCteProveedor\_TablaTarjetas.cshtml" />
     <Content Include="Views\Caja\AddOrEdit.cshtml" />
@@ -2855,6 +2857,16 @@
     <Content Include="Views\CajaSaldo\Detalle.cshtml" />
     <Content Include="Views\CajaSaldo\Index.cshtml" />
     <Content Include="Views\Caja\_GrillaCaja.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaChequesPropios.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_tablaChequesTerceros.cshtml" />
+    <Content Include="Views\CajaGrupo\ConsultaGrupo.cshtml" />
+    <Content Include="Views\Caja\ConsultaCaja.cshtml" />
+    <Content Include="Views\Localidad\Agregar.cshtml" />
+    <Content Include="Views\Localidad\Editar.cshtml" />
+    <Content Include="Views\Localidad\_Tabla.cshtml" />
+    <Content Include="Views\Rol\Details.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

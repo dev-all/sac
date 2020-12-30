@@ -1,0 +1,5 @@
+D:\SAC\SAC\Entidad\bin\Release\Entidad.dll
+D:\SAC\SAC\Entidad\bin\Release\Entidad.pdb
+D:\SAC\SAC\Entidad\obj\Release\Entidad.csproj.CoreCompileInputs.cache
+D:\SAC\SAC\Entidad\obj\Release\Entidad.dll
+D:\SAC\SAC\Entidad\obj\Release\Entidad.pdb

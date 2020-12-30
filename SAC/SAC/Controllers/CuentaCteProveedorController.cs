@@ -16,12 +16,16 @@ namespace SAC.Controllers
 {
     public class CuentaCteProveedorController : BaseController
     {
-
+        
         private ServicioCompra oServicioCompra = new ServicioCompra();
         private ServicioProveedor servicioProveedor = new ServicioProveedor();
         private ServicioCuentaCteProveedor servicioCuentaCteProveedor = new ServicioCuentaCteProveedor();
-        private ServicioPresupuestoActual servicioPresupuestoActual = new ServicioPresupuestoActual();
-
+        private ServicioPresupuestoActual servicioPresupuestoActual = new ServicioPresupuestoActual();  
+        private ServicioChequera oServicioChequera = new ServicioChequera();
+        private ServicioCheque oServicioCheque = new ServicioCheque();
+        private ServicioBancoCuenta oServicioCuentaBancaria = new ServicioBancoCuenta();
+        private ServicioTipoMoneda oServicioTipoMoneda = new ServicioTipoMoneda();
+      
         public CuentaCteProveedorController()
         {
             servicioCuentaCteProveedor._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
@@ -29,6 +33,10 @@ namespace SAC.Controllers
             servicioProveedor._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             servicioCuentaCteProveedor._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             servicioPresupuestoActual._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
+
+            oServicioChequera._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
+            oServicioCuentaBancaria._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
+            oServicioTipoMoneda._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
         }
 
         // GET: CuentaCteProveedor
@@ -55,7 +63,31 @@ namespace SAC.Controllers
                                                                  })).ToList();
 
             model.ListaPresupuestoActual = ListaPresupuestoActualDrop;
+          
+            //---------para el PartialView cheques terceros
+            List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oServicioCheque.GetAllCheque());
+            model.ListaChequesTerceros = ListaChequesTerceros;
+            //--------PartialView cheques propios          
+            List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());                      
+            List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
+            List<TipoMonedaModelView> ListaTipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(oServicioTipoMoneda.GetAllTipoMonedas());
+            List<SelectListItem> retornoListaCuentaBancaria = (ListaCuentaBancaria.Select(x =>
+                                        new SelectListItem()
+                                        {
+                                            Value = x.Id.ToString(),
+                                            Text = x.Banco + x.Descripcion
+                                        })).ToList();
+            List<SelectListItem> retornoListaTipoMoneda = (ListaTipoMoneda.Select(x =>
+                                         new SelectListItem()
+                                         {
+                                             Value = x.Id.ToString(),
+                                             Text = x.Descripcion
+                                         })).ToList();
 
+            model.ListaChequesPropios = ListaChequesPropios;
+            model.listaCuentaBancariaDrop = retornoListaCuentaBancaria;
+            model.ListaTipoMonedaDrop = retornoListaTipoMoneda;
+           
             return View(model);
         }
 
@@ -83,27 +115,79 @@ namespace SAC.Controllers
             
         }
 
-
         [HttpPost]
-        public ActionResult CargarCheques()
-
-        {
-            //cheques de terceros
-            ServicioCheque oServicioCheque = new ServicioCheque();
-            List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oServicioCheque.GetAllCheque());
-            //cheques propios
-            ServicioChequera oServicioChequera = new ServicioChequera();
+        public ActionResult CargarChequesPropios()
+        {           
+            //cheques propios          
             List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());
+            //Listo cuentas bancarias           
+            List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
+          
+            List<TipoMonedaModelView> ListaTipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(oServicioTipoMoneda.GetAllTipoMonedas());
 
-            FacturaPagoViewModel oChequesModel = new FacturaPagoViewModel();
-            oChequesModel.ListaChequesPropios = ListaChequesPropios;
-            oChequesModel.ListaChequesTerceros = ListaChequesTerceros;
+            List<SelectListItem> retornoListaCuentaBancaria  = (ListaCuentaBancaria.Select(x =>
+                                         new SelectListItem()
+                                         {
+                                             Value = x.Id.ToString(),
+                                             Text = x.Banco + x.Descripcion
+                                         })).ToList();
 
-            return PartialView("_tablaCheques", oChequesModel);
+            List<SelectListItem> retornoListaTipoMoneda = (ListaTipoMoneda.Select(x =>
+                                         new SelectListItem()
+                                         {
+                                             Value = x.Id.ToString(),
+                                             Text =  x.Descripcion
+                                         })).ToList();
+
+            FacturaPagoViewModel oChequesModel = new FacturaPagoViewModel
+            {
+                ListaChequesPropios = ListaChequesPropios,
+                listaCuentaBancariaDrop = retornoListaCuentaBancaria,
+                ListaTipoMonedaDrop = retornoListaTipoMoneda
+            };
+
+            return PartialView("_TablaChequesPropios", oChequesModel);
 
         }
 
-        
+        [HttpPost]
+        public ActionResult CargarChequesTerceros()
+
+        {
+            //cheques de terceros
+          
+            List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oServicioCheque.GetAllCheque());
+            
+            FacturaPagoViewModel oChequesModel = new FacturaPagoViewModel();
+            oChequesModel.ListaChequesTerceros = ListaChequesTerceros;
+
+            return PartialView("_tablaChequesTerceros", oChequesModel);
+
+        }
+
+        [HttpPost]
+        public ActionResult IngresarCheque(FacturaPagoViewModel oFacturaPago)
+
+        {
+            oFacturaPago.oChequera.IdBancoCuenta = oFacturaPago.idCuentaBancariaSeleccionada;
+            oFacturaPago.oChequera.Fecha = DateTime.Now;            
+            oFacturaPago.oChequera.IdMoneda = oFacturaPago.idTipoMonedaSeleccionada;
+            oFacturaPago.oChequera.Usado = false;
+            oFacturaPago.oChequera.IdProveedor = null;
+            oFacturaPago.oChequera.NumeroRecibo = null;
+            oFacturaPago.oChequera.Activo = true;
+            oFacturaPago.oChequera.IdUsuario = oFacturaPago.idUsuario;
+            oFacturaPago.oChequera.UltimaModificacion = DateTime.Now;
+            oServicioChequera.Insertar( Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago.oChequera));            
+           
+            FacturaPagoViewModel facturaPagoModelView = new FacturaPagoViewModel();
+            facturaPagoModelView.ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());
+            
+            return View(facturaPagoModelView);
+
+        }
+
+
         [HttpPost]
         public ActionResult CargarCuentas()
         {

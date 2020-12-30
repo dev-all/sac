@@ -163,6 +163,9 @@
     <Compile Include="ModeloDeDatos\PresupuestoCosto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\PresupuestoHistorico.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\PresupuestoItem.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -179,6 +182,9 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\SubRubro.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\TarjetaOperacion.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Tarjetas.cs">
@@ -241,6 +247,7 @@
     <Compile Include="Repositorios\PersonaRepositorio.cs" />
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\SubRubroRepositorio.cs" />
+    <Compile Include="Repositorios\TarjetaOperacionRepositorio.cs" />
     <Compile Include="Repositorios\TarjetaRepositorio.cs" />
     <Compile Include="Repositorios\TipoComprovanteVentaRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />

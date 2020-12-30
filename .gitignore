@@ -4,9 +4,9 @@
 
 
 *SAC/SAC/obj/
-*SAC/Negocio/obj/
-*SAC/Datos/obj/
-*SAC/Entidad/obj/
+*SAC/SAC/Negocio/obj/
+*SAC/SAC/Datos/obj/
+*SAC/SAC/Entidad/obj/
 
 # User-specific files
 *SAC/.vs/SAC/v16/.suo

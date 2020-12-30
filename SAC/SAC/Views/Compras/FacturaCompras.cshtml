@@ -1,12 +1,10 @@
 ﻿@model SAC.Models.CompraFacturaViewModel
-
 @{
     ViewBag.Title = "Factura Compras";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <!-- Date picker plugins css -->
 <link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-
 
 @using (Html.BeginForm("FacturaCompras", "Compras", FormMethod.Post))
 {
@@ -104,7 +102,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         @Html.LabelFor(m => m.Vencimiento, new { @class = "control-label form-control-sm" })
-                                        <input type="text" id="Vencimiento" name="Vencimiento" class="form-control form-control-sm fechadatepicker" required>
+                                        <input type="text" id="Vencimiento" name="Vencimiento" class="form-control form-control-sm fechadatepicker" required    data-validation-required-message="Ingrese una fecha">
 
                                         @*@Html.EditorFor(model => model.Vencimiento, new { htmlAttributes = new { @class = "form-control form-control-sm " } })
                                         @Html.ValidationMessageFor(model => model.Vencimiento, "", new { @class = "text-danger" })*@

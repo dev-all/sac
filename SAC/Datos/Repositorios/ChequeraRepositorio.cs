@@ -31,6 +31,12 @@ namespace Datos.Repositorios
             return context.Chequera.Where(p => p.Id == idCheque).First();
         }
 
+        public Chequera VerificarCheque(int nroCheque)
+        {
+            return context.Chequera.Where(p => p.NumeroCheque == nroCheque && p.Activo == true).FirstOrDefault();
+        }
+
+
         public Chequera Actualizar(Chequera oChequera)
         {
             Chequera nChequera = obtenerCheque(oChequera.Id);

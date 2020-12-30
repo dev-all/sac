@@ -30,6 +30,8 @@ namespace Negocio.Servicios
         ServicioPresupuestoCosto oServicioPresupuestoCosto = new ServicioPresupuestoCosto();
         ServicioPresupuestoItem oServicioPresupuestoItem = new ServicioPresupuestoItem();
         ServicioCaja oServicioCaja = new ServicioCaja();
+        ServicioTarjetaOperacion oServicioTarjetaOperacion = new ServicioTarjetaOperacion();
+        ServicioImputacion oServicioImputacion = new ServicioImputacion();
 
         private CompraRepositorio repositorio { get; set; }
 
@@ -64,13 +66,11 @@ namespace Negocio.Servicios
         public CompraFacturaModel RegistrarPago(CompraFacturaModel model)
         {
             try
-            {
-                var compraFactura = Mapper.Map<CompraFacturaModel, CompraFactura>(model);
-                compraFactura = repositorio.Insertar(compraFactura);
-                //model.IdUsuario = compraFactura.IdUsuario;
-                return model;
+            {                
+                var  compraFactura = repositorio.CreateFactura(Mapper.Map<CompraFacturaModel, CompraFactura>(model));
+                return Mapper.Map<CompraFactura,CompraFacturaModel>(compraFactura);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
@@ -91,7 +91,7 @@ namespace Negocio.Servicios
             }
          
         }
-    public bool ValidarFacturaPorNroFacturaIdProveedor(int numeroFactura, int idProveedor)
+        public bool ValidarFacturaPorNroFacturaIdProveedor(int numeroFactura, int idProveedor)
         {
             try
             {
@@ -210,198 +210,221 @@ namespace Negocio.Servicios
 
 
         /// <summary>
-        /// metodo que permite registrar un pago impacta en tbl compra factura, caja, banco, cheques, presupuesto, proveedores
+        /// metodo que permite registrar un pago impacta en tbl comprafactura, caja, banco, cheques, presupuesto, proveedores
         /// </summary>
         /// <param name="oCompraFacturaModel"></param>
-        public void RegistrarPago (FacturaPagoModel oCompraFacturaModel)
+        public void RegistrarPago(FacturaPagoModel oCompraFacturaModel)
         {
             try
             {
 
-                string[] FacturasaPagar = oCompraFacturaModel.idFacturas.Split(';');
-                int nroPago = 0;
-                foreach (var item in FacturasaPagar)
+                //controlo ingreso de los datos
+                if (oCompraFacturaModel.efectivo == 0 && oCompraFacturaModel.idChequesPropios == null
+                    && oCompraFacturaModel.idChequesTerceros == null && oCompraFacturaModel.idCuentasBancarias == "0"
+                    && oCompraFacturaModel.idTarjeta == 0)
                 {
-                    CompraFacturaModel Factura = new CompraFacturaModel();
-                    CompraFacturaPagoModel FacturaMedioPago = new CompraFacturaPagoModel();
-
-                    Factura = ObtenerPorID(int.Parse(item));
-                   
-                    nroPago= oServicioTipoComprobanteVenta.ObtenerNroPago(98);
-
-                    if (nroPago== 0 )
+                    _mensaje("Ops!, Faltan datos!!!", "war");
+                }
+                else
+                {
+                    string[] FacturasaPagar = oCompraFacturaModel.idFacturas.Split(';');
+                    int nroPago = 0;
+                    foreach (var item in FacturasaPagar)
                     {
-                        throw new Exception("Ocurrio un Error al intentar obtener el número de pago");
-                    }
-                    else
-                    {
+                       
+                        CompraFacturaPagoModel FacturaMedioPago = new CompraFacturaPagoModel();
 
-                       //estos seteos son para grabar en caja
-                        decimal ValorFactura = oCompraFacturaModel.TotalAPagar;
-                        decimal ImporteCheque = oCompraFacturaModel.montoChequesSeleccionados;
-                        decimal ImporteTarjeta = oCompraFacturaModel.montoTarjetaSeleccionados;
-                        decimal ImporteTranferencia = oCompraFacturaModel.montoTranferencia;
-                        int cuentaBanco = 0;
-                        //------------------------------------
+                        CompraFacturaModel Factura = ObtenerPorID(int.Parse(item));
+                        ProveedorModel facturaProveedor = oServicioProveedor.GetProveedor(Factura.IdProveedor);
+                        nroPago = oServicioTipoComprobanteVenta.ObtenerNroPago(98);
 
-                        //seteo los valores para avutalizar la tabla Compra facturas, punto 1 documento CtaCte
-                        Factura.FechaPago = DateTime.Now;
-                        Factura.NumeroPago = (nroPago + 1).ToString();
-                        Factura.CotizacionDePago = 0;
-
-                        //enviamos los datos a modificar y recupetamos la entidad actualizada
-                        Factura = ActualizarCompraFacturaPago(Factura);
-
-                        // seteo el tipo de moneda para grabar en caja
-                        int TipoDeMoneda = Factura.IdMoneda;
-                        //--------------------------------------
-
-                        oServicioTipoComprobanteVenta.ActualizarNroPago(98, nroPago + 1);
-
-                        // creamos el nuevo registro
-                        Factura.IdTipoComprobante = 98;
-                        Factura.PuntoVenta = 3;
-                        Factura.NumeroPago = (nroPago + 1).ToString();
-                        Factura.Total = oCompraFacturaModel.TotalAPagar;
-
-                        //condicion si diferencia es 0 graba 0 sino diferencia
-                        Factura.Parcial = oCompraFacturaModel.Diferencia;
-                        Factura.Saldo = oCompraFacturaModel.Diferencia;
-                        Factura.Fecha = DateTime.Now;
-                        Factura.Vencimiento = DateTime.Now;
-                        //Factura.TotalDolares
-
-                        //obtengo la cotizacion 
-                        ValorCotizacionModel valorCotizacion = oServicioTipoMoneda.GetCotizacionPorIdMoneda(Factura.Fecha,Factura.IdMoneda);
-                        //-----
-                        Factura.Cotizacion = valorCotizacion.Monto;
-                        Factura.FechaPago = DateTime.Now;
-                        string anio = DateTime.Now.Year.ToString();
-                        anio = anio.Substring(anio.Length - 2, 2);
-                        Factura.Periodo = int.Parse(anio + DateTime.Now.Month.ToString());
-
-
-                        Factura.CotizacionDePago = 0; //esta en la servicio tipoMoneda
-                        Factura.Concepto = "pago factura";
-                        //Factura.Imputacion = null;
-                        //Factura.IdMoneda = oCompraFacturaModel. 
-                        //Factura.Recibo = 0;
-
-
-                        //------aca insertamos los medios de pago
-                        //if (oCompraFacturaModel.idCuentasBancarias != null)
-                        //{
-                        //    FacturaMedioPago.IdFacturaCompra =int.Parse(item);
-                        //    FacturaMedioPago.IdTipoPago = 1;
-                        //    FacturaMedioPago.Id_pago = int.Parse(oCompraFacturaModel.idCuentasBancarias);
-                        //    FacturaMedioPago.Monto = oCompraFacturaModel.montoTranferencia;
-                        //    FacturaMedioPago.Observaciones = "tranferencia bancaria";
-                        //    FacturaMedioPago.Activo = true;
-                        //    FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
-                        //    oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
-                        //}
-
-                        if (oCompraFacturaModel.efectivo != null)
+                        if (nroPago == 0)
                         {
-                            FacturaMedioPago.IdFacturaCompra = int.Parse(item);
-                            FacturaMedioPago.IdTipoPago = 2;
-                            FacturaMedioPago.Monto = oCompraFacturaModel.efectivo;
-                            FacturaMedioPago.Observaciones = "Efectivo";
-                            FacturaMedioPago.Activo = true;
-                            FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
-                            FacturaMedioPago.UltimaModificacion = DateTime.Now;
-                            oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
-
+                            throw new Exception("Ocurrio un Error al intentar obtener el número de pago");
                         }
-
-                        if (oCompraFacturaModel.idChequesPropios != null)
+                        else
                         {
-                            ChequeraModel oChequera = new ChequeraModel();
-                            string[] chequesSeleccionados = oCompraFacturaModel.idChequesPropios.Split(';');
-                            foreach (var itemCheque in chequesSeleccionados)
+
+                            //estos seteos son para grabar en caja
+                            decimal ValorFactura = oCompraFacturaModel.TotalAPagar;
+                            decimal ImporteCheque = oCompraFacturaModel.montoChequesSeleccionados;
+                            decimal ImporteTarjeta = oCompraFacturaModel.montoTarjetaSeleccionados;
+                            decimal ImporteTranferencia = oCompraFacturaModel.montoTranferencia;
+                            int cuentaBanco = 0;
+                            //------------------------------------
+
+                            //seteo los valores para avutalizar la tabla Compra facturas, punto 1 documento CtaCte
+                            Factura.FechaPago = DateTime.Now;
+                            Factura.NumeroPago = (nroPago + 1).ToString();
+                            Factura.CotizacionDePago = 0;
+
+                            //enviamos los datos a modificar y recupetamos la entidad actualizada
+                            Factura = ActualizarCompraFacturaPago(Factura);
+
+                            // seteo el tipo de moneda para grabar en caja
+                            int TipoDeMoneda = Factura.IdMoneda;
+                            //--------------------------------------
+
+                            oServicioTipoComprobanteVenta.ActualizarNroPago(98, nroPago + 1);
+
+                            // creamos el nuevo registro CompraFacturaModel 
+                            Factura.Id = 0;
+                            Factura.IdTipoComprobante = 98;
+                            Factura.PuntoVenta = 3;
+                            Factura.NumeroPago = (nroPago + 1).ToString();
+                            Factura.Total = oCompraFacturaModel.TotalAPagar;
+
+                            Factura.Parcial = oCompraFacturaModel.Diferencia;
+                            Factura.Saldo = oCompraFacturaModel.Diferencia;
+                            Factura.Fecha = DateTime.Now;
+                            Factura.Vencimiento = DateTime.Now;
+                            //Factura.TotalDolares
+
+                            //obtengo la cotizacion 
+                            ValorCotizacionModel valorCotizacion = oServicioTipoMoneda.GetCotizacionPorIdMoneda(Factura.Fecha, Factura.IdMoneda);
+                            //-----
+                            if (valorCotizacion != null)
                             {
-                                oChequera = oServicioChequera.obtenerCheque(int.Parse(itemCheque));
-                                //inserto medio de pago
+                                Factura.Cotizacion = valorCotizacion.Monto;
+                            }
+                            else
+                            {
+                                Factura.Cotizacion = 0;
+                            }
+
+                            Factura.FechaPago = DateTime.Now;
+                            string anio = DateTime.Now.Year.ToString();
+                            anio = anio.Substring(anio.Length - 2, 2);
+                            Factura.Periodo = int.Parse(anio + DateTime.Now.Month.ToString());
+
+                            Factura.TipoMoneda = null;
+                            Factura.Proveedor = null;
+                            Factura.CompraIva = null;
+
+
+                            Factura.CotizacionDePago = 0; //esta en la servicio tipoMoneda
+                            Factura.Concepto = "Pago factura";
+                            Factura.IdImputacion = 0;
+                            Factura.IdCompraIva = null;
+                            Factura.Imputacion = null;
+                            Factura.IdUsuario = oCompraFacturaModel.idUsuario;
+                            Factura.UltimaModificacion = DateTime.Now;
+
+                            var Retorno = RegistrarPago(Factura);
+
+                            //------aca insertamos los medios de pago
+                            //if (oCompraFacturaModel.idCuentasBancarias != null)
+                            //{
+                            //    FacturaMedioPago.IdFacturaCompra =int.Parse(item);
+                            //    FacturaMedioPago.IdTipoPago = 1;
+                            //    FacturaMedioPago.Id_pago = int.Parse(oCompraFacturaModel.idCuentasBancarias);
+                            //    FacturaMedioPago.Monto = oCompraFacturaModel.montoTranferencia;
+                            //    FacturaMedioPago.Observaciones = "tranferencia bancaria";
+                            //    FacturaMedioPago.Activo = true;
+                            //    FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
+                            //    oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
+                            //}
+
+                            if (oCompraFacturaModel.efectivo != 0)
+                            {
                                 FacturaMedioPago.IdFacturaCompra = int.Parse(item);
-                                FacturaMedioPago.IdTipoPago = 3;
-                                FacturaMedioPago.IdChequera = int.Parse(itemCheque);
-                                FacturaMedioPago.Monto =decimal.Parse(oChequera.Importes.ToString());
-                                FacturaMedioPago.Observaciones = "Cheques propios";
+                                FacturaMedioPago.IdTipoPago = 2;
+                                FacturaMedioPago.Monto = oCompraFacturaModel.efectivo;
+                                FacturaMedioPago.Observaciones = "Efectivo";
                                 FacturaMedioPago.Activo = true;
                                 FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
                                 FacturaMedioPago.UltimaModificacion = DateTime.Now;
                                 oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
 
-                                //actualizo el cheque en la chequera
-                                oChequera.NumeroOperacion = nroPago + 1;
-                                oChequera.UltimaModificacion = DateTime.Now;
-                                oChequera.IdUsuario = oCompraFacturaModel.idUsuario;
-                                oChequera.Usado = true;
-                                //oChequera.Activo = false; //lo inactivo porque ya se uso
-                                oChequera.Destino = Factura.IdProveedor.ToString();//id proveedor
-                                oChequera.IdProveedor = Factura.IdProveedor.ToString();
-                                oChequera.IdUsuario = oCompraFacturaModel.idUsuario;
-                                oChequera.UltimaModificacion = DateTime.Now;
-                                oServicioChequera.Actualizar(oChequera);
-
-
-                                //registrar movimiento cuenta bancaria porque el cheque propio lo toma asi
-                                BancoCuentaBancariaModel oBancoCuentaBancariaModel = new BancoCuentaBancariaModel();
-                                oBancoCuentaBancariaModel.NumeroOperacion = nroPago + 1;
-                                oBancoCuentaBancariaModel.IdBancoCuenta= oChequera.IdBancoCuenta ;
-                                oBancoCuentaBancariaModel.CuentaDescripcion = oChequera.BancoCuenta.Descripcion;
-                                //oBancoCuentaBancariaModel.Fecha = DateTime.Now; // esta como float
-                                oBancoCuentaBancariaModel.FechaEfectiva = DateTime.Now;
-                                oBancoCuentaBancariaModel.DiaClearing = "";
-                                oBancoCuentaBancariaModel.Importe = decimal.Parse(oChequera.Importes.ToString());
-                                oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
-                                oBancoCuentaBancariaModel.Conciliacion = "F";
-
-                                // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
-                                oBancoCuentaBancariaModel.Activo = true;
-                                oBancoCuentaBancariaModel.IdImputacion = "0";
-                                oBancoCuentaBancariaModel.IdUsuario = oCompraFacturaModel.idUsuario;
-                                oBancoCuentaBancariaModel.UltimaModificacion = DateTime.Now;
-
-                                oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
-
                             }
-                        }
 
-                        if (oCompraFacturaModel.idChequesTerceros != null)
-                        {
-                            ChequeModel oCheque = new ChequeModel();
-                            string[] chequesSeleccionados = oCompraFacturaModel.idChequesTerceros.Split(';');
-                            foreach (var itemCheque in chequesSeleccionados)
+                            if (oCompraFacturaModel.idChequesPropios != null)
                             {
-                                oCheque = oServicioCheque.obtenerCheque(int.Parse(itemCheque));
+                                ChequeraModel oChequera = new ChequeraModel();
+                                string[] chequesSeleccionados = oCompraFacturaModel.idChequesPropios.Split(';');
+                                foreach (var itemCheque in chequesSeleccionados)
+                                {
+                                    oChequera = oServicioChequera.obtenerCheque(int.Parse(itemCheque));
+                                    //inserto medio de pago
+                                    FacturaMedioPago.IdFacturaCompra = int.Parse(item);
+                                    FacturaMedioPago.IdTipoPago = 3;
+                                    FacturaMedioPago.IdChequera = int.Parse(itemCheque);
+                                    FacturaMedioPago.Monto = decimal.Parse(oChequera.Importes.ToString());
+                                    FacturaMedioPago.Observaciones = "Cheques propios";
+                                    FacturaMedioPago.Activo = true;
+                                    FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
+                                    FacturaMedioPago.UltimaModificacion = DateTime.Now;
+                                    oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
 
-                                FacturaMedioPago.IdFacturaCompra = int.Parse(item);
-                                FacturaMedioPago.IdTipoPago = 3;
-                                FacturaMedioPago.IdCheque = int.Parse(itemCheque);
-                                FacturaMedioPago.Monto = decimal.Parse(oCheque.Importe.ToString());
-                                FacturaMedioPago.Observaciones = "Cheques propios";
-                                FacturaMedioPago.Activo = true;
-                                FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
-                                FacturaMedioPago.UltimaModificacion = DateTime.Now;
-                                oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
+                                    //actualizo el cheque en la chequera
+                                    oChequera.NumeroOperacion = nroPago + 1;
+                                    oChequera.UltimaModificacion = DateTime.Now;
+                                    oChequera.IdUsuario = oCompraFacturaModel.idUsuario;
+                                    oChequera.Usado = true;//lo inactivo porque ya se uso                                 
+                                    oChequera.Destino = "Pago a proveedor" + facturaProveedor.Nombre;
+                                    oChequera.IdProveedor = facturaProveedor.Id;
+                                    oChequera.IdUsuario = oCompraFacturaModel.idUsuario;
+                                    oChequera.UltimaModificacion = DateTime.Now;
+                                    oServicioChequera.Actualizar(oChequera);
 
-                                //registrar tabla cheques
-                                oCheque.FechaEgreso = DateTime.Now.ToString();
-                                oCheque.Destino = Factura.IdProveedor.ToString();//id proveedor
-                                oCheque.IdMoneda = oCheque.IdMoneda;
-                                oCheque.NumeroPago = (nroPago + 1).ToString();
-                                oCheque.Proveedor = Factura.IdProveedor.ToString();
-                                // oCheque.Activo = false;
-                                oCheque.Endosado = true;
 
-                                oServicioCheque.Actualizar(oCheque);
+                                    //registrar movimiento cuenta bancaria porque el cheque propio lo toma asi
+                                    BancoCuentaBancariaModel oBancoCuentaBancariaModel = new BancoCuentaBancariaModel();
+                                    oBancoCuentaBancariaModel.NumeroOperacion = nroPago + 1;
+                                    oBancoCuentaBancariaModel.IdBancoCuenta = oChequera.IdBancoCuenta ?? 0;
+                                    oBancoCuentaBancariaModel.CuentaDescripcion = oChequera.BancoCuenta.Descripcion;
+                                    oBancoCuentaBancariaModel.Fecha = DateTime.Now; 
+                                    oBancoCuentaBancariaModel.FechaEfectiva = DateTime.Now;
+                                    oBancoCuentaBancariaModel.DiaClearing = "";
+                                    oBancoCuentaBancariaModel.Importe = decimal.Parse(oChequera.Importes.ToString());
+                                    oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
+                                    oBancoCuentaBancariaModel.Conciliacion = "F";
 
+                                    // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
+                                    oBancoCuentaBancariaModel.Activo = true;
+                                    oBancoCuentaBancariaModel.IdImputacion = "0";
+                                    oBancoCuentaBancariaModel.IdUsuario = oCompraFacturaModel.idUsuario;
+                                    oBancoCuentaBancariaModel.UltimaModificacion = DateTime.Now;
+
+                                    oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
+
+                                }
                             }
-                        }
 
-                        if (oCompraFacturaModel.idCuentasBancarias != null)
-                        {
+                            if (oCompraFacturaModel.idChequesTerceros != null)
+                            {
+                                ChequeModel oCheque = new ChequeModel();
+                                string[] chequesSeleccionados = oCompraFacturaModel.idChequesTerceros.Split(';');
+                                foreach (var itemCheque in chequesSeleccionados)
+                                {
+                                    oCheque = oServicioCheque.obtenerCheque(int.Parse(itemCheque));
+
+                                    FacturaMedioPago.IdFacturaCompra = int.Parse(item);
+                                    FacturaMedioPago.IdTipoPago = 3;
+                                    FacturaMedioPago.IdCheque = int.Parse(itemCheque);
+                                    FacturaMedioPago.Monto = decimal.Parse(oCheque.Importe.ToString());
+                                    FacturaMedioPago.Observaciones = "Cheques propios";
+                                    FacturaMedioPago.Activo = true;
+                                    FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
+                                    FacturaMedioPago.UltimaModificacion = DateTime.Now;
+                                    oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
+
+                                    //registrar tabla cheques
+                                    oCheque.FechaEgreso = DateTime.Now;
+                                    oCheque.Destino = Factura.IdProveedor.ToString();//id proveedor
+                                    oCheque.IdMoneda = oCheque.IdMoneda;
+                                    oCheque.NumeroPago = (nroPago + 1).ToString();
+                                    oCheque.Proveedor = Factura.IdProveedor.ToString();
+                                    // oCheque.Activo = false;
+                                    oCheque.Endosado = true;
+
+                                    oServicioCheque.Actualizar(oCheque);
+
+                                }
+                            }
+
+                            if (oCompraFacturaModel.idCuentasBancarias != "0")
+                            {
                                 FacturaMedioPago.IdFacturaCompra = int.Parse(item);
                                 FacturaMedioPago.IdTipoPago = 4;
                                 FacturaMedioPago.IdBancoCuenta = int.Parse(oCompraFacturaModel.idCuentasBancarias);
@@ -409,127 +432,149 @@ namespace Negocio.Servicios
                                 FacturaMedioPago.Observaciones = "Tranferecia Bancaria";
                                 FacturaMedioPago.Activo = true;
                                 FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
+                                FacturaMedioPago.UltimaModificacion = DateTime.Now;
                                 oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
-                            //registrar movimiento cuenta bancaria
+                                //registrar movimiento cuenta bancaria
 
-                            //seteo para grabar en caja
-                            cuentaBanco = int.Parse(oCompraFacturaModel.idCuentasBancarias);
-                            //--------------------------
+                                //seteo para grabar en caja
+                                cuentaBanco = int.Parse(oCompraFacturaModel.idCuentasBancarias);
+                                //--------------------------
 
-                            //registrar movimiento cuenta bancaria porque el cheque propio lo toma asi
-                            BancoCuentaBancariaModel oBancoCuentaBancariaModel = new BancoCuentaBancariaModel();
-                            oBancoCuentaBancariaModel.NumeroOperacion = nroPago + 1;
-                            oBancoCuentaBancariaModel.IdBancoCuenta = int.Parse(oCompraFacturaModel.idCuentasBancarias);
-                           // oBancoCuentaBancariaModel.CuentaDescripcion = oCompraFacturaModel. BancoCuenta.Descripcion;
-                            //oBancoCuentaBancariaModel.Fecha = DateTime.Now; // esta como float
-                            oBancoCuentaBancariaModel.FechaEfectiva = DateTime.Now;
-                            oBancoCuentaBancariaModel.DiaClearing = "";
-                            oBancoCuentaBancariaModel.Importe = decimal.Parse(oCompraFacturaModel.montoTranferencia.ToString());
-                            oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
-                            oBancoCuentaBancariaModel.Conciliacion = "F";
-                            // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
-                            oBancoCuentaBancariaModel.IdImputacion = "0";
-                            oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
+                                //registrar movimiento cuenta bancaria porque el cheque propio lo toma asi
+                                BancoCuentaBancariaModel oBancoCuentaBancariaModel = new BancoCuentaBancariaModel();
+                                oBancoCuentaBancariaModel.NumeroOperacion = nroPago + 1;
+                                oBancoCuentaBancariaModel.IdBancoCuenta = int.Parse(oCompraFacturaModel.idCuentasBancarias);
+                                // oBancoCuentaBancariaModel.CuentaDescripcion = oCompraFacturaModel. BancoCuenta.Descripcion;
+                                //oBancoCuentaBancariaModel.Fecha = DateTime.Now; // esta como float
+                                oBancoCuentaBancariaModel.FechaEfectiva = DateTime.Now;
+                                oBancoCuentaBancariaModel.DiaClearing = "";
+                                oBancoCuentaBancariaModel.Importe = decimal.Parse(oCompraFacturaModel.montoTranferencia.ToString());
+                                oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
+                                oBancoCuentaBancariaModel.Conciliacion = "F";
+                                // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
+                                oBancoCuentaBancariaModel.IdImputacion = "0";
+                                oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
 
+                            }
+
+                            if (oCompraFacturaModel.idTarjeta != 0)
+                            {
+                                FacturaMedioPago.IdFacturaCompra = int.Parse(item);
+                                FacturaMedioPago.IdTipoPago = 5;
+                                FacturaMedioPago.IdTarjeta = oCompraFacturaModel.idTarjeta;
+                                FacturaMedioPago.Monto = oCompraFacturaModel.montoTarjetaSeleccionados;
+                                FacturaMedioPago.Observaciones = "Tarjeta";
+                                FacturaMedioPago.Activo = true;
+                                FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
+                                FacturaMedioPago.UltimaModificacion = DateTime.Now;
+                                oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
+
+
+                                //obtengo idGrupo caja de presupuesto
+                                PresupuestoActualModel oPresupuestoActualModel = new PresupuestoActualModel();
+                                oPresupuestoActualModel = oServicioPresupuestoActual.GetAllPresupuestos(oCompraFacturaModel.idPresupuesto);
+                                int idGrupoCaja = oPresupuestoActualModel.IdGrupoCaja;
+                                //registra tarjeta
+
+                                TarjetaOperacionModel oTarjetaOperacionModel = new TarjetaOperacionModel();
+                                oTarjetaOperacionModel.IdTarjeta = oCompraFacturaModel.idTarjeta;
+                                oTarjetaOperacionModel.Descripcion = "Pago Factura: " + Factura.NumeroFactura;
+                                oTarjetaOperacionModel.IdGrupoCaja = idGrupoCaja;
+                                oTarjetaOperacionModel.Conciliacion = false;
+                                oTarjetaOperacionModel.NumeroPago = (nroPago + 1).ToString();
+                                oTarjetaOperacionModel.Activo = true;
+                                oTarjetaOperacionModel.IdUsuario = oCompraFacturaModel.idUsuario;
+                                oTarjetaOperacionModel.UltimaModificacion = DateTime.Now;
+                                oServicioTarjetaOperacion.Insertar(oTarjetaOperacionModel);
+
+                            }
+
+
+                            //grabo en caja
+                            CajaModel oCajaModel = new CajaModel();
+
+                            oCajaModel.IdTipoMovimiento = 1;
+                            oCajaModel.Concepto = "nro factura: " + Factura.NumeroFactura;
+                            oCajaModel.Fecha = DateTime.Now;
+                            oCajaModel.Tipo = "";
+                            oCajaModel.Saldo = "";
+                            oCajaModel.Recibo = "";
+
+                            if (TipoDeMoneda == 1)
+                            {
+                                oCajaModel.ImportePesos = ValorFactura;
+                            }
+                            else if (TipoDeMoneda == 2)
+                            {
+                                oCajaModel.ImporteDolar = ValorFactura;
+                            }
+
+                            oCajaModel.IdCuentaBanco = cuentaBanco;
+                            oCajaModel.ImporteCheque = ImporteCheque;
+                            oCajaModel.ImporteDeposito = ImporteTranferencia;
+                            oCajaModel.ImporteTarjeta = ImporteTarjeta;
+
+                            oCajaModel.IdCuentaBanco = int.Parse(oCompraFacturaModel.idCuentasBancarias);
+
+
+                         
+                            //validar y actualizar presupuesto 
+
+                            PresupuestoActualModel oPrespuestoActual = oServicioPresupuestoActual.GetAllPresupuestos(oCompraFacturaModel.idPresupuesto);
+                            oPrespuestoActual.Ejecutado += Factura.Total;
+                            oPrespuestoActual.IdUsuario = oCompraFacturaModel.idUsuario;
+                            oPrespuestoActual.UltimaModificacion = DateTime.Now;
+                            oServicioPresupuestoActual.ActualizarPresupuesto(oPrespuestoActual);
+
+                            if (oPrespuestoActual.Id != 0)
+                            {
+                                PresupuestoCostoModel oPresupuestoCosto = oServicioPresupuestoCosto.GetAllPresupuestoCosto(oPrespuestoActual.Codigo);
+                                if (oPresupuestoCosto != null)
+                                {
+                                    oPresupuestoCosto.Ejecutado += Factura.Total;
+                                    oPresupuestoCosto.IdUsuario = oCompraFacturaModel.idUsuario;
+                                    oPresupuestoCosto.UltimaModificacion = DateTime.Now;
+                                    oServicioPresupuestoCosto.ActualizarPresupuesto(oPresupuestoCosto);
+                                }
+
+                            }
+
+                            //formo el periodo
+                            string anioPeriodo = DateTime.Now.Year.ToString();
+                            anioPeriodo = anioPeriodo.Substring(anioPeriodo.Length - 2, 2);
+                            PresupuestoItemModel presupuestoItem = new PresupuestoItemModel();
+                            presupuestoItem.Codigo = oPrespuestoActual.Codigo;
+                            presupuestoItem.Concepto = facturaProveedor.Nombre + "Nro Factura: " + Factura.NumeroFactura;
+                            presupuestoItem.Pagado = Factura.Total;
+                            presupuestoItem.Ejecutado = "true";
+                            presupuestoItem.Periodo = int.Parse(anioPeriodo + DateTime.Now.Month.ToString());
+
+                            PresupuestoItemModel oPresupuestoItem = oServicioPresupuestoItem.Insertar(presupuestoItem);
+
+
+
+                            //aca tengo que hacer la parte de la caja pero espero a esteban
+                            //sigue caja 
+
+                            
+                            /// ERROR AL ACTUALZIZAR PROVEEDOR
+                          //  var oProveedor = oServicioProveedor.GetProveedor(Factura.IdProveedor);
+                            facturaProveedor.idPresupuesto = oCompraFacturaModel.idPresupuesto;
+                            facturaProveedor.UltimaModificacion = DateTime.Now;
+                            facturaProveedor.IdUsuario = oCompraFacturaModel.idUsuario;
+                            oServicioProveedor.ActualizarProveedor(facturaProveedor);
                         }
 
-                        if (oCompraFacturaModel.idTarjeta != 0)
-                        {
-                            FacturaMedioPago.IdFacturaCompra = int.Parse(item);
-                            FacturaMedioPago.IdTipoPago = 5;
-                            FacturaMedioPago.IdTarjeta = oCompraFacturaModel.idTarjeta;
-                            FacturaMedioPago.Monto = oCompraFacturaModel.montoTarjetaSeleccionados;
-                            FacturaMedioPago.Observaciones = "Tarjeta";
-                            FacturaMedioPago.Activo = true;
-                            FacturaMedioPago.IdUsuario = oCompraFacturaModel.idUsuario;
-                            oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
-
-                            //registra tarjeta
-
-                        }
-
-
-                        //grabo en caja
-                        CajaModel oCajaModel = new CajaModel();
-
-                        oCajaModel.IdTipoMovimiento = 1;
-                        oCajaModel.Concepto = "nro factura: " + Factura.NumeroFactura;
-                        oCajaModel.Fecha = DateTime.Now;
-                        oCajaModel.Tipo = "";
-                        oCajaModel.Saldo = "";
-                        oCajaModel.Recibo = "";
-
-                        if (TipoDeMoneda==1)
-                        {
-                            oCajaModel.ImportePesos = ValorFactura;
-                        }
-                        else if (TipoDeMoneda ==2 )
-                        {
-                            oCajaModel.ImporteDolar = ValorFactura;
-                        }
-
-                        oCajaModel.IdCuentaBanco = cuentaBanco;
-                        oCajaModel.ImporteCheque = ImporteCheque;
-                        oCajaModel.ImporteDeposito = ImporteTranferencia;
-                        oCajaModel.ImporteTarjeta = ImporteTarjeta;
-
-
-
-                        oCajaModel.IdCuentaBanco = int.Parse(oCompraFacturaModel.idCuentasBancarias);
-                        
-
-
-
-                        //obtengo datos del proveedor
-                        ProveedorModel oProveedorObtenido =oServicioProveedor.GetProveedor(oCompraFacturaModel.idProveedor);
-
-                        //validar y actualizar presupuesto 
-
-                        PresupuestoActualModel oPrespuestoActual =  oServicioPresupuestoActual.GetAllPresupuestos(oCompraFacturaModel.idPresupuesto);
-                        oPrespuestoActual.Ejecutado += Factura.Total;
-                        oPrespuestoActual.IdUsuario = oCompraFacturaModel.idUsuario;
-                        oPrespuestoActual.UltimaModificacion = DateTime.Now;
-                        oServicioPresupuestoActual.ActualizarPresupuesto(oPrespuestoActual);
-
-                        PresupuestoCostoModel oPresupuestoCosto = oServicioPresupuestoCosto.GetAllPresupuestoCosto(oPrespuestoActual.Codigo);
-                        oPresupuestoCosto.Ejecutado += Factura.Total;
-                        oPresupuestoCosto.IdUsuario = oCompraFacturaModel.idUsuario;
-                        oPresupuestoCosto.UltimaModificacion = DateTime.Now;
-                        oServicioPresupuestoCosto.ActualizarPresupuesto(oPresupuestoCosto);
-
-
-                        //formo el periodo
-                        string anioPeriodo = DateTime.Now.Year.ToString();
-                        anioPeriodo = anioPeriodo.Substring(anioPeriodo.Length - 2, 2);
-                        PresupuestoItemModel presupuestoItem = new PresupuestoItemModel();
-                        presupuestoItem.Codigo = oPrespuestoActual.Codigo;
-                        presupuestoItem.Concepto = oProveedorObtenido.Nombre + "Nro Factura: " + Factura.NumeroFactura;
-                        presupuestoItem.Pagado = decimal.ToDouble(Factura.Total);
-                        presupuestoItem.Ejecutado = "true";
-                        presupuestoItem.Periodo   = int.Parse(anioPeriodo + DateTime.Now.Month.ToString());
-
-                        PresupuestoItemModel oPresupuestoItem = oServicioPresupuestoItem.Insertar(presupuestoItem);
-
-
-                        var Retorno = RegistrarPago(Factura);
-                        //aca tengo que hacer la parte de la caja pero espero a esteban
-                        //sigue caja 
-
-
-                        //actualizo proveedor
-                        var oProveedor = oServicioProveedor.GetProveedor(Factura.IdProveedor);
-                        oProveedor.idPresupuesto = oCompraFacturaModel.idPresupuesto;
-                        oProveedor.UltimaModificacion = DateTime.Now;
-                        oProveedor.IdUsuario = oCompraFacturaModel.idUsuario;
-                        oServicioProveedor.ActualizarProveedor(oProveedor);
                     }
-
                 }
+
+
+
             }
             catch (Exception ex)
             {
                 _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
-                
+
             }
         }
 

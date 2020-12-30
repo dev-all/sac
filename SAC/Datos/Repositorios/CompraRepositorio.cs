@@ -16,9 +16,13 @@ namespace Datos.Repositorios
             this.context = contexto;
         }
             
-        public CompraFactura CreateAccion(CompraFactura compraFactura)
+        public CompraFactura CreateFactura(CompraFactura compraFactura)
         {
-           return  Insertar(compraFactura);
+            context.Configuration.LazyLoadingEnabled = false;
+            CompraFactura nuevaEntidad = DbSet.Add(compraFactura);
+            Contexto.SaveChanges();
+              
+           return  null;
         }
 
         public List<CompraFactura> GetAllCompraFactura()

@@ -27,6 +27,7 @@ namespace Datos.ModeloDeDatos
         public decimal Ejecutado { get; set; }
         public decimal Historico { get; set; }
         public int IdImputacion { get; set; }
+        public Nullable<int> IdGrupoCaja { get; set; }
         public string CodigoCaja { get; set; }
         public string Visible { get; set; }
         public string Costos { get; set; }
@@ -34,7 +35,6 @@ namespace Datos.ModeloDeDatos
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
-        public Nullable<int> IdGrupoCaja { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }

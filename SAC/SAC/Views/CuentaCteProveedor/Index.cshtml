@@ -9,23 +9,15 @@
 <!-- Date picker plugins css -->
 <link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 
-<!-- ============================================================== -->
-<!-- Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-@*<div class="row page-titles m-t-40">
-    <div class="col-md-5 align-self-center">
-        <h3 class="text-themecolor">Lista de Proveedores</h3>
-    </div>
-
-</div>*@
 <div class="row">
     <div class="col-xlg-12 col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
 
-                <h4 class="card-title">Lista de Proveedores</h4>
-                <h6 class="card-subtitle">Puede buscar ingresando la fecha inicio y fin </h6>
-               
+                <h5 class="card-title">
+                    Lista de Proveedores  
+                </h5>
+
                 @using (Ajax.BeginForm("Filtrado", "", new AjaxOptions
                 {
                     HttpMethod = "POST",
@@ -34,21 +26,35 @@
                     InsertionMode = InsertionMode.Replace
                 }, new { @id = "frmFiltrado" }))
                 {
-                    <div class="row">
-                    
-                            <div class="form-group row col-8">
-                                @Html.TextBox("inicio", null, new { @class = "col-sm-2 offset-sm-1 form-control", @placeholder = "Fecha inicio" })
-                                @Html.TextBox("fin", null, new { @class = "col-sm-2 offset-sm-1 form-control ", @placeholder = "Fecha fin" })
-                                <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary  mb-2 offset-sm-1">Buscar</button>
-                            </div>
-                   
-                    </div>
 
-                    <div id="divPagina">
-                        @Html.Partial("_Tabla", Model)
+
+            <div class="row justify-content-md-center">
+                <div class="col-md-4">
+                    <label   class="form-control-label"> Filtro por fecha de movimiento  </label>
+                </div>
+                    <div class="col-md-2">
+                        @Html.TextBox("inicio", null, new { @class = "form-control form-control-sm", @placeholder = "Fecha inicio" })
                     </div>
+                    <div class="col-md-2">
+                        @Html.TextBox("fin", null, new { @class = "form-control form-control-sm", @placeholder = "Fecha fin" })
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary "><i class="fa  fa-search"></i>  Buscar</button>
+                    </div>
+                </div>
+
+
+                @*<div class="form-group row col-8">
+            @Html.TextBox("inicio", null, new { @class = "col-sm-3 offset-sm-1 form-control form-control-sm", @placeholder = "Fecha inicio" })
+            @Html.TextBox("fin", null, new { @class = "col-sm-3 offset-sm-1 form-control form-control-sm", @placeholder = "Fecha fin" })
+            <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary  mb-2 offset-sm-1">Buscar</button>
+        </div>*@
+
+                <div id="divPagina">
+                    @Html.Partial("_Tabla", Model)
+                </div>
                 }
-                
+
             </div>
         </div>
     </div>
@@ -59,28 +65,8 @@
 
 
     function IraPagar(valor) {
-        location.href = "@Url.Action("PagarFactura", "CuentaCteProveedor", new {idProveedor= "cid" })".replace("cid",valor.toString());
+        location.href = "@Url.Action("PagarFactura", "CuentaCteProveedor", new       {idProveedor= "cid" })".replace("cid",valor.toString());
     }
-
-
-    function fntabla() {
-        $('#TblProveedor').DataTable({
-            "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
-            "order": [[2, 'asc']],
-            'paging': true,
-            'lengthChange': false,
-            'searching': true,
-            'ordering': true,
-            'info': true,
-            'autoWidth': true,
-            'dom': 'Bfrtip',
-            'buttons': [
-                'pdf'
-            ]
-        });
-    }
-
-
 
 </script>
 
@@ -106,9 +92,20 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+          
             $('#TblProveedor').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+                "order": [[5, 'asc']],
+                'paging': false,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': false,
+                'info': false,
+                'autoWidth': true,
+                'scrollY': '350px',
+                'scrollCollapse': true,
+                'dom': 'Bfrtip',
+                'buttons': [
                     'pdf'
                 ]
             });

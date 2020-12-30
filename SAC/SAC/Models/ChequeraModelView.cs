@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+
 
 namespace SAC.Models
 {
@@ -9,34 +11,32 @@ namespace SAC.Models
     {
 
         public int Id { get; set; }
-
+        
+        [Display(Name = "Número Cheque"), Required(ErrorMessage = "Debe ingresar un número.")]
         public int NumeroCheque { get; set; }
 
-        public string Banco { get; set; }
+        public Nullable<int> IdBancoCuenta { get; set; }
 
-        public double Fecha { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
 
-        public double Importes { get; set; }
+        [Display(Name = "Importe"), Required(ErrorMessage = "Debe ingresar un valor.")]
+        public decimal Importes { get; set; }
 
-        public string IdProveedor { get; set; }
-
-        public string Descripcion { get; set; }
+        public Nullable<int> IdProveedor { get; set; }
 
         public string NumeroRecibo { get; set; }
 
-        public double FechaIngreso { get; set; }
+        [Display(Name = "Fecha Ingreso")]
 
-        public string FechaEgreso { get; set; }
+        public Nullable<System.DateTime> FechaIngreso { get; set; }
+   
+        public DateTime FechaEgreso { get; set; }
 
         public string Destino { get; set; }
 
-        public string IdMoneda { get; set; }
+        public Nullable<int> NumeroOperacion { get; set; }
 
-        public string GrupoCaja { get; set; }
-
-        public int IdFactura { get; set; }
-
-        public int NumeroPago { get; set; }
+        public Nullable<int> IdMoneda { get; set; }
 
         public string Registro { get; set; }
 
@@ -48,14 +48,13 @@ namespace SAC.Models
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
+        public BancoCuentaModelView BancoCuenta { get; set; }
+
         public TipoMonedaModelView TipoMoneda { get; set; }
 
 
         //propiedad agregada
         public bool seleccionado { get; set; }
 
-
-
-       // public string tipoMonedaDescripcion { get; set; }
     }
 }

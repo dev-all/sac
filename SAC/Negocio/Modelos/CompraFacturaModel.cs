@@ -31,7 +31,7 @@ namespace Negocio.Modelos
         public string Concepto { get; set; }
         public int IdImputacion { get; set; }
         public int IdMoneda { get; set; }
-        public int IdCompraIva { get; set; }
+        public Nullable<int> IdCompraIva { get; set; }
         public decimal Parcial { get; set; }
         public int Recibo { get; set; }
         public string NumeroPago { get; set; }

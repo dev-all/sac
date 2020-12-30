@@ -15,7 +15,7 @@ using Datos.Repositorios;
 
 namespace Negocio.Servicios
 {
-   public class ServicioChequera : ServicioBase
+    public class ServicioChequera : ServicioBase
     {
         private ChequeraRepositorio pChequeraRepositorio;
         public Action<string, string> _mensaje;
@@ -28,15 +28,43 @@ namespace Negocio.Servicios
 
         public List<ChequeraModel> GetAllChequera()
         {
-            List<ChequeraModel> listaChequera =Mapper.Map<List<Chequera>, List<ChequeraModel>>(pChequeraRepositorio.GetAllChequera());
+            List<ChequeraModel> listaChequera = Mapper.Map<List<Chequera>, List<ChequeraModel>>(pChequeraRepositorio.GetAllChequera());
             return listaChequera;
         }
 
         public ChequeraModel obtenerCheque(int idCheque)
         {
-            return Mapper.Map<Chequera,ChequeraModel>(pChequeraRepositorio.obtenerCheque(idCheque));
+            return Mapper.Map<Chequera, ChequeraModel>(pChequeraRepositorio.obtenerCheque(idCheque));
         }
 
+
+        public ChequeraModel Insertar(ChequeraModel oChequeModel)
+        {
+            try
+            {
+                //controlar que no exista 
+                Chequera oChequera = pChequeraRepositorio.VerificarCheque(oChequeModel.NumeroCheque);
+                if (oChequera != null) //significa que existe
+                {
+                     _mensaje("El número de cheque ya se encuentra ingresado.", "error");
+                    return null;
+                }
+                else //significa que no existe el dato a ingresar
+                {
+                    var oModel = Mapper.Map<ChequeraModel, Chequera>(oChequeModel);
+                    _mensaje("El cheque se ingresó correctamente", "ok");
+                    return Mapper.Map<Chequera, ChequeraModel>(pChequeraRepositorio.Insertar(oModel));
+                }
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                throw;
+            }
+
+
+
+        }
 
         public ChequeraModel Actualizar(ChequeraModel oChequeModel)
         {
@@ -56,4 +84,3 @@ namespace Negocio.Servicios
     }
 }
 
-   

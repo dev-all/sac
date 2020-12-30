@@ -9,8 +9,16 @@ namespace SAC.Models
 {
     public class FacturaPagoViewModel
     {
-        //listado de facturas obtenidas para el proveedor
-        public List<CompraFacturaViewModel> ListaFacturas { get; set; }
+        public FacturaPagoViewModel()
+        {
+            efectivo = 0;
+            TotalAPagar = 0;
+            montoTarjetaSeleccionados = 0;
+            montoChequesSeleccionados = 0;
+        }
+
+     //listado de facturas obtenidas para el proveedor
+       public List<CompraFacturaViewModel> ListaFacturas { get; set; }
 
         //proveedor consultado
         public ProveedorModelView Proveedor { get; set; }
@@ -31,7 +39,7 @@ namespace SAC.Models
 
         //medios de pago
         [Display(Name = "Monto en Efectivo")]          
-        public Nullable<decimal> efectivo { get; set; }
+        public decimal efectivo { get; set; }
 
         //estas propiedades son para listar los tipos
         //public List<CuentaModelView> listaCuentaBancaria { get; set; }
@@ -41,11 +49,16 @@ namespace SAC.Models
         public List<ChequeraModelView> ListaChequesPropios { get; set; }
         public List<SelectListItem> ListaPresupuestoActual { get; set; }
 
+        public List<SelectListItem> ListaTipoMonedaDrop { get; set; }
+
+        //id banco insertar cheque propio
+        public int idCuentaBancariaSeleccionada { get; set; }
+        public int idTipoMonedaSeleccionada { get; set; }
+
         public int idTarjeta { get; set; }
 
         [Display(Name = " Monto Tarjeta")]
         public decimal montoTarjetaSeleccionados { get; set; }
-
 
         //estas propiedades son de los hidden para pasar al controler
         public string idFacturas { get; set; }
@@ -57,7 +70,7 @@ namespace SAC.Models
         [Display(Name = " Monto cheques")]
         public decimal montoChequesSeleccionados { get; set; }
 
-        public string idCuentasBancarias { get; set; }
+        public int idCuentasBancarias { get; set; }
 
         [Display(Name = " Monto Tranferencia")]
         public decimal montoTranferencia { get; set; }
@@ -65,6 +78,12 @@ namespace SAC.Models
         public int idProveedor { get; set; }
 
         public int idUsuario { get; set; }
+
+        //agrego para insertar un cheque propio
+        public ChequeraModelView oChequera { get; set; }
+
+
+       
 
     }
 }

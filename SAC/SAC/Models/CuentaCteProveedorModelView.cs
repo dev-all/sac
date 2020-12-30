@@ -19,10 +19,10 @@ namespace SAC.Models
         public string ProveedorNombre { get; set; }
 
         [Display(Name = "Deuda A")]
-        public Nullable<decimal> MontoPesos { get; set; }
+        public decimal MontoPesos { get; set; }
 
         [Display(Name = "Deuda B")]
-        public Nullable<decimal> MontoDolares { get; set; }
+        public decimal MontoDolares { get; set; }
 
         [Display(Name = "Total")]
         public Nullable<decimal> TotalDeuda { get; set; }

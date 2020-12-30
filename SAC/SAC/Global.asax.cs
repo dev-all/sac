@@ -32,5 +32,34 @@ namespace SAC
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             };
         }
+
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+           // HttpContext context = HttpContext.Current;
+            //var languageSession = "en";
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageSession);
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo(languageSession);
+
+            //CultureInfo cultureInfo = CultureInfo.CurrentCulture;
+            //Thread.CurrentThread.CurrentCulture = cultureInfo;
+            //Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es");
+            CultureInfo newUICulture = new CultureInfo("es-AR");
+            //DateTimeFormatInfo dateTimeFormatInfo = new DateTimeFormatInfo
+            //{
+            //    TimeSeparator = "/"
+            //};
+            NumberFormatInfo formato = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = ".",
+                NumberGroupSeparator = ","
+            };
+            newUICulture.NumberFormat = formato;
+            Thread.CurrentThread.CurrentCulture = newUICulture;
+            Thread.CurrentThread.CurrentUICulture = newUICulture;
+        }
+
+
     }
 }

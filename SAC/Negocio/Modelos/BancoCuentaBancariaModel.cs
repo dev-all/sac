@@ -18,7 +18,7 @@ namespace Negocio.Modelos
 
         public string CuentaDescripcion { get; set; }
 
-        public double Fecha { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
 
         public Nullable<System.DateTime> FechaEfectiva { get; set; }
 
@@ -40,9 +40,7 @@ namespace Negocio.Modelos
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-
-
-        public virtual BancoCuenta BancoCuenta { get; set; }
+        public  BancoCuenta BancoCuenta { get; set; }
 
 
     }

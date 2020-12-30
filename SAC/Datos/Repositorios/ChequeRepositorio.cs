@@ -54,7 +54,7 @@ namespace Datos.Repositorios
             nCheque.FechaEgreso = oCheque.FechaEgreso;
             nCheque.Destino = oCheque.Destino;
             nCheque.IdMoneda = oCheque.IdMoneda;
-            nCheque.GrupoCaja = oCheque.GrupoCaja;
+            nCheque.IdGrupoCaja = oCheque.IdGrupoCaja;
             nCheque.IdFactura = oCheque.IdFactura;
             nCheque.NumeroPago = oCheque.NumeroPago;
             nCheque.Registro = oCheque.Registro;

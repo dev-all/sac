@@ -48,6 +48,8 @@ namespace Negocio.Modelos
         public int idPresupuesto { get; set; }
         public int idProveedor { get; set; }
 
+        //proveedor consultado
+        public ProveedorModel Proveedor { get; set; }
 
     }
 }

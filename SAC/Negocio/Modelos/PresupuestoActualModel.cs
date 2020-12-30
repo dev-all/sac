@@ -23,6 +23,8 @@ namespace Negocio.Modelos
 
         public int IdImputacion { get; set; }
 
+        public int IdGrupoCaja { get; set; }
+
         public string CodigoCaja { get; set; }
 
         public string Visible { get; set; }

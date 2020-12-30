@@ -12,12 +12,9 @@ namespace Negocio.Modelos
         public int Id { get; set; }
 
         public int NumeroCheque { get; set; }
-
-        public string IdBanco { get; set; }
-
-        public double Fecha { get; set; }
-
-        public string Clearing { get; set; }
+        public int IdBanco { get; set; }
+        public DateTime Fecha { get; set; }
+        public string DiaClearing { get; set; }
 
         public decimal Importe { get; set; }
 
@@ -26,17 +23,11 @@ namespace Negocio.Modelos
         public string Descripcion { get; set; }
 
         public string NumeroRecibo { get; set; }
-
-        public string FechaIngreso { get; set; }
-
-        public string FechaEgreso { get; set; }
-
+        public Nullable<System.DateTime> FechaIngreso { get; set; }
+        public System.DateTime FechaEgreso { get; set; }
         public string Destino { get; set; }
-
-        public string IdMoneda { get; set; }
-
-        public string GrupoCaja { get; set; }
-
+        public int IdMoneda { get; set; }
+        public int IdGrupoCaja { get; set; }
         public string IdFactura { get; set; }
 
         public string NumeroPago { get; set; }
@@ -53,9 +44,10 @@ namespace Negocio.Modelos
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-
+        public Banco Banco { get; set; }
         public TipoMoneda TipoMoneda { get; set; }
-
+      
+        public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }
         

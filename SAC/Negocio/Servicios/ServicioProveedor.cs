@@ -28,11 +28,11 @@ namespace Negocio.Servicios
 
         public List<ProveedorModel> GetAllProveedor()
         {
-            return Mapper.Map<List<Proveedor>, List<ProveedorModel>>(pProveedorRepositorio.GetAllProveedor());             
+            return Mapper.Map<List<Proveedor>, List<ProveedorModel>>(pProveedorRepositorio.GetAllProveedor());
         }
 
         public ProveedorModel GetProveedor(int _id)
-        {           
+        {
             Proveedor oProveedor = pProveedorRepositorio.GetProveedorPorId(_id);
             return Mapper.Map<Proveedor, ProveedorModel>(oProveedor);
         }
@@ -46,54 +46,18 @@ namespace Negocio.Servicios
         {
             try
             {
-                //controlar que no exista 
-                Proveedor oProveedor = pProveedorRepositorio.ObtenerProveedorPorNombre(oProveedorModel.Nombre, oProveedorModel.Cuit, oProveedorModel.Id);
-                if (oProveedor != null) //significa que existe
-                {
-                    //return -2;
-                    _mensaje("El proveedor que intenta resitrar ya se encuentra cargado", "error");
-                    return null;
-                }
-                else //significa que no existe el dato a ingresar
-                {
-                    Proveedor oProveedorNuevo = new Proveedor();
-
-                    oProveedorNuevo.Id = oProveedorModel.Id;
-                    oProveedorNuevo.Nombre = oProveedorModel.Nombre;
-                    oProveedorNuevo.Direccion = oProveedorModel.Direccion;
-                    oProveedorNuevo.Telefono = oProveedorModel.Telefono;
-                    oProveedorNuevo.IdPais = oProveedorModel.IdPais;
-                    oProveedorNuevo.IdProvincia = oProveedorModel.IdProvincia;
-                    oProveedorNuevo.IdLocalidad = oProveedorModel.IdLocalidad;
-                    oProveedorNuevo.IdCodigoPostal = oProveedorModel.IdCodigoPostal;
-                    oProveedorNuevo.IdImputacionProveedor = oProveedorModel.IdImputacionProveedor;
-                    oProveedorNuevo.Email = oProveedorModel.Email;
-                    oProveedorNuevo.IdTipoIva = oProveedorModel.IdTipoIva;
-                    oProveedorNuevo.Cuit = oProveedorModel.Cuit;
-                    oProveedorNuevo.IdImputacionFactura = oProveedorModel.IdImputacionFactura;
-                    oProveedorNuevo.IdTipoProveedor = oProveedorModel.IdTipoProveedor;
-                    oProveedorNuevo.IdTipoMoneda = oProveedorModel.IdTipoMoneda;
-                    oProveedorNuevo.Observaciones = oProveedorModel.Observaciones;
-                    oProveedorNuevo.UltimoPuntoVenta = oProveedorModel.UltimoPuntoVenta;
-                    oProveedorNuevo.Activo = true;
-                    oProveedorNuevo.IdUsuario = oProveedorModel.IdUsuario;//hay que poner el id del usuario logueado
-                    oProveedorNuevo.UltimaModificacion = oProveedorModel.UltimaModificacion;
-
-                    _mensaje("El proveedor se registró correctamente", "ok");
-
-                    return Mapper.Map<Proveedor, ProveedorModel>( pProveedorRepositorio.ActualizarProveedor(oProveedorNuevo));
-                   
-                }
-
+                Proveedor oProveedorNuevo = Mapper.Map<ProveedorModel, Proveedor>(oProveedorModel);
+                if (_mensaje != null) { _mensaje("El proveedor se actualizo correctamente", "ok"); }
+                return Mapper.Map<Proveedor, ProveedorModel>(pProveedorRepositorio.ActualizarProveedor(oProveedorNuevo));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _mensaje("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
-                return null;
-            }           
+                throw new Exception("No pudo ejecutar ActualizarProveedor");
+            }
         }
 
-     
+
         public int GuardarProveedor(ProveedorModel oProveedorModel)
         {
             try
@@ -144,7 +108,7 @@ namespace Negocio.Servicios
             {
                 return 0;
             }
-           
+
         }
 
         public int Eliminar(int idProveedor)

@@ -14,9 +14,11 @@
     .table td, .table th {
         padding: .25rem;
     }
+
     .dataTables_wrapper {
         padding-top: 0px;
     }
+
     .form-group {
         margin-bottom: 5px;
     }
@@ -39,13 +41,13 @@
                     <div class="card-body">
                         <h6 class="card-title">Cierre de Caja</h6>
                         <div class="form-body">
-                         
+
                             <div class="row">
                                 @*<div class="col-4">
-                                    <div class="form-group text-right">
-                                        Saldo Inicial
-                                    </div>
-                                </div>*@
+                                        <div class="form-group text-right">
+                                            Saldo Inicial
+                                        </div>
+                                    </div>*@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="form-group">
@@ -172,7 +174,7 @@
 
 
                             </div>
-                         
+
                             <div class="row m-t-10">
                                 <div class="col-4">
                                     <div class="form-group text-right">
@@ -261,8 +263,6 @@
                             </div>
 
                             <div class="row m-t-30  justify-content-md-center">
-
-
                                 <div class="col-md-4">
                                     <div class="form-group row  ">
                                         @Html.LabelFor(m => m.FechaCierre, new { @class = " control-label form-control-sm col-md-6 text-right" })
@@ -275,13 +275,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Confirmar Cierre de Caja</button>
-
-                                    @*@Html.ActionLink("Cancelar", "Index", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })*@
-                               
                                 </div>
-
-
-
                             </div>
 
                         </div>
