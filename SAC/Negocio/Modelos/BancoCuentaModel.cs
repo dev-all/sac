@@ -15,9 +15,9 @@ namespace Negocio.Modelos
 
         public string Codigo { get; set; }
 
-        public string Banco { get; set; }
+        public int IdBanco { get; set; }
 
-        public string Descripcion { get; set; }
+        public string BancoDescripcion { get; set; }
 
         public int IdImputacion { get; set; }
 
@@ -36,6 +36,8 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
+
+        public BancoModel Banco { get; set; }
 
     }
 }

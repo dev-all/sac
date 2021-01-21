@@ -46,7 +46,7 @@ namespace Negocio.Modelos
         public  CompraIvaModel CompraIva { get; set; }
         public  ImputacionModel Imputacion { get; set; }
         public  ProveedorModel Proveedor { get; set; }
-
+        public TipoComprobanteModel TipoComprobante { get; set; }
         public TipoMonedaModel TipoMoneda { get; set; }
 
         public  List<CompraFacturaPago> CompraFacturaPago { get; set; }

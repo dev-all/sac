@@ -11,17 +11,17 @@ namespace SAC.Models
     public class CuentaCteProveedorModelView
     {
 
-
+        
         [Display(Name ="Codigo")]
         public int ProveedorCodigo { get; set; }
 
         [Display(Name = "Nombre")]
         public string ProveedorNombre { get; set; }
 
-        [Display(Name = "Deuda A")]
+        [Display(Name = "Total Pesos")]
         public decimal MontoPesos { get; set; }
 
-        [Display(Name = "Deuda B")]
+        [Display(Name = "Total Dólares  ")]
         public decimal MontoDolares { get; set; }
 
         [Display(Name = "Total")]

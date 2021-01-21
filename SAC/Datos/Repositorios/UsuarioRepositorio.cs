@@ -97,11 +97,11 @@ namespace Datos.Repositorios
             
             var side = contexto.MenuSidebar
                                  .Include(m => m.Accion)
-                                 .IncludeFilter(m => m.MenuSidebar1.Where(p => p.Activo == true))
+                                 .IncludeFilter(m => m.MenuSidebar1.Where(p => p.Activo == true).OrderBy(i=>i.Orden))
                                  .Where(menu => menu.Activo == true 
                                             && menu.IdParent == null
                                             && items.Contains(menu.Accion.Controlador.ToLower() + menu.Accion.Nombre.ToLower()))
-                                 .OrderBy(acc => acc.Orden).ToList();
+                                 .OrderBy(m => m.Orden).ToList();
             return side;
         }
 

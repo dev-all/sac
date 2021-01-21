@@ -16,24 +16,21 @@ namespace SAC.Controllers
 {
     public class CuentaCteProveedorController : BaseController
     {
-        
         private ServicioCompra oServicioCompra = new ServicioCompra();
         private ServicioProveedor servicioProveedor = new ServicioProveedor();
         private ServicioCuentaCteProveedor servicioCuentaCteProveedor = new ServicioCuentaCteProveedor();
-        private ServicioPresupuestoActual servicioPresupuestoActual = new ServicioPresupuestoActual();  
+        private ServicioPresupuestoActual servicioPresupuestoActual = new ServicioPresupuestoActual();
         private ServicioChequera oServicioChequera = new ServicioChequera();
         private ServicioCheque oServicioCheque = new ServicioCheque();
         private ServicioBancoCuenta oServicioCuentaBancaria = new ServicioBancoCuenta();
         private ServicioTipoMoneda oServicioTipoMoneda = new ServicioTipoMoneda();
-      
+
         public CuentaCteProveedorController()
         {
             servicioCuentaCteProveedor._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
             oServicioCompra._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             servicioProveedor._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
-            servicioCuentaCteProveedor._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             servicioPresupuestoActual._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
-
             oServicioChequera._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             oServicioCuentaBancaria._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             oServicioTipoMoneda._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
@@ -42,41 +39,61 @@ namespace SAC.Controllers
         // GET: CuentaCteProveedor
         public ActionResult Index()
         {
-                List<CuentaCteProveedorModelView> model = Mapper.Map<List<CuentaCteProveedorModel>, List<CuentaCteProveedorModelView>>(servicioCuentaCteProveedor.GetAllCuentasCteProveedor());
-                return View(model);
+            List<CuentaCteProveedorModelView> model = Mapper.Map<List<CuentaCteProveedorModel>, List<CuentaCteProveedorModelView>>(servicioCuentaCteProveedor.GetAllCuentasCteProveedor());
+            return View(model);
         }
+
+        public ActionResult CtaCteDetalle(string searchIdProveedor,  string searchFecha)
+        {
+
+            CuentaCorrienteProveedorModelView model = new CuentaCorrienteProveedorModelView();
+
+            if (!string.IsNullOrEmpty(searchIdProveedor))
+            {
+                DateTime fechaDesde = DateTime.Now;
+                if (!string.IsNullOrEmpty(searchFecha))
+                {
+                    fechaDesde = DateTime.ParseExact(searchFecha, "dd/MM/yyyy", CultureInfo.InvariantCulture); 
+                }
+                int idProveedor = int.Parse(searchIdProveedor);
+
+                model.Proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedorCompleto(idProveedor));                
+                model.Detalles = Mapper.Map<List<CuentaCorrienteProveedorDetallesModel>, List<CuentaCorrienteProveedorDetallesModelView>>(servicioCuentaCteProveedor.CtaCteDetalle(idProveedor, fechaDesde));        
+            }
+          
+            return View(model);
+        }
+
 
 
         public ActionResult PagarFactura(int idProveedor)
         {
             FacturaPagoViewModel model = new FacturaPagoViewModel();
-            model.ListaFacturas =  Mapper.Map<List<CompraFacturaModel>, List<CompraFacturaViewModel>>(oServicioCompra.ObtenerPorIDProveedor(idProveedor));                 
-            model.Proveedor = Mapper.Map<ProveedorModel,ProveedorModelView>(servicioProveedor.GetProveedor(idProveedor));
-           
+            model.ListaFacturas = Mapper.Map<List<CompraFacturaModel>, List<CompraFacturaViewModel>>(oServicioCompra.ObtenerPorIDProveedor(idProveedor));
+            model.Proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedor(idProveedor));
             List<PresupuestoActualModelView> ListaPresupuesto = Mapper.Map<List<PresupuestoActualModel>, List<PresupuestoActualModelView>>(servicioPresupuestoActual.GetAllPresupuestos());
-
-            List<SelectListItem> ListaPresupuestoActualDrop =  (ListaPresupuesto.Select(x =>
-                                                                 new SelectListItem()
-                                                                 {
-                                                                     Value = x.Id.ToString(),
-                                                                     Text = x.Concepto
-                                                                 })).ToList();
-
+            List<SelectListItem> ListaPresupuestoActualDrop = (ListaPresupuesto.Select(x =>
+                                                                new SelectListItem()
+                                                                {
+                                                                    Value = x.Id.ToString(),
+                                                                    Text = x.Concepto
+                                                                })).ToList();
             model.ListaPresupuestoActual = ListaPresupuestoActualDrop;
-          
+
             //---------para el PartialView cheques terceros
             List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oServicioCheque.GetAllCheque());
             model.ListaChequesTerceros = ListaChequesTerceros;
             //--------PartialView cheques propios          
-            List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());                      
+            List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());
             List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
             List<TipoMonedaModelView> ListaTipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(oServicioTipoMoneda.GetAllTipoMonedas());
             List<SelectListItem> retornoListaCuentaBancaria = (ListaCuentaBancaria.Select(x =>
                                         new SelectListItem()
                                         {
                                             Value = x.Id.ToString(),
-                                            Text = x.Banco + x.Descripcion
+                                            Text = x.Banco.Nombre + " " + x.BancoDescripcion
                                         })).ToList();
+
             List<SelectListItem> retornoListaTipoMoneda = (ListaTipoMoneda.Select(x =>
                                          new SelectListItem()
                                          {
@@ -84,10 +101,13 @@ namespace SAC.Controllers
                                              Text = x.Descripcion
                                          })).ToList();
 
-            model.ListaChequesPropios = ListaChequesPropios;
+            model.ListaChequesPropios = new List<ChequeraModelView>(); //ListaChequesPropios; 
+
+            // segun la cuenta bancaria selecccionada se obtiene el numero de cheque  hacerlo via json
             model.listaCuentaBancariaDrop = retornoListaCuentaBancaria;
+
             model.ListaTipoMonedaDrop = retornoListaTipoMoneda;
-           
+
             return View(model);
         }
 
@@ -95,48 +115,48 @@ namespace SAC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult FacturaPago(FacturaPagoViewModel model)
-       {         
+        {
             try
             {
-                    //agrego el usuario
-                    var datosUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
-                    model.idUsuario = datosUsuario.IdUsuario;
-                    //registramos
-                    oServicioCompra.RegistrarPago(Mapper.Map<FacturaPagoViewModel, FacturaPagoModel>(model));
+                //agrego el usuario
+                var datosUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+                model.idUsuario = datosUsuario.IdUsuario;
+                //registramos
+                oServicioCompra.RegistrarPago(Mapper.Map<FacturaPagoViewModel, FacturaPagoModel>(model));
 
-                    return RedirectToAction("Index");
-               
+                return RedirectToAction("Index");
+
             }
             catch (Exception ex)
             {
                 servicioProveedor._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return View(model);
             }
-            
+
         }
 
         [HttpPost]
         public ActionResult CargarChequesPropios()
-        {           
+        {
             //cheques propios          
             List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());
             //Listo cuentas bancarias           
             List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
-          
+
             List<TipoMonedaModelView> ListaTipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(oServicioTipoMoneda.GetAllTipoMonedas());
 
-            List<SelectListItem> retornoListaCuentaBancaria  = (ListaCuentaBancaria.Select(x =>
-                                         new SelectListItem()
-                                         {
-                                             Value = x.Id.ToString(),
-                                             Text = x.Banco + x.Descripcion
-                                         })).ToList();
+            List<SelectListItem> retornoListaCuentaBancaria = (ListaCuentaBancaria.Select(x =>
+                                        new SelectListItem()
+                                        {
+                                            Value = x.Id.ToString(),
+                                            Text = x.Banco.Nombre + " " + x.BancoDescripcion
+                                        })).ToList();
 
             List<SelectListItem> retornoListaTipoMoneda = (ListaTipoMoneda.Select(x =>
                                          new SelectListItem()
                                          {
                                              Value = x.Id.ToString(),
-                                             Text =  x.Descripcion
+                                             Text = x.Descripcion
                                          })).ToList();
 
             FacturaPagoViewModel oChequesModel = new FacturaPagoViewModel
@@ -155,9 +175,9 @@ namespace SAC.Controllers
 
         {
             //cheques de terceros
-          
+
             List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oServicioCheque.GetAllCheque());
-            
+
             FacturaPagoViewModel oChequesModel = new FacturaPagoViewModel();
             oChequesModel.ListaChequesTerceros = ListaChequesTerceros;
 
@@ -166,27 +186,87 @@ namespace SAC.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult IngresarCheque(FacturaPagoViewModel oFacturaPago)
 
         {
-            oFacturaPago.oChequera.IdBancoCuenta = oFacturaPago.idCuentaBancariaSeleccionada;
-            oFacturaPago.oChequera.Fecha = DateTime.Now;            
-            oFacturaPago.oChequera.IdMoneda = oFacturaPago.idTipoMonedaSeleccionada;
-            oFacturaPago.oChequera.Usado = false;
-            oFacturaPago.oChequera.IdProveedor = null;
-            oFacturaPago.oChequera.NumeroRecibo = null;
-            oFacturaPago.oChequera.Activo = true;
-            oFacturaPago.oChequera.IdUsuario = oFacturaPago.idUsuario;
-            oFacturaPago.oChequera.UltimaModificacion = DateTime.Now;
-            oServicioChequera.Insertar( Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago.oChequera));            
-           
-            FacturaPagoViewModel facturaPagoModelView = new FacturaPagoViewModel();
-            facturaPagoModelView.ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());
-            
-            return View(facturaPagoModelView);
+            try
+            {
+                //buscar el tipo de moneda de la cta
+                BancoCuentaModelView bancoCuentaModelView = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(oServicioCuentaBancaria.GetCuentaPorId(oFacturaPago.idCuentaBancariaSeleccionada));
+
+                oFacturaPago.oChequera.IdBancoCuenta = oFacturaPago.idCuentaBancariaSeleccionada;
+                oFacturaPago.oChequera.Fecha = DateTime.Now;
+                oFacturaPago.oChequera.IdMoneda = bancoCuentaModelView.IdMoneda;
+                oFacturaPago.oChequera.Usado = false;
+                oFacturaPago.oChequera.IdProveedor = null;
+                oFacturaPago.oChequera.NumeroRecibo = null;
+                oFacturaPago.oChequera.Activo = true;
+                oFacturaPago.oChequera.IdUsuario = oFacturaPago.idUsuario;
+                oFacturaPago.oChequera.UltimaModificacion = DateTime.Now;
+                ChequeraModel chequePropioGuardado = oServicioChequera.Insertar(Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago.oChequera));
+                if (chequePropioGuardado != null)
+                {
+                    oServicioChequera.ActualizarNumeroCheque(chequePropioGuardado);
+                }
+
+                
+                ChequeraModelView chequeraModelView = Mapper.Map<ChequeraModel, ChequeraModelView>(oServicioChequera.GetChequePropioPorId(chequePropioGuardado.Id));
+                List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView>{ chequeraModelView };
+             
+                return PartialView("_RDChequesPropios", listChequeraModelView);
+
+            }
+            catch (Exception ex)
+            {
+                //throw;
+                oServicioChequera._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult QuitarCheque(int IdCheque = 0)  //PartialViewResult
+        {
+            try
+            {
+                oServicioChequera.DeleteChequePropio(IdCheque);
+                List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView>();                
+                return PartialView("_RDChequesPropios", listChequeraModelView);
+
+            }
+            catch (Exception ex)
+            {
+                oServicioChequera._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
+
+        }
+        //[HttpPost]
+        //public JsonResult AjaxMethodIngresarCheque(FacturaPagoViewModel oFacturaPago)
+        //{
+        //    string strJson;
+        //    try
+        //    {
+
+
+        //        strJson = Newtonsoft.Json.JsonConvert.SerializeObject(proveedor);
+        //        if ((strJson != null))
+        //        {
+        //            var rJson = Json(strJson, JsonRequestBehavior.AllowGet);
+        //            return rJson;
+        //        }            
+        //        ///ak realizar la busqueda por idcta del numero de cheque              
+        //        return Json(new { result = true, data = oServicioChequera.GetNroChequePorCta(id) }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { result = false, data = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+        //    }
+
+        //}
 
         [HttpPost]
         public ActionResult CargarCuentas()
@@ -194,7 +274,7 @@ namespace SAC.Controllers
             //cheques de terceros
             ServicioBancoCuenta oServicioCuentaBancaria = new ServicioBancoCuenta();
             List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
-           
+
             FacturaPagoViewModel oCompraFacturaModel = new FacturaPagoViewModel();
 
             List<SelectListItem> retornoListaCuentaBancaria = new List<SelectListItem>();
@@ -202,13 +282,12 @@ namespace SAC.Controllers
                                          new SelectListItem()
                                          {
                                              Value = x.Id.ToString(),
-                                             Text = x.Banco + x.Descripcion
+                                             Text = x.BancoDescripcion
                                          })).ToList();
 
             oCompraFacturaModel.listaCuentaBancariaDrop = retornoListaCuentaBancaria;
             return PartialView("_TablaCuentasBancaria", oCompraFacturaModel);
         }
-
 
         [HttpPost]
         public ActionResult CargarTarjetas()
@@ -225,7 +304,7 @@ namespace SAC.Controllers
                                          new SelectListItem()
                                          {
                                              Value = x.Id.ToString(),
-                                             Text =  x.Descripcion
+                                             Text = x.Descripcion
                                          })).ToList();
 
             oCompraFacturaModel.listaTarjetasDrop = retornoListaTarjetas;
@@ -280,8 +359,39 @@ namespace SAC.Controllers
                 model = Mapper.Map<List<CuentaCteProveedorModel>, List<CuentaCteProveedorModelView>>(servicioCuentaCteProveedor.GetAllCuentasCteProveedor(dInicio, dFin));
             }
             return PartialView("_Tabla", model);
-            
+
         }
 
+
+        //[HttpPost, ActionName("QuitarCheque")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteChequePropio(int id)
+        //{
+        //    try
+        //    {
+        //        oServicioChequera.DeleteChequePropio(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { result = false, data = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    return Json(new { result = true, data = "Operacion realizada correctamente... " }, JsonRequestBehavior.AllowGet);
+        //}
+
+
+        [HttpGet()]
+        public ActionResult GetNroChequePorCta(int id)
+        {
+
+            try
+            {
+                ///ak realizar la busqueda por idcta del numero de cheque              
+                return Json(new { result = true, data = oServicioChequera.GetNroChequePorCta(id) }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = false, data = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

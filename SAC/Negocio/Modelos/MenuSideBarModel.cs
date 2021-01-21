@@ -14,8 +14,8 @@ namespace Negocio.Modelos
         public int? IdAccion { get; set; }
         public bool Activo { get; set; }
         public System.DateTime FechaModificacion { get; set; }
-        public virtual Accion Accion { get; set; }
+        public Accion Accion { get; set; }
         public int? Orden { get; set; }
-        public virtual ICollection<MenuSideBarModel> Group { get; set; }
+        public ICollection<MenuSideBarModel> Group { get; set; }
     }
 }

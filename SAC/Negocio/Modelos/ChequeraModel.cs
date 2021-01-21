@@ -42,14 +42,14 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-
-        public BancoCuenta BancoCuenta { get; set; }
-
-
         public TipoMoneda TipoMoneda { get; set; }
+        public BancoCuenta BancoCuenta { get; set; }
+        public List<CompraFacturaPago> CompraFacturaPago { get; set; }
+
+
 
         //prop agregada
-       // public string tipoMonedaDescripcion { get; set; }
+        // public string tipoMonedaDescripcion { get; set; }
 
     }
 }

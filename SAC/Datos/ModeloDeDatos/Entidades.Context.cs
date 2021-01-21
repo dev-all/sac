@@ -44,7 +44,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Provincia> Provincia { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Rubro> Rubro { get; set; }
-        public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
         public virtual DbSet<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
         public virtual DbSet<TipoComprobanteVenta> TipoComprobanteVenta { get; set; }
         public virtual DbSet<TipoIva> TipoIva { get; set; }
@@ -55,9 +54,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<ValorCotizacion> ValorCotizacion { get; set; }
         public virtual DbSet<CuentaCorriente> CuentaCorriente { get; set; }
         public virtual DbSet<PresupuestoCosto> PresupuestoCosto { get; set; }
-        public virtual DbSet<Banco> Banco { get; set; }
         public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
-        public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<TipoCliente> TipoCliente { get; set; }
         public virtual DbSet<PrespuestoActual> PrespuestoActual { get; set; }
         public virtual DbSet<PresupuestoHistorico> PresupuestoHistorico { get; set; }
@@ -65,13 +62,18 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<SubRubro> SubRubro { get; set; }
         public virtual DbSet<TarjetaOperacion> TarjetaOperacion { get; set; }
         public virtual DbSet<Tarjetas> Tarjetas { get; set; }
-        public virtual DbSet<CompraFactura> CompraFactura { get; set; }
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual DbSet<CompraIva> CompraIva { get; set; }
         public virtual DbSet<Cheque> Cheque { get; set; }
         public virtual DbSet<Chequera> Chequera { get; set; }
-        public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
         public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         public virtual DbSet<PresupuestoItem> PresupuestoItem { get; set; }
+        public virtual DbSet<CompraFactura> CompraFactura { get; set; }
+        public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
+        public virtual DbSet<Banco> Banco { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
+        public virtual DbSet<ClienteDireccion> ClienteDireccion { get; set; }
+        public virtual DbSet<CuentaCorrienteProveedorDetalles> CuentaCorrienteProveedorDetalles { get; set; }
     }
 }

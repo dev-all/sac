@@ -14,6 +14,12 @@ namespace Datos.ModeloDeDatos
     
     public partial class Banco
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Banco()
+        {
+            this.BancoCuenta = new HashSet<BancoCuenta>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Recibo { get; set; }
@@ -21,12 +27,14 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<System.DateTime> FechaC { get; set; }
         public Nullable<decimal> Importe { get; set; }
-        public string NumeroCheque { get; set; }
+        public int NumeroCheque { get; set; }
         public int IdImputacion { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual Proveedor Proveedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BancoCuenta> BancoCuenta { get; set; }
     }
 }

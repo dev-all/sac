@@ -36,5 +36,9 @@ namespace Negocio.Servicios
             return Mapper.Map<List<CuentaCorriente>, List<CuentaCteProveedorModel>>(pProveedorRepositorio.GetAllCuentaCorriente(inicio,fin));
         }
 
+        public List<CuentaCorrienteProveedorDetallesModel> CtaCteDetalle(int idProveedor, DateTime fechaDesde)
+        {
+            return Mapper.Map<List<CuentaCorrienteProveedorDetalles>, List<CuentaCorrienteProveedorDetallesModel>>(pProveedorRepositorio.CtaCteDetalle(idProveedor, fechaDesde));
+        }
     }
 }

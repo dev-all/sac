@@ -112,6 +112,7 @@ namespace SAC.Controllers
           
             return View("Edit", rol);
         }      
+       
         public string getMenuSideBarModelSelect(List<MenuSideBarModel> model)
         {
             String[] menuIds = new String[model.Count];
@@ -183,6 +184,7 @@ namespace SAC.Controllers
                 return View();
             }
         }
+    
         public List<AccionModel> getMenuSideBarModelCheck(string idMenusider)
         {
             var ids = idMenusider.Split(',').ToArray();

@@ -26,8 +26,8 @@ namespace Datos.ModeloDeDatos
     
         public int Id { get; set; }
         public string Codigo { get; set; }
-        public string Banco { get; set; }
-        public string Descripcion { get; set; }
+        public int IdBanco { get; set; }
+        public string BancoDescripcion { get; set; }
         public int IdImputacion { get; set; }
         public string CNombre { get; set; }
         public decimal Saldo { get; set; }
@@ -38,6 +38,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual Banco Banco { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

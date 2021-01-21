@@ -25,7 +25,9 @@ namespace Datos.Repositorios
 
         }
 
-
-
+        public BancoCuenta GetCuentaPorId(int id)
+        {
+            return context.BancoCuenta.Where(p => p.Id == id).First();           
+        }
     }
 }

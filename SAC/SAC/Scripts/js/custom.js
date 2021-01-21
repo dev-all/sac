@@ -1,9 +1,4 @@
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: js
-*/
+
 $(function() {
     "use strict";
     $(function() {
@@ -13,12 +8,12 @@ $(function() {
         e.stopPropagation()
     });
     // ============================================================== 
-    // This is for the top header part and sidebar part
+    // This is for the top header part and sidebar part 1170 1440
     // ==============================================================  
     var set = function() {
         var width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
         var topOffset = 0;
-        if (width < 1170) {
+        if (width < 1440) {
             $("body").addClass("mini-sidebar");
             $('.navbar-brand span').hide();
             $(".sidebartoggler i").addClass("ti-menu");
@@ -156,3 +151,4 @@ $(function() {
     });
 
 });
+

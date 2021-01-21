@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Datos.ModeloDeDatos;
+
 
 namespace SAC.Models
 {
@@ -43,10 +43,10 @@ namespace SAC.Models
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public Banco Banco { get; set; }
-        public TipoMoneda TipoMoneda { get; set; }
+        public BancoModelView Banco { get; set; }
+        public TipoMonedaModelView TipoMoneda { get; set; }
 
-        public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+        //public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }
 

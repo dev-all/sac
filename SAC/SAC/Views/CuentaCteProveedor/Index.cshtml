@@ -15,7 +15,7 @@
             <div class="card-body">
 
                 <h5 class="card-title">
-                    Lista de Proveedores  
+                    Cuenta Corriente de Proveedores Resumen
                 </h5>
 
                 @using (Ajax.BeginForm("Filtrado", "", new AjaxOptions
@@ -28,34 +28,34 @@
                 {
 
 
-            <div class="row justify-content-md-center">
-                <div class="col-md-4">
-                    <label   class="form-control-label"> Filtro por fecha de movimiento  </label>
-                </div>
-                    <div class="col-md-2">
-                        @Html.TextBox("inicio", null, new { @class = "form-control form-control-sm", @placeholder = "Fecha inicio" })
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-4 text-right">
+                            <small> Filtro por fecha de movimiento  </small>
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBox("inicio", null, new { @class = "form-control form-control-sm", @placeholder = "Fecha inicio" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBox("fin", null, new { @class = "form-control form-control-sm", @placeholder = "Fecha fin" })
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary "><i class="fa  fa-search"></i>  Buscar</button>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        @Html.TextBox("fin", null, new { @class = "form-control form-control-sm", @placeholder = "Fecha fin" })
-                    </div>
-                    <div class="col-md-4">
-                        <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary "><i class="fa  fa-search"></i>  Buscar</button>
-                    </div>
-                </div>
 
 
-                @*<div class="form-group row col-8">
-            @Html.TextBox("inicio", null, new { @class = "col-sm-3 offset-sm-1 form-control form-control-sm", @placeholder = "Fecha inicio" })
-            @Html.TextBox("fin", null, new { @class = "col-sm-3 offset-sm-1 form-control form-control-sm", @placeholder = "Fecha fin" })
-            <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary  mb-2 offset-sm-1">Buscar</button>
-        </div>*@
+                    @*<div class="form-group row col-8">
+                @Html.TextBox("inicio", null, new { @class = "col-sm-3 offset-sm-1 form-control form-control-sm", @placeholder = "Fecha inicio" })
+                @Html.TextBox("fin", null, new { @class = "col-sm-3 offset-sm-1 form-control form-control-sm", @placeholder = "Fecha fin" })
+                <button type="submit" id="btnBuscar" class="btn btn-sm btn-secondary  mb-2 offset-sm-1">Buscar</button>
+            </div>*@
 
-                <div id="divPagina">
-                    @Html.Partial("_Tabla", Model)
-                </div>
+                    <div id="divPagina">
+                        @Html.Partial("_Tabla", Model)
+                    </div>
                 }
 
-            </div>
+             </div>
         </div>
     </div>
 </div>
@@ -65,7 +65,7 @@
 
 
     function IraPagar(valor) {
-        location.href = "@Url.Action("PagarFactura", "CuentaCteProveedor", new       {idProveedor= "cid" })".replace("cid",valor.toString());
+        location.href = "@Url.Action("PagarFactura", "CuentaCteProveedor", new {idProveedor= "cid" })".replace("cid",valor.toString());
     }
 
 </script>
@@ -94,8 +94,7 @@
         $(document).ready(function () {
           
             $('#TblProveedor').DataTable({
-                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
-                "order": [[5, 'asc']],
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },                
                 'paging': false,
                 'lengthChange': false,
                 'searching': true,

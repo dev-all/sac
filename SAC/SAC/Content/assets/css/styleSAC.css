@@ -1,4 +1,10 @@
-﻿
+﻿/*.modal:nth-of-type(even) {
+    z-index: 1052 !important;
+}
+
+.modal-backdrop.show:nth-of-type(even) {
+    z-index: 1051 !important;
+}*/
 
 /* data table*/
 .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -25,4 +31,8 @@
 
 .form-group {
     margin-bottom: 5px;
+}
+
+.Seleccionable {
+    cursor: pointer;    
 }

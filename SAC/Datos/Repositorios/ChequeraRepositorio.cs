@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Data.Entity;
 using Datos.ModeloDeDatos;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 
 namespace Datos.Repositorios
 {
-   public class ChequeraRepositorio : RepositorioBase<Chequera>
+    public class ChequeraRepositorio : RepositorioBase<Chequera>
     {
         private SAC_Entities context;
 
@@ -20,22 +19,23 @@ namespace Datos.Repositorios
         public List<Chequera> GetAllChequera()
         {
             List<Chequera> listaChequera = new List<Chequera>();
-            listaChequera = context.Chequera.Where(p =>p.IdProveedor == null && p.NumeroRecibo ==null).ToList();
-            // listaChequera = context.Chequera.Where(p =>p.Usado == false && p.Activo==true).ToList();
+            listaChequera = context.Chequera.Where(p => p.IdProveedor == null
+                                                    && p.NumeroRecibo == null
+                                                    && p.Activo == true
+                                                    && p.Usado == false).ToList();
             listaChequera = listaChequera.OrderBy(p => p.NumeroCheque).ToList();
             return listaChequera;
         }
 
         public Chequera obtenerCheque(int idCheque)
         {
-            return context.Chequera.Where(p => p.Id == idCheque).First();
+            return context.Chequera.Where(p => p.Id == idCheque && p.Activo == true).First();
         }
 
         public Chequera VerificarCheque(int nroCheque)
         {
             return context.Chequera.Where(p => p.NumeroCheque == nroCheque && p.Activo == true).FirstOrDefault();
         }
-
 
         public Chequera Actualizar(Chequera oChequera)
         {
@@ -61,6 +61,46 @@ namespace Datos.Repositorios
             return nChequera;
         }
 
+        public List<Chequera> GetChequePropioPorUsuario(int idUsuario)
+        {
+            return context.Chequera.Where(p => p.IdUsuario == idUsuario && p.Usado == false).ToList();
+        }
+
+        public void DeleteChequePropio(int id)
+        {
+            Chequera chequera = GetChequePropioPorId(id);
+            chequera.Activo = false;
+            chequera.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+            context.SaveChanges();
+        }
+
+        public Chequera GetChequePropioPorId(int id)
+        {
+            return context.Chequera
+                .Include(b => b.TipoMoneda)
+                .Include(b => b.BancoCuenta)
+                .Where(p => p.Id == id && p.Activo == true)
+                .FirstOrDefault();
+        }
+
+        public int GetNroChequePorCta(int id)
+        {
+            BancoCuenta bancoCuenta = context.BancoCuenta
+                                       .Include(b => b.Banco)
+                                       .Where(p => p.Id == id && p.Activo == true).FirstOrDefault();
+            return bancoCuenta.Banco.NumeroCheque;
+        }
+
+        public void ActualizarNumeroCheque(Chequera model)
+        {
+            BancoCuenta bancoCuenta = context.BancoCuenta.Where(p => p.Id == model.IdBancoCuenta).FirstOrDefault();
+            Banco banco = context.Banco.Where(p => p.Id == bancoCuenta.IdBanco).First();
+            banco.NumeroCheque = model.NumeroCheque;
+            banco.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+            context.SaveChanges();
+        }
+
+
     }
-   
+
 }

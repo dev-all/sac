@@ -162,6 +162,7 @@
     </Compile>
     <Compile Include="Helpers\BcraHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
+    <Compile Include="Models\BancoModelView.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
     <Compile Include="Models\AutoCompletarViewModel.cs" />
@@ -174,6 +175,8 @@
     <Compile Include="Models\ChequeraModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
     <Compile Include="Models\CompraIvaModelView.cs" />
+    <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
+    <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
     <Compile Include="Models\CuentaCteProveedorModelView.cs" />
     <Compile Include="Models\FacturaPagoViewModel.cs" />
     <Compile Include="Models\PresupuestoActualModelView.cs" />
@@ -2764,6 +2767,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\DatatableJson.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -2800,6 +2804,8 @@
     <Content Include="Scripts\TreeView\TreeView.js" />
     <Content Include="Scripts\view\CajaScript.js" />
     <Content Include="Scripts\view\calcularporcentaje.js" />
+    <Content Include="Scripts\view\CtaCteProveedor.js" />
+    <Content Include="Scripts\view\CtaCteProveedorDetalle.js" />
     <Content Include="Scripts\view\DatePickerReady.js" />
     <Content Include="Scripts\view\FacturaCompraScript.js" />
     <Content Include="Web.config">
@@ -2867,6 +2873,8 @@
     <Content Include="Views\Rol\Details.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_RDChequesPropios.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\CtaCteDetalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

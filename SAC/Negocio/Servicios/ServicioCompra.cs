@@ -239,8 +239,8 @@ namespace Negocio.Servicios
                         nroPago = oServicioTipoComprobanteVenta.ObtenerNroPago(98);
 
                         if (nroPago == 0)
-                        {
-                            throw new Exception("Ocurrio un Error al intentar obtener el número de pago");
+                        {           
+                            _mensaje("Ops!, Error al intentar obtener el número de pago. contacte al administrador", "erro");
                         }
                         else
                         {
@@ -372,7 +372,7 @@ namespace Negocio.Servicios
                                     BancoCuentaBancariaModel oBancoCuentaBancariaModel = new BancoCuentaBancariaModel();
                                     oBancoCuentaBancariaModel.NumeroOperacion = nroPago + 1;
                                     oBancoCuentaBancariaModel.IdBancoCuenta = oChequera.IdBancoCuenta ?? 0;
-                                    oBancoCuentaBancariaModel.CuentaDescripcion = oChequera.BancoCuenta.Descripcion;
+                                    oBancoCuentaBancariaModel.CuentaDescripcion = oChequera.BancoCuenta.BancoDescripcion;
                                     oBancoCuentaBancariaModel.Fecha = DateTime.Now; 
                                     oBancoCuentaBancariaModel.FechaEfectiva = DateTime.Now;
                                     oBancoCuentaBancariaModel.DiaClearing = "";
@@ -563,6 +563,8 @@ namespace Negocio.Servicios
                             facturaProveedor.UltimaModificacion = DateTime.Now;
                             facturaProveedor.IdUsuario = oCompraFacturaModel.idUsuario;
                             oServicioProveedor.ActualizarProveedor(facturaProveedor);
+
+                            _mensaje("Se registro el pago correctamente", "ok");
                         }
 
                     }

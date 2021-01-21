@@ -47,7 +47,7 @@ namespace Negocio.Modelos
         public Banco Banco { get; set; }
         public TipoMoneda TipoMoneda { get; set; }
       
-        public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+        //public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }
         

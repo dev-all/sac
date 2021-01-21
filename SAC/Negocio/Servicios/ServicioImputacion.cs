@@ -204,7 +204,7 @@ namespace Negocio.Servicios
                 cta.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 cta.Activo = true;
                 ImputacionRepositorio.ActualizarAsientoImputacion(Mapper.Map<ImputacionModel, Imputacion>(cta));
-                _mensaje("Se registro eñ asineto contable correctamente", "ok");
+                _mensaje("Se registro el asineto contable correctamente", "ok");
 
 
 

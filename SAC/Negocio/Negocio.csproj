@@ -58,6 +58,8 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\CuentaCorrienteProveedorDetallesModel.cs" />
+    <Compile Include="Modelos\BancoModel.cs" />
     <Compile Include="Modelos\BancoCuentaBancariaModel.cs" />
     <Compile Include="Modelos\BancoCuentaModel.cs" />
     <Compile Include="Modelos\CajaGrupoModel.cs" />

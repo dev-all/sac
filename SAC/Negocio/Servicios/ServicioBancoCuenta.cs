@@ -30,6 +30,10 @@ namespace Negocio.Servicios
             return Mapper.Map<List<BancoCuenta>, List<BancoCuentaModel>>(oBancoCuentaRepositorio.GetAllCuenta());
         }
 
+        public BancoCuentaModel GetCuentaPorId(int id)
+        {
+            return Mapper.Map<BancoCuenta, BancoCuentaModel>(oBancoCuentaRepositorio.GetCuentaPorId(id));
+        }
 
 
 

@@ -17,10 +17,10 @@ namespace SAC.Atributos
             if (usuario == null)
             { filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { action = "Acceder", controller = "Cuenta" })); }
             else if (!usuario.TienePermisos(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower(),
-             filterContext.ActionDescriptor.ActionName.ToLower()) )
-              
+             filterContext.ActionDescriptor.ActionName.ToLower()))
+
             {
-  //& !usuario.EsAdministrador
+                //& !usuario.EsAdministrador
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { action = "Index", controller = "Unauthorised" }));
             }
         }

@@ -28,7 +28,7 @@ namespace SAC.Models
 
         [Display(Name = "Fecha Ingreso")]
 
-        public Nullable<System.DateTime> FechaIngreso { get; set; }
+        public DateTime FechaIngreso { get; set; }
    
         public DateTime FechaEgreso { get; set; }
 

@@ -12,6 +12,10 @@ namespace Agenda.Infrastructure
         public AutoMapperNegProfile()
         {
 
+            CreateMap<CuentaCorrienteProveedorDetalles, CuentaCorrienteProveedorDetallesModel>();
+            CreateMap<CuentaCorrienteProveedorDetallesModel, CuentaCorrienteProveedorDetalles>();
+
+
             CreateMap<TarjetaOperacionModel, TarjetaOperacion>();
             CreateMap<TarjetaOperacion, TarjetaOperacionModel>();
 
@@ -78,7 +82,7 @@ namespace Agenda.Infrastructure
             CreateMap<CompraFacturaModel, CompraFactura>();
             CreateMap<CompraFactura, CompraFacturaModel>();
 
-            CreateMap< CuentaCteProveedorModel, CuentaCorriente>();
+            CreateMap<CuentaCteProveedorModel, CuentaCorriente>();
             CreateMap<CuentaCorriente, CuentaCteProveedorModel>();
 
             CreateMap<ProveedorModel, Proveedor>();

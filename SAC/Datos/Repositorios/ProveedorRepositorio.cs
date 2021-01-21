@@ -48,6 +48,15 @@ namespace Datos.Repositorios
         }
 
 
+        public List<CuentaCorrienteProveedorDetalles> CtaCteDetalle(int idProveedor, DateTime fechaDesde)
+        {
+            //return  context.Database.SqlQuery<Object>(  "SELECT * FROM  Proveedor INNER JOIN   CompraFactura ON Proveedor.Id = CompraFactura.IdProveedor INNER JOIN  CompraFacturaPago ON CompraFactura.Id = CompraFacturaPago.IdFacturaCompra INNER JOIN               TipoComprobante ON CompraFactura.IdTipoComprobante = TipoComprobante.Id").ToList();        
+
+            return context.CuentaCorrienteProveedorDetalles.ToList();
+
+
+        }
+
         public List<CuentaCorriente> GetAllCuentaCorriente()
         {
             return context.CuentaCorriente.ToList();

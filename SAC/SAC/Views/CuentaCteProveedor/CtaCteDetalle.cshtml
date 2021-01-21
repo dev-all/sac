@@ -1,0 +1,161 @@
+﻿@model SAC.Models.CuentaCorrienteProveedorModelView
+    @{
+        /**/
+
+        ViewBag.Title = "Consulta Cta. Cte.";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <!-- Date picker plugins css -->
+    <link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+    <div class="row">
+        <div class="col-xlg-12 col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        Cuenta Corriente de Proveedor Detalles
+                    </h5>
+
+                    <div class="card-body">
+
+                        @using (Html.BeginForm("ctactedetalle", "CuentaCteProveedor", FormMethod.Post, new { @class = "text-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                            <div class="row m-b-10">
+
+                                <div class="col-xlg-4 col-lg-4 col-md-4">
+                                    <div class="form-group row">
+                                        <small class="text-right col-md-3">Proveedor</small>
+                                        <div class="col-md-9">
+                                            <input type="hidden" id="searchIdProveedor" name="searchIdProveedor" />
+                                            <input class="form-control form-control-sm" id="NombreProveedor" name="ProveedorNombre" type="text" placeholder="Nombre del proveedor">
+                                            @*<small class="form-control-feedback"> [Autocompletable]</small>*@
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xlg-3 col-lg-3 col-md-3">
+                                    <div class="form-group row">
+                                        <small class="text-right col-md-6">Fecha Desde</small>
+                                        <div class="col-md-6">
+                                            <input type="text" id="searchFecha" name="searchFecha"
+                                                   class="form-control form-control-sm Calendario"
+                                                   data-validation-required-message="Ingrese una fecha">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xlg-2 col-lg-2 col-md-2">
+                                    <button type="submit" class="btn btn-sm btn-secondary"><i class="fa  fa-search"></i> Buscar </button>
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div id="DatosProveedor" class="row bg-light text-left">
+                                <div class="col-md-3">
+                                    <small>Razón Social:</small> <small id="RazonSocialProv">@Model.Proveedor.Nombre.ToUpper()</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small>Tipo Iva:</small> <small id="TipoIvaProv">@Model.Proveedor.TipoIva.Descripcion.ToUpper()</small>
+                                </div>
+                                <div class="col-md-2">
+                                    <small>CUIT:</small> <small id="CuitProv">@Model.Proveedor.Cuit.ToUpper()</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <small>Dirección:</small> <small id="DireccionProv">@Model.Proveedor.Direccion.ToUpper()</small>
+                                </div>
+                            </div>
+
+
+                        }
+
+
+                        <div class="row">
+                            <div class="col-xlg-12 col-lg-12 col-md-12">
+                                <table id="tblCtaCteProveedorDetalles" name="tblInforme" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>PV</th>
+                                            <th>Factura</th>
+                                            <th>Fecha</th>
+                                            <th>Total $</th>
+                                            <th>Pago $</th>
+                                            <th>Total U$S</th>
+                                            <th>Parcial</th>
+                                            <th>Saldo</th>
+                                            <th>Cotizacion</th>
+                                            <th>Nº Pago</th>
+                                            <th>Recibo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Detalles)
+                                        {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.ImportePago)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.TotalDolares)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Parcial)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Saldo)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Cotizacion)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NumeroPago)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Recibo)</td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+
+
+                                @*<table id="tblInforme" name="tblInforme" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed">
+                                    <thead></thead>
+                                    <tbody></tbody>
+                                </table>*@
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section Scripts{
+
+        <!-- This is data table -->
+        <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <!-- start - This is for export functionality only -->
+        <script src="~/Content/assets/plugins/datatables/jsTable/dataTables.buttons.min.js"></script>
+        <script src="~/Content/assets/plugins/datatables/jsTable/buttons.flash.min.js"></script>
+        <script src="~/Content/assets/plugins/datatables/jsTable/jszip.min.js"></script>
+        <script src="~/Content/assets/plugins/datatables/jsTable/pdfmake.min.js"></script>
+        <script src="~/Content/assets/plugins/datatables/jsTable/vfs_fonts.js"></script>
+        <script src="~/Content/assets/plugins/datatables/jsTable/buttons.html5.min.js"></script>
+        <script src="~/Content/assets/plugins/datatables/jsTable/buttons.print.min.js"></script>
+
+        <!-- Date Picker Plugin JavaScript -->
+        <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script src="~/Scripts/view/CtaCteProveedorDetalle.js"></script>
+
+
+    }

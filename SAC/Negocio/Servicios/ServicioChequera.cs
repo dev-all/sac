@@ -18,13 +18,13 @@ namespace Negocio.Servicios
     public class ServicioChequera : ServicioBase
     {
         private ChequeraRepositorio pChequeraRepositorio;
-        public Action<string, string> _mensaje;
+
+       // public Action<string, string> _mensaje;
 
         public ServicioChequera()
         {
             pChequeraRepositorio = kernel.Get<ChequeraRepositorio>();
         }
-
 
         public List<ChequeraModel> GetAllChequera()
         {
@@ -36,7 +36,6 @@ namespace Negocio.Servicios
         {
             return Mapper.Map<Chequera, ChequeraModel>(pChequeraRepositorio.obtenerCheque(idCheque));
         }
-
 
         public ChequeraModel Insertar(ChequeraModel oChequeModel)
         {
@@ -81,6 +80,47 @@ namespace Negocio.Servicios
             }
         }
 
+        public List<ChequeraModel> GetChequePropioPorUsuario(int idUsuario)
+        {
+            try
+            {           
+                return Mapper.Map<List<Chequera>, List<ChequeraModel>>(pChequeraRepositorio.GetChequePropioPorUsuario(idUsuario));
+
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
+        }
+
+        public void DeleteChequePropio(int id)
+        {
+            try
+            {             
+                pChequeraRepositorio.DeleteChequePropio(id);
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");              
+            }
+        }
+
+        public int GetNroChequePorCta(int id)
+        {
+            return pChequeraRepositorio.GetNroChequePorCta(id);
+        }
+
+
+        public void ActualizarNumeroCheque(ChequeraModel model)
+        {
+            pChequeraRepositorio.ActualizarNumeroCheque(Mapper.Map<ChequeraModel,Chequera>(model));
+        }
+
+        public ChequeraModel GetChequePropioPorId(int id)
+        {
+            return Mapper.Map<Chequera,ChequeraModel>(pChequeraRepositorio.GetChequePropioPorId(id));
+        }
     }
 }
 

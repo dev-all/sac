@@ -41,7 +41,7 @@
     <Property Name="Fecha" Type="datetime" />
     <Property Name="FechaC" Type="datetime" />
     <Property Name="Importe" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="NumeroCheque" Type="varchar" MaxLength="50" />
+    <Property Name="NumeroCheque" Type="int" Nullable="false" />
     <Property Name="IdImputacion" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
@@ -53,8 +53,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Banco" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdBanco" Type="int" Nullable="false" />
+    <Property Name="BancoDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IdImputacion" Type="int" Nullable="false" />
     <Property Name="CNombre" Type="varchar" MaxLength="50" />
     <Property Name="Saldo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -193,26 +193,45 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Codigo" Type="varchar" MaxLength="50" />
     <Property Name="Nombre" Type="varchar" MaxLength="50" />
-    <Property Name="Direccion" Type="varchar" MaxLength="50" />
-    <Property Name="IdProveedor" Type="int" />
-    <Property Name="Telefono" Type="varchar" MaxLength="20" />
-    <Property Name="Fax" Type="varchar" MaxLength="20" />
-    <Property Name="Iva" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="IdTipoiva" Type="int" />
     <Property Name="Cuit" Type="varchar" MaxLength="20" />
     <Property Name="DiasFactura" Type="int" />
     <Property Name="IdImputacion" Type="int" />
     <Property Name="Observaciones" Type="nvarchar" MaxLength="200" />
-    <Property Name="SaldoCuentaCorriente" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="IdPais" Type="int" />
-    <Property Name="Especial" Type="bit" />
-    <Property Name="CodigoPostal" Type="varchar" MaxLength="20" />
-    <Property Name="Pie" Type="varchar" MaxLength="50" />
-    <Property Name="CanFac" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="IdXml" Type="int" />
+    <Property Name="IdPieNota" Type="int" />
     <Property Name="IdIdioma" Type="int" />
     <Property Name="IdTipoCliente" Type="int" />
-    <Property Name="Locala" Type="nchar" MaxLength="10" />
-    <Property Name="IdMoneda" Type="int" />
+    <Property Name="Visible" Type="int" />
+    <Property Name="IdNotaPieB" Type="int" />
+    <Property Name="IdTipoMoneda" Type="int" />
     <Property Name="IdGrupoPresupuesto" Type="int" />
+    <Property Name="MiPyme" Type="bit" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ClienteDireccion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="CodigoAfip" Type="nvarchar" MaxLength="50" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdPais" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdProvincia" Type="int" />
+    <Property Name="IdCodigoPostal" Type="varchar" MaxLength="50" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cuit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdPieNota" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdIdioma" Type="int" />
+    <Property Name="LocalA" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdTipoMoneda" Type="int" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
@@ -779,6 +798,31 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <Property Name="TotalDeuda" Type="decimal" Precision="38" Scale="2" />
     <Property Name="UltimoMovimiento" Type="datetime" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="CuentaCorrienteProveedorDetalles">
+    <Key>
+      <PropertyRef Name="IdProveedor" />
+      <PropertyRef Name="PuntoVenta" />
+      <PropertyRef Name="NumeroFactura" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Cotizacion" />
+    </Key>
+    <Property Name="IdProveedor" Type="int" Nullable="false" />
+    <Property Name="RazonSocial" Type="varchar" MaxLength="50" />
+    <Property Name="Cbte" Type="varchar" MaxLength="250" />
+    <Property Name="PuntoVenta" Type="int" Nullable="false" />
+    <Property Name="NumeroFactura" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ImportePago" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalDolares" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Parcial" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Saldo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Cotizacion" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="NumeroPago" Type="nvarchar" MaxLength="50" />
+    <Property Name="Recibo" Type="int" />
+  </EntityType>
   <Association Name="FK_AccionesPorRoles_Acciones">
     <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
     <End Role="AccionPorRol" Type="Self.AccionPorRol" Multiplicity="*" />
@@ -812,6 +856,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Principal>
       <Dependent Role="Banco">
         <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BancoCuenta_Banco">
+    <End Role="Banco" Type="Self.Banco" Multiplicity="1" />
+    <End Role="BancoCuenta" Type="Self.BancoCuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banco">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BancoCuenta">
+        <PropertyRef Name="IdBanco" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -947,6 +1003,30 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Cliente_TipoMoneda">
+    <End Role="TipoMoneda" Type="Self.TipoMoneda" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdTipoMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="ClienteDireccion" Type="Self.ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CompraFactura_CompraIva">
     <End Role="CompraIva" Type="Self.CompraIva" Multiplicity="0..1" />
     <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="*" />
@@ -980,6 +1060,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Principal>
       <Dependent Role="CompraFactura">
         <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFactura_TipoComprobante">
+    <End Role="TipoComprobante" Type="Self.TipoComprobante" Multiplicity="1" />
+    <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoComprobante">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdTipoComprobante" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1356,6 +1448,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="Cheque" EntityType="Self.Cheque" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chequera" EntityType="Self.Chequera" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClienteDireccion" EntityType="Self.ClienteDireccion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompraFactura" EntityType="Self.CompraFactura" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompraFacturaPago" EntityType="Self.CompraFacturaPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompraIva" EntityType="Self.CompraIva" Schema="dbo" store:Type="Tables" />
@@ -1401,6 +1494,24 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     [CuentaCorriente].[UltimoMovimiento] AS [UltimoMovimiento]
     FROM [dbo].[CuentaCorriente] AS [CuentaCorriente]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="CuentaCorrienteProveedorDetalles" EntityType="Self.CuentaCorrienteProveedorDetalles" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CuentaCorrienteProveedorDetalles].[IdProveedor] AS [IdProveedor], 
+    [CuentaCorrienteProveedorDetalles].[RazonSocial] AS [RazonSocial], 
+    [CuentaCorrienteProveedorDetalles].[Cbte] AS [Cbte], 
+    [CuentaCorrienteProveedorDetalles].[PuntoVenta] AS [PuntoVenta], 
+    [CuentaCorrienteProveedorDetalles].[NumeroFactura] AS [NumeroFactura], 
+    [CuentaCorrienteProveedorDetalles].[Fecha] AS [Fecha], 
+    [CuentaCorrienteProveedorDetalles].[Total] AS [Total], 
+    [CuentaCorrienteProveedorDetalles].[ImportePago] AS [ImportePago], 
+    [CuentaCorrienteProveedorDetalles].[TotalDolares] AS [TotalDolares], 
+    [CuentaCorrienteProveedorDetalles].[Parcial] AS [Parcial], 
+    [CuentaCorrienteProveedorDetalles].[Saldo] AS [Saldo], 
+    [CuentaCorrienteProveedorDetalles].[Cotizacion] AS [Cotizacion], 
+    [CuentaCorrienteProveedorDetalles].[NumeroPago] AS [NumeroPago], 
+    [CuentaCorrienteProveedorDetalles].[Recibo] AS [Recibo]
+    FROM [dbo].[CuentaCorrienteProveedorDetalles] AS [CuentaCorrienteProveedorDetalles]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="Self.FK_AccionesPorRoles_Acciones">
       <End Role="Accion" EntitySet="Accion" />
       <End Role="AccionPorRol" EntitySet="AccionPorRol" />
@@ -1412,6 +1523,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <AssociationSet Name="FK_Banco_Proveedor" Association="Self.FK_Banco_Proveedor">
       <End Role="Proveedor" EntitySet="Proveedor" />
       <End Role="Banco" EntitySet="Banco" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BancoCuenta_Banco" Association="Self.FK_BancoCuenta_Banco">
+      <End Role="Banco" EntitySet="Banco" />
+      <End Role="BancoCuenta" EntitySet="BancoCuenta" />
     </AssociationSet>
     <AssociationSet Name="FK_BancoCuentaBancaria_BancoCuenta" Association="Self.FK_BancoCuentaBancaria_BancoCuenta">
       <End Role="BancoCuenta" EntitySet="BancoCuenta" />
@@ -1457,6 +1572,14 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       <End Role="TipoCliente" EntitySet="TipoCliente" />
       <End Role="Cliente" EntitySet="Cliente" />
     </AssociationSet>
+    <AssociationSet Name="FK_Cliente_TipoMoneda" Association="Self.FK_Cliente_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_Cliente" Association="Self.FK_ClienteDireccion_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_CompraIva" Association="Self.FK_CompraFactura_CompraIva">
       <End Role="CompraIva" EntitySet="CompraIva" />
       <End Role="CompraFactura" EntitySet="CompraFactura" />
@@ -1467,6 +1590,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_Proveedor" Association="Self.FK_CompraFactura_Proveedor">
       <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFactura_TipoComprobante" Association="Self.FK_CompraFactura_TipoComprobante">
+      <End Role="TipoComprobante" EntitySet="TipoComprobante" />
       <End Role="CompraFactura" EntitySet="CompraFactura" />
     </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_TipoMoneda" Association="Self.FK_CompraFactura_TipoMoneda">

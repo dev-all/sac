@@ -29,28 +29,7 @@ namespace Negocio.Servicios
         public List<ChequeModel> GetAllCheque()
         {
             List<ChequeModel> listaCheque = Mapper.Map<List<Cheque>, List<ChequeModel>>(pChequeRepositorio.GetAllCheque());
-
-            //foreach (var item in listaCheque)
-            //{
-            //    if (item.IdMoneda != null)
-            //    {
-            //        switch (int.Parse(item.IdMoneda))
-            //        {
-            //            case 1:
-            //                item.tipoMonedaDescripcion = "Pesos";
-            //                break;
-            //            case 2:
-            //                item.tipoMonedaDescripcion = "Dolares";
-            //                break;
-            //            case 3:
-            //                item.tipoMonedaDescripcion = "Euros";
-            //                break;
-            //        }
-            //    }
-            //}
-
             return listaCheque;
-
         }
 
         public ChequeModel obtenerCheque(int idCheque)

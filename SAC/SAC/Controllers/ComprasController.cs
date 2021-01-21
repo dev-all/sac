@@ -132,7 +132,7 @@ namespace SAC.Controllers
                                                                                                   , asiento
                                                                                                   , facturaRegistrada
                                                                                                   , facturaRegistrada.IdImputacion));
-
+                servicioCompra._mensaje("Operacion realizada correctamente... ", "ok");
                 return RedirectToAction("FacturaCompras");
 
             }
@@ -149,7 +149,7 @@ namespace SAC.Controllers
             try
             {
                 model.TipoMonedas = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(servicioTipoMoneda.GetAllTipoMonedas());
-                model.TipoComprobante = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetAllTipoComprobante());
+                model.ListTipoComprobante = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetAllTipoComprobante());
             }
             catch (Exception)
             {
@@ -286,9 +286,6 @@ namespace SAC.Controllers
                 return null;
             }
         }
-
-
-
 
 
     }
