@@ -56,19 +56,19 @@
 
                             </div>
 
-                            if( Model.Proveedor.Id != null) {
+                            if( Model.Proveedor.Nombre != null) {
                             <div id="DatosProveedor" class="row bg-light text-left">
                                 <div class="col-md-3">
-                                    <small>Razón Social:</small> <small id="RazonSocialProv">@Model.Proveedor.Nombre.ToUpper()</small>
+                                    <small>Razón Social:</small> <small id="RazonSocialProv">@Model.Proveedor.Nombre.ToString().ToUpper()</small>
                                 </div>
                                 <div class="col-md-3">
-                                    <small>Tipo Iva:</small> <small id="TipoIvaProv">@Model.Proveedor.TipoIva.Descripcion.ToUpper()</small>
+                                    <small>Tipo Iva:</small> <small id="TipoIvaProv">@Model.Proveedor.TipoIva.Descripcion.ToString().ToUpper()</small>
                                 </div>
                                 <div class="col-md-2">
-                                    <small>CUIT:</small> <small id="CuitProv">@Model.Proveedor.Cuit.ToUpper()</small>
+                                    <small>CUIT:</small> <small id="CuitProv">@Model.Proveedor.Cuit.ToString().ToUpper()</small>
                                 </div>
                                 <div class="col-md-4">
-                                    <small>Dirección:</small> <small id="DireccionProv">@Model.Proveedor.Direccion.ToUpper()</small>
+                                    <small>Dirección:</small> <small id="DireccionProv">@Model.Proveedor.Direccion.ToString().ToUpper()</small>
                                 </div>
                             </div>
                             }
@@ -78,7 +78,8 @@
 
                         <div class="row">
                             <div class="col-xlg-12 col-lg-12 col-md-12">
-                                <table id="tblCtaCteProveedorDetalles" name="tblInforme" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed">
+                                <div class="table-responsive">
+                                <table id="tblCtaCteProveedorDetalles" name="tblInforme" class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Tipo</th>
@@ -98,29 +99,30 @@
                                     <tbody>
                                         @foreach (var item in Model.Detalles)
                                         {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.ImportePago)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.TotalDolares)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Parcial)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Saldo)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Cotizacion)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.NumeroPago)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Recibo)</td>
-                                        </tr>
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ImportePago)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.TotalDolares)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Parcial)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Saldo)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Cotizacion)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.NumeroPago)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.Recibo)</td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
 
+                            </div>
 
                                 @*<table id="tblInforme" name="tblInforme" class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed">
-                                    <thead></thead>
-                                    <tbody></tbody>
-                                </table>*@
+            <thead></thead>
+            <tbody></tbody>
+        </table>*@
 
                             </div>
                         </div>
