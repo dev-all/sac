@@ -181,6 +181,9 @@
     <Compile Include="ModeloDeDatos\Provincia.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\Retencion.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Rol.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -220,6 +223,9 @@
     <Compile Include="ModeloDeDatos\TipoProveedor.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\TipoRetencion.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Usuario.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -248,6 +254,7 @@
     <Compile Include="Repositorios\LocalidadRepositorio.cs" />
     <Compile Include="Repositorios\ProveedorRepositorio.cs" />
     <Compile Include="Repositorios\AccionRepositorio.cs" />
+    <Compile Include="Repositorios\RetencionRepositorio.cs" />
     <Compile Include="Repositorios\RolRepositorio.cs" />
     <Compile Include="Repositorios\MenuSidebarRepositorio.cs" />
     <Compile Include="Repositorios\PersonaRepositorio.cs" />
@@ -258,6 +265,7 @@
     <Compile Include="Repositorios\TipoComprovanteVentaRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
     <Compile Include="Repositorios\TipoComprobanteRepositorio.cs" />
+    <Compile Include="Repositorios\TipoRetencionRepositorio.cs" />
     <Compile Include="Repositorios\ValorCotizacionRepositorio.cs" />
     <Compile Include="Repositorios\TipoMonedaRepositorio.cs" />
     <Compile Include="Repositorios\TipoProveedorRepositorio.cs" />

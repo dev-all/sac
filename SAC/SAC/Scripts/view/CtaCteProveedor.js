@@ -364,7 +364,7 @@ $(function () {
             data: { Id: $("#idCuentaBancariaSeleccionada").val() },
             success: function (result) {
                 if (result.data != "null" && result.result) {
-                    $("#oChequera_NumeroCheque").val(parseInt(result.data + 1));
+                    $("#NumeroCheque").val(parseInt(result.data + 1));
                 } else {
                     toastr.error('result.data');
                 }

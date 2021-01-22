@@ -620,6 +620,26 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="Retencion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NroPago" Type="int" />
+          <Property Name="IdCodigoProveedor" Type="int" />
+          <Property Name="NombreProveedor" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Importe" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NroRecibo" Type="int" />
+          <Property Name="IdProvincia" Type="int" />
+          <Property Name="IdCompraFactura" Type="int" />
+          <Property Name="IdTipoRetencion" Type="int" />
+          <Property Name="Periodo" Type="int" />
+          <Property Name="Actividad" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="Idusuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="IdRol" />
@@ -763,6 +783,16 @@
           <Property Name="Codigo" Type="char" MaxLength="1" />
           <Property Name="Activo" Type="bit" />
           <Property Name="IdUsuario" Type="int" />
+          <Property Name="UltimaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TipoRetencion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="Idusuario" Type="int" />
           <Property Name="UltimaModificacion" Type="datetime" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -1344,6 +1374,42 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Retencion_CompraFactura">
+          <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="0..1" />
+          <End Role="Retencion" Type="Self.Retencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Retencion">
+              <PropertyRef Name="IdCompraFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retencion_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Retencion" Type="Self.Retencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Retencion">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retencion_TipoRetencion">
+          <End Role="TipoRetencion" Type="Self.TipoRetencion" Multiplicity="0..1" />
+          <End Role="Retencion" Type="Self.Retencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRetencion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Retencion">
+              <PropertyRef Name="IdTipoRetencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Roles_HomePorRol">
           <End Role="homePorRol" Type="Self.homePorRol" Multiplicity="0..1" />
           <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
@@ -1474,6 +1540,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
           <EntitySet Name="PresupuestoItem" EntityType="Self.PresupuestoItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Retencion" EntityType="Self.Retencion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rubro" EntityType="Self.Rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubRubro" EntityType="Self.SubRubro" Schema="dbo" store:Type="Tables" />
@@ -1487,6 +1554,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
           <EntitySet Name="TipoMoneda" EntityType="Self.TipoMoneda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoPago" EntityType="Self.TipoPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProveedor" EntityType="Self.TipoProveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoRetencion" EntityType="Self.TipoRetencion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ValorCotizacion" EntityType="Self.ValorCotizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentaCorriente" EntityType="Self.CuentaCorriente" store:Type="Views" store:Schema="dbo">
@@ -1688,6 +1756,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
           <AssociationSet Name="FK_Provincia_Pais" Association="Self.FK_Provincia_Pais">
             <End Role="Pais" EntitySet="Pais" />
             <End Role="Provincia" EntitySet="Provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retencion_CompraFactura" Association="Self.FK_Retencion_CompraFactura">
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+            <End Role="Retencion" EntitySet="Retencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retencion_Provincia" Association="Self.FK_Retencion_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Retencion" EntitySet="Retencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retencion_TipoRetencion" Association="Self.FK_Retencion_TipoRetencion">
+            <End Role="TipoRetencion" EntitySet="TipoRetencion" />
+            <End Role="Retencion" EntitySet="Retencion" />
           </AssociationSet>
           <AssociationSet Name="FK_Roles_HomePorRol" Association="Self.FK_Roles_HomePorRol">
             <End Role="homePorRol" EntitySet="homePorRol" />
@@ -1981,6 +2061,20 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
             <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
           </AssociationSet>
           <EntitySet Name="CuentaCorrienteProveedorDetalles" EntityType="SAC_Model.CuentaCorrienteProveedorDetalles" />
+          <EntitySet Name="Retencion" EntityType="SAC_Model.Retencion" />
+          <EntitySet Name="TipoRetencion" EntityType="SAC_Model.TipoRetencion" />
+          <AssociationSet Name="FK_Retencion_CompraFactura" Association="SAC_Model.FK_Retencion_CompraFactura">
+            <End Role="CompraFactura" EntitySet="CompraFactura" />
+            <End Role="Retencion" EntitySet="Retencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retencion_Provincia" Association="SAC_Model.FK_Retencion_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Retencion" EntitySet="Retencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Retencion_TipoRetencion" Association="SAC_Model.FK_Retencion_TipoRetencion">
+            <End Role="TipoRetencion" EntitySet="TipoRetencion" />
+            <End Role="Retencion" EntitySet="Retencion" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="GrupoPresupuesto">
           <Key>
@@ -2265,6 +2359,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
           <NavigationProperty Name="Localidad" Relationship="SAC_Model.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
           <NavigationProperty Name="Pais" Relationship="SAC_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
           <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
+          <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_Provincia" FromRole="Provincia" ToRole="Retencion" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -3163,6 +3258,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
           <NavigationProperty Name="TipoComprobante" Relationship="SAC_Model.FK_CompraFactura_TipoComprobante" FromRole="CompraFactura" ToRole="TipoComprobante" />
           <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="CompraFactura" ToRole="TipoMoneda" />
           <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
+          <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="CompraFactura" ToRole="Retencion" />
         </EntityType>
         <EntityType Name="TipoComprobante">
           <Key>
@@ -3515,6 +3611,76 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
           <Property Name="NumeroPago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Recibo" Type="Int32" />
         </EntityType>
+        <EntityType Name="Retencion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NroPago" Type="Int32" />
+          <Property Name="IdCodigoProveedor" Type="Int32" />
+          <Property Name="NombreProveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NroRecibo" Type="Int32" />
+          <Property Name="IdProvincia" Type="Int32" />
+          <Property Name="IdCompraFactura" Type="Int32" />
+          <Property Name="IdTipoRetencion" Type="Int32" />
+          <Property Name="Periodo" Type="Int32" />
+          <Property Name="Actividad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Idusuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="Retencion" ToRole="CompraFactura" />
+          <NavigationProperty Name="Provincia" Relationship="SAC_Model.FK_Retencion_Provincia" FromRole="Retencion" ToRole="Provincia" />
+          <NavigationProperty Name="TipoRetencion" Relationship="SAC_Model.FK_Retencion_TipoRetencion" FromRole="Retencion" ToRole="TipoRetencion" />
+        </EntityType>
+        <EntityType Name="TipoRetencion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Idusuario" Type="Int32" />
+          <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_TipoRetencion" FromRole="TipoRetencion" ToRole="Retencion" />
+        </EntityType>
+        <Association Name="FK_Retencion_CompraFactura">
+          <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
+          <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompraFactura">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Retencion">
+              <PropertyRef Name="IdCompraFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retencion_Provincia">
+          <End Type="SAC_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+          <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Retencion">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Retencion_TipoRetencion">
+          <End Type="SAC_Model.TipoRetencion" Role="TipoRetencion" Multiplicity="0..1" />
+          <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoRetencion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Retencion">
+              <PropertyRef Name="IdTipoRetencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4382,6 +4548,38 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
                 <ScalarProperty Name="Cbte" ColumnName="Cbte" />
                 <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Retencion">
+            <EntityTypeMapping TypeName="SAC_Model.Retencion">
+              <MappingFragment StoreEntitySet="Retencion">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Actividad" ColumnName="Actividad" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="IdTipoRetencion" ColumnName="IdTipoRetencion" />
+                <ScalarProperty Name="IdCompraFactura" ColumnName="IdCompraFactura" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="NroRecibo" ColumnName="NroRecibo" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="NombreProveedor" ColumnName="NombreProveedor" />
+                <ScalarProperty Name="IdCodigoProveedor" ColumnName="IdCodigoProveedor" />
+                <ScalarProperty Name="NroPago" ColumnName="NroPago" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRetencion">
+            <EntityTypeMapping TypeName="SAC_Model.TipoRetencion">
+              <MappingFragment StoreEntitySet="TipoRetencion">
+                <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+                <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

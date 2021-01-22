@@ -81,6 +81,7 @@
     <Compile Include="Modelos\ImputacionModel.cs" />
     <Compile Include="Modelos\LocalidadModel.cs" />
     <Compile Include="Modelos\MenuSideBarModel.cs" />
+    <Compile Include="Modelos\PagosFacturasModel.cs" />
     <Compile Include="Modelos\PaisModel.cs" />
     <Compile Include="Modelos\PersonaModel.cs" />
     <Compile Include="Modelos\PresupuestoActualModel.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Modelos\PrioridadModel.cs" />
     <Compile Include="Modelos\ProveedorModel.cs" />
     <Compile Include="Modelos\ProvinciaModel.cs" />
+    <Compile Include="Modelos\RetencionModel.cs" />
     <Compile Include="Modelos\RolModel.cs" />
     <Compile Include="Modelos\SubRubroModel.cs" />
     <Compile Include="Modelos\TarjetaModel.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Modelos\TipoComprobanteModel.cs" />
     <Compile Include="Modelos\TipoMonedaModel.cs" />
     <Compile Include="Modelos\TipoProveedorModel.cs" />
+    <Compile Include="Modelos\TipoRetencionModel.cs" />
     <Compile Include="Modelos\UsuarioModel.cs" />
     <Compile Include="Modelos\ValorCotizacionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,6 +133,7 @@
     <Compile Include="Servicios\ServicioPresupuestoItem.cs" />
     <Compile Include="Servicios\ServicioProveedor.cs" />
     <Compile Include="Servicios\ServicioProvincia.cs" />
+    <Compile Include="Servicios\ServicioRetencion.cs" />
     <Compile Include="Servicios\ServicioSubRubro.cs" />
     <Compile Include="Servicios\ServicioTarjeta.cs" />
     <Compile Include="Servicios\ServicioTarjetaOperacion.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Servicios\ServicioTipoMoneda.cs" />
     <Compile Include="Servicios\ServicioCompra.cs" />
     <Compile Include="Servicios\ServicioTipoProveedor.cs" />
+    <Compile Include="Servicios\ServicioTipoRetencion.cs" />
     <Compile Include="Servicios\ServicioUsuario.cs" />
     <Compile Include="Servicios\ServicioConfiguracion.cs" />
     <Compile Include="Servicios\ServicioBase.cs" />

@@ -47,6 +47,15 @@ namespace Datos.Repositorios
             
         }
 
+        public List<CompraFactura> GetCompraFacturaPorIdProveedor_Moneda(int idProveedor, int idMoneda)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+
+            return context.CompraFactura
+                         .Include("TipoComprobante")
+                         .Where(p => p.IdProveedor == idProveedor && p.IdTipoComprobante == 11 && p.NumeroPago == "0" && p.IdMoneda == idMoneda).ToList();
+        }
+
         //esta actualizacion es solo para el pago de facturas
         public CompraFactura ActualizarCompraFacturaPago(CompraFactura model)
         {
@@ -90,6 +99,13 @@ namespace Datos.Repositorios
                             && f.IdProveedor == idProveedor
                             ).FirstOrDefault();
             return fact;
+        }
+
+
+        public CompraFactura ObtenerPorID_paraPagos(int id)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.CompraFactura.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault();
         }
 
         public List<CompraFactura> GetAllCompraFacturaPorNro(int nroFactura)

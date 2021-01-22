@@ -105,7 +105,7 @@ namespace SAC.Controllers
 
             // segun la cuenta bancaria selecccionada se obtiene el numero de cheque  hacerlo via json
             model.listaCuentaBancariaDrop = retornoListaCuentaBancaria;
-
+            ViewBag.listaCuentaBancariaDrop = retornoListaCuentaBancaria;
             model.ListaTipoMonedaDrop = retornoListaTipoMoneda;
 
             return View(model);
@@ -187,24 +187,25 @@ namespace SAC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult IngresarCheque(FacturaPagoViewModel oFacturaPago)
+        public ActionResult IngresarCheque(ChequeraModelView oFacturaPago)
 
         {
             try
             {
+
                 //buscar el tipo de moneda de la cta
                 BancoCuentaModelView bancoCuentaModelView = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(oServicioCuentaBancaria.GetCuentaPorId(oFacturaPago.idCuentaBancariaSeleccionada));
 
-                oFacturaPago.oChequera.IdBancoCuenta = oFacturaPago.idCuentaBancariaSeleccionada;
-                oFacturaPago.oChequera.Fecha = DateTime.Now;
-                oFacturaPago.oChequera.IdMoneda = bancoCuentaModelView.IdMoneda;
-                oFacturaPago.oChequera.Usado = false;
-                oFacturaPago.oChequera.IdProveedor = null;
-                oFacturaPago.oChequera.NumeroRecibo = null;
-                oFacturaPago.oChequera.Activo = true;
-                oFacturaPago.oChequera.IdUsuario = oFacturaPago.idUsuario;
-                oFacturaPago.oChequera.UltimaModificacion = DateTime.Now;
-                ChequeraModel chequePropioGuardado = oServicioChequera.Insertar(Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago.oChequera));
+                oFacturaPago.IdBancoCuenta = oFacturaPago.idCuentaBancariaSeleccionada;
+                oFacturaPago.Fecha = DateTime.Now;
+                oFacturaPago.IdMoneda = bancoCuentaModelView.IdMoneda;
+                oFacturaPago.Usado = false;
+                oFacturaPago.IdProveedor = null;
+                oFacturaPago.NumeroRecibo = null;
+                oFacturaPago.Activo = true;
+                //oFacturaPago.oChequera.IdUsuario = oFacturaPago.idUsuario;
+                oFacturaPago.UltimaModificacion = DateTime.Now;
+                ChequeraModel chequePropioGuardado = oServicioChequera.Insertar(Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago));
                 if (chequePropioGuardado != null)
                 {
                     oServicioChequera.ActualizarNumeroCheque(chequePropioGuardado);

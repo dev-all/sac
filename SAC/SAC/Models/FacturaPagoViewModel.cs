@@ -15,6 +15,7 @@ namespace SAC.Models
             TotalAPagar = 0;
             montoTarjetaSeleccionados = 0;
             montoChequesSeleccionados = 0;
+            oChequera = new ChequeraModelView();
         }
 
      //listado de facturas obtenidas para el proveedor

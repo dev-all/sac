@@ -19,6 +19,7 @@ namespace Datos.ModeloDeDatos
         {
             this.Localidad = new HashSet<Localidad>();
             this.Proveedor = new HashSet<Proveedor>();
+            this.Retencion = new HashSet<Retencion>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,7 @@ namespace Datos.ModeloDeDatos
         public virtual Pais Pais { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Retencion> Retencion { get; set; }
     }
 }

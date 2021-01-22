@@ -44,8 +44,8 @@ namespace Negocio.Modelos
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public Banco Banco { get; set; }
-        public TipoMoneda TipoMoneda { get; set; }
+        public BancoCuentaModel Banco { get; set; }
+        public TipoMonedaModel TipoMoneda { get; set; }
       
         //public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         //propiedad agregada

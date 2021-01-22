@@ -18,5 +18,11 @@ namespace SAC.Models
         public Nullable<int> IdUsuario { get; set; }
         public System.DateTime UltimaModificacion { get; set; }
 
+
+        public ICollection<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
+
+        public ICollection<CompraFacturaViewModel> CompraFactura { get; set; }
+
+
     }
 }

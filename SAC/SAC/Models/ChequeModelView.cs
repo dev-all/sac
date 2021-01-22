@@ -43,7 +43,7 @@ namespace SAC.Models
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public BancoModelView Banco { get; set; }
+        public BancoCuentaModelView Banco { get; set; }
         public TipoMonedaModelView TipoMoneda { get; set; }
 
         //public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }

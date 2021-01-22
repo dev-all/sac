@@ -38,7 +38,7 @@ namespace SAC.Controllers
                 if ((System.Web.HttpContext.Current.Session["controller"] != null & System.Web.HttpContext.Current.Session["metodo"] != null))
                     return RedirectToAction(System.Web.HttpContext.Current.Session["metodo"].ToString(), System.Web.HttpContext.Current.Session["controller"].ToString());
                 else
-                    return RedirectToAction("Index", "Evento");
+                    return RedirectToAction("Acceder", "Cuenta");
             }
 
             var viewModel = new LoginViewModel();

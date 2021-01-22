@@ -56,7 +56,7 @@
 
                             </div>
 
-
+                            if( Model.Proveedor.Id != null) {
                             <div id="DatosProveedor" class="row bg-light text-left">
                                 <div class="col-md-3">
                                     <small>Razón Social:</small> <small id="RazonSocialProv">@Model.Proveedor.Nombre.ToUpper()</small>
@@ -71,7 +71,7 @@
                                     <small>Dirección:</small> <small id="DireccionProv">@Model.Proveedor.Direccion.ToUpper()</small>
                                 </div>
                             </div>
-
+                            }
 
                         }
 

@@ -75,5 +75,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
         public virtual DbSet<ClienteDireccion> ClienteDireccion { get; set; }
         public virtual DbSet<CuentaCorrienteProveedorDetalles> CuentaCorrienteProveedorDetalles { get; set; }
+        public virtual DbSet<Retencion> Retencion { get; set; }
+        public virtual DbSet<TipoRetencion> TipoRetencion { get; set; }
     }
 }

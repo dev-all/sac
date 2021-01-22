@@ -1,4 +1,4 @@
-﻿@model SAC.Models.FacturaPagoViewModel
+﻿@model SAC.Models.ChequeraModelView
 
 
 <!-- Date picker plugins css -->
@@ -23,32 +23,34 @@
                     <div class="row">
                         <div class="col-md-3">
                             <small>Cuenta</small>
-                            @Html.DropDownListFor(x => x.idCuentaBancariaSeleccionada, Model.listaCuentaBancariaDrop, "Seleccionar...", new { @class = "form-control form-control-sm" })
+                            @Html.DropDownList("idCuentaBancariaSeleccionada", (List<SelectListItem>) ViewBag.listaCuentaBancariaDrop, "Seleccionar...", new { @class = "form-control form-control-sm" })
+
+                            @*@Html.DropDownListFor(x => x.idCuentaBancariaSeleccionada, Model.listaCuentaBancariaDrop, "Seleccionar...", new { @class = "form-control form-control-sm" })*@
                         </div>
                         <div class="col-md-2">
                             <small>Número</small>
-                            @Html.TextBoxFor(p => p.oChequera.NumeroCheque, new { @class = "form-control form-control-sm", @placeholder = "Nro cheque" })
-                            @Html.ValidationMessageFor(p => p.oChequera.NumeroCheque, "", new { @class = "text-danger form-control-sm" })
+                            @Html.TextBoxFor(model => model.NumeroCheque, new { @class = "form-control form-control-sm", @placeholder = "Nro cheque" })
+                            @Html.ValidationMessageFor(model => model.NumeroCheque, "", new { @class = "text-danger form-control-sm" })
                         </div>
 
                         <div class="col-md-2">
                             <small>Importe</small>
-                            @Html.TextBoxFor(p => p.oChequera.Importes, new { @class = "form-control form-control-sm", @placeholder = "importe" })
-                            @Html.ValidationMessageFor(p => p.oChequera.Importes, "", new { @class = "text-danger form-control-sm" })
+                            @Html.TextBoxFor(p => p.Importes, new { @class = "form-control form-control-sm", @placeholder = "importe" })
+                            @Html.ValidationMessageFor(p => p.Importes, "", new { @class = "text-danger form-control-sm" })
                         </div>
 
                         <div class="col-md-2">
-                            @*<small>Fecha Ingreso</small>
-                                @Html.EditorFor(Model => Model.oChequera.FechaIngreso, new { htmlAttributes = new { @class = "form-control form-control-sm  Calendario", @placeholder = "Fecha Emision", @readonly = true } })*@
+                          
                             <small>Fecha Ingreso</small>
-                            <input type="text" id="oChequera_FechaIngreso" name="oChequera.FechaIngreso"
+                            <input type="text" id="FechaIngreso" name="FechaIngreso"
                                    class="form-control form-control-sm Calendario"
                                    data-validation-required-message="Ingrese una fecha">
                         </div>
+
                         <div class="col-md-2">
                             <small>Fecha Efectivo</small>
-                            @*@Html.EditorFor(Model => Model.oChequera.FechaEgreso, new { htmlAttributes = new { @class = "form-control form-control-sm  Calendario", @placeholder = "Fecha Emision", @readonly = true } })*@
-                            <input type="text" id="oChequera_FechaEgreso" name="oChequera.FechaEgreso"
+                       
+                            <input type="text" id="FechaEgreso" name="FechaEgreso"
                                    class="form-control form-control-sm Calendario"
                                    data-validation-required-message="Ingrese una fecha">
 

@@ -62,6 +62,13 @@ namespace SAC.Models
         public bool Activo { get; set; }
         public int IdUsuario { get; set; }
         public DateTime UltimaModificacion { get; set; }
+
+        //agrego esto para las facutas a pagar MODULO PAGOS
+        public decimal pago { get; set; }
+        public decimal aplicacion { get; set; }
+        public decimal saldoPagos { get; set; }
+        //------------------------------------------------
+
         public TipoComprobanteModelView TipoComprobante { get; set; }
         public CompraIvaModelView CompraIva { get; set; }
         public ProveedorModelView Proveedor { get; set; }
@@ -69,6 +76,12 @@ namespace SAC.Models
         public CompraFacturaViewModel CompraFacturaAplicada { get; set; }
         public TipoMonedaModelView TipoMoneda { get; set; }
         public List<TipoMonedaModelView> TipoMonedas { get; set; }
+      
         public List<TipoComprobanteModelView> ListTipoComprobante { get; set; }
+
+       //public List<TipoComprobanteModelView> TipoComprobantes { get; set; }
+
+        public List<RetencionModelView> Retencion { get; set; }
+
     }
 }

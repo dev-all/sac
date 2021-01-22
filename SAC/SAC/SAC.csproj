@@ -147,6 +147,7 @@
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
+    <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\MenusidebarController.cs" />
@@ -179,6 +180,8 @@
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
     <Compile Include="Models\CuentaCteProveedorModelView.cs" />
     <Compile Include="Models\FacturaPagoViewModel.cs" />
+    <Compile Include="Models\PagosFacturasAPagarModelView.cs" />
+    <Compile Include="Models\PagosFacturasModelView.cs" />
     <Compile Include="Models\PresupuestoActualModelView.cs" />
     <Compile Include="Models\PresupuestoCostoModelView.cs" />
     <Compile Include="Models\PresupuestoItemModelView.cs" />
@@ -198,6 +201,7 @@
     <Compile Include="Models\ProvinciaModelView.cs" />
     <Compile Include="Models\Request\CotizacionAFIP.cs" />
     <Compile Include="Models\Request\CotizacionBNA.cs" />
+    <Compile Include="Models\RetencionModelView.cs" />
     <Compile Include="Models\RolModelView.cs" />
     <Compile Include="Models\AccionModelView.cs" />
     <Compile Include="Models\SubRubroModelView.cs" />
@@ -207,6 +211,7 @@
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\TipoProveedorModelView.cs" />
+    <Compile Include="Models\TipoRetencionModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />
     <Compile Include="Models\EventoModelView.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -2875,6 +2880,10 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\CuentaCteProveedor\_RDChequesPropios.cshtml" />
     <Content Include="Views\CuentaCteProveedor\CtaCteDetalle.cshtml" />
+    <Content Include="Views\Pagos\Index.cshtml" />
+    <Content Include="Views\Pagos\_TablaFacturasPagar.cshtml" />
+    <Content Include="Views\Pagos\_tablaRetenciones.cshtml" />
+    <Content Include="Views\CuentaCteProveedor\_TablaChequesPropios - Copia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

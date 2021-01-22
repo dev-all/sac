@@ -53,7 +53,10 @@ namespace SAC.Models
         public TipoMonedaModelView TipoMoneda { get; set; }
 
 
+
         //propiedad agregada
+
+        public int idCuentaBancariaSeleccionada { get; set; }
         public bool seleccionado { get; set; }
 
     }

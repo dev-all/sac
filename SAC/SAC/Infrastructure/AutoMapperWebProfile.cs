@@ -14,6 +14,12 @@ namespace SAC.Infrastructure
         public AutoMapperWebProfile()
         {
 
+            CreateMap<RetencionModel, RetencionModelView>();
+            CreateMap<RetencionModelView, RetencionModel>();
+
+            CreateMap<TipoRetencionModel, TipoRetencionModelView>();
+            CreateMap<TipoRetencionModelView, TipoRetencionModel>();
+
             CreateMap<PresupuestoItemModel, PresupuestoItemModelView>();
             CreateMap<PresupuestoItemModelView, PresupuestoItemModel>();
 

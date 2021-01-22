@@ -18,5 +18,10 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
         public System.DateTime UltimaModificacion { get; set; }
 
+
+        public  ICollection<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
+       
+        public  ICollection<CompraFacturaModel> CompraFactura { get; set; }
+
     }
 }
