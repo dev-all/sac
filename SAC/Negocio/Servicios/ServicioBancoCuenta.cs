@@ -35,6 +35,21 @@ namespace Negocio.Servicios
             return Mapper.Map<BancoCuenta, BancoCuentaModel>(oBancoCuentaRepositorio.GetCuentaPorId(id));
         }
 
+     public List<BancoCuentaModel> GetBancoPorNombre(string strBanco)
+        {
+
+            try
+            {
+                return Mapper.Map<List<BancoCuenta>, List<BancoCuentaModel>>(oBancoCuentaRepositorio.GetBancoPorNombre(strBanco));
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+
+
+        }
 
 
     }

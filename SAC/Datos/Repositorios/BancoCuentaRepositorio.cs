@@ -29,5 +29,14 @@ namespace Datos.Repositorios
         {
             return context.BancoCuenta.Where(p => p.Id == id).First();           
         }
+
+
+        public List<BancoCuenta> GetBancoPorNombre(string strBanco)
+        {
+            List<BancoCuenta> p = (from c in context.BancoCuenta
+                                   where c.Activo == true && c.BancoDescripcion.Contains(strBanco)
+                                   select c).ToList();
+            return p;
+        }
     }
 }

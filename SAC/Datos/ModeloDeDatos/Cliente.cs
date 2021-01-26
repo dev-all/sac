@@ -33,7 +33,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdPieNota { get; set; }
         public Nullable<int> IdIdioma { get; set; }
         public Nullable<int> IdTipoCliente { get; set; }
-        public Nullable<int> Visible { get; set; }
+        public Nullable<bool> Visible { get; set; }
         public Nullable<int> IdNotaPieB { get; set; }
         public Nullable<int> IdTipoMoneda { get; set; }
         public Nullable<int> IdGrupoPresupuesto { get; set; }
@@ -43,9 +43,12 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual GrupoPresupuesto GrupoPresupuesto { get; set; }
-        public virtual TipoCliente TipoCliente { get; set; }
+        public virtual GrupoPresupuesto GrupoPresupuesto1 { get; set; }
+        public virtual PieNota PieNota { get; set; }
+        public virtual TipoIdioma TipoIdioma { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
+        public virtual TipoCliente TipoCliente { get; set; }
     }
 }

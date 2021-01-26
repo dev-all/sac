@@ -15,7 +15,7 @@ using Datos.Repositorios;
 
 namespace Negocio.Servicios
 {
-    class ServicioTarjetaOperacion : ServicioBase
+    public class ServicioTarjetaOperacion : ServicioBase
     {
 
         private TarjetaOperacionRepositorio oTarjetaRepositorio;
@@ -33,6 +33,24 @@ namespace Negocio.Servicios
             //_mensaje("El cheque se ingresó correctamente", "ok");
             return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(oTarjetaRepositorio.Insertar(oModel));
         }
+
+        public List<TarjetaOperacionModel> GetTarjetaOperacionGastos(int idTipoTarjeta)
+        {
+            return Mapper.Map<List<TarjetaOperacion>, List<TarjetaOperacionModel>>(oTarjetaRepositorio.GetTarjetasOperacionGastos(idTipoTarjeta));
+        }
+
+
+        public List<TarjetaOperacionModel> GetTarjetaOperacionGastos(int idTipoTarjeta, DateTime cfechadesde, DateTime cfechahasta)
+        {
+            return Mapper.Map<List<TarjetaOperacion>, List<TarjetaOperacionModel>>(oTarjetaRepositorio.GetTarjetasOperacionGastos(idTipoTarjeta, cfechadesde, cfechahasta));
+        }
+
+
+
+
+
+
+
 
     }
 }

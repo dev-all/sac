@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Agenda_ModelStoreContainer" CdmEntityContainer="SAC_Entities">
-    <EntitySetMapping Name="GrupoPresupuesto">
-      <EntityTypeMapping TypeName="SAC_Model.GrupoPresupuesto">
-        <MappingFragment StoreEntitySet="GrupoPresupuesto">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Accion">
       <EntityTypeMapping TypeName="SAC_Model.Accion">
         <MappingFragment StoreEntitySet="Accion">
@@ -317,16 +305,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TipoIva">
-      <EntityTypeMapping TypeName="SAC_Model.TipoIva">
-        <MappingFragment StoreEntitySet="TipoIva">
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TipoMoneda">
       <EntityTypeMapping TypeName="SAC_Model.TipoMoneda">
         <MappingFragment StoreEntitySet="TipoMoneda">
@@ -435,19 +413,6 @@
           <ScalarProperty Name="TotalDolares" ColumnName="TotalDolares" />
           <ScalarProperty Name="TotalPesos" ColumnName="TotalPesos" />
           <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TipoCliente">
-      <EntityTypeMapping TypeName="SAC_Model.TipoCliente">
-        <MappingFragment StoreEntitySet="TipoCliente">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Clase" ColumnName="Clase" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -774,33 +739,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Cliente">
-      <EntityTypeMapping TypeName="SAC_Model.Cliente">
-        <MappingFragment StoreEntitySet="Cliente">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="MiPyme" ColumnName="MiPyme" />
-          <ScalarProperty Name="IdGrupoPresupuesto" ColumnName="IdGrupoPresupuesto" />
-          <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
-          <ScalarProperty Name="IdNotaPieB" ColumnName="IdNotaPieB" />
-          <ScalarProperty Name="Visible" ColumnName="Visible" />
-          <ScalarProperty Name="IdTipoCliente" ColumnName="IdTipoCliente" />
-          <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
-          <ScalarProperty Name="IdPieNota" ColumnName="IdPieNota" />
-          <ScalarProperty Name="IdXml" ColumnName="IdXml" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-          <ScalarProperty Name="DiasFactura" ColumnName="DiasFactura" />
-          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
-          <ScalarProperty Name="IdTipoiva" ColumnName="IdTipoiva" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="BancoCuenta">
       <EntityTypeMapping TypeName="SAC_Model.BancoCuenta">
         <MappingFragment StoreEntitySet="BancoCuenta">
@@ -816,31 +754,6 @@
           <ScalarProperty Name="BancoDescripcion" ColumnName="BancoDescripcion" />
           <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
           <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ClienteDireccion">
-      <EntityTypeMapping TypeName="SAC_Model.ClienteDireccion">
-        <MappingFragment StoreEntitySet="ClienteDireccion">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
-          <ScalarProperty Name="LocalA" ColumnName="LocalA" />
-          <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
-          <ScalarProperty Name="IdPieNota" ColumnName="IdPieNota" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
-          <ScalarProperty Name="Fax" ColumnName="Fax" />
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-          <ScalarProperty Name="IdCodigoPostal" ColumnName="IdCodigoPostal" />
-          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-          <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
-          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -893,6 +806,119 @@
           <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoIva">
+      <EntityTypeMapping TypeName="SAC_Model.TipoIva">
+        <MappingFragment StoreEntitySet="TipoIva">
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="SAC_Model.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="MiPyme" ColumnName="MiPyme" />
+          <ScalarProperty Name="IdGrupoPresupuesto" ColumnName="IdGrupoPresupuesto" />
+          <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
+          <ScalarProperty Name="IdNotaPieB" ColumnName="IdNotaPieB" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="IdTipoCliente" ColumnName="IdTipoCliente" />
+          <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
+          <ScalarProperty Name="IdPieNota" ColumnName="IdPieNota" />
+          <ScalarProperty Name="IdXml" ColumnName="IdXml" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+          <ScalarProperty Name="DiasFactura" ColumnName="DiasFactura" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="IdTipoiva" ColumnName="IdTipoiva" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClienteDireccion">
+      <EntityTypeMapping TypeName="SAC_Model.ClienteDireccion">
+        <MappingFragment StoreEntitySet="ClienteDireccion">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
+          <ScalarProperty Name="LocalA" ColumnName="LocalA" />
+          <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
+          <ScalarProperty Name="IdPieNota" ColumnName="IdPieNota" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="IdCodigoPostal" ColumnName="IdCodigoPostal" />
+          <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="CodigoAfip" ColumnName="CodigoAfip" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupoPresupuesto">
+      <EntityTypeMapping TypeName="SAC_Model.GrupoPresupuesto">
+        <MappingFragment StoreEntitySet="GrupoPresupuesto">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PieNota">
+      <EntityTypeMapping TypeName="SAC_Model.PieNota">
+        <MappingFragment StoreEntitySet="PieNota">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+          <ScalarProperty Name="Visible" ColumnName="Visible" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoIdioma">
+      <EntityTypeMapping TypeName="SAC_Model.TipoIdioma">
+        <MappingFragment StoreEntitySet="TipoIdioma">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsaurio" ColumnName="IdUsaurio" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoCliente">
+      <EntityTypeMapping TypeName="SAC_Model.TipoCliente">
+        <MappingFragment StoreEntitySet="TipoCliente">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Clase" ColumnName="Clase" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

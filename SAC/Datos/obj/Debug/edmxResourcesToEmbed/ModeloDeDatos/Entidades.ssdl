@@ -203,7 +203,7 @@
     <Property Name="IdPieNota" Type="int" />
     <Property Name="IdIdioma" Type="int" />
     <Property Name="IdTipoCliente" Type="int" />
-    <Property Name="Visible" Type="int" />
+    <Property Name="Visible" Type="bit" />
     <Property Name="IdNotaPieB" Type="int" />
     <Property Name="IdTipoMoneda" Type="int" />
     <Property Name="IdGrupoPresupuesto" Type="int" />
@@ -221,9 +221,10 @@
     <Property Name="CodigoAfip" Type="nvarchar" MaxLength="50" />
     <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
     <Property Name="Direccion" Type="nvarchar" MaxLength="50" />
-    <Property Name="IdPais" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdPais" Type="int" />
     <Property Name="IdProvincia" Type="int" />
-    <Property Name="IdCodigoPostal" Type="varchar" MaxLength="50" />
+    <Property Name="IdLocalidad" Type="int" />
+    <Property Name="IdCodigoPostal" Type="int" />
     <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
     <Property Name="Fax" Type="nvarchar" MaxLength="50" />
     <Property Name="Cuit" Type="nvarchar" MaxLength="50" />
@@ -331,6 +332,15 @@
     <Property Name="IdEvento" Type="int" Nullable="false" />
     <Property Name="IdPersona" Type="int" Nullable="false" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'SAC.dbo.Departamento' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Departamento">
+          <Property Name="Id" Type="int" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="Observacion" Type="varchar" MaxLength="200" />
+          <Property Name="TotalMes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TotalAnio" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>-->
   <EntityType Name="Diario">
     <Key>
       <PropertyRef Name="Id" />
@@ -502,6 +512,19 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="CodigoValidacion" Type="nchar" MaxLength="10" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PieNota">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nota" Type="ntext" />
+    <Property Name="Visible" Type="bit" Nullable="false" />
+    <Property Name="Cuenta" Type="nvarchar" MaxLength="50" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
   </EntityType>
   <EntityType Name="PrespuestoActual">
     <Key>
@@ -738,6 +761,16 @@
     <Property Name="Abreviatura" Type="nvarchar" MaxLength="50" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TipoIdioma">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsaurio" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
   </EntityType>
   <EntityType Name="TipoIva">
@@ -1021,6 +1054,30 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Cliente_GrupoPresupuesto1">
+    <End Role="GrupoPresupuesto" Type="Self.GrupoPresupuesto" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoPresupuesto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdGrupoPresupuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cliente_PieNota">
+    <End Role="PieNota" Type="Self.PieNota" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PieNota">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdPieNota" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Cliente_TipoCliente">
     <End Role="TipoCliente" Type="Self.TipoCliente" Multiplicity="0..1" />
     <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
@@ -1030,6 +1087,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
       </Principal>
       <Dependent Role="Cliente">
         <PropertyRef Name="IdTipoCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cliente_TipoIdioma">
+    <End Role="TipoIdioma" Type="Self.TipoIdioma" Multiplicity="0..1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIdioma">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdIdioma" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1054,6 +1123,78 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
       </Principal>
       <Dependent Role="ClienteDireccion">
         <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_Localidad">
+    <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+    <End Role="ClienteDireccion" Type="Self.ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_Localidad1">
+    <End Role="Localidad" Type="Self.Localidad" Multiplicity="0..1" />
+    <End Role="ClienteDireccion" Type="Self.ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Localidad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdLocalidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_Pais">
+    <End Role="Pais" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="ClienteDireccion" Type="Self.ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pais">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_Provincia">
+    <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+    <End Role="ClienteDireccion" Type="Self.ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_TipoIdioma">
+    <End Role="TipoIdioma" Type="Self.TipoIdioma" Multiplicity="0..1" />
+    <End Role="ClienteDireccion" Type="Self.ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoIdioma">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdIdioma" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_TipoMoneda">
+    <End Role="TipoMoneda" Type="Self.TipoMoneda" Multiplicity="0..1" />
+    <End Role="ClienteDireccion" Type="Self.ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdTipoMoneda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1529,6 +1670,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
     <EntitySet Name="MenuSidebar" EntityType="Self.MenuSidebar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PieNota" EntityType="Self.PieNota" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PrespuestoActual" EntityType="Self.PrespuestoActual" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PresupuestoCosto" EntityType="Self.PresupuestoCosto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PresupuestoHistorico" EntityType="Self.PresupuestoHistorico" Schema="dbo" store:Type="Tables" />
@@ -1545,6 +1687,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
     <EntitySet Name="TipoComprobante" EntityType="Self.TipoComprobante" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoComprobanteTipoIva" EntityType="Self.TipoComprobanteTipoIva" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoComprobanteVenta" EntityType="Self.TipoComprobanteVenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoIdioma" EntityType="Self.TipoIdioma" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoIva" EntityType="Self.TipoIva" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoMoneda" EntityType="Self.TipoMoneda" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TipoPago" EntityType="Self.TipoPago" Schema="dbo" store:Type="Tables" />
@@ -1636,8 +1779,20 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
       <End Role="GrupoPresupuesto" EntitySet="GrupoPresupuesto" />
       <End Role="Cliente" EntitySet="Cliente" />
     </AssociationSet>
+    <AssociationSet Name="FK_Cliente_GrupoPresupuesto1" Association="Self.FK_Cliente_GrupoPresupuesto1">
+      <End Role="GrupoPresupuesto" EntitySet="GrupoPresupuesto" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cliente_PieNota" Association="Self.FK_Cliente_PieNota">
+      <End Role="PieNota" EntitySet="PieNota" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
     <AssociationSet Name="FK_Cliente_TipoCliente" Association="Self.FK_Cliente_TipoCliente">
       <End Role="TipoCliente" EntitySet="TipoCliente" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cliente_TipoIdioma" Association="Self.FK_Cliente_TipoIdioma">
+      <End Role="TipoIdioma" EntitySet="TipoIdioma" />
       <End Role="Cliente" EntitySet="Cliente" />
     </AssociationSet>
     <AssociationSet Name="FK_Cliente_TipoMoneda" Association="Self.FK_Cliente_TipoMoneda">
@@ -1646,6 +1801,30 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
     </AssociationSet>
     <AssociationSet Name="FK_ClienteDireccion_Cliente" Association="Self.FK_ClienteDireccion_Cliente">
       <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_Localidad" Association="Self.FK_ClienteDireccion_Localidad">
+      <End Role="Localidad" EntitySet="Localidad" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_Localidad1" Association="Self.FK_ClienteDireccion_Localidad1">
+      <End Role="Localidad" EntitySet="Localidad" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_Pais" Association="Self.FK_ClienteDireccion_Pais">
+      <End Role="Pais" EntitySet="Pais" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_Provincia" Association="Self.FK_ClienteDireccion_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_TipoIdioma" Association="Self.FK_ClienteDireccion_TipoIdioma">
+      <End Role="TipoIdioma" EntitySet="TipoIdioma" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_TipoMoneda" Association="Self.FK_ClienteDireccion_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
       <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
     </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_CompraIva" Association="Self.FK_CompraFactura_CompraIva">

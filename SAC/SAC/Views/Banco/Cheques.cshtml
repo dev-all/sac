@@ -1,0 +1,370 @@
+﻿@model SAC.Models.ChequeModelView
+
+@{
+    ViewBag.Title = "Cheque";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+
+
+}
+
+
+
+
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.1em 1em;
+    }
+
+    .table td, .table th {
+        padding: .25rem;
+    }
+</style>
+
+@using (Html.BeginForm("Cheques", "Banco", FormMethod.Post, new { novalidate = true }))
+
+
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.IdBanco)
+    @Html.HiddenFor(model => model.IdCliente)
+
+
+    List<SelectListItem> ListaOpcion1 = (List<SelectListItem>)ViewBag.Opcion1;
+    List<SelectListItem> ListaOpcion2 = (List<SelectListItem>)ViewBag.Opcion2;
+
+    List<SelectListItem> ListaCargarBancos = (List<SelectListItem>)ViewBag.CargarBancos;
+    List<SelectListItem> ListaCargarClientes = (List<SelectListItem>)ViewBag.CargarClientes;
+
+
+
+    <div class="form-horizontal">
+
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h4 class="card-title">Consulta de Cheques en Cartera</h4>
+                        <div class="form-body">
+                            <div class="row">
+
+
+                                <div class="col-md-3">
+
+                                    <div class="form-group row">
+                                        <label for="readonly5" class="control-label form-control-sm">Opcion</label>
+                                        <div class="col-md-12">
+
+                                            @Html.DropDownList("Cparametro1", ListaOpcion1, null, new { @class = "form-control form-control-sm" })
+                                            @Html.ValidationMessage("Cparametro1", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="form-group row">
+
+                                        <label for="readonly5" class="control-label form-control-sm">Opcion</label>
+                                        <div class="col-md-12">
+
+                                            @Html.DropDownList("Cparametro2", ListaOpcion2, null, new { @class = "form-control form-control-sm" })
+                                            @Html.ValidationMessage("Cparametro2", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    <br />
+
+
+
+                                </div>
+
+                                <div class="col-md-3">
+
+                                    <div class="form-group row">
+
+                                        <label for="readonly5" class="control-label form-control-sm">Fecha Desde</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.cFechaDesde, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="col-md-10">
+                                        <div class="form-group row">
+                                            <label for="readonly5" class="control-label form-control-sm">Fecha Hasta</label>
+                                            <div class="col-md-12">
+                                                @Html.EditorFor(model => model.cFechaHasta, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="row">
+                                   <div class="col-md-9">
+                                    <div class="col-md-12" id="parametro1">
+                                        <div class="form-group row">
+                                            <label for="readonly5" class="control-label form-control-sm">Cliente</label>
+                                            <div class="col-md-12">
+                                                @Html.TextBoxFor(m => m.ListaCliente.Nombre, new
+                                                {
+                                                @class = "form-control form-control-sm",
+                                                @id = "NombreCliente",
+                                                @placeholder = "Ingrese parte del nombre del Cliente"
+                                                })
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </div>
+                                    
+
+                                    <div class="col-md-9" id="parametro2">
+                                        <div class="form-group row">
+                                            <label for="readonly5" class="control-label form-control-sm">Banco</label>
+                                            <div class="col-md-12">
+                                                @Html.TextBoxFor(m => m.ListaBancoCuenta.Banco, new
+                                                {
+                                                @class = "form-control form-control-sm text-box single-line",
+                                                @id = "NombreBanco",
+                                                @placeholder = "Ingrese parte del nombre del Banco",
+                                                @for = "IdBanco"
+                                                })
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                          
+
+
+
+
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+
+                    <div class="col-12">
+                       
+                    </div>
+
+                    <div class="col-12">
+
+                        <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Consultar</button>
+
+
+                        @Html.ActionLink("Consultar", "Cheques", "Banco", htmlAttributes: new { @class = "btn btn-success btn-sm" })
+
+
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+
+        @if (Model.CVisible)
+        {
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h4 class="card-title">Grilla de la Consulta</h4>
+                            <div class="form-body">
+
+                                
+
+
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive-md">
+
+                                            <table id="example23" class="table stylish-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="max-width: 33%;">Registro</th>
+                                                        <th class="text-center">Fecha</th>
+                                                        <th class="text-center">Cheque</th>
+                                                        <th class="text-center">Banco</th>
+                                                        <th class="text-center">Importe</th>
+                                                        <th class="text-center">Origen</th>
+                                                        <th class="text-center">Documento</th>
+                                                        <th class="text-center">Salida</th>
+                                                        <th class="text-center">Destino</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+
+
+                                                    @foreach (var item in Model.ListaCheque)
+                                                    {
+
+
+
+                                                        <tr>
+                                                            <td style="max-width: 33%;">
+
+                                                                @Html.DisplayFor(modelItem => item.Id)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Convert.ToDateTime(item.Fecha).ToString("dd/MM/yyyy")
+                                                            </td>
+
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.BancoCuenta.Banco)
+                                                            </td>
+
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.Importe)
+                                                            </td>
+
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.Descripcion)
+                                                            </td>
+
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.Descripcion)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Destino)
+
+                                                            </td>
+                                                          
+
+
+
+                                                        </tr>
+
+                                                    }
+
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+
+    </div>
+
+}
+
+@section Scripts {
+
+
+
+    <script src="~/Scripts/view/ChequeScript.js"></script>
+
+}
+
+
+
+<script type="text/javascript">
+
+
+    $(function () {
+
+        $("#parametro1").hide();
+        $("#parametro2").hide();
+
+
+        $("#Cparametro2").change(function () {
+
+            // $("#parametro1").style.display("none");
+
+            //document.getElementById("parametro1").style.display = "none";
+            //document.getElementById("parametro2").style.display = "none";
+
+            //$("#parametro1").style.display = "none";
+
+            // $("#parametro1").hide();
+            // $("#parametro2").hide();
+
+            opcion = $('option:selected', $(this)).val();
+
+            var x = document.getElementById("myDIV");
+
+            if (opcion > 0) {
+
+                //  alert($('option:selected', $(this)).val());
+
+                if (opcion == 1) {
+
+                    $("#parametro1").hide();
+                    $("#parametro2").hide();
+
+                }
+
+                if (opcion == 2) {
+
+                    $("#parametro1").show();
+                    $("#parametro2").hide();
+
+
+                }
+
+                if (opcion == 3) {
+
+                    $("#parametro1").hide();
+                    $("#parametro2").show();
+
+
+                }
+
+
+
+
+
+            }
+
+        });
+
+    });
+</script>

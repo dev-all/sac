@@ -20,6 +20,7 @@ namespace Datos.ModeloDeDatos
             this.Localidad = new HashSet<Localidad>();
             this.Provincia = new HashSet<Provincia>();
             this.Proveedor = new HashSet<Proveedor>();
+            this.ClienteDireccion = new HashSet<ClienteDireccion>();
         }
     
         public int Id { get; set; }
@@ -36,5 +37,7 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<Provincia> Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
     }
 }

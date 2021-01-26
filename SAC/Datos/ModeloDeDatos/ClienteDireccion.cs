@@ -19,9 +19,10 @@ namespace Datos.ModeloDeDatos
         public string CodigoAfip { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
-        public string IdPais { get; set; }
+        public Nullable<int> IdPais { get; set; }
         public Nullable<int> IdProvincia { get; set; }
-        public string IdCodigoPostal { get; set; }
+        public Nullable<int> IdLocalidad { get; set; }
+        public Nullable<int> IdCodigoPostal { get; set; }
         public string Telefono { get; set; }
         public string Fax { get; set; }
         public string Cuit { get; set; }
@@ -35,5 +36,11 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual Cliente Cliente { get; set; }
+        public virtual Localidad Localidad { get; set; }
+        public virtual Localidad Localidad1 { get; set; }
+        public virtual Pais Pais { get; set; }
+        public virtual Provincia Provincia { get; set; }
+        public virtual TipoIdioma TipoIdioma { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
     }
 }

@@ -163,6 +163,9 @@
     <Compile Include="ModeloDeDatos\Persona.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\PieNota.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\PrespuestoActual.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -211,6 +214,9 @@
     <Compile Include="ModeloDeDatos\TipoComprobanteVenta.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\TipoIdioma.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\TipoIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -241,12 +247,16 @@
     <Compile Include="Repositorios\CajaSaldoRepositorio.cs" />
     <Compile Include="Repositorios\ChequeraRepositorio.cs" />
     <Compile Include="Repositorios\ChequeRepositorio.cs" />
+    <Compile Include="Repositorios\ClienteDireccionRepositorio.cs" />
+    <Compile Include="Repositorios\ClienteRepositorio.cs" />
     <Compile Include="Repositorios\CompraFacturaPagoRepositorio.cs" />
     <Compile Include="Repositorios\CompraRepositorio.cs" />
+    <Compile Include="Repositorios\GrupoPresupuestoRepositorio.cs" />
     <Compile Include="Repositorios\ImputacionRepositorio.cs" />
     <Compile Include="Repositorios\LocalidadRespositorio.cs" />
     <Compile Include="Repositorios\DiarioRepositorio.cs" />
     <Compile Include="Repositorios\PaisRepositorio.cs" />
+    <Compile Include="Repositorios\PieNotaRepositorio.cs" />
     <Compile Include="Repositorios\PresupuestoActualRepositorio.cs" />
     <Compile Include="Repositorios\PresupuestoCostoRepositorio.cs" />
     <Compile Include="Repositorios\PresupuestoItemRepositorio.cs" />
@@ -262,7 +272,9 @@
     <Compile Include="Repositorios\SubRubroRepositorio.cs" />
     <Compile Include="Repositorios\TarjetaOperacionRepositorio.cs" />
     <Compile Include="Repositorios\TarjetaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoClienteRepositorio.cs" />
     <Compile Include="Repositorios\TipoComprovanteVentaRepositorio.cs" />
+    <Compile Include="Repositorios\TipoIdiomaRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
     <Compile Include="Repositorios\TipoComprobanteRepositorio.cs" />
     <Compile Include="Repositorios\TipoRetencionRepositorio.cs" />

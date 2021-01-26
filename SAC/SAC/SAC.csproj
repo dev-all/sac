@@ -139,16 +139,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="Controllers\BancoControllers.cs" />
     <Compile Include="Controllers\CajaCierreController.cs" />
     <Compile Include="Controllers\CajaControllers.cs" />
     <Compile Include="Controllers\CajaGrupoController.cs" />
     <Compile Include="Controllers\CajaSaldoController.cs" />
+    <Compile Include="Controllers\ClienteControllers.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\PaisController.cs" />
+    <Compile Include="Controllers\PieNotaControllers.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\MenusidebarController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -174,14 +177,18 @@
     <Compile Include="Models\CajaSaldoModelView.cs" />
     <Compile Include="Models\ChequeModelView.cs" />
     <Compile Include="Models\ChequeraModelView.cs" />
+    <Compile Include="Models\ClienteDireccionModelView.cs" />
+    <Compile Include="Models\ClienteModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
     <Compile Include="Models\CompraIvaModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
     <Compile Include="Models\CuentaCteProveedorModelView.cs" />
     <Compile Include="Models\FacturaPagoViewModel.cs" />
+    <Compile Include="Models\GrupoPresupuestoModelView.cs" />
     <Compile Include="Models\PagosFacturasAPagarModelView.cs" />
     <Compile Include="Models\PagosFacturasModelView.cs" />
+    <Compile Include="Models\PieNotaModelView.cs" />
     <Compile Include="Models\PresupuestoActualModelView.cs" />
     <Compile Include="Models\PresupuestoCostoModelView.cs" />
     <Compile Include="Models\PresupuestoItemModelView.cs" />
@@ -207,7 +214,9 @@
     <Compile Include="Models\SubRubroModelView.cs" />
     <Compile Include="Models\TarjetaModelView.cs" />
     <Compile Include="Models\TarjetaOperacionModelView.cs" />
+    <Compile Include="Models\TipoClienteModelView.cs" />
     <Compile Include="Models\TipoComprobanteModelView.cs" />
+    <Compile Include="Models\TipoIdiomaModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
     <Compile Include="Models\TipoProveedorModelView.cs" />
@@ -2165,6 +2174,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="logs\20210123.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\assets\images\background\Thumbs.db" />
@@ -2884,6 +2894,14 @@
     <Content Include="Views\Pagos\_TablaFacturasPagar.cshtml" />
     <Content Include="Views\Pagos\_tablaRetenciones.cshtml" />
     <Content Include="Views\CuentaCteProveedor\_TablaChequesPropios - Copia.cshtml" />
+    <Content Include="Views\Banco\Cheques.cshtml" />
+    <Content Include="Views\Banco\Tarjetas.cshtml" />
+    <Content Include="Views\Cliente\AddOrEdit.cshtml" />
+    <Content Include="Views\Cliente\AddOrEditDireccion.cshtml" />
+    <Content Include="Views\Cliente\DireccionCliente.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\PieNota\AddOrEdit.cshtml" />
+    <Content Include="Views\PieNota\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

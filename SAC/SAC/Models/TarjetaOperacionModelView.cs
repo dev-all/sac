@@ -20,7 +20,31 @@ namespace SAC.Models
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-       // public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
-        public TarjetaModelView Tarjetas { get; set; }
+        
+       
+       
+
+        public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+        
+       // TarjetaModelView??
+        public Tarjetas Tarjetas { get; set; }
+
+
+        [Display(Name = "Fecha Desde")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime cFechaDesde { get; set; }
+
+
+        [Display(Name = "Fecha Hasta")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime cFechaHasta { get; set; }
+
+        public List<TarjetaOperacionModelView> ListaTarjeta { get; set; }
+
+        public bool CVisible { get; set; }
+
+
     }
 }

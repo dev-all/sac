@@ -68,5 +68,31 @@ namespace Datos.Repositorios
         }
 
 
+        public List<Cheque> obtenerChequePorBanco(int cIdbanco, DateTime cfechadesde, DateTime cfechahasta)
+        {
+
+            List<Cheque> listaCheque = context.Cheque
+                                        .Include("BancoCuenta")
+                                        .Where(p => p.Activo == true && p.IdBanco == cIdbanco && p.Fecha >= cfechadesde && p.Fecha <= cfechahasta)
+                                        .OrderBy(p => p.NumeroCheque)
+                                        .ToList();
+
+            return listaCheque;
+
+        }
+
+        public List<Cheque> obtenerChequePorCliente(int cIdCliente, DateTime cfechadesde, DateTime cfechahasta)
+        {
+
+            List<Cheque> listaCheque = context.Cheque.Where(p => p.Activo == true && p.IdCliente == cIdCliente && p.Fecha >= cfechadesde && p.Fecha <= cfechahasta).ToList();
+
+            listaCheque = listaCheque.OrderBy(p => p.NumeroCheque).ToList();
+
+
+            return listaCheque;
+
+
+        }
+
     }
 }

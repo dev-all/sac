@@ -68,5 +68,30 @@ namespace Negocio.Servicios
             }
         }
 
+        public List<ChequeModel> GetAllChequePorCliente(int cIdCliente, DateTime cfechadesde, DateTime cfechahasta)
+
+
+
+        {
+            List<ChequeModel> listaCheque = Mapper.Map<List<Cheque>, List<ChequeModel>>(pChequeRepositorio.obtenerChequePorCliente(cIdCliente, cfechadesde, cfechahasta));
+
+
+            return listaCheque;
+
+        }
+
+        public List<ChequeModel> GetAllChequePorBanco(int cIdbanco, DateTime cfechadesde, DateTime cfechahasta)
+        {
+
+
+            List<ChequeModel> listaCheque = Mapper.Map<List<Cheque>, List<ChequeModel>>(pChequeRepositorio.obtenerChequePorBanco(cIdbanco, cfechadesde, cfechahasta));
+
+
+            return listaCheque;
+
+
+
+
+        }
     }
 }

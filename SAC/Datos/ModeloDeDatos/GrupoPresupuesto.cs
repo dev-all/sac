@@ -18,6 +18,7 @@ namespace Datos.ModeloDeDatos
         public GrupoPresupuesto()
         {
             this.Cliente = new HashSet<Cliente>();
+            this.Cliente1 = new HashSet<Cliente>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,7 @@ namespace Datos.ModeloDeDatos
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Cliente1 { get; set; }
     }
 }

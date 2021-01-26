@@ -11,6 +11,22 @@ namespace Agenda.Infrastructure
     {
         public AutoMapperNegProfile()
         {
+
+            CreateMap<TipoClienteModel, TipoCliente>();
+            CreateMap<TipoCliente, TipoClienteModel>();
+
+            CreateMap<ClienteDireccionModel, ClienteDireccion>();
+            CreateMap<ClienteDireccion, ClienteDireccionModel>();
+
+            CreateMap<ClienteModel, Cliente>();
+            CreateMap<Cliente, ClienteModel>();
+
+            CreateMap<PieNotaModel, PieNota>();
+            CreateMap<PieNota, PieNotaModel>();
+           
+            CreateMap<TipoIdiomaModel, TipoIdioma>();
+            CreateMap<TipoIdioma, TipoIdiomaModel>();
+
             CreateMap<RetencionModel, Retencion>();
             CreateMap<Retencion, RetencionModel>();
 

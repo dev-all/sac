@@ -14,7 +14,30 @@ namespace SAC.Infrastructure
         public AutoMapperWebProfile()
         {
 
-            CreateMap<RetencionModel, RetencionModelView>();
+            CreateMap<TipoIdiomaModel,TipoIdiomaModelView>();
+            CreateMap<TipoIdiomaModelView, TipoIdiomaModel>();
+
+
+            CreateMap<PieNotaModel, PieNotaModelView>();
+            CreateMap<PieNotaModelView, PieNotaModel>();
+
+            CreateMap<TipoClienteModel, TipoClienteModelView>();
+            CreateMap<TipoClienteModelView, TipoClienteModel>();
+
+            CreateMap<ClienteDireccionModel, ClienteDireccionModelView>();
+            CreateMap<ClienteDireccionModelView, ClienteDireccionModel>();
+
+
+            CreateMap<ClienteModel, ClienteModelView>();
+            CreateMap<ClienteModelView, ClienteModel>();
+
+
+            CreateMap<TarjetaOperacionModel, TarjetaOperacionModelView>();
+            CreateMap<TarjetaOperacionModelView, TarjetaOperacionModel>();
+           
+           
+           
+           CreateMap<RetencionModel, RetencionModelView>();
             CreateMap<RetencionModelView, RetencionModel>();
 
             CreateMap<TipoRetencionModel, TipoRetencionModelView>();
@@ -48,7 +71,7 @@ namespace SAC.Infrastructure
             CreateMap<CompraIvaModelView, CompraIvaModel>();
 
 
-            CreateMap< PresupuestoActualModel, PresupuestoActualModelView>();
+            CreateMap<PresupuestoActualModel, PresupuestoActualModelView>();
             CreateMap<PresupuestoActualModelView, PresupuestoActualModel>();
 
             CreateMap<TarjetaModel, TarjetaModelView>();
@@ -69,8 +92,8 @@ namespace SAC.Infrastructure
             CreateMap<FacturaPagoModel, FacturaPagoViewModel>();
             CreateMap<FacturaPagoViewModel, FacturaPagoModel>();
 
-            CreateMap <ImputacionModel, ImputacionModelView>();
-            CreateMap <ImputacionModelView, ImputacionModel>();
+            CreateMap<ImputacionModel, ImputacionModelView>();
+            CreateMap<ImputacionModelView, ImputacionModel>();
 
             CreateMap<TipoComprobanteModel, TipoComprobanteModelView>();
             CreateMap<TipoComprobanteModelView, TipoComprobanteModel>();

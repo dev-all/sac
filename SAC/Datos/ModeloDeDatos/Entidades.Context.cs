@@ -25,7 +25,6 @@ namespace Datos.ModeloDeDatos
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<GrupoPresupuesto> GrupoPresupuesto { get; set; }
         public virtual DbSet<Accion> Accion { get; set; }
         public virtual DbSet<AccionPorRol> AccionPorRol { get; set; }
         public virtual DbSet<AfipCategorias> AfipCategorias { get; set; }
@@ -46,7 +45,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Rubro> Rubro { get; set; }
         public virtual DbSet<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
         public virtual DbSet<TipoComprobanteVenta> TipoComprobanteVenta { get; set; }
-        public virtual DbSet<TipoIva> TipoIva { get; set; }
         public virtual DbSet<TipoMoneda> TipoMoneda { get; set; }
         public virtual DbSet<TipoPago> TipoPago { get; set; }
         public virtual DbSet<TipoProveedor> TipoProveedor { get; set; }
@@ -55,7 +53,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CuentaCorriente> CuentaCorriente { get; set; }
         public virtual DbSet<PresupuestoCosto> PresupuestoCosto { get; set; }
         public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
-        public virtual DbSet<TipoCliente> TipoCliente { get; set; }
         public virtual DbSet<PrespuestoActual> PrespuestoActual { get; set; }
         public virtual DbSet<PresupuestoHistorico> PresupuestoHistorico { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
@@ -71,11 +68,16 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CompraFactura> CompraFactura { get; set; }
         public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
         public virtual DbSet<Banco> Banco { get; set; }
-        public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
-        public virtual DbSet<ClienteDireccion> ClienteDireccion { get; set; }
         public virtual DbSet<CuentaCorrienteProveedorDetalles> CuentaCorrienteProveedorDetalles { get; set; }
         public virtual DbSet<Retencion> Retencion { get; set; }
         public virtual DbSet<TipoRetencion> TipoRetencion { get; set; }
+        public virtual DbSet<TipoIva> TipoIva { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<ClienteDireccion> ClienteDireccion { get; set; }
+        public virtual DbSet<GrupoPresupuesto> GrupoPresupuesto { get; set; }
+        public virtual DbSet<PieNota> PieNota { get; set; }
+        public virtual DbSet<TipoIdioma> TipoIdioma { get; set; }
+        public virtual DbSet<TipoCliente> TipoCliente { get; set; }
     }
 }

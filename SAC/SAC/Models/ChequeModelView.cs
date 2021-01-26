@@ -18,7 +18,7 @@ namespace SAC.Models
         public string DiaClearing { get; set; }
 
         public decimal Importe { get; set; }
-
+        [Display(Name = "Cliente")]
         public int IdCliente { get; set; }
 
         public string Descripcion { get; set; }
@@ -50,6 +50,34 @@ namespace SAC.Models
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }
 
+        //propiedad agregada
+        public bool seleccionado { get; set; }
+   
 
+        
+
+        public int cParametro1 { get; set; }
+        public int cParametro2 { get; set; }
+
+
+        [Display(Name = "Fecha Desde")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime cFechaDesde { get; set; }
+
+
+        [Display(Name = "Fecha Hasta")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime cFechaHasta { get; set; }
+
+       
+
+        public bool CVisible { get; set; }
+
+        public List<ChequeModelView> ListaCheque { get; set; }
+
+        public ClienteModelView ListaCliente { get; set; }
+        public BancoCuentaModelView ListaBancoCuenta { get; set; }
     }
 }

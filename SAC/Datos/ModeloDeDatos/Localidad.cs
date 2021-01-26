@@ -14,6 +14,13 @@ namespace Datos.ModeloDeDatos
     
     public partial class Localidad
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Localidad()
+        {
+            this.ClienteDireccion = new HashSet<ClienteDireccion>();
+            this.ClienteDireccion1 = new HashSet<ClienteDireccion>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> Codigo { get; set; }
         public string Nombre { get; set; }
@@ -32,5 +39,9 @@ namespace Datos.ModeloDeDatos
     
         public virtual Pais Pais { get; set; }
         public virtual Provincia Provincia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClienteDireccion> ClienteDireccion1 { get; set; }
     }
 }

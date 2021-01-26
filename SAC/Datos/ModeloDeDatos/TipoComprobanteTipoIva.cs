@@ -18,7 +18,7 @@ namespace Datos.ModeloDeDatos
         public int IdTipoIva { get; set; }
         public Nullable<int> IdTipoComprobante { get; set; }
     
-        public virtual TipoIva TipoIva { get; set; }
         public virtual TipoComprobante TipoComprobante { get; set; }
+        public virtual TipoIva TipoIva { get; set; }
     }
 }

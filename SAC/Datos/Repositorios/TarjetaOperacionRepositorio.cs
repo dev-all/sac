@@ -15,12 +15,45 @@ namespace Datos.Repositorios
             this.context = contexto;
         }
 
-
-        public TarjetaOperacion InsertarPais(TarjetaOperacion tarjetaOperacion)
+        public List<TarjetaOperacion> GetAllTarjetasOperacion()
         {
-            return Insertar(tarjetaOperacion);
+
+            return context.TarjetaOperacion.ToList();
+
         }
-       
+
+        public List<TarjetaOperacion> GetTarjetasOperacionGastos(int idTipoTarjeta, DateTime cfechadesde, DateTime cfechahasta)
+        {
+
+
+            List<TarjetaOperacion> listaCheque = context.TarjetaOperacion
+                                       .Include("Tarjetas")
+                                       .Where(p => p.Activo == true && p.IdTarjeta == idTipoTarjeta && p.UltimaModificacion >= cfechadesde && p.UltimaModificacion <= cfechahasta)
+                                       .OrderBy(p => p.Id)
+                                       .ToList();
+
+            return listaCheque;
+
+
+
+        }
+
+        public List<TarjetaOperacion> GetTarjetasOperacionGastos(int idTipoTarjeta)
+        {
+
+
+            List<TarjetaOperacion> listaCheque = context.TarjetaOperacion
+                                       .Include("Tarjetas")
+                                       .Where(p => p.Activo == true && p.IdTarjeta == idTipoTarjeta)
+                                       .OrderBy(p => p.Id)
+                                       .ToList();
+
+            return listaCheque;
+
+
+
+        }
+
 
 
     }
