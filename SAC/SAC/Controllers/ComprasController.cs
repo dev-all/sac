@@ -27,7 +27,6 @@ namespace SAC.Controllers
         //y los valores en dolares se registran en la tabla CompraFactura
 
 
-
         public ComprasController()
         {
             servicioCompra._mensaje += (msg_, tipo_) => CrearTempData(msg_, tipo_);

@@ -17,8 +17,8 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TipoComprobante()
         {
-            this.CompraFactura = new HashSet<CompraFactura>();
             this.TipoComprobanteTipoIva = new HashSet<TipoComprobanteTipoIva>();
+            this.CompraFactura = new HashSet<CompraFactura>();
         }
     
         public int Id { get; set; }
@@ -30,8 +30,8 @@ namespace Datos.ModeloDeDatos
         public System.DateTime UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompraFactura> CompraFactura { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompraFactura> CompraFactura { get; set; }
     }
 }

@@ -118,6 +118,9 @@
     <Compile Include="ModeloDeDatos\CuentaCorrienteProveedorDetalles.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\Departamento.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Diario.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -251,6 +254,7 @@
     <Compile Include="Repositorios\ClienteRepositorio.cs" />
     <Compile Include="Repositorios\CompraFacturaPagoRepositorio.cs" />
     <Compile Include="Repositorios\CompraRepositorio.cs" />
+    <Compile Include="Repositorios\DepartamentoRepositorio.cs" />
     <Compile Include="Repositorios\GrupoPresupuestoRepositorio.cs" />
     <Compile Include="Repositorios\ImputacionRepositorio.cs" />
     <Compile Include="Repositorios\LocalidadRespositorio.cs" />

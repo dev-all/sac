@@ -14,13 +14,7 @@ namespace Datos.ModeloDeDatos
     
     public partial class CompraIva
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CompraIva()
-        {
-            this.CompraFactura = new HashSet<CompraFactura>();
-        }
-    
-        public int Id { get; set; }
+        public int ID { get; set; }
         public Nullable<int> CodigoDiario { get; set; }
         public decimal NetoGravado { get; set; }
         public decimal NetoNoGravado { get; set; }
@@ -48,8 +42,5 @@ namespace Datos.ModeloDeDatos
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> Idusuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompraFactura> CompraFactura { get; set; }
     }
 }

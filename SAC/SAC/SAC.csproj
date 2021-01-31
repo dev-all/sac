@@ -139,6 +139,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
+    <Compile Include="CajaRepositorio.cs" />
     <Compile Include="Controllers\BancoControllers.cs" />
     <Compile Include="Controllers\CajaCierreController.cs" />
     <Compile Include="Controllers\CajaControllers.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Controllers\ClienteControllers.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
+    <Compile Include="Controllers\DepartamentoControllers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
     <Compile Include="Models\CuentaCteProveedorModelView.cs" />
+    <Compile Include="Models\DepartamentoModelView.cs" />
     <Compile Include="Models\FacturaPagoViewModel.cs" />
     <Compile Include="Models\GrupoPresupuestoModelView.cs" />
     <Compile Include="Models\PagosFacturasAPagarModelView.cs" />
@@ -2902,6 +2905,8 @@
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\PieNota\AddOrEdit.cshtml" />
     <Content Include="Views\PieNota\Index.cshtml" />
+    <Content Include="Views\Departamento\AddOrEdit.cshtml" />
+    <Content Include="Views\Departamento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

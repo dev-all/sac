@@ -14,6 +14,10 @@ namespace SAC.Infrastructure
         public AutoMapperWebProfile()
         {
 
+            CreateMap<DepartamentoModel, DepartamentoModelView>();
+            CreateMap<DepartamentoModelView, DepartamentoModel>();
+
+
             CreateMap<TipoIdiomaModel,TipoIdiomaModelView>();
             CreateMap<TipoIdiomaModelView, TipoIdiomaModel>();
 

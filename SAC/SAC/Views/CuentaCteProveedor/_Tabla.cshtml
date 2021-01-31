@@ -9,7 +9,7 @@
                 <th class="text-center"> @Html.DisplayNameFor(model => model[0].ProveedorNombre)</th>
                 <th class="text-center"> @Html.DisplayNameFor(model => model[0].MontoPesos)</th>
                 <th class="text-center"> @Html.DisplayNameFor(model => model[0].MontoDolares)</th>
-                <th class="text-center"> @Html.DisplayNameFor(model => model[0].TotalDeuda)</th>
+                @*<th class="text-center"> @Html.DisplayNameFor(model => model[0].TotalDeuda)</th>*@
                 <th class="text-center"> @Html.DisplayNameFor(model => model[0].UltimoMovimiento)</th>
 
             </tr>
@@ -27,7 +27,7 @@
                     <td>@Html.DisplayFor(modelItem => item.ProveedorNombre)</td>
                     <td class="text-right">@Html.DisplayFor(modelItem => item.MontoPesos)</td>
                     <td class="text-right">@Html.DisplayFor(modelItem => item.MontoDolares)</td>
-                    <td class="text-right">@Html.DisplayFor(modelItem => item.TotalDeuda)</td>
+                    @*<td class="text-right">@Html.DisplayFor(modelItem => item.TotalDeuda)</td>*@
                     <td class="text-center">@Html.DisplayFor(modelItem => item.UltimoMovimiento)</td>
                 </tr>
                 TotalPesos += item.MontoPesos;

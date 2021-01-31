@@ -71,6 +71,7 @@
     <Compile Include="Modelos\ChequeraModel.cs" />
     <Compile Include="Modelos\CompraFacturaPagoModel.cs" />
     <Compile Include="Modelos\CuentaCteProveedorModel.cs" />
+    <Compile Include="Modelos\DepartamentoModel.cs" />
     <Compile Include="Modelos\DiarioModel.cs" />
     <Compile Include="Modelos\CompraFacturaModel.cs" />
     <Compile Include="Modelos\AccionPorRol.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Servicios\ServicioClienteDireccion.cs" />
     <Compile Include="Servicios\ServicioCompraFacturaPago.cs" />
     <Compile Include="Servicios\ServicioCuentaCteProveedor.cs" />
+    <Compile Include="Servicios\ServicioDepartamento.cs" />
     <Compile Include="Servicios\ServicioElog.cs" />
     <Compile Include="Servicios\ServicioGrupoPresupuesto.cs" />
     <Compile Include="Servicios\ServicioImputacion.cs" />

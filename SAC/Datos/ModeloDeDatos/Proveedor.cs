@@ -17,8 +17,8 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proveedor()
         {
-            this.CompraFactura = new HashSet<CompraFactura>();
             this.Banco = new HashSet<Banco>();
+            this.CompraFactura = new HashSet<CompraFactura>();
         }
     
         public int Id { get; set; }
@@ -54,9 +54,9 @@ namespace Datos.ModeloDeDatos
         public virtual TipoMoneda TipoMoneda { get; set; }
         public virtual TipoProveedor TipoProveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CompraFactura> CompraFactura { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Banco> Banco { get; set; }
         public virtual TipoIva TipoIva { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CompraFactura> CompraFactura { get; set; }
     }
 }

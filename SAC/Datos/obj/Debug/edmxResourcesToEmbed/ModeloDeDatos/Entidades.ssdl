@@ -266,7 +266,7 @@
     <Property Name="IdCompraIva" Type="int" />
     <Property Name="Parcial" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Recibo" Type="int" />
-    <Property Name="NumeroPago" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumeroPago" Type="int" />
     <Property Name="IdCompraFacturaAplica" Type="int" />
     <Property Name="Auxiliar" Type="int" />
     <Property Name="AxiliarNumero" Type="nvarchar" MaxLength="50" />
@@ -293,9 +293,9 @@
   </EntityType>
   <EntityType Name="CompraIva">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CodigoDiario" Type="int" />
     <Property Name="NetoGravado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="NetoNoGravado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -332,15 +332,19 @@
     <Property Name="IdEvento" Type="int" Nullable="false" />
     <Property Name="IdPersona" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'SAC.dbo.Departamento' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="Departamento">
-          <Property Name="Id" Type="int" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="20" />
-          <Property Name="Observacion" Type="varchar" MaxLength="200" />
-          <Property Name="TotalMes" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="TotalAnio" Type="decimal" Precision="18" Scale="2" />
-        </EntityType>-->
+  <EntityType Name="Departamento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Observaciones" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="TotalMes" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAnio" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="Diario">
     <Key>
       <PropertyRef Name="Id" />
@@ -1198,18 +1202,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CompraFactura_CompraIva">
-    <End Role="CompraIva" Type="Self.CompraIva" Multiplicity="0..1" />
-    <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompraIva">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFactura">
-        <PropertyRef Name="IdCompraIva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CompraFactura_Imputacion">
     <End Role="Imputacion" Type="Self.Imputacion" Multiplicity="0..1" />
     <End Role="CompraFactura" Type="Self.CompraFactura" Multiplicity="*" />
@@ -1660,6 +1652,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
     <EntitySet Name="CompraFacturaPago" EntityType="Self.CompraFacturaPago" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompraIva" EntityType="Self.CompraIva" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoCaja" EntityType="Self.GrupoCaja" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoCuenta" EntityType="Self.GrupoCuenta" Schema="dbo" store:Type="Tables" />
@@ -1826,10 +1819,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorrienteProveedorDetalles' no
     <AssociationSet Name="FK_ClienteDireccion_TipoMoneda" Association="Self.FK_ClienteDireccion_TipoMoneda">
       <End Role="TipoMoneda" EntitySet="TipoMoneda" />
       <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CompraFactura_CompraIva" Association="Self.FK_CompraFactura_CompraIva">
-      <End Role="CompraIva" EntitySet="CompraIva" />
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
     </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_Imputacion" Association="Self.FK_CompraFactura_Imputacion">
       <End Role="Imputacion" EntitySet="Imputacion" />

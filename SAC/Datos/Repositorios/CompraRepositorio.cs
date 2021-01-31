@@ -43,7 +43,8 @@ namespace Datos.Repositorios
 
         public List<CompraFactura> GetCompraFacturaPorIdProveedor(int idProveedor)
         {
-            return context.CompraFactura.Where(p => p.IdProveedor == idProveedor && p.IdTipoComprobante == 11 &&  p.NumeroPago == "0"  ).ToList();
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.CompraFactura.Where(p => p.IdProveedor == idProveedor && p.IdTipoComprobante == 11 &&  p.NumeroPago == 0  ).ToList();
             
         }
 
@@ -53,7 +54,7 @@ namespace Datos.Repositorios
 
             return context.CompraFactura
                          .Include("TipoComprobante")
-                         .Where(p => p.IdProveedor == idProveedor && p.IdTipoComprobante == 11 && p.NumeroPago == "0" && p.IdMoneda == idMoneda).ToList();
+                         .Where(p => p.IdProveedor == idProveedor && p.IdTipoComprobante == 11 && p.NumeroPago == 0 && p.IdMoneda == idMoneda).ToList();
         }
 
         //esta actualizacion es solo para el pago de facturas
