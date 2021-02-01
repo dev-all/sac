@@ -53,7 +53,7 @@ namespace SAC.Models
         public int IdCompraIva { get; set; }
         public decimal Parcial { get; set; }
         public int Recibo { get; set; }
-        public string NumeroPago { get; set; }
+        public int NumeroPago { get; set; }
         [Display(Name = "Aplica Factura Nº ")]
         public int? IdCompraFacturaAplica { get; set; }
         public int IdDiario { get; set; }

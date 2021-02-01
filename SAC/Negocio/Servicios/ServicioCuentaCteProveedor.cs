@@ -38,7 +38,17 @@ namespace Negocio.Servicios
 
         public List<CuentaCorrienteProveedorDetallesModel> CtaCteDetalle(int idProveedor, DateTime fechaDesde)
         {
-            return Mapper.Map<List<CuentaCorrienteProveedorDetalles>, List<CuentaCorrienteProveedorDetallesModel>>(pProveedorRepositorio.CtaCteDetalle(idProveedor, fechaDesde));
+           //var list =  pProveedorRepositorio.CtaCteDetalle(idProveedor, fechaDesde);
+
+            List<CuentaCorrienteProveedorDetallesModel> detalles = Mapper.Map<List<CuentaCorrienteProveedorDetalles>,List<CuentaCorrienteProveedorDetallesModel>>(pProveedorRepositorio.CtaCteDetalle(idProveedor, fechaDesde));
+
+            //foreach (var item in detalles)
+            //{
+            //    CuentaCorrienteProveedorDetallesModel detalle = new CuentaCorrienteProveedorDetallesModel();
+            //    detalle.IdProveedor = item.Id;
+            //}
+
+            return detalles;
         }
     }
 }

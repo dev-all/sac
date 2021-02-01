@@ -4,13 +4,6 @@ var importeChequePropio = 0;
 var importeChequeTercero = 0;
 
 function fnVerModalCheques() {
-/// verificar si se quedan seleccionado los cheques de lo contrario habria que limpiar el hiden de ID   
-
-    //$("#montoChequesSeleccionados").val("0");
-    //solo para vista
-    // $("#TotalChequeSeleccionados").html();
-
-
 
     $("#ImporteAPagarCheque").html($("#TotalAPagar").val());    
     $("#ModalCheques").modal('show');
@@ -24,6 +17,8 @@ function fnAsignarCheque() {
     $("#ModalCheques").modal('hide');
     fnCalcularDirefencia();
 
+    //agregue bre 29/01/2021
+    SumarTotalPago();
     //id cheque propio si obtiene en onCompleteIngresarCheque
     //id cheques terceros
     
@@ -354,7 +349,7 @@ $(function () {
         language: 'es',
         autoclose: true,
         todayHighlight: true
-    }).datepicker('setDate', new Date()); // });
+    }).datepicker('setDate', new Date()); 
 
     //obtener nro cheque
     $("#idCuentaBancariaSeleccionada").change(function () {

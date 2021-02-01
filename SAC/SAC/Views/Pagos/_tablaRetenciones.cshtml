@@ -31,7 +31,7 @@
                             <td class="text-right">@Html.DisplayFor(modelItem => item.Provincia.Nombre)</td>
                             <td class="text-center">@Html.DisplayFor(modelItem => item.CompraFactura.NumeroFactura)</td>
                             <td>
-                                <a href="#" data-toggle="tooltip" data-original-title="Eliminar " class="btn btn-danger btn-xs fa fa-trash-o " onclick="ConfirmaEliminar(@item.Id, @item.IdCompraFactura)"> </a>
+                                <a href="#" data-toggle="tooltip" data-original-title="Eliminar " class="btn btn-danger btn-xs fa fa-trash-o " onclick="ConfirmaEliminarRetencion(@item.Id, @item.IdCompraFactura)"> </a>
                             </td>
                         </tr>
                         }

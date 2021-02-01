@@ -199,7 +199,6 @@
       <End Role="BancoCuenta" EntitySet="BancoCuenta" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
     </AssociationSet>
-    <EntitySet Name="CuentaCorrienteProveedorDetalles" EntityType="SAC_Model.CuentaCorrienteProveedorDetalles" />
     <EntitySet Name="Retencion" EntityType="SAC_Model.Retencion" />
     <EntitySet Name="TipoRetencion" EntityType="SAC_Model.TipoRetencion" />
     <AssociationSet Name="FK_Retencion_Provincia" Association="SAC_Model.FK_Retencion_Provincia">
@@ -278,8 +277,15 @@
       <End Role="Cliente" EntitySet="Cliente" />
     </AssociationSet>
     <EntitySet Name="Departamento" EntityType="SAC_Model.Departamento" />
-    <EntitySet Name="CompraIva" EntityType="SAC_Model.CompraIva" />
+    <EntitySet Name="TablaRetencion" EntityType="SAC_Model.TablaRetencion" />
+    <EntitySet Name="TrackingFacturaPagoCompra" EntityType="SAC_Model.TrackingFacturaPagoCompra" />
+    <EntitySet Name="CompraIvaVista" EntityType="SAC_Model.CompraIvaVista" />
     <EntitySet Name="CompraFactura" EntityType="SAC_Model.CompraFactura" />
+    <EntitySet Name="CompraIva" EntityType="SAC_Model.CompraIva" />
+    <AssociationSet Name="FK_CompraFactura_CompraIva" Association="SAC_Model.FK_CompraFactura_CompraIva">
+      <End Role="CompraIva" EntitySet="CompraIva" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_Imputacion" Association="SAC_Model.FK_CompraFactura_Imputacion">
       <End Role="Imputacion" EntitySet="Imputacion" />
       <End Role="CompraFactura" EntitySet="CompraFactura" />
@@ -303,6 +309,14 @@
     <AssociationSet Name="FK_Retencion_CompraFactura" Association="SAC_Model.FK_Retencion_CompraFactura">
       <End Role="CompraFactura" EntitySet="CompraFactura" />
       <End Role="Retencion" EntitySet="Retencion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura">
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+      <End Role="TrackingFacturaPagoCompra" EntitySet="TrackingFacturaPagoCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura1" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1">
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+      <End Role="TrackingFacturaPagoCompra" EntitySet="TrackingFacturaPagoCompra" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accion">
@@ -1509,29 +1523,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="CuentaCorrienteProveedorDetalles">
-    <Key>
-      <PropertyRef Name="IdProveedor" />
-      <PropertyRef Name="PuntoVenta" />
-      <PropertyRef Name="NumeroFactura" />
-      <PropertyRef Name="Fecha" />
-      <PropertyRef Name="Cotizacion" />
-    </Key>
-    <Property Name="IdProveedor" Type="Int32" Nullable="false" />
-    <Property Name="RazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Cbte" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="PuntoVenta" Type="Int32" Nullable="false" />
-    <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
-    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ImportePago" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="TotalDolares" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Parcial" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Saldo" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Cotizacion" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-    <Property Name="NumeroPago" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Recibo" Type="Int32" />
-  </EntityType>
   <EntityType Name="Retencion">
     <Key>
       <PropertyRef Name="Id" />
@@ -1911,38 +1902,115 @@
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="CompraIva">
+  <EntityType Name="TablaRetencion">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CodigoDiario" Type="Int32" />
-    <Property Name="NetoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="NetoNoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="TotalPercepciones" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Importe25" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe5" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe105" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe21" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe27" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva5" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionIva" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionIB" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionProvincia" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionImporteIva" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionImporteIB" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionImporteProvincia" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MontoDesde" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MontoHasta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MontoFijo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Porcetaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="MontoExcedente" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IdCodigo" Type="Int32" Nullable="false" />
     <Property Name="Activo" Type="Boolean" />
-    <Property Name="Idusuario" Type="Int32" />
+    <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TrackingFacturaPagoCompra">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFactura" Type="Int32" Nullable="false" />
+    <Property Name="IdPago" Type="Int32" Nullable="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura" FromRole="TrackingFacturaPagoCompra" ToRole="CompraFactura" />
+    <NavigationProperty Name="CompraFactura1" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1" FromRole="TrackingFacturaPagoCompra" ToRole="CompraFactura" />
+  </EntityType>
+  <EntityType Name="CompraIvaVista">
+    <Key>
+      <PropertyRef Name="Expr4" />
+      <PropertyRef Name="PuntoVenta" />
+      <PropertyRef Name="AuxiliarNumero" />
+      <PropertyRef Name="NumeroEmpresa" />
+      <PropertyRef Name="Empesa" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Total" />
+      <PropertyRef Name="Iva" />
+      <PropertyRef Name="IvaAri" />
+      <PropertyRef Name="IvaRes" />
+      <PropertyRef Name="TotalIva" />
+      <PropertyRef Name="Neto" />
+      <PropertyRef Name="Especial" />
+      <PropertyRef Name="Res" />
+      <PropertyRef Name="IdTipoIva" />
+      <PropertyRef Name="TipoFactura" />
+      <PropertyRef Name="ResDgr" />
+      <PropertyRef Name="Clase" />
+      <PropertyRef Name="NombreEmple" />
+      <PropertyRef Name="Periodo" />
+      <PropertyRef Name="AbreviaturaFactura" />
+      <PropertyRef Name="IdTipoMoneda" />
+      <PropertyRef Name="IdDiario" />
+      <PropertyRef Name="Cae" />
+    </Key>
+    <Property Name="Expr4" Type="Int32" Nullable="false" />
+    <Property Name="IdTipoComprobante" Type="Int32" />
+    <Property Name="PuntoVenta" Type="Int32" Nullable="false" />
+    <Property Name="NumeroFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AuxiliarNumero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroEmpresa" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Empesa" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Fecha" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Iva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IvaAri" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IvaRes" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Gasto" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Neto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Especial" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Res" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdTipoIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TipoFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ResDgr" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Cuit" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="dolar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Diferencia" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Clase" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="NombreEmple" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="Periodo" Type="Int32" Nullable="false" />
+    <Property Name="AbreviaturaFactura" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IdTipoMoneda" Type="Int32" Nullable="false" />
+    <Property Name="Isib" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="IdDiario" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Cae" Type="Int32" Nullable="false" />
+    <Property Name="Impint" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdImputacion" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tnogra" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Texento" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PerGeneral" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Perib" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PerMun" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Tnocat" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Pernac" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Ivan5" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total21" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total27" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total105" Type="Boolean" />
+    <Property Name="Total5" Type="Int32" />
+    <Property Name="Activo" Type="DateTime" Precision="3" />
+    <Property Name="Expr1" Type="Int32" />
+    <Property Name="Expr2" Type="Int32" />
+    <Property Name="Expr3" Type="Int32" />
   </EntityType>
   <EntityType Name="CompraFactura">
     <Key>
@@ -1980,13 +2048,62 @@
     <Property Name="Activo" Type="Boolean" />
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompraIva" Relationship="SAC_Model.FK_CompraFactura_CompraIva" FromRole="CompraFactura" ToRole="CompraIva" />
     <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
     <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
     <NavigationProperty Name="TipoComprobante" Relationship="SAC_Model.FK_CompraFactura_TipoComprobante" FromRole="CompraFactura" ToRole="TipoComprobante" />
     <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="CompraFactura" ToRole="TipoMoneda" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
     <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="CompraFactura" ToRole="Retencion" />
+    <NavigationProperty Name="TrackingFacturaPagoCompra" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
+    <NavigationProperty Name="TrackingFacturaPagoCompra1" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
   </EntityType>
+  <EntityType Name="CompraIva">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodigoDiario" Type="Int32" />
+    <Property Name="NetoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="NetoNoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalPercepciones" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Importe25" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe5" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe105" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe21" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe27" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva5" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionIva" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionIB" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionProvincia" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionImporteIva" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionImporteIB" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionImporteProvincia" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Idusuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_CompraIva" FromRole="CompraIva" ToRole="CompraFactura" />
+  </EntityType>
+  <Association Name="FK_CompraFactura_CompraIva">
+    <End Type="SAC_Model.CompraIva" Role="CompraIva" Multiplicity="0..1" />
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraIva">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdCompraIva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CompraFactura_Imputacion">
     <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
     <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
@@ -2056,6 +2173,30 @@
       </Principal>
       <Dependent Role="Retencion">
         <PropertyRef Name="IdCompraFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackingFacturaPagoCompra_CompraFactura">
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="1" />
+    <End Type="SAC_Model.TrackingFacturaPagoCompra" Role="TrackingFacturaPagoCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrackingFacturaPagoCompra">
+        <PropertyRef Name="IdFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackingFacturaPagoCompra_CompraFactura1">
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="1" />
+    <End Type="SAC_Model.TrackingFacturaPagoCompra" Role="TrackingFacturaPagoCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrackingFacturaPagoCompra">
+        <PropertyRef Name="IdPago" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -67,7 +67,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
         public virtual DbSet<Banco> Banco { get; set; }
         public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
-        public virtual DbSet<CuentaCorrienteProveedorDetalles> CuentaCorrienteProveedorDetalles { get; set; }
         public virtual DbSet<Retencion> Retencion { get; set; }
         public virtual DbSet<TipoRetencion> TipoRetencion { get; set; }
         public virtual DbSet<TipoIva> TipoIva { get; set; }
@@ -78,7 +77,10 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<TipoIdioma> TipoIdioma { get; set; }
         public virtual DbSet<TipoCliente> TipoCliente { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
-        public virtual DbSet<CompraIva> CompraIva { get; set; }
+        public virtual DbSet<TablaRetencion> TablaRetencion { get; set; }
+        public virtual DbSet<TrackingFacturaPagoCompra> TrackingFacturaPagoCompra { get; set; }
+        public virtual DbSet<CompraIvaVista> CompraIvaVista { get; set; }
         public virtual DbSet<CompraFactura> CompraFactura { get; set; }
+        public virtual DbSet<CompraIva> CompraIva { get; set; }
     }
 }

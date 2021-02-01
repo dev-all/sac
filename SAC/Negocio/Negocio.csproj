@@ -108,6 +108,7 @@
     <Compile Include="Modelos\TipoMonedaModel.cs" />
     <Compile Include="Modelos\TipoProveedorModel.cs" />
     <Compile Include="Modelos\TipoRetencionModel.cs" />
+    <Compile Include="Modelos\TrackingFacturaPagoCompraModel.cs" />
     <Compile Include="Modelos\UsuarioModel.cs" />
     <Compile Include="Modelos\ValorCotizacionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Servicios\ServicioCompra.cs" />
     <Compile Include="Servicios\ServicioTipoProveedor.cs" />
     <Compile Include="Servicios\ServicioTipoRetencion.cs" />
+    <Compile Include="Servicios\ServicioTrackingFacturaPagoCompra.cs" />
     <Compile Include="Servicios\ServicioUsuario.cs" />
     <Compile Include="Servicios\ServicioConfiguracion.cs" />
     <Compile Include="Servicios\ServicioBase.cs" />

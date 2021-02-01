@@ -18,7 +18,7 @@ namespace SAC.Models
         public string DiaClearing { get; set; }
 
         public decimal Importe { get; set; }
-        [Display(Name = "Cliente")]
+
         public int IdCliente { get; set; }
 
         public string Descripcion { get; set; }

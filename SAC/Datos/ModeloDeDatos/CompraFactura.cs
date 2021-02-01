@@ -19,6 +19,8 @@ namespace Datos.ModeloDeDatos
         {
             this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
             this.Retencion = new HashSet<Retencion>();
+            this.TrackingFacturaPagoCompra = new HashSet<TrackingFacturaPagoCompra>();
+            this.TrackingFacturaPagoCompra1 = new HashSet<TrackingFacturaPagoCompra>();
         }
     
         public int Id { get; set; }
@@ -54,6 +56,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual CompraIva CompraIva { get; set; }
         public virtual Imputacion Imputacion { get; set; }
         public virtual Proveedor Proveedor { get; set; }
         public virtual TipoComprobante TipoComprobante { get; set; }
@@ -62,5 +65,9 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Retencion> Retencion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TrackingFacturaPagoCompra> TrackingFacturaPagoCompra { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TrackingFacturaPagoCompra> TrackingFacturaPagoCompra1 { get; set; }
     }
 }

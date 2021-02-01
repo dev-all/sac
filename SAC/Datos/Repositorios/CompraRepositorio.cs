@@ -20,9 +20,8 @@ namespace Datos.Repositorios
         {
             context.Configuration.LazyLoadingEnabled = false;
             CompraFactura nuevaEntidad = DbSet.Add(compraFactura);
-            Contexto.SaveChanges();
-              
-           return  null;
+            Contexto.SaveChanges();              
+           return  nuevaEntidad;
         }
 
         public List<CompraFactura> GetAllCompraFactura()
@@ -31,7 +30,8 @@ namespace Datos.Repositorios
         }
 
         public CompraFactura GetCompraFacturaPorId(int id)
-        {           
+        {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.CompraFactura.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault(); 
         }
 
@@ -54,7 +54,8 @@ namespace Datos.Repositorios
 
             return context.CompraFactura
                          .Include("TipoComprobante")
-                         .Where(p => p.IdProveedor == idProveedor && p.IdTipoComprobante == 11 && p.NumeroPago == 0 && p.IdMoneda == idMoneda).ToList();
+                         .Where(p => p.IdProveedor == idProveedor && p.IdMoneda == idMoneda && p.Saldo > 0).OrderByDescending(x => x.NumeroFactura).ToList();
+                        
         }
 
         //esta actualizacion es solo para el pago de facturas
@@ -66,6 +67,8 @@ namespace Datos.Repositorios
             CompraFactura.FechaPago= model.FechaPago;
             CompraFactura.NumeroPago = model.NumeroPago;
             CompraFactura.CotizacionDePago= model.CotizacionDePago;
+            CompraFactura.Saldo = model.Saldo;
+            CompraFactura.Parcial = model.Parcial;
             context.SaveChanges();
 
             return CompraFactura;

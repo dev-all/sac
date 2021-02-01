@@ -109,15 +109,16 @@
     <Compile Include="ModeloDeDatos\CompraIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\CompraIvaVista.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Contacto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\CuentaCorriente.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloDeDatos\CuentaCorrienteProveedorDetalles.cs">
-      <DependentUpon>Entidades.tt</DependentUpon>
-    </Compile>
+    <Compile Include="ModeloDeDatos\CuentaCorrienteProveedorDetalles.cs" />
     <Compile Include="ModeloDeDatos\Departamento.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -199,6 +200,9 @@
     <Compile Include="ModeloDeDatos\SubRubro.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\TablaRetencion.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\TarjetaOperacion.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -233,6 +237,9 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\TipoRetencion.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\TrackingFacturaPagoCompra.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Usuario.cs">
@@ -282,6 +289,7 @@
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
     <Compile Include="Repositorios\TipoComprobanteRepositorio.cs" />
     <Compile Include="Repositorios\TipoRetencionRepositorio.cs" />
+    <Compile Include="Repositorios\TrackingFacturaPagoCompraRepositorio.cs" />
     <Compile Include="Repositorios\ValorCotizacionRepositorio.cs" />
     <Compile Include="Repositorios\TipoMonedaRepositorio.cs" />
     <Compile Include="Repositorios\TipoProveedorRepositorio.cs" />

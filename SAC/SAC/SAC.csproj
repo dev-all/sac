@@ -2822,6 +2822,8 @@
     <Content Include="Scripts\TreeView\TreeView.js" />
     <Content Include="Scripts\view\CajaScript.js" />
     <Content Include="Scripts\view\calcularporcentaje.js" />
+    <Content Include="Scripts\view\ChequeScript.js" />
+    <Content Include="Scripts\view\ClienteScript.js" />
     <Content Include="Scripts\view\CtaCteProveedor.js" />
     <Content Include="Scripts\view\CtaCteProveedorDetalle.js" />
     <Content Include="Scripts\view\DatePickerReady.js" />

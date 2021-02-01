@@ -686,26 +686,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CuentaCorrienteProveedorDetalles">
-      <EntityTypeMapping TypeName="SAC_Model.CuentaCorrienteProveedorDetalles">
-        <MappingFragment StoreEntitySet="CuentaCorrienteProveedorDetalles">
-          <ScalarProperty Name="Recibo" ColumnName="Recibo" />
-          <ScalarProperty Name="NumeroPago" ColumnName="NumeroPago" />
-          <ScalarProperty Name="Cotizacion" ColumnName="Cotizacion" />
-          <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-          <ScalarProperty Name="Parcial" ColumnName="Parcial" />
-          <ScalarProperty Name="TotalDolares" ColumnName="TotalDolares" />
-          <ScalarProperty Name="ImportePago" ColumnName="ImportePago" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
-          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
-          <ScalarProperty Name="Cbte" ColumnName="Cbte" />
-          <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
-          <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Retencion">
       <EntityTypeMapping TypeName="SAC_Model.Retencion">
         <MappingFragment StoreEntitySet="Retencion">
@@ -865,37 +845,91 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CompraIva">
-      <EntityTypeMapping TypeName="SAC_Model.CompraIva">
-        <MappingFragment StoreEntitySet="CompraIva">
+    <EntitySetMapping Name="TablaRetencion">
+      <EntityTypeMapping TypeName="SAC_Model.TablaRetencion">
+        <MappingFragment StoreEntitySet="TablaRetencion">
           <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="OtrosImpuestos" ColumnName="OtrosImpuestos" />
-          <ScalarProperty Name="PercepcionImporteProvincia" ColumnName="PercepcionImporteProvincia" />
-          <ScalarProperty Name="PercepcionImporteIB" ColumnName="PercepcionImporteIB" />
-          <ScalarProperty Name="PercepcionImporteIva" ColumnName="PercepcionImporteIva" />
-          <ScalarProperty Name="PercepcionProvincia" ColumnName="PercepcionProvincia" />
-          <ScalarProperty Name="PercepcionIB" ColumnName="PercepcionIB" />
-          <ScalarProperty Name="PercepcionIva" ColumnName="PercepcionIva" />
-          <ScalarProperty Name="Iva27" ColumnName="Iva27" />
-          <ScalarProperty Name="Iva21" ColumnName="Iva21" />
-          <ScalarProperty Name="Iva105" ColumnName="Iva105" />
-          <ScalarProperty Name="Iva5" ColumnName="Iva5" />
+          <ScalarProperty Name="IdCodigo" ColumnName="IdCodigo" />
+          <ScalarProperty Name="MontoExcedente" ColumnName="MontoExcedente" />
+          <ScalarProperty Name="Porcetaje" ColumnName="Porcetaje" />
+          <ScalarProperty Name="MontoFijo" ColumnName="MontoFijo" />
+          <ScalarProperty Name="MontoHasta" ColumnName="MontoHasta" />
+          <ScalarProperty Name="MontoDesde" ColumnName="MontoDesde" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrackingFacturaPagoCompra">
+      <EntityTypeMapping TypeName="SAC_Model.TrackingFacturaPagoCompra">
+        <MappingFragment StoreEntitySet="TrackingFacturaPagoCompra">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="IdPago" ColumnName="IdPago" />
+          <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompraIvaVista">
+      <EntityTypeMapping TypeName="SAC_Model.CompraIvaVista">
+        <MappingFragment StoreEntitySet="CompraIvaVista">
+          <ScalarProperty Name="Expr3" ColumnName="Expr3" />
+          <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+          <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Total5" ColumnName="Total5" />
+          <ScalarProperty Name="Total105" ColumnName="Total105" />
+          <ScalarProperty Name="Total27" ColumnName="Total27" />
+          <ScalarProperty Name="Total21" ColumnName="Total21" />
           <ScalarProperty Name="Iva25" ColumnName="Iva25" />
-          <ScalarProperty Name="Importe27" ColumnName="Importe27" />
-          <ScalarProperty Name="Importe21" ColumnName="Importe21" />
-          <ScalarProperty Name="Importe105" ColumnName="Importe105" />
-          <ScalarProperty Name="Importe5" ColumnName="Importe5" />
-          <ScalarProperty Name="Importe25" ColumnName="Importe25" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-          <ScalarProperty Name="TotalPercepciones" ColumnName="TotalPercepciones" />
+          <ScalarProperty Name="Ivan5" ColumnName="Ivan5" />
+          <ScalarProperty Name="Iva105" ColumnName="Iva105" />
+          <ScalarProperty Name="Iva21" ColumnName="Iva21" />
+          <ScalarProperty Name="Iva27" ColumnName="Iva27" />
+          <ScalarProperty Name="Pernac" ColumnName="Pernac" />
+          <ScalarProperty Name="Tnocat" ColumnName="Tnocat" />
+          <ScalarProperty Name="OtrosImpuestos" ColumnName="OtrosImpuestos" />
+          <ScalarProperty Name="PerMun" ColumnName="PerMun" />
+          <ScalarProperty Name="Perib" ColumnName="Perib" />
+          <ScalarProperty Name="PerGeneral" ColumnName="PerGeneral" />
+          <ScalarProperty Name="Texento" ColumnName="Texento" />
+          <ScalarProperty Name="Tnogra" ColumnName="Tnogra" />
+          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+          <ScalarProperty Name="Impint" ColumnName="Impint" />
+          <ScalarProperty Name="Cae" ColumnName="Cae" />
+          <ScalarProperty Name="IdDiario" ColumnName="IdDiario" />
+          <ScalarProperty Name="Isib" ColumnName="Isib" />
+          <ScalarProperty Name="IdTipoMoneda" ColumnName="IdTipoMoneda" />
+          <ScalarProperty Name="AbreviaturaFactura" ColumnName="AbreviaturaFactura" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="NombreEmple" ColumnName="NombreEmple" />
+          <ScalarProperty Name="Clase" ColumnName="Clase" />
+          <ScalarProperty Name="Diferencia" ColumnName="Diferencia" />
+          <ScalarProperty Name="dolar" ColumnName="dolar" />
+          <ScalarProperty Name="Cuit" ColumnName="Cuit" />
+          <ScalarProperty Name="ResDgr" ColumnName="ResDgr" />
+          <ScalarProperty Name="TipoFactura" ColumnName="TipoFactura" />
+          <ScalarProperty Name="IdTipoIva" ColumnName="IdTipoIva" />
+          <ScalarProperty Name="Res" ColumnName="Res" />
+          <ScalarProperty Name="Especial" ColumnName="Especial" />
+          <ScalarProperty Name="Neto" ColumnName="Neto" />
+          <ScalarProperty Name="Gasto" ColumnName="Gasto" />
           <ScalarProperty Name="TotalIva" ColumnName="TotalIva" />
-          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
-          <ScalarProperty Name="NetoNoGravado" ColumnName="NetoNoGravado" />
-          <ScalarProperty Name="NetoGravado" ColumnName="NetoGravado" />
-          <ScalarProperty Name="CodigoDiario" ColumnName="CodigoDiario" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IvaRes" ColumnName="IvaRes" />
+          <ScalarProperty Name="IvaAri" ColumnName="IvaAri" />
+          <ScalarProperty Name="Iva" ColumnName="Iva" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Empesa" ColumnName="Empesa" />
+          <ScalarProperty Name="NumeroEmpresa" ColumnName="NumeroEmpresa" />
+          <ScalarProperty Name="AuxiliarNumero" ColumnName="AuxiliarNumero" />
+          <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
+          <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
+          <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+          <ScalarProperty Name="Expr4" ColumnName="Expr4" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -933,6 +967,40 @@
           <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
           <ScalarProperty Name="PuntoVenta" ColumnName="PuntoVenta" />
           <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompraIva">
+      <EntityTypeMapping TypeName="SAC_Model.CompraIva">
+        <MappingFragment StoreEntitySet="CompraIva">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="Idusuario" ColumnName="Idusuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="OtrosImpuestos" ColumnName="OtrosImpuestos" />
+          <ScalarProperty Name="PercepcionImporteProvincia" ColumnName="PercepcionImporteProvincia" />
+          <ScalarProperty Name="PercepcionImporteIB" ColumnName="PercepcionImporteIB" />
+          <ScalarProperty Name="PercepcionImporteIva" ColumnName="PercepcionImporteIva" />
+          <ScalarProperty Name="PercepcionProvincia" ColumnName="PercepcionProvincia" />
+          <ScalarProperty Name="PercepcionIB" ColumnName="PercepcionIB" />
+          <ScalarProperty Name="PercepcionIva" ColumnName="PercepcionIva" />
+          <ScalarProperty Name="Iva27" ColumnName="Iva27" />
+          <ScalarProperty Name="Iva21" ColumnName="Iva21" />
+          <ScalarProperty Name="Iva105" ColumnName="Iva105" />
+          <ScalarProperty Name="Iva5" ColumnName="Iva5" />
+          <ScalarProperty Name="Iva25" ColumnName="Iva25" />
+          <ScalarProperty Name="Importe27" ColumnName="Importe27" />
+          <ScalarProperty Name="Importe21" ColumnName="Importe21" />
+          <ScalarProperty Name="Importe105" ColumnName="Importe105" />
+          <ScalarProperty Name="Importe5" ColumnName="Importe5" />
+          <ScalarProperty Name="Importe25" ColumnName="Importe25" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="TotalPercepciones" ColumnName="TotalPercepciones" />
+          <ScalarProperty Name="TotalIva" ColumnName="TotalIva" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="NetoNoGravado" ColumnName="NetoNoGravado" />
+          <ScalarProperty Name="NetoGravado" ColumnName="NetoGravado" />
+          <ScalarProperty Name="CodigoDiario" ColumnName="CodigoDiario" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

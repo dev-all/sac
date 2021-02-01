@@ -27,8 +27,9 @@ namespace SAC.Models
         public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         
        // TarjetaModelView??
-        public Tarjetas Tarjetas { get; set; }
+       // public Tarjetas Tarjetas { get; set; }
 
+        public TarjetaModelView Tarjetas { get; set; }
 
         [Display(Name = "Fecha Desde")]
         [DataType(DataType.Date)]

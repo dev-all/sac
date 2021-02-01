@@ -29,7 +29,7 @@ namespace SAC.Controllers
         private ServicioProvincia oServicioProvincia = new ServicioProvincia();
         private ServicioTipoRetencion oServicioTipoRetencion = new ServicioTipoRetencion();
         private ServicioRetencion oServicioRetencion = new ServicioRetencion();
-
+        private ServicioTrackingFacturaPagoCompra oServicioTrackingFacturaPagoCompra = new ServicioTrackingFacturaPagoCompra();
         public PagosController()
         {
             oServicioCuentaCteProveedor._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
@@ -40,11 +40,17 @@ namespace SAC.Controllers
             oServicioCuentaBancaria._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             oServicioTipoMoneda._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
             oServicioTarjeta._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
+            oServicioTrackingFacturaPagoCompra._mensaje += (msg, tipo_) => CrearTempData(msg, tipo_);
         }
 
         // GET: Pagos
         public ActionResult Index()
         {
+
+            Session["Facturas_Pagar"] = null;
+
+            Session["mediosPago"] = null;
+
             PagosFacturasModelView oPagosFacturasModel = new PagosFacturasModelView();
             ValorCotizacionModel oValorCotizacion = new ValorCotizacionModel();
             oValorCotizacion = oServicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 1);
@@ -58,7 +64,7 @@ namespace SAC.Controllers
                 oPagosFacturasModel.cotizacion_ = oValorCotizacion.Monto;
             }
 
-            oPagosFacturasModel.FechaOperacion_ = DateTime.Today;
+            // oPagosFacturasModel.FechaOperacion_ = DateTime.Today;
             string anio = DateTime.Now.Year.ToString();
             anio = anio.Substring(anio.Length - 2, 2);
             oPagosFacturasModel.Periodo_ = int.Parse(anio + DateTime.Now.Month.ToString());
@@ -108,6 +114,7 @@ namespace SAC.Controllers
             {
                 PagosFacturasModelView pagosFacturasModel = new PagosFacturasModelView();
 
+               
                 //para seleccionar
                 List<ProveedorModelView> ListaProveedores = Mapper.Map<List<ProveedorModel>, List<ProveedorModelView>>(oServicioProveedor.GetAllProveedor());
                 pagosFacturasModel.ListaProveedores_ = (ListaProveedores.Select(x =>
@@ -146,6 +153,7 @@ namespace SAC.Controllers
                                                  Value = x.Id.ToString(),
                                                  Text = x.Descripcion
                                              })).ToList();
+                pagosFacturasModel.ListaTarjetas_.Insert(0, new SelectListItem() { Value = "0", Text = "Sin Especificar" });
 
                 //drop cuenta bancaria
                 List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
@@ -154,9 +162,10 @@ namespace SAC.Controllers
                                                                                         new SelectListItem()
                                                                                         {
                                                                                             Value = x.Id.ToString(),
-                                                                                            Text = x.Banco.Nombre +' '+ x.BancoDescripcion
+                                                                                            Text = x.Banco.Nombre + ' ' + x.BancoDescripcion
                                                                                         })).ToList();
-               
+                pagosFacturasModel.ListaCuentasBancarias_.Insert(0, new SelectListItem() { Value = "0", Text = "Sin Especificar" });
+
                 ViewBag.listaCuentaBancariaDrop = pagosFacturasModel.ListaCuentasBancarias_;
                 //drop presupuesto
                 List<PresupuestoActualModelView> ListaPresupuesto = Mapper.Map<List<PresupuestoActualModel>, List<PresupuestoActualModelView>>(oServicioPresupuestoActual.GetAllPresupuestos());
@@ -178,6 +187,8 @@ namespace SAC.Controllers
                                                  Value = x.Id.ToString(),
                                                  Text = x.Descripcion
                                              })).ToList();
+
+
 
                 List<ProvinciaModelView> provinciaModelViews = Mapper.Map<List<ProvinciaModel>, List<ProvinciaModelView>>(oServicioProvincia.GetAllProvincias());
                 retencionPagoModelView.ListadoProvincias = (provinciaModelViews.Select(x =>
@@ -219,8 +230,6 @@ namespace SAC.Controllers
         [HttpPost]
         public ActionResult AgregarRetencion(PagosFacturasModelView pagosFacturasModelView)
         {
-
-
             RetencionModelView oRetencion = new RetencionModelView();
             oRetencion = pagosFacturasModelView.Retencion_;
             oRetencion.UltimaModificacion = DateTime.Now;
@@ -298,7 +307,7 @@ namespace SAC.Controllers
 
             }
 
-            else
+            if (idModoPago == 2)
             {
                 if (oCompraFactura.IdMoneda == 2)
                 {
@@ -309,9 +318,25 @@ namespace SAC.Controllers
                 {
                     oCompraFactura.aplicacion = Convert.ToDecimal(MontoPago);
                 }
+            }
 
+            //pago con saldo a favor
+            if (idModoPago == 3)
+            {
+                decimal ValorActualizado = 0;
+                if (oCompraFactura.IdMoneda == 2)
+                {
+                    ValorActualizado = oCompraFactura.Saldo * Convert.ToDecimal(CotizacionActual);
+                }
+                else
+                {
+                    ValorActualizado = oCompraFactura.Saldo;
+                }
+
+                oCompraFactura.aplicacion = -ValorActualizado;
 
             }
+
 
 
             if (Session["Facturas_Pagar"] != null)
@@ -375,27 +400,34 @@ namespace SAC.Controllers
 
                 foreach (CompraFacturaViewModel item in listaFacturasSeleccionadas)
                 {
-                    decimal valSal = Convert.ToDecimal(item.Saldo);
-                    decimal valApli = Convert.ToDecimal(item.aplicacion);
-                    totalMontoFacturas += valSal;
-                    totalMontoAplicacionFacturas += valApli;
-
+                        decimal valSal = Convert.ToDecimal(item.Saldo);
+                        decimal valApli = Convert.ToDecimal(item.aplicacion);
+                        totalMontoFacturas += valSal;
+                        totalMontoAplicacionFacturas += valApli;
                 }
 
                 CompraFacturaViewModel oCompraFactura = new CompraFacturaViewModel();
-                oCompraFactura.IdTipoComprobante = 9;
-                oCompraFactura.PuntoVenta = 1;
+                oCompraFactura.IdTipoComprobante = 98;
+                oCompraFactura.PuntoVenta = 9;
                 oCompraFactura.NumeroFactura = 0;
                 oCompraFactura.Saldo = 0;
-                oCompraFactura.pago = -oPagosFacturasModelView.montoTotal_; //suma de medios pago;
-                oCompraFactura.aplicacion = totalMontoAplicacionFacturas; //suma de fact;
-                oCompraFactura.saldoPagos = oCompraFactura.aplicacion + oCompraFactura.pago;
+                oCompraFactura.pago = oPagosFacturasModelView.montoTotal_; //suma de medios pago;
+                oCompraFactura.aplicacion = -oPagosFacturasModelView.montoTotal_; //suma de fact;
+
+                if( totalMontoAplicacionFacturas >= oPagosFacturasModelView.montoTotal_)
+                {
+                    oCompraFactura.saldoPagos = 0;
+                }
+                else
+                {
+                    oCompraFactura.saldoPagos = oPagosFacturasModelView.montoTotal_ - totalMontoAplicacionFacturas;
+                }
 
                 bool existe = false;
 
                 foreach (CompraFacturaViewModel a in listaFacturasSeleccionadas)
                 {
-                    if (a.IdTipoComprobante == 9) // es porque ya hay un pago)
+                    if (a.IdTipoComprobante == 98 && a.NumeroFactura == 0 ) // es porque ya hay un pago)
                     {
                         existe = true;
                         break;
@@ -426,11 +458,21 @@ namespace SAC.Controllers
 
 
         [HttpPost]
-        public ActionResult CancelarPago ()
+        public ActionResult CancelarPago()
         {
-            PagosFacturasModelView oPagosModelView = new PagosFacturasModelView();
-            Session["Facturas_Pagar"] = null;
-            return PartialView("_TablaFacturasPagar", oPagosModelView);
+            try
+            {
+                PagosFacturasModelView oPagosModelView = new PagosFacturasModelView();
+                Session["Facturas_Pagar"] = null;
+
+                return Json(new { result = true, data = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = false, data = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+            }
+
+            //return PartialView("_TablaFacturasPagar", oPagosModelView);
         }
 
         [HttpPost]
@@ -444,14 +486,22 @@ namespace SAC.Controllers
             PagosFacturasModelView mediosPago = new PagosFacturasModelView();
             mediosPago = Session["mediosPago"] as PagosFacturasModelView;
             mediosPago.idUsuario_ = datosUsuario.IdUsuario;
-            
 
 
-            oServicioCompra.RegistrarPagosFacturas(Mapper.Map<List<CompraFacturaViewModel>, List<CompraFacturaModel>>(listaFacturasSeleccionadas), Mapper.Map<PagosFacturasModelView,PagosFacturasModel>(mediosPago));
+
+            oServicioCompra.RegistrarPagosFacturas(Mapper.Map<List<CompraFacturaViewModel>, List<CompraFacturaModel>>(listaFacturasSeleccionadas), Mapper.Map<PagosFacturasModelView, PagosFacturasModel>(mediosPago));
+
+            var f  = (from i in listaFacturasSeleccionadas
+                      where (i.IdTipoComprobante != 98)
+                      select new PagosFacturasModelView {
+                                idTipoMonedaSelec_ = i.IdMoneda,
+                      ProveedorSelec_ = i.IdProveedor}).FirstOrDefault();
 
 
-            PagosFacturasModelView oPagosModelView = null;
-            return PartialView("_TablaFacturasPagar", oPagosModelView);
+
+            return RedirectToAction("Index",f);
+
+
         }
 
 
@@ -459,7 +509,7 @@ namespace SAC.Controllers
         public JsonResult ObtenerDatos(int IdFact)
         {
             CompraFacturaViewModel oCompraFactura = new CompraFacturaViewModel();
-           oCompraFactura =  Mapper.Map<CompraFacturaModel, CompraFacturaViewModel>(oServicioCompra.ObtenerPorID_paraPagos(IdFact));
+            oCompraFactura = Mapper.Map<CompraFacturaModel, CompraFacturaViewModel>(oServicioCompra.ObtenerPorID_paraPagos(IdFact));
             return Json(oCompraFactura, JsonRequestBehavior.AllowGet);
         }
 
@@ -475,7 +525,7 @@ namespace SAC.Controllers
                 {
                     foreach (CompraFacturaViewModel item in listaFacturasSeleccionadas)
                     {
-                        if (item.IdTipoComprobante == 9)
+                        if (item.IdTipoComprobante == 98 && item.NumeroFactura == 0)
                         {
                             respuesta = 1;
                             break;
@@ -486,7 +536,7 @@ namespace SAC.Controllers
                 {
                     respuesta = 0;
                 }
-                
+
 
                 return respuesta;
 
@@ -496,6 +546,69 @@ namespace SAC.Controllers
                 respuesta = 0;
             }
             return respuesta;
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IngresarCheque(ChequeraModelView oFacturaPago)
+
+        {
+            try
+            {
+
+                //buscar el tipo de moneda de la cta
+                BancoCuentaModelView bancoCuentaModelView = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(oServicioCuentaBancaria.GetCuentaPorId(oFacturaPago.idCuentaBancariaSeleccionada));
+
+                oFacturaPago.IdBancoCuenta = oFacturaPago.idCuentaBancariaSeleccionada;
+                oFacturaPago.Fecha = DateTime.Now;
+                oFacturaPago.IdMoneda = bancoCuentaModelView.IdMoneda;
+                oFacturaPago.Usado = false;
+                oFacturaPago.IdProveedor = null;
+                oFacturaPago.NumeroRecibo = null;
+                oFacturaPago.Activo = true;
+                //oFacturaPago.oChequera.IdUsuario = oFacturaPago.idUsuario;
+                oFacturaPago.UltimaModificacion = DateTime.Now;
+                ChequeraModel chequePropioGuardado = oServicioChequera.Insertar(Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago));
+                if (chequePropioGuardado != null)
+                {
+                    oServicioChequera.ActualizarNumeroCheque(chequePropioGuardado);
+                }
+
+
+                ChequeraModelView chequeraModelView = Mapper.Map<ChequeraModel, ChequeraModelView>(oServicioChequera.GetChequePropioPorId(chequePropioGuardado.Id));
+                List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView> { chequeraModelView };
+//esto modifique ahora 
+                return PartialView("~/Views/CuentaCteProveedor/_RDChequesPropios.cshtml", listChequeraModelView);
+
+            }
+            catch (Exception ex)
+            {
+                //throw;
+                oServicioChequera._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult QuitarCheque(int IdCheque = 0)  //PartialViewResult
+        {
+            try
+            {
+                oServicioChequera.DeleteChequePropio(IdCheque);
+                List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView>();
+
+                //return PartialView("_RDChequesPropios", listChequeraModelView);
+                return PartialView("~/Views/CuentaCteProveedor/_RDChequesPropios.cshtml", listChequeraModelView);
+            }
+            catch (Exception ex)
+            {
+                oServicioChequera._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
+
         }
 
 

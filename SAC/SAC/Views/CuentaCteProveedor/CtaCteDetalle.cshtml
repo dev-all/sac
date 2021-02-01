@@ -99,20 +99,40 @@
                                     <tbody>
                                         @foreach (var item in Model.Detalles)
                                         {
-                                            <tr>
-                                                <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                            var claseSele = "";
+                                            if (item.IdComprobante == 98)
+                                            {
+                                                claseSele = "table-success";
+                                            }
+                                            else
+                                            {
+                                                claseSele = "table-default";
+                                            }
+                                        <tr class="@claseSele">
+                                            <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+
+                                            @if (item.IdComprobante == 98)
+                                            {
+                                                <td>0.00</td>
                                                 <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.ImportePago)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.TotalDolares)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Parcial)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Saldo)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Cotizacion)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.NumeroPago)</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Recibo)</td>
-                                            </tr>
+                                            }
+                                            else
+                                            {
+                                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                                <td>0.00</td>
+                                            }
+
+
+                                            <td>@Html.DisplayFor(modelItem => item.TotalDolares)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Parcial)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Saldo)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Cotizacion)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.NumeroPago)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Recibo)</td>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>

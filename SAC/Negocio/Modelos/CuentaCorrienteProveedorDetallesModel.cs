@@ -10,6 +10,7 @@ namespace Negocio.Modelos
     {
         public int IdProveedor { get; set; }
         public string RazonSocial { get; set; }
+        public int IdComprobante { get; set; }
         public string Cbte { get; set; }
         public int PuntoVenta { get; set; }
         public int NumeroFactura { get; set; }
@@ -20,8 +21,9 @@ namespace Negocio.Modelos
         public Nullable<decimal> Parcial { get; set; }
         public Nullable<decimal> Saldo { get; set; }
         public decimal Cotizacion { get; set; }
-        public string NumeroPago { get; set; }
+        public Nullable<int> NumeroPago { get; set; }
         public Nullable<int> Recibo { get; set; }
+        public List<CompraFacturaPago> compraFacturaPagos { get; set; }
     }
 
 }

@@ -8,7 +8,7 @@ namespace SAC.Models
 {
     public class CuentaCorrienteProveedorModelView
     {
-       public CuentaCorrienteProveedorModelView()
+        public CuentaCorrienteProveedorModelView()
         {
             Proveedor = new ProveedorModelView();
             Detalles = new List<CuentaCorrienteProveedorDetallesModelView>();

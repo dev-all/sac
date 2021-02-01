@@ -45,7 +45,8 @@ namespace Datos.Repositorios
 
         public List<TipoComprobante> GetTipoComprobantePorTipoIvaProveedor(int idTipoIva)
         {
-             return (from c in context.TipoComprobante
+            context.Configuration.LazyLoadingEnabled = false;
+            return (from c in context.TipoComprobante
                     join ci in context.TipoComprobanteTipoIva on c.Id equals ci.IdTipoComprobante
                     where c.Activo == true && ci.IdTipoIva == idTipoIva
                     select c).ToList();
@@ -54,6 +55,8 @@ namespace Datos.Repositorios
 
         public List<TipoComprobante> GetAllTipoComprobante()
         {
+            context.Configuration.LazyLoadingEnabled = false;
+               
             List<TipoComprobante> listModel = context.TipoComprobante.Where(p => p.Activo == true).ToList();
             return listModel;
         }

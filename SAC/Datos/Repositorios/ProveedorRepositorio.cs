@@ -32,7 +32,7 @@ namespace Datos.Repositorios
 
         public List<Proveedor> GetAllProveedor()
         {
-           // context.Configuration.LazyLoadingEnabled = false;
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where( p=> p.Activo == true).ToList();
 
             //anda
@@ -45,18 +45,43 @@ namespace Datos.Repositorios
             //              .Include(x => x.TipoMoneda).Where(x => x.Activo == true).ToList();
             //return items;
 
+
         }
 
 
         public List<CuentaCorrienteProveedorDetalles> CtaCteDetalle(int idProveedor, DateTime fechaDesde)
         {
-            //return  context.Database.SqlQuery<Object>(  "SELECT * FROM  Proveedor INNER JOIN   CompraFactura ON Proveedor.Id = CompraFactura.IdProveedor INNER JOIN  CompraFacturaPago ON CompraFactura.Id = CompraFacturaPago.IdFacturaCompra INNER JOIN               TipoComprobante ON CompraFactura.IdTipoComprobante = TipoComprobante.Id").ToList();        
+            context.Configuration.LazyLoadingEnabled = false;
 
-            return context.CuentaCorrienteProveedorDetalles.ToList();
+            return context.CompraFactura
+                            .Include("Proveedor")
+                            .Include("CompraFacturaPago")
+                            .Include("TipoComprobante")
+                            .Where(p => p.IdProveedor == idProveedor  && p.Activo == true  && p.Fecha >= fechaDesde)
+                            .Select(p => new CuentaCorrienteProveedorDetalles(){
+                                        IdComprobante = p.TipoComprobante.Id,
+                                        Id= p.Proveedor.Id,
+                                        RazonSocial = p.Proveedor.Nombre,
+                                        Cbte =p.TipoComprobante.Denominacion,
+                                        PuntoVenta=    p.PuntoVenta,
+                                        NumeroFactura=      p.NumeroFactura,
+                                        Fecha=   p.Fecha,
+                                        Total = p.Total,
+                                        compraFacturaPagos = p.CompraFacturaPago,
+                                        TotalDolares=p.TotalDolares,
+                                        Parcial=p.Parcial,
+                                        Saldo= p.Saldo,
+                                        Cotizacion=p.Cotizacion,
+                                        NumeroPago=p.NumeroPago,
+                                        Recibo=p.Recibo
+
+                            }).ToList();
+           
         }
 
         public List<CuentaCorriente> GetAllCuentaCorriente()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.CuentaCorriente.ToList();
         }
         //busqueda por fecha
@@ -64,7 +89,7 @@ namespace Datos.Repositorios
         {
             //var dInicio = DateTime.Parse(inicio);
             //var dFin    = DateTime.Parse(fin);
-
+            context.Configuration.LazyLoadingEnabled = false;
             return context.CuentaCorriente.Where(p=> p.UltimoMovimiento >= inicio && p.UltimoMovimiento <= fin ).ToList();
         }
 
@@ -82,15 +107,18 @@ namespace Datos.Repositorios
         }
         public Proveedor ObtenerProveedorPorNombre(string nombre)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where(p => p.Nombre == nombre).FirstOrDefault();
         }
         public Proveedor ObtenerProveedorPorNombre(string oNombre, string oCuit)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where(p => p.Nombre == oNombre && p.Cuit == oCuit).FirstOrDefault();
         }
 
         public Proveedor ObtenerProveedorPorNombre(string oNombre, string oCuit, int oId)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Proveedor.Where(p => p.Nombre == oNombre && p.Cuit == oCuit && p.Id != oId).FirstOrDefault();
         }
 
@@ -122,7 +150,15 @@ namespace Datos.Repositorios
             return Proveedor;
         }
 
-
+        public void ActualizarPresupuestoProveedor(Proveedor model)
+        {
+            Proveedor Proveedor = GetProveedorPorId(model.Id);            
+            Proveedor.IdPresupuesto = model.IdPresupuesto;         
+            Proveedor.Activo = true;
+            Proveedor.IdUsuario = model.IdUsuario;
+            Proveedor.UltimaModificacion = model.UltimaModificacion;
+            context.SaveChanges();
+        }
 
         public int EliminarProveedor(int IdProveedor)
         {

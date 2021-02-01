@@ -51,8 +51,8 @@ namespace SAC.Models
         public decimal cotizacion_ { get; set; }
         public List<SelectListItem> ListaTipoMonedas_ { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime FechaOperacion_ { get; set; }
         public int Periodo_ { get; set; }
 

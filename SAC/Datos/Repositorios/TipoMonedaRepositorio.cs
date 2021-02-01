@@ -21,12 +21,14 @@ namespace Datos.Repositorios
 
         public TipoMoneda ObtenerTipoMonedaPorId(int idTipoMoneda)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             var TipoMoneda = context.TipoMoneda.Where(p => p.Id == idTipoMoneda).FirstOrDefault();
             return TipoMoneda;
         }
 
         public TipoMoneda ActualizarTipoMoneda(TipoMoneda model)
         {
+
             TipoMoneda TipoMonedaExistente = ObtenerTipoMonedaPorId(model.Id);
 
             TipoMonedaExistente.Id = model.Id;
@@ -54,12 +56,14 @@ namespace Datos.Repositorios
         /// <returns></returns>
         public TipoMoneda ObtenerTipoMonedaPorNombre(string nombre, int id)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.TipoMoneda.Where(p => p.Descripcion == nombre && p.Id != id).FirstOrDefault();
         }
      
 
         public List<TipoMoneda> GetAllTipoMoneda()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<TipoMoneda> listaTipoMoneda = context.TipoMoneda.Where(p => p.Activo == true).ToList();
             return listaTipoMoneda;
         }

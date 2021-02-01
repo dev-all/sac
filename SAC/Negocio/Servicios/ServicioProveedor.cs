@@ -124,7 +124,19 @@ namespace Negocio.Servicios
             }
         }
 
-       
+        public void ActualizarPresupuestoProveedor(ProveedorModel model)
+        {
+            try
+            {             
+                if (_mensaje != null) { _mensaje("El proveedor se actualizo correctamente", "ok"); }
+                pProveedorRepositorio.ActualizarPresupuestoProveedor(Mapper.Map<ProveedorModel, Proveedor>(model));
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
+                throw new Exception("No pudo ejecutar ActualizarProveedor");
+            }
+        }
     }
 
 }

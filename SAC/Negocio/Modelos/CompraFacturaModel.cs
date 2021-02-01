@@ -22,7 +22,7 @@ namespace Negocio.Modelos
         public System.DateTime Vencimiento { get; set; }
         public decimal TotalDolares { get; set; }
         public decimal Cotizacion { get; set; }
-        public System.DateTime FechaPago { get; set; }
+        public Nullable<System.DateTime> FechaPago { get; set; }
         public int Periodo { get; set; }
         public decimal Grupo { get; set; }
         public string Marca { get; set; }
@@ -34,7 +34,7 @@ namespace Negocio.Modelos
         public Nullable<int> IdCompraIva { get; set; }
         public decimal Parcial { get; set; }
         public int Recibo { get; set; }
-        public string NumeroPago { get; set; }
+        public int NumeroPago { get; set; }
         public int IdCompraFacturaAplica { get; set; }
         public int IdDiario { get; set; }
         public int Auxiliar { get; set; }
@@ -43,7 +43,7 @@ namespace Negocio.Modelos
         public int IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
         
-        public  CompraIvaModel CompraIva { get; set; }
+        public CompraIvaModel CompraIva { get; set; }
         public  ImputacionModel Imputacion { get; set; }
         public  ProveedorModel Proveedor { get; set; }
         public TipoMonedaModel TipoMoneda { get; set; }
@@ -55,7 +55,8 @@ namespace Negocio.Modelos
         public  List<RetencionModel> Retencion { get; set; }
 
 
-
+        public  List<TrackingFacturaPagoCompra> TrackingPago { get; set; }
+        public  List<TrackingFacturaPagoCompra> TrackingFactura { get; set; }
 
 
     }
