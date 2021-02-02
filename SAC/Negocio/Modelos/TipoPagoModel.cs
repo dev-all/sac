@@ -7,21 +7,18 @@ using System.Threading.Tasks;
 
 namespace Negocio.Modelos
 {
-  public  class TarjetaOperacionModel
+   public class TipoPagoModel
     {
 
         public int Id { get; set; }
-        public int IdTarjeta { get; set; }
-        public int IdGrupoCaja { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<bool> Conciliacion { get; set; }
-        public string NumeroPago { get; set; }
-        public Nullable<decimal> Importe { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-      //  public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
-        public Tarjetas Tarjetas { get; set; }
+              public virtual ICollection<CompraFacturaPagoModel> CompraFacturaPago { get; set; }
+
+
+
     }
 }

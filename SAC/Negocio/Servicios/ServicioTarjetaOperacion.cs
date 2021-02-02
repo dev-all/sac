@@ -34,10 +34,7 @@ namespace Negocio.Servicios
             return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(oTarjetaRepositorio.Insertar(oModel));
         }
 
-        public List<TarjetaOperacionModel> GetTarjetaOperacionGastos(int idTipoTarjeta)
-        {
-            return Mapper.Map<List<TarjetaOperacion>, List<TarjetaOperacionModel>>(oTarjetaRepositorio.GetTarjetasOperacionGastos(idTipoTarjeta));
-        }
+       
 
 
         public List<TarjetaOperacionModel> GetTarjetaOperacionGastos(int idTipoTarjeta, DateTime cfechadesde, DateTime cfechahasta)
@@ -45,12 +42,10 @@ namespace Negocio.Servicios
             return Mapper.Map<List<TarjetaOperacion>, List<TarjetaOperacionModel>>(oTarjetaRepositorio.GetTarjetasOperacionGastos(idTipoTarjeta, cfechadesde, cfechahasta));
         }
 
-
-
-
-
-
-
-
+       public List<TarjetaOperacionModel> GetTarjetaOperacionGastos(int idTipoTarjeta)
+        {
+            return Mapper.Map<List<TarjetaOperacion>, List<TarjetaOperacionModel>>(oTarjetaRepositorio.GetTarjetasOperacionGastos(idTipoTarjeta));
+        }
+   
     }
 }

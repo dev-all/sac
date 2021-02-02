@@ -12,6 +12,9 @@ namespace Agenda.Infrastructure
         public AutoMapperNegProfile()
         {
 
+            CreateMap<TipoPago, TipoPagoModel>();
+            CreateMap<TipoPagoModel, TipoPago>();
+
             CreateMap<TrackingFacturaPagoCompraModel, TrackingFacturaPagoCompra>();
             CreateMap<TrackingFacturaPagoCompra, TrackingFacturaPagoCompraModel>();
 

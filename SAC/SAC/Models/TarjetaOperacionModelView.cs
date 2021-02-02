@@ -16,20 +16,17 @@ namespace SAC.Models
         public string Descripcion { get; set; }
         public Nullable<bool> Conciliacion { get; set; }
         public string NumeroPago { get; set; }
+
+        public decimal Importe { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
-
-        
-       
-       
-
-        public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
-        
-       // TarjetaModelView??
-       // public Tarjetas Tarjetas { get; set; }
-
+    
         public TarjetaModelView Tarjetas { get; set; }
+
 
         [Display(Name = "Fecha Desde")]
         [DataType(DataType.Date)]
@@ -42,7 +39,7 @@ namespace SAC.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime cFechaHasta { get; set; }
 
-        public List<TarjetaOperacionModelView> ListaTarjeta { get; set; }
+        public List<TarjetaOperacionModelView> ListaTarjetaOperacion { get; set; }
 
         public bool CVisible { get; set; }
 

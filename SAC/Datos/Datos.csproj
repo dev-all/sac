@@ -288,6 +288,7 @@
     <Compile Include="Repositorios\TipoIdiomaRepositorio.cs" />
     <Compile Include="Repositorios\TipoIvaRepositorio.cs" />
     <Compile Include="Repositorios\TipoComprobanteRepositorio.cs" />
+    <Compile Include="Repositorios\TipoPagoRepositorio.cs" />
     <Compile Include="Repositorios\TipoRetencionRepositorio.cs" />
     <Compile Include="Repositorios\TrackingFacturaPagoCompraRepositorio.cs" />
     <Compile Include="Repositorios\ValorCotizacionRepositorio.cs" />

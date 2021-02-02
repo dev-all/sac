@@ -158,10 +158,10 @@
 
                                                     }
 
-                                                    @foreach (var item in Model.ListaTarjeta)
+                                                    @foreach (var item in Model.ListaTarjetaOperacion)
                                                     {
 
-                                                        TotalTarjeta += item.Id;
+                                                        TotalTarjeta += item.Importe;
 
 
 
@@ -185,7 +185,7 @@
                                                             </td>
 
                                                             <td class="text-right deuda">
-                                                                @Html.DisplayFor(modelItem => item.NumeroPago).00
+                                                                @Html.DisplayFor(modelItem => item.Importe)
                                                             </td>
 
                                                             <td class="text-right">
@@ -223,7 +223,7 @@
                                             <label>
                                                 <strong>Total</strong><label>
                                                     <div>
-                                                        <input id="total" type="text" placeholder="0.00" />
+                                                        <input id="total" type="text" placeholder="0.00" value="0.00" />
                                                     </div>
 
 
@@ -271,7 +271,9 @@
     {
         totalDeuda += parseInt($(this).html()) || 0;
     });
-    alert(totalDeuda);
+
+  //  alert(totalDeuda);
+
 </script>
 
 
@@ -285,21 +287,31 @@
         $('input[type="checkbox"]').change(function ()
         {
 
+            //debugger;
+
             var deuda;
 
-            var total = $('#total');
+            var total; // $('#total');
 
-            total.val(0);
+            total = $('#total').val();
+            total = total.replace("$ ", "");
+
+
+            if (isNaN(total))
+            {
+                total = 0.00;
+            }
             
 
-            if ($(this).is(':checked')) {
+            if ($(this).is(':checked'))
+            {
 
 
                 var tr = $(this).closest('tr');
                 deuda = parseFloat( $(tr).find('td:nth-child(5)').text());
 
               
-                total = parseFloat(total.val()) + deuda ;
+                total = parseFloat(total) + deuda ;
 
             }
 
@@ -310,16 +322,26 @@
                 deuda = parseFloat($(tr).find('td:nth-child(5)').text());
 
 
-                total = parseFloat(total.val()) - parseFloat(deuda.val());
+                total = parseFloat(total) -deuda;
 
 
             }
 
+        
+            
+          
+
             //var totalParts = parseFloat(total.val()).toFixed(2).split('.');
           // total.val('$' + totalParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '.' + (totalParts.length > 1 ? totalParts[1] : '00'));
-            total.val('$' + total.val);
+           // total.val('$' + total.val);
 
-            alert(total);
+
+
+
+            $('#total').val('$ ' + total);
+
+           // console.log(total);
+            //alert(total);
         })
     })
 
@@ -369,7 +391,7 @@
        // var totalParts = parseFloat(tot.val()).toFixed(2).split('.');
         tot.val('$' + tot.val);// totalParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '.' + (totalParts.length > 1 ? totalParts[1] : '00'));
 
-        alert()
+     //   alert()
     }
 
 
