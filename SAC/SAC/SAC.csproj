@@ -182,6 +182,7 @@
     <Compile Include="Models\ClienteDireccionModelView.cs" />
     <Compile Include="Models\ClienteModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
+    <Compile Include="Models\CompraFacturaPagoModelView.cs" />
     <Compile Include="Models\CompraIvaModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Models\TipoIdiomaModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
+    <Compile Include="Models\TipoPagoModelView.cs" />
     <Compile Include="Models\TipoProveedorModelView.cs" />
     <Compile Include="Models\TipoRetencionModelView.cs" />
     <Compile Include="Models\UsuarioModelView.cs" />

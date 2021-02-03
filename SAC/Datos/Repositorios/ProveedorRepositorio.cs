@@ -52,7 +52,7 @@ namespace Datos.Repositorios
         public List<CuentaCorrienteProveedorDetalles> CtaCteDetalle(int idProveedor, DateTime fechaDesde)
         {
             context.Configuration.LazyLoadingEnabled = false;
-
+         
             return context.CompraFactura
                             .Include("Proveedor")
                             .Include("CompraFacturaPago")

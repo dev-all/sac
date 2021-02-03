@@ -65,12 +65,12 @@ $('#example23').DataTable({
 
 
 
-//$('.fechadatepicker').datepicker({
-//    language: 'es',
-//    autoclose: true,
-//    format: 'dd/mm/yyyy',
-//    todayHighlight: true
-//}).datepicker('setDate', new Date());
+    $('.Calendario').datepicker({
+        language: 'es',
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+        todayHighlight: true
+    }).datepicker('setDate', new Date());
 
     if ($("#IdProveedor").val() > 0) {
         getProvedor($("#IdProveedor").val());

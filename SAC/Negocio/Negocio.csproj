@@ -106,6 +106,7 @@
     <Compile Include="Modelos\TipoIvaModel.cs" />
     <Compile Include="Modelos\TipoComprobanteModel.cs" />
     <Compile Include="Modelos\TipoMonedaModel.cs" />
+    <Compile Include="Modelos\TipoPagoModel.cs" />
     <Compile Include="Modelos\TipoProveedorModel.cs" />
     <Compile Include="Modelos\TipoRetencionModel.cs" />
     <Compile Include="Modelos\TrackingFacturaPagoCompraModel.cs" />

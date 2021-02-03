@@ -719,6 +719,7 @@
     <Property Name="Descripcion" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="Conciliacion" Type="bit" />
     <Property Name="NumeroPago" Type="nchar" MaxLength="10" />
+    <Property Name="Importe" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
@@ -1395,11 +1396,11 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CompraFacturaPago_TarjetaOperacion">
-    <End Role="TarjetaOperacion" Type="Self.TarjetaOperacion" Multiplicity="0..1" />
+  <Association Name="FK_CompraFacturaPago_Tarjetas">
+    <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="0..1" />
     <End Role="CompraFacturaPago" Type="Self.CompraFacturaPago" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TarjetaOperacion">
+      <Principal Role="Tarjetas">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CompraFacturaPago">
@@ -2019,8 +2020,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       <End Role="CompraFactura" EntitySet="CompraFactura" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
     </AssociationSet>
-    <AssociationSet Name="FK_CompraFacturaPago_TarjetaOperacion" Association="Self.FK_CompraFacturaPago_TarjetaOperacion">
-      <End Role="TarjetaOperacion" EntitySet="TarjetaOperacion" />
+    <AssociationSet Name="FK_CompraFacturaPago_Tarjetas" Association="Self.FK_CompraFacturaPago_Tarjetas">
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
     </AssociationSet>
     <AssociationSet Name="FK_CompraFacturaPago_TipoPago" Association="Self.FK_CompraFacturaPago_TipoPago">

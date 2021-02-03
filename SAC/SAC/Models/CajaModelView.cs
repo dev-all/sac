@@ -55,9 +55,9 @@ namespace SAC.Models
         public int IdUsuario { get; set; }
         public DateTime UltimaModificacion { get; set; }
 
-        public virtual CajaTipoMovimiento CajaTipoMovimiento { get; set; }
+        public CajaTipoMovimiento CajaTipoMovimiento { get; set; }
 
-        public virtual GrupoCaja GrupoCaja { get; set; }
+        public CajaGrupoModelView GrupoCaja { get; set; }
 
         public List<CajaModelView> ListaCaja { get; set; }
 
@@ -85,9 +85,11 @@ namespace SAC.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime cFechaHasta { get; set; }
 
-        public bool CVisible { get; set; }
+        
 
-        public CajaModelView CCajaSaldoInicial { get; set; }
+        public CajaModelView CajaDesde { get; set; }
+        public CajaModelView CajaHasta { get; set; }
+        public CajaModelView CajaSaldoUltimoMovimiento { get; set; }
 
 
 

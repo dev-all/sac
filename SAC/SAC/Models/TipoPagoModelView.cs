@@ -18,7 +18,7 @@ namespace SAC.Models
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public virtual ICollection<CompraFacturaPagoModelView> CompraFacturaPago { get; set; }
+        public virtual ICollection<CompraFacturaPagoModelView > CompraFacturaPago { get; set; }
 
 
     }

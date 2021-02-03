@@ -36,7 +36,7 @@ namespace SAC.Models
         public decimal? ParcialTarjetas { get; set; }
         [Display(Name = "Neto Parcial Depósitos")]
         public decimal? ParcialDepositos { get; set; }
-        public decimal? IdImputacion { get; set; }
+        public int IdImputacion { get; set; }
         public bool NoBorrar { get; set; }
         public bool Activo { get; set; }
         public int IdUsuario { get; set; }

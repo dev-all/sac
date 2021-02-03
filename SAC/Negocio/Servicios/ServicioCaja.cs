@@ -169,6 +169,19 @@ namespace Negocio.Servicios
             return Caja;
         }
 
+        public CajaModel GetCajaPorFecha(int idgrupocaja ,DateTime fecha)
+        {
+            try
+            {
+                return Mapper.Map<Caja, CajaModel>(CajaRepositorio.GetCajaPorFecha(idgrupocaja, fecha));
+            }
+            catch (Exception e)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
+                return null;
+            }
+        }
+
 
 
         #endregion
