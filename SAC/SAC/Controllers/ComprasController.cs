@@ -101,28 +101,34 @@ namespace SAC.Controllers
                 if (facturaRegistrada.CompraIva.TotalIva > 0)
                 {                    
                     ImporteImputacionFactura -= facturaRegistrada.CompraIva.TotalIva;
-                    servicioImputacion.AsintoContableGeneral(servicioContable.InsertAsientoContable("IVA", facturaRegistrada.CompraIva.TotalIva, asiento, facturaRegistrada, 0));                   
+
+                    var asientoTotalIva = servicioContable.InsertAsientoContable("IVA", facturaRegistrada.CompraIva.TotalIva, asiento, facturaRegistrada, 0);
+                    if(asientoTotalIva != null) { servicioImputacion.AsintoContableGeneral(asientoTotalIva); }
+
                 }
 
                 /// asiento Inputacion IVA provincia Factura Proveedor
                 if (facturaRegistrada.CompraIva.PercepcionImporteIva > 0)
                 {                   
                    ImporteImputacionFactura -= facturaRegistrada.CompraIva.PercepcionImporteIva;
-                   servicioImputacion.AsintoContableGeneral( servicioContable.InsertAsientoContable("IVA", facturaRegistrada.CompraIva.PercepcionImporteIva, asiento, facturaRegistrada, 0));
+                    var asientoIva = servicioContable.InsertAsientoContable("IVA", facturaRegistrada.CompraIva.PercepcionImporteIva, asiento, facturaRegistrada, 0);
+                    if (asientoIva != null) { servicioImputacion.AsintoContableGeneral(asientoIva); }
                 }
 
                 /// asiento Inputacion IB capital Factura Proveedor         
                 if (facturaRegistrada.CompraIva.PercepcionImporteIB > 0)
                 {
                     ImporteImputacionFactura -= facturaRegistrada.CompraIva.PercepcionImporteIB;
-                     servicioImputacion.AsintoContableGeneral(servicioContable.InsertAsientoContable("ISIBC", facturaRegistrada.CompraIva.PercepcionImporteIB, asiento, facturaRegistrada, 0));                   
+                    var asinetoIB = servicioContable.InsertAsientoContable("ISIBC", facturaRegistrada.CompraIva.PercepcionImporteIB, asiento, facturaRegistrada, 0);
+                    if (asinetoIB != null) { servicioImputacion.AsintoContableGeneral(asinetoIB); }
                 }
 
                 /// asiento Inputacion ganancias capital Factura Proveedor
                 if (facturaRegistrada.CompraIva.OtrosImpuestos > 0)
                 {
                     ImporteImputacionFactura -= facturaRegistrada.CompraIva.OtrosImpuestos;
-                    servicioImputacion.AsintoContableGeneral(servicioContable.InsertAsientoContable("GANAN", facturaRegistrada.CompraIva.OtrosImpuestos, asiento, facturaRegistrada, 0));
+                    var asientoGanan = servicioContable.InsertAsientoContable("GANAN", facturaRegistrada.CompraIva.OtrosImpuestos, asiento, facturaRegistrada, 0);
+                    if (asientoGanan != null) { servicioImputacion.AsintoContableGeneral(asientoGanan); }
                 }
 
                 /// asiento Inputacion Factura Proveedor
