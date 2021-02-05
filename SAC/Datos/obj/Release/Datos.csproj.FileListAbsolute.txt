@@ -1,5 +1,3 @@
-D:\SAC\SAC\Datos\obj\Release\Datos.csprojAssemblyReference.cache
-D:\SAC\SAC\Datos\obj\Release\Datos.csproj.CoreCompileInputs.cache
 D:\SAC\SAC\Datos\bin\Release\Datos.dll.config
 D:\SAC\SAC\Datos\bin\Release\Datos.dll
 D:\SAC\SAC\Datos\bin\Release\Datos.pdb
@@ -10,6 +8,13 @@ D:\SAC\SAC\Datos\bin\Release\Z.EntityFramework.Extensions.dll
 D:\SAC\SAC\Datos\bin\Release\Z.EntityFramework.Plus.EF6.dll
 D:\SAC\SAC\Datos\bin\Release\Z.Expressions.Eval.dll
 D:\SAC\SAC\Datos\bin\Release\Entidad.pdb
+D:\SAC\SAC\Datos\bin\Release\EntityFramework.xml
+D:\SAC\SAC\Datos\bin\Release\EntityFramework.SqlServer.xml
+D:\SAC\SAC\Datos\bin\Release\Z.EntityFramework.Extensions.xml
+D:\SAC\SAC\Datos\bin\Release\Z.EntityFramework.Plus.EF6.xml
+D:\SAC\SAC\Datos\bin\Release\Z.Expressions.Eval.xml
+D:\SAC\SAC\Datos\obj\Release\Datos.csprojAssemblyReference.cache
+D:\SAC\SAC\Datos\obj\Release\Datos.csproj.CoreCompileInputs.cache
 D:\SAC\SAC\Datos\obj\Release\Datos.csproj.CopyComplete
 D:\SAC\SAC\Datos\obj\Release\Datos.dll
 D:\SAC\SAC\Datos\obj\Release\Datos.pdb

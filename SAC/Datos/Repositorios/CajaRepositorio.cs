@@ -107,7 +107,7 @@ namespace Datos.Repositorios
         {        
 
             //1) se obtiene un objeto anonimo y no es posible pasarlo a una entidad
-            var iQuery = (from c in context.Caja
+            var iQuery = (  from c in context.Caja
                             where c.IdGrupoCaja == idgrupocaja && c.Fecha <= fecha
                             group c by c.IdGrupoCaja into g
                             select new 

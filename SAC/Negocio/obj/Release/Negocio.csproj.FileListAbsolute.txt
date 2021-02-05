@@ -1,7 +1,3 @@
-D:\SAC\SAC\Negocio\obj\Release\Negocio.csprojAssemblyReference.cache
-D:\SAC\SAC\Negocio\obj\Release\Negocio.Properties.Resources.resources
-D:\SAC\SAC\Negocio\obj\Release\Negocio.csproj.GenerateResource.cache
-D:\SAC\SAC\Negocio\obj\Release\Negocio.csproj.CoreCompileInputs.cache
 D:\SAC\SAC\Negocio\bin\Release\Negocio.dll.config
 D:\SAC\SAC\Negocio\bin\Release\Negocio.dll
 D:\SAC\SAC\Negocio\bin\Release\Negocio.pdb
@@ -17,6 +13,13 @@ D:\SAC\SAC\Negocio\bin\Release\Z.Expressions.Eval.dll
 D:\SAC\SAC\Negocio\bin\Release\Datos.pdb
 D:\SAC\SAC\Negocio\bin\Release\Datos.dll.config
 D:\SAC\SAC\Negocio\bin\Release\Entidad.pdb
+D:\SAC\SAC\Negocio\bin\Release\Z.EntityFramework.Plus.EF6.xml
+D:\SAC\SAC\Negocio\bin\Release\Z.EntityFramework.Extensions.xml
+D:\SAC\SAC\Negocio\bin\Release\Z.Expressions.Eval.xml
+D:\SAC\SAC\Negocio\obj\Release\Negocio.csprojAssemblyReference.cache
+D:\SAC\SAC\Negocio\obj\Release\Negocio.Properties.Resources.resources
+D:\SAC\SAC\Negocio\obj\Release\Negocio.csproj.GenerateResource.cache
+D:\SAC\SAC\Negocio\obj\Release\Negocio.csproj.CoreCompileInputs.cache
 D:\SAC\SAC\Negocio\obj\Release\Negocio.csproj.CopyComplete
 D:\SAC\SAC\Negocio\obj\Release\Negocio.dll
 D:\SAC\SAC\Negocio\obj\Release\Negocio.pdb
