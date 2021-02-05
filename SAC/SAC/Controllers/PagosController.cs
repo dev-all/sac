@@ -44,6 +44,7 @@ namespace SAC.Controllers
         }
 
         // GET: Pagos
+        //[HttpPost, ActionName("SearchCtaCteProveedor")]
         public ActionResult Index()
         {
 
@@ -487,8 +488,6 @@ namespace SAC.Controllers
             mediosPago = Session["mediosPago"] as PagosFacturasModelView;
             mediosPago.idUsuario_ = datosUsuario.IdUsuario;
 
-
-
             oServicioCompra.RegistrarPagosFacturas(Mapper.Map<List<CompraFacturaViewModel>, List<CompraFacturaModel>>(listaFacturasSeleccionadas), Mapper.Map<PagosFacturasModelView, PagosFacturasModel>(mediosPago));
 
             var f  = (from i in listaFacturasSeleccionadas
@@ -497,9 +496,7 @@ namespace SAC.Controllers
                                 idTipoMonedaSelec_ = i.IdMoneda,
                       ProveedorSelec_ = i.IdProveedor}).FirstOrDefault();
 
-
-
-            return RedirectToAction("Index",f);
+            return RedirectToAction("Index");
 
 
         }

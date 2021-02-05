@@ -28,7 +28,7 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="form-group">
-                                        @*@Html.LabelFor(m => m.IdProveedor, new { @class = " form-control-sm", @for = "IdProveedor" })*@
+                                     
                                         <small>Proveedor</small>
                                         <small>[Autocompletable]</small>
                                         @Html.TextBoxFor(m => m.Proveedor.Nombre, new
@@ -43,7 +43,6 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        @*<label for="txtImputacion" class="control-label form-control-sm">Imputación</label>*@
                                         <small>Imputación</small>
                                         @Html.TextBoxFor(m => m.IdImputacion, new { @class = "form-control form-control-sm", @placeholder = "" })
                                         @Html.ValidationMessageFor(m => m.IdImputacion, "", new { @class = "text-danger form-control-sm" })
@@ -62,19 +61,14 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-group">
-
-                                        @*<label for="txtIdTipoComprobante" class="control-label form-control-sm">Comprobante</label>*@
                                         <small>Comprobante</small>
-                                        @Html.DropDownListFor(model => model.IdTipoComprobante, new List<SelectListItem>(),
-                                            "Seleccionar...", new { @class = "form-control form-control-sm" })
-
+                                        @Html.DropDownListFor(model => model.IdTipoComprobante, new List<SelectListItem>(), "Seleccionar...", new { @class = "form-control form-control-sm" })
                                         @Html.ValidationMessageFor(m => m.IdTipoComprobante, "", new { @class = "text-danger form-control-sm" })
                                     </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        @*@Html.LabelFor(m => m.PuntoVenta, new { @class = "control-label form-control-sm" })*@
                                         <small>Punto Venta</small>
                                         @Html.TextBoxFor(m => m.PuntoVenta, new { @class = "form-control form-control-sm", @placeholder = "" })
                                         @Html.ValidationMessageFor(m => m.PuntoVenta, "", new { @class = "text-danger form-control-sm" })
@@ -83,7 +77,6 @@
 
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        @*@Html.LabelFor(m => m.NumeroFactura, new { @class = "control-label form-control-sm" })*@
                                         <small>Número</small>
                                         @Html.TextBoxFor(m => m.NumeroFactura, new { @class = "form-control form-control-sm", @placeholder = "" })
                                         @Html.ValidationMessageFor(m => m.NumeroFactura, "", new { @class = "text-danger form-control-sm" })
@@ -94,81 +87,57 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
 
-                                        @*@Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })*@
                                         <small>Fecha</small>
                                         <input type="text" id="Fecha" name="Fecha" class="form-control form-control-sm fechadatepicker" required
                                                data-validation-required-message="Ingrese una fecha">
-                                        @*@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control form-control-sm " } })
-        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })*@
-
                                     </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        @* @Html.LabelFor(m => m.Vencimiento, new { @class = "control-label form-control-sm" })*@
                                         <small>Vencimiento</small>
                                         <input type="text" id="Vencimiento" name="Vencimiento" class="form-control form-control-sm fechadatepicker" required data-validation-required-message="Ingrese una fecha">
-
-                                        @*@Html.EditorFor(model => model.Vencimiento, new { htmlAttributes = new { @class = "form-control form-control-sm " } })
-        @Html.ValidationMessageFor(model => model.Vencimiento, "", new { @class = "text-danger" })*@
-
                                     </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group invisible" id="AplicaFactura">
-                                        @*@Html.LabelFor(" Aplica Factura Nº ", new { @class = "control-label form-control-sm" })*@
-                                        @*<label for="NroAplica" class="control-label form-control-sm"> Aplica Factura Nº </label>*@
-                                        <small>Aplica Factura Nº</small>
+                                         <small>Aplica Factura Nº</small>
                                         <div class="input-group">
                                             <input type="text" id="txtBusacarFactura" class="form-control form-control-sm">
-                                            @*@Html.TextBoxFor(m => m.CompraFacturaAplicada.NumeroFactura,new { @class = "form-control form-control-sm", @placeholder = "" })*@
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="btnBuscarFacturaAplica">
                                                     <i class="ti-search"></i>
                                                 </span>
                                             </div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.CompraFacturaAplicada.IdCompraFacturaAplica, "", new { @class = "text-danger form-control-sm" })*@
-                                    </div>
+                                     </div>
                                 </div>
                             </div>
 
                             <div class="row m-b-10">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        @*@Html.LabelFor(m => m.Concepto, new { @class = "col-md-2 control-label form-control-sm" })*@
-                                        <small>Concepto</small>
-                                        <div class="col-md-10">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                       <small>Concepto</small>                                       
                                             @Html.TextBoxFor(m => m.Concepto, new { @class = "form-control form-control-sm", @placeholder = "" })
-                                            @Html.ValidationMessageFor(m => m.Concepto, "", new { @class = "text-danger form-control-sm" })
-                                        </div>
+                                            @Html.ValidationMessageFor(m => m.Concepto, "", new { @class = "text-danger form-control-sm" })                                      
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-
-                                        @*<label for="txtIdTipoMoneda" class=" col-md-4 control-label form-control-sm">Moneda</label>*@
-                                        <small>Moneda</small>
-                                        <div class="col-md-8">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <small>Moneda</small>                                        
                                             @Html.DropDownListFor(model => model.IdMoneda, (IEnumerable<SelectListItem>)
                                            (new SelectList(Model.TipoMonedas.Select(x => new { Value = x.Id, Text = x.Descripcion }),
                                             "Value", "Text")), new { @class = "form-control form-control-sm" })
 
-                                            @Html.ValidationMessageFor(m => m.IdMoneda, "", new { @class = "text-danger form-control-sm" })
-                                        </div>
-
+                                            @Html.ValidationMessageFor(m => m.IdMoneda, "", new { @class = "text-danger form-control-sm" })                                     
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="row">
-                                        @*@Html.LabelFor(m => m.Cotizacion, new { @class = "col-md-6 control-label form-control-sm" })*@
+                                <div class="col-md-2">
+                                    <div class="form-group">                                        
                                         <small>Cotización</small>
-                                        <div class="col-md-6">
                                             @Html.TextBoxFor(m => m.Cotizacion, new { @class = "form-control form-control-sm", @placeholder = "" })
-                                            @Html.ValidationMessageFor(m => m.Cotizacion, "", new { @class = "text-danger form-control-sm" })
-                                        </div>
+                                            @Html.ValidationMessageFor(m => m.Cotizacion, "", new { @class = "text-danger form-control-sm" })                                      
                                     </div>
                                 </div>
 

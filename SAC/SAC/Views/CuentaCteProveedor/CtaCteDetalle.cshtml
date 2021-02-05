@@ -82,18 +82,18 @@
                                 <table id="tblCtaCteProveedorDetalles" name="tblInforme" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Tipo</th>
-                                            <th>PV</th>
-                                            <th>Factura</th>
-                                            <th>Fecha</th>
-                                            <th>Total $</th>
-                                            <th>Pago $</th>
-                                            <th>Total U$S</th>
-                                            <th>Parcial</th>
-                                            <th>Saldo</th>
-                                            <th>Cotizacion</th>
-                                            <th>Nº Pago</th>
-                                            <th>Recibo</th>
+                                            <th class="text-center">Tipo</th>
+                                            <th class="text-center">PV</th>
+                                            <th class="text-center">Factura</th>
+                                            <th class="text-center">Fecha</th>
+                                            <th class="text-center">Total $</th>
+                                            <th class="text-center">Pago $</th>
+                                            <th class="text-center">Total U$S</th>
+                                            <th class="text-center">Parcial</th>
+                                            <th class="text-center">Saldo</th>
+                                            <th class="text-center">Cotizacion</th>
+                                            <th class="text-center">Nº Pago</th>
+                                            <th class="text-center">Recibo</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -109,29 +109,29 @@
                                                 claseSele = "table-default";
                                             }
                                         <tr class="@claseSele">
-                                            <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                            <td >@Html.DisplayFor(modelItem => item.Cbte)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
+                                            <td class="text-right">@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Fecha)</td>
 
                                             @if (item.IdComprobante == 98)
                                             {
-                                                <td>0.00</td>
-                                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                                                <td class="text-right">0.00</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.Total)</td>
                                             }
                                             else
                                             {
-                                                <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                                                <td>0.00</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.Total)</td>
+                                                <td class="text-right">0.00</td>
                                             }
 
 
-                                            <td>@Html.DisplayFor(modelItem => item.TotalDolares)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Parcial)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Saldo)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Cotizacion)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.NumeroPago)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Recibo)</td>
+                                            <td class="text-right">@Html.DisplayFor(modelItem => item.TotalDolares)</td>
+                                            <td class="text-right">@Html.DisplayFor(modelItem => item.Parcial)</td>
+                                            <td class="text-right">@Html.DisplayFor(modelItem => item.Saldo)</td>
+                                            <td class="text-right">@Html.DisplayFor(modelItem => item.Cotizacion)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.NumeroPago)</td>
+                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Recibo)</td>
                                         </tr>
                                         }
                                     </tbody>

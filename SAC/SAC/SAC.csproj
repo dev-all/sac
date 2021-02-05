@@ -2900,7 +2900,6 @@
     <Content Include="Views\Pagos\Index.cshtml" />
     <Content Include="Views\Pagos\_TablaFacturasPagar.cshtml" />
     <Content Include="Views\Pagos\_tablaRetenciones.cshtml" />
-    <Content Include="Views\CuentaCteProveedor\_TablaChequesPropios - Copia.cshtml" />
     <Content Include="Views\Banco\Cheques.cshtml" />
     <Content Include="Views\Banco\Tarjetas.cshtml" />
     <Content Include="Views\Cliente\AddOrEdit.cshtml" />

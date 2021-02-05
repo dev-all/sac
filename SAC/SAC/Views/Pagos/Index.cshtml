@@ -4,13 +4,11 @@
     ViewBag.Title = "Pagos de Compras";
 }
 
-
-
 <div class="row">
     <div class="col-xlg-12 col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Pago Facturas de Compras</h5>
+                <small>Pago Facturas de Compras</small>
 
                 @using (Html.BeginForm("Index", "Pagos", FormMethod.Post, new { @id = "frmBusqueda" }))
                 {
@@ -32,8 +30,6 @@
                         @*<input type="text" id="Fecha" name="Fecha" class="form-control form-control-sm fechadatepicker" required
                             data-validation-required-message="Ingrese una fecha">*@
                     </div>
-
-                
                 }
 
                 <br />
@@ -49,7 +45,6 @@
                                     @using (Ajax.BeginForm("AgregarFacturaPagar", "Pagos", null, new AjaxOptions
                                     {
                                         HttpMethod = "POST",
-                                        //OnSuccess = "mostrar",
                                         UpdateTargetId = "divPagina1",
                                         InsertionMode = InsertionMode.Replace
                                     }, new { @id = "frmCargarFactura" }))
@@ -59,8 +54,8 @@
                                             <thead>
                                                 <tr>
 
-                                                    <td class="text-center">Nro Factura</td>
-                                                    <td class="text-center">Tipo Comprobante</td>
+                                                    <td class="text-center">Nro. Factura</td>
+                                                    <td class="text-center">Cbte</td>
                                                     <td class="text-center">Fecha</td>
                                                     <td class="text-center">Total</td>
                                                     <td class="text-center">Parcial</td>
@@ -70,7 +65,7 @@
                                             </thead>
                                             <tbody>
 
-                                         
+
 
                                                 @foreach (var item in Model.ListaFacturasAPagar_)
                                                 {
@@ -92,7 +87,7 @@
 
                                                         @*<td class="text-center">@Html.DisplayFor(modelItem => item.ProveedorCodigo)</td>*@
                                                         <td>@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
-                                                        <td class="text-right">@Html.DisplayFor(modelItem => item.TipoComprobante.Denominacion)</td>
+                                                        <td class="text-right">@Html.DisplayFor(modelItem => item.TipoComprobante.Abreviatura)</td>
                                                         <td class="text-right">@Html.DisplayFor(modelItem => item.Fecha)</td>
                                                         <td class="text-right">@Html.DisplayFor(modelItem => item.Total)</td>
                                                         <td class="text-right">@Html.DisplayFor(modelItem => item.Parcial)</td>
@@ -220,13 +215,12 @@
                                     <div class="col-md-6"></div>
                                     <div class="col-md-3">
                                         <input type="button" class="btn btn-success btn-block btn-sm" id="btnSelPago" onclick="EjecutarPago()" value="Generar Pago">
-                                        @*<input type="submit" value="pago" />*@
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
-                          
+
                                 <div class="row  m-t-40">
                                 </div>
                                 <div class="row  m-t-5">
@@ -250,22 +244,25 @@
 </div>
 
 @*@using (Ajax.BeginForm("CancelarPago", "Pagos", null, new AjaxOptions
-{
-    HttpMethod = "POST"
-}, new { @id = "frmCancelarPago" }))
-{
+    {
+        HttpMethod = "POST"
+    }, new { @id = "frmCancelarPago" }))
+    {
 
-}*@
+    }*@
 
-@using (Ajax.BeginForm("Pagar", "Pagos", null, new AjaxOptions
+@*@using (Ajax.BeginForm("Pagar", "Pagos", null, new AjaxOptions
 {
     HttpMethod = "POST",
     InsertionMode = InsertionMode.Replace
 }, new { @id = "frmPagar" }))
 {
 
-}
+}*@
 
+
+@using (Html.BeginForm("Pagar", "Pagos", FormMethod.Post, new { id = "frmPagar" }))
+{ }
 
 
 <div class="modal fade" id="ModalCheques" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -547,8 +544,8 @@
     <script type="text/javascript">
 
 
-           
-     
+
+
 
         function PagarFinal() {
             $("#frmPagar").trigger("submit");
@@ -558,34 +555,6 @@
 
             $("#frmBusqueda").trigger("submit");
 
-
-            //$.ajax({
-            //    type: "Post",
-            //    url: "/Pagos/CancelarPago/",
-            //    success: function (result) {
-            //        if (result.data != "null" && result.result) {
-
-            //            $("#TblFacturasCuentaCorriente_Vista > tbody").empty();                     
-            //            $("#DivMediosPago").css("display", "none");
-            //            $("#btnGenerarPago").css("display", "none");
-            //            $("#LblTotalFactura").text("0");
-            //            $("#LblTotalPago").text("0");
-            //            $("#LblTotalSaldo").text("0");
-
-                        
-
-
-            //        } else {
-            //            toastr.error('result.data');
-            //        }
-            //    },
-            //    error: function (jqXHR, textStatus, errorThrown) {
-            //        toastr.error(' Ops!, A ocurriodo un error. Contacte al Administrador ');
-            //    }
-
-            //});
-
-           
         }
 
         function ValidarIngresoPago() {
@@ -610,9 +579,6 @@
         }
 
         function EjecutarPago() {
-            // $("#frmCrearPago").trigger("submit");
-            //var validacion = ValidarIngresoPago();
-            //if (validacion == true) {
 
             $("#frmCrearPago").trigger("submit");
             $("#ConceptoPago_").val('');
@@ -625,10 +591,7 @@
             $("#montoTotal_").val('');
             $("#idPresupuestos_").val(0);
             $("#btnGenerarPago").css("display", "block");
-            //}
-            //else {
-            //    alert("Ingrese los datos para realizar el pago");
-            //}
+
         }
 
         function SumarTotalPago() {
@@ -678,7 +641,7 @@
 
             var MontoParcial = parseFloat(document.getElementById("txtMonto").value);
 
-            var valorFactura = parseFloat( $("#lblMonto").text());
+            var valorFactura = parseFloat($("#lblMonto").text());
 
             if (isNaN(MontoParcial)) {
                 MontoParcial = 0;
@@ -722,8 +685,8 @@
                 $("#frmCargarFactura").trigger("submit");
             }
             $("#ModalModoPago").modal('hide');
-           
-           
+
+
 
         }
 
@@ -785,209 +748,6 @@
             $("#ModalRetenciones").modal('show');
         }
 
-
-
-
-
-                //function fnVerModalCheques() {
-
-                //    $("#montoChequesSeleccionados").val("0");
-                //    $("#montoChequesSeleccionados").val("0");
-                //    /// verificar si se quedan seleccionado los cheques de lo contrario habria que limpiar el hiden de ID
-                //    // fntablaChequesPropios();
-                //    // fntablaChequesTerceros();
-                //    $("#ModalCheques").modal('show');
-                //}
-
-                //function fnAsignarCheque() {
-
-                //    var total = 0;
-                //    //cheques propios
-                //    $('.checkChequePropio:checked').each(function () {
-                //        valor = parseFloat($(this)[0].value);
-                //        if (total == 0) {
-                //            total = valor
-                //        }
-                //        else {
-                //            total += valor;
-                //        }
-                //        $("#idChequesPropios").val($(this)[0].id);
-                //    });
-
-                //    //cheques terceros
-                //    $('.checkChequeTercero:checked').each(function () {
-                //        valor = parseFloat($(this)[0].value);
-                //        if (total == 0) {
-                //            total = valor
-                //        }
-                //        else {
-                //            total += valor;
-                //        }
-                //        $("#idChequesTerceros").val($(this)[0].id);
-                //    });
-
-                //    $("#montoChequesSeleccionados").val(total.toFixed(2));
-                //    $("#ModalCheques").modal('hide');
-                //    //fnCalcularDirefencia();
-                //    SumarTotalPago();
-
-                //}
-
-                //$(".check").on("click", function () {
-                //    var total = 0;
-                //    var valortotalSincoma = $("#TotalAPagar").val().replace(",", ".");
-                //    var idFacturas = $("#idFacturas").val();
-                //    if (idFacturas.length == 1) {
-                //        $("#idFacturas").val("");
-                //    }
-                //    var valor = 0;
-
-                //    if ($(this).is(":checked")) {
-                //        var valorSincoma = "";
-                //        valorSincoma = this.value.replace(",", ".");
-                //        valor = parseFloat(valorSincoma);
-
-                //        if ((valortotalSincoma != "")) {
-
-                //            if (isNaN(valortotalSincoma)) {
-                //                valortotalSincoma = 0;
-                //            }
-                //            total = parseFloat(valortotalSincoma);
-                //            total = total + valor;
-                //            $("#TotalAPagar").val(total.toFixed(2));
-                //            // $("#TotalAPagar").val(total);
-                //            if (valortotalSincoma == 0) {
-                //                idFacturas = this.id;
-                //            }
-                //            else {
-                //                idFacturas = idFacturas + ";" + this.id;
-                //            }
-                //        }
-                //        else {
-                //            $("#TotalAPagar").val(valor.toFixed(2));
-                //            idFacturas = this.id;
-                //        }
-
-                //        //agrego de la lista de facturas a pagar el registro seleccionado
-                //        $("#idFacturas").val(idFacturas);
-                //    }
-                //    else {
-                //        valorSincoma = this.value.replace(",", ".");
-                //        valor = parseFloat(valorSincoma);
-                //        var arr = idFacturas;
-                //        var arrayDeCadenas = arr.split(";");
-
-                //        if (valortotalSincoma != "0") {
-                //            total = parseFloat(valortotalSincoma);
-                //            total -= valor;
-                //            if (isNaN(total) || total == 0) {
-                //                $("#TotalAPagar").val("0");
-                //                console.log("0", arrayDeCadenas);
-                //                removeItemFromArr(arrayDeCadenas, this.id);
-                //            }
-                //            else {
-                //                $("#TotalAPagar").val(total.toFixed(2));
-                //                console.log("1", arrayDeCadenas);
-                //                removeItemFromArr(arrayDeCadenas, this.id);
-                //            }
-                //            $("#idFacturas").val(arrayDeCadenas.join(';'));
-                //        }
-                //        else {
-                //            $("#TotalAPagar").val(this.value);
-                //        }
-
-                //    }
-
-                //    console.log($("#idFacturas").val());
-                //});
-
-                ////elimina elemento de array por elemento
-                //function removeItemFromArr(arr, item) {
-                //    var i = arr.indexOf(item);
-                //    arr.splice(i, 1);
-                //}
-
-                //function fntablaChequesPropios() {
-                //    if ($.fn.dataTable.isDataTable('#TblChequesPropios')) {
-                //        table = $('#TblChequesPropios').DataTable();
-                //        table.destroy();
-                //    }
-
-                //    $('#TblChequesPropios').DataTable({
-                //        "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
-                //        "order": [[4, 'asc']],
-                //        'paging': false,
-                //        'lengthChange': false,
-                //        'searching': true,
-                //        'ordering': false,
-                //        'info': false,
-                //        'autoWidth': true,
-                //        'scrollY': '230px',
-                //        'scrollCollapse': true
-                //    });
-                //}
-
-                //function fntablaChequesTerceros() {
-                //    if ($.fn.dataTable.isDataTable('#TblChequesTerceros')) {
-                //        table = $('#TblChequesTerceros').DataTable();
-                //        table.destroy();
-                //    }
-                //    $('#TblChequesTerceros').DataTable({
-                //        "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
-                //        "order": [[4, 'asc']],
-                //        'paging': false,
-                //        'lengthChange': false,
-                //        'searching': true,
-                //        'ordering': false,
-                //        'info': false,
-                //        'autoWidth': true,
-                //        'scrollY': '230px',
-                //        'scrollCollapse': true
-                //    });
-
-                //}
-
-                //$(function () {
-
-                //    //$('#TblFacturas').DataTable({
-                //    //    "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
-                //    //    "order": [[5, 'asc']],
-                //    //    'paging': false,
-                //    //    'lengthChange': false,
-                //    //    'searching': true,
-                //    //    'ordering': false,
-                //    //    'info': false,
-                //    //    'autoWidth': true,
-                //    //    'scrollY': '230px',
-                //    //    'scrollCollapse': true
-                //    //});
-
-                //    $('.tabPropios').on('click', function (event) {
-                //        event.preventDefault();
-                //        fntablaChequesPropios();
-                //    });
-
-                //    $('.tabTerceros').on('click', function (event) {
-                //        event.preventDefault();
-                //        fntablaChequesTerceros();
-                //    });
-
-                //    $('#ModalCheques').on('shown.bs.modal', function () {
-                //        fntablaChequesPropios();
-                //    });
-
-                //    var modal_lv = 0;
-                //    $('.modal').on('shown.bs.modal', function (e) {
-                //        $('.modal-backdrop:last').css('zIndex', 1051 + modal_lv);
-                //        $(e.currentTarget).css('zIndex', 1052 + modal_lv);
-                //        modal_lv++
-                //    });
-
-                //    $('.modal').on('hidden.bs.modal', function (e) {
-                //        modal_lv--
-                //    });
-
-                //});
 
     </script>
 }

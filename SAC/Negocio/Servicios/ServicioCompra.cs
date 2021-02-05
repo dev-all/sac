@@ -33,8 +33,8 @@ namespace Negocio.Servicios
         private ServicioCaja oServicioCaja = new ServicioCaja();
         private ServicioTarjetaOperacion oServicioTarjetaOperacion = new ServicioTarjetaOperacion();
         private ServicioImputacion oServicioImputacion = new ServicioImputacion();
-
-       private ServicioTrackingFacturaPagoCompra oServicioTrackingFacturaPagoCompra = new ServicioTrackingFacturaPagoCompra();
+        private ServicioContable oServicioContable = new ServicioContable();
+        private ServicioTrackingFacturaPagoCompra oServicioTrackingFacturaPagoCompra = new ServicioTrackingFacturaPagoCompra();
 
         private CompraRepositorio repositorio { get; set; }
 
@@ -57,7 +57,7 @@ namespace Negocio.Servicios
                 model.CompraIva.UltimaModificacion = DateTime.Now;
                 model.Activo = true;
 
-                if(model.IdMoneda != 1)
+                if (model.IdMoneda != 1)
                 {
                     model.TotalDolares = model.CompraIva.Total;
                 }
@@ -311,7 +311,7 @@ namespace Negocio.Servicios
                             Factura.Id = 0;
                             Factura.IdTipoComprobante = 98;
                             Factura.PuntoVenta = 3;
-                            Factura.NumeroPago =  nroPago + 1;
+                            Factura.NumeroPago = nroPago + 1;
                             Factura.Total = oCompraFacturaModel.TotalAPagar;
 
                             Factura.Parcial = oCompraFacturaModel.Diferencia;
@@ -630,35 +630,32 @@ namespace Negocio.Servicios
             //obtengo el nro de pago
             nroPago = oServicioTipoComprobanteVenta.ObtenerNroPago(98);
             nroPago += 1;
-           
+
             ProveedorModel facturaProveedor = oServicioProveedor.GetProveedor(oListaFacturas[0].IdProveedor);
-
             decimal saldoPagoTotal = oMediosPago.montoTotal_;
-
             foreach (var Factura in oListaFacturas)
             {
                 CompraFacturaPagoModel FacturaMedioPago = new CompraFacturaPagoModel();
-               
-
                 if (nroPago == 0)
                 {
                     throw new Exception("Ocurrio un Error al intentar obtener el número de pago");
                 }
                 else
                 {
-                    //    //estos seteos son para grabar en caja
+                    //estos seteos son para grabar en caja
                     decimal ValorFactura = oMediosPago.montoTotal_;
                     decimal ImporteCheque = oMediosPago.montoChequesSeleccionados;
                     decimal ImporteTarjeta = oMediosPago.montoTarjetaSelec_;
                     decimal ImporteTranferencia = oMediosPago.montoCuentaBancaria_;
                     int cuentaBanco = 0;
-                    //    //------------------------------------
 
                     //instancio una factura para obtener los valores de retorno de la capa de datos
                     CompraFacturaModel FacturaN = new CompraFacturaModel();
 
+                    //--------- Registro de Facturas a Pagar -----------
                     if (Factura.IdTipoComprobante != 98)
                     {
+
                         //seteo los valores para actualizar la tabla Compra facturas, punto 1 documento CtaCte
                         Factura.FechaPago = DateTime.Now;
                         Factura.NumeroPago = nroPago;
@@ -684,23 +681,22 @@ namespace Negocio.Servicios
 
                         // seteo el tipo de moneda para grabar en caja
                         int TipoDeMoneda = Factura.IdMoneda;
-
-
                     }
-
                     else
                     {
-                        // creamos el nuevo registro CompraFacturaModel 
+                        
+                        ///------- Registro el Comprobante de Pago --------- CompraFacturaModel
+                        /// 1 - Ctes de Pago con saldo positivo a favor de la empresa
+                        /// 2 - New Cte de Pago 
 
+                        // 1
                         if (Factura.NumeroFactura > 0 && Factura.IdTipoComprobante == 98)
                         {
                             Factura.FechaPago = DateTime.Now;
                             Factura.NumeroPago = nroPago;
                             Factura.CotizacionDePago = 0; // esto deberia ser la cotizacion puesta en el txtcotizacion
-
                             //esto se hace para saber si el pago es mayos a todas las facturas pagadas
-                            saldoPagoTotal = saldoPagoTotal - Factura.Saldo;
-
+                            saldoPagoTotal -= Factura.Saldo;
                             if (oMediosPago.montoTotal_ >= Factura.Saldo)
                             {
                                 Factura.Saldo = 0;
@@ -719,10 +715,10 @@ namespace Negocio.Servicios
                             // seteo el tipo de moneda para grabar en caja
                             int TipoDeMoneda = Factura.IdMoneda;
                         }
-
-
                         else
                         {
+                            //2
+
                             // creamos el nuevo registro CompraFacturaModel 
 
                             //tengo q agregar al modelo los datos que necesito para insertar aca, ej idmoneda, proveedor, cotizacion
@@ -731,7 +727,6 @@ namespace Negocio.Servicios
                             Factura.NumeroFactura = nroPago;
                             Factura.IdProveedor = facturaProveedor.Id;   //traer 
                             Factura.IdMoneda = 1;
-                            // Factura.IdCompraIva = 53;
                             // Factura.IdMoneda = 0; //oMediosPago.id agregar al modelo para traer aca
 
                             Factura.IdTipoComprobante = 98;
@@ -745,27 +740,18 @@ namespace Negocio.Servicios
                             Factura.FechaPago = DateTime.Now;
                             Factura.CotizacionDePago = 0; //traer 
                             Factura.Concepto = oMediosPago.ConceptoPago_;
-
                             Factura.NumeroPago = nroPago;
                             Factura.Activo = true;
                             Factura.IdUsuario = oMediosPago.idUsuario_;
-                            //Factura.Proveedor = facturaProveedor;
                             Factura.UltimaModificacion = DateTime.Now;
                             Factura.Vencimiento = DateTime.Now;
-
                             Factura.Proveedor = null;
                             Factura.CompraIva = null;
                             Factura.IdCompraIva = null;
                             Factura.Imputacion = null;
-
-                            //tomo el peso
-                            //TipoMonedaModel tipoMonedaModel = oServicioTipoMoneda.GetTipoMoneda(1);
                             Factura.TipoMoneda = null;
-
-                            // TipoComprobanteModel tipoComprobanteModel = oServicionTipoComprobante.GetTipoComprobantePorId(Factura.IdTipoComprobante);
                             Factura.TipoComprobante = null;
-
-
+                            //------ Periodo ---------
                             string anio = DateTime.Now.Year.ToString();
                             string mes = DateTime.Now.Month.ToString();
                             if (mes.Length < 2)
@@ -774,13 +760,16 @@ namespace Negocio.Servicios
                             }
                             anio = anio.Substring(anio.Length - 2, 2);
                             Factura.Periodo = int.Parse(anio + mes);
-                            //Factura.CompraIva = null;
+                            
+                            // add codigo al cbte del pago  y utilizar el mismo para todos los asientos de pago
+                            var CodigoAsiento = oServicioContable.GetNuevoCodigoAsiento() + 1;
 
-                            //registro la "factura del pago"
+                            //----------- Registro la "Factura del Pago" --------------
                             var Retorno = RegistrarPago(Factura);
 
-                            SaveTrackingCompras(oListaFacturas,Retorno);
+                            SaveTrackingCompras(oListaFacturas, Retorno);
 
+                          
 
                             if (Retorno != null)
                             {
@@ -797,7 +786,8 @@ namespace Negocio.Servicios
                                     FacturaMedioPago.IdUsuario = oMediosPago.idUsuario_;
                                     FacturaMedioPago.UltimaModificacion = DateTime.Now;
                                     oServicioCompraFacturaPago.InsertarCompraFacturaPago(FacturaMedioPago);
-                                    //registrar movimiento cuenta bancaria
+
+                                    //-------Registrar movimiento Cuenta Bancaria
                                     //seteo para grabar en caja
                                     cuentaBanco = oMediosPago.idCuentaBancariaSelec_;
                                     //--------------------------
@@ -814,7 +804,32 @@ namespace Negocio.Servicios
                                     oBancoCuentaBancariaModel.Conciliacion = "F";
                                     // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
                                     oBancoCuentaBancariaModel.IdImputacion = "0";
-                                    oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
+                                   var pagoBancoCuentaBancaria= oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
+
+
+                                    // ------------- Inicio registro de asientos Por Transferencia Bancaria ----------dev-a
+                                    DiarioModel asiento = new DiarioModel();
+                                    asiento.Codigo = oMediosPago.idCuentaBancariaSelec_;
+                                    asiento.Importe = oMediosPago.montoTarjetaSelec_;
+                                    asiento.Fecha = oMediosPago.FechaOperacion_;
+                                    asiento.Periodo = DateTime.Now.ToString("yyMM");
+                                    asiento.Tipo = "CP"; //Compras Pago
+                                    asiento.Cotiza = 0 ; //dev-a se debe obtener la Cotizacion de dia
+                                    asiento.Asiento = CodigoAsiento;
+                                    asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
+                                    asiento.Moneda = oServicioTipoMoneda.GetTipoMoneda(oMediosPago.idTipoMonedaSelec_).Descripcion;
+                                    asiento.DescripcionMa = "Transferencia Pago Proveedor" + facturaProveedor.Nombre ;
+                                    asiento.Titulo = "Asiento de Pagos Proveedores";
+
+                                    /// asiento Inputacion Proveedor en valor - negativo
+                                    var asientoDiario = oServicioContable.InsertAsientoContable(null
+                                                                              , (oMediosPago.montoTarjetaSelec_) * (-1)
+                                                                              , asiento
+                                                                              , Retorno
+                                                                              , facturaProveedor.IdImputacionProveedor ?? -1);
+                                    /// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
+                                    /// oServicioImputacion.AsintoContableGeneral(asientoDiario);
+
                                 }
 
                                 if (oMediosPago.montoEfectivo_ != 0)
@@ -944,16 +959,16 @@ namespace Negocio.Servicios
 
                                     }
                                 }
-                                //grabo en caja
+                                
+                                ///------------Registro Caja----------
                                 CajaModel oCajaModel = new CajaModel();
-
                                 oCajaModel.IdTipoMovimiento = 1;
-                                oCajaModel.Concepto = "nro factura: " + Factura.NumeroFactura;
+                                oCajaModel.Concepto =Factura.Concepto + ", Nro. factura: " + Factura.NumeroFactura ;
                                 oCajaModel.Fecha = oMediosPago.FechaOperacion_;
                                 oCajaModel.Tipo = "";
                                 oCajaModel.Saldo = "";
                                 oCajaModel.Recibo = Retorno.NumeroPago.ToString();
-                                
+
                                 //segun la regla plasmada en .doc siempre se paga en pesos
                                 oCajaModel.ImportePesos = ValorFactura;
                                 //datos instanciados al inicio
@@ -1021,14 +1036,14 @@ namespace Negocio.Servicios
         {
             foreach (var item in oListaFacturas)
             {
-                if (item.Id > 0 )
+                if (item.Id > 0)
                 {
- TrackingFacturaPagoCompraModel tracking = new TrackingFacturaPagoCompraModel();
-                tracking.IdFactura = item.Id;
-                tracking.IdPago = pago.Id;
-                oServicioTrackingFacturaPagoCompra.Insert(tracking);
+                    TrackingFacturaPagoCompraModel tracking = new TrackingFacturaPagoCompraModel();
+                    tracking.IdFactura = item.Id;
+                    tracking.IdPago = pago.Id;
+                    oServicioTrackingFacturaPagoCompra.Insert(tracking);
                 }
-               
+
             }
         }
     }
