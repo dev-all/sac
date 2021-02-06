@@ -2182,7 +2182,6 @@
     <Content Include="logs\20210123.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\assets\images\background\Thumbs.db" />
     <Content Include="Content\assets\images\big\Thumbs.db" />
     <Content Include="Content\assets\plugins\bootstrap-material-datetimepicker\bower.json" />
     <Content Include="Content\assets\plugins\bootstrap-material-datetimepicker\font\Material-Design-Icons.eot" />
