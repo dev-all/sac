@@ -28,14 +28,18 @@ namespace Datos.ModeloDeDatos
         public Nullable<decimal> ImporteCheque { get; set; }
         public Nullable<decimal> ImporteDeposito { get; set; }
         public Nullable<decimal> ImporteTarjeta { get; set; }
+        public Nullable<int> IdTarjeta { get; set; }
+        public Nullable<int> IdCheque { get; set; }
         public Nullable<int> IdCajaSaldo { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual BancoCuenta BancoCuenta { get; set; }
         public virtual CajaSaldo CajaSaldo { get; set; }
         public virtual CajaTipoMovimiento CajaTipoMovimiento { get; set; }
+        public virtual Cheque Cheque { get; set; }
         public virtual GrupoCaja GrupoCaja { get; set; }
-        public virtual BancoCuenta BancoCuenta { get; set; }
+        public virtual Tarjetas Tarjetas { get; set; }
     }
 }

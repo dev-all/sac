@@ -10,7 +10,7 @@ namespace SAC.Models
     {
         public int Id { get; set; }
 
-        public int CodigoDiario { get; set; }
+     
 
         public decimal NetoGravado { get; set; }
 

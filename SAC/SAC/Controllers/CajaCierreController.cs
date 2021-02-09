@@ -25,10 +25,10 @@ namespace SAC.Controllers
             servicioCaja._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int searchIdCierre = 0)
         {           
             CajaModelView  model = new CajaModelView();
-            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCajaPorIdCierre(id));
+            model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCajaPorIdCierre(searchIdCierre));
             model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
             model.FechaCierre = DateTime.Now; //.ToString("dd/MM/yyyy");
             CargarCierreCaja();
@@ -38,13 +38,13 @@ namespace SAC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(CajaModelView model)
+        public ActionResult CierreDeCaja(CajaModelView model)
         {
 
             {
                 try
                 {
-
+                    // cerr
 
                     var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
                     model.IdUsuario = OUsuario.IdUsuario;
@@ -59,7 +59,7 @@ namespace SAC.Controllers
                 }
                 catch (Exception)
                 {
-                    return View(model);
+                    return View("Index");
                 }
             }
 

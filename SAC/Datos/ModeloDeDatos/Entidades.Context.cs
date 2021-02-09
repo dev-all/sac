@@ -28,7 +28,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Accion> Accion { get; set; }
         public virtual DbSet<AccionPorRol> AccionPorRol { get; set; }
         public virtual DbSet<AfipCategorias> AfipCategorias { get; set; }
-        public virtual DbSet<Caja> Caja { get; set; }
         public virtual DbSet<CajaSaldo> CajaSaldo { get; set; }
         public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
         public virtual DbSet<Contacto> Contacto { get; set; }
@@ -75,12 +74,13 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<TablaRetencion> TablaRetencion { get; set; }
         public virtual DbSet<TrackingFacturaPagoCompra> TrackingFacturaPagoCompra { get; set; }
         public virtual DbSet<CompraIvaVista> CompraIvaVista { get; set; }
-        public virtual DbSet<CompraFactura> CompraFactura { get; set; }
-        public virtual DbSet<CompraIva> CompraIva { get; set; }
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual DbSet<TarjetaOperacion> TarjetaOperacion { get; set; }
         public virtual DbSet<Tarjetas> Tarjetas { get; set; }
         public virtual DbSet<Diario> Diario { get; set; }
         public virtual DbSet<Imputacion> Imputacion { get; set; }
+        public virtual DbSet<Caja> Caja { get; set; }
+        public virtual DbSet<CompraFactura> CompraFactura { get; set; }
+        public virtual DbSet<CompraIva> CompraIva { get; set; }
     }
 }

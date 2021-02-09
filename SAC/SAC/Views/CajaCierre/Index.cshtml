@@ -6,24 +6,6 @@
     List<SelectListItem> ListaCajaCierre = (List<SelectListItem>)ViewBag.Listapagina;
 }
 
-<style>
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        padding: 0.1em 1em;
-    }
-
-    .table td, .table th {
-        padding: .25rem;
-    }
-
-    .dataTables_wrapper {
-        padding-top: 0px;
-    }
-
-    .form-group {
-        margin-bottom: 5px;
-    }
-</style>
-
 
 @using (Html.BeginForm())
 {
@@ -43,19 +25,22 @@
                         <div class="form-body">
 
                             <div class="row">
-                                @*<div class="col-4">
-                                        <div class="form-group text-right">
-                                            Saldo Inicial
-                                        </div>
-                                    </div>*@
+                              
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                        <div class="form-group">
-                                            <label class="form-control-sm">Seleccione un Cierre</label>
-                                            @Html.DropDownList("Fecha", ListaCajaCierre, null, new { @class = "form-control form-control-sm" })
+                                    <div class="form-group row">
+                                        <div class="col-xlg-8 col-lg-8 col-md-8">
+                                            <small>Seleccione un Cierre</small>
+                                        </div>
+                                            <div class="col-xlg-8 col-lg-8 col-md-8">
+                                                @Html.DropDownList("searchIdCierre", ListaCajaCierre, null, new { @class = "form-control form-control-sm" })
+                                            </div>
+                                            <div class="col-xlg-4 col-lg-4 col-md-4">
+                                              
+                                                <button type="submit"  formaction="@Url.Action("Index", "CajaCierre")" 
+                                                        class="btn btn-sm btn-secondary"><i class="fa  fa-search"></i> Buscar </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 <div class="col-2">
                                     <div class="form-group">
                                         <label class="form-control-sm"> Pesos</label>
@@ -267,14 +252,16 @@
                                     <div class="form-group row  ">
                                         @Html.LabelFor(m => m.FechaCierre, new { @class = " control-label form-control-sm col-md-6 text-right" })
                                         <div class="col-md-6">
+
                                             @Html.EditorFor(model => model.FechaCierre, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.FechaCierre, "", new { @class = "text-danger" })
+                                            @*@Html.ValidationMessageFor(model => model.FechaCierre, "", new { @class = "text-danger" })*@
 
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Confirmar Cierre de Caja</button>
+                                    <button type="submit" formaction="@Url.Action("CierreDeCaja", "CajaCierre")"
+                                          class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Confirmar Cierre de Caja</button>
                                 </div>
                             </div>
 

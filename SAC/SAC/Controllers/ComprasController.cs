@@ -60,8 +60,8 @@ namespace SAC.Controllers
                 {
                     throw new Exception();
                 }
-                //deveria ser unico en la db
-                model.CompraIva.CodigoDiario = servicioContable.GetNuevoCodigoAsiento() + 1;
+            
+                model.CodigoDiario = servicioContable.GetNuevoCodigoAsiento() + 1;
 
                 CompraFacturaModel facturaRegistrada = servicioCompra.CreateFactura(Mapper.Map<CompraFacturaViewModel, CompraFacturaModel>(model));
                 // update proveedor
@@ -73,15 +73,14 @@ namespace SAC.Controllers
                     servicioProveedor.ActualizarProveedor(proveedor);
                 }
 
-
                 // inicio registro de asientos
                 DiarioModel asiento = new DiarioModel();
-                asiento.Codigo = facturaRegistrada.CompraIva.CodigoDiario;
+                asiento.Codigo = facturaRegistrada.CodigoDiario;
                 asiento.Fecha = facturaRegistrada.Fecha;
                 asiento.Periodo = DateTime.Now.ToString("yyMM");
                 asiento.Tipo = "CF"; //Compras Facturas
                 asiento.Cotiza = facturaRegistrada.Cotizacion;
-                asiento.Asiento = facturaRegistrada.CompraIva.CodigoDiario;
+                asiento.Asiento = facturaRegistrada.CodigoDiario;
                 asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
                 asiento.Moneda = servicioTipoMoneda.GetTipoMoneda(facturaRegistrada.IdMoneda).Descripcion;
                 asiento.DescripcionMa = "Ingreso Factura Proveedor";

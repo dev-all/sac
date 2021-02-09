@@ -8,8 +8,7 @@ namespace Negocio.Modelos
 {
    public class CompraIvaModel
     {
-        public int Id { get; set; }        
-        public int CodigoDiario { get; set; }
+        public int Id { get; set; }               
         public decimal NetoGravado { get; set; }
         public decimal NetoNoGravado { get; set; }
         public decimal SubTotal { get; set; }

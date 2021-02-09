@@ -18,10 +18,10 @@ namespace Datos.ModeloDeDatos
         public BancoCuenta()
         {
             this.BancoCuentaBancaria = new HashSet<BancoCuentaBancaria>();
-            this.Caja = new HashSet<Caja>();
             this.Cheque = new HashSet<Cheque>();
             this.Chequera = new HashSet<Chequera>();
             this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
+            this.Caja = new HashSet<Caja>();
         }
     
         public int Id { get; set; }
@@ -42,12 +42,12 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Caja> Caja { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cheque> Cheque { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chequera> Chequera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Caja> Caja { get; set; }
     }
 }

@@ -103,6 +103,8 @@
     <Property Name="ImporteCheque" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ImporteDeposito" Type="decimal" Precision="18" Scale="2" />
     <Property Name="ImporteTarjeta" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdTarjeta" Type="int" />
+    <Property Name="IdCheque" Type="int" />
     <Property Name="IdCajaSaldo" Type="int" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
@@ -268,6 +270,7 @@
     <Property Name="Recibo" Type="int" />
     <Property Name="NumeroPago" Type="int" />
     <Property Name="IdCompraFacturaAplica" Type="int" />
+    <Property Name="CodigoDiario" Type="int" />
     <Property Name="Auxiliar" Type="int" />
     <Property Name="AxiliarNumero" Type="nvarchar" MaxLength="50" />
     <Property Name="Activo" Type="bit" />
@@ -296,7 +299,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CodigoDiario" Type="int" />
     <Property Name="NetoGravado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="NetoNoGravado" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="SubTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1072,6 +1074,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Caja_Cheque">
+    <End Role="Cheque" Type="Self.Cheque" Multiplicity="0..1" />
+    <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cheque">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdCheque" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Caja_GrupoCaja">
     <End Role="GrupoCaja" Type="Self.GrupoCaja" Multiplicity="0..1" />
     <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
@@ -1081,6 +1095,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Principal>
       <Dependent Role="Caja">
         <PropertyRef Name="IdGrupoCaja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caja_Tarjetas">
+    <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="0..1" />
+    <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tarjetas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdTarjeta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1924,8 +1950,16 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       <End Role="CajaTipoMovimiento" EntitySet="CajaTipoMovimiento" />
       <End Role="Caja" EntitySet="Caja" />
     </AssociationSet>
+    <AssociationSet Name="FK_Caja_Cheque" Association="Self.FK_Caja_Cheque">
+      <End Role="Cheque" EntitySet="Cheque" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
     <AssociationSet Name="FK_Caja_GrupoCaja" Association="Self.FK_Caja_GrupoCaja">
       <End Role="GrupoCaja" EntitySet="GrupoCaja" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caja_Tarjetas" Association="Self.FK_Caja_Tarjetas">
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
       <End Role="Caja" EntitySet="Caja" />
     </AssociationSet>
     <AssociationSet Name="FK_Cheque_BancoCuenta" Association="Self.FK_Cheque_BancoCuenta">

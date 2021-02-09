@@ -13,6 +13,7 @@ namespace Negocio.Modelos
         public int IdTipoComprobante { get; set; }
         public int PuntoVenta { get; set; }
         public int NumeroFactura { get; set; }
+        public int CodigoDiario { get; set; }
         public int IdProveedor { get; set; }
         public string IdTipoIva { get; set; }
         public string CAE { get; set; }

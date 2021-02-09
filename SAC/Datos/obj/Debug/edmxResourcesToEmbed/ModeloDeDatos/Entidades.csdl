@@ -4,7 +4,6 @@
     <EntitySet Name="Accion" EntityType="SAC_Model.Accion" />
     <EntitySet Name="AccionPorRol" EntityType="SAC_Model.AccionPorRol" />
     <EntitySet Name="AfipCategorias" EntityType="SAC_Model.AfipCategorias" />
-    <EntitySet Name="Caja" EntityType="SAC_Model.Caja" />
     <EntitySet Name="CajaSaldo" EntityType="SAC_Model.CajaSaldo" />
     <EntitySet Name="CajaTipoMovimiento" EntityType="SAC_Model.CajaTipoMovimiento" />
     <EntitySet Name="Contacto" EntityType="SAC_Model.Contacto" />
@@ -35,14 +34,6 @@
     <AssociationSet Name="FK_AccionesPorRoles_Roles" Association="SAC_Model.FK_AccionesPorRoles_Roles">
       <End Role="Rol" EntitySet="Rol" />
       <End Role="AccionPorRol" EntitySet="AccionPorRol" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Caja_CajaSaldo" Association="SAC_Model.FK_Caja_CajaSaldo">
-      <End Role="CajaSaldo" EntitySet="CajaSaldo" />
-      <End Role="Caja" EntitySet="Caja" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Caja_CajaTipoMovimiento" Association="SAC_Model.FK_Caja_CajaTipoMovimiento">
-      <End Role="CajaTipoMovimiento" EntitySet="CajaTipoMovimiento" />
-      <End Role="Caja" EntitySet="Caja" />
     </AssociationSet>
     <AssociationSet Name="FK_Contacto_Persona" Association="SAC_Model.FK_Contacto_Persona">
       <End Role="Persona" EntitySet="Persona" />
@@ -83,10 +74,6 @@
     <EntitySet Name="CuentaCorriente" EntityType="SAC_Model.CuentaCorriente" />
     <EntitySet Name="PresupuestoCosto" EntityType="SAC_Model.PresupuestoCosto" />
     <EntitySet Name="GrupoCaja" EntityType="SAC_Model.GrupoCaja" />
-    <AssociationSet Name="FK_Caja_GrupoCaja" Association="SAC_Model.FK_Caja_GrupoCaja">
-      <End Role="GrupoCaja" EntitySet="GrupoCaja" />
-      <End Role="Caja" EntitySet="Caja" />
-    </AssociationSet>
     <EntitySet Name="PrespuestoActual" EntityType="SAC_Model.PrespuestoActual" />
     <EntitySet Name="PresupuestoHistorico" EntityType="SAC_Model.PresupuestoHistorico" />
     <EntitySet Name="Proveedor" EntityType="SAC_Model.Proveedor" />
@@ -145,10 +132,6 @@
     <AssociationSet Name="FK_BancoCuentaBancaria_BancoCuenta" Association="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta">
       <End Role="BancoCuenta" EntitySet="BancoCuenta" />
       <End Role="BancoCuentaBancaria" EntitySet="BancoCuentaBancaria" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Caja_BancoCuenta" Association="SAC_Model.FK_Caja_BancoCuenta">
-      <End Role="BancoCuenta" EntitySet="BancoCuenta" />
-      <End Role="Caja" EntitySet="Caja" />
     </AssociationSet>
     <AssociationSet Name="FK_Cheque_BancoCuenta" Association="SAC_Model.FK_Cheque_BancoCuenta">
       <End Role="BancoCuenta" EntitySet="BancoCuenta" />
@@ -239,36 +222,6 @@
     <EntitySet Name="TablaRetencion" EntityType="SAC_Model.TablaRetencion" />
     <EntitySet Name="TrackingFacturaPagoCompra" EntityType="SAC_Model.TrackingFacturaPagoCompra" />
     <EntitySet Name="CompraIvaVista" EntityType="SAC_Model.CompraIvaVista" />
-    <EntitySet Name="CompraFactura" EntityType="SAC_Model.CompraFactura" />
-    <EntitySet Name="CompraIva" EntityType="SAC_Model.CompraIva" />
-    <AssociationSet Name="FK_CompraFactura_CompraIva" Association="SAC_Model.FK_CompraFactura_CompraIva">
-      <End Role="CompraIva" EntitySet="CompraIva" />
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CompraFactura_Proveedor" Association="SAC_Model.FK_CompraFactura_Proveedor">
-      <End Role="Proveedor" EntitySet="Proveedor" />
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CompraFactura_TipoComprobante" Association="SAC_Model.FK_CompraFactura_TipoComprobante">
-      <End Role="TipoComprobante" EntitySet="TipoComprobante" />
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CompraFactura_TipoMoneda" Association="SAC_Model.FK_CompraFactura_TipoMoneda">
-      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Retencion_CompraFactura" Association="SAC_Model.FK_Retencion_CompraFactura">
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-      <End Role="Retencion" EntitySet="Retencion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura">
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-      <End Role="TrackingFacturaPagoCompra" EntitySet="TrackingFacturaPagoCompra" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura1" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1">
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-      <End Role="TrackingFacturaPagoCompra" EntitySet="TrackingFacturaPagoCompra" />
-    </AssociationSet>
     <EntitySet Name="CompraFacturaPago" EntityType="SAC_Model.CompraFacturaPago" />
     <EntitySet Name="TarjetaOperacion" EntityType="SAC_Model.TarjetaOperacion" />
     <EntitySet Name="Tarjetas" EntityType="SAC_Model.Tarjetas" />
@@ -282,10 +235,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_CompraFacturaPago_Chequera" Association="SAC_Model.FK_CompraFacturaPago_Chequera">
       <End Role="Chequera" EntitySet="Chequera" />
-      <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="SAC_Model.FK_CompraFacturaPago_CompraFactura">
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
     </AssociationSet>
     <AssociationSet Name="FK_CompraFacturaPago_Tarjetas" Association="SAC_Model.FK_CompraFacturaPago_Tarjetas">
@@ -302,10 +251,6 @@
     </AssociationSet>
     <EntitySet Name="Diario" EntityType="SAC_Model.Diario" />
     <EntitySet Name="Imputacion" EntityType="SAC_Model.Imputacion" />
-    <AssociationSet Name="FK_CompraFactura_Imputacion" Association="SAC_Model.FK_CompraFactura_Imputacion">
-      <End Role="Imputacion" EntitySet="Imputacion" />
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-    </AssociationSet>
     <AssociationSet Name="FK_Diario_Imputacion" Association="SAC_Model.FK_Diario_Imputacion">
       <End Role="Imputacion" EntitySet="Imputacion" />
       <End Role="Diario" EntitySet="Diario" />
@@ -321,6 +266,69 @@
     <AssociationSet Name="FK_Proveedor_Imputacion1" Association="SAC_Model.FK_Proveedor_Imputacion1">
       <End Role="Imputacion" EntitySet="Imputacion" />
       <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <EntitySet Name="Caja" EntityType="SAC_Model.Caja" />
+    <EntitySet Name="CompraFactura" EntityType="SAC_Model.CompraFactura" />
+    <EntitySet Name="CompraIva" EntityType="SAC_Model.CompraIva" />
+    <AssociationSet Name="FK_Caja_BancoCuenta" Association="SAC_Model.FK_Caja_BancoCuenta">
+      <End Role="BancoCuenta" EntitySet="BancoCuenta" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caja_CajaSaldo" Association="SAC_Model.FK_Caja_CajaSaldo">
+      <End Role="CajaSaldo" EntitySet="CajaSaldo" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caja_CajaTipoMovimiento" Association="SAC_Model.FK_Caja_CajaTipoMovimiento">
+      <End Role="CajaTipoMovimiento" EntitySet="CajaTipoMovimiento" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caja_Cheque" Association="SAC_Model.FK_Caja_Cheque">
+      <End Role="Cheque" EntitySet="Cheque" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caja_GrupoCaja" Association="SAC_Model.FK_Caja_GrupoCaja">
+      <End Role="GrupoCaja" EntitySet="GrupoCaja" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Caja_Tarjetas" Association="SAC_Model.FK_Caja_Tarjetas">
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFactura_CompraIva" Association="SAC_Model.FK_CompraFactura_CompraIva">
+      <End Role="CompraIva" EntitySet="CompraIva" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFactura_Imputacion" Association="SAC_Model.FK_CompraFactura_Imputacion">
+      <End Role="Imputacion" EntitySet="Imputacion" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFactura_Proveedor" Association="SAC_Model.FK_CompraFactura_Proveedor">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFactura_TipoComprobante" Association="SAC_Model.FK_CompraFactura_TipoComprobante">
+      <End Role="TipoComprobante" EntitySet="TipoComprobante" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFactura_TipoMoneda" Association="SAC_Model.FK_CompraFactura_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="SAC_Model.FK_CompraFacturaPago_CompraFactura">
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+      <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retencion_CompraFactura" Association="SAC_Model.FK_Retencion_CompraFactura">
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+      <End Role="Retencion" EntitySet="Retencion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura">
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+      <End Role="TrackingFacturaPagoCompra" EntitySet="TrackingFacturaPagoCompra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura1" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1">
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+      <End Role="TrackingFacturaPagoCompra" EntitySet="TrackingFacturaPagoCompra" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accion">
@@ -356,33 +364,6 @@
     <Property Name="Activo" Type="Boolean" />
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="Caja">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdTipoMovimiento" Type="Int32" />
-    <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Fecha" Type="DateTime" Precision="3" />
-    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Saldo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="IdGrupoCaja" Type="Int32" />
-    <Property Name="Recibo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdCuentaBanco" Type="Int32" />
-    <Property Name="ImportePesos" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ImporteDolar" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ImporteCheque" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ImporteDeposito" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="ImporteTarjeta" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="IdCajaSaldo" Type="Int32" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CajaSaldo" Relationship="SAC_Model.FK_Caja_CajaSaldo" FromRole="Caja" ToRole="CajaSaldo" />
-    <NavigationProperty Name="CajaTipoMovimiento" Relationship="SAC_Model.FK_Caja_CajaTipoMovimiento" FromRole="Caja" ToRole="CajaTipoMovimiento" />
-    <NavigationProperty Name="GrupoCaja" Relationship="SAC_Model.FK_Caja_GrupoCaja" FromRole="Caja" ToRole="GrupoCaja" />
-    <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_Caja_BancoCuenta" FromRole="Caja" ToRole="BancoCuenta" />
   </EntityType>
   <EntityType Name="CajaSaldo">
     <Key>
@@ -699,30 +680,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Caja_CajaSaldo">
-    <End Type="SAC_Model.CajaSaldo" Role="CajaSaldo" Multiplicity="0..1" />
-    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CajaSaldo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Caja">
-        <PropertyRef Name="IdCajaSaldo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Caja_CajaTipoMovimiento">
-    <End Type="SAC_Model.CajaTipoMovimiento" Role="CajaTipoMovimiento" Multiplicity="0..1" />
-    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CajaTipoMovimiento">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Caja">
-        <PropertyRef Name="IdTipoMovimiento" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Contacto_Persona">
     <End Type="SAC_Model.Persona" Role="Persona" Multiplicity="1" />
     <End Type="SAC_Model.Contacto" Role="Contacto" Multiplicity="*" />
@@ -881,18 +838,6 @@
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_GrupoCaja" FromRole="GrupoCaja" ToRole="Caja" />
   </EntityType>
-  <Association Name="FK_Caja_GrupoCaja">
-    <End Type="SAC_Model.GrupoCaja" Role="GrupoCaja" Multiplicity="0..1" />
-    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GrupoCaja">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Caja">
-        <PropertyRef Name="IdGrupoCaja" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="PrespuestoActual">
     <Key>
       <PropertyRef Name="Id" />
@@ -968,9 +913,9 @@
     <NavigationProperty Name="TipoProveedor" Relationship="SAC_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
     <NavigationProperty Name="Banco" Relationship="SAC_Model.FK_Banco_Proveedor" FromRole="Proveedor" ToRole="Banco" />
     <NavigationProperty Name="TipoIva" Relationship="SAC_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
-    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
     <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_Proveedor_Imputacion" FromRole="Proveedor" ToRole="Imputacion" />
     <NavigationProperty Name="Imputacion1" Relationship="SAC_Model.FK_Proveedor_Imputacion1" FromRole="Proveedor" ToRole="Imputacion" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="Proveedor" ToRole="CompraFactura" />
   </EntityType>
   <EntityType Name="SubRubro">
     <Key>
@@ -1086,6 +1031,7 @@
     <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="Cheque" ToRole="TipoMoneda" />
     <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_Cheque_BancoCuenta" FromRole="Cheque" ToRole="BancoCuenta" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="Cheque" ToRole="CompraFacturaPago" />
+    <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_Cheque" FromRole="Cheque" ToRole="Caja" />
   </EntityType>
   <EntityType Name="Chequera">
     <Key>
@@ -1248,10 +1194,10 @@
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Banco" Relationship="SAC_Model.FK_BancoCuenta_Banco" FromRole="BancoCuenta" ToRole="Banco" />
     <NavigationProperty Name="BancoCuentaBancaria" Relationship="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" FromRole="BancoCuenta" ToRole="BancoCuentaBancaria" />
-    <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_BancoCuenta" FromRole="BancoCuenta" ToRole="Caja" />
     <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_Cheque_BancoCuenta" FromRole="BancoCuenta" ToRole="Cheque" />
     <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_BancoCuenta" FromRole="BancoCuenta" ToRole="Chequera" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_BancoCuenta" FromRole="BancoCuenta" ToRole="CompraFacturaPago" />
+    <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_BancoCuenta" FromRole="BancoCuenta" ToRole="Caja" />
   </EntityType>
   <Association Name="FK_BancoCuenta_Banco">
     <End Type="SAC_Model.Banco" Role="Banco" Multiplicity="1" />
@@ -1274,18 +1220,6 @@
       </Principal>
       <Dependent Role="BancoCuentaBancaria">
         <PropertyRef Name="IdBancoCuenta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Caja_BancoCuenta">
-    <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
-    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BancoCuenta">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Caja">
-        <PropertyRef Name="IdCuentaBanco" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1802,170 +1736,6 @@
     <Property Name="Expr2" Type="Int32" />
     <Property Name="Expr3" Type="Int32" />
   </EntityType>
-  <EntityType Name="CompraFactura">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
-    <Property Name="PuntoVenta" Type="Int32" Nullable="false" />
-    <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
-    <Property Name="IdProveedor" Type="Int32" Nullable="false" />
-    <Property Name="IdTipoIva" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CAE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Saldo" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="TotalDolares" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Cotizacion" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-    <Property Name="FechaPago" Type="DateTime" Precision="3" />
-    <Property Name="Periodo" Type="Int32" />
-    <Property Name="Grupo" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Pase" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="CotizacionDePago" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="IdImputacion" Type="Int32" />
-    <Property Name="IdMoneda" Type="Int32" />
-    <Property Name="IdCompraIva" Type="Int32" />
-    <Property Name="Parcial" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Recibo" Type="Int32" />
-    <Property Name="NumeroPago" Type="Int32" />
-    <Property Name="IdCompraFacturaAplica" Type="Int32" />
-    <Property Name="Auxiliar" Type="Int32" />
-    <Property Name="AxiliarNumero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CompraIva" Relationship="SAC_Model.FK_CompraFactura_CompraIva" FromRole="CompraFactura" ToRole="CompraIva" />
-    <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
-    <NavigationProperty Name="TipoComprobante" Relationship="SAC_Model.FK_CompraFactura_TipoComprobante" FromRole="CompraFactura" ToRole="TipoComprobante" />
-    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="CompraFactura" ToRole="TipoMoneda" />
-    <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="CompraFactura" ToRole="Retencion" />
-    <NavigationProperty Name="TrackingFacturaPagoCompra" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
-    <NavigationProperty Name="TrackingFacturaPagoCompra1" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
-    <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
-    <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
-  </EntityType>
-  <EntityType Name="CompraIva">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="CodigoDiario" Type="Int32" />
-    <Property Name="NetoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="NetoNoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="TotalPercepciones" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Importe25" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe5" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe105" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe21" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Importe27" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva5" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionIva" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionIB" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionProvincia" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionImporteIva" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionImporteIB" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="PercepcionImporteProvincia" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="Idusuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_CompraIva" FromRole="CompraIva" ToRole="CompraFactura" />
-  </EntityType>
-  <Association Name="FK_CompraFactura_CompraIva">
-    <End Type="SAC_Model.CompraIva" Role="CompraIva" Multiplicity="0..1" />
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompraIva">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFactura">
-        <PropertyRef Name="IdCompraIva" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CompraFactura_Proveedor">
-    <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="1" />
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Proveedor">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFactura">
-        <PropertyRef Name="IdProveedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CompraFactura_TipoComprobante">
-    <End Type="SAC_Model.TipoComprobante" Role="TipoComprobante" Multiplicity="1" />
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoComprobante">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFactura">
-        <PropertyRef Name="IdTipoComprobante" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CompraFactura_TipoMoneda">
-    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoMoneda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFactura">
-        <PropertyRef Name="IdMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Retencion_CompraFactura">
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
-    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompraFactura">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Retencion">
-        <PropertyRef Name="IdCompraFactura" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TrackingFacturaPagoCompra_CompraFactura">
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="1" />
-    <End Type="SAC_Model.TrackingFacturaPagoCompra" Role="TrackingFacturaPagoCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompraFactura">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TrackingFacturaPagoCompra">
-        <PropertyRef Name="IdFactura" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TrackingFacturaPagoCompra_CompraFactura1">
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="1" />
-    <End Type="SAC_Model.TrackingFacturaPagoCompra" Role="TrackingFacturaPagoCompra" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompraFactura">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TrackingFacturaPagoCompra">
-        <PropertyRef Name="IdPago" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="CompraFacturaPago">
     <Key>
       <PropertyRef Name="Id" />
@@ -1985,9 +1755,9 @@
     <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_CompraFacturaPago_BancoCuenta" FromRole="CompraFacturaPago" ToRole="BancoCuenta" />
     <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="CompraFacturaPago" ToRole="Cheque" />
     <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_CompraFacturaPago_Chequera" FromRole="CompraFacturaPago" ToRole="Chequera" />
-    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFacturaPago" ToRole="CompraFactura" />
     <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="CompraFacturaPago" ToRole="Tarjetas" />
     <NavigationProperty Name="TipoPago" Relationship="SAC_Model.FK_CompraFacturaPago_TipoPago" FromRole="CompraFacturaPago" ToRole="TipoPago" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFacturaPago" ToRole="CompraFactura" />
   </EntityType>
   <EntityType Name="TarjetaOperacion">
     <Key>
@@ -2019,6 +1789,7 @@
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="Tarjetas" ToRole="CompraFacturaPago" />
     <NavigationProperty Name="TarjetaOperacion" Relationship="SAC_Model.FK_TarjetaOperacion_Tarjetas" FromRole="Tarjetas" ToRole="TarjetaOperacion" />
+    <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_Tarjetas" FromRole="Tarjetas" ToRole="Caja" />
   </EntityType>
   <Association Name="FK_CompraFacturaPago_BancoCuenta">
     <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
@@ -2053,18 +1824,6 @@
       </Principal>
       <Dependent Role="CompraFacturaPago">
         <PropertyRef Name="IdChequera" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CompraFacturaPago_CompraFactura">
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
-    <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompraFactura">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFacturaPago">
-        <PropertyRef Name="IdFacturaCompra" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2153,24 +1912,12 @@
     <Property Name="Activo" Type="Boolean" />
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="Imputacion" ToRole="CompraFactura" />
     <NavigationProperty Name="Diario" Relationship="SAC_Model.FK_Diario_Imputacion" FromRole="Imputacion" ToRole="Diario" />
     <NavigationProperty Name="SubRubro" Relationship="SAC_Model.FK_Imputacion_SubRubro" FromRole="Imputacion" ToRole="SubRubro" />
     <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Imputacion" FromRole="Imputacion" ToRole="Proveedor" />
     <NavigationProperty Name="Proveedor1" Relationship="SAC_Model.FK_Proveedor_Imputacion1" FromRole="Imputacion" ToRole="Proveedor" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="Imputacion" ToRole="CompraFactura" />
   </EntityType>
-  <Association Name="FK_CompraFactura_Imputacion">
-    <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Imputacion">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFactura">
-        <PropertyRef Name="IdImputacion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Diario_Imputacion">
     <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="1" />
     <End Type="SAC_Model.Diario" Role="Diario" Multiplicity="*" />
@@ -2216,6 +1963,297 @@
       </Principal>
       <Dependent Role="Proveedor">
         <PropertyRef Name="IdImputacionFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Caja">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoMovimiento" Type="Int32" />
+    <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Saldo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="IdGrupoCaja" Type="Int32" />
+    <Property Name="Recibo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdCuentaBanco" Type="Int32" />
+    <Property Name="ImportePesos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ImporteDolar" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ImporteCheque" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ImporteDeposito" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ImporteTarjeta" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IdTarjeta" Type="Int32" />
+    <Property Name="IdCheque" Type="Int32" />
+    <Property Name="IdCajaSaldo" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_Caja_BancoCuenta" FromRole="Caja" ToRole="BancoCuenta" />
+    <NavigationProperty Name="CajaSaldo" Relationship="SAC_Model.FK_Caja_CajaSaldo" FromRole="Caja" ToRole="CajaSaldo" />
+    <NavigationProperty Name="CajaTipoMovimiento" Relationship="SAC_Model.FK_Caja_CajaTipoMovimiento" FromRole="Caja" ToRole="CajaTipoMovimiento" />
+    <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_Caja_Cheque" FromRole="Caja" ToRole="Cheque" />
+    <NavigationProperty Name="GrupoCaja" Relationship="SAC_Model.FK_Caja_GrupoCaja" FromRole="Caja" ToRole="GrupoCaja" />
+    <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_Caja_Tarjetas" FromRole="Caja" ToRole="Tarjetas" />
+  </EntityType>
+  <EntityType Name="CompraFactura">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
+    <Property Name="PuntoVenta" Type="Int32" Nullable="false" />
+    <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
+    <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+    <Property Name="IdTipoIva" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CAE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Saldo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TotalDolares" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Cotizacion" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="FechaPago" Type="DateTime" Precision="3" />
+    <Property Name="Periodo" Type="Int32" />
+    <Property Name="Grupo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Pase" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="CotizacionDePago" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Concepto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdImputacion" Type="Int32" />
+    <Property Name="IdMoneda" Type="Int32" />
+    <Property Name="IdCompraIva" Type="Int32" />
+    <Property Name="Parcial" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Recibo" Type="Int32" />
+    <Property Name="NumeroPago" Type="Int32" />
+    <Property Name="IdCompraFacturaAplica" Type="Int32" />
+    <Property Name="CodigoDiario" Type="Int32" />
+    <Property Name="Auxiliar" Type="Int32" />
+    <Property Name="AxiliarNumero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompraIva" Relationship="SAC_Model.FK_CompraFactura_CompraIva" FromRole="CompraFactura" ToRole="CompraIva" />
+    <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
+    <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
+    <NavigationProperty Name="TipoComprobante" Relationship="SAC_Model.FK_CompraFactura_TipoComprobante" FromRole="CompraFactura" ToRole="TipoComprobante" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="CompraFactura" ToRole="TipoMoneda" />
+    <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
+    <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="CompraFactura" ToRole="Retencion" />
+    <NavigationProperty Name="TrackingFacturaPagoCompra" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
+    <NavigationProperty Name="TrackingFacturaPagoCompra1" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
+  </EntityType>
+  <EntityType Name="CompraIva">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NetoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="NetoNoGravado" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalIva" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TotalPercepciones" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Importe25" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe5" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe105" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe21" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Importe27" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva25" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva5" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva105" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva21" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Iva27" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionIva" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionIB" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionProvincia" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionImporteIva" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionImporteIB" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PercepcionImporteProvincia" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OtrosImpuestos" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Idusuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_CompraIva" FromRole="CompraIva" ToRole="CompraFactura" />
+  </EntityType>
+  <Association Name="FK_Caja_BancoCuenta">
+    <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
+    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BancoCuenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdCuentaBanco" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caja_CajaSaldo">
+    <End Type="SAC_Model.CajaSaldo" Role="CajaSaldo" Multiplicity="0..1" />
+    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CajaSaldo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdCajaSaldo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caja_CajaTipoMovimiento">
+    <End Type="SAC_Model.CajaTipoMovimiento" Role="CajaTipoMovimiento" Multiplicity="0..1" />
+    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CajaTipoMovimiento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdTipoMovimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caja_Cheque">
+    <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="0..1" />
+    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cheque">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdCheque" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caja_GrupoCaja">
+    <End Type="SAC_Model.GrupoCaja" Role="GrupoCaja" Multiplicity="0..1" />
+    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoCaja">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdGrupoCaja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Caja_Tarjetas">
+    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="0..1" />
+    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tarjetas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdTarjeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFactura_CompraIva">
+    <End Type="SAC_Model.CompraIva" Role="CompraIva" Multiplicity="0..1" />
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraIva">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdCompraIva" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFactura_Imputacion">
+    <End Type="SAC_Model.Imputacion" Role="Imputacion" Multiplicity="0..1" />
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imputacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdImputacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFactura_Proveedor">
+    <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="1" />
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFactura_TipoComprobante">
+    <End Type="SAC_Model.TipoComprobante" Role="TipoComprobante" Multiplicity="1" />
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoComprobante">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFactura_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFacturaPago_CompraFactura">
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
+    <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFacturaPago">
+        <PropertyRef Name="IdFacturaCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retencion_CompraFactura">
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
+    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Retencion">
+        <PropertyRef Name="IdCompraFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackingFacturaPagoCompra_CompraFactura">
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="1" />
+    <End Type="SAC_Model.TrackingFacturaPagoCompra" Role="TrackingFacturaPagoCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrackingFacturaPagoCompra">
+        <PropertyRef Name="IdFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TrackingFacturaPagoCompra_CompraFactura1">
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="1" />
+    <End Type="SAC_Model.TrackingFacturaPagoCompra" Role="TrackingFacturaPagoCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TrackingFacturaPagoCompra">
+        <PropertyRef Name="IdPago" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

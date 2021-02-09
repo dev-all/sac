@@ -497,8 +497,6 @@ namespace SAC.Controllers
                       ProveedorSelec_ = i.IdProveedor}).FirstOrDefault();
 
             return RedirectToAction("Index");
-
-
         }
 
 

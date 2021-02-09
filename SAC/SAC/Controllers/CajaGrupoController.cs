@@ -29,11 +29,6 @@ namespace SAC.Controllers
             return View(cajaGrupoModelViews);
         }
 
-
-
-
-
-     
         public ActionResult AddOrEdit(int id = 0)
         {
             CajaGrupoModelView model;
@@ -51,11 +46,8 @@ namespace SAC.Controllers
             return View(model);
         }
 
-
-
         [HttpPost]
-        [ValidateAntiForgeryToken] 
-        
+        [ValidateAntiForgeryToken]         
         public ActionResult AddOrEdit(CajaGrupoModelView model)
         {
             try
@@ -85,8 +77,6 @@ namespace SAC.Controllers
             }
         }
 
-
-
         [HttpPost]
         public ActionResult Eliminar(int id)
         {
@@ -102,9 +92,7 @@ namespace SAC.Controllers
 
             return RedirectToAction("Index");
         }
-
-
-      
+   
         public ActionResult ConsultaGrupo()
         {
 
@@ -120,30 +108,16 @@ namespace SAC.Controllers
         [HttpPost]
         public ActionResult CajaGrupoCerrar()
         {
-
-
             try
             {
                serviciocajagrupo.CerrarGrupoCaja();
-
             }
             catch (Exception ex)
             {
                 serviciocajagrupo._mensaje(ex.Message, "error");
             }
-
             return RedirectToAction("ConsultaGrupo");
-
-   
-
-
-
-
-
         }
-
-
-
 
 
     }

@@ -57,6 +57,8 @@ namespace SAC.Models
         [Display(Name = "Aplica Factura Nº ")]
         public int? IdCompraFacturaAplica { get; set; }
         public int IdDiario { get; set; }
+
+        public Nullable<int> CodigoDiario { get; set; }
         public int Auxiliar { get; set; }
         public string AxiliarNumero { get; set; }
         public bool Activo { get; set; }

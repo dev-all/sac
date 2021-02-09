@@ -21,7 +21,6 @@ namespace Datos.ModeloDeDatos
         }
     
         public int Id { get; set; }
-        public Nullable<int> CodigoDiario { get; set; }
         public decimal NetoGravado { get; set; }
         public decimal NetoNoGravado { get; set; }
         public decimal SubTotal { get; set; }

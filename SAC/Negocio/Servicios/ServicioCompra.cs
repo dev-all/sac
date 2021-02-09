@@ -757,7 +757,7 @@ namespace Negocio.Servicios
 
                             // add codigo al cbte del pago  y utilizar el mismo para todos los asientos de pago
                             var CodigoAsiento = oServicioContable.GetNuevoCodigoAsiento() + 1;
-                            Factura.Auxiliar = CodigoAsiento;
+                            Factura.CodigoDiario = CodigoAsiento;
                             //----------- Registro la "Factura del Pago" --------------
                             var nuevoPagoRegistrado = RegistrarPago(Factura);
 
@@ -768,7 +768,7 @@ namespace Negocio.Servicios
 
                                 //// -------------- Inicio registro de asientos
                                 DiarioModel asiento = new DiarioModel();
-                                asiento.Codigo = nuevoPagoRegistrado.Auxiliar; /// se registra el codigo diario el tema es que en facturas se registra en el compraiva
+                                asiento.Codigo = nuevoPagoRegistrado.CodigoDiario; /// se registra el codigo diario el tema es que en facturas se registra en el compraiva
                                 asiento.Fecha = nuevoPagoRegistrado.Fecha;
                                 asiento.Periodo = DateTime.Now.ToString("yyMM");
                                 asiento.Tipo = "CP"; //Compras Pago
@@ -776,23 +776,24 @@ namespace Negocio.Servicios
                                 asiento.Asiento = nuevoPagoRegistrado.Auxiliar; // Duplicado???
                                 asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
                                 asiento.Moneda = oServicioTipoMoneda.GetTipoMoneda(nuevoPagoRegistrado.IdMoneda).Descripcion;
-                                asiento.DescripcionMa = "Ingreso Pago Proveedor";
+                                asiento.DescripcionMa = "Ingreso Pago Proveedor" + nuevoPagoRegistrado.NumeroPago;
 
-                                ///// asiento Inputacion Proveedor en valor - negativo
-                                //var asientoDiario = servicioContable.InsertAsientoContable(null
-                                //                                          , (facturaRegistrada.CompraIva.Total) * (-1)
-                                //                                          , asiento
-                                //                                          , facturaRegistrada
-                                //                                          , proveedor.IdImputacionProveedor ?? -1);
-                                ///// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
-                                //servicioImputacion.AsintoContableGeneral(asientoDiario);
+                                /// asiento Inputacion Proveedor en valor - negativo
+                                var asientoDiario = oServicioContable.InsertAsientoContable(null
+                                                                          , (nuevoPagoRegistrado.Total) * (-1)
+                                                                          , asiento
+                                                                          , nuevoPagoRegistrado
+                                                                          , facturaProveedor.IdImputacionProveedor ?? -1);
+
+                                /// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
+                               // oServicioImputacion.AsintoContableGeneral(asientoDiario); //----------------Consultar a Edgardo
 
 
 
                                 //-------------aca insertamos los medios de pago
                                 if (oMediosPago.idCuentaBancariaSelec_ > 0)
                                 {
-                                    FacturaMedioPago.IdFacturaCompra = Retorno.Id;
+                                    FacturaMedioPago.IdFacturaCompra = nuevoPagoRegistrado.Id;
                                     FacturaMedioPago.IdTipoPago = 4;
                                     FacturaMedioPago.IdBancoCuenta = oMediosPago.idCuentaBancariaSelec_;
                                     FacturaMedioPago.Monto = oMediosPago.montoCuentaBancaria_;
@@ -823,25 +824,25 @@ namespace Negocio.Servicios
 
 
                                     // ------------- Inicio registro de asientos Por Transferencia Bancaria ----------dev-a
-                                    DiarioModel asiento = new DiarioModel();
-                                    asiento.Codigo = oMediosPago.idCuentaBancariaSelec_;
-                                    asiento.Importe = oMediosPago.montoTarjetaSelec_;
-                                    asiento.Fecha = oMediosPago.FechaOperacion_;
-                                    asiento.Periodo = DateTime.Now.ToString("yyMM");
-                                    asiento.Tipo = "CP"; //Compras Pago
-                                    asiento.Cotiza = 0 ; //dev-a se debe obtener la Cotizacion de dia
-                                    asiento.Asiento = CodigoAsiento;
-                                    asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
-                                    asiento.Moneda = oServicioTipoMoneda.GetTipoMoneda(oMediosPago.idTipoMonedaSelec_).Descripcion;
-                                    asiento.DescripcionMa = "Transferencia Pago Proveedor" + facturaProveedor.Nombre ;
-                                    asiento.Titulo = "Asiento de Pagos Proveedores";
+                                    //DiarioModel asiento = new DiarioModel();
+                                    //asiento.Codigo = oMediosPago.idCuentaBancariaSelec_;
+                                    //asiento.Importe = oMediosPago.montoTarjetaSelec_;
+                                    //asiento.Fecha = oMediosPago.FechaOperacion_;
+                                    //asiento.Periodo = DateTime.Now.ToString("yyMM");
+                                    //asiento.Tipo = "CP"; //Compras Pago
+                                    //asiento.Cotiza = 0 ; //dev-a se debe obtener la Cotizacion de dia
+                                    //asiento.Asiento = CodigoAsiento;
+                                    //asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
+                                    //asiento.Moneda = oServicioTipoMoneda.GetTipoMoneda(oMediosPago.idTipoMonedaSelec_).Descripcion;
+                                    //asiento.DescripcionMa = "Transferencia Pago Proveedor" + facturaProveedor.Nombre ;
+                                    //asiento.Titulo = "Asiento de Pagos Proveedores";
 
-                                    /// asiento Inputacion Proveedor en valor - negativo
-                                    var asientoDiario = oServicioContable.InsertAsientoContable(null
-                                                                              , (oMediosPago.montoTarjetaSelec_) * (-1)
-                                                                              , asiento
-                                                                              , Retorno
-                                                                              , facturaProveedor.IdImputacionProveedor ?? -1);
+                                    ///// asiento Inputacion Proveedor en valor - negativo
+                                    //var asientoDiario = oServicioContable.InsertAsientoContable(null
+                                    //                                          , (oMediosPago.montoTarjetaSelec_) * (-1)
+                                    //                                          , asiento
+                                    //                                          , nuevoPagoRegistrado
+                                    //                                          , facturaProveedor.IdImputacionProveedor ?? -1);
                                     /// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
                                     /// oServicioImputacion.AsintoContableGeneral(asientoDiario);
 
@@ -849,7 +850,7 @@ namespace Negocio.Servicios
 
                                 if (oMediosPago.montoEfectivo_ != 0)
                                 {
-                                    FacturaMedioPago.IdFacturaCompra = Retorno.Id;
+                                    FacturaMedioPago.IdFacturaCompra = nuevoPagoRegistrado.Id;
                                     FacturaMedioPago.IdTipoPago = 2;
                                     FacturaMedioPago.Monto = oMediosPago.montoEfectivo_;
                                     FacturaMedioPago.Observaciones = "Efectivo";
@@ -861,7 +862,7 @@ namespace Negocio.Servicios
 
                                 if (oMediosPago.idTarjetaSelec_ != 0)
                                 {
-                                    FacturaMedioPago.IdFacturaCompra = Retorno.Id;
+                                    FacturaMedioPago.IdFacturaCompra = nuevoPagoRegistrado.Id;
                                     FacturaMedioPago.IdTipoPago = 5;
                                     FacturaMedioPago.IdTarjeta = oMediosPago.idTarjetaSelec_;
                                     FacturaMedioPago.Monto = oMediosPago.montoTarjetaSelec_;
@@ -879,7 +880,7 @@ namespace Negocio.Servicios
 
                                     TarjetaOperacionModel oTarjetaOperacionModel = new TarjetaOperacionModel();
                                     oTarjetaOperacionModel.IdTarjeta = oMediosPago.idTarjetaSelec_;
-                                    oTarjetaOperacionModel.Descripcion = "Pago Factura: " + Retorno.NumeroFactura;
+                                    oTarjetaOperacionModel.Descripcion = "Pago Factura: " + nuevoPagoRegistrado.NumeroFactura;
                                     oTarjetaOperacionModel.IdGrupoCaja = idGrupoCaja;
                                     oTarjetaOperacionModel.Conciliacion = false;
                                     oTarjetaOperacionModel.NumeroPago = nroPago.ToString();
@@ -897,7 +898,7 @@ namespace Negocio.Servicios
                                     {
                                         oChequera = oServicioChequera.obtenerCheque(int.Parse(itemCheque));
                                         //inserto medio de pago
-                                        FacturaMedioPago.IdFacturaCompra = Retorno.Id;
+                                        FacturaMedioPago.IdFacturaCompra = nuevoPagoRegistrado.Id;
                                         FacturaMedioPago.IdTipoPago = 3;
                                         FacturaMedioPago.IdChequera = int.Parse(itemCheque);
                                         FacturaMedioPago.Monto = decimal.Parse(oChequera.Importes.ToString());
@@ -942,7 +943,6 @@ namespace Negocio.Servicios
                                     }
                                 }
 
-
                                 if ((oMediosPago.idChequesTerceros != null) && (oMediosPago.idChequesTerceros != ""))
                                 {
                                     ChequeModel oCheque = new ChequeModel();
@@ -951,7 +951,7 @@ namespace Negocio.Servicios
                                     {
                                         oCheque = oServicioCheque.obtenerCheque(int.Parse(itemCheque));
 
-                                        FacturaMedioPago.IdFacturaCompra = Retorno.Id;
+                                        FacturaMedioPago.IdFacturaCompra = nuevoPagoRegistrado.Id;
                                         FacturaMedioPago.IdTipoPago = 3;
                                         FacturaMedioPago.IdCheque = int.Parse(itemCheque);
                                         FacturaMedioPago.Monto = decimal.Parse(oCheque.Importe.ToString());
@@ -982,7 +982,7 @@ namespace Negocio.Servicios
                                 oCajaModel.Fecha = oMediosPago.FechaOperacion_;
                                 oCajaModel.Tipo = "";
                                 oCajaModel.Saldo = "";
-                                oCajaModel.Recibo = Retorno.NumeroPago.ToString();
+                                oCajaModel.Recibo = nuevoPagoRegistrado.NumeroPago.ToString();
 
                                 //segun la regla plasmada en .doc siempre se paga en pesos
                                 oCajaModel.ImportePesos = ValorFactura;

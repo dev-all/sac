@@ -6,17 +6,6 @@
 }
 
 
-
-<style>
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        padding: 0.1em 1em;
-    }
-
-    .table td, .table th {
-        padding: .25rem;
-    }
-</style>
-
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
@@ -37,14 +26,12 @@
             <div class="card-body">
                 <h5 class="card-title">Consulta Totales por Grupo</h5>
                 <h6 class="card-subtitle"> </h6>
-                  <div class="table-responsive m-t-40">
+                <div class="table-responsive m-t-40">
 
                     <table id="example23" class="table stylish-table">
 
                         <thead>
                             <tr>
-
-
                                 <th>
                                     Codigo
                                 </th>
@@ -136,17 +123,15 @@
                     </table>
                 </div>
 
-                  <div class="form-actions mt-5">
+                <div class="form-actions mt-5">
 
-                      <span data-toggle="modal" data-target="#myModalEliminar">
-                          <a class="btn btn-success btn-sm" role='button' data-toggle="tooltip" data-placement="top" title="Cerrar Caja">Cerrar Caja</a>
-                      </span>
-
-                      
+                    <span data-toggle="modal" data-target="#myModalEliminar">
+                        <a class="btn btn-success btn-sm" role='button' data-toggle="tooltip" data-placement="top" title="Cerrar Caja">Cierre del Grupo Caja</a>
+                    </span>
 
 
-                      <button type="button" class="btn btn-dark btn-sm">Cancel</button>
-                  </div>
+                    <button type="button" class="btn btn-dark btn-sm">Cancel</button>
+                </div>
             </div>
         </div>
 
@@ -166,7 +151,7 @@
                     <p>Esta seguro de que desea hace el Cierre del Grupo  Caja ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-raised btn-danger">Cerrar</button>
+                    <button type="submit" class="btn btn-raised btn-success">Confirmar</button>
                     <button type="button" class="btn btn-raised btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
@@ -228,7 +213,7 @@
             });
         });
 
-     
+
 
 
 
