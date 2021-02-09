@@ -46,8 +46,6 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
-        public virtual Imputacion Imputacion { get; set; }
-        public virtual Imputacion Imputacion1 { get; set; }
         public virtual Pais Pais { get; set; }
         public virtual PrespuestoActual PrespuestoActual { get; set; }
         public virtual Provincia Provincia { get; set; }
@@ -58,5 +56,7 @@ namespace Datos.ModeloDeDatos
         public virtual TipoIva TipoIva { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFactura> CompraFactura { get; set; }
+        public virtual Imputacion Imputacion { get; set; }
+        public virtual Imputacion Imputacion1 { get; set; }
     }
 }

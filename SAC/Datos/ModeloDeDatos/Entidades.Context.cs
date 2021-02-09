@@ -32,10 +32,8 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CajaSaldo> CajaSaldo { get; set; }
         public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
         public virtual DbSet<Contacto> Contacto { get; set; }
-        public virtual DbSet<Diario> Diario { get; set; }
         public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
         public virtual DbSet<homePorRol> homePorRol { get; set; }
-        public virtual DbSet<Imputacion> Imputacion { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<MenuSidebar> MenuSidebar { get; set; }
         public virtual DbSet<Pais> Pais { get; set; }
@@ -82,5 +80,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
         public virtual DbSet<TarjetaOperacion> TarjetaOperacion { get; set; }
         public virtual DbSet<Tarjetas> Tarjetas { get; set; }
+        public virtual DbSet<Diario> Diario { get; set; }
+        public virtual DbSet<Imputacion> Imputacion { get; set; }
     }
 }

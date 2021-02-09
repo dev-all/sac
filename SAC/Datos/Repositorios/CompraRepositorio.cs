@@ -133,5 +133,57 @@ namespace Datos.Repositorios
         //    return cfi;
 
         //}
+
+
+        public List<CompraRegistroDetalle> GetCompraRegistroDetalle(int idProveedor, int mesFecha, int anioFecha)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+
+            return context.CompraFactura
+                            .Include("Proveedor")
+                            .Include("CompraIva")
+                            .Include("TipoComprobante")
+                            .Where(p => p.IdProveedor == idProveedor && p.Activo == true && p.Fecha.Month.Equals(mesFecha) && p.Fecha.Year.Equals(anioFecha) && p.IdTipoComprobante != 98)
+                            .Select(p => new CompraRegistroDetalle()
+                            {
+                                IdComprobante = p.TipoComprobante.Id,
+                                Empresa = p.Proveedor.Nombre,
+                                Cbte = p.TipoComprobante.Denominacion,
+                                PuntoVenta = p.PuntoVenta,
+                                NumeroFactura = p.NumeroFactura,
+                                Fecha = p.Fecha,
+                                Neto = p.CompraIva.NetoGravado,
+                                Gasto = 0,
+                                Iva = p.CompraIva.TotalIva,
+                                ISIB = p.CompraIva.TotalPercepciones,
+                                Total = p.CompraIva.NetoGravado + p.CompraIva.TotalIva + p.CompraIva.TotalPercepciones
+                            }).ToList();
+
+
+            ////1) se obtiene un objeto anonimo y no es posible pasarlo a una entidad
+            //var iQuery = (from c in context.Caja
+            //              where c.IdGrupoCaja == idgrupocaja && c.Fecha <= fecha
+            //              group c by c.IdGrupoCaja into g
+            //              select new
+            //              {
+            //                  IdGrupoCaja = g.Key,
+            //                  ImportePesos = g.Sum(c => c.ImportePesos),
+            //                  ImporteCheque = g.Sum(c => c.ImporteCheque),
+            //                  ImporteDolar = g.Sum(c => c.ImporteDolar),
+            //                  ImporteDeposito = g.Sum(c => c.ImporteDeposito),
+            //                  ImporteTarjeta = g.Sum(c => c.ImporteTarjeta)
+            //              });
+            ////2) convertimos el objeto anonimo en una entidad
+            //var caja = iQuery.ToList().Select(i => new Caja
+            //{
+            //    IdGrupoCaja = i.IdGrupoCaja,
+            //    ImportePesos = i.ImportePesos,
+            //    ImporteCheque = i.ImporteCheque,
+            //    ImporteDolar = i.ImporteDolar,
+            //    ImporteDeposito = i.ImporteDeposito,
+            //    ImporteTarjeta = i.ImporteTarjeta
+            //}).FirstOrDefault();
+        }
+
     }
 }

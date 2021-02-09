@@ -11,6 +11,11 @@ using System.Net;
 using Negocio.Servicios;
 using System.Net.Mime;
 using System.Text;
+using System.Linq;
+using Negocio.Enumeradores;
+using System.Reflection;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Negocio.Servicios
 {
@@ -39,36 +44,40 @@ namespace Negocio.Servicios
             }
         }
 
+       
 
         public ImputacionModel GetImputacion(int _id)
         {
-            Imputacion oImputacion = ImputacionRepositorio.ObtenerImputacionPorId(_id);
-            ImputacionModel oImputacionModel = new ImputacionModel();
+            //modifico esto porque da error de bucle inf bre 06/02/2021
+            //Imputacion oImputacion = 
+            //ImputacionModel oImputacionModel = new ImputacionModel();
+            return Mapper.Map<Imputacion, ImputacionModel>(ImputacionRepositorio.ObtenerImputacionPorId(_id));
 
-            oImputacionModel.Id = oImputacion.Id;
-            oImputacionModel.Descripcion = oImputacion.Descripcion;
-            oImputacionModel.IdSubRubro = oImputacion.IdSubRubro;
-            oImputacionModel.SaldoInicial = oImputacion.SaldoInicial;
-            oImputacionModel.SaldoFin = oImputacion.SaldoFin;
-            oImputacionModel.IdTipo = oImputacion.IdTipo;
-            oImputacionModel.Alias = oImputacion.Alias;
-            oImputacionModel.Enero = oImputacion.Enero;
-            oImputacionModel.Febrero = oImputacion.Febrero;
-            oImputacionModel.Marzo = oImputacion.Marzo;
-            oImputacionModel.Abril = oImputacion.Abril;
-            oImputacionModel.Mayo = oImputacion.Mayo;
-            oImputacionModel.Junio = oImputacion.Junio;
-            oImputacionModel.Julio = oImputacion.Julio;
-            oImputacionModel.Agosto = oImputacion.Agosto;
-            oImputacionModel.Septiembre = oImputacion.Septiembre;
-            oImputacionModel.Octubre = oImputacion.Octubre;
-            oImputacionModel.Noviembre = oImputacion.Noviembre;
-            oImputacionModel.Diciembre = oImputacion.Diciembre;
-            oImputacionModel.Activo = oImputacion.Activo;
-            oImputacionModel.IdUsuario = oImputacion.IdUsuario;
-            oImputacionModel.UltimaModificacion = oImputacion.UltimaModificacion;
 
-            return oImputacionModel;
+            //oImputacionModel.Id = oImputacion.Id;
+            //oImputacionModel.Descripcion = oImputacion.Descripcion;
+            //oImputacionModel.IdSubRubro = oImputacion.IdSubRubro;
+            //oImputacionModel.SaldoInicial = oImputacion.SaldoInicial;
+            //oImputacionModel.SaldoFin = oImputacion.SaldoFin;
+            //oImputacionModel.IdTipo = oImputacion.IdTipo;
+            //oImputacionModel.Alias = oImputacion.Alias;
+            //oImputacionModel.Enero = oImputacion.Enero;
+            //oImputacionModel.Febrero = oImputacion.Febrero;
+            //oImputacionModel.Marzo = oImputacion.Marzo;
+            //oImputacionModel.Abril = oImputacion.Abril;
+            //oImputacionModel.Mayo = oImputacion.Mayo;
+            //oImputacionModel.Junio = oImputacion.Junio;
+            //oImputacionModel.Julio = oImputacion.Julio;
+            //oImputacionModel.Agosto = oImputacion.Agosto;
+            //oImputacionModel.Septiembre = oImputacion.Septiembre;
+            //oImputacionModel.Octubre = oImputacion.Octubre;
+            //oImputacionModel.Noviembre = oImputacion.Noviembre;
+            //oImputacionModel.Diciembre = oImputacion.Diciembre;
+            //oImputacionModel.Activo = oImputacion.Activo;
+            //oImputacionModel.IdUsuario = oImputacion.IdUsuario;
+            //oImputacionModel.UltimaModificacion = oImputacion.UltimaModificacion;
+
+            //return oImputacionModel;
         }
 
         public int ActualizarImputacion(ImputacionModel oImputacionModel)
@@ -81,33 +90,37 @@ namespace Negocio.Servicios
             }
             else //significa que no existe el dato a ingresar
             {
-                Imputacion oImputacionNuevo = new Imputacion();
-                Imputacion oPaisRespuesta = new Imputacion();
 
-                oImputacionNuevo.Id = oImputacionModel.Id;
-                oImputacionNuevo.Descripcion = oImputacionModel.Descripcion;
-                oImputacionNuevo.IdSubRubro = oImputacionModel.IdSubRubro;
-                oImputacionNuevo.SaldoInicial = oImputacionModel.SaldoInicial;
-                oImputacionNuevo.SaldoFin = oImputacionModel.SaldoFin;
-                oImputacionNuevo.IdTipo = oImputacionModel.IdTipo;
-                oImputacionNuevo.Alias = oImputacionModel.Alias;
-                oImputacionNuevo.Enero = oImputacionModel.Enero;
-                oImputacionNuevo.Febrero = oImputacionModel.Febrero;
-                oImputacionNuevo.Marzo = oImputacionModel.Marzo;
-                oImputacionNuevo.Abril = oImputacionModel.Abril;
-                oImputacionNuevo.Mayo = oImputacionModel.Mayo;
-                oImputacionNuevo.Junio = oImputacionModel.Junio;
-                oImputacionNuevo.Julio = oImputacionModel.Julio;
-                oImputacionNuevo.Agosto = oImputacionModel.Agosto;
-                oImputacionNuevo.Septiembre = oImputacionModel.Septiembre;
-                oImputacionNuevo.Octubre = oImputacionModel.Octubre;
-                oImputacionNuevo.Noviembre = oImputacionModel.Noviembre;
-                oImputacionNuevo.Diciembre = oImputacionModel.Diciembre;
-                oImputacionNuevo.Activo = oImputacionModel.Activo;
-                oImputacionNuevo.IdUsuario = oImputacionModel.IdUsuario;
-                oImputacionNuevo.UltimaModificacion = oImputacionModel.UltimaModificacion;
 
-                oPaisRespuesta = ImputacionRepositorio.ActualizarImputacion(oImputacionNuevo);
+                var imp =  Mapper.Map<ImputacionModel, Imputacion> (oImputacionModel);
+
+                //Imputacion oImputacionNuevo = new Imputacion();
+               // = new Imputacion();
+
+                //oImputacionNuevo.Id = oImputacionModel.Id;
+                //oImputacionNuevo.Descripcion = oImputacionModel.Descripcion;
+                //oImputacionNuevo.IdSubRubro = oImputacionModel.IdSubRubro;
+                //oImputacionNuevo.SaldoInicial = oImputacionModel.SaldoInicial;
+                //oImputacionNuevo.SaldoFin = oImputacionModel.SaldoFin;
+                //oImputacionNuevo.IdTipo = oImputacionModel.IdTipo;
+                //oImputacionNuevo.Alias = oImputacionModel.Alias;
+                //oImputacionNuevo.Enero = oImputacionModel.Enero;
+                //oImputacionNuevo.Febrero = oImputacionModel.Febrero;
+                //oImputacionNuevo.Marzo = oImputacionModel.Marzo;
+                //oImputacionNuevo.Abril = oImputacionModel.Abril;
+                //oImputacionNuevo.Mayo = oImputacionModel.Mayo;
+                //oImputacionNuevo.Junio = oImputacionModel.Junio;
+                //oImputacionNuevo.Julio = oImputacionModel.Julio;
+                //oImputacionNuevo.Agosto = oImputacionModel.Agosto;
+                //oImputacionNuevo.Septiembre = oImputacionModel.Septiembre;
+                //oImputacionNuevo.Octubre = oImputacionModel.Octubre;
+                //oImputacionNuevo.Noviembre = oImputacionModel.Noviembre;
+                //oImputacionNuevo.Diciembre = oImputacionModel.Diciembre;
+                //oImputacionNuevo.Activo = oImputacionModel.Activo;
+                //oImputacionNuevo.IdUsuario = oImputacionModel.IdUsuario;
+                //oImputacionNuevo.UltimaModificacion = oImputacionModel.UltimaModificacion;
+
+                Imputacion oPaisRespuesta = ImputacionRepositorio.ActualizarImputacion(imp);
 
                 if (oPaisRespuesta == null)
                 {
@@ -120,10 +133,6 @@ namespace Negocio.Servicios
 
             }
         }
-
-
-
-
 
         public void ActualizarAsientoImputacion(ImputacionModel model)
         {
@@ -138,6 +147,7 @@ namespace Negocio.Servicios
             }
                
         }
+        
         public void AsintoContableGeneral(Diario model)
         {
             try
@@ -216,8 +226,6 @@ namespace Negocio.Servicios
             }
         }
 
-
-
         public ImputacionModel GetImputacionPorAlias(string alias)
         {
             try
@@ -278,9 +286,7 @@ namespace Negocio.Servicios
                 }
             }
         }
-
-     
-        
+           
         public int Eliminar(int idImputacion)
         {
             var retorno = ImputacionRepositorio.EliminarImputacion(idImputacion);
@@ -295,7 +301,89 @@ namespace Negocio.Servicios
         }
 
 
+        /// <summary>DoWork is a method in the TestClass class.
+        /// <para>Here's how you could make a second paragraph in a description. <see cref="System.Console.WriteLine(System.String)"/> for information about output statements.</para>
+        /// <seealso cref="TestClass.Main"/>
+        /// </summary>
 
+        public List<DiarioModel> GetAsientosContables(string periodo, string tipo)
+        {
+            try
+            {
+                IList<Diario> diario = ImputacionRepositorio.GetAsientosContables(periodo, tipo);
+                //var asientos = (from c in diario
+                //                 select c)
+                //                   .Select(u => new DiarioModel()
+                //                   {
+                //                       IdImputacion = u.IdImputacion,
+                //                       Descripcion =  u.Descripcion,
+                //                       Debe = (u.Importe > 0) ? u.Importe : 0,
+                //                       Haber = (u.Importe < 0) ? u.Importe : 0
+                //                   }).ToList();
+
+                var asientos = diario.GroupBy(x => new { x.IdImputacion, x.Descripcion })
+                                .Select(c => new DiarioModel()
+                                {
+                                    IdImputacion = c.Key.IdImputacion,
+                                    Descripcion = c.Key.Descripcion,
+                                    Debe = c.Sum(x => (x.Importe > 0) ? x.Importe : 0),
+                                    Haber = c.Sum(x => (x.Importe < 0) ? x.Importe : 0)
+                                }).ToList();
+
+                return asientos;
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
+                return null;
+            }
+        }
+        public List<DiarioModel> GetCompraFactura(string periodo)
+        {
+            try
+            {
+                return Mapper.Map<List<Diario>,List<DiarioModel>>(ImputacionRepositorio.GetCompraFactura(periodo));
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
+                return null;
+            }
+        }
+
+        public Dictionary<int, string> ObtenerTipoAsiento()
+        {
+            Dictionary<int, string> diccionario = new Dictionary<int, string>();
+            diccionario.Add((int)TipoAsientoEnum.CF, EnumDescription(TipoAsientoEnum.CF));
+       
+            return diccionario;
+        }
+        public Dictionary<string, string> GetTipoAsiento()
+        {
+            Dictionary<string, string> diccionario = new Dictionary<string, string>();
+            diccionario.Add(EnumDescriptionName(TipoAsientoEnum.CF), EnumDescription(TipoAsientoEnum.CF));
+            diccionario.Add(EnumDescriptionName(TipoAsientoEnum.CP), EnumDescription(TipoAsientoEnum.CP));
+            diccionario.Add(EnumDescriptionName(TipoAsientoEnum.VF), EnumDescription(TipoAsientoEnum.VF));
+            diccionario.Add(EnumDescriptionName(TipoAsientoEnum.VP), EnumDescription(TipoAsientoEnum.VP));
+
+            return diccionario;
+        }
+        public string EnumDescription(Enum enumValue)
+        {
+            return enumValue.GetType()
+                            .GetMember(enumValue.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()
+                            .GetDescription();
+        }
+        public string EnumDescriptionName(Enum enumValue)
+        {
+            return enumValue.GetType()
+                            .GetMember(enumValue.ToString())
+                            .First()
+                            .GetCustomAttribute<DisplayAttribute>()
+                            .GetName();
+        }
 
     }
 }

@@ -13,6 +13,11 @@ namespace SAC.Infrastructure
     {
         public AutoMapperWebProfile()
         {
+            CreateMap<CompraRegistroDetalleModel, CompraRegistroDetalleModelView>();
+            CreateMap<CompraRegistroDetalleModelView, CompraRegistroDetalleModel>();
+
+            CreateMap<DiarioModel, DiarioModelView>();
+            CreateMap<DiarioModelView, DiarioModel>();
 
             CreateMap<TipoPagoModel, TipoPagoModelView>();
             CreateMap<TipoPagoModelView, TipoPagoModel>();

@@ -147,6 +147,7 @@
     <Compile Include="Controllers\CajaSaldoController.cs" />
     <Compile Include="Controllers\ClienteControllers.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
+    <Compile Include="Controllers\ContabilidadControllers.cs" />
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\DepartamentoControllers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -167,6 +168,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BcraHelper.cs" />
+    <Compile Include="Helpers\Utilidades.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
     <Compile Include="Models\BancoModelView.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
@@ -184,10 +186,13 @@
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoModelView.cs" />
     <Compile Include="Models\CompraIvaModelView.cs" />
+    <Compile Include="Models\CompraRegistroDetalleModelView.cs" />
+    <Compile Include="Models\CompraRegistroModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
     <Compile Include="Models\CuentaCteProveedorModelView.cs" />
     <Compile Include="Models\DepartamentoModelView.cs" />
+    <Compile Include="Models\DiarioModelView.cs" />
     <Compile Include="Models\FacturaPagoViewModel.cs" />
     <Compile Include="Models\GrupoPresupuestoModelView.cs" />
     <Compile Include="Models\PagosFacturasAPagarModelView.cs" />
@@ -2824,6 +2829,7 @@
     <Content Include="Scripts\view\calcularporcentaje.js" />
     <Content Include="Scripts\view\ChequeScript.js" />
     <Content Include="Scripts\view\ClienteScript.js" />
+    <Content Include="Scripts\view\ContabilidadScript.js" />
     <Content Include="Scripts\view\CtaCteProveedor.js" />
     <Content Include="Scripts\view\CtaCteProveedorDetalle.js" />
     <Content Include="Scripts\view\DatePickerReady.js" />
@@ -2908,6 +2914,10 @@
     <Content Include="Views\PieNota\Index.cshtml" />
     <Content Include="Views\Departamento\AddOrEdit.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
+    <Content Include="Views\Contabilidad\DiarioCompraFactura.cshtml" />
+    <Content Include="Views\Contabilidad\DiarioCompraPagos.cshtml" />
+    <Content Include="Views\Compras\RegistroCompras.cshtml" />
+    <Content Include="Views\Contabilidad\ConsultaAsientosContables.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

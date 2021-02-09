@@ -12,10 +12,8 @@
         <EntityTypeShape EntityType="SAC_Model.CajaSaldo" Width="1.5" PointX="8.75" PointY="35.75" />
         <EntityTypeShape EntityType="SAC_Model.CajaTipoMovimiento" Width="1.5" PointX="8.75" PointY="23.75" />
         <EntityTypeShape EntityType="SAC_Model.Contacto" Width="1.5" PointX="18.25" PointY="12" />
-        <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="5.75" PointY="4.75" />
         <EntityTypeShape EntityType="SAC_Model.GrupoCuenta" Width="1.5" PointX="25.625" PointY="46.125" />
         <EntityTypeShape EntityType="SAC_Model.homePorRol" Width="1.5" PointX="13.625" PointY="2.875" />
-        <EntityTypeShape EntityType="SAC_Model.Imputacion" Width="1.5" PointX="27.125" PointY="34.25" />
         <EntityTypeShape EntityType="SAC_Model.Localidad" Width="1.5" PointX="3" PointY="26.25" />
         <EntityTypeShape EntityType="SAC_Model.MenuSidebar" Width="1.5" PointX="21.25" PointY="7.25" />
         <EntityTypeShape EntityType="SAC_Model.Pais" Width="1.5" PointX="0.75" PointY="30.5" />
@@ -52,9 +50,6 @@
         <EntityTypeShape EntityType="SAC_Model.PresupuestoHistorico" Width="1.5" PointX="18.625" PointY="14.5" />
         <EntityTypeShape EntityType="SAC_Model.Proveedor" Width="1.5" PointX="16.25" PointY="32.75" />
         <EntityTypeShape EntityType="SAC_Model.SubRubro" Width="1.5" PointX="29.625" PointY="40.25" />
-        <AssociationConnector Association="SAC_Model.FK_Imputacion_SubRubro" />
-        <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion" />
-        <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion1" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Pais" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Presupuesto1" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_Provincia" />
@@ -110,7 +105,6 @@
         <EntityTypeShape EntityType="SAC_Model.CompraFactura" Width="1.5" PointX="29.375" PointY="28.375" />
         <EntityTypeShape EntityType="SAC_Model.CompraIva" Width="1.5" PointX="27.125" PointY="22.5" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_CompraIva" />
-        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Imputacion" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_Proveedor" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_TipoComprobante" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_TipoMoneda" />
@@ -127,6 +121,13 @@
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_TipoPago" />
         <AssociationConnector Association="SAC_Model.FK_TarjetaOperacion_Tarjetas" />
+        <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="34.125" PointY="39.25" />
+        <EntityTypeShape EntityType="SAC_Model.Imputacion" Width="1.5" PointX="31.875" PointY="38.375" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFactura_Imputacion" />
+        <AssociationConnector Association="SAC_Model.FK_Diario_Imputacion" />
+        <AssociationConnector Association="SAC_Model.FK_Imputacion_SubRubro" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion" />
+        <AssociationConnector Association="SAC_Model.FK_Proveedor_Imputacion1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

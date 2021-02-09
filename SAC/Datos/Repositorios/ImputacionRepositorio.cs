@@ -3,6 +3,7 @@ using Datos.ModeloDeDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace Datos.Repositorios
 {
@@ -25,6 +26,7 @@ namespace Datos.Repositorios
 
         public Imputacion ObtenerImputacion(int idImputacion)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             Imputacion Imputacion = context.Imputacion.Where(p => p.Id == idImputacion).First();
             return Imputacion;
         }
@@ -32,6 +34,7 @@ namespace Datos.Repositorios
 
         public Imputacion ObtenerImputacionPorId(int idImputacion)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             var Imputacion = context.Imputacion.Where(p => p.Id == idImputacion).FirstOrDefault();
             return Imputacion;
         }
@@ -69,11 +72,13 @@ namespace Datos.Repositorios
 
         public Imputacion ObtenerImputacionPorDescripcion(string oDescripcion)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Imputacion.Where(p => p.Descripcion == oDescripcion).FirstOrDefault();
         }
 
         public Imputacion ObtenerImputacionPorDescripcion(string oDescripcion, int oCodigo)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Imputacion.Where(p => p.Descripcion == oDescripcion && p.Id== oCodigo).FirstOrDefault();
         }
 
@@ -86,6 +91,7 @@ namespace Datos.Repositorios
         /// <returns></returns>
         public Imputacion ObtenerImputacionPorDescripcion(string oDescripcion, int oIdSubrubro, int oIdImputacion)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Imputacion.Where(p => p.Descripcion == oDescripcion && p.IdSubRubro == oIdSubrubro && p.Id != oIdImputacion).FirstOrDefault();
         }
 
@@ -93,6 +99,7 @@ namespace Datos.Repositorios
 
         public List<Imputacion> GetAllImputacion()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<Imputacion> listaImputacion = context.Imputacion.Where(P=> P.Activo == true).ToList();
             listaImputacion = listaImputacion.OrderBy(p => p.Descripcion).ToList();
             return listaImputacion;
@@ -101,6 +108,7 @@ namespace Datos.Repositorios
 
         public int EliminarImputacion(int idImputacion)
         {
+
             Imputacion ImputacionExistente = ObtenerImputacionPorId(idImputacion);
             ImputacionExistente.Activo = false;
             context.SaveChanges();
@@ -110,7 +118,8 @@ namespace Datos.Repositorios
 
         public Imputacion GetImputacionPorAlias(string alias)
         {
-        return context.Imputacion.Where(p => p.Alias == alias).FirstOrDefault();
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.Imputacion.Where(p => p.Alias == alias).FirstOrDefault();
              
         }
 
@@ -135,6 +144,44 @@ namespace Datos.Repositorios
             imputacion.UltimaModificacion = model.UltimaModificacion;
             context.SaveChanges();
 
+        }
+
+    //    public List<Diario> GetCompraFactura_(string Periodo)
+    //    {
+    //        return context.Diario                    
+    //                 .Where(d => d.Tipo == "CF" && d.Periodo==Periodo && d.Activo==true)
+    //                 .Select(u => new 
+    //                {  
+    //                     Descripcion =  u.Descripcion,
+    //                    Debe =  1500, //(u.Importe > 0) ? u.Importe : 0,
+    //                    Haber =1500 //(u.Importe < 0) ? u.Importe : 0
+    //                }).ToList();
+    //}
+
+        // en desuso ej. para sp
+        public List<Diario> GetCompraFactura(string Periodo)
+        {
+            List<Diario> lista = new List<Diario>();
+
+            try
+            {
+                SqlParameter param1 = new SqlParameter("@Periodo", Periodo);
+                 lista = context.Database.SqlQuery<Diario>("Diario_of_Periodo @Periodo", param1).ToList();
+            }
+            catch (Exception ex)
+            {
+                lista = null;
+                Console.Write(ex.Message);
+            }
+            return lista;
+
+        }
+
+        public IList<Diario> GetAsientosContables(string periodo, string tipo)
+        {
+            IList<Diario> lista = null;
+            lista = context.Diario.Where(i => i.Activo == true && i.Tipo == tipo  && i.Periodo == periodo).ToList();                      
+            return lista;
         }
     }
 }

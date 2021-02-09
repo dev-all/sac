@@ -51,10 +51,10 @@
 
                                         @Html.ValidationMessageFor(m => m.idRol, "", new { @class = "text-danger" })
                                         @Html.DropDownListFor(model => model.idRol,
-     (IEnumerable<SelectListItem>)(new SelectList(Model.Roles.Select(x => new { Value = x.idRol, Text = x.descripcion }),
-                    "Value",
-                    "Text"))
-     , "Seleccionar Rol...", new { @class = "form-control" })
+                                                             (IEnumerable<SelectListItem>)(new SelectList(Model.Roles.Select(x => new { Value = x.idRol, Text = x.descripcion }),
+                                                                            "Value",
+                                                                            "Text"))
+                                                             , "Seleccionar Rol...", new { @class = "form-control" })
 
                                     </div>
                                 </div>

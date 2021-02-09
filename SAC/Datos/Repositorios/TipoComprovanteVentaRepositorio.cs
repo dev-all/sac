@@ -18,6 +18,7 @@ namespace Datos.Repositorios
 
         public TipoComprobanteVenta GetTipoComprobanteVentaPorId(int id)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             var TipoComprobante = context.TipoComprobanteVenta.Where(p => p.Id == id).FirstOrDefault();
             return TipoComprobante;
         }
@@ -25,12 +26,14 @@ namespace Datos.Repositorios
         
         public int ObtenerNroPago(int id)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             var NroPago = context.TipoComprobanteVenta.Where(p => p.Id == id).Select(p => p.Numero).FirstOrDefault();
             return int.Parse(NroPago);
         }
 
         public int ActualizarNroPago (int id, int nroPago)
         {
+
             var TipoComprobante = context.TipoComprobanteVenta.Where(p => p.Id == id).First();
             TipoComprobante.Numero = nroPago.ToString();
             return context.SaveChanges();

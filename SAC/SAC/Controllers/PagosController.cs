@@ -481,9 +481,9 @@ namespace SAC.Controllers
         {
 
             var datosUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+
             List<CompraFacturaViewModel> listaFacturasSeleccionadas = new List<CompraFacturaViewModel>();
             listaFacturasSeleccionadas = Session["Facturas_Pagar"] as List<CompraFacturaViewModel>;
-
             PagosFacturasModelView mediosPago = new PagosFacturasModelView();
             mediosPago = Session["mediosPago"] as PagosFacturasModelView;
             mediosPago.idUsuario_ = datosUsuario.IdUsuario;

@@ -1432,6 +1432,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Diario_Imputacion">
+    <End Role="Imputacion" Type="Self.Imputacion" Multiplicity="1" />
+    <End Role="Diario" Type="Self.Diario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imputacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Diario">
+        <PropertyRef Name="IdImputacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Imputacion_SubRubro">
     <End Role="SubRubro" Type="Self.SubRubro" Multiplicity="0..1" />
     <End Role="Imputacion" Type="Self.Imputacion" Multiplicity="*" />
@@ -2031,6 +2043,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <AssociationSet Name="FK_Contacto_Persona" Association="Self.FK_Contacto_Persona">
       <End Role="Persona" EntitySet="Persona" />
       <End Role="Contacto" EntitySet="Contacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Diario_Imputacion" Association="Self.FK_Diario_Imputacion">
+      <End Role="Imputacion" EntitySet="Imputacion" />
+      <End Role="Diario" EntitySet="Diario" />
     </AssociationSet>
     <AssociationSet Name="FK_Imputacion_SubRubro" Association="Self.FK_Imputacion_SubRubro">
       <End Role="SubRubro" EntitySet="SubRubro" />

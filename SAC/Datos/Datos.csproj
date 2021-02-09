@@ -112,6 +112,7 @@
     <Compile Include="ModeloDeDatos\CompraIvaVista.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\CompraRegistroDetalle.cs" />
     <Compile Include="ModeloDeDatos\Contacto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>

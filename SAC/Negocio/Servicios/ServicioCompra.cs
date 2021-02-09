@@ -687,7 +687,7 @@ namespace Negocio.Servicios
                         
                         ///------- Registro el Comprobante de Pago --------- CompraFacturaModel
                         /// 1 - Ctes de Pago con saldo positivo a favor de la empresa
-                        /// 2 - New Cte de Pago 
+                        /// 2 - New cbte de Pago 
 
                         // 1
                         if (Factura.NumeroFactura > 0 && Factura.IdTipoComprobante == 98)
@@ -721,13 +721,14 @@ namespace Negocio.Servicios
 
                             // creamos el nuevo registro CompraFacturaModel 
 
-                            //tengo q agregar al modelo los datos que necesito para insertar aca, ej idmoneda, proveedor, cotizacion
+                            //tengo q agregar al modelo los datos que necesito para insertar , ej idmoneda, proveedor, cotizacion
                             //graba en la sesion y puedo recuperar aca ya que es un pago para todas las facturas cargadas
 
                             Factura.NumeroFactura = nroPago;
-                            Factura.IdProveedor = facturaProveedor.Id;   //traer 
+                            Factura.IdProveedor = facturaProveedor.Id;   
                             Factura.IdMoneda = 1;
-                            // Factura.IdMoneda = 0; //oMediosPago.id agregar al modelo para traer aca
+                            // Factura.IdMoneda = 0;
+                            //oMediosPago.id agregar al modelo para traer aca
 
                             Factura.IdTipoComprobante = 98;
                             Factura.Total = oMediosPago.montoTotal_;
@@ -738,7 +739,7 @@ namespace Negocio.Servicios
                             Factura.Saldo = saldoPagoTotal;
                             Factura.Fecha = DateTime.Now;
                             Factura.FechaPago = DateTime.Now;
-                            Factura.CotizacionDePago = 0; //traer 
+                            Factura.CotizacionDePago = 0; //----------------Falta obtener desde AFIP  
                             Factura.Concepto = oMediosPago.ConceptoPago_;
                             Factura.NumeroPago = nroPago;
                             Factura.Activo = true;
@@ -752,29 +753,43 @@ namespace Negocio.Servicios
                             Factura.TipoMoneda = null;
                             Factura.TipoComprobante = null;
                             //------ Periodo ---------
-                            string anio = DateTime.Now.Year.ToString();
-                            string mes = DateTime.Now.Month.ToString();
-                            if (mes.Length < 2)
-                            {
-                                mes = "0" + mes;
-                            }
-                            anio = anio.Substring(anio.Length - 2, 2);
-                            Factura.Periodo = int.Parse(anio + mes);
-                            
+                            Factura.Periodo = int.Parse(DateTime.Now.ToString("yyMM"));
+
                             // add codigo al cbte del pago  y utilizar el mismo para todos los asientos de pago
                             var CodigoAsiento = oServicioContable.GetNuevoCodigoAsiento() + 1;
-
+                            Factura.Auxiliar = CodigoAsiento;
                             //----------- Registro la "Factura del Pago" --------------
-                            var Retorno = RegistrarPago(Factura);
+                            var nuevoPagoRegistrado = RegistrarPago(Factura);
 
-                            SaveTrackingCompras(oListaFacturas, Retorno);
+                            SaveTrackingCompras(oListaFacturas, nuevoPagoRegistrado);
 
-                          
-
-                            if (Retorno != null)
+                            if (nuevoPagoRegistrado != null)
                             {
 
-                                //    //------aca insertamos los medios de pago
+                                //// -------------- Inicio registro de asientos
+                                DiarioModel asiento = new DiarioModel();
+                                asiento.Codigo = nuevoPagoRegistrado.Auxiliar; /// se registra el codigo diario el tema es que en facturas se registra en el compraiva
+                                asiento.Fecha = nuevoPagoRegistrado.Fecha;
+                                asiento.Periodo = DateTime.Now.ToString("yyMM");
+                                asiento.Tipo = "CP"; //Compras Pago
+                                asiento.Cotiza = nuevoPagoRegistrado.Cotizacion;
+                                asiento.Asiento = nuevoPagoRegistrado.Auxiliar; // Duplicado???
+                                asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
+                                asiento.Moneda = oServicioTipoMoneda.GetTipoMoneda(nuevoPagoRegistrado.IdMoneda).Descripcion;
+                                asiento.DescripcionMa = "Ingreso Pago Proveedor";
+
+                                ///// asiento Inputacion Proveedor en valor - negativo
+                                //var asientoDiario = servicioContable.InsertAsientoContable(null
+                                //                                          , (facturaRegistrada.CompraIva.Total) * (-1)
+                                //                                          , asiento
+                                //                                          , facturaRegistrada
+                                //                                          , proveedor.IdImputacionProveedor ?? -1);
+                                ///// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
+                                //servicioImputacion.AsintoContableGeneral(asientoDiario);
+
+
+
+                                //-------------aca insertamos los medios de pago
                                 if (oMediosPago.idCuentaBancariaSelec_ > 0)
                                 {
                                     FacturaMedioPago.IdFacturaCompra = Retorno.Id;
@@ -1046,5 +1061,23 @@ namespace Negocio.Servicios
 
             }
         }
+
+
+        /*estos se usaen registro compras*/
+
+        public List<CompraRegistroDetalleModel> RegistroComprasDetalle (int idProveedor, int mesFecha, int anioFecha)
+        {
+            try
+            {
+                return Mapper.Map<List<CompraRegistroDetalle>, List<CompraRegistroDetalleModel>>(repositorio.GetCompraRegistroDetalle(idProveedor, mesFecha, anioFecha));
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+            }
+        }
+
+
     }
 }

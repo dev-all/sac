@@ -292,6 +292,22 @@ namespace SAC.Controllers
             }
         }
 
+        /*esto se usa para registro compras*/
+        public ActionResult RegistroCompras(string searchIdProveedor, string mesFecha, string anioFecha)
+        {
+            CompraRegistroModelView model = new CompraRegistroModelView();
+            if (!string.IsNullOrEmpty(searchIdProveedor))
+            {
+                if (!string.IsNullOrEmpty(mesFecha) && !string.IsNullOrEmpty(anioFecha))
+                {
+                    int idProveedor = int.Parse(searchIdProveedor);
+                    model.Proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedorCompleto(idProveedor));
+                    model.DetalleFacturas = Mapper.Map<List<CompraRegistroDetalleModel>, List<CompraRegistroDetalleModelView>>(servicioCompra.RegistroComprasDetalle(idProveedor, int.Parse(mesFecha), int.Parse(anioFecha)));
+                }
+            }
+            return View(model);
 
+        }
+       
     }
 }

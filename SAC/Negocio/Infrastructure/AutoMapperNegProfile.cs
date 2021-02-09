@@ -11,6 +11,8 @@ namespace Agenda.Infrastructure
     {
         public AutoMapperNegProfile()
         {
+            CreateMap<CompraRegistroDetalle, CompraRegistroDetalleModel>();
+            CreateMap<CompraRegistroDetalleModel, CompraRegistroDetalle>();
 
             CreateMap<TipoPago, TipoPagoModel>();
             CreateMap<TipoPagoModel, TipoPago>();
