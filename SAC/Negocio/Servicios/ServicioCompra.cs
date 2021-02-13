@@ -1087,11 +1087,11 @@ namespace Negocio.Servicios
 
         /*estos se usaen registro compras*/
 
-        public List<CompraRegistroDetalleModel> RegistroComprasDetalle(int idProveedor, int mesFecha, int anioFecha)
+        public List<CompraRegistroDetalleModel> RegistroComprasDetalle (int mesFecha, int anioFecha)
         {
             try
             {
-                return Mapper.Map<List<CompraRegistroDetalle>, List<CompraRegistroDetalleModel>>(repositorio.GetCompraRegistroDetalle(idProveedor, mesFecha, anioFecha));
+                return Mapper.Map<List<CompraRegistroDetalle>, List<CompraRegistroDetalleModel>>(repositorio.GetCompraRegistroDetalle( mesFecha, anioFecha));
             }
             catch (Exception ex)
             {

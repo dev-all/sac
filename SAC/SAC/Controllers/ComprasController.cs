@@ -9,6 +9,10 @@ using Negocio.Modelos;
 using AutoMapper;
 using Newtonsoft.Json;
 using SAC.Models.Request;
+using System.Data.SqlClient;
+using System.IO;
+using System.Xml.Linq;
+using System.Text;
 
 namespace SAC.Controllers
 {
@@ -292,21 +296,228 @@ namespace SAC.Controllers
         }
 
         /*esto se usa para registro compras*/
-        public ActionResult RegistroCompras(string searchIdProveedor, string mesFecha, string anioFecha)
+        public ActionResult RegistroCompras(string mesFecha, string anioFecha)
         {
             CompraRegistroModelView model = new CompraRegistroModelView();
-            if (!string.IsNullOrEmpty(searchIdProveedor))
+
+            if (!string.IsNullOrEmpty(mesFecha) && !string.IsNullOrEmpty(anioFecha))
             {
-                if (!string.IsNullOrEmpty(mesFecha) && !string.IsNullOrEmpty(anioFecha))
-                {
-                    int idProveedor = int.Parse(searchIdProveedor);
-                    model.Proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedorCompleto(idProveedor));
-                    model.DetalleFacturas = Mapper.Map<List<CompraRegistroDetalleModel>, List<CompraRegistroDetalleModelView>>(servicioCompra.RegistroComprasDetalle(idProveedor, int.Parse(mesFecha), int.Parse(anioFecha)));
+                //int idProveedor = int.Parse(searchIdProveedor);
+                //model.Proveedor = Mapper.Map<ProveedorModel, ProveedorModelView>(servicioProveedor.GetProveedorCompleto(idProveedor));
+                model.DetalleFacturas = Mapper.Map<List<CompraRegistroDetalleModel>, List<CompraRegistroDetalleModelView>>(servicioCompra.RegistroComprasDetalle(int.Parse(mesFecha), int.Parse(anioFecha)));
+                Session["Datos"] = model.DetalleFacturas;
+
+                //List<CompraRegistroDetalleModelView> listResultado = new List<CompraRegistroDetalleModelView>();
+                //List<string> Archivo = new List<string>();
+
+                //listResultado = Session["Datos"] as List<CompraRegistroDetalleModelView>;
+               
                 }
-            }
+
             return View(model);
 
         }
-       
+
+
+        public ActionResult GenerarTxtComprasComprobante()
+        {
+
+            List<CompraRegistroDetalleModelView> listResultado = new List<CompraRegistroDetalleModelView>();
+             List<string> Archivo = new List<string>();
+            listResultado = Session["Datos"] as List<CompraRegistroDetalleModelView>;
+
+              StringBuilder sb = new StringBuilder();
+
+            foreach (CompraRegistroDetalleModelView i in listResultado)
+            {
+                string anio = "";
+                string mes = "";
+                string dia = "";
+                string comprobante = "";
+                string ptoVenta = "";
+                string nroComprobante = "";
+                string despachoImportacion = "                ";//16 espacios ??
+                string codigoVendedor = "80";
+                string idVendedor = "";
+                string nombreVendedor = "";
+                string importeNeto = "";
+               // string alicuotaIva = "";
+                string impuestoLiquidado = "";
+                string total = "";
+                string netoNoGravado = "000000000000000";//15 espacios 
+                string operacionesExentas = "000000000000000";//15 espacios 
+                string impuestosNacionales = "000000000000000";//15 espacios 
+                string ingresosBrutos = "";
+                string impuestosMunicipales = "000000000000000";//15 espacios 
+                string impuestosInternos = "000000000000000";//15 espacios 
+                string nombreMoneda = "";
+                string tipoCambio = "0001000000";
+                string cantidadAlicuota = "1";
+                string codigoOperacion = " ";
+                string creditoFiscalComputable = "000000000000000";//no se que es
+                string otrosTributos = "000000000000000";//no se que es
+                string cuitEmisor = "00000000000";
+                string denominacionEmisor = "                              ";
+                string ivaComision = "000000000000000";
+
+
+                int importeNetoInt = 0;
+                // int alicuotaIvaInt = 0;
+                int impuestoLiquidadoInt = 0;
+                int totalInt = 0;
+                int ingresosBrutosInt = 0;
+
+                anio = i.Fecha.Year.ToString();
+
+                if (i.Fecha.Month < 10)
+                {
+                    mes ="0"+ i.Fecha.Month.ToString();
+                }
+                else
+                {
+                    mes = i.Fecha.Month.ToString();
+                }
+                
+                if (i.Fecha.Day < 10)
+                {
+                    dia = "0"+ i.Fecha.Day.ToString();
+                }
+                else
+                {
+                    dia = i.Fecha.Day.ToString();
+                }
+
+                comprobante = i.IdComprobante.ToString("D3");
+                ptoVenta = i.PuntoVenta.ToString("D5");
+                nroComprobante = i.NumeroFactura.ToString("D20");
+                despachoImportacion = despachoImportacion.ToString();
+                netoNoGravado = netoNoGravado.ToString();
+                operacionesExentas = operacionesExentas.ToString();
+                impuestosNacionales = impuestosNacionales.ToString();
+
+                if (i.ISIB != null)
+                {
+                    ingresosBrutos = i.ISIB.ToString().Replace(".", "");
+                    ingresosBrutosInt = int.Parse(ingresosBrutos);
+                    ingresosBrutos = ingresosBrutosInt.ToString("D15");
+                }
+                else
+                {
+                    ingresosBrutos = "000000000000000";
+                }
+
+
+                //PadLeft se usa con los string
+                idVendedor = i.Cuit.PadLeft(20, '0');
+                nombreVendedor = i.Empresa.PadRight (30, ' ');
+                denominacionEmisor = denominacionEmisor.ToString();
+
+                impuestosMunicipales = impuestosMunicipales.ToString();
+
+                impuestosInternos = impuestosInternos.ToString();
+                //esto cambiar
+                nombreMoneda = "PES";
+                codigoOperacion = codigoOperacion.ToString();
+
+                if (i.Total != null)
+                {
+                total = i.Total.ToString().Replace(".", "");
+                totalInt = int.Parse(total);
+                total = totalInt.ToString("D15");
+                }
+                else
+                {
+                    total = "000000000000000";
+                }
+                    
+
+                importeNeto = i.Neto.ToString().Replace(".", "");
+                importeNetoInt = int.Parse(importeNeto);
+                importeNeto = importeNetoInt.ToString("D15");
+
+                //alicuotaIva = i.PercepcionIva.ToString().Replace(".", "");
+                //alicuotaIvaInt = int.Parse(alicuotaIva);
+                //alicuotaIva = alicuotaIvaInt.ToString("D4");
+
+                impuestoLiquidado = i.PercepcionImporteIva.ToString().Replace(".", "");
+                impuestoLiquidadoInt = int.Parse(impuestoLiquidado);
+                impuestoLiquidado = impuestoLiquidadoInt.ToString("D15");
+
+                var Datos =anio+mes+dia+ comprobante + ptoVenta + nroComprobante + despachoImportacion + codigoVendedor +  idVendedor+ nombreVendedor + total + netoNoGravado + operacionesExentas+ impuestoLiquidado + impuestosNacionales+ ingresosBrutos + impuestosMunicipales + impuestosInternos + nombreMoneda + tipoCambio + cantidadAlicuota + codigoOperacion + creditoFiscalComputable + otrosTributos + cuitEmisor + denominacionEmisor+ ivaComision;
+
+                //Archivo.Add(anio + mes + dia + comprobante + ptoVenta + nroComprobante + despachoImportacion + codigoVendedor + idVendedor + total + netoNoGravado + operacionesExentas + impuestoLiquidado + impuestosNacionales + ingresosBrutos + impuestosMunicipales + impuestosInternos + nombreMoneda + tipoCambio + cantidadAlicuota + codigoOperacion + creditoFiscalComputable + otrosTributos + cuitEmisor + denominacionEmisor + ivaComision);
+                sb.AppendLine(Datos);
+            }
+
+            byte[] byteBuffer = ASCIIEncoding.ASCII.GetBytes(sb.ToString());
+            sb.Clear();
+            // returno el archivo creado
+            Response.Clear();
+            Response.ContentType = "text/plain";
+            Response.BinaryWrite(byteBuffer);
+            Response.AddHeader("content-disposition", "attachment;filename=LIBRO_IVA_DIGITAL_COMPRAS_CBTE.txt");
+            Response.End();
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult GenerarTxtComprasAlicuotas()
+        {
+
+            List<CompraRegistroDetalleModelView> listResultado = new List<CompraRegistroDetalleModelView>();
+           // List<string> Archivo = new List<string>();
+            listResultado = Session["Datos"] as List<CompraRegistroDetalleModelView>;
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (CompraRegistroDetalleModelView i in listResultado)
+            {
+                string comprobante = "";
+                string ptoVenta = "";
+                string nroComprobante = "";
+                string codigoVendedor = "80";
+                string idVendedor = "";
+                string importeNeto = "";
+                string alicuotaIva = "";
+                string impuestoLiquidado = "";
+                int importeNetoInt = 0;
+                int alicuotaIvaInt = 0;
+                int impuestoLiquidadoInt = 0;
+
+                comprobante = i.IdComprobante.ToString("D3");
+                ptoVenta = i.PuntoVenta.ToString("D5");
+                nroComprobante = i.NumeroFactura.ToString("D20");
+
+                idVendedor = i.Cuit.PadLeft(20, '0');
+                importeNeto = i.Neto.ToString().Replace(".", "");
+                importeNetoInt = int.Parse(importeNeto);
+                importeNeto = importeNetoInt.ToString("D15");
+
+                alicuotaIva = i.PercepcionIva.ToString().Replace(".", "");
+                alicuotaIvaInt = int.Parse(alicuotaIva);
+                alicuotaIva = alicuotaIvaInt.ToString("D4");
+
+                impuestoLiquidado = i.PercepcionImporteIva.ToString().Replace(".", "");
+                impuestoLiquidadoInt = int.Parse(impuestoLiquidado);
+                impuestoLiquidado = impuestoLiquidadoInt.ToString("D15");
+
+                var Datos = comprobante + ptoVenta + nroComprobante + codigoVendedor + idVendedor + importeNeto + alicuotaIva + impuestoLiquidado;
+
+                //Archivo.Add(comprobante + ptoVenta + nroComprobante + codigoVendedor + idVendedor + importeNeto + alicuotaIva + impuestoLiquidado);
+                sb.AppendLine(Datos);
+            }
+         
+            byte[] byteBuffer = ASCIIEncoding.ASCII.GetBytes(sb.ToString());
+            sb.Clear();
+            // returno el archivo creado
+            Response.Clear();
+            Response.ContentType = "text/plain";
+            Response.BinaryWrite(byteBuffer);
+            Response.AddHeader("content-disposition", "attachment;filename=LIBRO_IVA_DIGITAL_COMPRAS_ALICUOTAS.txt");
+            Response.End();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

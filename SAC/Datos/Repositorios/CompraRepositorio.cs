@@ -135,7 +135,7 @@ namespace Datos.Repositorios
         //}
 
 
-        public List<CompraRegistroDetalle> GetCompraRegistroDetalle(int idProveedor, int mesFecha, int anioFecha)
+        public List<CompraRegistroDetalle> GetCompraRegistroDetalle(int mesFecha, int anioFecha)
         {
             context.Configuration.LazyLoadingEnabled = false;
 
@@ -143,18 +143,22 @@ namespace Datos.Repositorios
                             .Include("Proveedor")
                             .Include("CompraIva")
                             .Include("TipoComprobante")
-                            .Where(p => p.IdProveedor == idProveedor && p.Activo == true && p.Fecha.Month.Equals(mesFecha) && p.Fecha.Year.Equals(anioFecha) && p.IdTipoComprobante != 98)
+                            .Where(p => p.Activo == true && p.Fecha.Month.Equals(mesFecha) && p.Fecha.Year.Equals(anioFecha) && p.IdTipoComprobante != 98)
                             .Select(p => new CompraRegistroDetalle()
                             {
                                 IdComprobante = p.TipoComprobante.Id,
+                                Cuit = p.Proveedor.Cuit,
                                 Empresa = p.Proveedor.Nombre,
                                 Cbte = p.TipoComprobante.Denominacion,
                                 PuntoVenta = p.PuntoVenta,
                                 NumeroFactura = p.NumeroFactura,
                                 Fecha = p.Fecha,
+                                PercepcionIva = p.CompraIva.PercepcionIva,
+                                PercepcionImporteIva = p.CompraIva.PercepcionImporteIva,
                                 Neto = p.CompraIva.NetoGravado,
                                 Gasto = 0,
-                                Iva = p.CompraIva.TotalIva,
+                               // Iva = p.CompraIva.TotalIva,
+                                Iva = 0,
                                 ISIB = p.CompraIva.TotalPercepciones,
                                 Total = p.CompraIva.NetoGravado + p.CompraIva.TotalIva + p.CompraIva.TotalPercepciones
                             }).ToList();

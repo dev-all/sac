@@ -15,7 +15,7 @@
             <div class="card-body">
 
                 <h5 class="card-title">
-                    Registros de compras
+                    Registros de compras <strong>(Consulta Iva Compras) </strong>
                 </h5>
 
                 <div class="card-body">
@@ -26,60 +26,38 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-                    <div class="row m-b-10">
+                        <div class="row m-b-10">
 
-                        <div class="col-xlg-4 col-lg-4 col-md-4">
-                            <div class="form-group row">
-                                <small class="text-right col-md-3">Proveedor</small>
-                                <div class="col-md-9">
-                                    <input type="hidden" id="searchIdProveedor" name="searchIdProveedor" />
-                                    <input class="form-control form-control-sm" id="NombreProveedor" name="ProveedorNombre" type="text" placeholder="Nombre del proveedor">
-                         
+                            <div class="col-xlg-2 col-lg-2 col-md-2 ">
+                                <div class="form-group row text-right">
+                                    <small class="text-right col-md-6">Mes</small>
+                                    <div class="col-md-6">
+                                        <input type="number" id="mesFecha" name="mesFecha" class="form-control form-control-sm" data-validation-required-message="Mes">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-xlg-2 col-lg-2 col-md-2">
-                            <div class="form-group row">
-                                <small class="text-right col-md-6">Mes</small>
-                                <div class="col-md-6">
-                                    <input type="number" id="mesFecha" name="mesFecha" class="form-control form-control-sm" data-validation-required-message="Mes">
+                            <div class="col-xlg-3 col-lg-3 col-md-3">
+                                <div class="form-group row text-left">
+                                    <small class="text-right col-md-3">Año</small>
+                                    <div class="col-md-4">
+                                        <input type="number" id="anioFecha" name="anioFecha" class="form-control form-control-sm" data-validation-required-message="Año">
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-secondary"><i class="fa  fa-search"></i> Buscar </button>
                                 </div>
+
+
                             </div>
-                        </div>
-                        <div class="col-xlg-2 col-lg-2 col-md-2">
-                            <div class="form-group row">
-                                <small class="text-right col-md-6">Año</small>
-                                <div class="col-md-6">
-                                    <input type="number" id="anioFecha" name="anioFecha" class="form-control form-control-sm" data-validation-required-message="Año">
-                                </div>
+                            @*<div class="col-xlg-2 col-lg-2 col-md-2">
+
+                                </div>*@
+
+                            <div class="col-xlg-3 col-lg-3 col-md-3">
+                                <button type="button" class="btn btn-sm btn-secondary" onclick="DescargartxtAlicuota()"><i class="fa fa-file-text"></i> Exportar </button>
+                                <button type="button" class="btn btn-sm btn-secondary" onclick="DescargartxtComprasComprobante()"><i class="fa fa-file-text-o"></i> ExpComprobante </button>
                             </div>
-                        </div>
-                        <div class="col-xlg-2 col-lg-2 col-md-2">
-                            <button type="submit" class="btn btn-sm btn-secondary"><i class="fa  fa-search"></i> Buscar </button>
+
                         </div>
 
-
-
-                    </div>
-
-                        if (Model.Proveedor.Nombre != null)
-                        {
-                            <div id="DatosProveedor" class="row bg-light text-left">
-                                <div class="col-md-3">
-                                    <small>Razón Social:</small> <small id="RazonSocialProv">@Model.Proveedor.Nombre.ToString().ToUpper()</small>
-                                </div>
-                                <div class="col-md-3">
-                                    <small>Tipo Iva:</small> <small id="TipoIvaProv">@Model.Proveedor.TipoIva.Descripcion.ToString().ToUpper()</small>
-                                </div>
-                                <div class="col-md-2">
-                                    <small>CUIT:</small> <small id="CuitProv">@Model.Proveedor.Cuit.ToString().ToUpper()</small>
-                                </div>
-                                <div class="col-md-4">
-                                    <small>Dirección:</small> <small id="DireccionProv">@Model.Proveedor.Direccion.ToString().ToUpper()</small>
-                                </div>
-                            </div>
-                        }
 
                     }
 
@@ -105,19 +83,19 @@
                                     <tbody>
                                         @foreach (var item in Model.DetalleFacturas)
                                         {
-                                           
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
-                                            <td class="text-center">@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
-                                            <td class="text-right">@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
-                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Fecha)</td>
-                                            <td class="text-center">@Html.DisplayFor(modelItem => item.Empresa)</td>
-                                            <td class="text-right">@Html.DisplayFor(modelItem => item.Neto)</td>
-                                            <td class="text-right">@Html.DisplayFor(modelItem => item.Gasto)</td>
-                                            <td class="text-right">@Html.DisplayFor(modelItem => item.Iva)</td>
-                                            <td class="text-right">@Html.DisplayFor(modelItem => item.ISIB)</td>
-                                            <td class="text-right">@Html.DisplayFor(modelItem => item.Total)</td>
-                                        </tr>
+
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Cbte)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.PuntoVenta)</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.NumeroFactura)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Fecha)</td>
+                                                <td class="text-center">@Html.DisplayFor(modelItem => item.Empresa)</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.Neto)</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.Gasto)</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.Iva)</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.ISIB)</td>
+                                                <td class="text-right">@Html.DisplayFor(modelItem => item.Total)</td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -143,8 +121,43 @@
     </div>
 </div>
 
+@using (Html.BeginForm("GenerarTxtComprasAlicuotas", "Compras", FormMethod.Post, new { @id = "frmDescargarAlicuota" }))
+{
+
+}
+
+@using (Html.BeginForm("GenerarTxtComprasComprobante", "Compras", FormMethod.Post, new { @id = "frmDescargarComprobante" }))
+{
+
+}
+
+<script>
+    function DescargartxtAlicuota() {
+        var frmDescargar = document.getElementById("frmDescargarAlicuota");
+        var nFilas = $("#tblCtaCteProveedorDetalles tr").length;
+        if (nFilas > 1) {
+            frmDescargar.submit();
+        }
+        
+    }
+
+
+    function DescargartxtComprasComprobante() {
+        var frmDescargar = document.getElementById("frmDescargarComprobante");
+        var nFilas = $("#tblCtaCteProveedorDetalles tr").length;
+        if (nFilas > 1) {
+            frmDescargar.submit();
+        }
+    }
+
+</script>
+
 
 @section Scripts{
+
+
+
+
 
     <!-- This is data table -->
     <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>

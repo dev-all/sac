@@ -243,7 +243,7 @@ $(document).ready(function () {
         'scrollCollapse': true,
         'dom': 'Bfrtip',
         'buttons': [
-            'pdf'
+            'pdf', 'excel'
         ]
     });
 });
