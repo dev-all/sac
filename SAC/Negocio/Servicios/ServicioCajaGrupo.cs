@@ -89,7 +89,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "error");
                 throw new Exception();
 
             }
@@ -103,18 +103,57 @@ namespace Negocio.Servicios
         public CajaGrupoModel GuardarGrupoCaja(CajaGrupoModel model)
         {
 
+            CajaGrupoModel modelo = new CajaGrupoModel();
             try
             {
+
+                modelo = GetGrupoCajaPorCodigo(model.Codigo);
+
+
+                if (model.IdImputacion==0 )
+
+                {
+                    _mensaje("Debe seleccionar un Numero de Imputacion", "error");
+
+                    return Mapper.Map<GrupoCaja, CajaGrupoModel>(cajaGrupoRepositorio.GetGrupoCajaPorCodigo(model.Codigo));
+
+                }
+
+
+
+
+                if (modelo != null)
+                {
+                   
                 
-                model.Activo = true;               
-                model.UltimaModificacion = DateTime.Now;
-                var newModel = cajaGrupoRepositorio.Insertar(Mapper.Map< CajaGrupoModel,GrupoCaja>(model));
-                _mensaje("Se registro correctamente", "ok");
-                return Mapper.Map<GrupoCaja,CajaGrupoModel> (newModel);               
+
+                    _mensaje("El codigo que intenta Ingresar ya Existe", "error");
+
+                    return Mapper.Map<GrupoCaja, CajaGrupoModel>(cajaGrupoRepositorio.GetGrupoCajaPorCodigo(model.Codigo));
+
+                }
+
+                else
+
+
+                {
+
+                    model.Activo = true;
+                    model.UltimaModificacion = DateTime.Now;
+                    var newModel = cajaGrupoRepositorio.Insertar(Mapper.Map<CajaGrupoModel, GrupoCaja>(model));
+                    _mensaje("Se registro correctamente", "ok");
+
+                    return Mapper.Map<GrupoCaja, CajaGrupoModel>(newModel);
+
+
+                }
+
+
+
             }
             catch (Exception )
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "error");
                 throw new Exception();
 
             }
@@ -130,6 +169,17 @@ namespace Negocio.Servicios
             try
             {
 
+                if (model.IdImputacion == 0)
+
+                {
+                    _mensaje("Debe seleccionar un Numero de Imputacion", "error");
+
+                    return Mapper.Map<GrupoCaja, CajaGrupoModel>(cajaGrupoRepositorio.GetGrupoCajaPorCodigo(model.Codigo));
+
+                }
+
+
+
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 var newModel = cajaGrupoRepositorio.ActualizarGrupoCaja(Mapper.Map<CajaGrupoModel, GrupoCaja>(model));              
                 _mensaje("Se actualizo correctamente", "ok");
@@ -138,7 +188,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "error");
                 throw new Exception();
 
             }
@@ -159,7 +209,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "error");
                 throw new Exception();
 
             }

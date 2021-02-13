@@ -17,10 +17,13 @@ namespace Negocio.Servicios
    public class ServicioCaja : ServicioBase
     {
         private CajaRepositorio CajaRepositorio ;
-      
+        private TarjetaOperacionRepositorio otarjetaoperacionrepositorio ;
+
+
         public ServicioCaja()
         {
-            CajaRepositorio = kernel.Get<CajaRepositorio>();            
+            CajaRepositorio = kernel.Get<CajaRepositorio>();
+            otarjetaoperacionrepositorio = kernel.Get<TarjetaOperacionRepositorio>();
         }
 
         #region "Metodos de Lectura de Datos"
@@ -36,11 +39,12 @@ namespace Negocio.Servicios
             }
             catch (Exception e)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
                 return null;
             }
         }
 
+      
         public List<CajaModel> GetAllCajaPorIdCierre(int v)
         {
             try
@@ -49,7 +53,7 @@ namespace Negocio.Servicios
             }
             catch (Exception e)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
                 return null;
             }
         }
@@ -62,7 +66,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
                 return null;
             }
         }
@@ -76,7 +80,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
                 return null;
             }
         }
@@ -92,12 +96,12 @@ namespace Negocio.Servicios
 
 
                 var retorno = CajaRepositorio.DeleteCaja(IdCaja);
-                _mensaje("Se eliminó correctamente", "ok");
+                _mensaje?.Invoke("Se eliminó correctamente", "ok");
 
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -110,7 +114,6 @@ namespace Negocio.Servicios
 
         public CajaModel GuardarCaja(CajaModel model)
         {
-
             try
             {
                 
@@ -118,11 +121,26 @@ namespace Negocio.Servicios
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = CajaRepositorio.Insertar(Mapper.Map< CajaModel,Caja>(model));
                 _mensaje("Se registro correctamente", "ok");
+
+                // Si viene con valor la tarjeta
+                if (model.IdTarjeta > 0 && model.ImporteTarjeta > 0)
+                {
+                    InsertarOperacionTarjeta(model);
+                }
+                // Si viene con valor el cheque
+
+                if (model.IdCheque > 0 && model.ImporteCheque > 0)
+                {
+                    //InsertarOperacionTarjeta(model);
+                }
+
+
+
                 return Mapper.Map<Caja,CajaModel> (newModel);               
             }
             catch (Exception )
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -138,20 +156,61 @@ namespace Negocio.Servicios
             try
             {
 
+                if (model.IdTarjeta > 0)
+                {
+
+                    InsertarOperacionTarjeta(model);
+                }
+
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 var newModel = CajaRepositorio.ActualizarCaja(Mapper.Map<CajaModel, Caja>(model));              
-                _mensaje("Se actualizo correctamente", "ok");
+                _mensaje?.Invoke("Se actualizo correctamente", "ok");
                 
                 return Mapper.Map<Caja, CajaModel>(newModel);
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
 
         }
+
+
+
+      
+
+
+
+
+        public TarjetaOperacionModel InsertarOperacionTarjeta(CajaModel Ocaja)
+
+
+
+        {
+            TarjetaOperacionModel oTarjetaOperacionModel = new TarjetaOperacionModel ();
+            oTarjetaOperacionModel.IdTarjeta = Convert.ToInt32( Ocaja.IdTarjeta);
+            oTarjetaOperacionModel.IdGrupoCaja = Convert.ToInt32(Ocaja.IdGrupoCaja);
+            oTarjetaOperacionModel.Descripcion = Convert.ToString(Ocaja.Concepto);
+            oTarjetaOperacionModel.Importe = Convert.ToDecimal(Ocaja.ImporteTarjeta);
+            oTarjetaOperacionModel.UltimaModificacion = DateTime.Now;
+            oTarjetaOperacionModel.Activo = true;
+
+            oTarjetaOperacionModel.IdUsuario = Convert.ToInt32(Ocaja.IdUsuario);        
+          
+
+            var oModel = Mapper.Map<TarjetaOperacionModel, TarjetaOperacion>(oTarjetaOperacionModel);
+            //_mensaje("El cheque se ingresó correctamente", "ok");
+            return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(otarjetaoperacionrepositorio.Agregar(oModel));
+
+
+
+
+        }
+
+
+
 
         public List<CajaModel> getGrupoCajaFecha(int idgrupocaja, DateTime fechadesde, DateTime fechahasta)
         {
@@ -177,8 +236,25 @@ namespace Negocio.Servicios
             }
             catch (Exception e)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
                 return null;
+            }
+        }
+
+        public void ActualizarCierreCaja(CajaModel model)
+        {
+            try
+            {
+
+                model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                 CajaRepositorio.ActualizarCierreCaja(Mapper.Map<CajaModel, Caja>(model));
+                _mensaje?.Invoke("Se actualizo correctamente", "ok");
+            }
+            catch (Exception)
+            {
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error - ActualizarCierreCaja. contacte al administrador", "erro");
+                throw new Exception();
+
             }
         }
 

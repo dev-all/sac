@@ -223,8 +223,6 @@
     <EntitySet Name="TrackingFacturaPagoCompra" EntityType="SAC_Model.TrackingFacturaPagoCompra" />
     <EntitySet Name="CompraIvaVista" EntityType="SAC_Model.CompraIvaVista" />
     <EntitySet Name="CompraFacturaPago" EntityType="SAC_Model.CompraFacturaPago" />
-    <EntitySet Name="TarjetaOperacion" EntityType="SAC_Model.TarjetaOperacion" />
-    <EntitySet Name="Tarjetas" EntityType="SAC_Model.Tarjetas" />
     <AssociationSet Name="FK_CompraFacturaPago_BancoCuenta" Association="SAC_Model.FK_CompraFacturaPago_BancoCuenta">
       <End Role="BancoCuenta" EntitySet="BancoCuenta" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
@@ -237,17 +235,9 @@
       <End Role="Chequera" EntitySet="Chequera" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
     </AssociationSet>
-    <AssociationSet Name="FK_CompraFacturaPago_Tarjetas" Association="SAC_Model.FK_CompraFacturaPago_Tarjetas">
-      <End Role="Tarjetas" EntitySet="Tarjetas" />
-      <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-    </AssociationSet>
     <AssociationSet Name="FK_CompraFacturaPago_TipoPago" Association="SAC_Model.FK_CompraFacturaPago_TipoPago">
       <End Role="TipoPago" EntitySet="TipoPago" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TarjetaOperacion_Tarjetas" Association="SAC_Model.FK_TarjetaOperacion_Tarjetas">
-      <End Role="Tarjetas" EntitySet="Tarjetas" />
-      <End Role="TarjetaOperacion" EntitySet="TarjetaOperacion" />
     </AssociationSet>
     <EntitySet Name="Diario" EntityType="SAC_Model.Diario" />
     <EntitySet Name="Imputacion" EntityType="SAC_Model.Imputacion" />
@@ -290,10 +280,6 @@
       <End Role="GrupoCaja" EntitySet="GrupoCaja" />
       <End Role="Caja" EntitySet="Caja" />
     </AssociationSet>
-    <AssociationSet Name="FK_Caja_Tarjetas" Association="SAC_Model.FK_Caja_Tarjetas">
-      <End Role="Tarjetas" EntitySet="Tarjetas" />
-      <End Role="Caja" EntitySet="Caja" />
-    </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_CompraIva" Association="SAC_Model.FK_CompraFactura_CompraIva">
       <End Role="CompraIva" EntitySet="CompraIva" />
       <End Role="CompraFactura" EntitySet="CompraFactura" />
@@ -329,6 +315,20 @@
     <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura1" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1">
       <End Role="CompraFactura" EntitySet="CompraFactura" />
       <End Role="TrackingFacturaPagoCompra" EntitySet="TrackingFacturaPagoCompra" />
+    </AssociationSet>
+    <EntitySet Name="TarjetaOperacion" EntityType="SAC_Model.TarjetaOperacion" />
+    <EntitySet Name="Tarjetas" EntityType="SAC_Model.Tarjetas" />
+    <AssociationSet Name="FK_Caja_Tarjetas" Association="SAC_Model.FK_Caja_Tarjetas">
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
+      <End Role="Caja" EntitySet="Caja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFacturaPago_Tarjetas" Association="SAC_Model.FK_CompraFacturaPago_Tarjetas">
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
+      <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TarjetaOperacion_Tarjetas" Association="SAC_Model.FK_TarjetaOperacion_Tarjetas">
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
+      <End Role="TarjetaOperacion" EntitySet="TarjetaOperacion" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accion">
@@ -1755,41 +1755,9 @@
     <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_CompraFacturaPago_BancoCuenta" FromRole="CompraFacturaPago" ToRole="BancoCuenta" />
     <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="CompraFacturaPago" ToRole="Cheque" />
     <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_CompraFacturaPago_Chequera" FromRole="CompraFacturaPago" ToRole="Chequera" />
-    <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="CompraFacturaPago" ToRole="Tarjetas" />
     <NavigationProperty Name="TipoPago" Relationship="SAC_Model.FK_CompraFacturaPago_TipoPago" FromRole="CompraFacturaPago" ToRole="TipoPago" />
     <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFacturaPago" ToRole="CompraFactura" />
-  </EntityType>
-  <EntityType Name="TarjetaOperacion">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdTarjeta" Type="Int32" Nullable="false" />
-    <Property Name="IdGrupoCaja" Type="Int32" Nullable="false" />
-    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Conciliacion" Type="Boolean" />
-    <Property Name="NumeroPago" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_TarjetaOperacion_Tarjetas" FromRole="TarjetaOperacion" ToRole="Tarjetas" />
-  </EntityType>
-  <EntityType Name="Tarjetas">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdImputacion" Type="Int32" Nullable="false" />
-    <Property Name="Numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="Tarjetas" ToRole="CompraFacturaPago" />
-    <NavigationProperty Name="TarjetaOperacion" Relationship="SAC_Model.FK_TarjetaOperacion_Tarjetas" FromRole="Tarjetas" ToRole="TarjetaOperacion" />
-    <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_Tarjetas" FromRole="Tarjetas" ToRole="Caja" />
+    <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="CompraFacturaPago" ToRole="Tarjetas" />
   </EntityType>
   <Association Name="FK_CompraFacturaPago_BancoCuenta">
     <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
@@ -1827,18 +1795,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CompraFacturaPago_Tarjetas">
-    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="0..1" />
-    <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tarjetas">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFacturaPago">
-        <PropertyRef Name="IdTarjeta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CompraFacturaPago_TipoPago">
     <End Type="SAC_Model.TipoPago" Role="TipoPago" Multiplicity="0..1" />
     <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
@@ -1848,18 +1804,6 @@
       </Principal>
       <Dependent Role="CompraFacturaPago">
         <PropertyRef Name="IdTipoPago" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TarjetaOperacion_Tarjetas">
-    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="1" />
-    <End Type="SAC_Model.TarjetaOperacion" Role="TarjetaOperacion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tarjetas">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TarjetaOperacion">
-        <PropertyRef Name="IdTarjeta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2137,18 +2081,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Caja_Tarjetas">
-    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="0..1" />
-    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Tarjetas">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Caja">
-        <PropertyRef Name="IdTarjeta" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CompraFactura_CompraIva">
     <End Type="SAC_Model.CompraIva" Role="CompraIva" Multiplicity="0..1" />
     <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
@@ -2254,6 +2186,74 @@
       </Principal>
       <Dependent Role="TrackingFacturaPagoCompra">
         <PropertyRef Name="IdPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TarjetaOperacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTarjeta" Type="Int32" Nullable="false" />
+    <Property Name="IdGrupoCaja" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Conciliacion" Type="Boolean" />
+    <Property Name="NumeroPago" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_TarjetaOperacion_Tarjetas" FromRole="TarjetaOperacion" ToRole="Tarjetas" />
+  </EntityType>
+  <EntityType Name="Tarjetas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+    <Property Name="Numero" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_Tarjetas" FromRole="Tarjetas" ToRole="Caja" />
+    <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="Tarjetas" ToRole="CompraFacturaPago" />
+    <NavigationProperty Name="TarjetaOperacion" Relationship="SAC_Model.FK_TarjetaOperacion_Tarjetas" FromRole="Tarjetas" ToRole="TarjetaOperacion" />
+  </EntityType>
+  <Association Name="FK_Caja_Tarjetas">
+    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="0..1" />
+    <End Type="SAC_Model.Caja" Role="Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tarjetas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Caja">
+        <PropertyRef Name="IdTarjeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFacturaPago_Tarjetas">
+    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="0..1" />
+    <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tarjetas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFacturaPago">
+        <PropertyRef Name="IdTarjeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TarjetaOperacion_Tarjetas">
+    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="1" />
+    <End Type="SAC_Model.TarjetaOperacion" Role="TarjetaOperacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tarjetas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TarjetaOperacion">
+        <PropertyRef Name="IdTarjeta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -197,16 +197,13 @@ namespace Datos.Repositorios
 
         public List<Cliente> GetAllCliente()
         {
+            context.Configuration.LazyLoadingEnabled = false;
+
             List<Cliente> listaCliente = context.Cliente
                 .Include("TipoCliente")
                 .Where(p => p.Activo == true).ToList();
        
             return listaCliente;
-
-
-
-          
-
         }
 
 
@@ -218,6 +215,7 @@ namespace Datos.Repositorios
         /// </summary>
         public Cliente GetClientePorId(int IdCliente)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.Cliente
                 .Include("TipoCliente")
                 .Where(p => p.Id == IdCliente).First();
@@ -237,15 +235,12 @@ namespace Datos.Repositorios
 
         public List<Cliente> GetClientePorTipoCliente(int idTipoCliente)
         {
-
-
+            context.Configuration.LazyLoadingEnabled = false;
             List<Cliente> listaCliente = context.Cliente
                .Include("TipoCliente")
                .Where(p => p.Activo == true && p.IdTipoCliente == idTipoCliente).ToList();
 
             return listaCliente;
-
-
 
 
             //List<Cliente> p = (from c in context.Cliente
@@ -262,13 +257,8 @@ namespace Datos.Repositorios
         ///  obtener el Cliente por el Nombre o Codigo
         /// </summary>
         public List<Cliente> GetClientePorNombre(string strCliente)
-
-
-
-
-
         {
-
+            context.Configuration.LazyLoadingEnabled = false;
             List<Cliente> listaCliente = context.Cliente
               .Include("TipoCliente")
               .Where(p => p.Activo == true && p.Nombre.Contains(strCliente)).ToList();
@@ -281,8 +271,7 @@ namespace Datos.Repositorios
 
         public List<Cliente> GetClientePorIdNombre(int idTipoCliente, string strCliente)
         {
-
-
+            context.Configuration.LazyLoadingEnabled = false;
             List<Cliente> p = (from c in context.Cliente
                                where c.Activo == true && c.Nombre == strCliente && c.IdTipoCliente == idTipoCliente
                                select c).ToList();

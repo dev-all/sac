@@ -39,7 +39,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje(ex.Message, "error");
+                 _mensaje?.Invoke(ex.Message, "error");
                 return null;
             }
         }
@@ -142,7 +142,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                 _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
             }
                
@@ -214,14 +214,14 @@ namespace Negocio.Servicios
                 cta.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 cta.Activo = true;
                 ImputacionRepositorio.ActualizarAsientoImputacion(Mapper.Map<ImputacionModel, Imputacion>(cta));
-                _mensaje("Se registro el asineto contable correctamente", "ok");
+                 _mensaje?.Invoke("Se registro el asineto contable correctamente", "ok");
 
 
 
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 throw new Exception();
             }
         }
@@ -234,7 +234,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                  _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -334,7 +334,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
                 return null;
             }
         }
@@ -346,7 +346,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
                 return null;
             }
         }

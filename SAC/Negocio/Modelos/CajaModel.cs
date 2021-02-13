@@ -24,6 +24,10 @@ namespace Negocio.Modelos
         public Nullable<decimal> ImporteDolar { get; set; }
         public Nullable<decimal> ImporteTarjeta { get; set; }
         public Nullable<decimal> ImporteCheque { get; set; }
+
+        public Nullable<int> IdTarjeta { get; set; }
+        public Nullable<int> IdCheque { get; set; }
+
         public Nullable<int> IdCajaSaldo { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }

@@ -28,5 +28,7 @@ namespace SAC.Models
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
         public List<Tarjetas> ListaTarjeta { get; set; }
+
+        public ICollection<CajaModelView> Caja { get; set; }
     }
 }

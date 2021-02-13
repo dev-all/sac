@@ -50,6 +50,11 @@ namespace SAC.Models
 
         [Display(Name = "Importe Cheque")]
         public decimal ImporteCheque { get; set; }
+
+
+        public int IdTarjeta { get; set; }
+        public int IdCheque { get; set; }
+
         public int IdCajaSaldo { get; set; }
         public bool Activo { get; set; }
         public int IdUsuario { get; set; }

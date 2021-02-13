@@ -11,7 +11,11 @@ namespace SAC.Models
     public class CajaGrupoModelView
     {
         public int Id { get; set; }
+
+        [Required]
         public string Codigo { get; set; }
+
+        [Required]
         public string Concepto { get; set; }
 
         [Display(Name = "Neto Total Pesos")]
@@ -36,6 +40,9 @@ namespace SAC.Models
         public decimal? ParcialTarjetas { get; set; }
         [Display(Name = "Neto Parcial Depósitos")]
         public decimal? ParcialDepositos { get; set; }
+
+        [Required]
+        [Display(Name = "Imputacion")]
         public int IdImputacion { get; set; }
         public bool NoBorrar { get; set; }
         public bool Activo { get; set; }

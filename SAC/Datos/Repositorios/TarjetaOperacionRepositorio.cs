@@ -15,6 +15,12 @@ namespace Datos.Repositorios
             this.context = contexto;
         }
 
+        public TarjetaOperacion Agregar(TarjetaOperacion tarjetaOperacion)
+        {
+            return Insertar(tarjetaOperacion);
+        }
+
+
         public List<TarjetaOperacion> GetAllTarjetasOperacion()
         {
 

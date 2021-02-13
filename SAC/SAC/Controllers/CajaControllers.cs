@@ -20,6 +20,13 @@ namespace SAC.Controllers
         private ServicioCajaGrupo servicioCajaGrupo = new ServicioCajaGrupo();
         private ServicioCajaSaldo servicioCajaSaldo = new ServicioCajaSaldo();
 
+        private ServicioTarjeta oservicioTarjeta = new ServicioTarjeta();
+
+        private ServicioCheque oservicioCheque = new ServicioCheque();
+
+        private ServicioTarjetaOperacion oservicioTarjetaOperacion = new ServicioTarjetaOperacion();
+
+
 
         public CajaController()
         {
@@ -35,6 +42,9 @@ namespace SAC.Controllers
             model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.GetAllCaja());
             model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
             CargarCajaGrupo();
+            CargarTarjetas();
+            CargarCheques();
+
             return View(model);
 
 
@@ -220,8 +230,38 @@ namespace SAC.Controllers
 
         }
 
+        private void CargarTarjetas()
+        {
+
+            List<TarjetaModelView> ListaCajaGrupo = Mapper.Map<List<TarjetaModel>, List<TarjetaModelView>>(oservicioTarjeta.GetAllTarjetas());
+            List<SelectListItem> retornoListaCajaGrupo = null;
+            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Descripcion
+            })).ToList();
+            retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "Tarjeta", Value = "" });
+            ViewBag.ListaTarjeta = retornoListaCajaGrupo;
 
 
+
+        }
+
+
+        private void CargarCheques()
+            {
+
+            List<ChequeModelView> ListaCajaGrupo = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oservicioCheque.GetAllCheque());
+            List<SelectListItem> retornoListaCajaGrupo = null;
+            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.NumeroCheque.ToString ()
+            })).ToList();
+            retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "Cheque", Value = "" });
+            ViewBag.ListaCheque = retornoListaCajaGrupo;
+
+        }
 
     }
 

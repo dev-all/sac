@@ -50,7 +50,10 @@ namespace Negocio.Modelos
         //public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }
-        
+
+        public virtual ICollection<CajaModel> Caja { get; set; }
+     
+
 
     }
 }

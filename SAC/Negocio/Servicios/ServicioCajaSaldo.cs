@@ -25,13 +25,6 @@ namespace Negocio.Servicios
         }
 
 
-
-      
-
-
-
-
-
         #region "Metodos de Lectura de Datos"
 
 
@@ -105,9 +98,19 @@ namespace Negocio.Servicios
 
         }
 
-
-
-     
+        public int GetNuevoNumeroCierre()
+        {
+            try
+            {
+                return CajaSaldoRepositorio.GetNuevoNumeroCierre();
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                return 0;
+            }
+            //throw new NotImplementedException();
+        }
 
         public CajaSaldoModel GuardarCajaSaldo(CajaSaldoModel model)
         {
@@ -135,10 +138,8 @@ namespace Negocio.Servicios
 
         public CajaSaldoModel ActualizarCajaSaldo(CajaSaldoModel model)
         {
-
             try
             {
-
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 var newModel = CajaSaldoRepositorio.ActualizarCajaSaldo(Mapper.Map<CajaSaldoModel, CajaSaldo>(model));              
                 _mensaje("Se actualizo correctamente", "ok");
@@ -153,10 +154,27 @@ namespace Negocio.Servicios
             }
 
         }
-   
+
+        public CajaSaldoModel ActualizarImporteCierreCajaSaldo(CajaSaldoModel model)
+        {
+            try
+            {
+                model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
+                CajaSaldo newModel = CajaSaldoRepositorio.ActualizarImporteCierreCajaSaldo(Mapper.Map<CajaSaldoModel, CajaSaldo>(model));
+                _mensaje?.Invoke("Se actualizo correctamente", "ok");
+                return Mapper.Map<CajaSaldo, CajaSaldoModel>(newModel);
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+
+            }
+        }
+
 
         #endregion
- }
+    }
 
 }
 

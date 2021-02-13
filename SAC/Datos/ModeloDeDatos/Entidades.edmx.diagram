@@ -98,14 +98,10 @@
         <EntityTypeShape EntityType="SAC_Model.TrackingFacturaPagoCompra" Width="1.5" PointX="31.625" PointY="33.75" />
         <EntityTypeShape EntityType="SAC_Model.CompraIvaVista" Width="1.5" PointX="20.75" PointY="19.75" />
         <EntityTypeShape EntityType="SAC_Model.CompraFacturaPago" Width="1.5" PointX="35" PointY="25.75" />
-        <EntityTypeShape EntityType="SAC_Model.TarjetaOperacion" Width="1.5" PointX="35" PointY="21.5" />
-        <EntityTypeShape EntityType="SAC_Model.Tarjetas" Width="1.5" PointX="32.75" PointY="23.5" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_BancoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Cheque" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Chequera" />
-        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_TipoPago" />
-        <AssociationConnector Association="SAC_Model.FK_TarjetaOperacion_Tarjetas" />
         <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="34.125" PointY="39.25" />
         <EntityTypeShape EntityType="SAC_Model.Imputacion" Width="1.5" PointX="31.875" PointY="38.375" />
         <AssociationConnector Association="SAC_Model.FK_Diario_Imputacion" />
@@ -120,7 +116,6 @@
         <AssociationConnector Association="SAC_Model.FK_Caja_CajaTipoMovimiento" />
         <AssociationConnector Association="SAC_Model.FK_Caja_Cheque" />
         <AssociationConnector Association="SAC_Model.FK_Caja_GrupoCaja" />
-        <AssociationConnector Association="SAC_Model.FK_Caja_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_CompraIva" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_Imputacion" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_Proveedor" />
@@ -130,6 +125,11 @@
         <AssociationConnector Association="SAC_Model.FK_Retencion_CompraFactura" />
         <AssociationConnector Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura" />
         <AssociationConnector Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1" />
+        <EntityTypeShape EntityType="SAC_Model.TarjetaOperacion" Width="1.5" PointX="12.625" PointY="6" />
+        <EntityTypeShape EntityType="SAC_Model.Tarjetas" Width="1.5" PointX="10.375" PointY="6" />
+        <AssociationConnector Association="SAC_Model.FK_Caja_Tarjetas" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Tarjetas" />
+        <AssociationConnector Association="SAC_Model.FK_TarjetaOperacion_Tarjetas" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

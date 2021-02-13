@@ -11,6 +11,9 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     List<SelectListItem> ListaCodigoCaja = (List<SelectListItem>)ViewBag.Listapagina;
+    List<SelectListItem> ListaTarjetas = (List<SelectListItem>)ViewBag.ListaTarjeta;
+
+    List<SelectListItem> ListaCheques = (List<SelectListItem>)ViewBag.ListaCheque;
 
     <div class="form-horizontal">
 
@@ -168,29 +171,31 @@
 
                                 <div class="row">
                                     <div class="col-xlg-1 col-lg-1 col-md-1 col-sm-1"></div>
-                                        <div class="col-xlg-5 col-lg-5 col-md-5 col-sm-5">
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label form-control-sm" })
-                                                @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                                @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger form-control-sm" })
-                                            </div>
-                                        </div>
-                                        <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-3">
-                                            <div class="form-group">
-                                                <label for="readonly5" class="control-label form-control-sm">Grupo Caja</label>
-                                                @Html.DropDownList("IdGrupoCaja", ListaCodigoCaja, null, new { @class = "form-control form-control-sm" })
-                                                @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
-                                            </div>
-                                        </div>
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <div class="form-group">
+                                    <div class="col-xlg-5 col-lg-5 col-md-5 col-sm-5">
+                                        <div class="form-group">
 
-                                                @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
-                                                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control form-control-sm fechadatepicker" } })
-                                                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-                                            </div>
+
+                                            @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label form-control-sm" })
+                                            @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger form-control-sm" })
                                         </div>
                                     </div>
+                                    <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-3">
+                                        <div class="form-group">
+                                            <label for="readonly5" class="control-label form-control-sm">Grupo Caja</label>
+                                            @Html.DropDownList("IdGrupoCaja", ListaCodigoCaja, null, new { @class = "form-control form-control-sm" })
+                                            @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
+                                        </div>
+                                    </div>
+                                    <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
+                                        <div class="form-group">
+
+                                            @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
+                                            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control form-control-sm fechadatepicker" } })
+                                            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-xlg-1 col-lg-1 col-md-1 col-sm-1"></div>
@@ -215,9 +220,15 @@
 
                                     <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
                                         <div class="form-group">
-                                            <label class="control-label form-control-sm"> Imp. Depósito </label>
-                                            @Html.EditorFor(model => model.ImporteDeposito, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteDeposito, "", new { @class = "text-danger form-control-sm" })
+                                            <label class="control-label form-control-sm"> Imp. Cheque </label>
+                                            @Html.EditorFor(model => model.ImporteCheque, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.ImporteCheque, "", new { @class = "text-danger form-control-sm" })
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            @Html.DropDownList("IdCheque", ListaCheques, null, new { @class = "form-control form-control-sm" })
+                                           
                                         </div>
                                     </div>
 
@@ -227,15 +238,18 @@
                                             @Html.EditorFor(model => model.ImporteTarjeta, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
                                             @Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger form-control-sm" })
                                         </div>
+                                        <div class="form-group">
+
+                                            @Html.DropDownList("IdTarjeta", ListaTarjetas, null, new { @class = "form-control form-control-sm" })
+                                           
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                        <div class="form-group">
-                                            <label class="control-label form-control-sm"> Imp. Cheque </label>
-                                            @Html.EditorFor(model => model.ImporteCheque, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteCheque, "", new { @class = "text-danger form-control-sm" })
-                                        </div>
-                                    </div>
+
+
+
+
 
                                 </div>
 
@@ -249,7 +263,7 @@
                                     </div>
                                 </div>
 
-                                </div>
+                            </div>
 
 
                         </div>

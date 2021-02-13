@@ -52,7 +52,7 @@ namespace Datos.Repositorios
 
             GrupoCajaExistente.ImporteFinalPesos= Model.ImporteFinalPesos;
             GrupoCajaExistente.ImporteFinalDolares = Model.ImporteFinalDolares;
-            GrupoCajaExistente.ImporteInicialCheques = Model.ImporteInicialCheques;
+            GrupoCajaExistente.ImporteFinalCheques = Model.ImporteFinalCheques;
             GrupoCajaExistente.ImporteFinalTarjetas = Model.ImporteFinalTarjetas;
             GrupoCajaExistente.ImporteFinalDepositos = Model.ImporteFinalDepositos;
 
@@ -78,9 +78,12 @@ namespace Datos.Repositorios
         public CajaSaldo GetUltimoCierre()
         {
 
-            return context.CajaSaldo.Where(acc=> acc.Activo == true).OrderByDescending(acc => acc.NumeroCierrre).FirstOrDefault();
+            return context.CajaSaldo.Where(acc=> acc.Activo == true).OrderByDescending(acc => acc.NumeroCierrre).FirstOrDefault();          
+        }
 
-          
+        public int GetNuevoNumeroCierre()
+        {
+            return context.CajaSaldo.Where(acc => acc.Activo == true).Max( n => n.NumeroCierrre) + 1;
         }
 
         public int DeleteCaja(int IdCaja)
@@ -93,9 +96,18 @@ namespace Datos.Repositorios
 
         }
 
-
-      
-    
-       
+        public CajaSaldo ActualizarImporteCierreCajaSaldo(CajaSaldo Model)
+        {
+            CajaSaldo GrupoCajaExistente = GetCajaSaldoPorId(Model.Id);
+            GrupoCajaExistente.ImporteFinalPesos = Model.ImporteFinalPesos;
+            GrupoCajaExistente.ImporteFinalDolares = Model.ImporteFinalDolares;
+            GrupoCajaExistente.ImporteFinalCheques = Model.ImporteFinalCheques;
+            GrupoCajaExistente.ImporteFinalTarjetas = Model.ImporteFinalTarjetas;
+            GrupoCajaExistente.ImporteFinalDepositos = Model.ImporteFinalDepositos;
+            GrupoCajaExistente.UltimaModificacion = Model.UltimaModificacion;
+            GrupoCajaExistente.IdUsuario = Model.IdUsuario;
+            context.SaveChanges();
+            return GrupoCajaExistente;
+        }
     }
 }

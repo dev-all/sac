@@ -30,6 +30,7 @@ namespace SAC.Controllers
         private ServicioTipoRetencion oServicioTipoRetencion = new ServicioTipoRetencion();
         private ServicioRetencion oServicioRetencion = new ServicioRetencion();
         private ServicioTrackingFacturaPagoCompra oServicioTrackingFacturaPagoCompra = new ServicioTrackingFacturaPagoCompra();
+      
         public PagosController()
         {
             oServicioCuentaCteProveedor._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
@@ -106,7 +107,6 @@ namespace SAC.Controllers
 
             return View(oPagosFacturasModel);
         }
-
 
         [HttpPost]
         public ActionResult Index(PagosFacturasModelView pagosFacturasModelView)

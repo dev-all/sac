@@ -176,5 +176,13 @@ namespace Datos.Repositorios
             return caja;
         }
 
+        public object ActualizarCierreCaja(Caja model)
+        {
+            Caja GrupoCajaExistente = GetCajaPorId(model.Id);           
+            GrupoCajaExistente.IdGrupoCaja = model.IdGrupoCaja;
+            GrupoCajaExistente.UltimaModificacion = model.UltimaModificacion;
+            context.SaveChanges();
+            return GrupoCajaExistente;
+        }
     }
 }

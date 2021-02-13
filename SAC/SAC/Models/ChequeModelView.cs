@@ -46,6 +46,8 @@ namespace SAC.Models
         public BancoCuentaModelView Banco { get; set; }
         public TipoMonedaModelView TipoMoneda { get; set; }
 
+        public ICollection<CajaModelView> Caja { get; set; }
+
         //public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }

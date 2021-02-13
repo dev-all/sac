@@ -52,9 +52,11 @@ namespace Negocio.Servicios
                 }
                 if (imputacionModel !=null) { 
                 asiento.IdImputacion = imputacionModel.Id;
+
                 asiento.Importe = (facturaRegistrada.IdMoneda == 1) ? ( total) : (total * facturaRegistrada.Cotizacion);
+
                 asiento.Descripcion = imputacionModel.Descripcion;
-                asiento.Titulo = imputacionModel.Descripcion;
+                asiento.Titulo = asiento.Titulo ??  imputacionModel.Descripcion;
                 Diario asientoContable = diarioRepositorio.InsertarDiario(Mapper.Map<DiarioModel, Diario>(asiento));
 
                 return asientoContable;

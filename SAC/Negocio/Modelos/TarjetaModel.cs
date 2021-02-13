@@ -25,5 +25,11 @@ namespace Negocio.Modelos
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
+        public  ICollection<CajaModel> Caja { get; set; }
+
+        public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+
+        public ICollection<TarjetaOperacion> TarjetaOperacion { get; set; }
+
     }
 }
