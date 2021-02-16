@@ -46,7 +46,7 @@ namespace SAC.Models
         public virtual PieNotaModelView PieNota { get; set; }
         public virtual TipoClienteModelView TipoCliente { get; set; }
         public virtual TipoMonedaModelView TipoMoneda { get; set; }
-         public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
+        public virtual ICollection<ClienteDireccionModelView> ClienteDireccion { get; set; }
 
            
        

@@ -16,7 +16,7 @@
         padding: .25rem;
     }
 </style>
-
+ 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.IdCliente)
@@ -107,11 +107,11 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Codigo</th>
-                                                        <th style="max-width: 33%;" class="text-center">Nombre</th>
+                                                        <th style="max-width: 33%;">Nombre</th>
                                                         <th class="text-center">Telefono</th>
                                                         <th class="text-center">Imputacion</th>
                                                         <th class="text-center">Tipo Cliente</th>
-                                                        <th style="max-width: 33%;">Accion</th>
+                                                        <th class="text-center">Accion</th>
 
 
                                                     </tr>
@@ -313,9 +313,11 @@
                 "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
                 "order": [[2, 'asc']],
                 'paging': true,
+                'pageLength':'200',
                 'lengthChange': false,
                 'searching': true,
                 'ordering': true,
+                'scrollY': '400px',
                 'info': true,
                 'autoWidth': true,
                 'dom': 'Bfrtip',

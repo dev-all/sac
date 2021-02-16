@@ -93,5 +93,11 @@ namespace Negocio.Servicios
 
 
         }
+
+        public List<ChequeModel> BuscarCheque(int idCliente, int idbanco, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            List<ChequeModel> listaCheque = Mapper.Map<List<Cheque>, List<ChequeModel>>(pChequeRepositorio.BuscarCheque(idCliente,idbanco, fechaDesde, fechaHasta));
+            return listaCheque;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace SAC.Models
 
         [Display(Name = "Nro Cliente")]
         [Required]
-                public Nullable<int> IdCliente { get; set; }
+        public Nullable<int> IdCliente { get; set; }
 
         [Display(Name = "Codigo Afip")]
         public string CodigoAfip { get; set; }
@@ -26,17 +26,17 @@ namespace SAC.Models
         [Display(Name = "Pais")]
         [Required]
         //[Range(1, 1000, ErrorMessage = "El valor del pais no corresponde")]
-        public int IdPais { get; set; }
+        public Nullable<int>  IdPais { get; set; }
 
         [Display(Name = "Provincia")]
         [Required]
         //[Range(1, 1000, ErrorMessage = "El valor del Provincia no corresponde")]
-        public int IdProvincia { get; set; }
+        public Nullable<int> IdProvincia { get; set; }
 
 
         [Display(Name = "Localidad")]
         [Required]
-        public int IdLocalidad { get; set; }
+        public Nullable<int> IdLocalidad { get; set; }
 
         [Display(Name = "Codico postal")]
         //[Range(1, 1000, ErrorMessage = "El valor del Telefono no corresponde")]
@@ -65,16 +65,10 @@ namespace SAC.Models
         public virtual PieNotaModelView PieNota { get; set; }
         public virtual TipoClienteModelView TipoCliente { get; set; }
         public virtual TipoMonedaModelView Moneda { get; set; }
-
         public virtual TipoIdiomaModelView Idioma { get; set; }
-
         public virtual PaisModelView Pais { get; set; }
-        public virtual ProvinciaModelView Provinca { get; set; }
+        public virtual ProvinciaModelView Provincia { get; set; }
         public virtual LocalidadModelView Localidad { get; set; }
-
-
-
-
 
 
         public List<ClienteDireccionModelView> ListaDireccion { get; set; }

@@ -34,7 +34,7 @@ namespace Datos.Repositorios
         public List<BancoCuenta> GetBancoPorNombre(string strBanco)
         {
             List<BancoCuenta> p = (from c in context.BancoCuenta
-                                   where c.Activo == true && c.BancoDescripcion.Contains(strBanco)
+                                   where c.Activo == true && c.Banco.Nombre.Contains(strBanco)
                                    select c).ToList();
             return p;
         }

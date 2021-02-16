@@ -3,6 +3,35 @@
 var importeChequePropio = 0;
 var importeChequeTercero = 0;
 
+
+function fnAsignarChequeCaja() {
+
+    var total = 0;
+    total = importeChequePropio + importeChequeTercero;
+    $("#montoChequesSeleccionados").val(total.toFixed(2));
+    $("#ModalCheques").modal('hide');
+    //fnCalcularDirefencia();
+
+    //agregue bre 29/01/2021
+    //SumarTotalPago();
+    //id cheque propio si obtiene en onCompleteIngresarCheque
+    //id cheques terceros
+
+    var i = 0;
+    $('.checkChequeTercero:checked').each(function (index) {
+        if (i > 0) {
+            $("#idChequesTerceros").val($("#idChequesTerceros").val() + ';' + $(this)[0].id);
+        }
+        else {
+            $("#idChequesTerceros").val("");
+            $("#idChequesTerceros").val($(this)[0].id);
+        }
+        i++;
+    });
+
+
+}
+
 function fnVerModalCheques() {
 
     $("#ImporteAPagarCheque").html($("#TotalAPagar").val());    
@@ -271,6 +300,7 @@ function onCompleteQuitarCheque(result) {
     $("#ModalConfirmaEliminar").modal("hide");
  
 }
+
 function onCompleteIngresarCheque(result) {
     $("#TblChequesPropios tbody tr").each(function (index) {
         $("#idChequesPropios").val(parseFloat($(this)[0].attributes[0].nodeValue));

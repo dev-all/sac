@@ -26,6 +26,8 @@ namespace SAC.Controllers
 
         private ServicioGrupoPresupuesto OservicioGrupoPresupuesto = new ServicioGrupoPresupuesto();
 
+        private ServicioPais OservicioPais = new ServicioPais();
+
 
 
         public ClienteController()
@@ -178,15 +180,7 @@ namespace SAC.Controllers
             CargarIdioma();
             CargarTipoMoneda();
             CargarPais();
-            CargarProvincia(1);
-            CargarLocalidad(2);
-
-
-
-           // var OCliente = (ClienteModel)System.Web.HttpContext.Current.Session["idCliente"]; ;
-
-           // OCliente.Id = System.Web.HttpContext.Current.Session["idCliente"];
-
+           
            ClienteDireccionModelView model;
 
             
@@ -194,7 +188,7 @@ namespace SAC.Controllers
             if (Id == 0)
             {
                 model = new ClienteDireccionModelView();
-                model.IdCliente = Convert.ToInt32(System.Web.HttpContext.Current.Session["idCliente"]); 
+                model.IdCliente = Convert.ToInt32(System.Web.HttpContext.Current.Session["IdCliente"]); 
                 
             }
             else
@@ -203,9 +197,12 @@ namespace SAC.Controllers
 
             }
 
-            
 
 
+            CargarProvincia(model.IdPais ?? 0);
+            CargarLocalidad(model.IdProvincia ?? 0);
+
+          
 
             return View(model);
         }
@@ -240,7 +237,20 @@ namespace SAC.Controllers
                     // return RedirectToAction(nameof(Index));
                     return RedirectToAction("DireccionCliente", new { IdCliente = model.IdCliente });
                 }
-                return View(model);
+
+
+
+                return RedirectToAction("DireccionCliente", new { IdCliente = model.IdCliente });
+
+              
+
+
+
+
+                return RedirectToAction("DireccionCliente", new { IdCliente = model.IdCliente });
+
+                // return View(model);
+              //  return RedirectToAction("DireccionCliente", new { I = model.Id });
 
             }
 
@@ -372,7 +382,7 @@ namespace SAC.Controllers
 
 
 
-        //combo cajagrupo
+        //combo CargarTipoCliente
         public void CargarTipoCliente()
         {
             List<TipoClienteModelView> ListaTipoCliente = Mapper.Map<List<TipoClienteModel>, List<TipoClienteModelView>>(OservicioTipoCliente.GetAllTipoCliente());
@@ -497,7 +507,6 @@ namespace SAC.Controllers
 
 
         //combo Pais
-
         public void CargarPais()
         {
             ServicioPais servicioPais = new ServicioPais();
@@ -515,9 +524,6 @@ namespace SAC.Controllers
             retornoListaPais.Insert(0, new SelectListItem { Text = "-- Seleccione País --", Value = "" });
             ViewBag.ListaPais = retornoListaPais;
         }
-
-
-     
 
         public void CargarProvincia(int oPais)
         {
@@ -557,63 +563,11 @@ namespace SAC.Controllers
 
 
 
-
-        //busco las provincias
-        public JsonResult GetlistaProvincias(int idPais)
-        {
-            //string a = "dsaasdasdad";
-            ServicioProvincia servicioProvincia = new ServicioProvincia();
-            List<ProvinciaModelView> ListaProvincia = Mapper.Map<List<ProvinciaModel>, List<ProvinciaModelView>>(servicioProvincia.GetAllProvinciasNombreId(idPais));
-            return Json(ListaProvincia, JsonRequestBehavior.AllowGet);
-        }
+     
 
 
 
-        //busco las provincias
-        public JsonResult GetlistaLocalidades(int idProvincia)
-        {
-            //string a = "dsaasdasdad";
-            ServicioLocalidad servicioLocalidad = new ServicioLocalidad();
-            List<LocalidadModelView> ListaLocalidad = Mapper.Map<List<LocalidadModel>, List<LocalidadModelView>>(servicioLocalidad.GetAllLocalidads(idProvincia));
-            return Json(ListaLocalidad, JsonRequestBehavior.AllowGet);
-        }
-
-        //busco el codigo postal de la localidad
-        public JsonResult GetCodigoPostal(int idLocalidad)
-        {
-            ServicioLocalidad servicioLocalidad = new ServicioLocalidad();
-            var CpLocalidad = servicioLocalidad.GetCodigoPostal(idLocalidad);
-            return Json(CpLocalidad, JsonRequestBehavior.AllowGet);
-        }
-
-
-
-
-         #region ArbolUbigeoJSON------------------------------------------------------------
-
-
-        //public ActionResult LlenarDistJSON(int idprov)
-        //{
-        //    var Lista = negArbolUbigeo.Instancia.ListarDist(Convert.ToInt32(idprov));
-        //    var JsonLista = Json(Lista.ToList(), JsonRequestBehavior.AllowGet);
-        //    return JsonLista;
-        //}
-
-        //public ActionResult LlenarProvJSON(int iddepat)
-        //{
-        //    var Lista = negArbolUbigeo.Instancia.ListarProv(Convert.ToInt32(iddepat));
-        //    var JsonLista = Json(Lista.ToList(), JsonRequestBehavior.AllowGet);
-        //    return JsonLista;
-        //}
-
-        //public ActionResult LlenarDeptJSON()
-        //{
-        //    var Lista = negArbolUbigeo.Instancia.ListarDept();
-        //    var JsonLista = Json(Lista.ToList(), JsonRequestBehavior.AllowGet);
-        //    return JsonLista;
-        //}
-
-        #endregion ArbolUbigeoJSON
+         
 
 
 

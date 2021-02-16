@@ -2834,6 +2834,7 @@
     <Content Include="Scripts\view\CtaCteProveedorDetalle.js" />
     <Content Include="Scripts\view\DatePickerReady.js" />
     <Content Include="Scripts\view\FacturaCompraScript.js" />
+    <Content Include="Scripts\view\TarjetaScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

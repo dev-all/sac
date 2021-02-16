@@ -6,4 +6,11 @@
 
 }).datepicker();
 
+
+$('.Calendario').datepicker({
+    format: "dd/mm/yyyy",
+    language: 'es',
+    autoclose: true,
+    todayHighlight: true
+}).datepicker('setDate', new Date()); 
 //'setDate', new Date()

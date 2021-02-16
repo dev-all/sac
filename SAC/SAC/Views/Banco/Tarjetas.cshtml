@@ -5,454 +5,307 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Tarjeta</h2>
-
-
-
-
-
-<style>
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        padding: 0.1em 1em;
-    }
-
-    .table td, .table th {
-        padding: .25rem;
-    }
-</style>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-
-
-
-
-
-    List<SelectListItem> ListaTarjeta = (List<SelectListItem>)ViewBag.ListaTarjeta;
-
-
-
-
+    @Html.Hidden("idTarjetaConciliar")
     <div class="form-horizontal">
-
-
         <div class="row">
-
             <div class="col-lg-12">
                 <div class="card">
-
                     <div class="card-body">
-
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-3">
+                                    <div class="form-group">
+                                        <small>Fecha Desde</small>
+                                        <input type="text" id="cFechaDesde" name="cFechaDesde"
+                                               class="form-control form-control-sm Calendario"
+                                               data-validation-required-message="Ingrese una fecha">
 
-                                    <div class="form-group row">
-
-                                        <label for="readonly5" class="control-label form-control-sm">Fecha Desde</label>
-                                        <div class="col-md-10">
-
-                                            @Html.TextBoxFor(x => x.cFechaDesde, "{0:yyyy-MM-dd}", new { @class = "form-control form-control-sm", @type = "date" })
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="col-md-10">
-                                        <div class="form-group row">
-                                            <label for="readonly5" class="control-label form-control-sm">Fecha Hasta</label>
-                                            <div class="col-md-12">
-
-                                                @Html.TextBoxFor(x => x.cFechaHasta, "{0:yyyy-MM-dd}", new { @class = "form-control form-control-sm", @type = "date" })
+                                    @*<div class="form-group row">
+                                            <label for="readonly5" class="control-label form-control-sm">Fecha Desde</label>
+                                            <div class="col-md-10">
+                                                @Html.TextBoxFor(x => x.cFechaDesde, "{0:yyyy-MM-dd}", new { @class = "form-control form-control-sm", @type = "date" })
                                             </div>
-                                        </div>
-                                    </div>
+                                        </div>*@
                                 </div>
                                 <div class="col-md-3">
-
-                                    <div class="form-group row">
-                                        <label for="readonly5" class="control-label form-control-sm">Opcion</label>
-                                        <div class="col-md-12">
-
-                                            @Html.DropDownList("IdTipoTarjeta", ListaTarjeta, null, new { @class = "form-control form-control-sm" })
-                                            @Html.ValidationMessage("IdTipoTarjeta", new { @class = "text-danger" })
-                                        </div>
+                                    <div class="form-group ">
+                                        <small>Fecha Desde</small>
+                                        <input type="text" id="cFechaHasta" name="cFechaHasta"
+                                               class="form-control form-control-sm Calendario"
+                                               data-validation-required-message="Ingrese una fecha">
                                     </div>
+                                    @*<div class="col-md-10">
+                                            <div class="form-group row">
+                                                <label for="readonly5" class="control-label form-control-sm">Fecha Hasta</label>
+                                                <div class="col-md-12">
 
+                                                    @Html.TextBoxFor(x => x.cFechaHasta, "{0:yyyy-MM-dd}", new { @class = "form-control form-control-sm", @type = "date" })
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <small>Tarjeta</small>
+                                        @Html.DropDownList("IdTipoTarjeta", (List<SelectListItem>)ViewBag.ListaTarjeta, null, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessage("IdTipoTarjeta", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Consultar</button>
+                                    @*@Html.ActionLink("Cancelar", "ConsultaCaja", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })*@
                                 </div>
                             </div>
 
                         </div>
-
                     </div>
-
-
-
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Consultar</button>
-                        @Html.ActionLink("Cancelar", "ConsultaCaja", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })
-
-                    </div>
-
-
-
                 </div>
-
-
-
-
             </div>
         </div>
+    </div>
 
 
-        @if (Model.CVisible)
-        {
+if (Model.ListaTarjetaOperacion.Count > 0)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
+                <div class="card-body">
 
-                        <div class="card-body">
+                    <div class="form-body">
 
-                            <div class="form-body">
-
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <div class="form-group ">
-
-                                            <h4 class="card-title">Consulta de Tarjetas Pendientes de Cobro</h4>
-
-
-
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group ">
+                                    <small>Consulta de Tarjetas Pendientes de Cobro</small>
+                                </div>
+                            </div>
+                        </div>
 
 
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive-md">
+
+                                    <table id="example23" class="table stylish-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Paga</th>
+                                                <th class="text-center">Fecha</th>
+                                                <th class="text-center">Codigo</th>
+                                                <th class="text-center">Descripcion</th>
+                                                <th class="text-center">Importe</th>
+                                                <th class="text-center">Datos</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @{
+                                                decimal TotalTarjeta = 0;
+
+                                            }
+
+                                            @foreach (var item in Model.ListaTarjetaOperacion)
+                                            {
+
+                                                TotalTarjeta += item.Importe;
+
+                                                <tr>
+                                                    @*<td class="text-center">
+                                                            <input type="checkbox" class="mis-checkboxes" checked="@(1 == 0)">
+                                                        </td>*@
+                                                    <td class="text-center">
+                                                        <input type="checkbox" class="check Seleccionable" id=@item.Id value=@item.Importe>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        @Html.DisplayFor(modelItem => item.UltimaModificacion)
+                                                    </td>
+                                                    <td class="text-right">
+                                                        @Html.DisplayFor(modelItem => item.Tarjetas.Codigo)
+                                                    </td>
+
+                                                    <td class="text-right">
+                                                        @Html.DisplayFor(modelItem => item.Tarjetas.Descripcion)
+                                                    </td>
+
+                                                    <td class="text-right deuda">
+                                                        @Html.DisplayFor(modelItem => item.Importe)
+                                                    </td>
+
+                                                    <td class="text-right">
+                                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                            <tr>
+                                                <td colspan="4" class="text-right"><label> Total</label></td>
+                                                <td class="text-right">
+                                                    <label> @Html.Raw(TotalTarjeta)</label>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+
+
+                                    </table>
 
                                 </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="table-responsive-md">
-
-                                            <table id="example23" class="table stylish-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="max-width:10%;">Paga</th>
-                                                        <th class="text-center">Fecha</th>
-                                                        <th class="text-center">Codigo</th>
-                                                        <th class="text-center">Descripcion</th>
-                                                        <th class="text-center">Importe</th>
-                                                        <th class="text-center" style="max-width: 33%;">Datos</th>
-
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    @{
-                                                        decimal TotalTarjeta = 0;
-
-                                                    }
-
-                                                    @foreach (var item in Model.ListaTarjetaOperacion)
-                                                    {
-
-                                                        TotalTarjeta += item.Importe;
-
-
-
-                                                        <tr>
-                                                            <td style="max-width:10%;">
-                                                                <input type="checkbox" class="mis-checkboxes" checked="@(1 == 0)">
-
-                                                            </td>
-
-                                                            <td class="text-right">
-
-                                                                @Html.DisplayFor(modelItem => item.UltimaModificacion)
-
-                                                            </td>
-                                                            <td class="text-right">
-                                                                @Html.DisplayFor(modelItem => item.Tarjetas.Codigo)
-                                                            </td>
-
-                                                            <td class="text-right">
-                                                                @Html.DisplayFor(modelItem => item.Tarjetas.Descripcion)
-                                                            </td>
-
-                                                            <td class="text-right deuda">
-                                                                @Html.DisplayFor(modelItem => item.Importe)
-                                                            </td>
-
-                                                            <td class="text-right">
-                                                                @Html.DisplayFor(modelItem => item.Descripcion)
-                                                            </td>
-
-
-
-
-                                                        </tr>
-
-                                                    }
-
-                                                    <tr>
-
-                                                        <td colspan="4" class="text-right"><label> Total</label></td>
-
-                                                        <td class="text-right">
-                                                            <label> @Html.Raw(TotalTarjeta)</label>
-
-                                                        </td>
-
-                                                    </tr>
-
-                                                </tbody>
-
-
-
-                                            </table>
-
-                                        </div>
-
-
-                                        <div class="row">
-                                            <label>
-                                                <strong>Total</strong><label>
-                                                    <div>
-                                                        <input id="total" type="text" placeholder="0.00" value="0.00" />
-                                                    </div>
-
-
-                                                    <div class="col-md-offset-6">
-                                                        <div class="form-group">
-                                                            <label> Monto Seleccionado</label>
-                                                            <input type="text" id="MontoSeleccionado" class="form-control form-control-sm" readonly="readonly" />
-                                                        </div>
-
-                                                    </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
 
 
                             </div>
                         </div>
+
+                        <div class="row">
+
+                            <div class="col-xlg-6 col-lg-6 col-md-6">
+                                <div class="form-group row">
+                                    <small class="col-xlg-4 col-lg-4 col-md-4"> Monto Seleccionado</small>
+                                    <input type="text" id="MontoSeleccionado" class="form-control form-control-sm col-xlg-3 col-lg-3 col-md-3" readonly="readonly" />
+                                    <div class="col-xlg-3 col-lg-3 col-md-3">
+                                        <button type="submit" formaction="@Url.Action("ConciliarTarjeta", "Banco")" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Confirmar</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-        }
-
+        </div>
     </div>
-
 }
+
+  }
+
 
 @section Scripts {
 
 
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/view/DatePickerReady.js"></script>
+    <!-- This is data table -->
+    <script src="/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="~/Content/assets/plugins/datatables/jsTable/dataTables.buttons.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.flash.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/jszip.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/pdfmake.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/vfs_fonts.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.html5.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/jsTable/buttons.print.min.js"></script>
 
-    
+    <script src="~/Scripts/view/TarjetaScript.js"></script>
 
 }
 
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
-    var totalDeuda = 0;
+@*<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        var totalDeuda = 0;
 
-    $(".deuda").each(function ()
-    {
-        totalDeuda += parseInt($(this).html()) || 0;
-    });
+        $(".deuda").each(function () {
+            totalDeuda += parseInt($(this).html()) || 0;
+        });
 
-  //  alert(totalDeuda);
+        //  alert(totalDeuda);
 
-</script>
+    </script>*@
 
 
 <script type="text/javascript">
 
 
-    $(document).ready(function ()
+  
+    //function calcular() {
+    //    var tot = $('#total');
+    //    tot.val(0);
+    //    $('.mis-deuda').each(function () {
+    //        if ($(this).hasClass('mis-checkboxes')) {
+    //            tot.val(($(this).is(':checked') ? parseFloat($(this).attr('tu-attr-precio')) : 0) + parseFloat(tot.val()));
+    //        }
+    //        else {
+    //            tot.val(parseFloat(tot.val()) + (isNaN(parseFloat($(this).val())) ? 0 : parseFloat($(this).val())));
+    //        }
+    //    });
+    //    // var totalParts = parseFloat(tot.val()).toFixed(2).split('.');
+    //    tot.val('$' + tot.val);// totalParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '.' + (totalParts.length > 1 ? totalParts[1] : '00'));
 
-
-    {
-        $('input[type="checkbox"]').change(function ()
-        {
-
-            //debugger;
-
-            var deuda;
-
-            var total; // $('#total');
-
-            total = $('#total').val();
-            total = total.replace("$ ", "");
-
-
-            if (isNaN(total))
-            {
-                total = 0.00;
-            }
-            
-
-            if ($(this).is(':checked'))
-            {
-
-
-                var tr = $(this).closest('tr');
-                deuda = parseFloat( $(tr).find('td:nth-child(5)').text());
-
-              
-                total = parseFloat(total) + deuda ;
-
-            }
-
-            else
-            {
-
-                var tr = $(this).closest('tr');
-                deuda = parseFloat($(tr).find('td:nth-child(5)').text());
-
-
-                total = parseFloat(total) -deuda;
-
-
-            }
-
-        
-            
-          
-
-            //var totalParts = parseFloat(total.val()).toFixed(2).split('.');
-          // total.val('$' + totalParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '.' + (totalParts.length > 1 ? totalParts[1] : '00'));
-           // total.val('$' + total.val);
+    //    //   alert()
+    //}
 
 
 
 
-            $('#total').val('$ ' + total);
+    //$(function () {
 
-           // console.log(total);
-            //alert(total);
-        })
-    })
+    //    $("#parametro1").hide();
+    //    $("#parametro2").hide();
 
 
+    //    $("#Cparametro2").change(function () {
 
-    //$(document).ready(function ()
-    //{
+    //        // $("#parametro1").style.display("none");
 
-    //    $(document).on('click keyup', '.mis-checkboxes', function ()
-    //    {
-    //        calcular();
+    //        //document.getElementById("parametro1").style.display = "none";
+    //        //document.getElementById("parametro2").style.display = "none";
 
-    //        //Sumar();
+    //        //$("#parametro1").style.display = "none";
+
+    //        // $("#parametro1").hide();
+    //        // $("#parametro2").hide();
+
+    //        opcion = $('option:selected', $(this)).val();
+
+    //        var x = document.getElementById("myDIV");
+
+    //        if (opcion > 0) {
+
+    //            //  alert($('option:selected', $(this)).val());
+
+    //            if (opcion == 1) {
+
+    //                $("#parametro1").hide();
+    //                $("#parametro2").hide();
+
+    //            }
+
+    //            if (opcion == 2) {
+
+    //                $("#parametro1").show();
+    //                $("#parametro2").hide();
+
+
+    //            }
+
+    //            if (opcion == 3) {
+
+    //                $("#parametro1").hide();
+    //                $("#parametro2").show();
+
+
+    //            }
+
+
+
+
+
+    //        }
 
     //    });
 
     //});
-
-    //function Sumar()
-
-    //{
-    //    $(".deuda").each(function ()
-    //    {
-
-
-    //        totalDeuda += parseInt($(this).html()) || 0;
-    //    });
-    //    alert(totalDeuda);
-
-    //}
-
-    function calcular()
-    {
-        var tot = $('#total');
-        tot.val(0);
-        $('.mis-deuda').each(function ()
-        {
-            if ($(this).hasClass('mis-checkboxes'))
-            {
-                tot.val(($(this).is(':checked') ? parseFloat($(this).attr('tu-attr-precio')) : 0) + parseFloat(tot.val()));
-            }
-            else
-            {
-                tot.val(parseFloat(tot.val()) + (isNaN(parseFloat($(this).val())) ? 0 : parseFloat($(this).val())));
-            }
-        });
-       // var totalParts = parseFloat(tot.val()).toFixed(2).split('.');
-        tot.val('$' + tot.val);// totalParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '.' + (totalParts.length > 1 ? totalParts[1] : '00'));
-
-     //   alert()
-    }
-
-
-
-
-    $(function () {
-
-        $("#parametro1").hide();
-        $("#parametro2").hide();
-
-
-        $("#Cparametro2").change(function () {
-
-            // $("#parametro1").style.display("none");
-
-            //document.getElementById("parametro1").style.display = "none";
-            //document.getElementById("parametro2").style.display = "none";
-
-            //$("#parametro1").style.display = "none";
-
-            // $("#parametro1").hide();
-            // $("#parametro2").hide();
-
-            opcion = $('option:selected', $(this)).val();
-
-            var x = document.getElementById("myDIV");
-
-            if (opcion > 0) {
-
-                //  alert($('option:selected', $(this)).val());
-
-                if (opcion == 1) {
-
-                    $("#parametro1").hide();
-                    $("#parametro2").hide();
-
-                }
-
-                if (opcion == 2) {
-
-                    $("#parametro1").show();
-                    $("#parametro2").hide();
-
-
-                }
-
-                if (opcion == 3) {
-
-                    $("#parametro1").hide();
-                    $("#parametro2").show();
-
-
-                }
-
-
-
-
-
-            }
-
-        });
-
-    });
 </script>

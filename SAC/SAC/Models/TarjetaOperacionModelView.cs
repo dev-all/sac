@@ -41,7 +41,7 @@ namespace SAC.Models
 
         public List<TarjetaOperacionModelView> ListaTarjetaOperacion { get; set; }
 
-        public bool CVisible { get; set; }
+        public string idTarjetaConciliar { get; set; }
 
 
     }

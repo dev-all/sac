@@ -102,7 +102,7 @@ namespace Datos.Repositorios
             //                       select c).ToList();
             //return p;
 
-
+            context.Configuration.LazyLoadingEnabled = false;
 
             List<ClienteDireccion> listaCliente = context.ClienteDireccion
             .Include("Pais")
@@ -141,7 +141,7 @@ namespace Datos.Repositorios
 
         {
 
-           
+           context.Configuration.LazyLoadingEnabled = false;
 
             List<ClienteDireccion> listaCliente = context.ClienteDireccion
                 .Include("Pais")

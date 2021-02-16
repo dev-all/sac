@@ -33,7 +33,15 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public virtual ClienteModel Cliente { get; set; }
+
+
+        public ClienteModel Cliente { get; set; }      
+        public LocalidadModel Localidad { get; set; }
+        public LocalidadModel Localidad1 { get; set; }
+        public PaisModel Pais { get; set; }
+        public ProvinciaModel Provincia { get; set; }
+        public TipoIdiomaModel TipoIdioma { get; set; }
+        public TipoMonedaModel TipoMoneda { get; set; }
 
 
     }

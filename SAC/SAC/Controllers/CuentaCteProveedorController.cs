@@ -84,6 +84,7 @@ namespace SAC.Controllers
             List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oServicioCheque.GetAllCheque());
             model.ListaChequesTerceros = ListaChequesTerceros;
             //--------PartialView cheques propios          
+
             List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(oServicioChequera.GetAllChequera());
             List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
             List<TipoMonedaModelView> ListaTipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(oServicioTipoMoneda.GetAllTipoMonedas());
@@ -245,6 +246,8 @@ namespace SAC.Controllers
             }
 
         }
+      
+        
         //[HttpPost]
         //public JsonResult AjaxMethodIngresarCheque(FacturaPagoViewModel oFacturaPago)
         //{

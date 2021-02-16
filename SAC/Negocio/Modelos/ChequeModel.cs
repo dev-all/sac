@@ -44,15 +44,14 @@ namespace Negocio.Modelos
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public BancoCuentaModel Banco { get; set; }
+       
         public TipoMonedaModel TipoMoneda { get; set; }
       
-        //public ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         //propiedad agregada
         public string tipoMonedaDescripcion { get; set; }
 
-        public virtual ICollection<CajaModel> Caja { get; set; }
-     
+        public ICollection<CajaModel> Caja { get; set; }
+        public BancoCuentaModel BancoCuenta { get; set; }
 
 
     }

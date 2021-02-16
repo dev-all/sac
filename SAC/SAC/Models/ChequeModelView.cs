@@ -80,6 +80,6 @@ namespace SAC.Models
         public List<ChequeModelView> ListaCheque { get; set; }
 
         public ClienteModelView ListaCliente { get; set; }
-        public BancoCuentaModelView ListaBancoCuenta { get; set; }
+        public BancoCuentaModelView BancoCuenta { get; set; }
     }
 }

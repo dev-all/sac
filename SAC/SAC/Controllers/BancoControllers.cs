@@ -8,6 +8,7 @@ using SAC.Atributos;
 using SAC.Models;
 using AutoMapper;
 using Negocio.Modelos;
+using System.Globalization;
 
 namespace SAC.Controllers
 {
@@ -18,73 +19,59 @@ namespace SAC.Controllers
 
         private ServicioCajaGrupo servicioCajaGrupo = new ServicioCajaGrupo();
         private ServicioCajaSaldo servicioCajaSaldo = new ServicioCajaSaldo();
-
-
         private ServicioBancoCuenta servicioBanco = new ServicioBancoCuenta();
-
-
-
         private ServicioCliente oservicioCliente = new ServicioCliente();
         private ServicioCheque  oservicioCheque = new ServicioCheque();
-
-
-        private ServicioTarjeta oservicioTarjeta = new ServicioTarjeta();
-        
-
+        private ServicioTarjeta oservicioTarjeta = new ServicioTarjeta();     
         private ServicioTarjetaOperacion oservicioTarjetaOperacion = new  ServicioTarjetaOperacion();
-
 
         public BancoController()
         {
             servicioCaja._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
         }
-
-
        
         // PRIMERA CARGA DE LA PAGINA  DE LA VISTA CHEQUES
 
         public ActionResult Cheques()
         {
-
-
-
             ChequeModelView model = new ChequeModelView();
-            model.CVisible = false;
+            model.ListaCheque = new List<ChequeModelView>();
             model.cFechaDesde = DateTime.Now;
-
-            CargarListaOpcion();
-          //  CargarBanco();
-           //CargarClientes();
-
-            // return View();
-            return View(model);
-           
-
+            CargarListaOpcion();     
+            return View(model);          
         }
 
-
-
         [HttpPost]
-        public ActionResult Cheques( int Idbanco , int IdCliente, DateTime Cfechadesde, DateTime Cfechahasta)
+        public ActionResult Cheques(string Cfechadesde , string Cfechahasta, int Idbanco = 0, int IdCliente = 0)
         {
 
             ChequeModelView model = new ChequeModelView();
-        
-            if (Idbanco > 0)
-              
+            model.ListaCheque = new List<ChequeModelView>();
+
+            DateTime fechaDesde = DateTime.Now;
+            if (!string.IsNullOrEmpty(Cfechadesde))
             {
-                model.ListaCheque = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oservicioCheque.GetAllChequePorBanco(Idbanco, Cfechadesde, Cfechahasta));
+                fechaDesde = DateTime.ParseExact(Cfechadesde, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
-
-            if (IdCliente > 0)
-
+            DateTime fechaHasta = DateTime.Now;
+            if (!string.IsNullOrEmpty(Cfechahasta))
             {
-               model.ListaCheque = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oservicioCheque.GetAllChequePorCliente(IdCliente, Cfechadesde, Cfechahasta));
+                fechaHasta = DateTime.ParseExact(Cfechahasta, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
+            //if (Idbanco > 0)              
+            //{
+            //    model.ListaCheque = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oservicioCheque.GetAllChequePorBanco(Idbanco, fechaDesde, fechaHasta));
+            //}
 
-            model.CVisible = true;
-            model.cFechaDesde = Cfechadesde;
-            model.cFechaHasta = Cfechahasta;
+            //if (IdCliente > 0)
+
+            //{
+            //   model.ListaCheque = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oservicioCheque.GetAllChequePorCliente(IdCliente, fechaDesde, fechaHasta));
+            //}
+            model.ListaCheque = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oservicioCheque.BuscarCheque(IdCliente,Idbanco, fechaDesde, fechaHasta));
+
+            model.cFechaDesde = fechaDesde; 
+            model.cFechaHasta = fechaHasta;
 
             CargarListaOpcion();
           
@@ -100,70 +87,47 @@ namespace SAC.Controllers
         public ActionResult Tarjetas()
         {
 
-
-
-            TarjetaOperacionModelView model = new TarjetaOperacionModelView();
-           // model.ListaTarjeta = Mapper.Map<List<TarjetaModel>, List<TarjetaModelView>>(servicio.GetAllCaja());
-           
-           
-           
-
+            TarjetaOperacionModelView model = new TarjetaOperacionModelView();  
             CargarTarjetas();
-
+            model.ListaTarjetaOperacion = new List<TarjetaOperacionModelView>();
             model.cFechaDesde = DateTime.Today;
             model.cFechaHasta = DateTime.Today;
+            return View(model);
+        }
 
+        [HttpPost]
+        public ActionResult Tarjetas(DateTime Cfechadesde, DateTime Cfechahasta, int IdTipoTarjeta=0)
+        {
+            TarjetaOperacionModelView model = new TarjetaOperacionModelView();
+            if (IdTipoTarjeta != 0)
+            {
 
+           
+            if (Cfechadesde == Cfechahasta)  // si la fecha es igual trae todos los movimientos
+            {
+                model.ListaTarjetaOperacion = Mapper.Map<List<TarjetaOperacionModel>, List<TarjetaOperacionModelView>>(oservicioTarjetaOperacion.GetTarjetaOperacionGastos(IdTipoTarjeta));
+            }
+            else  // si la fecha es distintas filtra por las fecha
+            {
+                model.ListaTarjetaOperacion = Mapper.Map<List<TarjetaOperacionModel>, List<TarjetaOperacionModelView>>(oservicioTarjetaOperacion.GetTarjetaOperacionGastos(IdTipoTarjeta, Cfechadesde, Cfechahasta));
+            }
+            }
+          
+            model.cFechaDesde = Cfechadesde;
+            model.cFechaHasta = Cfechahasta;
+
+            CargarTarjetas();
+ 
             return View(model);
 
 
         }
 
         [HttpPost]
-
-        public ActionResult Tarjetas(DateTime Cfechadesde, DateTime Cfechahasta, int IdTipoTarjeta)
-        {
-
-
-            TarjetaOperacionModelView model = new TarjetaOperacionModelView();
-
-
-            if (Cfechadesde == Cfechahasta)  // si la fecha es igual trae todos los movimientos
-
-            {
-
-                model.ListaTarjetaOperacion = Mapper.Map<List<TarjetaOperacionModel>, List<TarjetaOperacionModelView>>(oservicioTarjetaOperacion.GetTarjetaOperacionGastos(IdTipoTarjeta));
-
-
-            }
-
-
-            else  // si la fecha es distintas filtra por las fecha
-            {
-
-                model.ListaTarjetaOperacion = Mapper.Map<List<TarjetaOperacionModel>, List<TarjetaOperacionModelView>>(oservicioTarjetaOperacion.GetTarjetaOperacionGastos(IdTipoTarjeta, Cfechadesde, Cfechahasta));
-
-
-
-            }
-
-           
-          
-
-            model.CVisible = true;
-            model.cFechaDesde = Cfechadesde;
-            model.cFechaHasta = Cfechahasta;
-
-            CargarTarjetas();
-
-            return View(model);
-
-
+        public ActionResult ConciliarTarjeta(TarjetaOperacionModelView model)
+        {                
+            return RedirectToAction("Tarjetas");
         }
-
-
-
-
 
 
         public void CargarListaOpcion()
@@ -174,13 +138,10 @@ namespace SAC.Controllers
 
         }
 
-
-
         private List<SelectListItem> GetOpcion1()
         {
             return Opcion1;
         }
-
 
         private static readonly List<SelectListItem> Opcion1 = new List<SelectListItem>
         {
@@ -204,14 +165,6 @@ namespace SAC.Controllers
             new SelectListItem() {Value = "2",Text = "Clientes"},
             new SelectListItem() {Value = "3",Text = "Banco"}
         };
-
-
-
-
-
-
-
-
 
 
         // cargar  Clientes
@@ -264,7 +217,7 @@ namespace SAC.Controllers
         {
             try
             {
-                List<BancoCuentaModel> proveedor = servicioBanco.GetBancoPorNombre(term);
+                IList<BancoCuentaModel> proveedor = servicioBanco.GetBancoPorNombre(term);
                 var arrayProveedor = (from prov in proveedor
                                       select new AutoCompletarViewModel()
                                       {

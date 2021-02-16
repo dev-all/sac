@@ -81,6 +81,23 @@ namespace Datos.Repositorios
 
         }
 
+        public List<Cheque> BuscarCheque(int idCliente, int idbanco, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            List<Cheque> listaCheque = context.Cheque
+                                        .Include(b => b.BancoCuenta)
+                                        .Include(b => b.BancoCuenta.Banco)
+                                        .Where(p => p.Activo == true                                      
+                                        & (idbanco == 0 | p.IdBanco == idbanco)
+                                        & (idCliente == 0 | p.IdCliente == idCliente)
+                                        & p.Fecha >= fechaDesde
+                                        && p.Fecha <= fechaHasta)
+                                        .OrderBy(p => p.NumeroCheque)
+                                        .ToList();
+
+            return listaCheque;
+        }
+
         public List<Cheque> obtenerChequePorCliente(int cIdCliente, DateTime cfechadesde, DateTime cfechahasta)
         {
 
@@ -94,5 +111,5 @@ namespace Datos.Repositorios
 
         }
 
-    }
+     }
 }

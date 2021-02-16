@@ -190,9 +190,9 @@
                                     <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
                                         <div class="form-group">
 
-                                            @Html.LabelFor(m => m.Fecha, new { @class = "control-label form-control-sm" })
-                                            @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control form-control-sm fechadatepicker" } })
-                                            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                            <small>Fecha</small>
+                                            <input type="text" id="Fecha" name="Fecha" class="form-control form-control-sm Calendario" required
+                                                   data-validation-required-message="Ingrese una fecha">
                                         </div>
                                     </div>
                                 </div>
@@ -215,20 +215,17 @@
                                             @Html.ValidationMessageFor(model => model.ImporteDolar, "", new { @class = "text-danger form-control-sm" })
 
                                         </div>
-
                                     </div>
 
                                     <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label class="control-label form-control-sm"> Imp. Cheque </label>
-                                            @Html.EditorFor(model => model.ImporteCheque, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteCheque, "", new { @class = "text-danger form-control-sm" })
+                                            @Html.EditorFor(model => model.montoChequesSeleccionados, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                            @Html.ValidationMessageFor(model => model.montoChequesSeleccionados, "", new { @class = "text-danger form-control-sm" })
                                         </div>
 
                                         <div class="form-group">
-
-                                            @Html.DropDownList("IdCheque", ListaCheques, null, new { @class = "form-control form-control-sm" })
-                                           
+                                            <input type="button" class="btn btn-secondary btn-sm btn-block" id="btnSelCheque" onclick="fnVerModalCheques();" value="Cheque">
                                         </div>
                                     </div>
 
@@ -239,27 +236,16 @@
                                             @Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger form-control-sm" })
                                         </div>
                                         <div class="form-group">
-
                                             @Html.DropDownList("IdTarjeta", ListaTarjetas, null, new { @class = "form-control form-control-sm" })
-                                           
                                         </div>
-
                                     </div>
-
-
-
-
-
 
                                 </div>
 
                                 <div class="row m-t-10">
                                     <div class="col-xlg-1 col-lg-1 col-md-1 col-sm-1"></div>
                                     <div class="col-md-10">
-
                                         <button type="submit" class="btn btn-success btn-sm pull-right"> <i class="fa fa-check"></i> Guardar</button>
-
-                                        @*@Html.ActionLink("Cancelar", "Index", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })*@
                                     </div>
                                 </div>
 
@@ -276,6 +262,107 @@
     </div>
 
 }
+
+
+<div class="modal fade" id="ModalCheques" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Cheques</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">×</button>
+            </div>
+
+            <div class="modal-body">
+                <ul class="nav nav-tabs mb-3">
+                    <li class="nav-item">
+                        <a href="#Terceros" data-toggle="tab" aria-expanded="true" class="nav-link active tabTerceros">
+                            <i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
+                            <span class="d-none d-lg-block">Terceros</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Propios" data-toggle="tab" aria-expanded="false" class="nav-link  tabPropios">
+                            <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
+                            <span class="d-none d-lg-block">Propios</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="Terceros">
+                        @Html.Partial("~/Views/CuentaCteProveedor/_tablaChequesTerceros.cshtml", Model.ListaChequesTerceros)
+                    </div>
+
+                    <div class="tab-pane show" id="Propios">
+                        @Html.Partial("~/Views/CuentaCteProveedor/_TablaChequesPropios.cshtml", Model.oChequera)
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-md-center" style="display: inline;">
+
+                <div class="row ">
+                    <div class="col-md-2 m-l-15 ">
+                        <small class="hide">A pagar:</small>
+                    </div>
+                    <div class="col-md-2 ">
+                        <small class="hide" id="ImporteAPagarCheque"></small>
+                    </div>
+                    <div class="col-md-2 ">
+                        <small>Total cheques:</small>
+                    </div>
+                    <div class="col-md-2 ">
+                        <small id="TotalChequeSeleccionados"></small>
+                    </div>
+                    <div class="col-md-2 ">
+                        <button type="button" class="btn btn-success btn-sm" onclick="fnAsignarChequeCaja()">Asignar Cheques</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade ModalConfirmaEliminar" id="ModalConfirmaEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Aviso</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Ajax.BeginForm("QuitarCheque", "", new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "divPagina",
+                OnComplete = "onCompleteQuitarCheque",
+
+            }, new { @id = "FormQuitarCheque" }))
+            {
+                <div class="modal-body">
+
+                    <h3> ¿Está seguro que desea eliminar el registro?</h3>
+
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("IdCheque")
+                </div>
+                <div class="text-center p-10">
+                    <button type="button" class="btn btn-secondary btn-sm " data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Aceptar</button>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+
+
 
 @section Scripts{
 
@@ -296,7 +383,7 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
     <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
-
+    <script src="~/Scripts/view/CtaCteProveedor.js"></script>
 }
 
 <script type="text/javascript">

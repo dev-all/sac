@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using Negocio.Modelos;
 using Datos.ModeloDeDatos;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace SAC.Models
 {
@@ -96,7 +97,17 @@ namespace SAC.Models
         public CajaModelView CajaHasta { get; set; }
         public CajaModelView CajaSaldoUltimoMovimiento { get; set; }
 
+        //----dev-a
+        public List<SelectListItem> listaTarjetasDrop { get; set; }
+        public List<SelectListItem> listaCuentaBancariaDrop { get; set; }
+        public List<SelectListItem> ListaTipoMonedaDrop { get; set; }
 
+        public List<ChequeModelView> ListaChequesTerceros { get; set; }
+        public ChequeraModelView oChequera { get; set; }
+        public List<ChequeraModelView> ListaChequesPropios { get; set; }
+        public decimal montoChequesSeleccionados { get; set; }
+        public string idChequesPropios { get; set; }
+        public string idChequesTerceros { get; set; }
 
 
 
