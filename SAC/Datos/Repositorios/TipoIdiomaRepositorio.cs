@@ -65,6 +65,7 @@ namespace Datos.Repositorios
 
         public List<TipoIdioma> GetAllTipoIdioma()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<TipoIdioma> Lista = context.TipoIdioma.ToList();
             return Lista;
         }

@@ -23,6 +23,7 @@ namespace Datos.Repositorios
 
         public List<TipoIva> GetAllTipoIva()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<TipoIva> listaTipoIva = context.TipoIva.ToList();
             return listaTipoIva;
         }
@@ -30,6 +31,7 @@ namespace Datos.Repositorios
 
         public TipoIva ObtenerTipoIva(int idTipoIva)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             TipoIva TipoIva = context.TipoIva.Where(p => p.Id == idTipoIva).First();
             return TipoIva;
         }

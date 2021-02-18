@@ -83,6 +83,7 @@ namespace Datos.Repositorios
 
         public List<Pais> GetAllPais()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<Pais> listaPais = context.Pais.Where(p => p.Activo == true).ToList();
 
             return listaPais;

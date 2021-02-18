@@ -7,16 +7,7 @@
 }
 
 
-<style>
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        padding: 0.1em 1em;
-    }
 
-    .table td, .table th {
-        padding: .25rem;
-    }
-</style>
- 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.IdCliente)
@@ -33,72 +24,42 @@
 
                     <div class="card-body">
 
-                        <h5 class="card-title">Clientes</h5>
-                        <h6 class="card-subtitle"> </h6>
-                        <a href="@Url.Action("AddOrEdit", "Cliente")" class="btn btn-sm btn-secondary "><i class="mdi mdi-calendar-plus"></i> Nuevo Cliente</a>
-
-
-
-
+                        <small>Administración de Clientes</small>
 
                         <div class="form-body m-t-15">
                             <div class="row">
 
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label for="readonly5" class="control-label form-control-sm">Tipo Cliente</label>
-                                        <div class="col-md-8">
-                                            @Html.DropDownList("IdTipoCliente", ListaTipoCliente, null, new { @class = "form-control form-control-sm" })
-                                            @Html.ValidationMessageFor(model => model.IdTipoCliente, "", new { @class = "text-danger" })
-
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <small>Tipo Cliente</small>
+                                        @Html.DropDownList("IdTipoCliente", ListaTipoCliente, null, new { @class = "form-control form-control-sm" })
+                                        @Html.ValidationMessageFor(model => model.IdTipoCliente, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label for="readonly5" class="control-label form-control-sm">Nombre</label>
-                                        <div class="col-md-8">
-                                            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <small>Nombre</small>
 
-                                        </div>
+                                        @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+
+
                                     </div>
                                 </div>
+                                <div class="col-md-2 p-t-20">
+                                    <button type="submit" class="btn btn-dark btn-sm"> <i class="fa fa-check"></i> Consultar</button>
+                                </div><div class="col-md-2 p-t-20">
+                                    <a href="@Url.Action("AddOrEdit", "Cliente")" class="btn btn-sm btn-secondary "><i class="mdi mdi-calendar-plus"></i> Nuevo Cliente</a>
+
+                                </div>
+
                             </div>
 
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Consultar</button>
-                                @Html.ActionLink("Cancelar", "ConsultaCaja", "Caja", htmlAttributes: new { @class = "btn btn-dark btn-sm" })
-
-                            </div>
 
 
-
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @if (Model.CVisible)
-        {
-
-
-
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-
-                        <div class="card-body">
-                            <h4 class="card-title">Grilla de la Consulta</h4>
-                            <div class="form-body">
-
-
+                            @if (Model.CVisible)
+                            {
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="table-responsive-md">
@@ -141,7 +102,7 @@
                                                                 @Html.DisplayFor(modelItem => item.IdImputacion)
                                                             </td>
 
-                                                            <td class="text-right">
+                                                            <td class="text-center">
                                                                 @Html.DisplayFor(modelItem => item.TipoCliente.Descripcion)
                                                             </td>
 
@@ -191,18 +152,15 @@
                                         </div>
                                     </div>
                                 </div>
+                            }
 
 
-
-
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-
-        }
 
     </div>
 
@@ -312,12 +270,12 @@
             $('#example23').DataTable({
                 "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
                 "order": [[2, 'asc']],
-                'paging': true,
-                'pageLength':'200',
+                'paging': false ,
+               // 'pageLength': '200',
                 'lengthChange': false,
                 'searching': true,
-                'ordering': true,
-                'scrollY': '400px',
+                'ordering': false,
+                'scrollY': '350px',
                 'info': true,
                 'autoWidth': true,
                 'dom': 'Bfrtip',

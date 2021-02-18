@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bindings.cs" />
+    <Compile Include="Enumeradores\TipoElementoEnum.cs" />
     <Compile Include="Enumeradores\TipoAsientoEnum.cs" />
     <Compile Include="Enumeradores\PrioridadEvento.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Modelos\ChequeraModel.cs" />
     <Compile Include="Modelos\CompraFacturaPagoModel.cs" />
     <Compile Include="Modelos\CuentaCteProveedorModel.cs" />
+    <Compile Include="Modelos\CuentaPlanContableModel.cs" />
     <Compile Include="Modelos\DepartamentoModel.cs" />
     <Compile Include="Modelos\DiarioModel.cs" />
     <Compile Include="Modelos\CompraFacturaModel.cs" />

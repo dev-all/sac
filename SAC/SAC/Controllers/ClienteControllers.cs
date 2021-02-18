@@ -95,22 +95,18 @@ namespace SAC.Controllers
             CargarGrupoPresupuesto();
             CargarTipoMoneda();
 
-
             ClienteModelView model;
-
-            
 
             if (id == 0)
             {
                 model = new ClienteModelView();
+             
             }
             else
             {
                 model = Mapper.Map<ClienteModel, ClienteModelView>(oServicioCliente.GetClientePorId(id));
 
-            }
-
-           
+            }           
             return View(model);
         }
 
@@ -560,15 +556,6 @@ namespace SAC.Controllers
             retornoListaLocalidad.Insert(0, new SelectListItem { Text = "-- Seleccione Localidad --", Value = "" });
             ViewBag.ListaLocalidad = retornoListaLocalidad;
         }
-
-
-
-     
-
-
-
-         
-
 
 
         #endregion

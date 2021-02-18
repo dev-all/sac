@@ -79,6 +79,7 @@ namespace Datos.Repositorios
 
         public List<Localidad> GetAllLocalidad(int idProvincia)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdProvincia == idProvincia).ToList();
             listaLocalidad = listaLocalidad.OrderBy(p => p.Nombre).ToList();
             return listaLocalidad;
@@ -86,6 +87,7 @@ namespace Datos.Repositorios
 
         public List<Localidad> GetAllLocalidad(int idPais, int idProvincia)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<Localidad> listaLocalidad = context.Localidad.Where(p => p.Activo == true && p.IdPais == idPais && p.IdProvincia == idProvincia).ToList();
             listaLocalidad = listaLocalidad.OrderBy(p => p.Nombre).ToList();
             return listaLocalidad;
@@ -93,12 +95,14 @@ namespace Datos.Repositorios
 
         public Localidad GetCodigoPostal(int idLocalidad)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             Localidad oLocalidad = context.Localidad.Where(p => p.Activo == true && p.Id == idLocalidad).First();
             return oLocalidad;
         }
 
         public Localidad GetIdLocalidadCodigoPostal(int oCodigoPostal)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             Localidad oLocalidad = context.Localidad.Where(p => p.Activo == true && p.Codigo == oCodigoPostal).First();
             return oLocalidad;
         }

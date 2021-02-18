@@ -188,6 +188,8 @@
     <Compile Include="Models\CompraIvaModelView.cs" />
     <Compile Include="Models\CompraRegistroDetalleModelView.cs" />
     <Compile Include="Models\CompraRegistroModelView.cs" />
+    <Compile Include="Models\CuentaPlanContableModelView.cs" />
+    <Compile Include="Models\PlanContableModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
     <Compile Include="Models\CuentaCteProveedorModelView.cs" />
@@ -2915,10 +2917,12 @@
     <Content Include="Views\PieNota\Index.cshtml" />
     <Content Include="Views\Departamento\AddOrEdit.cshtml" />
     <Content Include="Views\Departamento\Index.cshtml" />
-    <Content Include="Views\Contabilidad\DiarioCompraFactura.cshtml" />
-    <Content Include="Views\Contabilidad\DiarioCompraPagos.cshtml" />
     <Content Include="Views\Compras\RegistroCompras.cshtml" />
     <Content Include="Views\Contabilidad\ConsultaAsientosContables.cshtml" />
+    <Content Include="Views\Contabilidad\Edit.cshtml" />
+    <Content Include="Views\Contabilidad\Index.cshtml" />
+    <Content Include="Views\Contabilidad\TreeItem.cshtml" />
+    <Content Include="Views\Cliente\Listado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

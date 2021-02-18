@@ -98,7 +98,7 @@ namespace Datos.Repositorios
         }
         public List<Provincia> GetAllProvincia(int idPais)
         {
-            
+            context.Configuration.LazyLoadingEnabled = false;
             List<Provincia> listaProvincia = context.Provincia
                                             .Where(p => p.Activo == true && p.IdPais == idPais).ToList();
             listaProvincia = listaProvincia.OrderBy(p => p.Nombre).ToList();

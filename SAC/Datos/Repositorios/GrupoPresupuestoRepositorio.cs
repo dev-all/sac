@@ -80,6 +80,7 @@ namespace Datos.Repositorios
 
         public List<GrupoPresupuesto> GetAllGrupoPresupuesto()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             return context.GrupoPresupuesto.Where(acc => acc.Activo == true).OrderBy(acc => acc.Id).ToList();
         }
 

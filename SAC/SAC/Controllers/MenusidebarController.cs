@@ -45,9 +45,8 @@ namespace SAC.Controllers
                 ICaccion = Mapper.Map<List<AccionModel>, List<AccionModelView>>(servicioConfiguracion.GetAccion())
 
             };
-            
+         
             ViewBag.JsonMenuSider = TreeView(servicioConfiguracion.GetMenuSidebar());
-
             return View(configAccionModelView);
         }
 
@@ -76,6 +75,8 @@ namespace SAC.Controllers
             JsonTreeView += jsonString.Serialize(ListTreeView);
             return JsonTreeView;
         }
+
+      
 
         public ActionResult Edit(int id)
         {
@@ -146,33 +147,6 @@ namespace SAC.Controllers
            
 
         }
-
-        //[HttpPost]
-        //public JsonResult Delete(int Id)
-        //{
-        //   // string strJson;
-        //    try
-        //    {
-        //        servicioConfiguracion.DeleteMenusidebar(Id);
-        //        // return Json(new { status = "Success" });
-        //        // return Json(new { data = strJson, result = true }, JsonRequestBehavior.AllowGet);
-        //        servicioConfiguracion._mensaje("Se eliminó el registro", "ok");              
-        //        return Json(new { result = true, msj = "Se eliminó el registro" }, JsonRequestBehavior.AllowGet);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return Json(new { result = false, msj = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
-
-        // GET: Accion/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-
-
 
     }
 }

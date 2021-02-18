@@ -34,30 +34,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Caja">
-      <EntityTypeMapping TypeName="SAC_Model.Caja">
-        <MappingFragment StoreEntitySet="Caja">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="IdCajaSaldo" ColumnName="IdCajaSaldo" />
-          <ScalarProperty Name="ImporteTarjeta" ColumnName="ImporteTarjeta" />
-          <ScalarProperty Name="ImporteDeposito" ColumnName="ImporteDeposito" />
-          <ScalarProperty Name="ImporteCheque" ColumnName="ImporteCheque" />
-          <ScalarProperty Name="ImporteDolar" ColumnName="ImporteDolar" />
-          <ScalarProperty Name="ImportePesos" ColumnName="ImportePesos" />
-          <ScalarProperty Name="IdCuentaBanco" ColumnName="IdCuentaBanco" />
-          <ScalarProperty Name="Recibo" ColumnName="Recibo" />
-          <ScalarProperty Name="IdGrupoCaja" ColumnName="IdGrupoCaja" />
-          <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-          <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CajaSaldo">
       <EntityTypeMapping TypeName="SAC_Model.CajaSaldo">
         <MappingFragment StoreEntitySet="CajaSaldo">
@@ -98,29 +74,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Diario">
-      <EntityTypeMapping TypeName="SAC_Model.Diario">
-        <MappingFragment StoreEntitySet="Diario">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Asiento" ColumnName="Asiento" />
-          <ScalarProperty Name="Balance" ColumnName="Balance" />
-          <ScalarProperty Name="Cotiza" ColumnName="Cotiza" />
-          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
-          <ScalarProperty Name="DescripcionMa" ColumnName="DescripcionMa" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-          <ScalarProperty Name="Importe" ColumnName="Importe" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="GrupoCuenta">
       <EntityTypeMapping TypeName="SAC_Model.GrupoCuenta">
         <MappingFragment StoreEntitySet="GrupoCuenta">
@@ -139,34 +92,6 @@
           <ScalarProperty Name="Controller" ColumnName="Controller" />
           <ScalarProperty Name="Metodo" ColumnName="Metodo" />
           <ScalarProperty Name="IdHome" ColumnName="IdHome" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Imputacion">
-      <EntityTypeMapping TypeName="SAC_Model.Imputacion">
-        <MappingFragment StoreEntitySet="Imputacion">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
-          <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
-          <ScalarProperty Name="Octubre" ColumnName="Octubre" />
-          <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
-          <ScalarProperty Name="Agosto" ColumnName="Agosto" />
-          <ScalarProperty Name="Julio" ColumnName="Julio" />
-          <ScalarProperty Name="Junio" ColumnName="Junio" />
-          <ScalarProperty Name="Mayo" ColumnName="Mayo" />
-          <ScalarProperty Name="Abril" ColumnName="Abril" />
-          <ScalarProperty Name="Marzo" ColumnName="Marzo" />
-          <ScalarProperty Name="Febrero" ColumnName="Febrero" />
-          <ScalarProperty Name="Enero" ColumnName="Enero" />
-          <ScalarProperty Name="Alias" ColumnName="Alias" />
-          <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
-          <ScalarProperty Name="SaldoFin" ColumnName="SaldoFin" />
-          <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
-          <ScalarProperty Name="IdSubRubro" ColumnName="IdSubRubro" />
-          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -886,6 +811,101 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CompraFacturaPago">
+      <EntityTypeMapping TypeName="SAC_Model.CompraFacturaPago">
+        <MappingFragment StoreEntitySet="CompraFacturaPago">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="IdBancoCuenta" ColumnName="IdBancoCuenta" />
+          <ScalarProperty Name="IdTarjeta" ColumnName="IdTarjeta" />
+          <ScalarProperty Name="IdChequera" ColumnName="IdChequera" />
+          <ScalarProperty Name="IdCheque" ColumnName="IdCheque" />
+          <ScalarProperty Name="IdTipoPago" ColumnName="IdTipoPago" />
+          <ScalarProperty Name="IdFacturaCompra" ColumnName="IdFacturaCompra" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Diario">
+      <EntityTypeMapping TypeName="SAC_Model.Diario">
+        <MappingFragment StoreEntitySet="Diario">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Asiento" ColumnName="Asiento" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Cotiza" ColumnName="Cotiza" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="DescripcionMa" ColumnName="DescripcionMa" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Imputacion">
+      <EntityTypeMapping TypeName="SAC_Model.Imputacion">
+        <MappingFragment StoreEntitySet="Imputacion">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Diciembre" ColumnName="Diciembre" />
+          <ScalarProperty Name="Noviembre" ColumnName="Noviembre" />
+          <ScalarProperty Name="Octubre" ColumnName="Octubre" />
+          <ScalarProperty Name="Septiembre" ColumnName="Septiembre" />
+          <ScalarProperty Name="Agosto" ColumnName="Agosto" />
+          <ScalarProperty Name="Julio" ColumnName="Julio" />
+          <ScalarProperty Name="Junio" ColumnName="Junio" />
+          <ScalarProperty Name="Mayo" ColumnName="Mayo" />
+          <ScalarProperty Name="Abril" ColumnName="Abril" />
+          <ScalarProperty Name="Marzo" ColumnName="Marzo" />
+          <ScalarProperty Name="Febrero" ColumnName="Febrero" />
+          <ScalarProperty Name="Enero" ColumnName="Enero" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+          <ScalarProperty Name="SaldoFin" ColumnName="SaldoFin" />
+          <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
+          <ScalarProperty Name="IdSubRubro" ColumnName="IdSubRubro" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Caja">
+      <EntityTypeMapping TypeName="SAC_Model.Caja">
+        <MappingFragment StoreEntitySet="Caja">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="IdCajaSaldo" ColumnName="IdCajaSaldo" />
+          <ScalarProperty Name="IdCheque" ColumnName="IdCheque" />
+          <ScalarProperty Name="IdTarjeta" ColumnName="IdTarjeta" />
+          <ScalarProperty Name="ImporteTarjeta" ColumnName="ImporteTarjeta" />
+          <ScalarProperty Name="ImporteDeposito" ColumnName="ImporteDeposito" />
+          <ScalarProperty Name="ImporteCheque" ColumnName="ImporteCheque" />
+          <ScalarProperty Name="ImporteDolar" ColumnName="ImporteDolar" />
+          <ScalarProperty Name="ImportePesos" ColumnName="ImportePesos" />
+          <ScalarProperty Name="IdCuentaBanco" ColumnName="IdCuentaBanco" />
+          <ScalarProperty Name="Recibo" ColumnName="Recibo" />
+          <ScalarProperty Name="IdGrupoCaja" ColumnName="IdGrupoCaja" />
+          <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+          <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CompraFactura">
       <EntityTypeMapping TypeName="SAC_Model.CompraFactura">
         <MappingFragment StoreEntitySet="CompraFactura">
@@ -894,6 +914,7 @@
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="AxiliarNumero" ColumnName="AxiliarNumero" />
           <ScalarProperty Name="Auxiliar" ColumnName="Auxiliar" />
+          <ScalarProperty Name="CodigoDiario" ColumnName="CodigoDiario" />
           <ScalarProperty Name="IdCompraFacturaAplica" ColumnName="IdCompraFacturaAplica" />
           <ScalarProperty Name="NumeroPago" ColumnName="NumeroPago" />
           <ScalarProperty Name="Recibo" ColumnName="Recibo" />
@@ -953,25 +974,6 @@
           <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
           <ScalarProperty Name="NetoNoGravado" ColumnName="NetoNoGravado" />
           <ScalarProperty Name="NetoGravado" ColumnName="NetoGravado" />
-          <ScalarProperty Name="CodigoDiario" ColumnName="CodigoDiario" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CompraFacturaPago">
-      <EntityTypeMapping TypeName="SAC_Model.CompraFacturaPago">
-        <MappingFragment StoreEntitySet="CompraFacturaPago">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="Monto" ColumnName="Monto" />
-          <ScalarProperty Name="IdBancoCuenta" ColumnName="IdBancoCuenta" />
-          <ScalarProperty Name="IdTarjeta" ColumnName="IdTarjeta" />
-          <ScalarProperty Name="IdChequera" ColumnName="IdChequera" />
-          <ScalarProperty Name="IdCheque" ColumnName="IdCheque" />
-          <ScalarProperty Name="IdTipoPago" ColumnName="IdTipoPago" />
-          <ScalarProperty Name="IdFacturaCompra" ColumnName="IdFacturaCompra" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -23,10 +23,7 @@ namespace Datos.Repositorios
         /// </summary>
         public List<MenuSidebar> GetMenuSidebar()
         {
-            //var side = (from menu in context.MenuSidebar
-            //            where menu.Activo == true && menu.IdParent == null
-            //            orderby menu.Orden
-            //            select menu).ToList();
+         
             var side = context.MenuSidebar.
                            IncludeFilter(m => m.MenuSidebar1.Where(p => p.Activo == true))
                            .Where(menu => menu.Activo == true && menu.IdParent == null)

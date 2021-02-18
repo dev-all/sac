@@ -23,6 +23,7 @@ namespace Datos.Repositorios
 
         public List<TipoCliente> GetAllTipoCliente()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<TipoCliente> listaTipoCliente = context.TipoCliente.ToList();
             return listaTipoCliente;
         }

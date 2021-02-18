@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
+using Z.EntityFramework.Plus;
 
 namespace Datos.Repositorios
 {
@@ -105,6 +106,7 @@ namespace Datos.Repositorios
             return listaImputacion;
         }
 
+     
 
         public int EliminarImputacion(int idImputacion)
         {
@@ -170,8 +172,7 @@ namespace Datos.Repositorios
             }
             catch (Exception ex)
             {
-                lista = null;
-                Console.Write(ex.Message);
+                lista = null;               
             }
             return lista;
 
@@ -182,6 +183,156 @@ namespace Datos.Repositorios
             IList<Diario> lista = null;
             lista = context.Diario.Where(i => i.Activo == true && i.Tipo == tipo  && i.Periodo == periodo).ToList();                      
             return lista;
+        }
+
+
+        public List<GrupoCuenta> GetPlanContable()
+        {
+            return context.GrupoCuenta.Where(P => P.Activo == true).ToList();
+        }
+
+        public List<GrupoCuenta> GetGrupoCuentaContable()
+        {
+            return context.GrupoCuenta.Where(g => g.Activo == true ).ToList();
+        }
+
+        public List<Rubro> GetRubroContable()
+        {
+            return context.Rubro.Where(g => g.Activo == true).ToList();
+        }
+
+        public List<SubRubro> GetSubRubroContable()
+        {
+            return context.SubRubro.Where(g => g.Activo == true).ToList();
+        }
+
+        public List<Imputacion> GetImputacionContable()
+        {
+            return context.Imputacion.Where(g => g.Activo == true ).ToList();
+        }
+
+
+
+        public GrupoCuenta GetGrupoCuentaContable(int id)
+        {
+            return context.GrupoCuenta.Where(g => g.Activo == true & g.Id == id ).FirstOrDefault();
+        }
+
+        public Rubro GetRubroContable(int id)
+        {
+            return context.Rubro.Where(g => g.Activo == true & g.Id == id).FirstOrDefault();
+        }
+
+        public SubRubro GetSubRubroContable(int id)
+        {
+            return context.SubRubro.Where(g => g.Activo == true & g.Id == id).FirstOrDefault();
+        }
+
+        public Imputacion GetImputacionContable(int id)
+        {
+            return context.Imputacion.Where(g => g.Activo == true & g.Id == id).FirstOrDefault();
+        }
+
+        public GrupoCuenta updateGrupoCuentaContable(GrupoCuenta model)
+        {
+            var entidad = GetGrupoCuentaContable(model.Id);
+            if (entidad != null){
+            entidad.Id = model.Id;
+            entidad.Descripcion = model.Descripcion;
+            entidad.Activo = model.Activo;
+            entidad.UltimaModificacion = model.UltimaModificacion;
+            context.SaveChanges(); 
+            }
+            return entidad;
+        }
+
+        public Rubro updateRubroContable(Rubro model)
+        {
+            var entidad = GetRubroContable(model.Id);
+            if (entidad != null)
+            {
+                entidad.Id = model.Id;
+                entidad.Descripcion = model.Descripcion;
+                entidad.IdGrupoCuenta = model.IdGrupoCuenta;
+                entidad.Activo = model.Activo;
+                entidad.UltimaModificacion = model.UltimaModificacion;
+                context.SaveChanges();
+            }
+            return entidad;
+        }
+
+        public SubRubro updateSubRubroContable(SubRubro model)
+        {
+            var entidad = GetSubRubroContable(model.Id);
+            if (entidad != null)
+            {
+                entidad.Id = model.Id;
+                entidad.Descripcion = model.Descripcion;
+                entidad.IdRubro = model.IdRubro;
+                entidad.Activo = model.Activo;
+                entidad.UltimaModificacion = model.UltimaModificacion;
+                context.SaveChanges();
+            }
+            return entidad;
+        }
+
+        public Imputacion updateImputacionContable(Imputacion model)
+        {
+            var entidad = GetImputacionContable(model.Id);
+            if (entidad != null)
+            {
+                entidad.Id = model.Id;
+                entidad.Descripcion = model.Descripcion;
+                entidad.IdSubRubro = model.IdSubRubro;
+                entidad.Activo = model.Activo;
+                entidad.UltimaModificacion = model.UltimaModificacion;
+                context.SaveChanges();
+            }
+            return entidad;
+        }
+
+        public GrupoCuenta InsertGrupoCuentaContable(GrupoCuenta model)
+        {
+            var entidad = GetGrupoCuentaContable(model.Id);
+            if (entidad == null)
+            {
+                context.GrupoCuenta.Add(model);               
+                context.SaveChanges();
+            }
+            return model;
+        }
+
+        public Rubro InsertRubroContable(Rubro model)
+        {
+            var entidad = GetRubroContable(model.Id);
+            if (entidad == null)
+            {
+                context.Rubro.Add(model);
+                context.SaveChanges();
+            }
+            return model;
+        }
+
+        public SubRubro InsertSubRubroContable(SubRubro model)
+        {
+            var entidad = GetSubRubroContable(model.Id);
+            if (entidad == null)
+            {
+                context.SubRubro.Add(model);
+                context.SaveChanges();
+            }
+            return model;
+        }
+
+        public Imputacion InsertImputacionContable(Imputacion model)
+        {
+            var entidad = GetImputacionContable(model.Id);
+            if (entidad == null)
+            {
+                InsertarImputacion(model);
+            }
+            return model;
+          
         }
     }
 }

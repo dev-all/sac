@@ -38,34 +38,33 @@
                     <div class="col-md-6 float-sm-left">
                         <h5 class="card-title">Cliente</h5>
                     </div>
-                    @if (Model.Visible == false)
+
+                    @switch (Model.Visible)
                     {
-
-                        <div class="col-md-6 float-sm-right">
-                            <div class="form-group row">
-                                <h5 class="control-label form-control-sm  alert alert-danger">El Cliente esta Oculto</h5>
-                            
-
+                        case false:
+                            <div class="col-md-6 float-sm-right">
+                                <div class="form-group row">
+                                    <h5 class="control-label form-control-sm  alert alert-danger">El Cliente esta Oculto</h5>
+                                </div>
                             </div>
-                        </div>
 
-
-
-                    }
-                    else
-                    {
-
-                        <div class="col-md-6 float-sm-right">
-                            <div class="form-group row">
-                                <h5 class="control-label form-control-sm alert alert-info">El Cliente esta Visible</h5>
-                              
-
+                            break;
+                        case true:
+                            <div class="col-md-6 float-sm-right">
+                                <div class="form-group row">
+                                    <h5 class="control-label form-control-sm alert alert-info">El Cliente esta Visible</h5>
+                                </div>
                             </div>
-                        </div>
-
-
-
+                            break;
+                        default:
+                            <div class="col-md-6 float-sm-right">
+                                <div class="form-group row">
+                                    <h5 class="control-label form-control-sm alert alert-success">Registro de un cliente nuevo</h5>
+                                </div>
+                            </div>
+                            break;
                     }
+
                 </div>
 
                     @Html.Hidden("BotonSeleccion")
@@ -288,17 +287,6 @@
             </div>
     </div>
 </div>
-
-
-                  
-                    
-
-
-
-                   
-
-
-
 
 
                     }

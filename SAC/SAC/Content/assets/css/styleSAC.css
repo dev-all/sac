@@ -6,6 +6,12 @@
     z-index: 1051 !important;
 }*/
 
+.TreePlan .list-group-item {  
+    font-size:small;
+    padding: .3rem .5rem;   
+}
+
+
 /* data table*/
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     padding: 0.1em 1em;

@@ -9,6 +9,8 @@ using SAC.Models;
 using AutoMapper;
 using Negocio.Modelos;
 using System.Text;
+using Entidad.Models;
+using System.Web.Script.Serialization;
 
 namespace SAC.Controllers
 {
@@ -16,6 +18,10 @@ namespace SAC.Controllers
     {
 
         private ServicioImputacion servicioimputacion = new ServicioImputacion();
+        public PlanContableModelView planContableModelView = new PlanContableModelView();
+        private String JsonTreeView;
+        private JavaScriptSerializer jsonString = new JavaScriptSerializer();
+
 
         public ContabilidadController()
         {
@@ -24,12 +30,12 @@ namespace SAC.Controllers
 
         /// Consulta asientos contables"
         /// 
-        public ActionResult ConsultaAsientosContables(string Periodo = null , string Tipo = "CF")
+        public ActionResult ConsultaAsientosContables(string Periodo = null, string Tipo = "CF")
         {
             DiarioModelView model = new DiarioModelView();
             if (!string.IsNullOrEmpty(Periodo))
             {
-                model.ListaDiario = Mapper.Map<List<DiarioModel>, List<DiarioModelView>>(servicioimputacion.GetAsientosContables(Periodo ,Tipo));
+                model.ListaDiario = Mapper.Map<List<DiarioModel>, List<DiarioModelView>>(servicioimputacion.GetAsientosContables(Periodo, Tipo));
             }
             model.TipoAsiento = TipoAsiento();
             CargarAnio();
@@ -113,6 +119,312 @@ namespace SAC.Controllers
             }
             ViewBag.ListaAnio = sb.ToString();
         }
+
+
+        //---------------- PLAN CONTABLE --------
+
+        // GET: 
+        //[AutorizacionDeSistema]
+        public ActionResult Index()
+        {
+
+
+            CuentaPlanContableModelView nuevaCuenta = new CuentaPlanContableModelView();
+            nuevaCuenta.TipoElemento = GetTipoElemento();
+            nuevaCuenta.selectListCuentaSuperior = GetCuentaSuperior(0);
+
+            planContableModelView = new PlanContableModelView
+            {
+                IEmenuSideBar = Mapper.Map<List<MenuSideBarModel>, List<MenuSideBarModelView>>(servicioimputacion.GetPlanContable()),
+                cuentaContable = nuevaCuenta,
+            };
+            JsonTreeView = jsonString.Serialize(TreeViewNode(servicioimputacion.GetPlanContable()));
+            ViewBag.JsonMenuSider = JsonTreeView;          
+            return View(planContableModelView);
+        }
+
+        public String TreeView(List<MenuSideBarModel> model)
+        {
+            List<TreeViewModel> ListTreeView = new List<TreeViewModel>();
+            foreach (var i in model)
+            {
+                TreeViewModel item = new TreeViewModel();
+                item.text = i.Titulo;
+                item.href = "/Contabilidad/Edit/" + i.IdMenuSidebar.ToString();
+                if (i.Group.Count > 0)
+                {
+                    List<TreeViewModel> ListNode = new List<TreeViewModel>();
+                    foreach (var n in i.Group)
+                    {
+                        TreeViewModel nodo = new TreeViewModel();
+                        nodo.text = n.Titulo;
+                        nodo.href = "/Contabilidad/Edit/" + n.IdMenuSidebar.ToString();
+                        ListNode.Add(nodo);
+                    }
+                    item.nodes = ListNode;
+                }
+                ListTreeView.Add(item);
+            }
+            JsonTreeView += jsonString.Serialize(ListTreeView);
+            return JsonTreeView;
+        }
+
+        public List<TreeViewModel> TreeViewNode(ICollection<MenuSideBarModel> model)
+        {
+            List<TreeViewModel> ListTreeView = new List<TreeViewModel>();
+            foreach (var i in model)
+            {
+                TreeViewModel item = new TreeViewModel();
+                item.text = i.Titulo;
+                item.href = "/Contabilidad/Edit/" + i.Url + i.IdMenuSidebar.ToString();
+                if (i.Group.Count > 0)
+                {
+                    item.nodes = TreeViewNode(i.Group);
+                }
+                ListTreeView.Add(item);
+            }
+
+            return ListTreeView;
+        }
+
+        private SelectList GetTipoElemento()
+        {
+            var diccionario = servicioimputacion.GetTipoElemento();
+            return new SelectList(diccionario, "Key", "Value");
+        }
+
+        public ActionResult Edit(string id = null)
+        {
+            CuentaPlanContableModelView model = new CuentaPlanContableModelView();
+            model.TipoElemento = GetTipoElemento();
+
+            if (id != null)
+            {
+                //edit
+                string[] param = id.Split('-');
+                int TipoCuenta = int.Parse(param[0]);
+                int IdCuenta = int.Parse(param[1]);
+                switch (TipoCuenta)
+                {
+                    case 0:
+
+                        var g = servicioimputacion.GetGrupoCuentaContable(IdCuenta);
+                        model.Codigo = g.Id;
+                        model.IdNuevo = g.Id;
+                        model.Descripcion = g.Descripcion;
+                        model.IdTipoElemento = "G";
+                        model.selectListCuentaSuperior = GetCuentaSuperior(0);
+                        model.IdCuentaSuperior = 0;
+                        break;
+
+                    case 1:
+
+                        var r = servicioimputacion.GetRubroContable(IdCuenta);
+                        model.Codigo = r.Id;
+                        model.IdNuevo = r.Id;
+                        model.Descripcion = r.Descripcion;
+                        model.IdTipoElemento = "R";
+                        model.selectListCuentaSuperior = GetCuentaSuperior(0);
+                        model.IdCuentaSuperior = r.IdGrupoCuenta ?? 0;
+                        break;
+
+                    case 2:
+
+                        var s = servicioimputacion.GetSubRubroContable(IdCuenta);
+                        model.Codigo = s.Id;
+                        model.IdNuevo = s.Id;
+                        model.Descripcion = s.Descripcion;
+                        model.IdTipoElemento = "S";
+                        model.IdCuentaSuperior = s.IdRubro;
+                        model.selectListCuentaSuperior = GetCuentaSuperior(1);
+                        break;
+
+                    case 3:
+                        var c = servicioimputacion.GetImputacionContable(IdCuenta);
+                        model.Codigo = c.Id;
+                        model.IdNuevo = c.Id;
+                        model.Descripcion = c.Descripcion;
+                        model.IdTipoElemento = "C";
+                        model.selectListCuentaSuperior = GetCuentaSuperior(2);
+                        model.IdCuentaSuperior = c.IdSubRubro ?? 0;
+                        break;
+
+                    default:
+                        // code block
+                        break;
+                }
+            }
+
+
+
+            return View(model);
+
+        }
+        [HttpPost]
+        public ActionResult Edit(CuentaPlanContableModelView modelView)
+        {
+                modelView.Activo = true;
+                servicioimputacion.ActualizarCuentaContable(Mapper.Map<CuentaPlanContableModelView, CuentaPlanContableModel>(modelView));
+            
+            return RedirectToAction("Index");
+
+
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(CuentaPlanContableModelView modelView)
+        {           
+                modelView.Activo = false;
+                servicioimputacion.ActualizarCuentaContable(Mapper.Map<CuentaPlanContableModelView, CuentaPlanContableModel>(modelView));           
+            return RedirectToAction("Index");
+           
+        }
+
+
+        //[AutorizacionDeSistema]
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(PlanContableModelView modelView)
+        {
+
+            if (ModelState.IsValid)
+            {
+                modelView.cuentaContable.Activo = true;
+                servicioimputacion.NuevaCuentaContable(Mapper.Map<CuentaPlanContableModelView, CuentaPlanContableModel>(modelView.cuentaContable));
+
+            }
+        
+            return RedirectToAction("Index");
+        }
+
+
+
+        public List<SelectListItem> GetCuentaSuperior(int TipoElemento)
+        {
+
+            List<SelectListItem> selectListItems = new List<SelectListItem>();
+
+
+            switch (TipoElemento)
+            {
+                case 0:
+
+                    var g = servicioimputacion.GetGrupoCuentaContable();
+                    selectListItems = (g.Select(x =>
+                                  new SelectListItem()
+                                  {
+                                      Value = x.Id.ToString(),
+                                      Text = x.Descripcion
+                                  })).ToList();
+
+                    break;
+
+                case 1:
+
+                    var r = servicioimputacion.GetRubroContable();
+                    selectListItems = (r.Select(x =>
+                                  new SelectListItem()
+                                  {
+                                      Value = x.Id.ToString(),
+                                      Text = x.Descripcion
+                                  })).ToList();
+                    break;
+
+                case 2:
+
+                    var s = servicioimputacion.GetSubRubroContable();
+                    selectListItems = (s.Select(x =>
+                                    new SelectListItem()
+                                    {
+                                        Value = x.Id.ToString(),
+                                        Text = x.Descripcion
+                                    })).ToList();
+                    break;
+
+                case 3:
+                    var c = servicioimputacion.GetImputacionContable();
+                    selectListItems = (c.Select(x =>
+                                   new SelectListItem()
+                                   {
+                                       Value = x.Id.ToString(),
+                                       Text = x.Descripcion
+                                   })).ToList();
+                    break;
+
+                default:
+                    // code block
+                    break;
+            }
+            return selectListItems;
+        }
+
+        public JsonResult GetlistaCuentas(string TipoElemento)
+        {
+
+            List<CuentaPlanContableModelView> model = new List<CuentaPlanContableModelView>();
+            switch (TipoElemento)
+            {
+                //case "G":
+
+                //    var g = servicioimputacion.GetGrupoCuentaContable();
+                //    model = (from i in g
+                //             select new CuentaPlanContable
+                //             {
+                //                 Id = i.Id,
+                //                 Descripcion = i.Descripcion,
+                //             }).ToList();
+                //    break;
+
+                case "R":
+
+                    var r = servicioimputacion.GetGrupoCuentaContable();
+
+                    model = (from i in r
+                             select new CuentaPlanContableModelView
+                             {
+                                 Id = i.Id,
+                                 Descripcion = i.Descripcion,
+                             }).ToList();
+                    break;
+
+                case "S":
+
+                    var s = servicioimputacion.GetRubroContable();
+                    model = (from i in s
+                             select new CuentaPlanContableModelView
+                             {
+                                 Id = i.Id,
+                                 Descripcion = i.Descripcion,
+                             }).ToList();
+                    break;
+
+                case "C":
+                    var c = servicioimputacion.GetSubRubroContable();
+                    model = (from i in c
+                             select new CuentaPlanContableModelView
+                             {
+                                 Id = i.Id,
+                                 Descripcion = i.Descripcion,
+                             }).ToList();
+                    break;
+
+                default:
+                    // code block
+                    break;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
 
     }
 

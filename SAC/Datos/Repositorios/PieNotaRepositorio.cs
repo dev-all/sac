@@ -134,6 +134,7 @@ namespace Datos.Repositorios
 
         public List<PieNota> GetAllPieNota()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<PieNota> ListaPieNota= context.PieNota
                                 .Where(p => p.Activo == true).ToList();
        

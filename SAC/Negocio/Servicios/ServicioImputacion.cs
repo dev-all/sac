@@ -53,31 +53,6 @@ namespace Negocio.Servicios
             //ImputacionModel oImputacionModel = new ImputacionModel();
             return Mapper.Map<Imputacion, ImputacionModel>(ImputacionRepositorio.ObtenerImputacionPorId(_id));
 
-
-            //oImputacionModel.Id = oImputacion.Id;
-            //oImputacionModel.Descripcion = oImputacion.Descripcion;
-            //oImputacionModel.IdSubRubro = oImputacion.IdSubRubro;
-            //oImputacionModel.SaldoInicial = oImputacion.SaldoInicial;
-            //oImputacionModel.SaldoFin = oImputacion.SaldoFin;
-            //oImputacionModel.IdTipo = oImputacion.IdTipo;
-            //oImputacionModel.Alias = oImputacion.Alias;
-            //oImputacionModel.Enero = oImputacion.Enero;
-            //oImputacionModel.Febrero = oImputacion.Febrero;
-            //oImputacionModel.Marzo = oImputacion.Marzo;
-            //oImputacionModel.Abril = oImputacion.Abril;
-            //oImputacionModel.Mayo = oImputacion.Mayo;
-            //oImputacionModel.Junio = oImputacion.Junio;
-            //oImputacionModel.Julio = oImputacion.Julio;
-            //oImputacionModel.Agosto = oImputacion.Agosto;
-            //oImputacionModel.Septiembre = oImputacion.Septiembre;
-            //oImputacionModel.Octubre = oImputacion.Octubre;
-            //oImputacionModel.Noviembre = oImputacion.Noviembre;
-            //oImputacionModel.Diciembre = oImputacion.Diciembre;
-            //oImputacionModel.Activo = oImputacion.Activo;
-            //oImputacionModel.IdUsuario = oImputacion.IdUsuario;
-            //oImputacionModel.UltimaModificacion = oImputacion.UltimaModificacion;
-
-            //return oImputacionModel;
         }
 
         public int ActualizarImputacion(ImputacionModel oImputacionModel)
@@ -94,32 +69,6 @@ namespace Negocio.Servicios
 
                 var imp =  Mapper.Map<ImputacionModel, Imputacion> (oImputacionModel);
 
-                //Imputacion oImputacionNuevo = new Imputacion();
-               // = new Imputacion();
-
-                //oImputacionNuevo.Id = oImputacionModel.Id;
-                //oImputacionNuevo.Descripcion = oImputacionModel.Descripcion;
-                //oImputacionNuevo.IdSubRubro = oImputacionModel.IdSubRubro;
-                //oImputacionNuevo.SaldoInicial = oImputacionModel.SaldoInicial;
-                //oImputacionNuevo.SaldoFin = oImputacionModel.SaldoFin;
-                //oImputacionNuevo.IdTipo = oImputacionModel.IdTipo;
-                //oImputacionNuevo.Alias = oImputacionModel.Alias;
-                //oImputacionNuevo.Enero = oImputacionModel.Enero;
-                //oImputacionNuevo.Febrero = oImputacionModel.Febrero;
-                //oImputacionNuevo.Marzo = oImputacionModel.Marzo;
-                //oImputacionNuevo.Abril = oImputacionModel.Abril;
-                //oImputacionNuevo.Mayo = oImputacionModel.Mayo;
-                //oImputacionNuevo.Junio = oImputacionModel.Junio;
-                //oImputacionNuevo.Julio = oImputacionModel.Julio;
-                //oImputacionNuevo.Agosto = oImputacionModel.Agosto;
-                //oImputacionNuevo.Septiembre = oImputacionModel.Septiembre;
-                //oImputacionNuevo.Octubre = oImputacionModel.Octubre;
-                //oImputacionNuevo.Noviembre = oImputacionModel.Noviembre;
-                //oImputacionNuevo.Diciembre = oImputacionModel.Diciembre;
-                //oImputacionNuevo.Activo = oImputacionModel.Activo;
-                //oImputacionNuevo.IdUsuario = oImputacionModel.IdUsuario;
-                //oImputacionNuevo.UltimaModificacion = oImputacionModel.UltimaModificacion;
-
                 Imputacion oPaisRespuesta = ImputacionRepositorio.ActualizarImputacion(imp);
 
                 if (oPaisRespuesta == null)
@@ -134,19 +83,68 @@ namespace Negocio.Servicios
             }
         }
 
-        public void ActualizarAsientoImputacion(ImputacionModel model)
+
+        public List<MenuSideBarModel> GetPlanContable()
         {
-            try
-            {                                
-               
-            }
-            catch (Exception ex)
-            {
-                 _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
-                throw new Exception();
-            }
-               
+            IList<GrupoCuenta> grupoCuentas = ImputacionRepositorio.GetPlanContable();
+            ICollection<MenuSideBarModel> node = new List<MenuSideBarModel>();
+
+
+            var grupos = grupoCuentas
+                               .Select(c => new MenuSideBarModel()
+                               {
+                                   IdMenuSidebar = c.Id,
+                                   Titulo = c.Descripcion,
+                                   Icono = "fa-book",
+                                   Url = "0-",
+                                   IdParent = 0
+                                   ,Group = c.Rubro.Where( r => r.Activo == true)
+                                        .Select(r => new MenuSideBarModel()
+                                                           {
+                                                               IdMenuSidebar = r.Id,
+                                                               Titulo = r.Descripcion,
+                                                               Icono = "fa-book",
+                                                               Url = "1-",
+                                                               IdParent = r.IdGrupoCuenta,
+                                                               Group = r.SubRubro.Where(s => s.Activo == true)
+                                                               .Select(s => new MenuSideBarModel()
+                                                               {
+                                                                   IdMenuSidebar = s.Id,
+                                                                   Titulo = s.Descripcion,
+                                                                   Icono = "fa-book",
+                                                                   Url = "2-",
+                                                                   IdParent = s.IdRubro,
+                                                                   Group = s.Imputacion.Where(i => i.Activo == true)
+                                                                   .Select(i => new MenuSideBarModel()
+                                                                   {
+                                                                       IdMenuSidebar = i.Id,
+                                                                       Titulo = i.Descripcion,
+                                                                       Icono = "fa-book",
+                                                                       Url = "3-",
+                                                                       IdParent = i.IdSubRubro,
+                                                                       Group = new List<MenuSideBarModel>()
+                                                                   }).ToList()
+                                                               }).ToList()
+                                                           }).ToList()
+                                   
+                               }).ToList();
+
+            return grupos;
         }
+
+        //public void ActualizarAsientoImputacion(ImputacionModel model)
+        //{
+        //    try
+        //    {                                
+               
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //         _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+        //        throw new Exception();
+        //    }
+               
+        //}
         
         public void AsintoContableGeneral(Diario model)
         {
@@ -226,6 +224,58 @@ namespace Negocio.Servicios
             }
         }
 
+
+        public List<Imputacion> GetImputacionContable()
+        {
+            List<Imputacion> imputacions = ImputacionRepositorio.GetImputacionContable();
+            return imputacions;
+        }
+
+        public List<SubRubro> GetSubRubroContable()
+        {
+            List<SubRubro> subRubros = ImputacionRepositorio.GetSubRubroContable();
+            return subRubros;
+        }
+
+        public List<Rubro> GetRubroContable()
+        {
+            List<Rubro> rubros = ImputacionRepositorio.GetRubroContable();
+            return rubros;
+        }
+
+        public List<GrupoCuenta> GetGrupoCuentaContable()
+        {
+            List<GrupoCuenta> grupoCuentas = ImputacionRepositorio.GetGrupoCuentaContable();
+            return grupoCuentas;
+        }
+
+        public Imputacion GetImputacionContable( int i)
+        {
+            Imputacion imputacions = ImputacionRepositorio.GetImputacionContable(i);
+            return imputacions;
+        }
+
+        public SubRubro GetSubRubroContable(int s)
+        {
+           SubRubro subRubros = ImputacionRepositorio.GetSubRubroContable(s);
+            return subRubros;
+        }
+
+        public Rubro GetRubroContable( int r)
+        {
+            Rubro rubros = ImputacionRepositorio.GetRubroContable(r);
+            return rubros;
+        }
+
+        public GrupoCuenta GetGrupoCuentaContable(int g)
+        {
+            GrupoCuenta grupoCuentas = ImputacionRepositorio.GetGrupoCuentaContable(g);
+            return grupoCuentas;
+        }
+
+
+
+
         public ImputacionModel GetImputacionPorAlias(string alias)
         {
             try
@@ -300,6 +350,143 @@ namespace Negocio.Servicios
             }
         }
 
+        public void ActualizarCuentaContable(CuentaPlanContableModel modelView)
+        {
+            try
+            {
+         
+            switch (modelView.IdTipoElemento)
+            {
+                case "G":
+                   
+                    GrupoCuenta g = new GrupoCuenta {
+                                                        Id = modelView.Codigo,
+                                                        Descripcion = modelView.Descripcion,
+                                                        Activo = modelView.Activo,
+                                                        UltimaModificacion = DateTime.Now
+                                                    };
+                    g = ImputacionRepositorio.updateGrupoCuentaContable(g);
+                    break;
+                case "R":
+
+                    Rubro r = new Rubro
+                    {
+                        Id = modelView.Codigo,
+                        Descripcion = modelView.Descripcion,
+                        IdGrupoCuenta = modelView.IdCuentaSuperior,
+                        Activo = modelView.Activo,
+                        UltimaModificacion = DateTime.Now
+                    };
+                    r = ImputacionRepositorio.updateRubroContable(r);
+                    break;
+
+                case "S":
+
+                    SubRubro s = new SubRubro
+                    {
+                        Id = modelView.Codigo,
+                        Descripcion = modelView.Descripcion,
+                        IdRubro = modelView.IdCuentaSuperior,
+                        Activo = modelView.Activo,
+                        UltimaModificacion = DateTime.Now
+                    };
+                    s = ImputacionRepositorio.updateSubRubroContable(s);
+                    break;
+
+                case "C":
+                    Imputacion c = new Imputacion
+                    {
+                        Id = modelView.Codigo,
+                        Descripcion = modelView.Descripcion,
+                        IdSubRubro = modelView.IdCuentaSuperior,
+                        Activo = modelView.Activo,
+                        UltimaModificacion = DateTime.Now
+                    };
+                    c = ImputacionRepositorio.updateImputacionContable(c);
+                    break;
+
+                default:
+                    // code block
+                    break;
+            }
+                _mensaje?.Invoke("Se Actualizo Correctamente", "ok");
+            }
+            catch (Exception ex)
+            {
+
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
+            }
+        }
+
+        public void NuevaCuentaContable(CuentaPlanContableModel modelView)
+        {
+            try
+            {
+
+                switch (modelView.IdTipoElemento)
+                {
+                    case "G":
+
+                        GrupoCuenta g = new GrupoCuenta
+                        {
+                            Id = modelView.IdNuevo,
+                            Descripcion = modelView.Descripcion,
+                            Activo = modelView.Activo,
+                            UltimaModificacion = DateTime.Now
+                        };
+                        g = ImputacionRepositorio.InsertGrupoCuentaContable(g);
+                        break;
+                    case "R":
+
+                        Rubro r = new Rubro
+                        {
+                            Id = modelView.IdNuevo,
+                            Descripcion = modelView.Descripcion,
+                            IdGrupoCuenta = modelView.IdCuentaSuperior,
+                            Activo = modelView.Activo,
+                            UltimaModificacion = DateTime.Now
+                        };
+                        r = ImputacionRepositorio.InsertRubroContable(r);
+                        break;
+
+                    case "S":
+
+                        SubRubro s = new SubRubro
+                        {
+                            Id = modelView.IdNuevo,
+                            Descripcion = modelView.Descripcion,
+                            IdRubro = modelView.IdCuentaSuperior,
+                            Activo = modelView.Activo,
+                            UltimaModificacion = DateTime.Now
+                        };
+                        s = ImputacionRepositorio.InsertSubRubroContable(s);
+                        break;
+
+                    case "C":
+                        Imputacion c = new Imputacion
+                        {
+                            Id = modelView.IdNuevo,
+                            Descripcion = modelView.Descripcion,
+                            IdSubRubro = modelView.IdCuentaSuperior,
+                            Activo = modelView.Activo,
+                            UltimaModificacion = DateTime.Now
+                        };
+                        c = ImputacionRepositorio.InsertImputacionContable(c);
+                        break;
+
+                    default:
+                        // code block
+                        break;
+                }
+                _mensaje?.Invoke("Se Actualizo Correctamente", "ok");
+            }
+            catch (Exception ex)
+            {
+
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
+            }
+        }
+
 
         /// <summary>DoWork is a method in the TestClass class.
         /// <para>Here's how you could make a second paragraph in a description. <see cref="System.Console.WriteLine(System.String)"/> for information about output statements.</para>
@@ -368,6 +555,20 @@ namespace Negocio.Servicios
 
             return diccionario;
         }
+
+        public Dictionary<string, string> GetTipoElemento()
+        {
+            Dictionary<string, string> diccionario = new Dictionary<string, string>();
+            diccionario.Add(EnumDescriptionName(TipoElementoEnum.G), EnumDescription(TipoElementoEnum.G));
+            diccionario.Add(EnumDescriptionName(TipoElementoEnum.R), EnumDescription(TipoElementoEnum.R));
+            diccionario.Add(EnumDescriptionName(TipoElementoEnum.S), EnumDescription(TipoElementoEnum.S));
+            diccionario.Add(EnumDescriptionName(TipoElementoEnum.C), EnumDescription(TipoElementoEnum.C));
+
+            return diccionario;
+        }
+
+
+
         public string EnumDescription(Enum enumValue)
         {
             return enumValue.GetType()
