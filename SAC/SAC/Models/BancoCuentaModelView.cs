@@ -25,11 +25,8 @@ namespace SAC.Models
         public string CNombre { get; set; }
 
         public decimal Saldo { get; set; }
-
-        public int Cierre { get; set; }
-
-        public string Fecha { get; set; }
-
+        public int NumeroCierre { get; set; }
+        public System.DateTime Fecha { get; set; }
         public int IdMoneda { get; set; }
 
         public Nullable<bool> Activo { get; set; }

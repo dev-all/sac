@@ -416,7 +416,7 @@ namespace Negocio.Servicios
                                     oBancoCuentaBancariaModel.DiaClearing = "";
                                     oBancoCuentaBancariaModel.Importe = decimal.Parse(oChequera.Importes.ToString());
                                     oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
-                                    oBancoCuentaBancariaModel.Conciliacion = "F";
+                                    oBancoCuentaBancariaModel.Conciliacion = false;
 
                                     // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
                                     oBancoCuentaBancariaModel.Activo = true;
@@ -488,7 +488,7 @@ namespace Negocio.Servicios
                                 oBancoCuentaBancariaModel.DiaClearing = "";
                                 oBancoCuentaBancariaModel.Importe = decimal.Parse(oCompraFacturaModel.montoTranferencia.ToString());
                                 oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
-                                oBancoCuentaBancariaModel.Conciliacion = "F";
+                                oBancoCuentaBancariaModel.Conciliacion = false;
                                 // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
                                 oBancoCuentaBancariaModel.IdImputacion = "0";
                                 oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
@@ -833,7 +833,7 @@ namespace Negocio.Servicios
                                         oBancoCuentaBancariaModel.DiaClearing = "";
                                         oBancoCuentaBancariaModel.Importe = decimal.Parse(oMediosPago.montoCuentaBancaria_.ToString());
                                         oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
-                                        oBancoCuentaBancariaModel.Conciliacion = "F";
+                                        oBancoCuentaBancariaModel.Conciliacion = false;
                                         //oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double+
                                         oBancoCuentaBancariaModel.IdImputacion = "0";
                                         var pagoBancoCuentaBancaria = oServicioBancoCuentaBancaria.Agregar(oBancoCuentaBancariaModel);
@@ -956,7 +956,7 @@ namespace Negocio.Servicios
                                             oBancoCuentaBancariaModel.DiaClearing = "";
                                             oBancoCuentaBancariaModel.Importe = decimal.Parse(oChequera.Importes.ToString());
                                             oBancoCuentaBancariaModel.IdCliente = Factura.IdProveedor.ToString();
-                                            oBancoCuentaBancariaModel.Conciliacion = "F";
+                                            oBancoCuentaBancariaModel.Conciliacion = false;
 
                                             // oBancoCuentaBancariaModel.FechaIngreso = DateTime.Now;//es double
                                             oBancoCuentaBancariaModel.Activo = true;

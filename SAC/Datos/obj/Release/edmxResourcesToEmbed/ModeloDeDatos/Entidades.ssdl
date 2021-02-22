@@ -58,8 +58,8 @@
     <Property Name="IdImputacion" Type="int" Nullable="false" />
     <Property Name="CNombre" Type="varchar" MaxLength="50" />
     <Property Name="Saldo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Cierre" Type="int" Nullable="false" />
-    <Property Name="Fecha" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NumeroCierre" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="IdMoneda" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
@@ -72,14 +72,15 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NumeroOperacion" Type="int" Nullable="false" />
     <Property Name="IdBancoCuenta" Type="int" Nullable="false" />
+    <Property Name="IdGrupoCaja" Type="int" Nullable="false" />
     <Property Name="CuentaDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Fecha" Type="datetime" />
     <Property Name="FechaEfectiva" Type="datetime" />
     <Property Name="DiaClearing" Type="nvarchar" MaxLength="50" />
     <Property Name="Importe" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="IdCliente" Type="nvarchar" MaxLength="50" />
-    <Property Name="Conciliacion" Type="char" MaxLength="10" Nullable="false" />
-    <Property Name="FechaIngreso" Type="float" Nullable="false" />
+    <Property Name="Conciliacion" Type="bit" Nullable="false" />
+    <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
     <Property Name="IdImputacion" Type="nvarchar" MaxLength="50" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
@@ -1026,6 +1027,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BancoCuenta_Imputacion">
+    <End Role="Imputacion" Type="Self.Imputacion" Multiplicity="1" />
+    <End Role="BancoCuenta" Type="Self.BancoCuenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Imputacion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BancoCuenta">
+        <PropertyRef Name="IdImputacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_BancoCuentaBancaria_BancoCuenta">
     <End Role="BancoCuenta" Type="Self.BancoCuenta" Multiplicity="1" />
     <End Role="BancoCuentaBancaria" Type="Self.BancoCuentaBancaria" Multiplicity="*" />
@@ -1932,6 +1945,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     </AssociationSet>
     <AssociationSet Name="FK_BancoCuenta_Banco" Association="Self.FK_BancoCuenta_Banco">
       <End Role="Banco" EntitySet="Banco" />
+      <End Role="BancoCuenta" EntitySet="BancoCuenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BancoCuenta_Imputacion" Association="Self.FK_BancoCuenta_Imputacion">
+      <End Role="Imputacion" EntitySet="Imputacion" />
       <End Role="BancoCuenta" EntitySet="BancoCuenta" />
     </AssociationSet>
     <AssociationSet Name="FK_BancoCuentaBancaria_BancoCuenta" Association="Self.FK_BancoCuentaBancaria_BancoCuenta">

@@ -21,6 +21,7 @@ namespace Datos.ModeloDeDatos
             this.Proveedor = new HashSet<Proveedor>();
             this.Proveedor1 = new HashSet<Proveedor>();
             this.CompraFactura = new HashSet<CompraFactura>();
+            this.BancoCuenta = new HashSet<BancoCuenta>();
         }
     
         public int Id { get; set; }
@@ -55,5 +56,7 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<Proveedor> Proveedor1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFactura> CompraFactura { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BancoCuenta> BancoCuenta { get; set; }
     }
 }

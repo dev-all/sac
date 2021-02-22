@@ -1,0 +1,92 @@
+﻿@model SAC.Models.IngresoBancoModelView
+@{
+    ViewBag.Title = "IngresoCuentaBancaria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <!-- Date picker plugins css -->
+    <link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+@Html.Partial("_Ingresos", Model.Ingresos)
+
+
+
+
+@section Scripts{
+
+
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/view/DatePickerReady.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("input[name=TipoMovimiento]").click(function () {
+                // alert("La edad seleccionada es: " + $('input:radio[name=TipoMovimiento]:checked').val());
+                //alert("La edad seleccionada es: " + $(this).val());
+                $("#ctrIngreso").removeClass("hide");
+
+
+                $("#TipoMovimiento").val($(this).val());
+
+           
+                $("#CtrCtaDestino").addClass("hide");
+
+                $("#CtrTTImporteDolar").addClass("hide");
+                $("#CtrTTImportePesos").addClass("hide");
+                //$("#CtrImporte").addClass("hide");
+    // $("#CtrGrupoCaja").addClass("hide");
+                switch ($(this).val()) {
+
+
+                    case "cv":
+                        $("#CtrImporte").removeClass("hide");
+                        $("#CtrGrupoCaja").removeClass("hide");
+                        $("#CtrImporte").addClass("show");
+                        $("#CtrGrupoCaja").addClass("show");
+                        break;
+                    case "de":
+                        $("#CtrImporte").removeClass("hide");
+                        $("#CtrGrupoCaja").removeClass("show");
+                        $("#CtrImporte").addClass("show");
+                        $("#CtrGrupoCaja").addClass("hide");
+                        break;
+                    case "tc":
+                        $("#CtrImporte").removeClass("hide");
+                        $("#CtrGrupoCaja").removeClass("show");
+                        $("#CtrImporte").addClass("show");
+                        $("#CtrGrupoCaja").addClass("hide");
+                        $("#CtrCtaDestino").removeClass("hide");
+                        $("#CtrCtaDestino").addClass("show");
+
+                        break;
+                    case "tt":
+
+                        $("#CtrImporte").removeClass("show");
+                        $("#CtrImporte").addClass("hide");
+                        $("#CtrGrupoCaja").removeClass("show");
+                        $("#CtrGrupoCaja").addClass("hide");
+                        $("#CtrCtaDestino").removeClass("hide");
+                        $("#CtrCtaDestino").addClass("show");
+
+                        if ($("#IdTipoMoneda").val() == 1) {
+                            $("#CtrTTImportePesos").removeClass("hide");
+                            $("#CtrTTImportePesos").addClass("show");
+                        } else {
+                            $("#CtrTTImporteDolar").removeClass("hide");
+                            $("#CtrTTImporteDolar").addClass("show");                            
+                        }
+                                         
+                        break;
+
+                    default:
+                        // ok
+                        break;
+                }
+            });
+
+        });
+    </script>
+}
+

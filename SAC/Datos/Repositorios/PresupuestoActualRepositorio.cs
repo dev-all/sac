@@ -26,7 +26,10 @@ namespace Datos.Repositorios
         {
             return context.PrespuestoActual.Where(p => p.Activo == true && p.Id == idPresupuesto).First();
         }
-
+        public PrespuestoActual GetPresupuestos(int idPresupuesto)
+        {
+            return context.PrespuestoActual.Where(p => p.Activo == true && p.Id == idPresupuesto).First();
+        }
 
         public PrespuestoActual ActualizarPresupuesto(PrespuestoActual oPresupuestoActual)
         {
@@ -51,6 +54,9 @@ namespace Datos.Repositorios
 
         }
 
-
+        public PrespuestoActual GetPresupuestosPorCodigo(string codigo)
+        {
+            return context.PrespuestoActual.Where(p => p.Activo == true && p.Codigo == codigo).First();
+        }
     }
 }

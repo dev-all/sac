@@ -144,8 +144,6 @@ namespace Negocio.Servicios
                 throw new Exception();
 
             }
-
-
         }
 
 
@@ -249,6 +247,31 @@ namespace Negocio.Servicios
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                  CajaRepositorio.ActualizarCierreCaja(Mapper.Map<CajaModel, Caja>(model));
                 _mensaje?.Invoke("Se actualizo correctamente", "ok");
+            }
+            catch (Exception)
+            {
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error - ActualizarCierreCaja. contacte al administrador", "erro");
+                throw new Exception();
+
+            }
+        }
+
+     
+
+        public CajaModel IngresoCuentaBancaria(BancoCuentaBancariaModel model ,int IdGrupoCaja)
+        {
+
+            try
+            {
+                CajaModel caja = new CajaModel();
+                caja.IdTipoMovimiento = 1;
+                caja.IdCuentaBanco = model.IdBancoCuenta;
+                caja.Concepto = model.CuentaDescripcion;
+                caja.ImporteDeposito = model.Importe;
+                caja.Fecha = model.Fecha;
+                caja.IdGrupoCaja = IdGrupoCaja; // 'BANCH'
+
+                return GuardarCaja(caja);
             }
             catch (Exception)
             {

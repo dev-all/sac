@@ -25,9 +25,8 @@ namespace Negocio.Modelos
 
         public decimal Saldo { get; set; }
 
-        public int Cierre { get; set; }
-
-        public string Fecha { get; set; }
+        public int NumeroCierre { get; set; }
+        public System.DateTime Fecha { get; set; }
 
         public int IdMoneda { get; set; }
 

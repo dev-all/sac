@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Tarjeta";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <!-- Date picker plugins css -->
+    <link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
 }
 
 
@@ -72,123 +75,123 @@
     </div>
 
 
-if (Model.ListaTarjetaOperacion.Count > 0)
-{
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
+    if (Model.ListaTarjetaOperacion.Count > 0)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
 
-                <div class="card-body">
+                    <div class="card-body">
 
-                    <div class="form-body">
+                        <div class="form-body">
 
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group ">
-                                    <small>Consulta de Tarjetas Pendientes de Cobro</small>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="table-responsive-md">
-
-                                    <table id="example23" class="table stylish-table">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">Paga</th>
-                                                <th class="text-center">Fecha</th>
-                                                <th class="text-center">Codigo</th>
-                                                <th class="text-center">Descripcion</th>
-                                                <th class="text-center">Importe</th>
-                                                <th class="text-center">Datos</th>
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @{
-                                                decimal TotalTarjeta = 0;
-
-                                            }
-
-                                            @foreach (var item in Model.ListaTarjetaOperacion)
-                                            {
-
-                                                TotalTarjeta += item.Importe;
-
-                                                <tr>
-                                                    @*<td class="text-center">
-                                                            <input type="checkbox" class="mis-checkboxes" checked="@(1 == 0)">
-                                                        </td>*@
-                                                    <td class="text-center">
-                                                        <input type="checkbox" class="check Seleccionable" id=@item.Id value=@item.Importe>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        @Html.DisplayFor(modelItem => item.UltimaModificacion)
-                                                    </td>
-                                                    <td class="text-right">
-                                                        @Html.DisplayFor(modelItem => item.Tarjetas.Codigo)
-                                                    </td>
-
-                                                    <td class="text-right">
-                                                        @Html.DisplayFor(modelItem => item.Tarjetas.Descripcion)
-                                                    </td>
-
-                                                    <td class="text-right deuda">
-                                                        @Html.DisplayFor(modelItem => item.Importe)
-                                                    </td>
-
-                                                    <td class="text-right">
-                                                        @Html.DisplayFor(modelItem => item.Descripcion)
-                                                    </td>
-                                                </tr>
-                                            }
-
-                                            <tr>
-                                                <td colspan="4" class="text-right"><label> Total</label></td>
-                                                <td class="text-right">
-                                                    <label> @Html.Raw(TotalTarjeta)</label>
-
-                                                </td>
-                                            </tr>
-                                        </tbody>
-
-
-
-                                    </table>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-xlg-6 col-lg-6 col-md-6">
-                                <div class="form-group row">
-                                    <small class="col-xlg-4 col-lg-4 col-md-4"> Monto Seleccionado</small>
-                                    <input type="text" id="MontoSeleccionado" class="form-control form-control-sm col-xlg-3 col-lg-3 col-md-3" readonly="readonly" />
-                                    <div class="col-xlg-3 col-lg-3 col-md-3">
-                                        <button type="submit" formaction="@Url.Action("ConciliarTarjeta", "Banco")" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Confirmar</button>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group ">
+                                        <small>Consulta de Tarjetas Pendientes de Cobro</small>
                                     </div>
                                 </div>
                             </div>
 
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive-md">
+
+                                        <table id="example23" class="table stylish-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Paga</th>
+                                                    <th class="text-center">Fecha</th>
+                                                    <th class="text-center">Codigo</th>
+                                                    <th class="text-center">Descripcion</th>
+                                                    <th class="text-center">Importe</th>
+                                                    <th class="text-center">Datos</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @{
+                                                    decimal TotalTarjeta = 0;
+
+                                                }
+
+                                                @foreach (var item in Model.ListaTarjetaOperacion)
+                                                {
+
+                                                    TotalTarjeta += item.Importe;
+
+                                                    <tr>
+                                                        @*<td class="text-center">
+                                                                <input type="checkbox" class="mis-checkboxes" checked="@(1 == 0)">
+                                                            </td>*@
+                                                        <td class="text-center">
+                                                            <input type="checkbox" class="check Seleccionable" id=@item.Id value=@item.Importe>
+                                                        </td>
+                                                        <td class="text-right">
+                                                            @Html.DisplayFor(modelItem => item.UltimaModificacion)
+                                                        </td>
+                                                        <td class="text-right">
+                                                            @Html.DisplayFor(modelItem => item.Tarjetas.Codigo)
+                                                        </td>
+
+                                                        <td class="text-right">
+                                                            @Html.DisplayFor(modelItem => item.Tarjetas.Descripcion)
+                                                        </td>
+
+                                                        <td class="text-right deuda">
+                                                            @Html.DisplayFor(modelItem => item.Importe)
+                                                        </td>
+
+                                                        <td class="text-right">
+                                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                                <tr>
+                                                    <td colspan="4" class="text-right"><label> Total</label></td>
+                                                    <td class="text-right">
+                                                        <label> @Html.Raw(TotalTarjeta)</label>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+
+
+                                        </table>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xlg-6 col-lg-6 col-md-6">
+                                    <div class="form-group row">
+                                        <small class="col-xlg-4 col-lg-4 col-md-4"> Monto Seleccionado</small>
+                                        <input type="text" id="MontoSeleccionado" class="form-control form-control-sm col-xlg-3 col-lg-3 col-md-3" readonly="readonly" />
+                                        <div class="col-xlg-3 col-lg-3 col-md-3">
+                                            <button type="submit" formaction="@Url.Action("ConciliarTarjeta", "Banco")" class="btn btn-success btn-sm"> <i class="fa fa-check"></i> Confirmar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-}
+    }
 
-  }
+}
 
 
 @section Scripts {
@@ -229,7 +232,7 @@ if (Model.ListaTarjetaOperacion.Count > 0)
 <script type="text/javascript">
 
 
-  
+
     //function calcular() {
     //    var tot = $('#total');
     //    tot.val(0);

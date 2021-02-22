@@ -39,12 +39,16 @@ namespace Negocio.Servicios
             }
             catch(Exception ex)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
-                return null;
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                throw new NotImplementedException();
             }
          
         }
 
-
+     
+        public BancoCuentaBancariaModel IngresoCuentaBancaria(BancoCuentaBancariaModel bancoCuentaBancariaModel)
+        {
+          return  Agregar(bancoCuentaBancariaModel);
+        }
     }
 }

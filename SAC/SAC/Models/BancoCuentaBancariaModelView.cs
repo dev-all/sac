@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Datos.ModeloDeDatos;
+using System.Web.Mvc;
 
 namespace SAC.Models
 {
@@ -11,49 +12,32 @@ namespace SAC.Models
     {
 
         public int Id { get; set; }
-
-        public int NumeroCheque { get; set; }
-
-        public int IdBanco { get; set; }
-
-        public string BancoDescripcion { get; set; }
-
+        public int NumeroOperacion { get; set; }
+        public int IdBancoCuenta { get; set; }
+        public int IdGrupoCaja { get; set; }
         public string CuentaDescripcion { get; set; }
-
-        public double DFecha { get; set; }
-
-        public double DFechaD { get; set; }
-
-        public string NClearing { get; set; }
-
-        public double DFechaEf { get; set; }
-
-        public double NImporte { get; set; }
-
+        public Nullable<System.DateTime> Fecha { get; set; }
+        public Nullable<System.DateTime> FechaEfectiva { get; set; }
+        public string DiaClearing { get; set; }
+        public decimal Importe { get; set; }
         public string IdCliente { get; set; }
-
-        public string LCondicion { get; set; }
-
-        public string CGrupoCaje { get; set; }
-
-        public double DIngreso { get; set; }
-
+        public bool Conciliacion { get; set; }
+        public System.DateTime FechaIngreso { get; set; }
         public string IdImputacion { get; set; }
-
-        public string NumeroRecibo { get; set; }
-
-        public string Factura { get; set; }
-
-        public string NumeroPago { get; set; }
-
-        public string Registro { get; set; }
-
         public Nullable<bool> Activo { get; set; }
-
         public Nullable<int> IdUsuario { get; set; }
-
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-
+        public virtual BancoCuenta BancoCuenta { get; set; }
+      
+        [Display(Name = "Tipo de Movimiento")]        
+        public string TipoMovimiento { get; set; }
+        public List<SelectListItem> ListItemsGrupoCaja { get; set; }
+ 
+        public List<SelectListItem> ListItemsBancoCuenta { get; set; }
+        public int IdBancoCuentaDestino { get; set; }
+        public decimal ImporteDolar { get; set; }
+        public decimal Cotizacion { get; set; }
+        public int IdTipoMoneda { get; set; }
     }
 }

@@ -80,7 +80,7 @@ namespace SAC.Controllers
                     ultimoCierreCajaSaldoModel = servicioCajaSaldo.GetUltimoCierre();
 
                     CajaSaldoModel cajaSaldoModel = new CajaSaldoModel();
-                    cajaSaldoModel.Fecha = model.Fecha;
+                    cajaSaldoModel.Fecha = model.FechaCierre;
                     cajaSaldoModel.NumeroCierrre = servicioCajaSaldo.GetNuevoNumeroCierre();
                     cajaSaldoModel.ImporteInicialCheques = ultimoCierreCajaSaldoModel.ImporteFinalCheques;
                     cajaSaldoModel.ImporteInicialDepositos = ultimoCierreCajaSaldoModel.ImporteFinalDepositos;
@@ -208,7 +208,7 @@ namespace SAC.Controllers
                     }
                  
        
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index");
 
 
                 }
@@ -220,8 +220,6 @@ namespace SAC.Controllers
 
 
         }
-
-
 
 
 
@@ -329,9 +327,6 @@ namespace SAC.Controllers
             })).ToList();
             retornoListaCajaCierre.Insert(0, new SelectListItem { Text = "-- Cierre Actual --", Value = "0" });
             ViewBag.Listapagina = retornoListaCajaCierre;
-
-
-
 
         }
 

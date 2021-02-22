@@ -56,17 +56,11 @@
         <EntityTypeShape EntityType="SAC_Model.Chequera" Width="1.5" PointX="8.375" PointY="17.25" />
         <AssociationConnector Association="SAC_Model.FK_Cheque_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_Chequera_TipoMoneda" />
-        <EntityTypeShape EntityType="SAC_Model.BancoCuentaBancaria" Width="2" PointX="8.375" PointY="26.625" />
         <EntityTypeShape EntityType="SAC_Model.PresupuestoItem" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="SAC_Model.TipoComprobante" Width="1.5" PointX="27.125" PointY="30.25" />
         <AssociationConnector Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante" />
         <EntityTypeShape EntityType="SAC_Model.Banco" Width="1.5" PointX="18.5" PointY="34.625" />
         <AssociationConnector Association="SAC_Model.FK_Banco_Proveedor" />
-        <EntityTypeShape EntityType="SAC_Model.BancoCuenta" Width="1.5" PointX="20.75" PointY="34.125" />
-        <AssociationConnector Association="SAC_Model.FK_BancoCuenta_Banco" />
-        <AssociationConnector Association="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" />
-        <AssociationConnector Association="SAC_Model.FK_Cheque_BancoCuenta" />
-        <AssociationConnector Association="SAC_Model.FK_Chequera_BancoCuenta" />
         <EntityTypeShape EntityType="SAC_Model.Retencion" Width="1.5" PointX="32" PointY="27.875" />
         <EntityTypeShape EntityType="SAC_Model.TipoRetencion" Width="1.5" PointX="29.75" PointY="25" />
         <AssociationConnector Association="SAC_Model.FK_Retencion_Provincia" />
@@ -98,7 +92,6 @@
         <EntityTypeShape EntityType="SAC_Model.TrackingFacturaPagoCompra" Width="1.5" PointX="31.625" PointY="33.75" />
         <EntityTypeShape EntityType="SAC_Model.CompraIvaVista" Width="1.5" PointX="20.75" PointY="19.75" />
         <EntityTypeShape EntityType="SAC_Model.CompraFacturaPago" Width="1.5" PointX="35" PointY="25.75" />
-        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_BancoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Cheque" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Chequera" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_TipoPago" />
@@ -111,7 +104,6 @@
         <EntityTypeShape EntityType="SAC_Model.Caja" Width="1.5" PointX="38" PointY="19.5" />
         <EntityTypeShape EntityType="SAC_Model.CompraFactura" Width="1.5" PointX="38.125" PointY="26.375" />
         <EntityTypeShape EntityType="SAC_Model.CompraIva" Width="1.5" PointX="35.875" PointY="31.75" />
-        <AssociationConnector Association="SAC_Model.FK_Caja_BancoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_Caja_CajaSaldo" />
         <AssociationConnector Association="SAC_Model.FK_Caja_CajaTipoMovimiento" />
         <AssociationConnector Association="SAC_Model.FK_Caja_Cheque" />
@@ -130,6 +122,15 @@
         <AssociationConnector Association="SAC_Model.FK_Caja_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_TarjetaOperacion_Tarjetas" />
+        <EntityTypeShape EntityType="SAC_Model.BancoCuenta" Width="1.5" PointX="20.75" PointY="34.125" />
+        <AssociationConnector Association="SAC_Model.FK_BancoCuenta_Banco" />
+        <AssociationConnector Association="SAC_Model.FK_Caja_BancoCuenta" />
+        <AssociationConnector Association="SAC_Model.FK_Cheque_BancoCuenta" />
+        <AssociationConnector Association="SAC_Model.FK_Chequera_BancoCuenta" />
+        <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_BancoCuenta" />
+        <AssociationConnector Association="SAC_Model.FK_BancoCuenta_Imputacion" />
+        <EntityTypeShape EntityType="SAC_Model.BancoCuentaBancaria" Width="1.5" PointX="23.375" PointY="34.375" />
+        <AssociationConnector Association="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -70,7 +70,37 @@ namespace Negocio.Servicios
             }
         }
 
-      
+
+        public Diario InsertAsientoContable(string alias, DiarioModel asiento, int idImputacion = 0)
+        {
+            try
+            {
+                ImputacionModel imputacionModel;
+                if (idImputacion > 0)
+                {
+                    imputacionModel = servicioImputacion.GetImputacion(idImputacion);
+                }
+                else
+                {
+                    imputacionModel = servicioImputacion.GetImputacionPorAlias(alias);
+                }
+                if (imputacionModel != null)
+                {
+                    asiento.IdImputacion = imputacionModel.Id;
+                   
+                    Diario asientoContable = diarioRepositorio.InsertarDiario(Mapper.Map<DiarioModel, Diario>(asiento));
+
+                    return asientoContable;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                throw new Exception();
+            }
+        }
+
 
 
         public int GetNuevoCodigoAsiento()

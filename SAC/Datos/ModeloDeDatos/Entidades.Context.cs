@@ -56,11 +56,9 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<SubRubro> SubRubro { get; set; }
         public virtual DbSet<Cheque> Cheque { get; set; }
         public virtual DbSet<Chequera> Chequera { get; set; }
-        public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         public virtual DbSet<PresupuestoItem> PresupuestoItem { get; set; }
         public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
         public virtual DbSet<Banco> Banco { get; set; }
-        public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
         public virtual DbSet<Retencion> Retencion { get; set; }
         public virtual DbSet<TipoRetencion> TipoRetencion { get; set; }
         public virtual DbSet<TipoIva> TipoIva { get; set; }
@@ -82,5 +80,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CompraIva> CompraIva { get; set; }
         public virtual DbSet<TarjetaOperacion> TarjetaOperacion { get; set; }
         public virtual DbSet<Tarjetas> Tarjetas { get; set; }
+        public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
+        public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
     }
 }

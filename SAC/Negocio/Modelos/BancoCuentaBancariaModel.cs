@@ -15,7 +15,7 @@ namespace Negocio.Modelos
         public int NumeroOperacion { get; set; }
 
         public int IdBancoCuenta { get; set; }
-
+        public int IdGrupoCaja { get; set; }
         public string CuentaDescripcion { get; set; }
 
         public Nullable<System.DateTime> Fecha { get; set; }
@@ -28,9 +28,8 @@ namespace Negocio.Modelos
 
         public string IdCliente { get; set; }
 
-        public string Conciliacion { get; set; }
-
-        public double FechaIngreso { get; set; }
+        public bool Conciliacion { get; set; }
+        public System.DateTime FechaIngreso { get; set; }
 
         public string IdImputacion { get; set; }
 

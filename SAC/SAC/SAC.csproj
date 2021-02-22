@@ -60,6 +60,9 @@
       <HintPath>..\packages\HtmlAgilityPack.1.11.28\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -189,6 +192,7 @@
     <Compile Include="Models\CompraRegistroDetalleModelView.cs" />
     <Compile Include="Models\CompraRegistroModelView.cs" />
     <Compile Include="Models\CuentaPlanContableModelView.cs" />
+    <Compile Include="Models\IngresoBancoModelView.cs" />
     <Compile Include="Models\PlanContableModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="Models\TipoIdiomaModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
+    <Compile Include="Models\TipoMovimiento.cs" />
     <Compile Include="Models\TipoPagoModelView.cs" />
     <Compile Include="Models\TipoProveedorModelView.cs" />
     <Compile Include="Models\TipoRetencionModelView.cs" />
@@ -2923,6 +2928,8 @@
     <Content Include="Views\Contabilidad\Index.cshtml" />
     <Content Include="Views\Contabilidad\TreeItem.cshtml" />
     <Content Include="Views\Cliente\Listado.cshtml" />
+    <Content Include="Views\Banco\_Ingresos.cshtml" />
+    <Content Include="Views\Banco\IngresoCuentaBancaria.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

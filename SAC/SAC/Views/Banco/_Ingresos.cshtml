@@ -1,0 +1,117 @@
+﻿@model SAC.Models.BancoCuentaBancariaModelView
+
+
+@using (Html.BeginForm("Ingreso", "Banco"))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.TipoMovimiento)
+    @Html.Hidden("IdBancoCuenta", Model.IdBancoCuenta)
+    @Html.Hidden("IdTipoMoneda", Model.IdTipoMoneda)
+
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-xlg-3 col-lg-3 col-md-3">
+                        <label class="form-control-label ">Tipo de Movimiento</label>
+                    </div>
+                    <div class="col-xlg-8 col-lg-8 col-md-8">
+                        <div class="row">
+                            <div class="col-xlg-3 col-lg-3 col-md-3">
+                                <input name="TipoMovimiento" type="radio" id="radio_cv" value="cv"> <label for="radio_cv">Cargos Varios</label>
+                            </div>
+                            <div class="col-xlg-3 col-lg-3 col-md-3">
+                                <input name="TipoMovimiento" type="radio" id="radio_de" value="de">  <label for="radio_de">Dep. Efectivo</label>
+                            </div>
+                            <div class="col-xlg-3 col-lg-3 col-md-3">
+                                <input name="TipoMovimiento" type="radio" id="radio_tc" value="tc">  <label for="radio_tc">Transf. a Caja</label>
+                            </div>
+                            <div class="col-xlg-3 col-lg-3 col-md-3">
+                                <input name="TipoMovimiento" type="radio" id="radio_tt" value="tt">  <label for="radio_tt">Transf. entre Ctas.</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xlg-1 col-lg-1 col-md-1 ">
+                        <input type="button" class="btn btn-secondary btn-sm" id="btnSelCheque" onclick="fnVerModalCheques();" value="Cheque">
+                    </div>
+                </div>
+
+                <div id="ctrIngreso" class="row hide">
+
+                    <div class="col-md-3">
+                        <small>Concepto</small>
+                        @Html.TextBoxFor(model => model.CuentaDescripcion, new { @class = "form-control form-control-sm", @placeholder = "Nro cheque" })
+                        @Html.ValidationMessageFor(model => model.CuentaDescripcion, "", new { @class = "text-danger form-control-sm" })
+                    </div>
+
+                    <div class="col-md-2">
+                        <small>Fecha Op.</small>               
+                        <input type="text" id="Fecha" name="Fecha"
+                               class="form-control form-control-sm Calendario"
+                               data-validation-required-message="Ingrese una fecha">
+                    </div>
+                    <div class="col-md-3">
+                        <div id="CtrImporte" class="">
+
+                            <small>Importe en $</small>
+                            @Html.TextBoxFor(p => p.Importe, new { @class = "form-control form-control-sm", @placeholder = "importe" })
+                            @Html.ValidationMessageFor(p => p.Importe, "", new { @class = "text-danger form-control-sm" })
+                        </div>
+
+                        <div id="CtrTTImportePesos" class="hide">
+                            <div class="row">
+                                <div class="col-xlg-6 col-lg-6 col-md-6">
+                                    <small>Importe en $</small>
+                                    @Html.TextBoxFor(p => p.Importe, new { @class = "form-control form-control-sm", @placeholder = "importe" })
+                                    @Html.ValidationMessageFor(p => p.Importe, "", new { @class = "text-danger form-control-sm" })
+                                </div>
+                         
+                                <div class="col-xlg-6 col-lg-6 col-md-6">
+                                    <small>Importe en U$S</small>
+                                    @Html.TextBoxFor(p => p.Importe, new { @class = "form-control form-control-sm", @placeholder = "importe" })
+                                    @Html.ValidationMessageFor(p => p.Importe, "", new { @class = "text-danger form-control-sm" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="CtrTTImporteDolar" class="hide">
+                            <div class="col-xlg-6 col-lg-6 col-md-6">
+                                <small>Importe en U$S</small>
+                                @Html.TextBoxFor(p => p.Importe, new { @class = "form-control form-control-sm", @placeholder = "importe" })
+                                @Html.ValidationMessageFor(p => p.Importe, "", new { @class = "text-danger form-control-sm" })
+                            </div>
+                            <div class="col-xlg-6 col-lg-6 col-md-6">
+                                <small>Importe en $</small>
+                                @Html.TextBoxFor(p => p.Importe, new { @class = "form-control form-control-sm", @placeholder = "importe" })
+                                @Html.ValidationMessageFor(p => p.Importe, "", new { @class = "text-danger form-control-sm" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="CtrGrupoCaja" class="col-md-2">
+                        <small>Grupo Caja</small>
+                        @Html.DropDownList("IdGrupoCaja", (List<SelectListItem>)Model.ListItemsGrupoCaja, null, new { @class = "form-control form-control-sm" })
+                        @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
+                    </div>
+
+                    <div id="CtrCtaDestino" class="col-md-2 hide">
+                        <small>Cta. Destino</small>
+                        @Html.DropDownList("IdGrupoCaja", (List<SelectListItem>)Model.ListItemsGrupoCaja, null, new { @class = "form-control form-control-sm" })
+                        @Html.ValidationMessage("IdGrupoCaja", new { @class = "text-danger form-control-sm" })
+                    </div>
+
+                    <div class="col-md-1 p-t-20">
+                        @*<button type="submit" class="btn btn-secondary "><i class="fa  fa-save"></i> </button>*@
+                        <input type="submit" class="btn btn-secondary btn-sm " id="btnIngreso" value="Confirmar Ingreso">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
