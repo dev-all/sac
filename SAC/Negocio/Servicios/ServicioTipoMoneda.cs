@@ -33,7 +33,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -46,7 +46,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -56,12 +56,12 @@ namespace Negocio.Servicios
             try
             {
                 valorCotizacionRepositorio.Insertar(Mapper.Map<ValorCotizacionModel, ValorCotizacion>(valorCotizacionModel));
-                _mensaje("Se Actualizo la Cotizacion de Monedas segun BNA", "ok");
+                _mensaje?.Invoke("Se Actualizo la Cotizacion de Monedas segun BNA", "ok");
 
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                
             }
         }
@@ -74,7 +74,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -88,7 +88,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje(ex.Message, "error");
+                _mensaje?.Invoke(ex.Message, "error");
                 return null;
             }
         }
@@ -144,7 +144,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje(ex.Message, "error");
+                _mensaje?.Invoke(ex.Message, "error");
                 return null;
             }           
         }

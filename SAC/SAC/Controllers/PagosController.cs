@@ -11,6 +11,7 @@ using SAC.Atributos;
 using SAC.Models;
 using System.Web.Routing;
 using System.Globalization;
+using System.IO;
 
 namespace SAC.Controllers
 {
@@ -92,20 +93,23 @@ namespace SAC.Controllers
             oPagosFacturasModel.ListaFacturasAPagar_ = null;
 
             //drop cuenta bancaria
-            List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
-
-            oPagosFacturasModel.ListaCuentasBancarias_ = (ListaCuentaBancaria.Select(x =>
-                                                                                    new SelectListItem()
-                                                                                    {
-                                                                                        Value = x.Id.ToString(),
-                                                                                        Text = x.Banco.Nombre + ' ' + x.BancoDescripcion
-                                                                                    })).ToList();
-
-            ViewBag.listaCuentaBancariaDrop = oPagosFacturasModel.ListaCuentasBancarias_;
-
-
+           
+            ListaCuentaBancaria();
 
             return View(oPagosFacturasModel);
+        }
+
+        private void ListaCuentaBancaria()
+        {
+            List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
+
+            ViewBag.listaCuentaBancariaDrop =    (ListaCuentaBancaria.Select(x =>
+                                                    new SelectListItem()
+                                                    {
+                                                        Value = x.Id.ToString(),
+                                                        Text = x.Banco.Nombre + ' ' + x.BancoDescripcion
+                                                    })).ToList();
+
         }
 
         [HttpPost]
@@ -154,7 +158,7 @@ namespace SAC.Controllers
                                                  Value = x.Id.ToString(),
                                                  Text = x.Descripcion
                                              })).ToList();
-                pagosFacturasModel.ListaTarjetas_.Insert(0, new SelectListItem() { Value = "0", Text = "Sin Especificar" });
+                pagosFacturasModel.ListaTarjetas_.Insert(0, new SelectListItem() { Value = "0", Text = "Tarjetas" });
 
                 //drop cuenta bancaria
                 List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(oServicioCuentaBancaria.GetAllCuenta());
@@ -165,7 +169,7 @@ namespace SAC.Controllers
                                                                                             Value = x.Id.ToString(),
                                                                                             Text = x.Banco.Nombre + ' ' + x.BancoDescripcion
                                                                                         })).ToList();
-                pagosFacturasModel.ListaCuentasBancarias_.Insert(0, new SelectListItem() { Value = "0", Text = "Sin Especificar" });
+                pagosFacturasModel.ListaCuentasBancarias_.Insert(0, new SelectListItem() { Value = "0", Text = "Cuentas " });
 
                 ViewBag.listaCuentaBancariaDrop = pagosFacturasModel.ListaCuentasBancarias_;
                 //drop presupuesto
@@ -546,13 +550,12 @@ namespace SAC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult IngresarCheque(ChequeraModelView oFacturaPago)
-
+        public ActionResult IngresarChequeAjax(ChequeraModelView oFacturaPago)
         {
+            List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView>();
             try
             {
-
-                //buscar el tipo de moneda de la cta
+                 //buscar el tipo de moneda de la cta
                 BancoCuentaModelView bancoCuentaModelView = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(oServicioCuentaBancaria.GetCuentaPorId(oFacturaPago.idCuentaBancariaSeleccionada));
 
                 oFacturaPago.IdBancoCuenta = oFacturaPago.idCuentaBancariaSeleccionada;
@@ -564,46 +567,69 @@ namespace SAC.Controllers
                 oFacturaPago.Activo = true;
                 //oFacturaPago.oChequera.IdUsuario = oFacturaPago.idUsuario;
                 oFacturaPago.UltimaModificacion = DateTime.Now;
-                ChequeraModel chequePropioGuardado = oServicioChequera.Insertar(Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago));
+
+                ChequeraModel chequePropioGuardado = oServicioChequera.InsertarAjax(Mapper.Map<ChequeraModelView, ChequeraModel>(oFacturaPago));
+              
                 if (chequePropioGuardado != null)
                 {
                     oServicioChequera.ActualizarNumeroCheque(chequePropioGuardado);
+                    ChequeraModelView chequeraModelView = Mapper.Map<ChequeraModel, ChequeraModelView>(oServicioChequera.GetChequePropioPorId(chequePropioGuardado.Id));
+                    listChequeraModelView = new List<ChequeraModelView> { chequeraModelView };
                 }
-
-
-                ChequeraModelView chequeraModelView = Mapper.Map<ChequeraModel, ChequeraModelView>(oServicioChequera.GetChequePropioPorId(chequePropioGuardado.Id));
-                List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView> { chequeraModelView };
-//esto modifique ahora 
+                         
                 return PartialView("~/Views/CuentaCteProveedor/_RDChequesPropios.cshtml", listChequeraModelView);
-
             }
             catch (Exception ex)
             {
-                //throw;
-                oServicioChequera._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
-                return null;
+                ListaCuentaBancaria();
+               
+                return JsonView(false ,ex.Message.ToString() , "~/Views/CuentaCteProveedor/_TablaChequesPropios.cshtml", oFacturaPago);
+            }
+          
+
+        }
+
+
+        private JsonResult JsonView(bool success, string message , string viewName, object model)
+        {
+            return Json(new { Success = success , Message = message, View = RenderPartialView(viewName, model) });
+        }
+
+        private string RenderPartialView(string partialViewName, object model)
+        {
+            if (ControllerContext == null)
+                return string.Empty;
+
+            if (model == null)
+                throw new ArgumentNullException("model");
+
+            if (string.IsNullOrEmpty(partialViewName))
+                throw new ArgumentNullException("partialViewName");
+
+            ViewData.Model = model;
+
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, partialViewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                return sw.GetStringBuilder().ToString();
             }
         }
+
+
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult QuitarCheque(int IdCheque = 0)  //PartialViewResult
         {
-            try
-            {
-                oServicioChequera.DeleteChequePropio(IdCheque);
-                List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView>();
+            oServicioChequera.DeleteChequePropio(IdCheque);
+            List<ChequeraModelView> listChequeraModelView = new List<ChequeraModelView>();
 
-                //return PartialView("_RDChequesPropios", listChequeraModelView);
-                return PartialView("~/Views/CuentaCteProveedor/_RDChequesPropios.cshtml", listChequeraModelView);
-            }
-            catch (Exception ex)
-            {
-                oServicioChequera._mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
-                return null;
-            }
-
+            //return PartialView("_RDChequesPropios", listChequeraModelView);
+            return PartialView("~/Views/CuentaCteProveedor/_RDChequesPropios.cshtml", listChequeraModelView);
+           
         }
 
 

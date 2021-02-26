@@ -34,12 +34,12 @@ namespace Negocio.Servicios
 
 
                 var retorno = oGrupoPresupuestoRepositorio.DeleteGrupoPresupuesto(IdGrupoPresupuesto);
-                _mensaje("Se eliminó correctamente", "ok");
+                _mensaje?.Invoke("Se eliminó correctamente", "ok");
 
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -59,12 +59,12 @@ namespace Negocio.Servicios
                 model.Activo = true;
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = oGrupoPresupuestoRepositorio.Insertar(Mapper.Map<GrupoPresupuestoModel, GrupoPresupuesto>(model));
-                _mensaje("Se registro correctamente", "ok");
+                _mensaje?.Invoke("Se registro correctamente", "ok");
                 return Mapper.Map<GrupoPresupuesto, GrupoPresupuestoModel>(newModel);
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -80,13 +80,13 @@ namespace Negocio.Servicios
             {
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 var newModel = oGrupoPresupuestoRepositorio.ActualizarGrupoPresupuesto(Mapper.Map<GrupoPresupuestoModel, GrupoPresupuesto>(model));
-                _mensaje("Se actualizo correctamente", "ok");
+                _mensaje?.Invoke("Se actualizo correctamente", "ok");
 
                 return Mapper.Map<GrupoPresupuesto, GrupoPresupuestoModel>(newModel);
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -112,7 +112,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
                 return null;
             }
         }
@@ -127,7 +127,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
                 return null;
             }
         }

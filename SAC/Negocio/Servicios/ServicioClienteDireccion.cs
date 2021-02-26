@@ -46,13 +46,13 @@ namespace Negocio.Servicios
 
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 var newModel = oClienteDireccionRepositorio.ActualizarDireccion(Mapper.Map<ClienteDireccionModel, ClienteDireccion>(model));
-                _mensaje("Se actualizo correctamente", "ok");
+                _mensaje?.Invoke("Se actualizo correctamente", "ok");
 
                 return Mapper.Map<ClienteDireccion, ClienteDireccionModel>(newModel);
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
                 throw new Exception();
 
             }
@@ -68,12 +68,12 @@ namespace Negocio.Servicios
 
 
                 var retorno = oClienteDireccionRepositorio.DeleteDireccion(IdDireccion);
-                _mensaje("Se eliminó correctamente", "ok");
+                _mensaje?.Invoke("Se eliminó correctamente", "ok");
 
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -91,12 +91,12 @@ namespace Negocio.Servicios
                 model.Activo = true;
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = oClienteDireccionRepositorio.Agregar(Mapper.Map<ClienteDireccionModel, ClienteDireccion>(model));
-                _mensaje("Se registro correctamente", "ok");
+                _mensaje?.Invoke("Se registro correctamente", "ok");
                 return Mapper.Map<ClienteDireccion, ClienteDireccionModel>(newModel);
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
                 throw new Exception();
 
             }
@@ -124,7 +124,7 @@ namespace Negocio.Servicios
             {
                 
                ServicioElog.Log(this, e);
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
 
@@ -140,7 +140,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
 
                 
                 

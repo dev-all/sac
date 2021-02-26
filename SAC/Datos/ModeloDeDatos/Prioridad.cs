@@ -12,13 +12,11 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Contacto
+    public partial class Prioridad
     {
         public int Id { get; set; }
-        public int IdEvento { get; set; }
-        public int IdPersona { get; set; }
-    
-        public virtual Evento Evento { get; set; }
-        public virtual Persona Persona { get; set; }
+        public string Color { get; set; }
+        public bool Activo { get; set; }
+        public string Nombre { get; set; }
     }
 }

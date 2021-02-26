@@ -12,23 +12,17 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class SubRubro
+    public partial class AfipRegimen
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SubRubro()
-        {
-            this.Imputacion = new HashSet<Imputacion>();
-        }
-    
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public int IdRubro { get; set; }
+        public string Concepto { get; set; }
+        public Nullable<decimal> Aliri { get; set; }
+        public Nullable<decimal> Alirni { get; set; }
+        public Nullable<decimal> Minimo { get; set; }
+        public Nullable<int> Imputacion { get; set; }
         public Nullable<bool> Activo { get; set; }
-        public Nullable<int> Idusuario { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Imputacion> Imputacion { get; set; }
-        public virtual Rubro Rubro { get; set; }
     }
 }

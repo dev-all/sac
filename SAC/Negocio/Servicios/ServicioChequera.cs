@@ -45,25 +45,46 @@ namespace Negocio.Servicios
                 Chequera oChequera = pChequeraRepositorio.VerificarCheque(oChequeModel.NumeroCheque);
                 if (oChequera != null) //significa que existe
                 {
-                     _mensaje("El número de cheque ya se encuentra ingresado.", "error");
+                     _mensaje?.Invoke("El número de cheque ya se encuentra ingresado.", "error");
                     return null;
                 }
                 else //significa que no existe el dato a ingresar
                 {
                     var oModel = Mapper.Map<ChequeraModel, Chequera>(oChequeModel);
-                    _mensaje("El cheque se ingresó correctamente", "ok");
+                    _mensaje?.Invoke("El cheque se ingresó correctamente", "ok");
                     return Mapper.Map<Chequera, ChequeraModel>(pChequeraRepositorio.Insertar(oModel));
                 }
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "error");
                 throw;
             }
 
 
 
         }
+
+        public ChequeraModel InsertarAjax(ChequeraModel oChequeModel)
+        {
+                Chequera oChequera = pChequeraRepositorio.VerificarCheque(oChequeModel.NumeroCheque);
+                if (oChequera != null) 
+                {
+                    
+                  throw new Exception("El número de cheque ya se encuentra ingresado.");                   
+                }
+                else 
+                {
+                    var oModel = Mapper.Map<ChequeraModel, Chequera>(oChequeModel);
+                    return Mapper.Map<Chequera, ChequeraModel>(pChequeraRepositorio.Insertar(oModel));
+                }
+            
+           
+
+
+        }
+
+
 
         public ChequeraModel Actualizar(ChequeraModel oChequeModel)
         {
@@ -75,7 +96,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
         }
@@ -89,7 +110,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
         }
@@ -102,7 +123,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");              
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");              
             }
         }
 

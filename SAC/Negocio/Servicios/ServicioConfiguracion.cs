@@ -37,12 +37,12 @@ namespace Negocio.Servicios
                 acc.Nombre = Accion.Nombre.ToLower();
                 acc.Activo = true;
                 acc.fechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
-                _mensaje("Se guardo Correctamente", "ok");
+                _mensaje?.Invoke("Se guardo Correctamente", "ok");
                 return Mapper.Map<Accion, AccionModel>(accionRepositorio.CreateAccion(acc));         
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
         }
@@ -56,13 +56,13 @@ namespace Negocio.Servicios
             try
             {   
                 Accion AccionParaActualizar = Mapper.Map<Modelos.AccionModel, Accion>(Accion);
-                _mensaje("Se Actualizo Correctamente", "ok");
+                _mensaje?.Invoke("Se Actualizo Correctamente", "ok");
             return Mapper.Map<Accion, Modelos.AccionModel>(accionRepositorio.ActualizarAccion(AccionParaActualizar));
            
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
          
@@ -76,7 +76,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");               
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");               
             }
             
         }
@@ -95,7 +95,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
                    
@@ -105,12 +105,12 @@ namespace Negocio.Servicios
             try
             { 
                 Rol p = Mapper.Map<Modelos.RolModel, Rol>(rol);
-                _mensaje("Se Guardo Correctamente", "ok");
+                _mensaje?.Invoke("Se Guardo Correctamente", "ok");
                 return Mapper.Map<Rol, Modelos.RolModel>(rolRepositorio.Insertar(p));
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
            
@@ -126,11 +126,11 @@ namespace Negocio.Servicios
             try
             {  
                 rolRepositorio.ActualizarRol(Mapper.Map<Modelos.RolModel, Rol>(rol));
-                _mensaje("Se Actualizo Correctamente", "ok");
+                _mensaje?.Invoke("Se Actualizo Correctamente", "ok");
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                
             }
          
@@ -193,7 +193,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
                 return null;
             }
         }
@@ -206,7 +206,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
                 return null;
             }
         }
@@ -220,7 +220,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
                 return null;
             }
         }
@@ -234,7 +234,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
                 return null;
             }
 
@@ -245,12 +245,12 @@ namespace Negocio.Servicios
             try
             {
                 MenuSidebar menu = Mapper.Map<MenuSideBarModel, MenuSidebar>(sidebar);
-        _mensaje("Se Guardo Correctamente", "ok");
+        _mensaje?.Invoke("Se Guardo Correctamente", "ok");
                 return Mapper.Map<MenuSidebar, MenuSideBarModel>(menuSidebarRepositorio.Insertar(menu));        
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
 
@@ -261,11 +261,11 @@ namespace Negocio.Servicios
             {
                 MenuSidebar menu = Mapper.Map<MenuSideBarModel, MenuSidebar>(menuSideBarModel);               
                 menuSidebarRepositorio.ActualizarMenusidebar(menu);   
-                 _mensaje("Se Actualizo Correctamente", "ok");
+                 _mensaje?.Invoke("Se Actualizo Correctamente", "ok");
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");              
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");              
             }
         }
 

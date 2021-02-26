@@ -32,7 +32,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -47,7 +47,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }
@@ -62,7 +62,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return 0;
             }
         }
@@ -76,7 +76,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                 _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return 0;
             }
         }
@@ -91,7 +91,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje(ex.Message, "error");
+                _mensaje?.Invoke(ex.Message, "error");
                 return null;
             }
         }

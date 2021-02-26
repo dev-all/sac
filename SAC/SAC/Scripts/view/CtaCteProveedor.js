@@ -301,7 +301,25 @@ function onCompleteQuitarCheque(result) {
  
 }
 
-function onCompleteIngresarCheque(result) {
+function onSuccess(data, status, xhr) {
+
+    //$("#ajaxFormContainer").html(data.View);
+
+   
+    if (data.Success == false || data.Success != undefined) {
+
+        toastr.info(data.Message);
+
+    }
+
+}
+
+function onFailure(xhr, status, error) {
+    response = xhr.responseJSON;
+    window.location.href = response.RedirectUrl;
+}
+function onCompleteIngresarCheque(xhr, status) {
+
     $("#TblChequesPropios tbody tr").each(function (index) {
         $("#idChequesPropios").val(parseFloat($(this)[0].attributes[0].nodeValue));
         importeChequePropio = parseFloat($(this)[0].attributes[1].nodeValue);
@@ -309,6 +327,9 @@ function onCompleteIngresarCheque(result) {
 
     $("#TotalChequeSeleccionados").html(importeChequeTercero + importeChequePropio);
 }
+
+
+
 
 
 //* apilar model */

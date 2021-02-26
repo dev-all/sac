@@ -46,7 +46,7 @@ namespace Negocio.Servicios
             }
             catch (Exception )
             {
-                //_mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                //_mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception("Ops!, Ha ocurriodo un error. contacte al administrador");
 
             }

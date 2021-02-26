@@ -41,7 +41,7 @@ namespace Negocio.Servicios
                 Omodel.Activo = true;
                 Omodel.UltimaModificacion = DateTime.Now;
                 var oModel = Mapper.Map<DepartamentoModel, Departamento>(Omodel);
-                    _mensaje("Se Agregó correctamente", "ok");
+                    _mensaje?.Invoke("Se Agregó correctamente", "ok");
 
                 return Mapper.Map<Departamento, DepartamentoModel>(oDepartamentoRepositorio.Agregar(oModel));
 
@@ -49,7 +49,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
         }
@@ -68,13 +68,13 @@ namespace Negocio.Servicios
                 oChequeModel.UltimaModificacion = DateTime.Now;
                 var oModel = Mapper.Map<DepartamentoModel, Departamento>(oChequeModel);
 
-                _mensaje("Se Actualizó correctamente", "ok");
+                _mensaje?.Invoke("Se Actualizó correctamente", "ok");
                 return Mapper.Map<Departamento, DepartamentoModel>(oDepartamentoRepositorio.ActualizarDepartamento(oModel));
 
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
         }
@@ -94,12 +94,12 @@ namespace Negocio.Servicios
 
 
                 var retorno = oDepartamentoRepositorio.Eliminar(IdDepartamento,idCliente);
-                _mensaje("Se Eliminó correctamente", "ok");
+                _mensaje?.Invoke("Se Eliminó correctamente", "ok");
 
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }

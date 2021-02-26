@@ -70,6 +70,12 @@
     <Compile Include="ModeloDeDatos\AfipCategorias.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\AfipRegimen.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Articulo.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Banco.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -109,9 +115,6 @@
     <Compile Include="ModeloDeDatos\CompraIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModeloDeDatos\CompraIvaVista.cs">
-      <DependentUpon>Entidades.tt</DependentUpon>
-    </Compile>
     <Compile Include="ModeloDeDatos\CompraRegistroDetalle.cs" />
     <Compile Include="ModeloDeDatos\Contacto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
@@ -141,6 +144,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="ModeloDeDatos\EstadoCivil.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Evento.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\GrupoCaja.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -160,6 +169,9 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\MenuSidebar.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Notificacion.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Pais.cs">
@@ -183,10 +195,16 @@
     <Compile Include="ModeloDeDatos\PresupuestoItem.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\Prioridad.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\Proveedor.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Provincia.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\REGISTRO.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Retencion.cs">

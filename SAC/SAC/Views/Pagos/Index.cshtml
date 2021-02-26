@@ -8,12 +8,12 @@
     <div class="col-xlg-12 col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
-                <small>Pago Facturas de Compras</small>
+                <label>Pago Facturas de Compras</label>
 
                 @using (Html.BeginForm("Index", "Pagos", FormMethod.Post, new { @id = "frmBusqueda" }))
                 {
                     <div class="row col-md-12 m-t-10">
-                        <div class="col-md-1"></div>
+
                         <div class="col-md-1  text-right">
                             @Html.Label("Proveedores", new { @class = "control-label form-control-sm" })
                         </div>
@@ -26,9 +26,7 @@
                         <div class="col-md-1 text-left">
                             <button type="submit" value="Buscar" class="btn btn-secondary btn-sm">Buscar</button>
                         </div>
-
-                        @*<input type="text" id="Fecha" name="Fecha" class="form-control form-control-sm fechadatepicker" required
-                            data-validation-required-message="Ingrese una fecha">*@
+                       
                     </div>
                 }
 
@@ -39,6 +37,10 @@
                         <div class="col-md-6">
 
                             <h5>Cuenta Corriente</h5>
+                            @{
+                                decimal saldoCtaCte = 0;
+                            }
+
                             <div class="table-responsive">
                                 <div id="divPaginaFacturasPagar" style="height:200px">
 
@@ -69,6 +71,7 @@
 
                                                 @foreach (var item in Model.ListaFacturasAPagar_)
                                                 {
+
                                                     var claseSele = "";
                                                     if (item.TipoComprobante.Id == 98)
                                                     {
@@ -94,7 +97,7 @@
                                                         <td class="text-center">@Html.DisplayFor(modelItem => item.Saldo)</td>
                                                         <td class="text-center">@Html.DisplayFor(modelItem => item.Cotizacion)</td>
                                                     </tr>
-
+                                                    saldoCtaCte += item.Saldo;
                                                 }
                                             </tbody>
                                             <tfoot>
@@ -105,7 +108,18 @@
                                 </div>
                             </div>
 
+                         
+                                                    <div class="row justify-content-md-center">
+                                                        <div class="col-md-4 text-right">
+                                                            <small>Saldo de Cta. Cte. </small>  
+                                                        </div>
 
+                                                        <div class="col-md-6 text-left">
+                                                            <small id="sldocta" class="font-weight-bold"> @saldoCtaCte</small>
+                                                        </div>
+
+                                                    </div>
+                                             
 
                         </div>
                         @* aca van las facturas a pagar *@
@@ -138,20 +152,27 @@
 
                         <div class="row col-md-12 m-t-10" id="DivMediosPago" style="display:none">
                             <div class="col-md-8">
-                                <h5>Generar pago</h5>
+                                <small>Generar pago</small>
                                 <div class="row ">
                                     <div class="col-md-3  text-right"> @Html.Label("Concepto", new { @class = "control-label form-control-sm" }) </div>
                                     <div class="col-md-9"> @Html.TextBoxFor(p => p.ConceptoPago_, new { @class = "form-control form-control-sm" })</div>
                                 </div>
+
                                 <div class="row  m-t-5">
-                                    <div class="col-md-3  text-right"> @Html.Label("Nro Recibo", new { @class = "control-label form-control-sm" }) </div>
+                                    <div class="col-md-3  text-right">
+                                        @Html.Label("Nro Recibo", new { @class = "control-label form-control-sm" })
+                                    </div>
                                     <div class="col-md-3">
                                         @Html.TextBoxFor(p => p.nroRecibo_, new { @class = "form-control form-control-sm" })
                                         @*@Html.ValidationMessageFor(p => p.nroRecibo_, "", new { @class = "text-danger" })*@
                                     </div>
 
-                                    <div class="col-md-3  text-right"> @Html.Label("Efectivo", new { @class = "control-label form-control-sm" }) </div>
-                                    <div class="col-md-3"> @Html.TextBoxFor(p => p.montoEfectivo_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })</div>
+                                    <div class="col-md-3  text-right">
+                                        @Html.Label("Efectivo", new { @class = "control-label form-control-sm" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(p => p.montoEfectivo_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })
+                                    </div>
                                 </div>
 
                                 <div class="row  m-t-5">
@@ -163,19 +184,7 @@
                                                data-validation-required-message="Ingrese una fecha">
                                     </div>
 
-                                    <div class="col-md-3 text-right"> @Html.Label("Cotizacion", new { @class = "control-label form-control-sm", @id = "Cotizacion" })</div>
-                                    <div class="col-md-3"> @Html.TextBoxFor(p => p.cotizacion_, new { @class = "form-control form-control-sm" })</div>
-
-                                </div>
-                                <div class="row  m-t-5">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-3  text-right"> @Html.Label("Tarjeta", new { @class = "control-label form-control-sm" }) </div>
-                                    <div class="col-md-3">@Html.DropDownList("idTarjetaSelec_", Model.ListaTarjetas_, null, new { @class = "form-control form-control-sm" }) </div>
-                                    <div class="col-md-3">@Html.TextBoxFor(p => p.montoTarjetaSelec_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })</div>
-                                </div>
-                                <div class="row  m-t-5">
-                                    <div class="col-md-6"></div>
-                                    <div class="col-md-3  text-left">
+                                    <div class="col-md-3  text-right">
                                         <input type="button" class="btn btn-secondary btn-sm" id="btnSelCheque" onclick="fnVerModalCheques();" value="Cheque">
                                     </div>
                                     <div class="col-md-3  text-left">
@@ -183,19 +192,44 @@
                                     </div>
 
                                 </div>
+
                                 <div class="row  m-t-5">
                                     <div class="col-md-3"></div>
-                                    <div class="col-md-3  text-right"> @Html.Label("Cuenta Banco", new { @class = "control-label form-control-sm" }) </div>
+                                    @*<div class="col-md-3  text-right"> @Html.Label("Tarjeta", new { @class = "control-label form-control-sm" }) </div>
+                                        <div class="col-md-3">@Html.DropDownList("idTarjetaSelec_", Model.ListaTarjetas_, null, new { @class = "form-control form-control-sm" }) </div>
+                                        <div class="col-md-3">@Html.TextBoxFor(p => p.montoTarjetaSelec_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })</div>*@
+                                </div>
+
+                                <div class="row  m-t-5">
+                                    <div class="col-md-3 text-right">
+                                        @Html.Label("Cotizacion", new { @class = "control-label form-control-sm", @id = "Cotizacion" })
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(p => p.cotizacion_, new { @class = "form-control form-control-sm" })
+                                    </div>
+
+                                    @*<div class="col-md-3 "> @Html.Label("Tarjeta", new { @class = "control-label form-control-sm" }) </div>*@
+                                    <div class="col-md-3">@Html.DropDownList("idTarjetaSelec_", Model.ListaTarjetas_, null, new { @class = "form-control form-control-sm" }) </div>
+                                    <div class="col-md-3">@Html.TextBoxFor(p => p.montoTarjetaSelec_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })</div>
+
+
+
+
+                                </div>
+                                <div class="row  m-t-5">
+                                    <div class="col-md-6"></div>
+                                    @*<div class="col-md-3  text-right"> @Html.Label("Cuenta Banco", new { @class = "control-label form-control-sm" }) </div>*@
                                     <div class="col-md-3">@Html.DropDownList("idCuentaBancariaSelec_", Model.ListaCuentasBancarias_, null, new { @class = "form-control form-control-sm" }) </div>
                                     <div class="col-md-3">@Html.TextBoxFor(p => p.montoCuentaBancaria_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })</div>
                                 </div>
                                 <div class="row  m-t-5">
+                                    <div class="col-md-6"></div>
                                     <div class="col-md-3  text-right"> @Html.Label("Presupuesto", new { @class = "control-label form-control-sm" }) </div>
-                                    <div class="col-md-6">@Html.DropDownList("idPresupuestos_", Model.ListaPresupuestoActual_, null, new { @class = "form-control form-control-sm" }) </div>
+                                    <div class="col-md-3">@Html.DropDownList("idPresupuestos_", Model.ListaPresupuestoActual_, null, new { @class = "form-control form-control-sm" }) </div>
                                 </div>
                                 <div class="row  m-t-5">
                                     <div class="col-md-6"></div>
-                                    <div class="col-md-3  text-left">
+                                    <div class="col-md-3  text-right">
                                         <input type="button" class="btn btn-secondary btn-sm" id="btnSelRetencion" onclick="fnVerModalRetencion();" value="Retención">
                                     </div>
                                     <div class="col-md-3  text-left">
@@ -214,7 +248,7 @@
                                 <div class="row  m-t-5">
                                     <div class="col-md-6"></div>
                                     <div class="col-md-3">
-                                        <input type="button" class="btn btn-success btn-block btn-sm" id="btnSelPago" onclick="EjecutarPago()" value="Generar Pago">
+                                        <input type="button" class="btn btn-success btn-block btn-sm" id="btnSelPago" onkeypress="EjecutarPago()" onclick="EjecutarPago()" value="Generar Pago">
                                     </div>
                                 </div>
                             </div>
@@ -224,14 +258,14 @@
                                 <div class="row  m-t-40">
                                 </div>
                                 <div class="row  m-t-5">
-                                    <div class="col-md-3"></div>
-                                    <div class="col-md-3  text-left">
-                                        <input type="button" class="btn btn-success btn-block btn-sm" style="display:none" id="btnGenerarPago" onclick="PagarFinal()" value="Pagar">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6  text-left">
+                                        <input type="button" class="btn btn-success btn-block btn-sm" style="display:none" id="btnGenerarPago" onclick="PagarFinal()" value=" Confirmar Pago ">
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <input type="button" class="btn btn-danger btn-block btn-sm" id="btnCancelarPago" onclick="CancelarPago()" value="Cancelar">
                                     </div>
-                                    <div class="col-md-3"></div>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -243,22 +277,6 @@
     </div>
 </div>
 
-@*@using (Ajax.BeginForm("CancelarPago", "Pagos", null, new AjaxOptions
-    {
-        HttpMethod = "POST"
-    }, new { @id = "frmCancelarPago" }))
-    {
-
-    }*@
-
-@*@using (Ajax.BeginForm("Pagar", "Pagos", null, new AjaxOptions
-{
-    HttpMethod = "POST",
-    InsertionMode = InsertionMode.Replace
-}, new { @id = "frmPagar" }))
-{
-
-}*@
 
 
 @using (Html.BeginForm("Pagar", "Pagos", FormMethod.Post, new { id = "frmPagar" }))
@@ -541,6 +559,7 @@
     <script src="~/Scripts/view/CtaCteProveedor.js"></script>
 
 
+  
     <script type="text/javascript">
 
 

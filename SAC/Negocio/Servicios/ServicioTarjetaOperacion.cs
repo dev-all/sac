@@ -30,7 +30,7 @@ namespace Negocio.Servicios
         public TarjetaOperacionModel Insertar(TarjetaOperacionModel oTarjetaOperacionModel)
         {
             var oModel = Mapper.Map<TarjetaOperacionModel, TarjetaOperacion>(oTarjetaOperacionModel);
-            //_mensaje("El cheque se ingresó correctamente", "ok");
+            //_mensaje?.Invoke("El cheque se ingresó correctamente", "ok");
             return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(oTarjetaRepositorio.Insertar(oModel));
         }
 

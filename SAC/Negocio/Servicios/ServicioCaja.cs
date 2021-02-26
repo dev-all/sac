@@ -120,7 +120,7 @@ namespace Negocio.Servicios
                 model.Activo = true;               
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = CajaRepositorio.Insertar(Mapper.Map< CajaModel,Caja>(model));
-                _mensaje("Se registro correctamente", "ok");
+                _mensaje?.Invoke("Se registro correctamente", "ok");
 
                 // Si viene con valor la tarjeta
                 if (model.IdTarjeta > 0 && model.ImporteTarjeta > 0)
@@ -128,11 +128,10 @@ namespace Negocio.Servicios
                     InsertarOperacionTarjeta(model);
                 }
                 // Si viene con valor el cheque
-
-                if (model.IdCheque > 0 && model.ImporteCheque > 0)
-                {
-                    //InsertarOperacionTarjeta(model);
-                }
+                //if (model.IdCheque > 0 && model.ImporteCheque > 0)
+                //{
+                //    //InsertarOperacionTarjeta(model);
+                //}
 
 
 
@@ -146,7 +145,29 @@ namespace Negocio.Servicios
             }
         }
 
+        /// <summary>
+        /// Resgitrando Pago de Factura Compras
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public CajaModel IngresoPagoCaja(CajaModel model)
+        {
+            try
+            {
 
+                model.Activo = true;
+                model.UltimaModificacion = DateTime.Now;
+                var newModel = CajaRepositorio.Insertar(Mapper.Map<CajaModel, Caja>(model));
+                _mensaje?.Invoke("Se registro correctamente", "ok");
+                return Mapper.Map<Caja, CajaModel>(newModel);
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+
+            }
+        }
 
         public CajaModel ActualizarCaja(CajaModel model)
         {
@@ -199,7 +220,7 @@ namespace Negocio.Servicios
           
 
             var oModel = Mapper.Map<TarjetaOperacionModel, TarjetaOperacion>(oTarjetaOperacionModel);
-            //_mensaje("El cheque se ingresó correctamente", "ok");
+            //_mensaje?.Invoke("El cheque se ingresó correctamente", "ok");
             return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(otarjetaoperacionrepositorio.Agregar(oModel));
 
 

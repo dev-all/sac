@@ -17,10 +17,10 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Pais()
         {
-            this.Localidad = new HashSet<Localidad>();
-            this.Provincia = new HashSet<Provincia>();
-            this.Proveedor = new HashSet<Proveedor>();
             this.ClienteDireccion = new HashSet<ClienteDireccion>();
+            this.Localidad = new HashSet<Localidad>();
+            this.Proveedor = new HashSet<Proveedor>();
+            this.Provincia = new HashSet<Provincia>();
         }
     
         public int Id { get; set; }
@@ -32,12 +32,12 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Localidad> Localidad { get; set; }
+        public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Provincia> Provincia { get; set; }
+        public virtual ICollection<Localidad> Localidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
+        public virtual ICollection<Provincia> Provincia { get; set; }
     }
 }

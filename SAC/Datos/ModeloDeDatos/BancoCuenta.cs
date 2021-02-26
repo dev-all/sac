@@ -17,11 +17,11 @@ namespace Datos.ModeloDeDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BancoCuenta()
         {
+            this.BancoCuentaBancaria = new HashSet<BancoCuentaBancaria>();
             this.Caja = new HashSet<Caja>();
             this.Cheque = new HashSet<Cheque>();
             this.Chequera = new HashSet<Chequera>();
             this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
-            this.BancoCuentaBancaria = new HashSet<BancoCuentaBancaria>();
         }
     
         public int Id { get; set; }
@@ -39,6 +39,9 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual Banco Banco { get; set; }
+        public virtual Imputacion Imputacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Caja> Caja { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,8 +50,5 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<Chequera> Chequera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
-        public virtual Imputacion Imputacion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
     }
 }

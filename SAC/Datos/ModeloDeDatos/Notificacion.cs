@@ -12,13 +12,15 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Contacto
+    public partial class Notificacion
     {
         public int Id { get; set; }
-        public int IdEvento { get; set; }
         public int IdPersona { get; set; }
+        public Nullable<bool> EnvioEmail { get; set; }
+        public string Obs { get; set; }
+        public bool Activo { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
     
-        public virtual Evento Evento { get; set; }
         public virtual Persona Persona { get; set; }
     }
 }

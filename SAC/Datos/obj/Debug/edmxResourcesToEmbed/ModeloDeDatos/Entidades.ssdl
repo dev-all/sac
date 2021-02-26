@@ -30,6 +30,37 @@
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
   </EntityType>
+  <EntityType Name="AfipRegimen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+    <Property Name="Concepto" Type="varchar" MaxLength="50" />
+    <Property Name="Aliri" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Alirni" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Minimo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Imputacion" Type="int" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Articulo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo" Type="varchar" MaxLength="20" />
+    <Property Name="DescripcionCastellano" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DescripcionIngles" Type="nvarchar" MaxLength="150" />
+    <Property Name="Grupo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Honorario" Type="varchar" MaxLength="1" />
+    <Property Name="Tipo" Type="varchar" MaxLength="50" />
+    <Property Name="Imputacion" Type="int" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="Banco">
     <Key>
       <PropertyRef Name="Id" />
@@ -370,6 +401,37 @@
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
   </EntityType>
+  <EntityType Name="EstadoCivil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="activo" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Evento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="varchar" MaxLength="350" />
+    <Property Name="FechaInicio" Type="datetime" />
+    <Property Name="HoraInicio" Type="time" Precision="7" />
+    <Property Name="FechaFin" Type="datetime" />
+    <Property Name="HoraFin" Type="time" Precision="7" />
+    <Property Name="IdPrioridad" Type="int" />
+    <Property Name="TodoElDia" Type="bit" />
+    <Property Name="Asisten" Type="varchar" MaxLength="500" />
+    <Property Name="Recibido" Type="varchar" MaxLength="500" />
+    <Property Name="Enviado" Type="varchar" MaxLength="500" />
+    <Property Name="Pasado" Type="varchar" MaxLength="500" />
+    <Property Name="Ubicacion" Type="nvarchar" MaxLength="250" />
+    <Property Name="Organizador" Type="nvarchar" MaxLength="250" />
+    <Property Name="Obs" Type="varchar" MaxLength="500" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="GrupoCaja">
     <Key>
       <PropertyRef Name="Id" />
@@ -483,6 +545,17 @@
     <Property Name="Orden" Type="int" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notificacion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPersona" Type="int" Nullable="false" />
+    <Property Name="EnvioEmail" Type="bit" />
+    <Property Name="Obs" Type="nvarchar" MaxLength="250" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Pais">
     <Key>
@@ -602,6 +675,15 @@
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
   </EntityType>
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Proveedor">
     <Key>
       <PropertyRef Name="Id" />
@@ -644,6 +726,19 @@
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAC.dbo.REGISTRO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="REGISTRO">
+    <Key>
+      <PropertyRef Name="identificador" />
+    </Key>
+    <Property Name="identificador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fechaHora" Type="datetime2" Precision="7" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="100" />
+    <Property Name="evento" Type="nvarchar" MaxLength="100" />
+    <Property Name="instruccion" Type="nvarchar" MaxLength="2000" />
+    <Property Name="contexto" Type="xml" />
   </EntityType>
   <EntityType Name="Retencion">
     <Key>
@@ -881,90 +976,6 @@
     <Property Name="IdTipoMoneda" Type="int" />
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
-  </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'SAC.dbo.CompraIvaVista' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="CompraIvaVista">
-    <Key>
-      <PropertyRef Name="Expr4" />
-      <PropertyRef Name="PuntoVenta" />
-      <PropertyRef Name="AuxiliarNumero" />
-      <PropertyRef Name="NumeroEmpresa" />
-      <PropertyRef Name="Empesa" />
-      <PropertyRef Name="Fecha" />
-      <PropertyRef Name="Total" />
-      <PropertyRef Name="Iva" />
-      <PropertyRef Name="IvaAri" />
-      <PropertyRef Name="IvaRes" />
-      <PropertyRef Name="TotalIva" />
-      <PropertyRef Name="Neto" />
-      <PropertyRef Name="Especial" />
-      <PropertyRef Name="Res" />
-      <PropertyRef Name="IdTipoIva" />
-      <PropertyRef Name="TipoFactura" />
-      <PropertyRef Name="ResDgr" />
-      <PropertyRef Name="Clase" />
-      <PropertyRef Name="NombreEmple" />
-      <PropertyRef Name="Periodo" />
-      <PropertyRef Name="AbreviaturaFactura" />
-      <PropertyRef Name="IdTipoMoneda" />
-      <PropertyRef Name="IdDiario" />
-      <PropertyRef Name="Cae" />
-    </Key>
-    <Property Name="Expr4" Type="int" Nullable="false" />
-    <Property Name="IdTipoComprobante" Type="int" />
-    <Property Name="PuntoVenta" Type="int" Nullable="false" />
-    <Property Name="NumeroFactura" Type="nvarchar" MaxLength="50" />
-    <Property Name="AuxiliarNumero" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="NumeroEmpresa" Type="datetime" Nullable="false" />
-    <Property Name="Empesa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Fecha" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Iva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="IvaAri" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="IvaRes" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="TotalIva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Gasto" Type="nvarchar" MaxLength="1" />
-    <Property Name="Neto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Especial" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Res" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IdTipoIva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="TipoFactura" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ResDgr" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Cuit" Type="nvarchar" MaxLength="1" />
-    <Property Name="dolar" Type="nvarchar" MaxLength="50" />
-    <Property Name="Diferencia" Type="nvarchar" MaxLength="30" />
-    <Property Name="Clase" Type="varchar" MaxLength="4" Nullable="false" />
-    <Property Name="NombreEmple" Type="varchar" MaxLength="4" Nullable="false" />
-    <Property Name="Periodo" Type="int" Nullable="false" />
-    <Property Name="AbreviaturaFactura" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="IdTipoMoneda" Type="int" Nullable="false" />
-    <Property Name="Isib" Type="varchar" MaxLength="20" />
-    <Property Name="IdDiario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Cae" Type="int" Nullable="false" />
-    <Property Name="Impint" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="IdImputacion" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Tnogra" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Texento" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="PerGeneral" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Perib" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="PerMun" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="OtrosImpuestos" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Tnocat" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Pernac" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Iva27" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Iva21" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Iva105" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Ivan5" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Iva25" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Total21" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Total27" Type="decimal" Precision="18" Scale="2" />
-    <Property Name="Total105" Type="bit" />
-    <Property Name="Total5" Type="int" />
-    <Property Name="Activo" Type="datetime" />
-    <Property Name="Expr1" Type="int" />
-    <Property Name="Expr2" Type="int" />
-    <Property Name="Expr3" Type="int" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1459,6 +1470,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Contacto_Evento">
+    <End Role="Evento" Type="Self.Evento" Multiplicity="1" />
+    <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Evento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Contacto">
+        <PropertyRef Name="IdEvento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Contacto_Persona">
     <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
     <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
@@ -1540,6 +1563,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Principal>
       <Dependent Role="MenuSidebar1">
         <PropertyRef Name="IdParent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notificacion_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="Notificacion" Type="Self.Notificacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notificacion">
+        <PropertyRef Name="IdPersona" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1811,6 +1846,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AccionPorRol" EntityType="Self.AccionPorRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AfipCategorias" EntityType="Self.AfipCategorias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AfipRegimen" EntityType="Self.AfipRegimen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Banco" EntityType="Self.Banco" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BancoCuenta" EntityType="Self.BancoCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BancoCuentaBancaria" EntityType="Self.BancoCuentaBancaria" Schema="dbo" store:Type="Tables" />
@@ -1827,6 +1864,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoCaja" EntityType="Self.GrupoCaja" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoCuenta" EntityType="Self.GrupoCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoPresupuesto" EntityType="Self.GrupoPresupuesto" Schema="dbo" store:Type="Tables" />
@@ -1834,6 +1873,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="Imputacion" EntityType="Self.Imputacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenuSidebar" EntityType="Self.MenuSidebar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PieNota" EntityType="Self.PieNota" Schema="dbo" store:Type="Tables" />
@@ -1841,6 +1881,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="PresupuestoCosto" EntityType="Self.PresupuestoCosto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PresupuestoHistorico" EntityType="Self.PresupuestoHistorico" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PresupuestoItem" EntityType="Self.PresupuestoItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prioridad" EntityType="Self.Prioridad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Retencion" EntityType="Self.Retencion" Schema="dbo" store:Type="Tables" />
@@ -1863,63 +1904,15 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="TrackingFacturaPagoCompra" EntityType="Self.TrackingFacturaPagoCompra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ValorCotizacion" EntityType="Self.ValorCotizacion" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CompraIvaVista" EntityType="Self.CompraIvaVista" store:Type="Views" store:Schema="dbo">
+    <EntitySet Name="REGISTRO" EntityType="Self.REGISTRO" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [CompraIvaVista].[Expr4] AS [Expr4], 
-    [CompraIvaVista].[IdTipoComprobante] AS [IdTipoComprobante], 
-    [CompraIvaVista].[PuntoVenta] AS [PuntoVenta], 
-    [CompraIvaVista].[NumeroFactura] AS [NumeroFactura], 
-    [CompraIvaVista].[AuxiliarNumero] AS [AuxiliarNumero], 
-    [CompraIvaVista].[NumeroEmpresa] AS [NumeroEmpresa], 
-    [CompraIvaVista].[Empesa] AS [Empesa], 
-    [CompraIvaVista].[Fecha] AS [Fecha], 
-    [CompraIvaVista].[Total] AS [Total], 
-    [CompraIvaVista].[Iva] AS [Iva], 
-    [CompraIvaVista].[IvaAri] AS [IvaAri], 
-    [CompraIvaVista].[IvaRes] AS [IvaRes], 
-    [CompraIvaVista].[TotalIva] AS [TotalIva], 
-    [CompraIvaVista].[Gasto] AS [Gasto], 
-    [CompraIvaVista].[Neto] AS [Neto], 
-    [CompraIvaVista].[Especial] AS [Especial], 
-    [CompraIvaVista].[Res] AS [Res], 
-    [CompraIvaVista].[IdTipoIva] AS [IdTipoIva], 
-    [CompraIvaVista].[TipoFactura] AS [TipoFactura], 
-    [CompraIvaVista].[ResDgr] AS [ResDgr], 
-    [CompraIvaVista].[Cuit] AS [Cuit], 
-    [CompraIvaVista].[dolar] AS [dolar], 
-    [CompraIvaVista].[Diferencia] AS [Diferencia], 
-    [CompraIvaVista].[Clase] AS [Clase], 
-    [CompraIvaVista].[NombreEmple] AS [NombreEmple], 
-    [CompraIvaVista].[Periodo] AS [Periodo], 
-    [CompraIvaVista].[AbreviaturaFactura] AS [AbreviaturaFactura], 
-    [CompraIvaVista].[IdTipoMoneda] AS [IdTipoMoneda], 
-    [CompraIvaVista].[Isib] AS [Isib], 
-    [CompraIvaVista].[IdDiario] AS [IdDiario], 
-    [CompraIvaVista].[Cae] AS [Cae], 
-    [CompraIvaVista].[Impint] AS [Impint], 
-    [CompraIvaVista].[IdImputacion] AS [IdImputacion], 
-    [CompraIvaVista].[Tnogra] AS [Tnogra], 
-    [CompraIvaVista].[Texento] AS [Texento], 
-    [CompraIvaVista].[PerGeneral] AS [PerGeneral], 
-    [CompraIvaVista].[Perib] AS [Perib], 
-    [CompraIvaVista].[PerMun] AS [PerMun], 
-    [CompraIvaVista].[OtrosImpuestos] AS [OtrosImpuestos], 
-    [CompraIvaVista].[Tnocat] AS [Tnocat], 
-    [CompraIvaVista].[Pernac] AS [Pernac], 
-    [CompraIvaVista].[Iva27] AS [Iva27], 
-    [CompraIvaVista].[Iva21] AS [Iva21], 
-    [CompraIvaVista].[Iva105] AS [Iva105], 
-    [CompraIvaVista].[Ivan5] AS [Ivan5], 
-    [CompraIvaVista].[Iva25] AS [Iva25], 
-    [CompraIvaVista].[Total21] AS [Total21], 
-    [CompraIvaVista].[Total27] AS [Total27], 
-    [CompraIvaVista].[Total105] AS [Total105], 
-    [CompraIvaVista].[Total5] AS [Total5], 
-    [CompraIvaVista].[Activo] AS [Activo], 
-    [CompraIvaVista].[Expr1] AS [Expr1], 
-    [CompraIvaVista].[Expr2] AS [Expr2], 
-    [CompraIvaVista].[Expr3] AS [Expr3]
-    FROM [dbo].[CompraIvaVista] AS [CompraIvaVista]</DefiningQuery>
+    [REGISTRO].[identificador] AS [identificador], 
+    [REGISTRO].[fechaHora] AS [fechaHora], 
+    [REGISTRO].[usuario] AS [usuario], 
+    [REGISTRO].[evento] AS [evento], 
+    [REGISTRO].[instruccion] AS [instruccion], 
+    [REGISTRO].[contexto] AS [contexto]
+    FROM [dbo].[REGISTRO] AS [REGISTRO]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="CuentaCorriente" EntityType="Self.CuentaCorriente" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
@@ -2091,6 +2084,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       <End Role="TipoPago" EntitySet="TipoPago" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
     </AssociationSet>
+    <AssociationSet Name="FK_Contacto_Evento" Association="Self.FK_Contacto_Evento">
+      <End Role="Evento" EntitySet="Evento" />
+      <End Role="Contacto" EntitySet="Contacto" />
+    </AssociationSet>
     <AssociationSet Name="FK_Contacto_Persona" Association="Self.FK_Contacto_Persona">
       <End Role="Persona" EntitySet="Persona" />
       <End Role="Contacto" EntitySet="Contacto" />
@@ -2118,6 +2115,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <AssociationSet Name="FK_MenuSidebar_MenuSidebar" Association="Self.FK_MenuSidebar_MenuSidebar">
       <End Role="MenuSidebar" EntitySet="MenuSidebar" />
       <End Role="MenuSidebar1" EntitySet="MenuSidebar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notificacion_Persona" Association="Self.FK_Notificacion_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="Notificacion" EntitySet="Notificacion" />
     </AssociationSet>
     <AssociationSet Name="FK_Proveedor_Imputacion" Association="Self.FK_Proveedor_Imputacion">
       <End Role="Imputacion" EntitySet="Imputacion" />

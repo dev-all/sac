@@ -35,7 +35,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
            
@@ -51,7 +51,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
          
@@ -66,7 +66,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
 
@@ -84,7 +84,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
             
@@ -119,7 +119,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }         
         }
@@ -134,7 +134,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return false;
             }
            
@@ -149,12 +149,12 @@ namespace Negocio.Servicios
                 usuarioModel.Persona.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 usuarioModel.Persona.Activo = usuarioModel.Activo;
                 repositorio.UpdateUsuario(Mapper.Map<UsuarioModel, Usuario>(usuarioModel));
-                _mensaje("Se registro correctamente", "ok");
+                _mensaje?.Invoke("Se registro correctamente", "ok");
                
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                throw new Exception();  
             }
         }
@@ -169,11 +169,11 @@ namespace Negocio.Servicios
                 usuarioModel.Persona.FechaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 usuarioModel.Persona.Activo = usuarioModel.Activo;
                 repositorio.CreateUsuario(Mapper.Map < UsuarioModel, Usuario>( usuarioModel));
-                _mensaje("Se registro correctamente", "ok");
+                _mensaje?.Invoke("Se registro correctamente", "ok");
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
             }
 
@@ -185,11 +185,11 @@ namespace Negocio.Servicios
           try
             {
                 repositorio.ActualizarRolDeUsaurio(idUsuario, idRol, idUsuarioLogueado);         
-                _mensaje("Se Actualizo correctamente", "ok");
+                _mensaje?.Invoke("Se Actualizo correctamente", "ok");
             }
             catch (Exception ex)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                
             }
             
@@ -202,7 +202,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
             
@@ -216,7 +216,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             { 
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
 
@@ -228,11 +228,11 @@ namespace Negocio.Servicios
             {
                 var passwordHasheado = StringHelper.ObtenerMD5("12345678");
                 repositorio.CambiarPassword(id, passwordHasheado);
-                _mensaje("Se Actualizo correctamente", "ok");
+                _mensaje?.Invoke("Se Actualizo correctamente", "ok");
             }
             catch (Exception ex)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
 
             }
         }
@@ -242,11 +242,11 @@ namespace Negocio.Servicios
             {
             var passwordHasheado = StringHelper.ObtenerMD5(password);
             repositorio.CambiarPassword(idUsuario, passwordHasheado);
-                _mensaje("Se Actualizo correctamente", "ok");
+                _mensaje?.Invoke("Se Actualizo correctamente", "ok");
             }
             catch (Exception ex)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
 
             }
           
@@ -259,7 +259,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
                 return null;
             }
 
@@ -274,7 +274,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-               _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+               _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
 
             }
            

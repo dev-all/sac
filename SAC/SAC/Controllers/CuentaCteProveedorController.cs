@@ -188,7 +188,7 @@ namespace SAC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult IngresarCheque(ChequeraModelView oFacturaPago)
+        public ActionResult IngresarChequeAjax(ChequeraModelView oFacturaPago)
 
         {
             try

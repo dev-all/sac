@@ -12,13 +12,13 @@ namespace Datos.ModeloDeDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Contacto
+    public partial class REGISTRO
     {
-        public int Id { get; set; }
-        public int IdEvento { get; set; }
-        public int IdPersona { get; set; }
-    
-        public virtual Evento Evento { get; set; }
-        public virtual Persona Persona { get; set; }
+        public int identificador { get; set; }
+        public Nullable<System.DateTime> fechaHora { get; set; }
+        public string usuario { get; set; }
+        public string evento { get; set; }
+        public string instruccion { get; set; }
+        public string contexto { get; set; }
     }
 }

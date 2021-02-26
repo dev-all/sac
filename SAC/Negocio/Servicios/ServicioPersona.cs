@@ -26,7 +26,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "erro");
                 return null;
             }
         }

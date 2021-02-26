@@ -47,12 +47,12 @@ namespace Negocio.Servicios
             try
             {
                 Proveedor oProveedorNuevo = Mapper.Map<ProveedorModel, Proveedor>(oProveedorModel);
-                if (_mensaje != null) { _mensaje("El proveedor se actualizo correctamente", "ok"); }
+                if (_mensaje != null) { _mensaje?.Invoke("El proveedor se actualizo correctamente", "ok"); }
                 return Mapper.Map<Proveedor, ProveedorModel>(pProveedorRepositorio.ActualizarProveedor(oProveedorNuevo));
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
+                _mensaje?.Invoke("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
                 throw new Exception("No pudo ejecutar ActualizarProveedor");
             }
         }
@@ -128,12 +128,12 @@ namespace Negocio.Servicios
         {
             try
             {             
-                if (_mensaje != null) { _mensaje("El proveedor se actualizo correctamente", "ok"); }
+                if (_mensaje != null) { _mensaje?.Invoke("El proveedor se actualizo correctamente", "ok"); }
                 pProveedorRepositorio.ActualizarPresupuestoProveedor(Mapper.Map<ProveedorModel, Proveedor>(model));
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
+                _mensaje?.Invoke("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
                 throw new Exception("No pudo ejecutar ActualizarProveedor");
             }
         }

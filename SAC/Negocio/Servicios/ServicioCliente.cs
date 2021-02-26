@@ -39,7 +39,7 @@ namespace Negocio.Servicios
             }
             catch (Exception )
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
 
@@ -57,7 +57,7 @@ namespace Negocio.Servicios
             }
             catch (Exception )
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
 
@@ -74,7 +74,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
 
                 return null;
             }
@@ -90,7 +90,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
 
@@ -106,7 +106,7 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
 
@@ -130,7 +130,7 @@ namespace Negocio.Servicios
 
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 var newModel = oClienteRepositorio.ActualizarCliente(Mapper.Map<ClienteModel, Cliente>(model));
-                _mensaje("Se actualizo correctamente", "ok");
+                _mensaje?.Invoke("Se actualizo correctamente", "ok");
 
                 return Mapper.Map<Cliente, ClienteModel>(newModel);
             }
@@ -153,7 +153,7 @@ namespace Negocio.Servicios
                     }
                 }
 
-               // _mensaje(mensaje);
+               // _mensaje?.Invoke(mensaje);
                 throw new Exception(mensaje);
             }
 
@@ -161,7 +161,7 @@ namespace Negocio.Servicios
 
             //catch (Exception ex)
             //{
-            //    _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
+            //    _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
             //    throw new Exception();
 
             //}
@@ -177,12 +177,12 @@ namespace Negocio.Servicios
 
 
                 var retorno = oClienteRepositorio.DeleteCliente(IdCliente);
-                _mensaje("Se eliminó correctamente", "ok");
+                _mensaje?.Invoke("Se eliminó correctamente", "ok");
 
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -197,12 +197,12 @@ namespace Negocio.Servicios
 
 
                 var retorno = oClienteRepositorio.BloquearCliente(IdCliente);
-                _mensaje("Se bloqueó correctamente", "ok");
+                _mensaje?.Invoke("Se bloqueó correctamente", "ok");
 
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -215,12 +215,12 @@ namespace Negocio.Servicios
 
 
                 var retorno = oClienteRepositorio.HabilitarCliente(IdCliente);
-                _mensaje("Se Habilitó correctamente", "ok");
+                _mensaje?.Invoke("Se Habilitó correctamente", "ok");
 
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
 
             }
@@ -238,12 +238,12 @@ namespace Negocio.Servicios
                 model.Activo = true;
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = oClienteRepositorio.Agregar(Mapper.Map<ClienteModel, Cliente>(model));
-                _mensaje("Se registro correctamente", "ok");
+                _mensaje?.Invoke("Se registro correctamente", "ok");
                 return Mapper.Map<Cliente, ClienteModel>(newModel);
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador" + ex.Message, "erro");
                 throw new Exception();
 
             }
