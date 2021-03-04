@@ -22,7 +22,8 @@
 
             @foreach (var item in Model)
             {
-                <tr ondblclick="IraPagar(@item.ProveedorCodigo)" class="Seleccionable">
+                @*<tr ondblclick="IraPagar(@item.ProveedorCodigo)" class="Seleccionable">*@
+                <tr>
                     @*<td class="text-center">@Html.DisplayFor(modelItem => item.ProveedorCodigo)</td>*@
                     <td>@Html.DisplayFor(modelItem => item.ProveedorNombre)</td>
                     <td class="text-right">@Html.DisplayFor(modelItem => item.MontoPesos)</td>

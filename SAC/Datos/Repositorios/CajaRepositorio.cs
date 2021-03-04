@@ -179,7 +179,8 @@ namespace Datos.Repositorios
         public object ActualizarCierreCaja(Caja model)
         {
             Caja GrupoCajaExistente = GetCajaPorId(model.Id);           
-            GrupoCajaExistente.IdGrupoCaja = model.IdGrupoCaja;
+            GrupoCajaExistente.IdCajaSaldo = model.IdCajaSaldo;
+
             GrupoCajaExistente.UltimaModificacion = model.UltimaModificacion;
             context.SaveChanges();
             return GrupoCajaExistente;

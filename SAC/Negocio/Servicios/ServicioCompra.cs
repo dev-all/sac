@@ -627,12 +627,31 @@ namespace Negocio.Servicios
         {
             try
             {
+                // 1 pago factura con cbte de pago
+                // 1.1 pago fact 100 con cbte > 500 (saldo a favor)
+                // 1.2 pago fact 700 con cbte < 200 (actualiza monto factura)
+
+                // 2 pago fact(N) + cbte pago(N) a favor + cbte pago
+
+                // 3 cbte pago adelanto
+
+               
+
                 int nroPago = 0;
                 //obtengo el nro de pago
                 nroPago = oServicioTipoComprobanteVenta.ObtenerNroPago(98) + 1;
 
                 ProveedorModel facturaProveedor = oServicioProveedor.GetProveedor(oListaFacturas[0].IdProveedor);
+                //cbte pago con saldo a favor
+                decimal saldoPagoTotalAFavor = oListaFacturas.Where(x => x.IdTipoComprobante.Equals(98)).Sum(x => x.Saldo);
+
+                oMediosPago.montoTotal_ = oMediosPago.montoTotal_ + saldoPagoTotalAFavor;
                 decimal saldoPagoTotal = oMediosPago.montoTotal_;
+                decimal saldoAPagarTotal = oListaFacturas.Where(x => x.IdTipoComprobante.Equals(11)).Sum(x => x.Saldo);
+
+                
+
+
                 foreach (var Factura in oListaFacturas)
                 {
                     CompraFacturaPagoModel FacturaMedioPago = new CompraFacturaPagoModel();
@@ -684,7 +703,7 @@ namespace Negocio.Servicios
                         /// 1 - Ctes de Pago con saldo positivo a favor de la empresa
                         /// 2 - New cbte de Pago 
 
-                        // 1
+                        // 1 cbte de pago con saldo a favor 
                         if (Factura.NumeroFactura > 0 && Factura.IdTipoComprobante == 98)
                         {
                             Factura.FechaPago = DateTime.Now;
@@ -981,6 +1000,7 @@ namespace Negocio.Servicios
 
                                     }
                                 }
+
                                 if ((oMediosPago.idChequesTerceros != null) && (oMediosPago.idChequesTerceros != ""))
                                 {
                                     ChequeModel oCheque = new ChequeModel();

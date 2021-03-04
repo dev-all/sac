@@ -26,7 +26,7 @@
                         <div class="col-md-1 text-left">
                             <button type="submit" value="Buscar" class="btn btn-secondary btn-sm">Buscar</button>
                         </div>
-                       
+
                     </div>
                 }
 
@@ -108,18 +108,18 @@
                                 </div>
                             </div>
 
-                         
-                                                    <div class="row justify-content-md-center">
-                                                        <div class="col-md-4 text-right">
-                                                            <small>Saldo de Cta. Cte. </small>  
-                                                        </div>
 
-                                                        <div class="col-md-6 text-left">
-                                                            <small id="sldocta" class="font-weight-bold"> @saldoCtaCte</small>
-                                                        </div>
+                            <div class="row justify-content-md-center">
+                                <div class="col-md-4 text-right">
+                                    <small>Saldo de Cta. Cte. </small>
+                                </div>
 
-                                                    </div>
-                                             
+                                <div class="col-md-6 text-left">
+                                    <small id="sldocta" class="font-weight-bold"> @saldoCtaCte</small>
+                                </div>
+
+                            </div>
+
 
                         </div>
                         @* aca van las facturas a pagar *@
@@ -149,8 +149,8 @@
                         InsertionMode = InsertionMode.Replace
                     }, new { @id = "frmCrearPago" }))
                     {
-
-                        <div class="row col-md-12 m-t-10" id="DivMediosPago" style="display:none">
+                        @Html.HiddenFor(model => model.idProveedor_)
+                        <div class="row col-md-12 m-t-10" id="DivMediosPago">
                             <div class="col-md-8">
                                 <small>Generar pago</small>
                                 <div class="row ">
@@ -164,7 +164,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         @Html.TextBoxFor(p => p.nroRecibo_, new { @class = "form-control form-control-sm" })
-                                        @*@Html.ValidationMessageFor(p => p.nroRecibo_, "", new { @class = "text-danger" })*@
+                                        @*@Html.ValidationMessageFor(p => p.nroRecibo_, "", new { @class = "text-danger" })style="display:none"*@
                                     </div>
 
                                     <div class="col-md-3  text-right">
@@ -196,8 +196,8 @@
                                 <div class="row  m-t-5">
                                     <div class="col-md-3"></div>
                                     @*<div class="col-md-3  text-right"> @Html.Label("Tarjeta", new { @class = "control-label form-control-sm" }) </div>
-                                        <div class="col-md-3">@Html.DropDownList("idTarjetaSelec_", Model.ListaTarjetas_, null, new { @class = "form-control form-control-sm" }) </div>
-                                        <div class="col-md-3">@Html.TextBoxFor(p => p.montoTarjetaSelec_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })</div>*@
+                            <div class="col-md-3">@Html.DropDownList("idTarjetaSelec_", Model.ListaTarjetas_, null, new { @class = "form-control form-control-sm" }) </div>
+                            <div class="col-md-3">@Html.TextBoxFor(p => p.montoTarjetaSelec_, new { @class = "form-control form-control-sm", @onkeyup = "SumarTotalPago()" })</div>*@
                                 </div>
 
                                 <div class="row  m-t-5">
@@ -265,7 +265,7 @@
                                     <div class="col-md-4">
                                         <input type="button" class="btn btn-danger btn-block btn-sm" id="btnCancelarPago" onclick="CancelarPago()" value="Cancelar">
                                     </div>
-                                  
+
                                 </div>
                             </div>
                         </div>
@@ -674,7 +674,7 @@
                             //monto total
                             if (MontoParcial == 0) {
                                 document.getElementById("idModoPago").value = 1;
-                                $("#DivMediosPago").css("display", "-webkit-inline-box");
+                              //  $("#DivMediosPago").css("display", "-webkit-inline-box");
                                 $("#frmCargarFactura").trigger("submit");
                             }
                             else {
@@ -682,7 +682,7 @@
                                 if (MontoParcial != 0) {
                                     document.getElementById("idModoPago").value = 2;
                                     document.getElementById("MontoPago").value = MontoParcial;
-                                    $("#DivMediosPago").css("display", "-webkit-inline-box");
+                                   // $("#DivMediosPago").css("display", "-webkit-inline-box");
                                     $("#frmCargarFactura").trigger("submit");
                                 }
                             }
@@ -700,7 +700,7 @@
                 //modo de pago 3 es pago con salgo favor
                 document.getElementById("idModoPago").value = 3;
                 document.getElementById("MontoPago").value = parseFloat($("#lblMontoPago").text());
-                $("#DivMediosPago").css("display", "-webkit-inline-box");
+              //  $("#DivMediosPago").css("display", "-webkit-inline-box");
                 $("#frmCargarFactura").trigger("submit");
             }
             $("#ModalModoPago").modal('hide');

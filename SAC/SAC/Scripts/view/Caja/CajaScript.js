@@ -1,40 +1,40 @@
 ﻿
 $(function ()
 {
-    var TotalPesos = getNro($("#CajaSaldoInicial_ImporteFinalPesos").val()) + getNro($("#ProcesadoPesos").val());
-    var TotalDolares = getNro($("#CajaSaldoInicial_ImporteFinalDolares").val()) + getNro($("#ProcesadoDolares").val());
-    var TotalDepositos = getNro($("#CajaSaldoInicial_ImporteFinalDepositos").val()) + getNro($("#ProcesadoDepositos").val());
-    var TotalTarjetas = getNro($("#CajaSaldoInicial_ImporteFinalTarjetas").val()) + getNro($("#ProcesadoTarjetas").val());
+    //var TotalPesos = getNro($("#CajaSaldoInicial_ImporteFinalPesos").val()) + getNro($("#ProcesadoPesos").val());
+    //var TotalDolares = getNro($("#CajaSaldoInicial_ImporteFinalDolares").val()) + getNro($("#ProcesadoDolares").val());
+    //var TotalDepositos = getNro($("#CajaSaldoInicial_ImporteFinalDepositos").val()) + getNro($("#ProcesadoDepositos").val());
+    //var TotalTarjetas = getNro($("#CajaSaldoInicial_ImporteFinalTarjetas").val()) + getNro($("#ProcesadoTarjetas").val());
 
+    //$("#FinalPesos").val(TotalPesos)  ;
+    //$("#FinalDolares").val(TotalDolares) ;
+    //$("#FinalDepositos").val(TotalDepositos) ;
+    //$("#FinalTarjetas").val(TotalTarjetas) ;
 
-    $("#FinalPesos").val(TotalPesos)  ;
-    $("#FinalDolares").val(TotalDolares) ;
-    $("#FinalDepositos").val(TotalDepositos) ;
-    $("#FinalTarjetas").val(TotalTarjetas) ;
+    //obtener nro cheque
+    $("#IdTarjeta").change(function () {
+        var $this = $("#IdTarjeta").val()
+        if ($this > 0) {
+            $("#ImporteTarjeta").removeAttr("disabled");
+        } else {
+            $("#ImporteTarjeta").attr('disabled', 'disabled');
+        }             
+    });
 
+    $("#ModalCheques").on("hidden.bs.modal", function () {
 
+        var $this = $("#IdTarjeta").val()
+        if ($this > 0) {
+            $("#ImporteTarjeta").removeAttr("disabled");
+        } else {
+            $("#ImporteTarjeta").attr('disabled', 'disabled');
+        }    
 
+    });
 
-
-
-
-
-    // Switchery
-    //var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-    //$('.js-switch').each(function () {
-    //    new Switchery($(this)[0], $(this).data());
-    //});
-
-    //var changeCheckbox = document.querySelector('.js-check-activo')
-    //    , changeField = document.querySelector('.js-check-activo-field');
-    //changeCheckbox.onchange = function () {
-    //    $("input[type='hidden'][name='tipo']").val(changeCheckbox.checked);
-    //};
-
-
-$('#example23').DataTable({
+    $('#tblCajaCierre').DataTable({
     "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
-    "order": [[2, 'asc']],
+    "order": [[5, 'asc']],
     'paging': false,
     'lengthChange': false,
     'searching': false,
@@ -46,8 +46,21 @@ $('#example23').DataTable({
     'dom': 'Bfrtip',
     'buttons': []
 });
+   
+    $('.Calendario').datepicker({
+        language: 'es',
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+        todayHighlight: true
+    }).datepicker('setDate', new Date());
 
-    //$("#birthday").datepicker({ dateFormat: "dd/mm/yyyy", 'setDate': new Date())}).mask("99/99/9999");
+    if ($("#IdProveedor").val() > 0) {
+        getProvedor($("#IdProveedor").val());
+    }
+
+});
+
+   //$("#birthday").datepicker({ dateFormat: "dd/mm/yyyy", 'setDate': new Date())}).mask("99/99/9999");
     //$.validator.addMethod('date',
     //    function (value, element, params) {
     //        if (this.optional(element)) {
@@ -65,19 +78,6 @@ $('#example23').DataTable({
 
 
 
-    $('.Calendario').datepicker({
-        language: 'es',
-        autoclose: true,
-        format: 'dd/mm/yyyy',
-        todayHighlight: true
-    }).datepicker('setDate', new Date());
-
-    if ($("#IdProveedor").val() > 0) {
-        getProvedor($("#IdProveedor").val());
-    }
-});
-
-
 function getTotales()
 {
     setNeto();
@@ -85,6 +85,7 @@ function getTotales()
     setTotalPercepciones();
     setTotal();
 }
+
 function setTotal() {
     $('#CompraIva_Total').val(
         getNro($("#CompraIva_SubTotal").val()) +
@@ -93,6 +94,7 @@ function setTotal() {
     );
 
 }
+
 function setNeto() {
  
     $('#CompraIva_NetoGravado').val(
@@ -128,7 +130,6 @@ function setTotalPercepciones() {
         getNro($('#CompraIva_PercepcionImporteProvincia').val()) +
         getNro($('#CompraIva_OtrosImpuestos').val()) 
     );
-
 }
   
 function getNro(x)
@@ -150,6 +151,7 @@ function getNro(x)
 //    }
 //}
 //-----SCRIPT SEPARADOR DE MILES---------
+
 function format(input) {
     var num = input.value.replace(/\./g, '');
     if (isNaN(num)) {       

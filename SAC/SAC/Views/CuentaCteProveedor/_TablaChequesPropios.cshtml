@@ -28,10 +28,7 @@
             <div class="row">
                 <div class="card" style="margin-bottom: 0px;">
                     <div class="card-body">
-                        @*@if (ViewBag.Message != null)
-                        {
-                            <span class="text-info">@ViewBag.Message</span>
-                        }*@
+                      
                         <div class="row">
 
                             <div class="col-md-3">
@@ -40,6 +37,7 @@
 
                                 @*@Html.DropDownListFor(x => x.idCuentaBancariaSeleccionada, Model.listaCuentaBancariaDrop, "Seleccionar...", new { @class = "form-control form-control-sm" })*@
                             </div>
+                          
                             <div class="col-md-2">
                                 <small>Número</small>
                                 @Html.TextBoxFor(model => model.NumeroCheque, new { @class = "form-control form-control-sm", @placeholder = "Nro cheque" })
@@ -69,12 +67,12 @@
 
 
                             </div>
+                         
                             <div class="col-md-1 m-t-10">
                                 <button type="submit" class="btn btn-secondary btn-circle"><i class="fa  fa-save"></i> </button>
                             </div>
+                       
                         </div>
-
-
                     </div>
                 </div>
             </div>

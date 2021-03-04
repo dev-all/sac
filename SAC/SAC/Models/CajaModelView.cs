@@ -21,14 +21,14 @@ namespace SAC.Models
         public string Concepto { get; set; }
 
         
-        [DisplayName("Fecha"), Required(ErrorMessage = "Debe ingresar una fecha.")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        //[DisplayName("Fecha"), Required(ErrorMessage = "Debe ingresar una fecha.")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Fecha { get; set; }
 
         public string Tipo { get; set; }
         public string Saldo { get; set; }
-        [Required(ErrorMessage = "Seleccione un items")]
+        //[Required(ErrorMessage = "Seleccione un items")]
         public int IdGrupoCaja { get; set; }
 
         public string Recibo { get; set; }
@@ -40,7 +40,7 @@ namespace SAC.Models
         [Display(Name = "Importe Depósito")]
         public decimal ImporteDeposito { get; set; }
 
-        [Required(ErrorMessage = "Seleccione un items")]
+        //[Required(ErrorMessage = "Seleccione un items")]
         public Nullable<int> IdCuentaBanco { get; set; }
 
         [Display(Name = "Importe Dolar")]
@@ -69,9 +69,9 @@ namespace SAC.Models
 
         public CajaSaldoModelView CajaSaldoInicial { get; set; }
 
-        [DisplayName("Fecha Cierre"), Required(ErrorMessage = "Debe ingresar una Fecha.")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        //[DisplayName("Fecha Cierre"), Required(ErrorMessage = "Debe ingresar una Fecha.")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime FechaCierre { get; set; }
 
 
@@ -80,15 +80,15 @@ namespace SAC.Models
         [Display(Name = "Grupo Caja")]
         public int cIdGrupoCaja { get; set; }
 
-        [Display(Name = "Fecha Desde")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-         public DateTime cFechaDesde { get; set; }
+        //[Display(Name = "Fecha Desde")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+         public System.DateTime cFechaDesde { get; set; }
 
         
-        [Display(Name = "Fecha Hasta")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        //[Display(Name = "Fecha Hasta")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime cFechaHasta { get; set; }
 
         

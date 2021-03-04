@@ -95,10 +95,15 @@ namespace SAC.Controllers
                     cajaSaldoModel.Activo = true;
                     cajaSaldoModel.IdUsuario = usuario.IdUsuario;
 
+                    // Registro Nuevo Caja Saldo 
                     CajaSaldoModel nuevoCierreCajaSaldoModel = servicioCajaSaldo.GuardarCajaSaldo(cajaSaldoModel);
                   
+
+                    // recorrer CajaActual para poder obtener los nuevos importes
+
                     foreach (var item in caja)
                     {
+                        // acumula los totales por grupo
                         CajaGrupoModel grupo = cajaGrupoModel.FirstOrDefault(i => i.Id == item.IdGrupoCaja);
                         if (grupo == null)
                         {   
@@ -127,7 +132,7 @@ namespace SAC.Controllers
                             grupo.ParcialDolares += item.ImporteDolar;
                             grupo.ParcialCheques += item.ImporteCheque;
                             grupo.ParcialDepositos += item.ImporteDeposito;
-                            grupo.ParcialTarjetas += item.ImporteTarjeta;
+                            grupo.ParcialTarjetas += item.ImporteTarjeta;                           
                             cajaGrupoModel.Remove(cajaGrupoModel.FirstOrDefault(i => i.Id == item.IdGrupoCaja));
                             cajaGrupoModel.Add(grupo);                           
                         }
@@ -135,23 +140,24 @@ namespace SAC.Controllers
                         //-----acumulo los importes para Asiento de ingresos manuales
                         if (item.IdTipoMovimiento != 1)
                         {
-                            asientoCajaModel.ImporteCheque += item.ImporteCheque;
-                            asientoCajaModel.ImporteDeposito += item.ImporteDeposito;
-                            asientoCajaModel.ImporteDolar += item.ImporteDolar;
-                            asientoCajaModel.ImportePesos += item.ImportePesos;
-                            asientoCajaModel.ImporteTarjeta += item.ImporteTarjeta;                            
+                            asientoCajaModel.ImporteCheque = asientoCajaModel.ImporteCheque ?? 0 + item.ImporteCheque;
+                            asientoCajaModel.ImporteDeposito = asientoCajaModel.ImporteDeposito ?? 0 +item.ImporteDeposito;
+                            asientoCajaModel.ImporteDolar = asientoCajaModel.ImporteDolar ?? 0 + item.ImporteDolar;
+                            asientoCajaModel.ImportePesos = asientoCajaModel.ImportePesos ?? 0 + item.ImportePesos;
+                            asientoCajaModel.ImporteTarjeta = asientoCajaModel.ImporteTarjeta ?? 0 + item.ImporteTarjeta;                            
                         }
-
+                        /// acumulo importes finales
                         nuevoCierreCajaSaldoModel.ImporteFinalCheques += item.ImporteCheque ?? 0;
                         nuevoCierreCajaSaldoModel.ImporteFinalDepositos += item.ImporteDeposito ?? 0;
                         nuevoCierreCajaSaldoModel.ImporteFinalDolares += item.ImporteDolar ?? 0;
                         nuevoCierreCajaSaldoModel.ImporteFinalPesos += item.ImportePesos ?? 0;
                         nuevoCierreCajaSaldoModel.ImporteFinalTarjetas += item.ImporteTarjeta ?? 0;
 
+                        // actualizamos el registro de caja con el id del Cierre
                         item.IdCajaSaldo = nuevoCierreCajaSaldoModel.Id;
                         servicioCaja.ActualizarCierreCaja(item);
                     }
-                    /// actualizo con los importe el cierre 
+                    /// actualizo con los importe finales el cierre 
                     servicioCajaSaldo.ActualizarImporteCierreCajaSaldo(nuevoCierreCajaSaldoModel);
 
                     /// REGISTRO DE ASIENTOS CONTABLES

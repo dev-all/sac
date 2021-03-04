@@ -76,6 +76,7 @@ namespace Datos.Repositorios
 
         public Chequera GetChequePropioPorId(int id)
         {
+            context.Configuration.LazyLoadingEnabled = false; //dev-a
             return context.Chequera
                 .Include(b => b.TipoMoneda)
                 .Include(b => b.BancoCuenta)

@@ -93,19 +93,14 @@ namespace Negocio.Servicios
         {
             try
             {
-
-
                 var retorno = CajaRepositorio.DeleteCaja(IdCaja);
                 _mensaje?.Invoke("Se eliminó correctamente", "ok");
-
             }
             catch (Exception)
             {
                 _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
-
             }
-
         }
 
 
@@ -115,18 +110,21 @@ namespace Negocio.Servicios
         public CajaModel GuardarCaja(CajaModel model)
         {
             try
-            {
-                
+            {                
                 model.Activo = true;               
                 model.UltimaModificacion = DateTime.Now;
+
+
+
                 var newModel = CajaRepositorio.Insertar(Mapper.Map< CajaModel,Caja>(model));
+
                 _mensaje?.Invoke("Se registro correctamente", "ok");
 
                 // Si viene con valor la tarjeta
-                if (model.IdTarjeta > 0 && model.ImporteTarjeta > 0)
-                {
-                    InsertarOperacionTarjeta(model);
-                }
+                //if (model.IdTarjeta > 0 && model.ImporteTarjeta > 0)
+                //{
+                //    InsertarOperacionTarjeta(model);
+                //}
                 // Si viene con valor el cheque
                 //if (model.IdCheque > 0 && model.ImporteCheque > 0)
                 //{
@@ -135,9 +133,11 @@ namespace Negocio.Servicios
 
 
 
+
+
                 return Mapper.Map<Caja,CajaModel> (newModel);               
             }
-            catch (Exception )
+            catch (Exception ex)
             {
                 _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
@@ -154,7 +154,6 @@ namespace Negocio.Servicios
         {
             try
             {
-
                 model.Activo = true;
                 model.UltimaModificacion = DateTime.Now;
                 var newModel = CajaRepositorio.Insertar(Mapper.Map<CajaModel, Caja>(model));
@@ -165,7 +164,6 @@ namespace Negocio.Servicios
             {
                 _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
                 throw new Exception();
-
             }
         }
 
@@ -175,11 +173,11 @@ namespace Negocio.Servicios
             try
             {
 
-                if (model.IdTarjeta > 0)
-                {
+                //if (model.IdTarjeta > 0)
+                //{
 
-                    InsertarOperacionTarjeta(model);
-                }
+                //    InsertarOperacionTarjeta(model);
+                //}
 
                 model.UltimaModificacion = Convert.ToDateTime(DateTime.Now.ToString());
                 var newModel = CajaRepositorio.ActualizarCaja(Mapper.Map<CajaModel, Caja>(model));              
@@ -196,35 +194,27 @@ namespace Negocio.Servicios
 
         }
 
-
-
-      
-
-
-
-
-        public TarjetaOperacionModel InsertarOperacionTarjeta(CajaModel Ocaja)
-
-
-
+        public CajaModel RegistroManualDeCaja(CajaModel model)
         {
-            TarjetaOperacionModel oTarjetaOperacionModel = new TarjetaOperacionModel ();
-            oTarjetaOperacionModel.IdTarjeta = Convert.ToInt32( Ocaja.IdTarjeta);
-            oTarjetaOperacionModel.IdGrupoCaja = Convert.ToInt32(Ocaja.IdGrupoCaja);
-            oTarjetaOperacionModel.Descripcion = Convert.ToString(Ocaja.Concepto);
-            oTarjetaOperacionModel.Importe = Convert.ToDecimal(Ocaja.ImporteTarjeta);
-            oTarjetaOperacionModel.UltimaModificacion = DateTime.Now;
-            oTarjetaOperacionModel.Activo = true;
+            try
+            {
+                model.UltimaModificacion = DateTime.Now;
+                var newModel = CajaRepositorio.Insertar(Mapper.Map<CajaModel, Caja>(model));
+                _mensaje?.Invoke("Se registro correctamente", "ok");             
+                return Mapper.Map<Caja, CajaModel>(newModel);
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ha ocurriodo un error. contacte al administrador", "erro");
+                throw new Exception();
+            }
+        }
 
-            oTarjetaOperacionModel.IdUsuario = Convert.ToInt32(Ocaja.IdUsuario);        
-          
-
-            var oModel = Mapper.Map<TarjetaOperacionModel, TarjetaOperacion>(oTarjetaOperacionModel);
+        public TarjetaOperacionModel InsertarOperacionTarjeta(TarjetaOperacionModel model)
+        {                          
+            var tarjetaOperacion = Mapper.Map<TarjetaOperacionModel, TarjetaOperacion>(model);
             //_mensaje?.Invoke("El cheque se ingresó correctamente", "ok");
-            return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(otarjetaoperacionrepositorio.Agregar(oModel));
-
-
-
+            return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(otarjetaoperacionrepositorio.Agregar(tarjetaOperacion));
 
         }
 

@@ -171,16 +171,15 @@
                             <small>Ingreso de Caja</small>
                             <div class="container">
 
-
                                 <div class="row">
                                     <div class="col-xlg-1 col-lg-1 col-md-1 col-sm-1"></div>
                                     <div class="col-xlg-5 col-lg-5 col-md-5 col-sm-5">
                                         <div class="form-group">
 
-
                                             @Html.LabelFor(model => model.Concepto, htmlAttributes: new { @class = "control-label form-control-sm" })
                                             @Html.EditorFor(model => model.Concepto, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
                                             @Html.ValidationMessageFor(model => model.Concepto, "", new { @class = "text-danger form-control-sm" })
+
                                         </div>
                                     </div>
                                     <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-3">
@@ -216,14 +215,16 @@
                                             <label class="control-label form-control-sm"> Imp. Dolar </label>
                                             @Html.EditorFor(model => model.ImporteDolar, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
                                             @Html.ValidationMessageFor(model => model.ImporteDolar, "", new { @class = "text-danger form-control-sm" })
-
                                         </div>
                                     </div>
 
                                     <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
                                         <div class="form-group">
+
+                                            @Html.HiddenFor(model => model.idChequesTerceros)
+                                            @Html.HiddenFor(model => model.idChequesPropios)
                                             <label class="control-label form-control-sm"> Imp. Cheque </label>
-                                            @Html.EditorFor(model => model.montoChequesSeleccionados, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                            @Html.EditorFor(model => model.montoChequesSeleccionados, new { htmlAttributes = new { @class = "form-control form-control-sm", @disabled = "disabled" } })
                                             @Html.ValidationMessageFor(model => model.montoChequesSeleccionados, "", new { @class = "text-danger form-control-sm" })
                                         </div>
 
@@ -235,8 +236,8 @@
                                     <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
                                         <div class="form-group">
                                             <label class="control-label form-control-sm"> Imp. Tarjeta </label>
-                                            @Html.EditorFor(model => model.ImporteTarjeta, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                                            @Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger form-control-sm" })
+                                            @Html.EditorFor(model => model.ImporteTarjeta, new { htmlAttributes = new { @class = "form-control form-control-sm", @disabled = "disabled" } })
+                                            @*@Html.ValidationMessageFor(model => model.ImporteTarjeta, "", new { @class = "text-danger form-control-sm" })*@
                                         </div>
                                         <div class="form-group">
                                             @Html.DropDownList("IdTarjeta", ListaTarjetas, null, new { @class = "form-control form-control-sm" })
@@ -264,7 +265,7 @@
 
     </div>
 
-}
+
 
 
 <div class="modal fade" id="ModalCheques" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -283,27 +284,28 @@
                             <span class="d-none d-lg-block">Terceros</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    @*<li class="nav-item">
                         <a href="#Propios" data-toggle="tab" aria-expanded="false" class="nav-link  tabPropios">
                             <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
                             <span class="d-none d-lg-block">Propios</span>
                         </a>
-                    </li>
+                    </li>*@
                 </ul>
 
                 <div class="tab-content">
 
                     <div class="tab-pane active" id="Terceros">
+                      
                         @Html.Partial("~/Views/CuentaCteProveedor/_tablaChequesTerceros.cshtml", Model.ListaChequesTerceros)
                     </div>
 
-                    <div class="tab-pane show" id="Propios">
+                    @*<div class="tab-pane show" id="Propios">
+                    
                         @Html.Partial("~/Views/CuentaCteProveedor/_TablaChequesPropios.cshtml", Model.oChequera)
-                    </div>
+                    </div>*@
                 </div>
             </div>
             <div class="modal-footer justify-content-md-center" style="display: inline;">
-
                 <div class="row ">
                     <div class="col-md-2 m-l-15 ">
                         <small class="hide">A pagar:</small>
@@ -326,7 +328,8 @@
         </div>
     </div>
 </div>
-
+                                                  
+}
 
 
 <div class="modal fade ModalConfirmaEliminar" id="ModalConfirmaEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -374,7 +377,7 @@
     <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/js/mask.js"></script>
-    <script src="~/Scripts/view/CajaScript.js"></script>
+
 
     <script src="~/Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -386,10 +389,11 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
 
     <script src="~/Content/assets/plugins/switchery/dist/switchery.min.js"></script>
-    <script src="~/Scripts/view/CtaCteProveedor.js"></script>
+    <script src="~/Scripts/view/Caja/CajaScript.js"></script>
+    <script src="~/Scripts/view/Caja/CajaCheques.js"></script>
 }
 
-<script type="text/javascript">
+@*<script type="text/javascript">
 
 
     $(function () {
@@ -414,5 +418,5 @@
 
 
     });
-</script>
+</script>*@
 

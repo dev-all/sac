@@ -2832,7 +2832,8 @@
     <Content Include="Scripts\js\widget-data.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\TreeView\TreeView.js" />
-    <Content Include="Scripts\view\CajaScript.js" />
+    <Content Include="Scripts\view\Caja\CajaScript.js" />
+    <Content Include="Scripts\view\Caja\CajaCheques.js" />
     <Content Include="Scripts\view\calcularporcentaje.js" />
     <Content Include="Scripts\view\ChequeScript.js" />
     <Content Include="Scripts\view\ClienteScript.js" />
