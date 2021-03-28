@@ -31,9 +31,45 @@ namespace SAC.Controllers
         public ServicioImputacion servicioImputacion = new ServicioImputacion();
         public ServicioContable servicioContable = new ServicioContable();
 
+        private ServicioCheque oServicioCheque = new ServicioCheque();
+
         public BancoController()
         {
             servicioCaja._mensaje = (msg_, tipo_) => CrearTempData(msg_, tipo_);
+        }
+
+
+        //public ActionResult Index()
+        //{
+        //    BancoCuentaModelView model = new BancoCuentaModelView();
+        //    CargarBanco();
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //public ActionResult Index(int IdBanco , DateTime Fecha)
+        //{
+        //    BancoCuentaModelView model = new BancoCuentaModelView();
+        //    model.ListaBancoCuenta = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioBanco.GetBancoPorFecha(IdBanco, Fecha));
+        //    CargarBanco();
+        //    return View(model);
+        //}
+
+
+        // cargar bancos 
+
+        private void CargarBanco()
+        {
+            List<BancoCuentaModel> ListBancoCuentaModels = servicioBanco.GetAllCuenta();
+
+            List<SelectListItem> ListBancoCuenta = null;
+            ListBancoCuenta = (ListBancoCuentaModels.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.BancoDescripcion
+            })).ToList();
+            ListBancoCuenta.Insert(0, new SelectListItem { Text = "Seleccionar", Value = "" });
+            ViewBag.CargarBanco = ListBancoCuenta;
         }
 
         // PRIMERA CARGA DE LA PAGINA  DE LA VISTA CHEQUES
@@ -103,6 +139,7 @@ namespace SAC.Controllers
         public ActionResult Tarjetas(DateTime Cfechadesde, DateTime Cfechahasta, int IdTipoTarjeta = 0)
         {
             TarjetaOperacionModelView model = new TarjetaOperacionModelView();
+            model.ListaTarjetaOperacion = new List<TarjetaOperacionModelView>();
             if (IdTipoTarjeta != 0)
             {
 
@@ -130,8 +167,22 @@ namespace SAC.Controllers
         [HttpPost]
         public ActionResult ConciliarTarjeta(TarjetaOperacionModelView model)
         {
+            string[] movimientosSeleccionados = model.IdTarjetaConciliar.Split(';');
+            foreach (var item in movimientosSeleccionados)
+            {
+                oservicioTarjetaOperacion.ConciliarMovimiento(int.Parse(item));
+            }
+
             return RedirectToAction("Tarjetas");
         }
+
+
+        //[HttpPost]
+        //public ActionResult ConciliarMovimiento(IngresoBancoModelView model)
+        //{
+
+        //    return RedirectToAction(model);
+        //}
 
 
         public void CargarListaOpcion()
@@ -155,12 +206,10 @@ namespace SAC.Controllers
             new SelectListItem() {Value = "3",Text = "Cheques en Cartera"}
         };
 
-
         private List<SelectListItem> GetOpcion2()
         {
             return Opcion2;
         }
-
 
         private static readonly List<SelectListItem> Opcion2 = new List<SelectListItem>
         {
@@ -169,10 +218,7 @@ namespace SAC.Controllers
             new SelectListItem() {Value = "2",Text = "Clientes"},
             new SelectListItem() {Value = "3",Text = "Banco"}
         };
-
-
         // cargar  Clientes
-
         private void CargarClientes()
         {
 
@@ -188,28 +234,6 @@ namespace SAC.Controllers
 
 
         }
-
-
-        // cargar bancos 
-
-        private void CargarBanco()
-        {
-
-            List<CajaGrupoModelView> ListaCajaGrupo = Mapper.Map<List<CajaGrupoModel>, List<CajaGrupoModelView>>(servicioCajaGrupo.GetAllCajaGrupo());
-            List<SelectListItem> retornoListaCajaGrupo = null;
-            retornoListaCajaGrupo = (ListaCajaGrupo.Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.Codigo
-            })).ToList();
-            retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "Seleccionar Grupo", Value = "" });
-            ViewBag.CargarBanco = retornoListaCajaGrupo;
-
-
-
-        }
-
-
 
         // metodos de autocompletar de Banco y de clientes
 
@@ -235,8 +259,6 @@ namespace SAC.Controllers
 
         }
 
-
-
         [HttpGet()]
         public ActionResult GetListClienteJson(string term)
         {
@@ -260,7 +282,6 @@ namespace SAC.Controllers
         }
 
 
-
         private void CargarTarjetas()
         {
 
@@ -279,46 +300,86 @@ namespace SAC.Controllers
 
 
         [HttpGet]
-        public ActionResult IngresoCuentaBancaria()
+        public ActionResult IngresoCuentaBancaria(int IdBancoCuenta = 0, String searchFecha = null)
         {
             IngresoBancoModelView modelView = new IngresoBancoModelView();
+            modelView.BancoCuenta = new BancoCuentaModelView();
+            modelView.BancoCuenta.Fecha = DateTime.Now;
+            modelView.BancoCuenta.IdMoneda = 1;
+            modelView.Cotizacion = 5;
+            if (IdBancoCuenta != 0)
+            {
+                DateTime fecha = DateTime.Now;
+                if (!string.IsNullOrEmpty(searchFecha))
+                {
+                    fecha = DateTime.ParseExact(searchFecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+                modelView.BancoCuenta = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(servicioBanco.GetBancoCuentaPorId(IdBancoCuenta));
+                modelView.ListaBancoCuenta = Mapper.Map<List<BancoCuentaBancariaModel>, List<BancoCuentaBancariaModelView>>(servicioBanco.GetmMovimientosPendientesCuentaBancaria(IdBancoCuenta, fecha));
+            }
+
+            CargarBanco();
+
             BancoCuentaBancariaModelView ingresos = new BancoCuentaBancariaModelView();
             ingresos.ListItemsGrupoCaja = CargarCajaGrupo();
-            ingresos.IdTipoMoneda = 1;
+            ingresos.ListItemsBancoCuenta = CargarBancoCuenta();
+            ingresos.IdTipoMoneda = modelView.BancoCuenta.IdMoneda;
+
+            //debe ser segun la cuenta banco seleccionada
+            //---------para el PartialView cheques terceros
+
+            List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(oServicioCheque.GetAllCheque());
+
+            // validacion de fecha de efectivo <= a fecha actual
+            ingresos.ListaChequesTerceros = (from c in ListaChequesTerceros
+                                             where c.FechaEgreso >= DateTime.Now
+                                             select c).ToList();
+
+            ingresos.ListaChequesTerceros = ListaChequesTerceros;
             modelView.Ingresos = ingresos;
+
+
+
             return View(modelView);
         }
-
 
         [HttpPost]
         public ActionResult Ingreso(BancoCuentaBancariaModelView modelView)
         {
-
+            //IngresoBancoModelView model
+            //BancoCuentaBancariaModelView modelView = model.Ingresos;
+            //modelView.Cotizacion = model.Cotizacion;
+            //modelView.IdBancoCuenta = model.IdBancoCuenta;
             // el tipo de moneda esta determinado por la cta
 
+            BancoCuentaModelView modelBancoCuenta = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(servicioBanco.GetBancoCuentaPorId(modelView.IdBancoCuenta));
             switch (modelView.TipoMovimiento)
             {
                 case "cv":
 
-                    RegistroIngresoPorCargosVarios(modelView);
+                    RegistroIngresoPorCargosVarios(modelView, modelBancoCuenta);
 
                     break;
 
                 case "de":
 
-                    RegistroIngresoPorDespositoEfectivo(modelView);
+                    RegistroIngresoPorDespositoEfectivo(modelView, modelBancoCuenta);
                     break;
 
                 case "tc":
 
-                    RegistroIngresoPorTrasnferenciaCaja(modelView);
+                    RegistroIngresoPorTrasnferenciaCaja(modelView, modelBancoCuenta);
                     break;
 
                 case "tt":
 
-                    RegistroIngresoPorTrasnferenciaEntreCuentas(modelView);
+                    RegistroIngresoPorTrasnferenciaEntreCuentas(modelView, modelBancoCuenta);
                     break;
 
+                case "ch":
+
+                    RegistroIngresoDepositoDeCheque(modelView, modelBancoCuenta);
+                    break;
                 default:
                     //ingreso por cheque
 
@@ -329,13 +390,145 @@ namespace SAC.Controllers
             return RedirectToAction("IngresoCuentaBancaria");
         }
 
-        private void RegistroIngresoPorTrasnferenciaEntreCuentas(BancoCuentaBancariaModelView modelView)
+
+        [HttpPost]
+        public ActionResult ConfirmarConciliacion(IngresoBancoModelView modelView)
+        {
+            //BancoCuentaModelView modelBancoCuenta = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(servicioBanco.GetBancoCuentaPorId(modelView.IdBancoCuenta));
+            //modelView.ListaBancoCuenta = Mapper.Map<List<BancoCuentaBancariaModel>, List<BancoCuentaBancariaModelView>>(servicioBanco.GetmMovimientosPendientesCuentaBancaria(IdBancoCuenta, fecha));
+            string[] movimientosSeleccionados = modelView.IdConciliacionMovimiento.Split(';');
+            foreach (var item in movimientosSeleccionados)
+            {
+                servicioBancoCuentaBancaria.ConciliarMovimiento(int.Parse(item));                               
+            }
+
+            return RedirectToAction("IngresoCuentaBancaria");
+        }
+        [HttpPost]
+        public ActionResult CierreCuenta(IngresoBancoModelView modelView)
+        {
+            BancoCuentaModelView modelBancoCuenta = Mapper.Map<BancoCuentaModel, BancoCuentaModelView>(servicioBanco.GetBancoCuentaPorId(modelView.IdBancoCuenta));
+
+            List<BancoCuentaBancariaModel> bancoCuentaBancariaModels = servicioBancoCuentaBancaria.GetAllMovimientosConciliados(modelBancoCuenta.Id);
+
+            decimal SaldoCierre = modelBancoCuenta.Saldo + bancoCuentaBancariaModels.Sum(s => s.Importe);
+
+            BancoCuentaModel cierre = servicioBanco.CierreDeCuentaBancaria(modelBancoCuenta.Id, SaldoCierre);
+
+            foreach (var item in bancoCuentaBancariaModels)
+            {
+                //actualizar nro cierre en BancoCuentaBancariaModel
+                item.NumeroCierre = cierre.NumeroCierre;
+                servicioBancoCuentaBancaria.UpdateNumeroCierreMovimiento(item);
+            }
+
+            return RedirectToAction("IngresoCuentaBancaria");
+        }
+
+
+        private void RegistroIngresoDepositoDeCheque(BancoCuentaBancariaModelView modelView, BancoCuentaModelView modelBancoCuenta)
+        {
+            try
+            {
+                if (modelView.Importe <= 0)
+                {
+                    throw new Exception("Complete los Campos requeridos");
+                }
+
+                if ((modelView.idChequesTerceros != null) && (modelView.idChequesTerceros != ""))
+                {
+
+                    ChequeModel oCheque = new ChequeModel();
+                    BancoModel bancoModel = new BancoModel();
+
+                    var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+                    DateTime fecha = Convert.ToDateTime(DateTime.Now, new CultureInfo("es-ES"));
+                    fecha = fecha.AddDays(2);
+
+                    string[] chequesSeleccionados = modelView.idChequesTerceros.Split(';');
+                    foreach (var itemCheque in chequesSeleccionados)
+                    {
+
+                        oCheque = oServicioCheque.obtenerCheque(int.Parse(itemCheque));
+                        if (oCheque != null)
+                        {
+
+
+                            // obtener banco seleccionado para deposito de cheque
+                            bancoModel = servicioBanco.GetBancoPorId(modelBancoCuenta.IdBanco);//obtener banco
+
+                            //--------------------------- BancoCuentaBancaria ------
+                            modelView.NumeroOperacion = oCheque.NumeroCheque;
+                            modelView.IdBancoCuenta = modelBancoCuenta.Id; //obtener el id de la cuta seleccionada
+                            modelView.Fecha = Convert.ToDateTime(DateTime.Now);
+                            modelView.FechaIngreso = Convert.ToDateTime(DateTime.Now);
+                            modelView.FechaEfectiva = fecha;
+                            modelView.DiaClearing = "2";
+                            modelView.Conciliacion = false;
+                            CajaGrupoModel cajaGrupoModel = servicioCajaGrupo.GetGrupoCajaPorCodigo("TRANS");
+                            if (cajaGrupoModel != null)
+                            {
+                                modelView.IdGrupoCaja = cajaGrupoModel.Id; //"TRANS"
+                            }
+                            else
+                            {
+                                modelView.IdGrupoCaja = 0;
+                            }
+                            modelView.IdCliente = "BANCO";
+                            modelView.IdUsuario = usuario.IdUsuario;
+                            modelView.Importe *= -1; /// valor en negativo 
+                            modelView.CuentaDescripcion = "Deposito de Cheque Nº" + oCheque.NumeroCheque.ToString();//nro cheque
+
+                            servicioBancoCuentaBancaria.IngresoCuentaBancaria(Mapper.Map<BancoCuentaBancariaModelView, BancoCuentaBancariaModel>(modelView));
+
+
+                            //------------------- Actualizar cheques                    
+                            oCheque.FechaEgreso = DateTime.Now;
+                            oCheque.Destino = modelView.CuentaDescripcion + bancoModel.Nombre;
+                            //oCheque.NumeroPago = null;
+                            oCheque.Proveedor = "BANCO";
+                            oCheque.Activo = false;
+                            oCheque.Endosado = true;
+                            oServicioCheque.Actualizar(oCheque);
+
+                            ///------------------- Caja--------------------
+
+                            cajaGrupoModel = servicioCajaGrupo.GetGrupoCajaPorCodigo("BANCH");
+                            if (cajaGrupoModel != null)
+                            {
+                                modelView.IdGrupoCaja = cajaGrupoModel.Id;
+                            }
+                            else
+                            {
+                                modelView.IdGrupoCaja = 0;
+                            }
+
+                            servicioCaja.IngresoCuentaBancaria(Mapper.Map<BancoCuentaBancariaModelView,
+                                                                  BancoCuentaBancariaModel>(modelView), modelView.IdGrupoCaja);
+
+
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //podria guardar el log
+                servicioCaja._mensaje?.Invoke("Ops!!. " + ex.Message.ToString(), "error");
+                //return RedirectToAction(nameof(IngresoCuentaBancaria));
+            }
+
+        }
+
+        private void RegistroIngresoPorTrasnferenciaEntreCuentas(BancoCuentaBancariaModelView modelView, BancoCuentaModelView modelBancoCuenta)
         {
             var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
             DateTime fecha = Convert.ToDateTime(DateTime.Now, new CultureInfo("es-ES"));
             fecha = fecha.AddDays(2);
 
-            //modelView.IdBancoCuenta = 1; // el que es seleccionado por el cliente en la vntana consulta
+            modelView.IdBancoCuenta = modelBancoCuenta.Id; // el que es seleccionado por el cliente en la vntana consulta
             modelView.Fecha = Convert.ToDateTime(DateTime.Now);
             modelView.FechaIngreso = Convert.ToDateTime(DateTime.Now);
             modelView.FechaEfectiva = fecha;
@@ -360,15 +553,15 @@ namespace SAC.Controllers
 
         }
 
-        private void RegistroIngresoPorTrasnferenciaCaja(BancoCuentaBancariaModelView modelView)
+        private void RegistroIngresoPorTrasnferenciaCaja(BancoCuentaBancariaModelView modelView, BancoCuentaModelView modelBancoCuenta)
         {
             var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
             DateTime fecha = Convert.ToDateTime(DateTime.Now, new CultureInfo("es-ES"));
             fecha = fecha.AddDays(2);
 
-            //modelView.IdBancoCuenta = 1;
+            modelView.IdBancoCuenta = modelBancoCuenta.Id;
             modelView.Fecha = Convert.ToDateTime(DateTime.Now);
-            //modelView.FechaIngreso = Convert.ToDateTime(DateTime.Now); cambiar a datetime                
+            modelView.FechaIngreso = Convert.ToDateTime(DateTime.Now);
             modelView.FechaEfectiva = fecha;
             modelView.DiaClearing = "2";
             modelView.Importe *= -1; // paso a negativo
@@ -384,7 +577,7 @@ namespace SAC.Controllers
             modelView.IdUsuario = usuario.IdUsuario;
             servicioBancoCuentaBancaria.IngresoCuentaBancaria(Mapper.Map<BancoCuentaBancariaModelView, BancoCuentaBancariaModel>(modelView));
 
-            modelView.Importe *= -1; //paso a positivo     
+            modelView.Importe *= -1; //paso a positivo    
             servicioCaja.IngresoCuentaBancaria(Mapper.Map<BancoCuentaBancariaModelView, BancoCuentaBancariaModel>(modelView), modelView.IdGrupoCaja);
 
 
@@ -399,6 +592,7 @@ namespace SAC.Controllers
             asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
             asiento.Moneda = servicioTipoMoneda.GetTipoMoneda(modelView.IdTipoMoneda).Descripcion;
             asiento.DescripcionMa = "Ingreso Cuenta Bancaria";
+            asiento.Descripcion = "Ingreso Cuenta Bancaria";
             asiento.Importe = modelView.Importe;  //(modelView.IdTipoMoneda == 1) ? (modelView.Importe) : (modelView.Importe * modelView.Cotizacion);
             asiento.Titulo = "Ingreso Cuenta Bancaria";
 
@@ -419,20 +613,20 @@ namespace SAC.Controllers
 
 
             asiento.Importe *= -1; // importe negativo
-            asientoDiario = servicioContable.InsertAsientoContable("Cuentas", asiento, 0);
+            asientoDiario = servicioContable.InsertAsientoContable("", asiento, modelBancoCuenta.IdImputacion);
             /// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
             servicioImputacion.AsintoContableGeneral(asientoDiario);
 
 
         }
 
-        private void RegistroIngresoPorDespositoEfectivo(BancoCuentaBancariaModelView modelView)
+        private void RegistroIngresoPorDespositoEfectivo(BancoCuentaBancariaModelView modelView, BancoCuentaModelView modelBancoCuenta)
         {
             var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
             DateTime fecha = Convert.ToDateTime(DateTime.Now, new CultureInfo("es-ES"));
             fecha = fecha.AddDays(2);
 
-            modelView.IdBancoCuenta = 1;
+            modelView.IdBancoCuenta = modelBancoCuenta.Id;
             modelView.Fecha = Convert.ToDateTime(DateTime.Now);
             modelView.FechaIngreso = Convert.ToDateTime(DateTime.Now);
             modelView.FechaEfectiva = fecha;
@@ -467,6 +661,7 @@ namespace SAC.Controllers
             asiento.Asiento = 0;
             asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
             asiento.Moneda = servicioTipoMoneda.GetTipoMoneda(modelView.IdTipoMoneda).Descripcion;
+            asiento.Descripcion = "Ingreso Cuenta Bancaria";
             asiento.DescripcionMa = "Ingreso Cuenta Bancaria";
             // asiento.Importe = (modelView.IdTipoMoneda == 1) ? (modelView.Importe) : (modelView.Importe * modelView.Cotizacion);
             asiento.Titulo = "Ingreso Cuenta Bancaria";
@@ -489,14 +684,14 @@ namespace SAC.Controllers
             servicioImputacion.AsintoContableGeneral(asientoDiario);
 
             modelView.Importe *= -1; /// valor en +  
-            asientoDiario = servicioContable.InsertAsientoContable("Cuentas", asiento, 0);
+            asientoDiario = servicioContable.InsertAsientoContable("", asiento, modelBancoCuenta.IdImputacion);
             /// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
             servicioImputacion.AsintoContableGeneral(asientoDiario);
 
 
         }
 
-        private void RegistroIngresoPorCargosVarios(BancoCuentaBancariaModelView modelView)
+        private void RegistroIngresoPorCargosVarios(BancoCuentaBancariaModelView modelView, BancoCuentaModelView modelBancoCuenta)
         {
             var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
             DateTime fecha = Convert.ToDateTime(DateTime.Now, new CultureInfo("es-ES"));
@@ -504,7 +699,7 @@ namespace SAC.Controllers
 
             // CajaGrupoModel cajaGrupoModel = servicioCajaGrupo.GetGrupoCajaPorId(modelView.IdGrupoCaja);
 
-            modelView.IdBancoCuenta = 1;
+            modelView.IdBancoCuenta = modelBancoCuenta.Id;
             modelView.Fecha = Convert.ToDateTime(DateTime.Now);
             modelView.FechaIngreso = Convert.ToDateTime(DateTime.Now);
             modelView.FechaEfectiva = fecha;
@@ -512,6 +707,7 @@ namespace SAC.Controllers
             modelView.Importe *= -1; // importe negativo
             modelView.Conciliacion = false;
             modelView.IdUsuario = usuario.IdUsuario;
+
             servicioBancoCuentaBancaria.IngresoCuentaBancaria(Mapper.Map<BancoCuentaBancariaModelView, BancoCuentaBancariaModel>(modelView));
 
 
@@ -538,12 +734,13 @@ namespace SAC.Controllers
             asiento.Asiento = 0;
             asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
             asiento.Moneda = servicioTipoMoneda.GetTipoMoneda(modelView.IdTipoMoneda).Descripcion;
+            asiento.Descripcion = "Ingreso Cuenta Bancaria";
             asiento.DescripcionMa = "Ingreso Cuenta Bancaria";
             // asiento.Importe = (modelView.IdTipoMoneda == 1) ? (modelView.Importe) : (modelView.Importe * modelView.Cotizacion);
             asiento.Titulo = "Ingreso Cuenta Bancaria";
 
             //imputacion por grupo caja
-            var asientoDiario = servicioContable.InsertAsientoContable("", asiento, cajaGrupoModel.IdImputacion ?? 0);
+            var asientoDiario = servicioContable.InsertAsientoContable("", asiento, modelBancoCuenta.IdImputacion);
             /// Actualizar Cuenta Contable General (Libro Mayor)CTACBLE                
             servicioImputacion.AsintoContableGeneral(asientoDiario);
 
@@ -570,7 +767,19 @@ namespace SAC.Controllers
             retornoListaCajaGrupo.Insert(0, new SelectListItem { Text = "Seleccionar Grupo", Value = "" });
             return retornoListaCajaGrupo;
         }
+        public List<SelectListItem> CargarBancoCuenta()
+        {
+            List<BancoCuentaModel> ListBancoCuentaModels = servicioBanco.GetAllCuenta();
 
+            List<SelectListItem> ListBancoCuenta = null;
+            ListBancoCuenta = (ListBancoCuentaModels.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.BancoDescripcion
+            })).ToList();
+            ListBancoCuenta.Insert(0, new SelectListItem { Text = "Seleccionar", Value = "" });
+            return ListBancoCuenta;
+        }
     }
 
 

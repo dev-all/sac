@@ -34,6 +34,8 @@ namespace Negocio.Servicios
         {
             try
             {
+                oBancoCuentaBancariaModel.Activo = true;
+                oBancoCuentaBancariaModel.UltimaModificacion = DateTime.Now;
                 var oModel = Mapper.Map<BancoCuentaBancariaModel, BancoCuentaBancaria>(oBancoCuentaBancariaModel);
                 return Mapper.Map<BancoCuentaBancaria, BancoCuentaBancariaModel>(oBancoCuentaBancariaRepositorio.Agregar(oModel));
             }
@@ -49,6 +51,38 @@ namespace Negocio.Servicios
         public BancoCuentaBancariaModel IngresoCuentaBancaria(BancoCuentaBancariaModel bancoCuentaBancariaModel)
         {
           return  Agregar(bancoCuentaBancariaModel);
+        }
+
+        public List<BancoCuentaBancariaModel> GetAllMovimientosConciliados(int id)
+        {
+            return Mapper.Map<List<BancoCuentaBancaria>, List<BancoCuentaBancariaModel>>(oBancoCuentaBancariaRepositorio.GetAllMovimientosConciliados(id));
+        }
+
+        public void UpdateNumeroCierreMovimiento(BancoCuentaBancariaModel item)
+        {
+            try
+            {            
+                var model = Mapper.Map<BancoCuentaBancariaModel, BancoCuentaBancaria>(item);
+                oBancoCuentaBancariaRepositorio.UpdateNumeroCierreMovimiento(model);
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema" , "error");
+                throw new NotImplementedException(ex.Message);
+            }
+        }
+
+        public void ConciliarMovimiento(int item)
+        {
+            try
+            {                
+                oBancoCuentaBancariaRepositorio.ConciliarMovimiento(item);
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                throw new NotImplementedException(ex.Message);
+            }
         }
     }
 }

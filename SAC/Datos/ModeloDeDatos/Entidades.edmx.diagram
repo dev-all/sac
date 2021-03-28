@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="SAC_Model.Articulo" Width="1.5" PointX="1.5" PointY="5.125" />
         <EntityTypeShape EntityType="SAC_Model.Banco" Width="1.5" PointX="12" PointY="15.5" />
         <EntityTypeShape EntityType="SAC_Model.BancoCuenta" Width="1.5" PointX="14.25" PointY="15" />
-        <EntityTypeShape EntityType="SAC_Model.BancoCuentaBancaria" Width="1.5" PointX="16.5" PointY="14.25" />
         <EntityTypeShape EntityType="SAC_Model.Caja" Width="1.5" PointX="19.5" PointY="18.125" />
         <EntityTypeShape EntityType="SAC_Model.CajaSaldo" Width="1.5" PointX="17.25" PointY="9.125" />
         <EntityTypeShape EntityType="SAC_Model.CajaTipoMovimiento" Width="1.5" PointX="17.25" PointY="29" />
@@ -28,7 +27,6 @@
         <EntityTypeShape EntityType="SAC_Model.Diario" Width="1.5" PointX="9.75" PointY="38.875" />
         <EntityTypeShape EntityType="SAC_Model.EstadoCivil" Width="1.5" PointX="1.5" PointY="9.125" />
         <EntityTypeShape EntityType="SAC_Model.Evento" Width="1.5" PointX="17.75" PointY="46" />
-        <EntityTypeShape EntityType="SAC_Model.GrupoCaja" Width="1.5" PointX="17.25" PointY="31.625" />
         <EntityTypeShape EntityType="SAC_Model.GrupoCuenta" Width="1.5" PointX="0.75" PointY="37.875" />
         <EntityTypeShape EntityType="SAC_Model.GrupoPresupuesto" Width="1.5" PointX="4.5" PointY="7" />
         <EntityTypeShape EntityType="SAC_Model.homePorRol" Width="1.5" PointX="12.5" PointY="3.375" />
@@ -73,7 +71,6 @@
         <AssociationConnector Association="SAC_Model.FK_Banco_Proveedor" />
         <AssociationConnector Association="SAC_Model.FK_BancoCuenta_Banco" />
         <AssociationConnector Association="SAC_Model.FK_BancoCuenta_Imputacion" />
-        <AssociationConnector Association="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_Caja_BancoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_Cheque_BancoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_Chequera_BancoCuenta" />
@@ -81,7 +78,6 @@
         <AssociationConnector Association="SAC_Model.FK_Caja_CajaSaldo" />
         <AssociationConnector Association="SAC_Model.FK_Caja_CajaTipoMovimiento" />
         <AssociationConnector Association="SAC_Model.FK_Caja_Cheque" />
-        <AssociationConnector Association="SAC_Model.FK_Caja_GrupoCaja" />
         <AssociationConnector Association="SAC_Model.FK_Caja_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_Cheque_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Cheque" />
@@ -139,6 +135,11 @@
         <AssociationConnector Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante" />
         <AssociationConnector Association="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva" />
         <EntityTypeShape EntityType="SAC_Model.CuentaCorriente" Width="1.5" PointX="22.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SAC_Model.BancoCuentaBancaria" Width="1.5" PointX="24.625" PointY="14.625" />
+        <EntityTypeShape EntityType="SAC_Model.GrupoCaja" Width="1.5" PointX="22.375" PointY="14.125" />
+        <AssociationConnector Association="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" />
+        <AssociationConnector Association="SAC_Model.FK_ctabancaria_grupo" />
+        <AssociationConnector Association="SAC_Model.FK_Caja_GrupoCaja" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

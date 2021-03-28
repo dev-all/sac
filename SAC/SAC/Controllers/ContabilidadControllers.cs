@@ -30,7 +30,53 @@ namespace SAC.Controllers
 
         /// Consulta asientos contables"
         /// 
-        public ActionResult ConsultaAsientosContables(string Periodo = null, string Tipo = "CF")
+        public ActionResult ConsultaAsientosContables(string Periodo = null, string Tipo = null)
+        {
+            DiarioModelView model = new DiarioModelView();
+            if (!string.IsNullOrEmpty(Periodo))
+            {
+                Tipo = (!string.IsNullOrEmpty(Tipo))? Tipo : "CF";
+                model.ListaDiario = Mapper.Map<List<DiarioModel>, List<DiarioModelView>>(servicioimputacion.GetAsientosContables(Periodo, Tipo));
+            }
+            model.TipoAsiento = TipoAsiento();
+            model.Periodo = Periodo;
+            model.Tipo = Tipo;
+            CargarAnio();
+            CargarMes();
+            return View(model);
+        }
+
+        [HttpGet()]
+        public ActionResult GetDetallesAsientosContables(string cuenta = null,string periodo = null, string tipo = null)
+        {
+
+            try
+            {
+                ///ak realizar la busqueda por idcta del numero de cheque  
+                ///
+                List<DiarioModelView> diarioModelViews = new List<DiarioModelView>();
+                int IdImputacion = 0;
+                if (!string.IsNullOrEmpty(cuenta))
+                {
+                    IdImputacion = int.Parse(cuenta);
+                    tipo = (!string.IsNullOrEmpty(tipo)) ? tipo : "CF";
+                    periodo = (!string.IsNullOrEmpty(periodo)) ? periodo : DateTime.Now.ToString("yy") + DateTime.Now.ToString("dd");
+              
+                    diarioModelViews = Mapper.Map<List<DiarioModel>, List<DiarioModelView>>(servicioimputacion.GetAsientoContableDetalles(IdImputacion, periodo, tipo));
+                }
+           
+                 return Json(new { result = true, data = Newtonsoft.Json.JsonConvert.SerializeObject(diarioModelViews) }, JsonRequestBehavior.AllowGet);
+               // return Json(new { result = false, data = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = false, data = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// Consulta Suma y saldos"
+        /// 
+        public ActionResult ConsultaSumaYSaldos(string Periodo = null, string Tipo = "CF")
         {
             DiarioModelView model = new DiarioModelView();
             if (!string.IsNullOrEmpty(Periodo))
@@ -42,6 +88,9 @@ namespace SAC.Controllers
             CargarMes();
             return View(model);
         }
+
+
+
 
         public ActionResult DiarioCompraFactura(string Periodo = null)
         {

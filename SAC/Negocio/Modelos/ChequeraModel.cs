@@ -1,4 +1,4 @@
-﻿using Datos.ModeloDeDatos;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,9 +42,9 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public TipoMoneda TipoMoneda { get; set; }
-        public BancoCuenta BancoCuenta { get; set; }
-        public List<CompraFacturaPago> CompraFacturaPago { get; set; }
+        public TipoMonedaModel TipoMoneda { get; set; }
+        public BancoCuentaModel BancoCuenta { get; set; }
+        public List<CompraFacturaPagoModel> CompraFacturaPago { get; set; }
 
 
 

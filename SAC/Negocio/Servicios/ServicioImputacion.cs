@@ -83,7 +83,6 @@ namespace Negocio.Servicios
             }
         }
 
-
         public List<MenuSideBarModel> GetPlanContable()
         {
             IList<GrupoCuenta> grupoCuentas = ImputacionRepositorio.GetPlanContable();
@@ -497,7 +496,7 @@ namespace Negocio.Servicios
         {
             try
             {
-                IList<Diario> diario = ImputacionRepositorio.GetAsientosContables(periodo, tipo);
+                List<Diario> diario = ImputacionRepositorio.GetAsientosContables(periodo, tipo);
                 //var asientos = (from c in diario
                 //                 select c)
                 //                   .Select(u => new DiarioModel()
@@ -513,10 +512,11 @@ namespace Negocio.Servicios
                                 {
                                     IdImputacion = c.Key.IdImputacion,
                                     Descripcion = c.Key.Descripcion,
+                                    Tipo = tipo,
+                                    Periodo = periodo,
                                     Debe = c.Sum(x => (x.Importe > 0) ? x.Importe : 0),
                                     Haber = c.Sum(x => (x.Importe < 0) ? x.Importe : 0)
                                 }).ToList();
-
                 return asientos;
             }
             catch (Exception ex)
@@ -525,6 +525,23 @@ namespace Negocio.Servicios
                 return null;
             }
         }
+
+
+        public List<DiarioModel> GetAsientoContableDetalles(int cuenta, string periodo, string tipo)
+        {
+            try
+            {
+                List<Diario> diario = ImputacionRepositorio.GetAsientoContableDetalles(cuenta ,periodo, tipo);
+              
+                return Mapper.Map<List<Diario>, List<DiarioModel>>(diario);
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "error");
+                return null;
+            }
+        }
+
         public List<DiarioModel> GetCompraFactura(string periodo)
         {
             try

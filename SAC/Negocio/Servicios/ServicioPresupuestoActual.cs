@@ -42,6 +42,7 @@ namespace Negocio.Servicios
         }
         public PresupuestoActualModel GetPresupuestosPorCodigo(string codigo)
         {
+
             return Mapper.Map<PrespuestoActual, PresupuestoActualModel>(oPresupuestoActualRepositorio.GetPresupuestosPorCodigo(codigo));
         }
 

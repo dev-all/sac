@@ -17,7 +17,7 @@ namespace Negocio.Modelos
         public int IdBancoCuenta { get; set; }
         public int IdGrupoCaja { get; set; }
         public string CuentaDescripcion { get; set; }
-
+        public int NumeroCierre { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
 
         public Nullable<System.DateTime> FechaEfectiva { get; set; }
@@ -39,8 +39,9 @@ namespace Negocio.Modelos
 
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public  BancoCuenta BancoCuenta { get; set; }
+        public  BancoCuentaModel BancoCuenta { get; set; }
 
+        public  CajaGrupoModel GrupoCaja { get; set; }
 
     }
 }

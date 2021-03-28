@@ -16,7 +16,7 @@ namespace SAC.Models
 
         public int IdBanco { get; set; }
 
-        //public string BancoDescipcion { get; set; }
+        public string BancoDescipcion { get; set; }
 
         public string BancoDescripcion { get; set; }
 
@@ -36,5 +36,7 @@ namespace SAC.Models
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
         public BancoModelView Banco { get; set; }
+
+
     }
 }

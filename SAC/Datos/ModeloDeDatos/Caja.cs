@@ -39,7 +39,7 @@ namespace Datos.ModeloDeDatos
         public virtual CajaSaldo CajaSaldo { get; set; }
         public virtual CajaTipoMovimiento CajaTipoMovimiento { get; set; }
         public virtual Cheque Cheque { get; set; }
-        public virtual GrupoCaja GrupoCaja { get; set; }
         public virtual Tarjetas Tarjetas { get; set; }
+        public virtual GrupoCaja GrupoCaja { get; set; }
     }
 }

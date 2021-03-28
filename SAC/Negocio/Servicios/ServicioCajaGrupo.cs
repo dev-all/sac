@@ -35,7 +35,6 @@ namespace Negocio.Servicios
             {
                 var CajaGrupo = Mapper.Map<List<GrupoCaja>, List<CajaGrupoModel>>(cajaGrupoRepositorio.GetAllGrupoCaja());
                 return CajaGrupo;
-
             }
             catch (Exception)
             {

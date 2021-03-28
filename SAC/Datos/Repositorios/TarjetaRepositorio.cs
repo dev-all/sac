@@ -23,7 +23,9 @@ namespace Datos.Repositorios
 
         }
 
-
-
+        public void ConciliarMovimiento(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

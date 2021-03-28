@@ -250,6 +250,20 @@ namespace Negocio.Servicios
             }
         }
 
+        
+  public CajaModel GetCajaMenorIgualAFecha(int idgrupocaja, DateTime fecha)
+        {
+            try
+            {
+                return Mapper.Map<Caja, CajaModel>(CajaRepositorio.GetCajaPorFecha(idgrupocaja, fecha));
+            }
+            catch (Exception e)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor" + e.Message, "error");
+                return null;
+            }
+        }
+
         public void ActualizarCierreCaja(CajaModel model)
         {
             try
@@ -278,9 +292,10 @@ namespace Negocio.Servicios
                 caja.IdTipoMovimiento = 1;
                 caja.IdCuentaBanco = model.IdBancoCuenta;
                 caja.Concepto = model.CuentaDescripcion;
-                caja.ImporteDeposito = model.Importe;
+                caja.ImporteCheque = model.Importe;
                 caja.Fecha = model.Fecha;
                 caja.IdGrupoCaja = IdGrupoCaja; // 'BANCH'
+
 
                 return GuardarCaja(caja);
             }

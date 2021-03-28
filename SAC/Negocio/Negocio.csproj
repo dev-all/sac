@@ -60,6 +60,7 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\ArticuloModel.cs" />
     <Compile Include="Modelos\ClienteDireccionModel.cs" />
     <Compile Include="Modelos\ClienteModel.cs" />
     <Compile Include="Modelos\CompraRegistroDetalleModel.cs" />
@@ -127,6 +128,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioArticulo.cs" />
     <Compile Include="Servicios\ServicioBancoCuenta.cs" />
     <Compile Include="Servicios\ServicioBancoCuentaBancaria.cs" />
     <Compile Include="Servicios\ServicioCaja.cs" />

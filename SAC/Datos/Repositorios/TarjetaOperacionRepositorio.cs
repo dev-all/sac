@@ -60,7 +60,19 @@ namespace Datos.Repositorios
 
         }
 
+        public void ConciliarMovimiento(int id)
+        {
+            TarjetaOperacion tarjetaOperacion = GetTarjetaOperacionPorId(id);
+            tarjetaOperacion.Activo = true;
+            tarjetaOperacion.UltimaModificacion = DateTime.Now;
+            tarjetaOperacion.Conciliacion = true;
+            context.SaveChanges();
+        }
 
-
+        private TarjetaOperacion GetTarjetaOperacionPorId(int id)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.TarjetaOperacion.Where(i => i.Activo == true && i.Id == id).FirstOrDefault();
+        }
     }
 }

@@ -27,44 +27,7 @@
                     <div class="card-body">
                         <small>Consulta de Caja</small>
                         <div class="form-body">
-
-                            <div class="row">
-                                <div class="col-xlg-4 col-lg-4 col-md-4 col-sm-4 text-right">
-                                    <small>
-                                        Saldo Inicial
-                                    </small>
-                                </div>
-                                <div class="col-xlg-8 col-lg-8 col-md-8 col-sm-8 text-center">
-                                    <div class="row">
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <div class="form-group">
-                                                <small> Pesos</small><br />
-                                                <small class="font-weight-bold ">$@Html.Raw(@Model.CajaSaldoInicial.ImporteFinalPesos)</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <div class="form-group">
-                                                <small> Dolares</small><br />
-                                                <small class="font-weight-bold "> $@Html.Raw(@Model.CajaSaldoInicial.ImporteFinalDolares)</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <div class="form-group">
-                                                <small> Cheques</small><br />
-                                                <small class="font-weight-bold "> $@Html.Raw(@Model.CajaSaldoInicial.ImporteFinalCheques) </small>
-                                            </div>
-                                        </div>
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <div class="form-group">
-                                                <small> Tarjetas</small><br />
-                                                <small class="font-weight-bold "> $@Html.Raw(@Model.CajaSaldoInicial.ImporteFinalTarjetas) </small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
+                      
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="table-responsive-md">
@@ -72,16 +35,60 @@
                                         <table id="example23" class="table stylish-table">
                                             <thead>
                                                 <tr>
-                                                    <th style="max-width: 33%;">Concepto</th>
-                                                    <th class="text-center">Pesos</th>
-                                                    <th class="text-center">Dolares</th>
-                                                    <th class="text-center">Cheques</th>
-                                                    <th class="text-center">Tarjeta</th>
-                                                    <th class="text-center">Fecha</th>
-                                                    <th class="text-center">Grupo</th>
+                                                    <th style="max-width: 33%;"></th>
+                                                    <th class="text-center">
+                                                        &nbsp;&nbsp;&nbsp;
+                                                    </th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th> </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+
+                                                <tr>
+                                                    <td style="max-width: 33%;" class="text-right">Saldo Inicial</td>
+                                                    <td class="text-right">
+                                                        <small> Pesos</small><br />
+                                                        <small class="font-weight-bold ">$@Html.Raw(@Model.CajaSaldoInicial.ImporteInicialPesos)</small>
+                                                    </td>
+                                                    <td class="text-right">
+
+                                                        <small> Dolares</small><br />
+                                                        <small class="font-weight-bold ">$@Html.Raw(@Model.CajaSaldoInicial.ImporteInicialDolares)</small>
+                                                    </td>
+                                                    <td class="text-right">
+
+                                                        <small> Cheques</small><br />
+                                                        <small class="font-weight-bold ">$@Html.Raw(@Model.CajaSaldoInicial.ImporteInicialCheques)</small>
+                                                    </td>
+                                                    <td class="text-right">
+
+                                                        <small> Tarjeta</small><br />
+                                                        <small class="font-weight-bold ">$@Html.Raw(@Model.CajaSaldoInicial.ImporteInicialTarjetas)</small>
+                                                    </td>
+                                                    <td class="text-center">
+
+                                                        <small> Fecha</small><br />
+                                                    </td>
+                                                    <td class="text-center">
+
+                                                        <small> Grupo Caja</small><br />
+                                                    </td>
+                                                </tr>
+                                                <tr class="table-dark text-dark">
+                                                    <td style="max-width: 33%;">Concepto</td>
+                                                    <td class="text-center"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td> </td>
+                                                </tr>
+
+
 
                                                 @{
                                                     decimal TotalPesos = 0;
@@ -91,80 +98,125 @@
                                                     decimal TotalDeposito = 0;
                                                 }
 
-
-                                                @foreach (var item in Model.ListaCaja)
+                                                @if (Model.ListaCaja.Count > 0)
                                                 {
+                                                    foreach (var item in Model.ListaCaja)
+                                                    {
 
-                                                    TotalPesos += item.ImportePesos;
-                                                    TotalDolares += item.ImporteDolar;
-                                                    TotalCheque += item.ImporteCheque;
-                                                    TotalTarjeta += item.ImporteTarjeta;
-                                                    TotalDeposito += item.ImporteDeposito;
+                                                        TotalPesos += item.ImportePesos;
+                                                        TotalDolares += item.ImporteDolar;
+                                                        TotalCheque += item.ImporteCheque;
+                                                        TotalTarjeta += item.ImporteTarjeta;
+                                                        TotalDeposito += item.ImporteDeposito;
 
-                                                    <tr>
-                                                        <td style="max-width: 33%;">
-                                                            @Html.DisplayFor(modelItem => item.Concepto)
-                                                        </td>
-                                                        <td class="text-right">
-                                                            @Html.DisplayFor(modelItem => item.ImportePesos)
-                                                        </td>
+                                                        <tr>
+                                                            <td style="max-width: 33%;">
+                                                                @Html.DisplayFor(modelItem => item.Concepto)
+                                                            </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.ImportePesos)
+                                                            </td>
 
-                                                        <td class="text-right">
-                                                            @Html.DisplayFor(modelItem => item.ImporteDolar)
-                                                        </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.ImporteDolar)
+                                                            </td>
 
-                                                        <td class="text-right">
-                                                            @Html.DisplayFor(modelItem => item.ImporteCheque)
-                                                        </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.ImporteCheque)
+                                                            </td>
 
-                                                        <td class="text-right">
-                                                            @Html.DisplayFor(modelItem => item.ImporteTarjeta)
-                                                        </td>
+                                                            <td class="text-right">
+                                                                @Html.DisplayFor(modelItem => item.ImporteTarjeta)
+                                                            </td>
 
-                                                        <td class="text-center">
-                                                            @Html.DisplayFor(modelItem => item.Fecha)
-                                                        </td>
+                                                            <td class="text-center">
+                                                                @Html.DisplayFor(modelItem => item.Fecha)
+                                                            </td>
 
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
-                                                        </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.GrupoCaja.Codigo)
+                                                            </td>
 
-                                                    </tr>
+                                                        </tr>
 
-                                                }
+                                                    }
+                                                 } else
+                                                        {
+                                            <tr>
+                                                <td style = "max-width: 33%;" class="text-right">
+                                                    <small>
+                                                        Ningún dato disponible en esta tabla
+                                                    </small>
+                                                </td>
+                                                <td class="text-right">
+                                                </td>
+                                                <td class="text-right">
+                                                </td>
+                                                <td class="text-right">
+                                                </td>
+                                                <td class="text-right">
+                                                </td>
+                                                <td class="text-center">
+                                                </td>
+                                                <td class="text-center">
+                                                </td>
+                                            </tr>
+                                        }
 
-                                            </tbody>
+                                                </tbody>
+                                            <tfoot>
 
+                                                <tr>
+                                                    <td style="max-width: 33%;" class="text-right"> &nbsp;&nbsp;&nbsp; </td>
+                                                    <td class="text-right">
+                                                    </td>
+                                                    <td class="text-right">
+                                                        &nbsp;&nbsp;&nbsp;
+
+                                                    </td>
+                                                    <td class="text-right">
+                                                    </td>
+                                                    <td class="text-right">
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+                                              
+                                                <tr>
+                                                    <td style="max-width: 33%;" class="text-right"> Saldo Procesado</td>
+                                                    <td class="text-right">
+
+                                                        <small class="font-weight-bold ">$@Html.Raw(TotalPesos)</small>
+                                                    </td>
+                                                    <td class="text-right">
+
+
+                                                        <small class="font-weight-bold ">$@Html.Raw(TotalDolares)</small>
+                                                    </td>
+                                                    <td class="text-right">
+
+
+                                                        <small class="font-weight-bold ">$@Html.Raw(TotalCheque)</small>
+                                                    </td>
+                                                    <td class="text-right">
+
+
+                                                        <small class="font-weight-bold ">$@Html.Raw(TotalTarjeta)</small>
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+
+                                               
+                                            </tfoot>
                                         </table>
 
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row m-t-20">
-                                <div class="col-xlg-4 col-lg-4 col-md-4 col-sm-4 text-center">
-                                    <small>
-                                        Saldo Procesado
-                                    </small>
-                                </div>
-
-                                <div class="col-xlg-8 col-lg-8 col-md-8 col-sm-8 text-center">
-                                    <div class="row">
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <small class="font-weight-bold ">$@Html.Raw(TotalPesos)</small>
-                                        </div>
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <small class="font-weight-bold ">$@Html.Raw(TotalDolares)</small>
-                                        </div>
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <small class="font-weight-bold ">$@Html.Raw(TotalCheque)</small>
-                                        </div>
-                                        <div class="col-xlg-2 col-lg-2 col-md-2 col-sm-2">
-                                            <small class="font-weight-bold ">$@Html.Raw(TotalTarjeta)</small>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
 
                             <hr />

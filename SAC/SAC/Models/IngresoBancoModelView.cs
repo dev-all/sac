@@ -9,11 +9,22 @@ namespace SAC.Models
     public class IngresoBancoModelView
     {
 
+        public int IdBancoCuenta { get; set; }
 
-        public int Id {get;set;}
+        public String Fecha { get; set; }
 
+        public string IdConciliacionMovimiento { get; set; }
 
+        public decimal Cotizacion { get; set; }
+        public decimal SaldoConciliado { get; set; }
+
+        public BancoCuentaModelView BancoCuenta { get; set; }
         public BancoCuentaBancariaModelView Ingresos { get; set; }
+
+
+        public List<BancoCuentaBancariaModelView> ListaBancoCuenta { get; set; }
+
+        public List<BancoCuentaBancariaModelView> ListaBancoCuentaDestino { get; set; }
 
     }
 }

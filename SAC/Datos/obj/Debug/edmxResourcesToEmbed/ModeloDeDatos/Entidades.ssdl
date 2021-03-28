@@ -54,7 +54,7 @@
     <Property Name="DescripcionCastellano" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="DescripcionIngles" Type="nvarchar" MaxLength="150" />
     <Property Name="Grupo" Type="nvarchar" MaxLength="50" />
-    <Property Name="Honorario" Type="varchar" MaxLength="1" />
+    <Property Name="Honorario" Type="varchar" MaxLength="2" />
     <Property Name="Tipo" Type="varchar" MaxLength="50" />
     <Property Name="Imputacion" Type="int" />
     <Property Name="Activo" Type="bit" />
@@ -104,6 +104,7 @@
     <Property Name="NumeroOperacion" Type="int" Nullable="false" />
     <Property Name="IdBancoCuenta" Type="int" Nullable="false" />
     <Property Name="IdGrupoCaja" Type="int" Nullable="false" />
+    <Property Name="NumeroCierre" Type="int" Nullable="false" />
     <Property Name="CuentaDescripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Fecha" Type="datetime" />
     <Property Name="FechaEfectiva" Type="datetime" />
@@ -1494,6 +1495,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ctabancaria_grupo">
+    <End Role="GrupoCaja" Type="Self.GrupoCaja" Multiplicity="1" />
+    <End Role="BancoCuentaBancaria" Type="Self.BancoCuentaBancaria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GrupoCaja">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BancoCuentaBancaria">
+        <PropertyRef Name="IdGrupoCaja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Diario_Imputacion">
     <End Role="Imputacion" Type="Self.Imputacion" Multiplicity="1" />
     <End Role="Diario" Type="Self.Diario" Multiplicity="*" />
@@ -2091,6 +2104,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <AssociationSet Name="FK_Contacto_Persona" Association="Self.FK_Contacto_Persona">
       <End Role="Persona" EntitySet="Persona" />
       <End Role="Contacto" EntitySet="Contacto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ctabancaria_grupo" Association="Self.FK_ctabancaria_grupo">
+      <End Role="GrupoCaja" EntitySet="GrupoCaja" />
+      <End Role="BancoCuentaBancaria" EntitySet="BancoCuentaBancaria" />
     </AssociationSet>
     <AssociationSet Name="FK_Diario_Imputacion" Association="Self.FK_Diario_Imputacion">
       <End Role="Imputacion" EntitySet="Imputacion" />

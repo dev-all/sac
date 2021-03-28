@@ -34,9 +34,6 @@ namespace Negocio.Servicios
             return Mapper.Map<TarjetaOperacion, TarjetaOperacionModel>(oTarjetaRepositorio.Insertar(oModel));
         }
 
-       
-
-
         public List<TarjetaOperacionModel> GetTarjetaOperacionGastos(int idTipoTarjeta, DateTime cfechadesde, DateTime cfechahasta)
         {
             return Mapper.Map<List<TarjetaOperacion>, List<TarjetaOperacionModel>>(oTarjetaRepositorio.GetTarjetasOperacionGastos(idTipoTarjeta, cfechadesde, cfechahasta));
@@ -46,6 +43,18 @@ namespace Negocio.Servicios
         {
             return Mapper.Map<List<TarjetaOperacion>, List<TarjetaOperacionModel>>(oTarjetaRepositorio.GetTarjetasOperacionGastos(idTipoTarjeta));
         }
-   
+
+        public void ConciliarMovimiento(int id)
+        {
+            try
+            {
+                oTarjetaRepositorio.ConciliarMovimiento(id);
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                throw new NotImplementedException(ex.Message);
+            }
+        }
     }
 }

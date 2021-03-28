@@ -18,8 +18,11 @@ namespace Datos.Repositorios
 
         public List<Chequera> GetAllChequera()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<Chequera> listaChequera = new List<Chequera>();
-            listaChequera = context.Chequera.Where(p => p.IdProveedor == null
+            listaChequera = context.Chequera
+                .Include(b => b.BancoCuenta)
+                .Where(p => p.IdProveedor == null
                                                     && p.NumeroRecibo == null
                                                     && p.Activo == true
                                                     && p.Usado == false).ToList();

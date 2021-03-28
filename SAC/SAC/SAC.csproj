@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
     <Compile Include="CajaRepositorio.cs" />
+    <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\BancoControllers.cs" />
     <Compile Include="Controllers\CajaCierreController.cs" />
     <Compile Include="Controllers\CajaControllers.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Helpers\BcraHelper.cs" />
     <Compile Include="Helpers\Utilidades.cs" />
     <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
+    <Compile Include="Models\ArticuloModelView.cs" />
     <Compile Include="Models\BancoModelView.cs" />
     <Compile Include="Models\AccionPorRolModelView.cs" />
     <Compile Include="Models\AfipRegimenModelView.cs" />
@@ -1067,6 +1069,13 @@
     <Content Include="Content\assets\plugins\datatables\es.txt" />
     <Content Include="Content\assets\plugins\datatables\jquery.dataTables.min.css" />
     <Content Include="Content\assets\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="Content\assets\plugins\datatables\jsTable\buttons.flash.min.js" />
+    <Content Include="Content\assets\plugins\datatables\jsTable\buttons.html5.min.js" />
+    <Content Include="Content\assets\plugins\datatables\jsTable\buttons.print.min.js" />
+    <Content Include="Content\assets\plugins\datatables\jsTable\dataTables.buttons.min.js" />
+    <Content Include="Content\assets\plugins\datatables\jsTable\jszip.min.js" />
+    <Content Include="Content\assets\plugins\datatables\jsTable\pdfmake.min.js" />
+    <Content Include="Content\assets\plugins\datatables\jsTable\vfs_fonts.js" />
     <Content Include="Content\assets\plugins\datatables\license.txt" />
     <Content Include="Content\assets\plugins\datatables\media\css\dataTables.bootstrap.css" />
     <Content Include="Content\assets\plugins\datatables\media\css\dataTables.bootstrap.min.css" />
@@ -2832,6 +2841,7 @@
     <Content Include="Scripts\js\widget-data.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\TreeView\TreeView.js" />
+    <Content Include="Scripts\view\Banco\BancoCheques.js" />
     <Content Include="Scripts\view\Caja\CajaScript.js" />
     <Content Include="Scripts\view\Caja\CajaCheques.js" />
     <Content Include="Scripts\view\calcularporcentaje.js" />
@@ -2931,6 +2941,13 @@
     <Content Include="Views\Cliente\Listado.cshtml" />
     <Content Include="Views\Banco\_Ingresos.cshtml" />
     <Content Include="Views\Banco\IngresoCuentaBancaria.cshtml" />
+    <Content Include="Views\BancoCuenta\Index.cshtml" />
+    <Content Include="Views\Articulo\AddOrEdit.cshtml" />
+    <Content Include="Views\Articulo\Index.cshtml" />
+    <Content Include="Views\Contabilidad\ConsultaSumaYSaldos.cshtml" />
+    <Content Include="Views\Cobros\_TablaFacturasPagar.cshtml" />
+    <Content Include="Views\Cobros\_tablaRetenciones.cshtml" />
+    <Content Include="Views\Cobros\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

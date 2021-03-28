@@ -108,7 +108,7 @@ namespace Datos.Repositorios
 
             //1) se obtiene un objeto anonimo y no es posible pasarlo a una entidad
             var iQuery = (  from c in context.Caja
-                            where c.IdGrupoCaja == idgrupocaja && c.Fecha <= fecha
+                            where c.IdGrupoCaja == idgrupocaja && c.Fecha < fecha
                             group c by c.IdGrupoCaja into g
                             select new 
                             {
@@ -131,6 +131,37 @@ namespace Datos.Repositorios
             }).FirstOrDefault();
 
           
+            return caja;
+        }
+
+        public Caja GetCajaMenorIgualAFecha(int idgrupocaja, DateTime fecha)
+        {
+
+            //1) se obtiene un objeto anonimo y no es posible pasarlo a una entidad
+            var iQuery = (from c in context.Caja
+                          where c.IdGrupoCaja == idgrupocaja && c.Fecha <= fecha
+                          group c by c.IdGrupoCaja into g
+                          select new
+                          {
+                              IdGrupoCaja = g.Key,
+                              ImportePesos = g.Sum(c => c.ImportePesos),
+                              ImporteCheque = g.Sum(c => c.ImporteCheque),
+                              ImporteDolar = g.Sum(c => c.ImporteDolar),
+                              ImporteDeposito = g.Sum(c => c.ImporteDeposito),
+                              ImporteTarjeta = g.Sum(c => c.ImporteTarjeta)
+                          });
+            //2) convertimos el objeto anonimo en una entidad
+            var caja = iQuery.ToList().Select(i => new Caja
+            {
+                IdGrupoCaja = i.IdGrupoCaja,
+                ImportePesos = i.ImportePesos,
+                ImporteCheque = i.ImporteCheque,
+                ImporteDolar = i.ImporteDolar,
+                ImporteDeposito = i.ImporteDeposito,
+                ImporteTarjeta = i.ImporteTarjeta
+            }).FirstOrDefault();
+
+
             return caja;
         }
 

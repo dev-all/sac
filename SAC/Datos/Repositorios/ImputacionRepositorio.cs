@@ -178,10 +178,9 @@ namespace Datos.Repositorios
 
         }
 
-        public IList<Diario> GetAsientosContables(string periodo, string tipo)
+        public List<Diario> GetAsientosContables(string periodo, string tipo)
         {
-            IList<Diario> lista = null;
-            lista = context.Diario.Where(i => i.Activo == true && i.Tipo == tipo  && i.Periodo == periodo).ToList();                      
+            List<Diario> lista = context.Diario.Where(i => i.Activo == true && i.Tipo == tipo  && i.Periodo == periodo).ToList();                      
             return lista;
         }
 
@@ -333,6 +332,16 @@ namespace Datos.Repositorios
             }
             return model;
           
+        }
+
+        public List<Diario> GetAsientoContableDetalles(int cuenta, string periodo, string tipo)
+        {
+        
+            List<Diario> lista = context.Diario.Where(i => i.Activo == true
+            && i.Tipo == tipo.Replace(" ", String.Empty)
+            && i.Periodo == periodo.Replace(" ", String.Empty)
+            && i.IdImputacion == cuenta).ToList();
+            return lista;
         }
     }
 }

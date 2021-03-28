@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Datos.ModeloDeDatos;
+
 using System.Web.Mvc;
 
 namespace SAC.Models
@@ -13,8 +13,9 @@ namespace SAC.Models
 
         public int Id { get; set; }
         public int NumeroOperacion { get; set; }
-        public int IdBancoCuenta { get; set; }
+        public int IdBancoCuenta { get; set; }       
         public int IdGrupoCaja { get; set; }
+
         public string CuentaDescripcion { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
         public Nullable<System.DateTime> FechaEfectiva { get; set; }
@@ -28,7 +29,7 @@ namespace SAC.Models
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public virtual BancoCuenta BancoCuenta { get; set; }
+        
       
         [Display(Name = "Tipo de Movimiento")]        
         public string TipoMovimiento { get; set; }
@@ -39,5 +40,15 @@ namespace SAC.Models
         public decimal ImporteDolar { get; set; }
         public decimal Cotizacion { get; set; }
         public int IdTipoMoneda { get; set; }
+
+
+        public List<ChequeModelView> ListaChequesTerceros { get; set; }
+        public ChequeraModelView oChequera { get; set; }
+        public decimal montoChequesSeleccionados { get; set; }
+        public string idChequesPropios { get; set; }
+        public string idChequesTerceros { get; set; }
+
+        public CajaGrupoModelView GrupoCaja { get; set; }
+        public BancoCuentaModelView BancoCuenta { get; set; }
     }
 }

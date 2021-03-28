@@ -326,11 +326,13 @@ namespace SAC.Controllers
 
             List<CajaSaldoModelView> ListaCajaGrupo = Mapper.Map<List<CajaSaldoModel>, List<CajaSaldoModelView>>(servicioCajaSaldo.GetAllCajaSaldo());
             List<SelectListItem> retornoListaCajaCierre = null;
-            retornoListaCajaCierre = (ListaCajaGrupo.Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = "Nro: " + x.NumeroCierrre.ToString() + "- Fecha: " + x.Fecha.ToString("dd/MM/yyyy")
-            })).ToList();
+
+            retornoListaCajaCierre = (ListaCajaGrupo.OrderByDescending( x => x.NumeroCierrre ).Select(x => new SelectListItem()
+                                                                {
+                                                                    Value = x.Id.ToString(),
+                                                                    Text = "Nro: " + x.NumeroCierrre.ToString() + "- Fecha: " + x.Fecha.ToString("dd/MM/yyyy")
+                                                                })).ToList();
+
             retornoListaCajaCierre.Insert(0, new SelectListItem { Text = "-- Cierre Actual --", Value = "0" });
             ViewBag.Listapagina = retornoListaCajaCierre;
 

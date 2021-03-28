@@ -296,12 +296,17 @@ namespace SAC.Controllers
                 {
                     fechaHasta = DateTime.ParseExact(searchFechaHasta, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
+              
                 model.GrupoCaja = Mapper.Map<CajaGrupoModel, CajaGrupoModelView>(servicioCajaGrupo.GetGrupoCajaPorId(CIdGrupoCaja));
+             
                 model.ListaCaja = Mapper.Map<List<CajaModel>, List<CajaModelView>>(servicioCaja.getGrupoCajaFecha(CIdGrupoCaja, fechaDesde, fechaHasta));
 
                 model.CajaDesde = Mapper.Map<CajaModel, CajaModelView>(servicioCaja.GetCajaPorFecha(CIdGrupoCaja, fechaDesde)) ?? new CajaModelView();
 
-                model.CajaHasta = Mapper.Map<CajaModel, CajaModelView>(servicioCaja.GetCajaPorFecha(CIdGrupoCaja, fechaHasta)) ?? new CajaModelView();
+                DateTime fecha = DateTime.Now;
+                model.Fecha = fecha;
+                model.CajaHasta = Mapper.Map<CajaModel, CajaModelView>(servicioCaja.GetCajaMenorIgualAFecha(CIdGrupoCaja, fecha)) ?? new CajaModelView();
+             
                 model.CajaSaldoInicial = Mapper.Map<CajaSaldoModel, CajaSaldoModelView>(servicioCajaSaldo.GetUltimoCierre());
 
             }

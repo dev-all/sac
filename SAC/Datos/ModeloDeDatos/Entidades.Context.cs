@@ -32,7 +32,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Articulo> Articulo { get; set; }
         public virtual DbSet<Banco> Banco { get; set; }
         public virtual DbSet<BancoCuenta> BancoCuenta { get; set; }
-        public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         public virtual DbSet<Caja> Caja { get; set; }
         public virtual DbSet<CajaSaldo> CajaSaldo { get; set; }
         public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
@@ -48,7 +47,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Diario> Diario { get; set; }
         public virtual DbSet<EstadoCivil> EstadoCivil { get; set; }
         public virtual DbSet<Evento> Evento { get; set; }
-        public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
         public virtual DbSet<GrupoCuenta> GrupoCuenta { get; set; }
         public virtual DbSet<GrupoPresupuesto> GrupoPresupuesto { get; set; }
         public virtual DbSet<homePorRol> homePorRol { get; set; }
@@ -88,5 +86,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<ValorCotizacion> ValorCotizacion { get; set; }
         public virtual DbSet<REGISTRO> REGISTRO { get; set; }
         public virtual DbSet<CuentaCorriente> CuentaCorriente { get; set; }
+        public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
+        public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
     }
 }

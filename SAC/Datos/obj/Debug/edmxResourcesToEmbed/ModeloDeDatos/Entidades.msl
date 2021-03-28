@@ -104,28 +104,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BancoCuentaBancaria">
-      <EntityTypeMapping TypeName="SAC_Model.BancoCuentaBancaria">
-        <MappingFragment StoreEntitySet="BancoCuentaBancaria">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-          <ScalarProperty Name="Conciliacion" ColumnName="Conciliacion" />
-          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-          <ScalarProperty Name="Importe" ColumnName="Importe" />
-          <ScalarProperty Name="DiaClearing" ColumnName="DiaClearing" />
-          <ScalarProperty Name="FechaEfectiva" ColumnName="FechaEfectiva" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="CuentaDescripcion" ColumnName="CuentaDescripcion" />
-          <ScalarProperty Name="IdGrupoCaja" ColumnName="IdGrupoCaja" />
-          <ScalarProperty Name="IdBancoCuenta" ColumnName="IdBancoCuenta" />
-          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Caja">
       <EntityTypeMapping TypeName="SAC_Model.Caja">
         <MappingFragment StoreEntitySet="Caja">
@@ -452,30 +430,6 @@
           <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
           <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
           <ScalarProperty Name="Tipo" ColumnName="Tipo" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GrupoCaja">
-      <EntityTypeMapping TypeName="SAC_Model.GrupoCaja">
-        <MappingFragment StoreEntitySet="GrupoCaja">
-          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="NoBorrar" ColumnName="NoBorrar" />
-          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
-          <ScalarProperty Name="ParcialDepositos" ColumnName="ParcialDepositos" />
-          <ScalarProperty Name="ParcialTarjetas" ColumnName="ParcialTarjetas" />
-          <ScalarProperty Name="ParcialCheques" ColumnName="ParcialCheques" />
-          <ScalarProperty Name="ParcialDolares" ColumnName="ParcialDolares" />
-          <ScalarProperty Name="ParcialPesos" ColumnName="ParcialPesos" />
-          <ScalarProperty Name="TotalDepositos" ColumnName="TotalDepositos" />
-          <ScalarProperty Name="TotalTarjetas" ColumnName="TotalTarjetas" />
-          <ScalarProperty Name="TotalCheques" ColumnName="TotalCheques" />
-          <ScalarProperty Name="TotalDolares" ColumnName="TotalDolares" />
-          <ScalarProperty Name="TotalPesos" ColumnName="TotalPesos" />
-          <ScalarProperty Name="Concepto" ColumnName="Concepto" />
-          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1046,6 +1000,53 @@
           <ScalarProperty Name="MontoPesos" ColumnName="MontoPesos" />
           <ScalarProperty Name="ProveedorNombre" ColumnName="ProveedorNombre" />
           <ScalarProperty Name="ProveedorCodigo" ColumnName="ProveedorCodigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BancoCuentaBancaria">
+      <EntityTypeMapping TypeName="SAC_Model.BancoCuentaBancaria">
+        <MappingFragment StoreEntitySet="BancoCuentaBancaria">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+          <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+          <ScalarProperty Name="Conciliacion" ColumnName="Conciliacion" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="Importe" ColumnName="Importe" />
+          <ScalarProperty Name="DiaClearing" ColumnName="DiaClearing" />
+          <ScalarProperty Name="FechaEfectiva" ColumnName="FechaEfectiva" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="CuentaDescripcion" ColumnName="CuentaDescripcion" />
+          <ScalarProperty Name="NumeroCierre" ColumnName="NumeroCierre" />
+          <ScalarProperty Name="IdGrupoCaja" ColumnName="IdGrupoCaja" />
+          <ScalarProperty Name="IdBancoCuenta" ColumnName="IdBancoCuenta" />
+          <ScalarProperty Name="NumeroOperacion" ColumnName="NumeroOperacion" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GrupoCaja">
+      <EntityTypeMapping TypeName="SAC_Model.GrupoCaja">
+        <MappingFragment StoreEntitySet="GrupoCaja">
+          <ScalarProperty Name="UltimaModificacion" ColumnName="UltimaModificacion" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="NoBorrar" ColumnName="NoBorrar" />
+          <ScalarProperty Name="IdImputacion" ColumnName="IdImputacion" />
+          <ScalarProperty Name="ParcialDepositos" ColumnName="ParcialDepositos" />
+          <ScalarProperty Name="ParcialTarjetas" ColumnName="ParcialTarjetas" />
+          <ScalarProperty Name="ParcialCheques" ColumnName="ParcialCheques" />
+          <ScalarProperty Name="ParcialDolares" ColumnName="ParcialDolares" />
+          <ScalarProperty Name="ParcialPesos" ColumnName="ParcialPesos" />
+          <ScalarProperty Name="TotalDepositos" ColumnName="TotalDepositos" />
+          <ScalarProperty Name="TotalTarjetas" ColumnName="TotalTarjetas" />
+          <ScalarProperty Name="TotalCheques" ColumnName="TotalCheques" />
+          <ScalarProperty Name="TotalDolares" ColumnName="TotalDolares" />
+          <ScalarProperty Name="TotalPesos" ColumnName="TotalPesos" />
+          <ScalarProperty Name="Concepto" ColumnName="Concepto" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

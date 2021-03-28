@@ -56,7 +56,7 @@ namespace Datos.Repositorios
 
         public PrespuestoActual GetPresupuestosPorCodigo(string codigo)
         {
-            return context.PrespuestoActual.Where(p => p.Activo == true && p.Codigo == codigo).First();
+            return context.PrespuestoActual.Where(p => p.Activo == true && p.Codigo == codigo).FirstOrDefault();
         }
     }
 }
