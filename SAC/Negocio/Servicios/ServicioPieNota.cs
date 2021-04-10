@@ -168,7 +168,19 @@ namespace Negocio.Servicios
             }
         }
 
-       
+        public PieNotaModel GetPieNotaPorCodigo(string codigo)
+        {
+            try
+            {
+                return Mapper.Map<PieNota, PieNotaModel>(oPieNotaRepositorio.GetPieNotaPorCodigo(codigo));
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+
+                return null;
+            }
+        }
         #endregion
     }
 }

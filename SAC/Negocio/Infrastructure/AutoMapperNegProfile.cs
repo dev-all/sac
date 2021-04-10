@@ -21,12 +21,20 @@ namespace Agenda.Infrastructure
             CreateMap<TipoPago, TipoPagoModel>();
             CreateMap<TipoPagoModel, TipoPago>();
 
+            CreateMap<Dto, DtoModel>();
+            CreateMap<DtoModel, Dto>();
+
             CreateMap<TrackingFacturaPagoCompraModel, TrackingFacturaPagoCompra>();
             CreateMap<TrackingFacturaPagoCompra, TrackingFacturaPagoCompraModel>();
 
+            CreateMap<ItemImprModel, ItemImpre>();
+            CreateMap<ItemImpre, ItemImprModel>();
 
             CreateMap<Departamento, DepartamentoModel>();
             CreateMap<DepartamentoModel, Departamento>();
+
+            CreateMap<Articulo, ArticuloModel>();
+            CreateMap<ArticuloModel, Articulo>();
 
             CreateMap<TipoClienteModel, TipoCliente>();
             CreateMap<TipoCliente, TipoClienteModel>();
@@ -78,7 +86,10 @@ namespace Agenda.Infrastructure
 
             CreateMap<TipoComprobanteModel, TipoComprobante>();
             CreateMap<TipoComprobante, TipoComprobanteModel>();
-            
+
+            CreateMap<TipoComprobanteVentaModel, TipoComprobanteVenta>();
+            CreateMap<TipoComprobanteVenta, TipoComprobanteVentaModel>();
+
             CreateMap<CompraFacturaModel, CompraFactura>();
             CreateMap<CompraFactura, CompraFacturaModel>();
 

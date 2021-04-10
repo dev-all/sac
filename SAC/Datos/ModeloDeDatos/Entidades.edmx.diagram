@@ -140,6 +140,11 @@
         <AssociationConnector Association="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" />
         <AssociationConnector Association="SAC_Model.FK_ctabancaria_grupo" />
         <AssociationConnector Association="SAC_Model.FK_Caja_GrupoCaja" />
+        <EntityTypeShape EntityType="SAC_Model.Dto" Width="1.5" PointX="22.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SAC_Model.FactVenta" Width="1.5" PointX="24.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SAC_Model.ItemImpre" Width="1.5" PointX="24.375" PointY="20.75" />
+        <EntityTypeShape EntityType="SAC_Model.IvaVenta" Width="1.5" PointX="24.375" PointY="25.75" />
+        <EntityTypeShape EntityType="SAC_Model.CompraIvaVista" Width="1.5" PointX="26.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

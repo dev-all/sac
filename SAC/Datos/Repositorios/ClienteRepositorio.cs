@@ -268,6 +268,15 @@ namespace Datos.Repositorios
            
         }
 
+        public List<Cliente> GetClientePorCodigo(string strCodigo)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            List<Cliente> listaCliente = context.Cliente
+              .Include("TipoCliente")
+              .Where(p => p.Activo == true && p.Codigo.Contains(strCodigo)).ToList();
+
+            return listaCliente;
+        }
 
         public List<Cliente> GetClientePorIdNombre(int idTipoCliente, string strCliente)
         {

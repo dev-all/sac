@@ -7,7 +7,7 @@ using Datos.ModeloDeDatos;
 using System.Web.Mvc;
 using Negocio.Modelos;
 
-namespace SAC.Models.Cobro
+namespace SAC.Models
 {
     public class CobroClienteModelView
     {
@@ -28,9 +28,7 @@ namespace SAC.Models.Cobro
         public String Fecha { get; set; }
 
         public List<PagosFacturasModelView> CuentaCorriente { get; set; }
-        public List<PagosFacturasModelView> ResumenPago { get; set; }
-        
- 
+        public List<PagosFacturasModelView> ResumenPago { get; set; }         
         public List<SelectListItem> SelectTipoMoneda { get; set; }
         public List<SelectListItem> SelectCuentasBancarias { get; set; }
         public List<SelectListItem> SelectTarjetas { get; set; }
@@ -39,9 +37,7 @@ namespace SAC.Models.Cobro
         public List<ChequeraModelView> ListaChequesPropios { get; set; }
         public ChequeraModelView Chequera { get; set; }
 
-
         public DateTime UltimaModificacion { get; set; }
-
 
         public string ConceptoCobro { get; set; }
         public int NumeroRecibo { get; set; }

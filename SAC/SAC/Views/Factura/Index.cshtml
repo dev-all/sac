@@ -1,0 +1,588 @@
+﻿@model SAC.Models.FacturaModelView
+
+@{
+    ViewBag.Title = "Registro factura compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Date picker plugins css -->
+<link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+@using (Html.BeginForm("GrabarFactura", "Factura", FormMethod.Post, new { id = "FrmGrabar" }))
+{
+    @Html.AntiForgeryToken()
+    @*@Html.ValidationSummary(false, "", new { @class = "text-danger" })*@
+
+
+    @Html.HiddenFor(model => model.IdCliente)
+    @Html.HiddenFor(model => model.IdPuntoVenta)
+    @Html.HiddenFor(model => model.idTipoIva)
+    @Html.HiddenFor(model => model.mipyme)
+    @Html.HiddenFor(model => model.IdArticulo)
+
+    @Html.HiddenFor(model => model.hdnArticulos)
+    
+
+    @*@Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Proveedor.Id)*@
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-body">
+                        <h5 class="card-title">Registro Facturas de Compras</h5>
+                        <hr>
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <small>Codigo Cliente</small>
+                                    @Html.TextBoxFor(m => m.Cliente.Nombre, new
+                               {
+                                   @class = "form-control form-control-sm",
+                                   @id = "NombreCliente"
+                               })
+                                    @Html.ValidationMessageFor(m => m.Cliente.Nombre, "", new { @class = "text-danger form-control-sm" })
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <small>Pto Venta</small>
+                                    @Html.DropDownList("IdPuntoVenta", Model.SelectPuntoVenta, null, new { @class = "form-control form-control-sm", disabled = "true" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    <small>Fecha</small>
+                                    <input type="text" id="Fecha" name="Fecha" disabled class="form-control form-control-sm fechadatepicker" required
+                                           data-validation-required-message="Ingrese una fecha">
+                                </div>
+                                <div class="col-md-2">
+                                    <small>CUIT</small>
+                                    @Html.TextBoxFor(m => m.Cuit, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                    @Html.ValidationMessageFor(m => m.Cuit, "", new { @class = "text-danger form-control-sm" })
+                                </div>
+                                <div class="col-md-2">
+                                    <small>Tipo Comprobante</small>
+                                    @*@Html.DropDownList("idTipoComprobanteSeleccionado", Model.TipoComprobante, null, new { @class = "form-control form-control-sm" })*@
+                                    @Html.DropDownListFor(model => model.idTipoComprobanteSeleccionado, new List<SelectListItem>(), "Seleccionar...", new { @class = "form-control form-control-sm" })
+                                </div>
+
+                                <div class="col-md-2">
+                                    <small>Departamento</small>
+                                    @Html.DropDownList("idDepartamento", Model.Departamentos, null, new { @class = "form-control form-control-sm" })
+                                </div>
+                            </div>
+
+                            <div class="row m-b-10">
+                                <div class="col-md-4">
+                                    <small>Dirección Factura</small>
+                                    @*@Html.DropDownList("IdDireccionCliente", Model.ClienteDirecciones, null, new { @class = "form-control form-control-sm" })*@
+                                    @Html.DropDownListFor(model => model.IdDireccionCliente, new List<SelectListItem>(), "Seleccionar...", new { @class = "form-control form-control-sm" })
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <small>Tipo Pago</small>
+                                    @Html.DropDownList("IdTipoPago", Model.FormaPago, null, new { @class = "form-control form-control-sm" })
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-1">
+                                    <small>Oref</small>
+                                    @Html.TextBoxFor(m => m.ORef, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <small>Yref</small>
+                                    @Html.TextBoxFor(m => m.YREf, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="card" style="margin-bottom:0px">
+
+                                Detalle de dirección
+
+                                <div class="row m-b-10 ">
+                                    <div class="col-sm-5">
+                                        @Html.TextBoxFor(m => m.Atencion, new { @class = "form-control form-control-sm", @placeholder = "Atención" })
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row form-group">
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px;">Carpeta</label>
+                                            <div class="col-sm-4">
+                                                @Html.TextBoxFor(m => m.nroCarpera, new { @class = "form-control form-control-sm" })
+                                            </div>
+                                            <div class="col-sm-1">/</div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.nroCarperaFinal, new { @class = "form-control form-control-sm"})
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row form-group">
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px;">Factura Manual</label>
+                                            <div class="col-sm-8">
+                                                @*@Html.TextBoxFor(m => m.FacturaManual, new { @class = "form-control form-control-sm", @placeholder = "" })*@
+                                                @Html.CheckBoxFor(model => model.FacturaManual, new { @class = "form-check-input" })
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row m-b-10 ">
+                                    <div class="col-sm-5">
+                                        @Html.TextBoxFor(m => m.NombreComp, new { @class = "form-control form-control-sm", @placeholder = "Nombre" })
+                                    </div>
+                                    <div class="col-sm-3">
+                                        
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row form-group">
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Aplica N/C</label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.AplicaNC, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row m-b-10">
+                                    <div class="col-sm-5">
+                                        @Html.TextBoxFor(m => m.DireccionCompuesta, new { @class = "form-control form-control-sm", @placeholder = "Dirección" })
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row form-group">
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Moneda</label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownList("idTipoMoneda", Model.TipoMonedas, null, new { @class = "form-control form-control-sm" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 text-left">
+                                        <div class="row form-group">
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Cotización</label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Cotizacion, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row m-b-10">
+                                    <div class="col-sm-5">
+                                        @Html.TextBoxFor(m => m.PaisComp, new { @class = "form-control form-control-sm", @placeholder = "País" })
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row form-group">
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Idioma Factura</label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownList("IdTipoIdioma", Model.TipoIdioma, null, new { @class = "form-control form-control-sm" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="row form-group">
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Cuenta Bco</label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownList("IdCuentaBancaria", Model.CuentaBancaria, null, new { @class = "form-control form-control-sm" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row m-b-10 ">
+                                <div class="col-sm-7">
+                                    <small>Encabezado Factura</small>
+                                    @Html.TextAreaFor(m => m.EncabezadoFact, new { @class = "form-control form-control-sm", @rows = 4 })
+                                </div>
+                                <div class="col-sm-4">
+                                    <small>Notas</small>
+                                    @Html.TextAreaFor(m => m.Nota, new { @class = "form-control form-control-sm", @rows = 4 })
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+
+                            <div class="row col-8 m-b-10">
+                                <div class="col-md-2">
+                                    <small>Codigo</small>
+                                    <input type="text" id="txtCodigo" class="form-control form-control-sm" />
+                                </div>
+                                <div class="col-md-7">
+                                    <small>Descripcion</small>
+                                    <input type="text" id="txtCodigoDescripcion" class="form-control form-control-sm" />
+                                </div>
+                                <div class="col-md-2">
+                                    <small>Monto</small>
+                                    <input type="text" id="txtMonto" class="form-control form-control-sm" />
+                                </div>
+                            </div>
+
+                            <div class="row m-b-10 ">
+                                <input type="button" id="ItemFact" style="margin-left:15px" class="btn btn-secondary btn-sm" value="Agregar Items" onclick="fnAsignarItem()" />
+
+
+                            </div>
+
+                            <div class="row m-b-10 ">
+                                <div class="col-md-8">
+                                    <table id="TblItemsFact" class="table stylish-table" style="display:none">
+                                        <thead>
+                                            <tr>
+                                                <td>Orden</td>
+                                                <td>Codigo</td>
+                                                <td>Descripcion</td>
+                                                <td>Valor</td>
+                                                <td class="text-center">Eliminar</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                        @*<tfoot></tfoot>*@
+                                    </table>
+                                </div>
+                                <div class="col-md-2">
+                                    <div id="Total" style="display:none">
+                                        <small>Total:  </small>
+                                        <p id="LblTotalFactura"></p>
+                                        @*@Html.TextAreaFor(m =>m.TotalFactura, new { @class = "form-control form-control-sm"})*@
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="text-right m-t-10">
+                        <button type="submit" onclick="Validacion(event)" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
+                        @*<input type="button" id="btnprueba" onclick="Validacion()" value="Guardar"/>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+
+<script>
+
+    jQuery('.fechadatepicker').datepicker({
+        language: 'es',
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+        todayHighlight: true
+
+    }).datepicker('setDate', new Date());
+
+    //autocompletar de los clientes
+    $('#NombreCliente').autocomplete({
+        source: function (request, response) {
+            $.getJSON("/Factura/GetListClienteJson/", request, function (data) {
+                response($.map(data, function (item) {
+
+                    return {
+                        id: item.id,
+                        value: item.label
+                    }
+
+                }))
+            })
+        },
+        minLength: 2,
+        select: function (event, ui) {
+            getCliente(ui.item.id)
+            $("#IdCliente").val(ui.item.id);
+            //  $("#Proveedor_Id").val(ui.item.id);
+
+            // this.value = ui.item.value;
+
+            return false;
+        }
+
+    });
+
+    function getCliente(codigo) {
+
+        $.getJSON("/Factura/GetClienteJson",
+            { IdCliente: codigo },
+            function (data) {
+                var cliente = JSON.parse(data);
+                //console.log(cliente);
+                //validaciones del word, se considera que el iva 4 es excento en tbl tipoiva, por lo tanto es extranjero
+                if (cliente.IdTipoIva != 4) {
+                    $("#IdPuntoVenta").val(3);
+                }
+                else {
+                    $("#IdPuntoVenta").val(2);
+                }
+
+                $("#NombreCliente").val(cliente.Codigo);
+                $("#NombreComp").val(cliente.Nombre);
+
+                $("#IdCliente").val(cliente.Id);
+                $("#idTipoIva").val(cliente.IdTipoiva);
+                $("#mipyme").val(cliente.MiPyme);
+
+                $("#IdTipoIdioma").val(cliente.IdIdioma);
+                $("#Cuit").val(cliente.Cuit);
+
+                $("#idTipoComprobanteSeleccionado").empty();
+                $("#idTipoComprobanteSeleccionado").append("<option value> Seleccionar ...</option>")
+                $.each(cliente.ListaComprobantes, function (index, row) {
+                    $("#idTipoComprobanteSeleccionado").append("<option value='" + row.Id + "'>" + row.Denominacion + "</option>")
+                });
+
+                $("#IdDireccionCliente").empty();
+                $("#IdDireccionCliente").append("<option value> Seleccionar ...</option>")
+                $.each(cliente.ClienteDireccion, function (index, row) {
+                    $("#IdDireccionCliente").append("<option value='" + row.Id + "'>" + row.Direccion + "</option>")
+                });
+
+
+            });
+
+    }
+    //-----------------------------//
+
+    //auto completar de los articulos
+    $('#txtCodigo').autocomplete({
+        source: function (request, response) {
+            $.getJSON("/Factura/GetListCodigoJson/", request, function (data) {
+                response($.map(data, function (item) {
+
+                    return {
+                        id: item.id,
+                        value: item.label
+                    }
+
+                }))
+            })
+        },
+        minLength: 2,
+        select: function (event, ui) {
+            getArticulo(ui.item.id)
+            $("#IdArticulo").val(ui.item.id);
+            //  $("#Proveedor_Id").val(ui.item.id);
+
+            //this.value = ui.item.value;
+            return false;
+        }
+
+    });
+
+    function getArticulo(cod) {
+        $.getJSON("/Factura/GetCodigoJson",
+            { IdArticulo: cod },
+            function (data) {
+                var articulo = JSON.parse(data);
+                //console.log(articulo);
+
+                $("#txtCodigo").val(articulo.Codigo);
+                if ($("#IdTipoIdioma").val() == 1) {
+                    $("#txtCodigoDescripcion").val(articulo.DescripcionCastellano);
+                }
+                else {
+                    $("#txtCodigoDescripcion").val(articulo.DescripcionIngles);
+                }
+
+
+            });
+
+    }
+
+    function fnAsignarItem() {
+        var codigo = $("#txtCodigo").val();
+        var descripcion = $("#txtCodigoDescripcion").val();
+        var monto = $("#txtMonto").val();
+
+        var item = $('#TblItemsFact >tbody >tr').length;
+
+
+        if (codigo != "" && descripcion != "" && monto != "") {
+            item += 1;
+
+            var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + item + ")'> <i class='fa fa-times'></i> </button>";
+            //var botonEliminar = "<a href='#' style='color: #f90431;' onclick='el(" + item + ")'><i class='fa fa-times'></i></a>";
+
+            $('#TblItemsFact > tbody:last-child').append("<tr><td>" + item + "</td><td>" + codigo + "</td><td>" + descripcion + "</td><td>" + monto + "</td><td>" + botonEliminar + "</td></tr>");
+            // $("#ModalItemFacturas").modal("hide");
+            $("#txtCodigo").val('');
+            $("#txtCodigoDescripcion").val('');
+            $("#txtMonto").val('');
+
+
+            SumarMontoTotal();
+           
+        }
+        else {
+            alert("Faltan datos");
+        }
+
+        if (item >= 1) {
+            $("#TblItemsFact").css("display", "block");
+        }
+        else {
+            $("#TblItemsFact").css("display", "none");
+        }
+        CargarItems();
+        // $('#TblItemsFact > tfoot:last-child').append("<tr><td>Total:</td><td>" + 111 + "</td></tr>");
+    }
+
+    function CargarItems() {
+
+        $("#hdnArticulos").val('');
+
+        let arrayItems = [];
+
+        $('#TblItemsFact tbody tr').each(function () {
+            let ObjItem = {
+                id: $(this).find("td").eq(0).html(),
+                codigo: $(this).find("td").eq(1).html(),
+                descripcion: $(this).find("td").eq(2).html(),
+                valor: $(this).find("td").eq(3).html()
+            };
+            arrayItems.push(ObjItem);
+
+        })
+        $("#hdnArticulos").val(JSON.stringify(arrayItems));
+        console.log(arrayItems);
+        console.log($("#hdnArticulos").val());
+    }
+
+    function SumarMontoTotal() {
+        //var TotalFactura = 0;
+
+        var total_col1 = 0;
+        $('#TblItemsFact tbody').find('tr').each(function (i, el) {
+
+            //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )
+            total_col1 += parseFloat($(this).find('td').eq(3).text());
+
+        });
+
+        if (total_col1 > 0) {
+            $("#Total").css("display", "block");
+            $("#LblTotalFactura").html(total_col1);
+        }
+        else { $("#Total").css("display", "none"); }
+
+    }
+
+    function el(e) {
+        console.log(e);
+        var index = e - 1;
+        $("table tr:eq(" + e + ")").remove();
+        var item = $('#TblItemsFact >tbody >tr').length;
+        if (item == 0) {
+            $("#TblItemsFact").css("display", "none");
+           
+        }
+        else {
+            //esto es para re ordenar el table
+            $('#TblItemsFact > tbody  > tr').each(function (index1, tr) {
+                var a = index1 + 1;
+                $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[0].innerHTML = a;
+                var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + a + ")'> <i class='fa fa-times'></i> </button>";
+                $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[4].innerHTML = botonEliminar;
+                //console.log("index", index1);
+                //console.log(tr);
+            });
+        }
+        SumarMontoTotal();
+        CargarItems();
+    }
+
+    $('#IdDireccionCliente').on('change', function () {
+        var idDir = this.value;
+        $.getJSON("/Factura/GetDireccionJson",
+            { idDireccion: idDir },
+            function (data) {
+                var direccion = JSON.parse(data);
+                $("#DireccionCompuesta").val(direccion.Direccion + ' ' + direccion.Provincia.Nombre + ' ' + direccion.Localidad.Nombre);
+                //  $("#NombreComp").val();
+                $("#PaisComp").val(direccion.Pais.Nombre);
+
+            });
+
+
+    });
+
+    $('#IdCuentaBancaria').on('change', function () {
+
+        var idCuenta = this.value;
+        $.getJSON("/Factura/GetPieNotaJson",
+            { idCodigoCuentaBancaria: idCuenta },
+            function (data) {
+                var pieNota = JSON.parse(data);
+                $("#Nota").val(pieNota.Nota);
+            });
+
+
+    });
+
+    function Validacion(event) {
+        var cantidad = 5;
+        var contralor = 0;
+
+        event.preventDefault();
+
+        if ($("#ORef").val() != '') {
+            contralor += 1;
+        }
+
+        if ($("#YREf").val() != '') {
+            contralor += 1;
+        }
+
+        if ($("#idDepartamento").val() != 0) {
+            contralor += 1;
+        }
+
+        if ($("#IdCuentaBancaria").val() != 0) {
+            contralor += 1;
+        }
+        if ($("#LblTotalFactura").html() != '') {
+            contralor += 1;
+        }
+
+        if (cantidad == contralor) {
+            $("#FrmGrabar").submit();
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    //en teoria valida y si esta ok hace el submit
+    //$(function () {
+    //    $('#FrmGrabar').on('submit', function (event) {
+    //        event.preventDefault();
+    //        return Validacion();
+    //    });
+    //});
+
+</script>
+
+@section Scripts {
+
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/js/mask.js"></script>
+
+    @*<script src="~/Scripts/view/FacturaCompraScript.js"></script>
+        <script src="~/Scripts/view/calcularporcentaje.js"></script>*@
+}

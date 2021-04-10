@@ -60,7 +60,23 @@ namespace Datos.Repositorios
             List<TipoComprobante> listModel = context.TipoComprobante.Where(p => p.Activo == true).ToList();
             return listModel;
         }
-       
+
+        public List<TipoComprobante> GetTipoComprobanteLocalesVentaSinFactura()
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            List<TipoComprobante> listModel = context.TipoComprobante
+                                                .Where(p => p.Id == 11 || p.Id==12 || p.Id== 13 && p.Activo ==true).ToList();
+            return listModel;
+        }
+        public List<TipoComprobante> GetTipoComprobanteExtranjerosVenta()
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+
+            List<TipoComprobante> listModel = context.TipoComprobante
+                                             .Where(p => p.Id == 19 || p.Id == 20 || p.Id == 21 && p.Activo == true).ToList();
+            return listModel;
+        }
+
 
         public int EliminarTipoComprobanteTipoMoneda(int id)
         {

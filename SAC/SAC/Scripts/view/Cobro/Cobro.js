@@ -25,7 +25,7 @@
 });
 
 
-$('#NombreCliente').autocomplete({  
+$('#Cliente_Nombre').autocomplete({  
     source: function (request, response) {
         $.getJSON("/Cobro/GetListClienteJson/", request, function (data) {
             response($.map(data, function (item) {
@@ -40,9 +40,10 @@ $('#NombreCliente').autocomplete({
     },
     minLength: 3,
     select: function (event, ui) {
-        getProvedor(ui.item.id)
+        //getProvedor(ui.item.id)
         $("#IdCliente").val(ui.item.id);       
         this.value = ui.item.value;
+        $("#frmBusqueda").submit();
         return false;
     }
 

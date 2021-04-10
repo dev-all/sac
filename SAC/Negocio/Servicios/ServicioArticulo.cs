@@ -38,7 +38,18 @@ namespace Negocio.Servicios
             }
         }
 
-
+        public List<ArticuloModel> GetArticulosPorCodigo(string strCodigo)
+        {
+            try
+            {
+                return Mapper.Map<List<Articulo>, List<ArticuloModel>>(oArticuloRepositorio.GetArticulosPorCodigo(strCodigo));
+            }
+            catch (Exception)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
+        }
         public ArticuloModel GetArticuloPorId(int id)
         {
             return Mapper.Map<Articulo, ArticuloModel>(oArticuloRepositorio.GetArticuloPorId(id));
@@ -90,6 +101,18 @@ namespace Negocio.Servicios
             {
                 return -1;//paso algo
             }
+        }
+
+     public ArticuloModel GetArticulo(int idArticulo)
+        {
+            ArticuloModel Articulo = Mapper.Map<Articulo, ArticuloModel>(oArticuloRepositorio.GetArticulo(idArticulo));
+            return Articulo;
+        }
+
+        public ArticuloModel GetArticuloOuCodigo(string Codigo)
+        {
+            ArticuloModel Articulo = Mapper.Map<Articulo, ArticuloModel>(oArticuloRepositorio.GetArticuloOuCodigo(Codigo));
+            return Articulo;
         }
     }
 }

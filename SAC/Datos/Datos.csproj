@@ -115,6 +115,9 @@
     <Compile Include="ModeloDeDatos\CompraIva.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\CompraIvaVista.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\CompraRegistroDetalle.cs" />
     <Compile Include="ModeloDeDatos\Contacto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
@@ -127,6 +130,9 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Diario.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\Dto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Entidades.Context.cs">
@@ -150,6 +156,9 @@
     <Compile Include="ModeloDeDatos\Evento.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\FactVenta.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModeloDeDatos\GrupoCaja.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
@@ -163,6 +172,12 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Imputacion.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\ItemImpre.cs">
+      <DependentUpon>Entidades.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModeloDeDatos\IvaVenta.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Localidad.cs">
@@ -282,8 +297,12 @@
     <Compile Include="Repositorios\CompraFacturaPagoRepositorio.cs" />
     <Compile Include="Repositorios\CompraRepositorio.cs" />
     <Compile Include="Repositorios\DepartamentoRepositorio.cs" />
+    <Compile Include="Repositorios\DtoRepositorio.cs" />
+    <Compile Include="Repositorios\FacturaVentasRepositorio.cs" />
     <Compile Include="Repositorios\GrupoPresupuestoRepositorio.cs" />
     <Compile Include="Repositorios\ImputacionRepositorio.cs" />
+    <Compile Include="Repositorios\ItemImprRepositorio.cs" />
+    <Compile Include="Repositorios\IvaVentaRepositorio.cs" />
     <Compile Include="Repositorios\LocalidadRespositorio.cs" />
     <Compile Include="Repositorios\DiarioRepositorio.cs" />
     <Compile Include="Repositorios\PaisRepositorio.cs" />

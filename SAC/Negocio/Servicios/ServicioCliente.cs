@@ -60,7 +60,18 @@ namespace Negocio.Servicios
                 return null;
             }
         }
-
+     public List<ClienteModel> GetClientePorCodigo(string strCodigo)
+        {
+            try
+            {
+                return Mapper.Map<List<Cliente>, List<ClienteModel>>(oClienteRepositorio.GetClientePorCodigo(strCodigo));
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
 
 
         public ClienteModel GetClientePorId(int id)

@@ -64,7 +64,33 @@ namespace Negocio.Servicios
             }
         }
 
-                
+        public List<TipoComprobanteModel> GetTipoComprobanteLocalesVentaSinFactura()
+        {
+            try
+            {
+                return Mapper.Map<List<TipoComprobante>, List<TipoComprobanteModel>>(tipoComprobanteRepositorio.GetTipoComprobanteLocalesVentaSinFactura());
+
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                return null;
+            }
+        }
+        public List<TipoComprobanteModel> GetTipoComprobanteExtranjerosVenta()
+        {
+            try
+            {
+                return Mapper.Map<List<TipoComprobante>, List<TipoComprobanteModel>>(tipoComprobanteRepositorio.GetTipoComprobanteExtranjerosVenta());
+
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                return null;
+            }
+        }
+
 
     }
 }

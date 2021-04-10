@@ -39,6 +39,21 @@ namespace Datos.Repositorios
             return context.SaveChanges();
         }
 
+        public int ObtenerNroFactura(int nroComprobante, int puntoVenta)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            var nroFactura = context.TipoComprobanteVenta.Where(p => p.Id == nroComprobante && p.PuntoVenta == puntoVenta).First();
+            return int.Parse(nroFactura.Numero);
+        }
+
+        public List<TipoComprobanteVenta> GetAllTipoComprobante()
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+
+            List<TipoComprobanteVenta> listModel = context.TipoComprobanteVenta.ToList();
+            return listModel;
+        }
+
 
 
     }

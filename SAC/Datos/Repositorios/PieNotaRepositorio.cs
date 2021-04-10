@@ -156,15 +156,12 @@ namespace Datos.Repositorios
                               .Where(p => p.Id == IdPieNota).First();
         }
 
-      
-
-
-
-
-
-
-
-
+         public PieNota GetPieNotaPorCodigo(string codigo)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.PieNota
+                              .Where(p => p.Cuenta.Contains(codigo)).First();
+        }
         #endregion
 
 

@@ -64,5 +64,34 @@ namespace Negocio.Servicios
             }
         }
 
+        
+        public int ObtenerNroFactura(int nroComprobante, int puntoVenta)
+        {
+            try
+            {
+                return otipoComprobanteVentaRepositorio.ObtenerNroFactura(nroComprobante, puntoVenta);
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                return 0;
+            }
+        }
+
+
+        public List<TipoComprobanteVentaModel> GetAllTipoComprobante()
+        {
+            try
+            {
+                return Mapper.Map<List<TipoComprobanteVenta>, List<TipoComprobanteVentaModel>>(otipoComprobanteVentaRepositorio.GetAllTipoComprobante());
+
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                return null;
+            }
+        }
+
     }
 }

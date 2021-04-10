@@ -24,9 +24,15 @@ namespace SAC.Infrastructure
             CreateMap<DiarioModel, DiarioModelView>();
             CreateMap<DiarioModelView, DiarioModel>();
 
+            CreateMap<ItemImprModel, ItemImprModelView>();
+            CreateMap<ItemImprModelView, ItemImprModel>();
+
             CreateMap<TipoPagoModel, TipoPagoModelView>();
             CreateMap<TipoPagoModelView, TipoPagoModel>();
-           
+
+            CreateMap<ArticuloModel, ArticuloModelView>();
+            CreateMap<ArticuloModelView, ArticuloModel>();
+
             CreateMap<DepartamentoModel, DepartamentoModelView>();
             CreateMap<DepartamentoModelView, DepartamentoModel>();
 
@@ -80,6 +86,9 @@ namespace SAC.Infrastructure
 
             CreateMap<TipoComprobanteModel, TipoComprobanteModelView>();
             CreateMap<TipoComprobanteModelView, TipoComprobanteModel>();
+
+            CreateMap<TipoComprobanteVentaModel, TipoComprobanteVentaModelView>();
+            CreateMap<TipoComprobanteVentaModelView, TipoComprobanteVentaModel>();
 
             CreateMap<CompraFacturaModel, CompraFacturaViewModel>();
             CreateMap<CompraFacturaViewModel, CompraFacturaModel>();

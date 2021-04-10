@@ -155,6 +155,7 @@
     <Compile Include="Controllers\ContabilidadControllers.cs" />
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
     <Compile Include="Controllers\DepartamentoControllers.cs" />
+    <Compile Include="Controllers\FacturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalidadController.cs" />
     <Compile Include="Controllers\PagosController.cs" />
@@ -189,7 +190,7 @@
     <Compile Include="Models\ChequeraModelView.cs" />
     <Compile Include="Models\ClienteDireccionModelView.cs" />
     <Compile Include="Models\ClienteModelView.cs" />
-    <Compile Include="Models\Cobro\CobroClienteModelView.cs" />
+    <Compile Include="Models\CobroClienteModelView.cs" />
     <Compile Include="Models\Cobro\BuscarClienteModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoModelView.cs" />
@@ -197,7 +198,10 @@
     <Compile Include="Models\CompraRegistroDetalleModelView.cs" />
     <Compile Include="Models\CompraRegistroModelView.cs" />
     <Compile Include="Models\CuentaPlanContableModelView.cs" />
+    <Compile Include="Models\FacturaModelView.cs" />
     <Compile Include="Models\IngresoBancoModelView.cs" />
+    <Compile Include="Models\ItemImprFacturaModelView.cs" />
+    <Compile Include="Models\ItemImprModelView.cs" />
     <Compile Include="Models\PlanContableModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorModelView.cs" />
     <Compile Include="Models\CuentaCorrienteProveedorDetallesModelView.cs" />
@@ -236,6 +240,7 @@
     <Compile Include="Models\TarjetaOperacionModelView.cs" />
     <Compile Include="Models\TipoClienteModelView.cs" />
     <Compile Include="Models\TipoComprobanteModelView.cs" />
+    <Compile Include="Models\TipoComprobanteVentaModelView.cs" />
     <Compile Include="Models\TipoIdiomaModelView.cs" />
     <Compile Include="Models\TipoIvaViewModel.cs" />
     <Compile Include="Models\TipoMonedaModelView.cs" />
@@ -2953,6 +2958,7 @@
     <Content Include="Views\Cobros\_tablaRetenciones.cshtml" />
     <Content Include="Views\Cobros\Index.cshtml" />
     <Content Include="Views\Cobro\Index.cshtml" />
+    <Content Include="Views\Factura\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

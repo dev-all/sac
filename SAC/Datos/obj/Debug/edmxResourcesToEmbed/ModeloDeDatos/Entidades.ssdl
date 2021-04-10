@@ -402,6 +402,55 @@
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
   </EntityType>
+  <EntityType Name="Dto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Periodo" Type="int" Nullable="false" />
+    <Property Name="CodDto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CodArt" Type="nvarchar" MaxLength="50" />
+    <Property Name="NomDto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Loc01" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc02" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc03" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc04" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc05" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc06" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc07" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc08" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc09" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc10" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc11" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Loc12" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext01" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext02" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext03" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext04" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext05" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext06" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext07" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext08" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext09" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext10" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext11" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ext12" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe01" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe02" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe03" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe4" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe05" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe06" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe07" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe08" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe09" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe10" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe11" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Epe12" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
   <EntityType Name="EstadoCivil">
     <Key>
       <PropertyRef Name="id" />
@@ -432,6 +481,57 @@
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FactVenta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoComprobante" Type="int" Nullable="false" />
+    <Property Name="PuntoVenta" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NumeroFactura" Type="int" Nullable="false" />
+    <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="TotalD" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Parcial" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Saldo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Vencimiento" Type="datetime" Nullable="false" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Baja" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Impre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FPago" Type="datetime" />
+    <Property Name="TipoIva" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Concepto" Type="nvarchar" MaxLength="50" />
+    <Property Name="Marca" Type="nvarchar" MaxLength="1" />
+    <Property Name="Condic" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdProvincia" Type="int" Nullable="false" />
+    <Property Name="IdPais" Type="int" Nullable="false" />
+    <Property Name="IdImputacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NumeroPago" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cotiza" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Moneda" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ORef" Type="nvarchar" MaxLength="1" />
+    <Property Name="YRef" Type="nvarchar" MaxLength="1" />
+    <Property Name="Gasto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Descuento" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CotizaP" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TipoFac" Type="nvarchar" MaxLength="50" />
+    <Property Name="Diario" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Recibo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Periodo" Type="int" Nullable="false" />
+    <Property Name="NumeroTra" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Anula" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Combria" Type="float" Nullable="false" />
+    <Property Name="IngBr" Type="float" Nullable="false" />
+    <Property Name="Efectivo" Type="nvarchar" MaxLength="1" />
+    <Property Name="Cheque" Type="nvarchar" MaxLength="1" />
+    <Property Name="Debito" Type="nvarchar" MaxLength="1" />
+    <Property Name="Cuenta" Type="nvarchar" MaxLength="1" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
   </EntityType>
   <EntityType Name="GrupoCaja">
     <Key>
@@ -509,6 +609,83 @@
     <Property Name="Octubre" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Noviembre" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Diciembre" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ItemImpre">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoComprobante" Type="int" />
+    <Property Name="PuntoVenta" Type="nvarchar" MaxLength="50" />
+    <Property Name="Factura" Type="int" />
+    <Property Name="Codigo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Cantidad" Type="float" />
+    <Property Name="Unidad" Type="nvarchar" MaxLength="1" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AuxiliarNumero" Type="int" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="IvaVenta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoComprobantes" Type="int" Nullable="false" />
+    <Property Name="PuntoVenta" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NumeroFactura" Type="int" Nullable="false" />
+    <Property Name="AuxiliarNumero" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NroEmp" Type="int" Nullable="false" />
+    <Property Name="Empre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Iva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IvaRi" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IvaRes" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotIva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Gasto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Neto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Espe" Type="nvarchar" MaxLength="1" />
+    <Property Name="Res" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TipoIva" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TipoFac" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ResDGR" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Cuit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dolar" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Difer" Type="nvarchar" MaxLength="1" />
+    <Property Name="Clase" Type="nvarchar" MaxLength="50" />
+    <Property Name="NomEmp" Type="nvarchar" MaxLength="50" />
+    <Property Name="Periodo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ClaseFac" Type="nvarchar" MaxLength="50" />
+    <Property Name="Moneda" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Isib" Type="float" Nullable="false" />
+    <Property Name="Diario" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cae" Type="float" />
+    <Property Name="Impint" Type="float" Nullable="false" />
+    <Property Name="IdImputacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tnogra" Type="nvarchar" MaxLength="1" />
+    <Property Name="Texento" Type="nvarchar" MaxLength="1" />
+    <Property Name="Pergral" Type="nvarchar" MaxLength="1" />
+    <Property Name="Peib" Type="nvarchar" MaxLength="1" />
+    <Property Name="Permun" Type="nvarchar" MaxLength="1" />
+    <Property Name="OtrosImp" Type="nvarchar" MaxLength="1" />
+    <Property Name="Tnocat" Type="nvarchar" MaxLength="1" />
+    <Property Name="Pernac" Type="nvarchar" MaxLength="1" />
+    <Property Name="Iva27" Type="nvarchar" MaxLength="1" />
+    <Property Name="Iva21" Type="nvarchar" MaxLength="1" />
+    <Property Name="Iva105" Type="nvarchar" MaxLength="1" />
+    <Property Name="Iva5" Type="nvarchar" MaxLength="1" />
+    <Property Name="Iva25" Type="nvarchar" MaxLength="1" />
+    <Property Name="Total21" Type="nvarchar" MaxLength="1" />
+    <Property Name="Total27" Type="nvarchar" MaxLength="1" />
+    <Property Name="Total105" Type="nvarchar" MaxLength="1" />
+    <Property Name="Total5" Type="nvarchar" MaxLength="1" />
     <Property Name="Activo" Type="bit" />
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
@@ -977,6 +1154,90 @@ advertencia 6002: La tabla o vista 'SAC.dbo.REGISTRO' no tiene definida ninguna 
     <Property Name="IdTipoMoneda" Type="int" />
     <Property Name="IdUsuario" Type="int" />
     <Property Name="UltimaModificacion" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'SAC.dbo.CompraIvaVista' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="CompraIvaVista">
+    <Key>
+      <PropertyRef Name="Expr4" />
+      <PropertyRef Name="PuntoVenta" />
+      <PropertyRef Name="AuxiliarNumero" />
+      <PropertyRef Name="NumeroEmpresa" />
+      <PropertyRef Name="Empesa" />
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="Total" />
+      <PropertyRef Name="Iva" />
+      <PropertyRef Name="IvaAri" />
+      <PropertyRef Name="IvaRes" />
+      <PropertyRef Name="TotalIva" />
+      <PropertyRef Name="Neto" />
+      <PropertyRef Name="Especial" />
+      <PropertyRef Name="Res" />
+      <PropertyRef Name="IdTipoIva" />
+      <PropertyRef Name="TipoFactura" />
+      <PropertyRef Name="ResDgr" />
+      <PropertyRef Name="Clase" />
+      <PropertyRef Name="NombreEmple" />
+      <PropertyRef Name="Periodo" />
+      <PropertyRef Name="AbreviaturaFactura" />
+      <PropertyRef Name="IdTipoMoneda" />
+      <PropertyRef Name="IdDiario" />
+      <PropertyRef Name="Cae" />
+    </Key>
+    <Property Name="Expr4" Type="int" Nullable="false" />
+    <Property Name="IdTipoComprobante" Type="int" />
+    <Property Name="PuntoVenta" Type="int" Nullable="false" />
+    <Property Name="NumeroFactura" Type="nvarchar" MaxLength="50" />
+    <Property Name="AuxiliarNumero" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NumeroEmpresa" Type="datetime" Nullable="false" />
+    <Property Name="Empesa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Fecha" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Iva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IvaAri" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IvaRes" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TotalIva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Gasto" Type="nvarchar" MaxLength="1" />
+    <Property Name="Neto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Especial" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Res" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdTipoIva" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TipoFactura" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ResDgr" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Cuit" Type="nvarchar" MaxLength="1" />
+    <Property Name="dolar" Type="nvarchar" MaxLength="50" />
+    <Property Name="Diferencia" Type="nvarchar" MaxLength="30" />
+    <Property Name="Clase" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="NombreEmple" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="Periodo" Type="int" Nullable="false" />
+    <Property Name="AbreviaturaFactura" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="IdTipoMoneda" Type="int" Nullable="false" />
+    <Property Name="Isib" Type="varchar" MaxLength="20" />
+    <Property Name="IdDiario" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Cae" Type="int" Nullable="false" />
+    <Property Name="Impint" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IdImputacion" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tnogra" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Texento" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PerGeneral" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Perib" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PerMun" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OtrosImpuestos" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Tnocat" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Pernac" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Iva27" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Iva21" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Iva105" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Ivan5" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Iva25" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total21" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total27" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total105" Type="bit" />
+    <Property Name="Total5" Type="int" />
+    <Property Name="Activo" Type="datetime" />
+    <Property Name="Expr1" Type="int" />
+    <Property Name="Expr2" Type="int" />
+    <Property Name="Expr3" Type="int" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1877,13 +2138,17 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dto" EntityType="Self.Dto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FactVenta" EntityType="Self.FactVenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoCaja" EntityType="Self.GrupoCaja" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoCuenta" EntityType="Self.GrupoCuenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoPresupuesto" EntityType="Self.GrupoPresupuesto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="homePorRol" EntityType="Self.homePorRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Imputacion" EntityType="Self.Imputacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemImpre" EntityType="Self.ItemImpre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IvaVenta" EntityType="Self.IvaVenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenuSidebar" EntityType="Self.MenuSidebar" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
@@ -1926,6 +2191,64 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     [REGISTRO].[instruccion] AS [instruccion], 
     [REGISTRO].[contexto] AS [contexto]
     FROM [dbo].[REGISTRO] AS [REGISTRO]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CompraIvaVista" EntityType="Self.CompraIvaVista" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CompraIvaVista].[Expr4] AS [Expr4], 
+    [CompraIvaVista].[IdTipoComprobante] AS [IdTipoComprobante], 
+    [CompraIvaVista].[PuntoVenta] AS [PuntoVenta], 
+    [CompraIvaVista].[NumeroFactura] AS [NumeroFactura], 
+    [CompraIvaVista].[AuxiliarNumero] AS [AuxiliarNumero], 
+    [CompraIvaVista].[NumeroEmpresa] AS [NumeroEmpresa], 
+    [CompraIvaVista].[Empesa] AS [Empesa], 
+    [CompraIvaVista].[Fecha] AS [Fecha], 
+    [CompraIvaVista].[Total] AS [Total], 
+    [CompraIvaVista].[Iva] AS [Iva], 
+    [CompraIvaVista].[IvaAri] AS [IvaAri], 
+    [CompraIvaVista].[IvaRes] AS [IvaRes], 
+    [CompraIvaVista].[TotalIva] AS [TotalIva], 
+    [CompraIvaVista].[Gasto] AS [Gasto], 
+    [CompraIvaVista].[Neto] AS [Neto], 
+    [CompraIvaVista].[Especial] AS [Especial], 
+    [CompraIvaVista].[Res] AS [Res], 
+    [CompraIvaVista].[IdTipoIva] AS [IdTipoIva], 
+    [CompraIvaVista].[TipoFactura] AS [TipoFactura], 
+    [CompraIvaVista].[ResDgr] AS [ResDgr], 
+    [CompraIvaVista].[Cuit] AS [Cuit], 
+    [CompraIvaVista].[dolar] AS [dolar], 
+    [CompraIvaVista].[Diferencia] AS [Diferencia], 
+    [CompraIvaVista].[Clase] AS [Clase], 
+    [CompraIvaVista].[NombreEmple] AS [NombreEmple], 
+    [CompraIvaVista].[Periodo] AS [Periodo], 
+    [CompraIvaVista].[AbreviaturaFactura] AS [AbreviaturaFactura], 
+    [CompraIvaVista].[IdTipoMoneda] AS [IdTipoMoneda], 
+    [CompraIvaVista].[Isib] AS [Isib], 
+    [CompraIvaVista].[IdDiario] AS [IdDiario], 
+    [CompraIvaVista].[Cae] AS [Cae], 
+    [CompraIvaVista].[Impint] AS [Impint], 
+    [CompraIvaVista].[IdImputacion] AS [IdImputacion], 
+    [CompraIvaVista].[Tnogra] AS [Tnogra], 
+    [CompraIvaVista].[Texento] AS [Texento], 
+    [CompraIvaVista].[PerGeneral] AS [PerGeneral], 
+    [CompraIvaVista].[Perib] AS [Perib], 
+    [CompraIvaVista].[PerMun] AS [PerMun], 
+    [CompraIvaVista].[OtrosImpuestos] AS [OtrosImpuestos], 
+    [CompraIvaVista].[Tnocat] AS [Tnocat], 
+    [CompraIvaVista].[Pernac] AS [Pernac], 
+    [CompraIvaVista].[Iva27] AS [Iva27], 
+    [CompraIvaVista].[Iva21] AS [Iva21], 
+    [CompraIvaVista].[Iva105] AS [Iva105], 
+    [CompraIvaVista].[Ivan5] AS [Ivan5], 
+    [CompraIvaVista].[Iva25] AS [Iva25], 
+    [CompraIvaVista].[Total21] AS [Total21], 
+    [CompraIvaVista].[Total27] AS [Total27], 
+    [CompraIvaVista].[Total105] AS [Total105], 
+    [CompraIvaVista].[Total5] AS [Total5], 
+    [CompraIvaVista].[Activo] AS [Activo], 
+    [CompraIvaVista].[Expr1] AS [Expr1], 
+    [CompraIvaVista].[Expr2] AS [Expr2], 
+    [CompraIvaVista].[Expr3] AS [Expr3]
+    FROM [dbo].[CompraIvaVista] AS [CompraIvaVista]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="CuentaCorriente" EntityType="Self.CuentaCorriente" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

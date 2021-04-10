@@ -88,5 +88,10 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CuentaCorriente> CuentaCorriente { get; set; }
         public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
+        public virtual DbSet<Dto> Dto { get; set; }
+        public virtual DbSet<FactVenta> FactVenta { get; set; }
+        public virtual DbSet<ItemImpre> ItemImpre { get; set; }
+        public virtual DbSet<IvaVenta> IvaVenta { get; set; }
+        public virtual DbSet<CompraIvaVista> CompraIvaVista { get; set; }
     }
 }

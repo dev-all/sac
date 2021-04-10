@@ -16,6 +16,36 @@ namespace Datos.Repositorios
             this.context = contexto;
         }
 
+ public List<Articulo> GetAllArticulo()
+        {
+            //context.Configuration.LazyLoadingEnabled = false;
+            //return context.Articulo.Where(acc => acc.Activo == true).ToList();
+            List<Articulo> listaArticulo = context.Articulo.Where(p => p.Activo == true).OrderBy(acc => acc.Id).ToList();
+            return listaArticulo;
+        }
+        public Articulo GetArticulo(int idArticulo)
+        {
+            //context.Configuration.LazyLoadingEnabled = false;
+            Articulo Articulo = context.Articulo.Where(p => p.Activo == true && p.Id== idArticulo).First();
+            return Articulo;
+        }
+
+
+  public List<Articulo> GetArticulosPorCodigo(string strCodigo)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            List<Articulo> listaArticulos = context.Articulo
+              .Where(p => p.Activo == true && p.Codigo.Contains(strCodigo)).ToList();
+
+            return listaArticulos;
+        }
+
+        public Articulo GetArticuloOuCodigo(string strCodigo)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            Articulo Articulo = context.Articulo.Where(p => p.Activo == true && p.Codigo.Contains(strCodigo)).First();
+            return Articulo;
+        }
 
             
         public Articulo CrearArticulo(Articulo model)
@@ -61,12 +91,7 @@ namespace Datos.Repositorios
         }
 
 
-        public List<Articulo> GetAllArticulo()
-        {
-            return context.Articulo.Where(acc => acc.Activo == true).OrderBy(acc => acc.Id).ToList();
-        }
-
-        public Articulo GetArticuloPorId(int id)
+       public Articulo GetArticuloPorId(int id)
         {           
             return context.Articulo.Where(acc => acc.Id == id && acc.Activo == true).FirstOrDefault(); 
         }

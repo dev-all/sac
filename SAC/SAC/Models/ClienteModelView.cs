@@ -63,7 +63,8 @@ namespace SAC.Models
 
         public int CNombreCliente { get; set; }
 
-
+        //agrego listaComprobantes
+        public List<TipoComprobanteModelView> ListaComprobantes { get; set; }
 
 
 
