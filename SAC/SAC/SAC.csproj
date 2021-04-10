@@ -150,6 +150,7 @@
     <Compile Include="Controllers\CajaGrupoController.cs" />
     <Compile Include="Controllers\CajaSaldoController.cs" />
     <Compile Include="Controllers\ClienteControllers.cs" />
+    <Compile Include="Controllers\CobroController.cs" />
     <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\ContabilidadControllers.cs" />
     <Compile Include="Controllers\CuentaCteProveedorController.cs" />
@@ -188,6 +189,8 @@
     <Compile Include="Models\ChequeraModelView.cs" />
     <Compile Include="Models\ClienteDireccionModelView.cs" />
     <Compile Include="Models\ClienteModelView.cs" />
+    <Compile Include="Models\Cobro\CobroClienteModelView.cs" />
+    <Compile Include="Models\Cobro\BuscarClienteModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoModelView.cs" />
     <Compile Include="Models\CompraIvaModelView.cs" />
@@ -2847,6 +2850,7 @@
     <Content Include="Scripts\view\calcularporcentaje.js" />
     <Content Include="Scripts\view\ChequeScript.js" />
     <Content Include="Scripts\view\ClienteScript.js" />
+    <Content Include="Scripts\view\Cobro\Cobro.js" />
     <Content Include="Scripts\view\ContabilidadScript.js" />
     <Content Include="Scripts\view\CtaCteProveedor.js" />
     <Content Include="Scripts\view\CtaCteProveedorDetalle.js" />
@@ -2948,6 +2952,7 @@
     <Content Include="Views\Cobros\_TablaFacturasPagar.cshtml" />
     <Content Include="Views\Cobros\_tablaRetenciones.cshtml" />
     <Content Include="Views\Cobros\Index.cshtml" />
+    <Content Include="Views\Cobro\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -50,7 +50,6 @@ namespace Negocio.Servicios
 
         public List<ClienteModel> GetClientePorNombre(string strCliente)
         {
-
             try
             {
                 return Mapper.Map<List<Cliente>, List<ClienteModel>>(oClienteRepositorio.GetClientePorNombre(strCliente));
@@ -60,8 +59,6 @@ namespace Negocio.Servicios
                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
-
-
         }
 
 

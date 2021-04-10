@@ -128,6 +128,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioCobro.cs" />
     <Compile Include="Servicios\ServicioArticulo.cs" />
     <Compile Include="Servicios\ServicioBancoCuenta.cs" />
     <Compile Include="Servicios\ServicioBancoCuentaBancaria.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Servicios\ServicioCliente.cs" />
     <Compile Include="Servicios\ServicioClienteDireccion.cs" />
     <Compile Include="Servicios\ServicioCompraFacturaPago.cs" />
+    <Compile Include="Servicios\ServicioCorreo.cs" />
     <Compile Include="Servicios\ServicioCuentaCteProveedor.cs" />
     <Compile Include="Servicios\ServicioDepartamento.cs" />
     <Compile Include="Servicios\ServicioElog.cs" />
