@@ -63,9 +63,20 @@ namespace Negocio.Servicios
                 return null;
             }
         }
+        public BancoModel GetBancoPorIdLazy(int id)
+        {
+            try
+            {
+                return Mapper.Map<Banco, BancoModel>(oBancoCuentaRepositorio.GetBancoPorIdLazy(id));
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
 
-        
-      public List<BancoCuentaBancariaModel> GetmMovimientosPendientesCuentaBancaria(int idBanco, DateTime fecha)
+        public List<BancoCuentaBancariaModel> GetmMovimientosPendientesCuentaBancaria(int idBanco, DateTime fecha)
         {
             try
             {
@@ -105,6 +116,19 @@ namespace Negocio.Servicios
             catch (Exception ex)
             {
                 _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "erro");
+                return null;
+            }
+        }
+
+        public List<BancoModel> GetAllBanco()
+        {
+            try
+            {
+                return Mapper.Map<List<Banco>, List<BancoModel>>(oBancoCuentaRepositorio.GetAllBanco());
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
                 return null;
             }
         }

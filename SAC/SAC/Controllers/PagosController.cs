@@ -186,7 +186,7 @@ namespace SAC.Controllers
 
 
                 List<TipoRetencionModelView> tipoRetencionModelViews = Mapper.Map<List<TipoRetencionModel>, List<TipoRetencionModelView>>(oServicioTipoRetencion.GetAllTipoRetencion());
-                retencionPagoModelView.tipoRetencion = (tipoRetencionModelViews.Select(x =>
+                retencionPagoModelView.ListaTipoRetencion = (tipoRetencionModelViews.Select(x =>
                                              new SelectListItem()
                                              {
                                                  Value = x.Id.ToString(),
@@ -245,7 +245,7 @@ namespace SAC.Controllers
 
             var a = oServicioRetencion.Agregar(Mapper.Map<RetencionModelView, RetencionModel>(oRetencion));
 
-            List<RetencionModelView> retencionModelView = Mapper.Map<List<RetencionModel>, List<RetencionModelView>>(oServicioRetencion.GetAllRetencion(pagosFacturasModelView.Retencion_.IdCompraFactura));
+            List<RetencionModelView> retencionModelView = Mapper.Map<List<RetencionModel>, List<RetencionModelView>>(oServicioRetencion.GetAllRetencion(a.IdCompraFactura??0));
 
             PagosFacturasModelView oPagosModelView = new PagosFacturasModelView();
             oPagosModelView.ListadoRetenciones_ = retencionModelView;

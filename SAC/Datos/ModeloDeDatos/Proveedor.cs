@@ -56,7 +56,7 @@ namespace Datos.ModeloDeDatos
         public virtual PrespuestoActual PrespuestoActual { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual TipoIva TipoIva { get; set; }
-        public virtual TipoMoneda TipoMoneda { get; set; }
         public virtual TipoProveedor TipoProveedor { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
     }
 }

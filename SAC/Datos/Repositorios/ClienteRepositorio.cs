@@ -278,6 +278,16 @@ namespace Datos.Repositorios
             return listaCliente;
         }
 
+        public void ActualizarPresupuesto(Cliente model)
+        {
+            Cliente cliente = GetClientePorId(model.Id);
+            cliente.IdGrupoPresupuesto = model.IdGrupoPresupuesto;
+            cliente.Activo = true;
+            cliente.IdUsuario = model.IdUsuario;
+            cliente.UltimaModificacion = model.UltimaModificacion;
+            context.SaveChanges();
+        }
+
         public List<Cliente> GetClientePorIdNombre(int idTipoCliente, string strCliente)
         {
             context.Configuration.LazyLoadingEnabled = false;

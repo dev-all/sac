@@ -1,10 +1,22 @@
 ﻿@model SAC.Models.FacturaModelView
 
 @{
-    ViewBag.Title = "Registro factura compras";
+    ViewBag.Title = "Registro Factura ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    fieldset {
+        /* min-width: 0; */
+        /* margin: 0; */
+        border: 1px solid lightgray !important;
+        padding: 5px;
+    }
 
+    legend {
+        padding: 3px;
+        font: small sans-serif;
+    }
+</style>
 <!-- Date picker plugins css -->
 <link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
 
@@ -15,12 +27,20 @@
 
 
     @Html.HiddenFor(model => model.IdCliente)
-    @Html.HiddenFor(model => model.IdPuntoVenta)
+    @*@Html.HiddenFor(model => model.IdPuntoVenta)*@
     @Html.HiddenFor(model => model.idTipoIva)
     @Html.HiddenFor(model => model.mipyme)
     @Html.HiddenFor(model => model.IdArticulo)
+    @Html.HiddenFor(model => model.CodigoCliente)
 
     @Html.HiddenFor(model => model.hdnArticulos)
+
+    @Html.HiddenFor(model => model.idPais)
+    @Html.HiddenFor(model => model.idProvincia)
+    @Html.HiddenFor(model => model.TotalFactura)
+    @Html.HiddenFor(model => model.CuitSeleccionado)
+    @Html.HiddenFor(model => model.idImputacion)
+
     
 
     @*@Html.HiddenFor(model => model.Id)
@@ -31,9 +51,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="form-body">
-                        <h5 class="card-title">Registro Facturas de Compras</h5>
-                        <hr>
+                    <div class="form-body">                       
                         <div class="form-horizontal">
                             <div class="row">
                                 <div class="col-md-2">
@@ -46,31 +64,40 @@
                                     @Html.ValidationMessageFor(m => m.Cliente.Nombre, "", new { @class = "text-danger form-control-sm" })
                                 </div>
 
-
                                 <div class="col-md-2">
                                     <small>Pto Venta</small>
-                                    @Html.DropDownList("IdPuntoVenta", Model.SelectPuntoVenta, null, new { @class = "form-control form-control-sm", disabled = "true" })
+                                    @Html.DropDownListFor(model => model.IdPuntoVenta, Model.SelectPuntoVenta, null, new { @class = "form-control form-control-sm"})
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <small>Fecha</small>
-                                    <input type="text" id="Fecha" name="Fecha" disabled class="form-control form-control-sm fechadatepicker" required
+                                    <input type="text" id="Fecha" name="Fecha" class="form-control form-control-sm fechadatepicker" required
                                            data-validation-required-message="Ingrese una fecha">
                                 </div>
+
                                 <div class="col-md-2">
                                     <small>CUIT</small>
                                     @Html.TextBoxFor(m => m.Cuit, new { @class = "form-control form-control-sm", @placeholder = "" })
                                     @Html.ValidationMessageFor(m => m.Cuit, "", new { @class = "text-danger form-control-sm" })
                                 </div>
+
+                                <div class="col-md-1">
+                                    <small>Cod Pais</small>
+                                    @Html.TextBoxFor(m => m.CodPaisAfip, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                    @*@Html.ValidationMessageFor(m => m.CodPaisAfip, "", new { @class = "text-danger form-control-sm" })*@
+                                </div>
+
                                 <div class="col-md-2">
                                     <small>Tipo Comprobante</small>
                                     @*@Html.DropDownList("idTipoComprobanteSeleccionado", Model.TipoComprobante, null, new { @class = "form-control form-control-sm" })*@
                                     @Html.DropDownListFor(model => model.idTipoComprobanteSeleccionado, new List<SelectListItem>(), "Seleccionar...", new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.idTipoComprobanteSeleccionado, "", new { @class = "text-danger form-control-sm" })
                                 </div>
 
                                 <div class="col-md-2">
                                     <small>Departamento</small>
                                     @Html.DropDownList("idDepartamento", Model.Departamentos, null, new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(m => m.idDepartamento, "", new { @class = "text-danger form-control-sm" })
                                 </div>
                             </div>
 
@@ -87,14 +114,16 @@
                                     @Html.DropDownList("IdTipoPago", Model.FormaPago, null, new { @class = "form-control form-control-sm" })
                                 </div>
                                 <div class="col-md-2"></div>
-                                <div class="col-md-1">
+                                <div class="col-md-2">
                                     <small>Oref</small>
                                     @Html.TextBoxFor(m => m.ORef, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                    @Html.ValidationMessageFor(m => m.ORef, "", new { @class = "text-danger form-control-sm" })
                                 </div>
-                                <div class="col-md-1"></div>
-                                <div class="col-md-1">
+                                @*<div class="col-md-1"></div>*@
+                                <div class="col-md-2">
                                     <small>Yref</small>
                                     @Html.TextBoxFor(m => m.YREf, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                    @Html.ValidationMessageFor(m => m.YREf, "", new { @class = "text-danger form-control-sm" })
                                 </div>
 
                             </div>
@@ -111,19 +140,19 @@
                                         <div class="row form-group">
                                             <label class="col-sm-4 text-right small" style="padding-top:5px;">Carpeta</label>
                                             <div class="col-sm-4">
-                                                @Html.TextBoxFor(m => m.nroCarpera, new { @class = "form-control form-control-sm" })
+                                                @Html.TextBoxFor(m => m.nroCarpera, new { maxlength = 6, @class = "form-control form-control-sm" })
                                             </div>
-                                            <div class="col-sm-1">/</div>
-                                            <div class="col-sm-2">
-                                                @Html.TextBoxFor(m => m.nroCarperaFinal, new { @class = "form-control form-control-sm"})
+                                            <label class="small" style="padding-top:5px;">/</label>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(m => m.nroCarperaFinal, new { maxlength = 2, @class = "form-control form-control-sm" })
                                             </div>
 
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="row form-group">
-                                            <label class="col-sm-4 text-right small" style="padding-top:5px;">Factura Manual</label>
-                                            <div class="col-sm-8">
+                                            <label class="col-sm-8 text-right small" style="padding-top:5px;">Factura Manual</label>
+                                            <div class="col-sm-4">
                                                 @*@Html.TextBoxFor(m => m.FacturaManual, new { @class = "form-control form-control-sm", @placeholder = "" })*@
                                                 @Html.CheckBoxFor(model => model.FacturaManual, new { @class = "form-check-input" })
                                             </div>
@@ -133,21 +162,22 @@
                                     </div>
 
                                 </div>
-
                                 <div class="row m-b-10 ">
                                     <div class="col-sm-5">
                                         @Html.TextBoxFor(m => m.NombreComp, new { @class = "form-control form-control-sm", @placeholder = "Nombre" })
                                     </div>
                                     <div class="col-sm-3">
-                                        
+
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="row form-group">
                                             <label class="col-sm-4 text-right small" style="padding-top:5px">Aplica N/C</label>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-6">
                                                 @Html.TextBoxFor(m => m.AplicaNC, new { @class = "form-control form-control-sm", @placeholder = "" })
                                             </div>
-
+                                            <div class="col-sm-2">
+                                                <input type="button" id="BuscarFactura" class="btn btn-secondary btn-sm" value="Buscar" />
+                                            </div>
                                         </div>
 
                                     </div>
@@ -165,13 +195,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 text-left">
+                                    <div class="col-sm-4 text-left">
                                         <div class="row form-group">
-                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Cotización</label>
-                                            <div class="col-sm-8">
-                                                @Html.TextBoxFor(m => m.Cotizacion, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                            <label class="col-sm-5 text-center small" style="padding-top:5px">Idioma Factura</label>
+                                            <div class="col-sm-7">
+                                                @Html.DropDownList("IdTipoIdioma", Model.TipoIdioma, null, new { @class = "form-control form-control-sm" })
                                             </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
 
                                 </div>
@@ -181,16 +211,16 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="row form-group">
-                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Idioma Factura</label>
+                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Cotización</label>
                                             <div class="col-sm-8">
-                                                @Html.DropDownList("IdTipoIdioma", Model.TipoIdioma, null, new { @class = "form-control form-control-sm" })
+                                                @Html.TextBoxFor(m => m.Cotizacion, new { @class = "form-control form-control-sm", @placeholder = "" })
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-4">
                                         <div class="row form-group">
-                                            <label class="col-sm-4 text-right small" style="padding-top:5px">Cuenta Bco</label>
-                                            <div class="col-sm-8">
+                                            <label class="col-sm-5 text-center small" style="padding-top:5px">Cuenta</label>
+                                            <div class="col-sm-7">
                                                 @Html.DropDownList("IdCuentaBancaria", Model.CuentaBancaria, null, new { @class = "form-control form-control-sm" })
 
                                             </div>
@@ -211,50 +241,92 @@
                                 <div class="col-sm-1"></div>
                             </div>
 
-                            <div class="row col-8 m-b-10">
-                                <div class="col-md-2">
-                                    <small>Codigo</small>
-                                    <input type="text" id="txtCodigo" class="form-control form-control-sm" />
-                                </div>
-                                <div class="col-md-7">
-                                    <small>Descripcion</small>
-                                    <input type="text" id="txtCodigoDescripcion" class="form-control form-control-sm" />
-                                </div>
-                                <div class="col-md-2">
-                                    <small>Monto</small>
-                                    <input type="text" id="txtMonto" class="form-control form-control-sm" />
-                                </div>
-                            </div>
-
-                            <div class="row m-b-10 ">
-                                <input type="button" id="ItemFact" style="margin-left:15px" class="btn btn-secondary btn-sm" value="Agregar Items" onclick="fnAsignarItem()" />
-
-
-                            </div>
-
-                            <div class="row m-b-10 ">
+                            @*<div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4"></div>
+        </div>*@
+                            <div class="row">
                                 <div class="col-md-8">
-                                    <table id="TblItemsFact" class="table stylish-table" style="display:none">
-                                        <thead>
+                                    <fieldset>
+                                        <legend>Detalle de la Facturación </legend>
+                                        <div class="row" id="ItemsCargaDatos">
+                                            <div class="col-md-2">
+                                                <small>Codigo</small>
+                                                <input type="text" id="txtCodigo" class="form-control form-control-sm" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <small>Descripcion</small>
+                                                <input type="text" id="txtCodigoDescripcion" class="form-control form-control-sm" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <small>Monto</small>
+                                                <input type="text" id="txtMonto" class="form-control form-control-sm" />
+                                            </div>
+                                            <div class="col-md-2 m-t-20" id="ItemsCargaDatosBtn">
+                                                @*<button type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-check"></i> </button>*@
+                                                <input type="button" id="ItemFact" class="btn btn-dark btn-sm" value="Agregar"
+                                                       onclick="fnAsignarItem()" />
+                                            </div>
+                                        </div>
+</fieldset>
+
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+
+                           
+                            <div class="row m-t-10">
+                                <div class="col-md-8" id="MostrarItems" style="display:none">
+                                    <table id="TblItemsFact" class="table table-bordered">
+                                        <thead class="thead-dark">
                                             <tr>
-                                                <td>Orden</td>
-                                                <td>Codigo</td>
-                                                <td>Descripcion</td>
-                                                <td>Valor</td>
-                                                <td class="text-center">Eliminar</td>
+                                                <td >Orden</td>
+                                                <td >Codigo</td>
+                                                <td >Descripcion</td>
+                                                <td >Valor</td>
+                                                <td  class="text-center" id="ColumnaEliminar">Eliminar</td>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
-                                        @*<tfoot></tfoot>*@
+
                                     </table>
                                 </div>
                                 <div class="col-md-2">
-                                    <div id="Total" style="display:none">
-                                        <small>Total:  </small>
-                                        <p id="LblTotalFactura"></p>
-                                        @*@Html.TextAreaFor(m =>m.TotalFactura, new { @class = "form-control form-control-sm"})*@
-                                    </div>
 
+                                    <div id="Total" style="display:none">
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex no-block">                                                    
+                                                    <div class="align-self-center">
+                                                        <h4 class="text-muted m-t-10 m-b-0">Total:</h4>
+                                                        <h3 class="m-t-0">$<span id="LblTotalFactura"></span> </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="col-md-2 text-left">
+                                    <div id="TotalAjuste" style="display:none">
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex no-block">
+                                                    <div class="align-self-center">
+                                                        <h4 class="text-muted m-t-10 m-b-0">Total Ajuste:</h4>
+                                                        <h3 class="m-t-0">
+                                                            $ @Html.TextBoxFor(m => m.MontoAjuste, new { @class = "form-control form-control-sm", @placeholder = "" })
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                       
+                                       
+                                    </div>
                                 </div>
                             </div>
 
@@ -265,7 +337,10 @@
 
                     <div class="text-right m-t-10">
                         <button type="submit" onclick="Validacion(event)" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
-                        @*<input type="button" id="btnprueba" onclick="Validacion()" value="Guardar"/>*@
+                       
+                        @* esto es con validacion de modelo pero hay atributos que los valida sin que el diga *@
+                        @*<button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>*@
+                       
                     </div>
                 </div>
             </div>
@@ -314,34 +389,48 @@
     });
 
     function getCliente(codigo) {
-
         $.getJSON("/Factura/GetClienteJson",
             { IdCliente: codigo },
             function (data) {
                 var cliente = JSON.parse(data);
                 //console.log(cliente);
                 //validaciones del word, se considera que el iva 4 es excento en tbl tipoiva, por lo tanto es extranjero
-                if (cliente.IdTipoIva != 4) {
-                    $("#IdPuntoVenta").val(3);
-                }
-                else {
-                    $("#IdPuntoVenta").val(2);
-                }
+                //if (cliente.IdTipoCliente != 4) {
+                //    $("#IdPuntoVenta").val(IdTipoCliente);
+                //}
+                //else {
+                //    $("#IdPuntoVenta").val(2);
+                //}
+
+
+                console.log($("#IdPuntoVenta").val());
+
+                $("#IdPuntoVenta option[value=" + cliente.IdTipoCliente + "]").attr('selected', 'true');
+                $("#IdPuntoVenta").val(cliente.IdTipoCliente);
+         
+                console.log($("#IdPuntoVenta").val());
+                console.log($("#IdPuntoVenta option:selected").text());
 
                 $("#NombreCliente").val(cliente.Codigo);
+                $("#CodigoCliente").val(cliente.Codigo);
+
                 $("#NombreComp").val(cliente.Nombre);
+                $("#idImputacion").val(cliente.IdImputacion);
+
 
                 $("#IdCliente").val(cliente.Id);
                 $("#idTipoIva").val(cliente.IdTipoiva);
                 $("#mipyme").val(cliente.MiPyme);
 
+
                 $("#IdTipoIdioma").val(cliente.IdIdioma);
-                $("#Cuit").val(cliente.Cuit);
+                //$("#Cuit").val(cliente.Cuit);
 
                 $("#idTipoComprobanteSeleccionado").empty();
                 $("#idTipoComprobanteSeleccionado").append("<option value> Seleccionar ...</option>")
-                $.each(cliente.ListaComprobantes, function (index, row) {
-                    $("#idTipoComprobanteSeleccionado").append("<option value='" + row.Id + "'>" + row.Denominacion + "</option>")
+                $.each(cliente.ListaComprobantesDrop, function (index, row) {
+                   // console.log(row);
+                    $("#idTipoComprobanteSeleccionado").append("<option value='" + row.Value + "'>" + row.Text + "</option>")
                 });
 
                 $("#IdDireccionCliente").empty();
@@ -359,7 +448,8 @@
     //auto completar de los articulos
     $('#txtCodigo').autocomplete({
         source: function (request, response) {
-            $.getJSON("/Factura/GetListCodigoJson/", request, function (data) {
+            $.getJSON("/Factura/GetListCodigoJson/", request, 
+                function (data) {
                 response($.map(data, function (item) {
 
                     return {
@@ -409,39 +499,38 @@
 
         var item = $('#TblItemsFact >tbody >tr').length;
 
-
+        $("#ColumnaEliminar").css("display", "block");
         if (codigo != "" && descripcion != "" && monto != "") {
             item += 1;
 
             var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + item + ")'> <i class='fa fa-times'></i> </button>";
-            //var botonEliminar = "<a href='#' style='color: #f90431;' onclick='el(" + item + ")'><i class='fa fa-times'></i></a>";
-
-            $('#TblItemsFact > tbody:last-child').append("<tr><td>" + item + "</td><td>" + codigo + "</td><td>" + descripcion + "</td><td>" + monto + "</td><td>" + botonEliminar + "</td></tr>");
-            // $("#ModalItemFacturas").modal("hide");
+          
+            $('#TblItemsFact > tbody:last-child').append("<tr><td class='text-center'>" + item + "</td><td class='text-center'>" + codigo + "</td><td>" + descripcion + "</td><td class='text-right'>" + monto + "</td><td class='text-center'>" + botonEliminar + "</td></tr>");           
             $("#txtCodigo").val('');
             $("#txtCodigoDescripcion").val('');
             $("#txtMonto").val('');
 
 
             SumarMontoTotal();
-           
+          
         }
         else {
             alert("Faltan datos");
         }
 
         if (item >= 1) {
-            $("#TblItemsFact").css("display", "block");
+            $("#MostrarItems").css("display", "block");
         }
         else {
-            $("#TblItemsFact").css("display", "none");
+            $("#MostrarItems").css("display", "none");
         }
+
+       
         CargarItems();
         // $('#TblItemsFact > tfoot:last-child').append("<tr><td>Total:</td><td>" + 111 + "</td></tr>");
     }
 
     function CargarItems() {
-
         $("#hdnArticulos").val('');
 
         let arrayItems = [];
@@ -457,13 +546,11 @@
 
         })
         $("#hdnArticulos").val(JSON.stringify(arrayItems));
-        console.log(arrayItems);
-        console.log($("#hdnArticulos").val());
+        //console.log(arrayItems);
+        //console.log($("#hdnArticulos").val());
     }
 
     function SumarMontoTotal() {
-        //var TotalFactura = 0;
-
         var total_col1 = 0;
         $('#TblItemsFact tbody').find('tr').each(function (i, el) {
 
@@ -475,19 +562,23 @@
         if (total_col1 > 0) {
             $("#Total").css("display", "block");
             $("#LblTotalFactura").html(total_col1);
+            $("#TotalFactura").val(total_col1);
         }
-        else { $("#Total").css("display", "none"); }
+        else {
+            $("#Total").css("display", "none");
+            $("#TotalFactura").val(0);
+        }
 
     }
 
     function el(e) {
-        console.log(e);
+        //console.log(e);
         var index = e - 1;
         $("table tr:eq(" + e + ")").remove();
         var item = $('#TblItemsFact >tbody >tr').length;
         if (item == 0) {
             $("#TblItemsFact").css("display", "none");
-           
+
         }
         else {
             //esto es para re ordenar el table
@@ -495,14 +586,71 @@
                 var a = index1 + 1;
                 $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[0].innerHTML = a;
                 var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + a + ")'> <i class='fa fa-times'></i> </button>";
-                $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[4].innerHTML = botonEliminar;
-                //console.log("index", index1);
-                //console.log(tr);
+                var td = $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[4];
+                td.innerHTML = botonEliminar;                            
             });
         }
         SumarMontoTotal();
         CargarItems();
     }
+
+    
+
+    $('#BuscarFactura').on('click', function () {
+        var idCliente = $("#IdCliente").val();
+        var nroFactura = $("#AplicaNC").val();
+        var tipoComprobante = $("#idTipoComprobanteSeleccionado").val();
+
+        if (idCliente != 0 && nroFactura != '' && tipoComprobante != '' && tipoComprobante != '1') {
+
+            $.getJSON("/Factura/GetObtenerFacturaJson",
+                {
+                    idCliente: idCliente,
+                    nroFactura: nroFactura,
+                    idComprobante: 1
+                },
+                function (data) {
+                    var resultado = JSON.parse(data);
+                    console.log(resultado);
+                    $("#idTipoMoneda").val(resultado.factura.IdMoneda);
+                    $("#EncabezadoFact").val(resultado.factura.Concepto);
+                    if (resultado.factura.IdMoneda !=1) {
+                        $("#Cotizacion").val(resultado.factura.CotizaP);
+                    }
+
+                    $("#ORef").val(resultado.factura.ORef);
+                    $("#YREf").val(resultado.factura.YRef);
+
+                    
+
+
+                    var item = 0;
+
+                    var item = $('#TblItemsFact >tbody >tr').length;
+                    if (item == 0) {
+                        for (var clave in resultado.items) {
+                            //console.log(resultado.items[clave].Codigo);
+                            //console.log("La clave es " + clave + " y el valor es " + rates[clave]);
+
+                            item += 1;
+
+                            $('#TblItemsFact > tbody:last-child').append("<tr><td>" + item + "</td><td>" + resultado.items[clave].Codigo + "</td><td>" + resultado.items[clave].Descripcion + "</td><td>" + resultado.items[clave].Precio + "</td></tr>");
+
+                            SumarMontoTotal();
+                        }
+                        $("#MostrarItems").css("display", "block");
+                        $("#ColumnaEliminar").css("display", "none");
+                        $("#TotalAjuste").css("display", "block");
+                        
+                    }
+                    
+                });
+        }
+        else {
+            alert("Ingrese el cliente y el nro factura para buscar o verifique el tipo de comprobante");
+        }
+    });
+
 
     $('#IdDireccionCliente').on('change', function () {
         var idDir = this.value;
@@ -510,13 +658,35 @@
             { idDireccion: idDir },
             function (data) {
                 var direccion = JSON.parse(data);
-                $("#DireccionCompuesta").val(direccion.Direccion + ' ' + direccion.Provincia.Nombre + ' ' + direccion.Localidad.Nombre);
-                //  $("#NombreComp").val();
+                $("#DireccionCompuesta").val(direccion.Direccion + ' / ' + direccion.Provincia.Nombre + ' / ' + direccion.Localidad.Nombre);
+                var cuitLimpio = direccion.Cuit.replaceAll("-", "");
+                $("#Cuit").val(cuitLimpio);
+                $("#CuitSeleccionado").val(direccion.Cuit);
+                $("#CodPaisAfip").val(direccion.CodigoAfip);
+                $("#idPais").val(direccion.Pais.Id);
+                $("#idProvincia").val(direccion.Provincia.Id);
+
                 $("#PaisComp").val(direccion.Pais.Nombre);
 
             });
+    });
 
+    $('#idTipoMoneda').on('change', function () {
+        var idTipoMoneda = this.value;
 
+       
+            $.getJSON("/Factura/GetCotizacionJson",
+                { IdMoneda: idTipoMoneda },
+                function (data) {
+                    var resultado = JSON.parse(data);
+                    console.log(resultado);
+                    $("#Cotizacion").val(parseFloat(resultado.Importe).toFixed(2));
+                });
+        //if (this.value != 1) { }
+        //else {
+        //    $("#Cotizacion").val("");
+        //}
+        
     });
 
     $('#IdCuentaBancaria').on('change', function () {
@@ -532,6 +702,27 @@
 
     });
 
+    $('#idTipoComprobanteSeleccionado').on('change', function () {
+
+        if (this.value != 1) {
+            $("#ItemsCargaDatos").css("display", "none");
+            $("#ItemsCargaDatosBtn").css("display", "none");
+        }
+        else {
+            $("#ItemsCargaDatos").css("display", "inline-flex");
+            $("#ItemsCargaDatosBtn").css("display", "block");
+            //borro las filas de la tabla
+            $('table tbody tr').remove();
+            $("#MostrarItems").css("display", "none");
+            $("#Total").css("display", "none");
+            $("#TotalAjuste").css("display", "none");
+            $("#AplicaNC").val('');
+
+        }
+
+    });
+
+    
     function Validacion(event) {
         var cantidad = 5;
         var contralor = 0;
@@ -540,22 +731,39 @@
 
         if ($("#ORef").val() != '') {
             contralor += 1;
+            $("#ORef").css("border-color", "");
+        }
+        else {
+            $("#ORef").css("border-color", "red");
         }
 
         if ($("#YREf").val() != '') {
             contralor += 1;
+            $("#YREf").css("border-color", "");
+        }
+        else {
+            $("#YREf").css("border-color", "red");
         }
 
         if ($("#idDepartamento").val() != 0) {
             contralor += 1;
+            $("#idDepartamento").css("border-color", "");
+        }
+        else {
+            $("#idDepartamento").css("border-color", "red");
         }
 
         if ($("#IdCuentaBancaria").val() != 0) {
             contralor += 1;
+            $("#IdCuentaBancaria").css("border-color", "");
+        }
+        else {
+            $("#IdCuentaBancaria").css("border-color", "red");
         }
         if ($("#LblTotalFactura").html() != '') {
             contralor += 1;
         }
+        
 
         if (cantidad == contralor) {
             $("#FrmGrabar").submit();

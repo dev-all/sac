@@ -220,18 +220,20 @@ namespace SAC.Controllers
             try
             {
 
-                var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(f, IdMoneda);
-                if (moneda != null)
+                 var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(f, IdMoneda);
+                if (cotizacion == null)
                 {
-                    cotizacion.Importe = 100;
+                    cotizacion.Importe = 1;
                     cotizacion.Fecha = f.ToString("dd/MM/yyyy");
                 }
                 else
                 {
-                    // obtener cotizacion de afip y registrar la cotizacion para la fecha
-                    cotizacion.Importe = 130;
-                    cotizacion.Fecha = f.ToString("dd/MM/yyyy");
+ cotizacion.Importe = moneda.Monto;
+                cotizacion.IdMoneda = moneda.Id.ToString();
+                cotizacion.Fecha = moneda.Fecha.ToString();
                 }
+
+               
                 strJson = Newtonsoft.Json.JsonConvert.SerializeObject(cotizacion);
                 if ((strJson != null))
                 {

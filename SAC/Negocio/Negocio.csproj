@@ -61,9 +61,12 @@
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
     <Compile Include="Modelos\ArticuloModel.cs" />
+    <Compile Include="Modelos\BuqueModel.cs" />
     <Compile Include="Modelos\ClienteDireccionModel.cs" />
     <Compile Include="Modelos\ClienteModel.cs" />
+    <Compile Include="Modelos\CobroFacturaModoModel.cs" />
     <Compile Include="Modelos\CompraRegistroDetalleModel.cs" />
+    <Compile Include="Modelos\CotizaModel.cs" />
     <Compile Include="Modelos\CuentaCorrienteProveedorDetallesModel.cs" />
     <Compile Include="Modelos\BancoModel.cs" />
     <Compile Include="Modelos\BancoCuentaBancariaModel.cs" />
@@ -87,6 +90,8 @@
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
     <Compile Include="Modelos\FacturaPagoModel.cs" />
+    <Compile Include="Modelos\CobroFacturaModel.cs" />
+    <Compile Include="Modelos\FacturaVentaItemsModel.cs" />
     <Compile Include="Modelos\FacturaVentaModel.cs" />
     <Compile Include="Modelos\GrupoPresupuestoModel.cs" />
     <Compile Include="Modelos\ImputacionModel.cs" />
@@ -132,6 +137,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioBuque.cs" />
     <Compile Include="Servicios\ServicioCobro.cs" />
     <Compile Include="Servicios\ServicioArticulo.cs" />
     <Compile Include="Servicios\ServicioBancoCuenta.cs" />
@@ -143,13 +149,16 @@
     <Compile Include="Servicios\ServicioChequera.cs" />
     <Compile Include="Servicios\ServicioCliente.cs" />
     <Compile Include="Servicios\ServicioClienteDireccion.cs" />
+    <Compile Include="Servicios\ServicioCobroFacturaModo.cs" />
     <Compile Include="Servicios\ServicioCompraFacturaPago.cs" />
     <Compile Include="Servicios\ServicioCorreo.cs" />
+    <Compile Include="Servicios\ServicioCotiza.cs" />
     <Compile Include="Servicios\ServicioCuentaCteProveedor.cs" />
     <Compile Include="Servicios\ServicioDepartamento.cs" />
     <Compile Include="Servicios\ServicioDto.cs" />
     <Compile Include="Servicios\ServicioElog.cs" />
     <Compile Include="Servicios\ServicioFacturaVenta.cs" />
+    <Compile Include="Servicios\ServicioFacturaVentaItems.cs" />
     <Compile Include="Servicios\ServicioGrupoPresupuesto.cs" />
     <Compile Include="Servicios\ServicioImputacion.cs" />
     <Compile Include="Servicios\ServicioContable.cs" />

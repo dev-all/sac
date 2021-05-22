@@ -36,7 +36,18 @@ namespace Negocio.Servicios
                 return null;
             }
         }
-
+     public TipoComprobanteVentaModel GetTipoComprobanteVentaPorNroAfip(int idAfip, int idPuntoVenta)
+        {
+            try
+            {
+                return Mapper.Map<TipoComprobanteVenta, TipoComprobanteVentaModel>(otipoComprobanteVentaRepositorio.GetTipoComprobanteVentaPorNroAfip(idAfip, idPuntoVenta));
+            }
+            catch (Exception)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                return null;
+            }
+        }
         public int ObtenerNroPago(int idTipoComprobanteVenta)
         {
             try
@@ -73,12 +84,61 @@ namespace Negocio.Servicios
             }
             catch (Exception)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return 0;
             }
         }
 
+           public TipoComprobanteVentaModel getTipoComprobanteVentaNewNumeroFactura(int nroComprobante, int puntoVenta)
+                {
+                    try
+                    {
+                        return Mapper.Map<TipoComprobanteVenta,TipoComprobanteVentaModel>(otipoComprobanteVentaRepositorio.getTipoComprobanteVentaNewNumeroFactura(nroComprobante, puntoVenta));
+                    }
+                    catch (Exception)
+                    {
+                        _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                        return null;
+                    }
+                }
+        public int ActualizarNroFactura(int idTipoComprobanteVenta, int nroPago, int nroFactura)
+                {
+                    try
+                    {
+                        return otipoComprobanteVentaRepositorio.ActualizarNroFactura(idTipoComprobanteVenta, nroPago, nroFactura);
+                    }
+                    catch (Exception)
+                    {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                        return 0;
+                    }
+                }
 
+        public TipoComprobanteVentaModel GetNuevoNumeroCobro(int codigoAfip, int puntoVenta)
+        {
+            try
+            {
+                return Mapper.Map<TipoComprobanteVenta, TipoComprobanteVentaModel>(otipoComprobanteVentaRepositorio.GetNuevoNumeroCobro(codigoAfip, puntoVenta));
+            }
+            catch (Exception)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                return null;
+            }
+        }
+
+        public TipoComprobanteVentaModel GetNuevoNumeroCobro(int IdTipoComprobanteVenta)
+        {
+            try
+            {
+                return Mapper.Map<TipoComprobanteVenta, TipoComprobanteVentaModel>(otipoComprobanteVentaRepositorio.GetNuevoNumeroCobro(IdTipoComprobanteVenta));
+            }
+            catch (Exception)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                return null;
+            }
+        }
         public List<TipoComprobanteVentaModel> GetAllTipoComprobante()
         {
             try
@@ -88,7 +148,7 @@ namespace Negocio.Servicios
             }
             catch (Exception ex)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese en contacto con el administrador del sistema", "error");
                 return null;
             }
         }

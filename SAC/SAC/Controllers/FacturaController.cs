@@ -24,16 +24,22 @@ namespace SAC.Controllers
         private ServicioDepartamento servicioDepartamento = new ServicioDepartamento();
         private ServicioTipoComprobanteVenta servicioTipoComprobanteVenta = new ServicioTipoComprobanteVenta();
        // private ServicioTipoPago servicioTipoPago = new ServicioTipoPago();
-        private ServicioBancoCuenta servicioCuentaBancaria = new ServicioBancoCuenta();
+       // private ServicioBancoCuenta servicioCuentaBancaria = new ServicioBancoCuenta();
         private ServicioTipoComprobante servicioTipoComprobante = new ServicioTipoComprobante();
         private ServicioArticulo servicioArticulo = new ServicioArticulo();
 
         private ServicioPieNota servicioPieNota = new ServicioPieNota();
-        ServicioBancoCuenta servicioBancoCuenta = new ServicioBancoCuenta();
+        private ServicioBancoCuenta servicioBancoCuenta = new ServicioBancoCuenta();
         private ServicioItemImpr servicioItemImpr = new ServicioItemImpr();
         private ServicioDto servicioDto = new ServicioDto();
         private ServicioFacturaVenta servicioFacturaVenta = new ServicioFacturaVenta();
         private ServicioIvaVenta servicioIvaVenta = new ServicioIvaVenta();
+        private ServicioBuque servicioBuque = new ServicioBuque();
+        private ServicioCotiza servicioCotiza = new ServicioCotiza();
+        private ServicioContable servicioContable = new ServicioContable();
+        private ServicioImputacion servicioImputacion = new ServicioImputacion();
+
+        private ServicioFacturaVentaItems servicioFacturaVentaItems = new ServicioFacturaVentaItems();
 
 
         // GET: Factura
@@ -52,6 +58,7 @@ namespace SAC.Controllers
 
 
         List<SelectListItem> listFormaPago = new List<SelectListItem>();
+
             listFormaPago.Add(new SelectListItem() { Text = "Contado", Value = "1" });
             listFormaPago.Add(new SelectListItem() { Text = "Tarjeta de Crédito", Value = "68" });
             listFormaPago.Add(new SelectListItem() { Text = "Tarjeta de Débito", Value = "69" });
@@ -91,7 +98,7 @@ namespace SAC.Controllers
                                   })).ToList();
             lstDepartamentos.Insert(0, new SelectListItem { Value = "0", Text = "Sin Especificar" });
 
-            List<BancoCuentaModelView> ListaCuentasBancarias = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioCuentaBancaria.GetAllCuenta());
+            List<BancoCuentaModelView> ListaCuentasBancarias = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioBancoCuenta.GetAllCuenta());
             List<SelectListItem> lstCuentasBancarias = null;
             lstCuentasBancarias = (ListaCuentasBancarias.Select(x =>
                                   new SelectListItem()
@@ -101,24 +108,15 @@ namespace SAC.Controllers
                                   })).ToList();
             lstCuentasBancarias.Insert(0, new SelectListItem { Value = "0", Text = "Sin Especificar" });
 
-            //List<BancoCuentaModelView> ListaCuentasBancarias = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioCuentaBancaria.GetAllCuenta());
-            //List<SelectListItem> lstCuentasBancarias = null;
-            //lstCuentasBancarias = (ListaCuentasBancarias.Select(x =>
-            //                      new SelectListItem()
-            //                      {
-            //                          Value = x.Id.ToString(),
-            //                          Text = x.BancoDescripcion
-            //                      })).ToList();
+         
 
             model.TipoComprobante = lstTipoComprobante;
             model.Departamentos = lstDepartamentos;
             model.TipoMonedas = lstTipoMoneda;
             model.CuentaBancaria = lstCuentasBancarias;
             model.FormaPago = listFormaPago;
-
-
             model.ClienteDirecciones = null;
-           
+
             ValorCotizacionModel valorCotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 1);
             if (valorCotizacion != null)
             {
@@ -126,7 +124,7 @@ namespace SAC.Controllers
             }
             else
             {
-                model.Cotizacion = 0;
+                model.Cotizacion = 1;
             }
 
             return View(model);
@@ -138,109 +136,477 @@ namespace SAC.Controllers
 
             var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
 
-            // ClienteModel clienteSeleccionado = servicioCliente.GetClientePorId(model.IdCliente);
+            ClienteModel cliente = servicioCliente.GetClientePorId(model.IdCliente);
 
-            var nroFactura = servicioTipoComprobanteVenta.ObtenerNroFactura(model.idTipoComprobanteSeleccionado, model.IdPuntoVenta);
+            //se verifica que tipo de comprobante se selecciono
+            string tipoComprobante = "";
+            string tipoComprobanteAbreviado = "";
+
+            switch (model.idTipoComprobanteSeleccionado)
+            {
+                case 1:
+                    tipoComprobante = "Factura";
+                    tipoComprobanteAbreviado = "F";
+                   
+                    break;
+                case 2:
+                    tipoComprobante = "Debito";
+                    tipoComprobanteAbreviado = "D";
+                    break;
+                case 3:
+                    tipoComprobante = "Credito";
+                    tipoComprobanteAbreviado = "C";
+                    break;
+            }
+
+            //seteo la factura en cero sino es como sabana corta!!!
+            int comprobanteActualizado = DeterminarNroComprovante(model.idTipoIva, model.mipyme, model.TotalFactura, tipoComprobante);
+
+            var cbt = servicioTipoComprobanteVenta.getTipoComprobanteVentaNewNumeroFactura(comprobanteActualizado, model.IdPuntoVenta);
+
             int nFactor = 1;
-            //11 es factura C
-            if (model.IdTipoComprobante != 13)
+            if (tipoComprobante != "Credito")
             {
                 nFactor = 1;
             }
             else
             {
-                if (model.IdTipoComprobante == 13)
+                if (tipoComprobante == "Credito")
                 {
                     nFactor = -1;
                 }
             }
 
-            var ListadoItemsFactura = JsonConvert.DeserializeObject<List<ItemImprFacturaModelView>>(model.hdnArticulos);
-            foreach (ItemImprFacturaModelView item in ListadoItemsFactura)
+            decimal  totalGastosPesos = 0; // ver esto porque deberia ser el acumulado de gastos
+            decimal totalGastosDolares= 0;
+            //tengo que controlar el tipo de comprobante que viene solo para la factura son los items
+
+            switch (model.idTipoComprobanteSeleccionado)
             {
-                ItemImprModelView itemImpr = new ItemImprModelView();
-                itemImpr.IdTipoComprobante = model.idTipoComprobanteSeleccionado;
-                itemImpr.PuntoVenta = model.IdPuntoVenta.ToString();
-                itemImpr.Factura = model.NumeroFactura;
-                itemImpr.Codigo = item.codigo;
-                itemImpr.Descripcion = "descripcion";//item.descripcion;
-                itemImpr.Precio = item.valor;
-                itemImpr.Activo = true;
-                itemImpr.Cantidad = 1;
-                itemImpr.Factura = nroFactura;
-                itemImpr.IdUsuario = OUsuario.IdUsuario;
-                itemImpr.UltimaModificacion = DateTime.Now;
-                //agrego item
-                ItemImprModel itemInsertado = servicioItemImpr.Agregar(Mapper.Map<ItemImprModelView, ItemImprModel>(itemImpr));
+                case 1: //factura
+               
+                    //actualiza tabla cotiza ?? nose
+                    List<FacturaVentaModel> ListaFactura = servicioFacturaVenta.GetAllFacturaVentaCliente(model.IdCliente);
+                    //if (ListaFactura.Count == 0)
+                    //{
+                    //    CotizaModel CotizaInsert = new CotizaModel();
+                    //    CotizaInsert.Activo = true;
+                    //    CotizaInsert.Cotiza1 = model.Cotizacion;
+                    //    CotizaInsert.Fecha = DateTime.Now;
+                    //    //actualiza tabla cotiza ?? nose
+                    //    CotizaModel cotiza = servicioCotiza.Agregar(CotizaInsert);
+                    //}
+                                  
+                    // agrega en tbl FactVenta
+                    FacturaVentaModel facturaVentaModel = new FacturaVentaModel();
+                    facturaVentaModel.IdTipoComprobante = cbt.Id; //model.idTipoComprobanteSeleccionado;  // facturaVentaModel. = model.IdPuntoVenta.ToString();
+                    facturaVentaModel.NumeroFactura = cbt.Numero;
+                    facturaVentaModel.Codigo = model.CodigoCliente;
+                    facturaVentaModel.IdCliente = model.IdCliente;
+                    facturaVentaModel.Fecha = DateTime.Now; //model.Fecha;
+                    facturaVentaModel.Impre = "true";
+                    facturaVentaModel.Vencimiento = DateTime.Now.AddDays(1);
+                    facturaVentaModel.Concepto = model.EncabezadoFact;
+                    facturaVentaModel.Condicion = "1";
+                    facturaVentaModel.IdProvincia = model.idProvincia;
+                    facturaVentaModel.IdPais = model.idPais;
 
-                ArticuloModel artModel = servicioArticulo.GetArticuloOuCodigo(item.codigo);
-                //agrego, actualizo dto
-                DtoModel dtoModel = servicioDto.ActualizarDatosDto(DateTime.Now, itemInsertado, artModel.Id, model.idTipoIva, model.idDepartamento, nFactor, model.idTipoMoneda, model.Cotizacion, artModel);
+                    //Monto de factura
+                    decimal TotalFactura = model.TotalFactura * nFactor;                   
+                    if (model.idTipoMoneda == 2)
+                    {
+                        facturaVentaModel.TotalDolares = TotalFactura;
+                    }
+                    facturaVentaModel.Total = model.TotalFactura * nFactor;
+                    facturaVentaModel.Saldo = model.TotalFactura * nFactor;
+                    facturaVentaModel.TipoIva = model.idTipoIva.ToString();
+                    facturaVentaModel.Cotiza = model.Cotizacion;
+                    facturaVentaModel.YRef = model.YREf;
+                    facturaVentaModel.ORef = model.ORef;
+                    //facturaVentaModel.Dto // no existe campo                
+                    // facturaVentaModel.IdTipoComprobante = model.idTipoComprobanteSeleccionado;
 
-                //asiento contable
-                if (artModel.Tipo.Contains("Gastos"))
-                {
-                    //generar asiento contable
-                }
+                    //lo agrego asi por que el documento no explica a q tipo de cbante le da esas letras
+                    //seteo arriba
+                    facturaVentaModel.Tipo = tipoComprobanteAbreviado;
 
+                    if (model.IdPuntoVenta == 2)
+                    {
+                        facturaVentaModel.TipoFac = "E";
+                    }
+                    else
+                    {
+                        facturaVentaModel.TipoFac = "L";
+                    }
+                    facturaVentaModel.Periodo = int.Parse(DateTime.Now.ToString("yyMM"));
+                    //datos obligatorios
+                    facturaVentaModel.Baja = "*";
+                    facturaVentaModel.IdImputacion = 0;
+                    facturaVentaModel.NumeroCobro = 0;
+                    facturaVentaModel.IdMoneda = model.idTipoMoneda;
+                    facturaVentaModel.Descuento = "1"; //no se de donde sale
+                    facturaVentaModel.Recibo = "0";
+                    facturaVentaModel.NumeroTra = "0"; //no se de donde sale
+                    facturaVentaModel.Anula = "0";
+                    facturaVentaModel.Activo = true;
+                    facturaVentaModel.IdUsuario = OUsuario.IdUsuario;
+                    facturaVentaModel.UltimaModificacion = DateTime.Now;
+                    facturaVentaModel.TipoMoneda = null;
+                    facturaVentaModel.TipoComprobanteVenta = null;
+                    facturaVentaModel.FactVentaCobro = null;
+                    facturaVentaModel.ItemImpre = null;
+                    facturaVentaModel.Retencion = null;
+
+                    // add codigo al cbte del pago  y utilizar el mismo para todos los asientos de pago                  
+                    var CodigoAsiento = servicioContable.GetNuevoCodigoAsiento() + 1;
+                    facturaVentaModel.CodigoDiario = CodigoAsiento;
+
+                    FacturaVentaModel FacturaInsertada = servicioFacturaVenta.Agregar(facturaVentaModel);
+
+                    //inserto items de la factura
+                    var ListadoItemsFactura = JsonConvert.DeserializeObject<List<ItemImprFacturaModelView>>(model.hdnArticulos);
+                    foreach (ItemImprFacturaModelView item in ListadoItemsFactura)
+                    {
+                        ItemImprModelView itemImpr = new ItemImprModelView();
+                        itemImpr.IdTipoComprobante = cbt.Id; 
+                        itemImpr.PuntoVenta = model.IdPuntoVenta.ToString();
+                        itemImpr.IdFactVenta = FacturaInsertada.Id;
+                        itemImpr.Factura = cbt.Numero;
+                        itemImpr.Codigo = item.codigo;
+                        itemImpr.Descripcion = "descripcion";//item.descripcion;
+                        itemImpr.Precio = item.valor;
+                        itemImpr.Activo = true;
+                        itemImpr.Cantidad = 1;
+                        itemImpr.Factura = cbt.Numero;
+                        itemImpr.IdUsuario = OUsuario.IdUsuario;
+                        itemImpr.UltimaModificacion = DateTime.Now;
+                        //agrego item
+                        ItemImprModel itemInsertado = servicioItemImpr.Agregar(Mapper.Map<ItemImprModelView, ItemImprModel>(itemImpr));
+
+                        ArticuloModel artModel = servicioArticulo.GetArticuloOuCodigo(item.codigo);
+                        //agrego, actualizo dto
+                        DtoModel dtoModel = servicioDto.ActualizarDatosDto(DateTime.Now, itemInsertado, artModel.Codigo, model.idTipoIva, model.idDepartamento, nFactor, model.idTipoMoneda, model.Cotizacion, artModel, OUsuario);
+
+                        //asiento contable
+                        if (artModel.Tipo.Contains("Gastos"))
+                        {
+                            if (FacturaInsertada.IdMoneda == 2)
+                            {
+                                totalGastosPesos += (item.valor * model.Cotizacion) * nFactor;
+                            }
+                            else {
+                                totalGastosPesos += item.valor * nFactor; 
+                            }                                                                                     
+                        }
+                    }
+ 
+                    
+                    var ImportePesos = (FacturaInsertada.IdMoneda == 1) ? (FacturaInsertada.Total * nFactor) : (FacturaInsertada.TotalDolares * FacturaInsertada.Cotiza * nFactor);                       
+                    /// asientos de ventas
+                    if (FacturaInsertada != null)
+                    {
+                        DiarioModel asiento = new DiarioModel();
+                        asiento.Codigo = FacturaInsertada.CodigoDiario;
+                        asiento.Fecha = FacturaInsertada.Fecha;
+                        asiento.Periodo = DateTime.Now.ToString("yyMM");
+                        asiento.Tipo = "VF";
+                        asiento.Cotiza = FacturaInsertada.Cotiza;                    
+                        asiento.Balance = int.Parse(DateTime.Now.ToString("yyyy"));
+                        asiento.Moneda = servicioTipoMoneda.GetTipoMoneda(FacturaInsertada.IdMoneda).Descripcion;
+                        asiento.Descripcion = "Deudores por Ventas Cliente " + FacturaInsertada.NumeroFactura;
+                        asiento.DescripcionMa = "Asiento de Factura Venta " + FacturaInsertada.NumeroFactura;
+                        asiento.Titulo = "Asiento de Venta";
+                        if (model.idTipoIva == 4) // exterior
+                                {
+                                    // 1 
+                                    asiento.Importe =  (FacturaInsertada.IdMoneda == 1) ? (  FacturaInsertada.Total ) : ( (FacturaInsertada.TotalDolares * FacturaInsertada.Cotiza));                                   
+                                    var asientoVEXT = servicioContable.InsertAsientoContable("VEXT", asiento, 0);
+                                    if (asientoVEXT != null) { servicioImputacion.AsintoContableGeneral(asientoVEXT); }
+
+                            //2
+                            asiento.Descripcion = "Servicios";
+                            asiento.Importe = - (ImportePesos - totalGastosPesos);
+                            if (asiento.Importe != 0)
+                            {
+                                    var asientoSEXT = servicioContable.InsertAsientoContable("SEXT", asiento, 0);
+                                    if (asientoSEXT != null) { servicioImputacion.AsintoContableGeneral(asientoSEXT); }
+                            }
+
+                            //3 totalGastosPesos
+                             asiento.Importe = - totalGastosPesos;
+                            if (asiento.Importe != 0)
+                            {
+                                asiento.Descripcion = "Recupero de Gastos";
+                                var asientoGastos = servicioContable.InsertAsientoContable("VGAS", asiento, 0);
+                                    if (asientoGastos != null) { servicioImputacion.AsintoContableGeneral(asientoGastos); }
+                            }
+                        
+                        }
+                        else //local
+                                {
+                                    // 1 
+                                    asiento.Importe = (FacturaInsertada.IdMoneda == 1) ? ( FacturaInsertada.Total) : (  (FacturaInsertada.TotalDolares * FacturaInsertada.Cotiza));
+                                    var asientoVEXT = servicioContable.InsertAsientoContable("VLOC", asiento, 0);
+                                    if (asientoVEXT != null) { servicioImputacion.AsintoContableGeneral(asientoVEXT); }
+                            //2
+                            asiento.Descripcion = "Servicios";
+                            asiento.Importe = -(ImportePesos - totalGastosPesos);
+                                    var asientoSEXT = servicioContable.InsertAsientoContable("SLOC", asiento, 0);
+                                    if (asientoSEXT != null) { servicioImputacion.AsintoContableGeneral(asientoSEXT); }
+
+                            //3 totalGastosPesos
+                            asiento.Descripcion = "Recupero de Gastos";
+                            asiento.Importe = - totalGastosPesos;
+                                    var asientoGastos = servicioContable.InsertAsientoContable("VGAS", asiento, 0);
+                                    if (asientoGastos != null) { servicioImputacion.AsintoContableGeneral(asientoSEXT); }
+
+                            //GrabaDiario(0, 'VLOC', nImporte, Rlmisce: NroDia, oItem, 'VF',, Moneda, Cotiza, cDescripMa)
+                            //        GrabaDiario(0, 'SLOC', -(nImporte - nTotGasto), Rlmisce: NroDia, oItem, 'VF',, Moneda, Cotiza, cDescripMa)
+
+                        }
+
+                    }
+                 
+                    //agrega en tbl IvaVenta
+                    IvaVentaModel ivaVenta = new IvaVentaModel();
+                    ivaVenta.IdTipoComprobantes = cbt.Id;
+                    ivaVenta.PuntoVenta = model.IdPuntoVenta.ToString();
+                    ivaVenta.NumeroFactura = cbt.Numero;
+                    ivaVenta.NroEmp = model.IdCliente;
+                    ivaVenta.NomEmp = model.CodigoCliente;
+                    ivaVenta.IdImputacion = model.idImputacion.ToString();
+                    ivaVenta.Fecha = DateTime.Now;
+                    ivaVenta.Periodo = DateTime.Now.ToString("yyMM");
+                    ivaVenta.Neto = ImportePesos - totalGastosPesos;
+                    ivaVenta.Total = ImportePesos;
+                    ivaVenta.Gasto = totalGastosPesos;
+                    ivaVenta.Isib = 0; // no se q es
+                    ivaVenta.Moneda = model.idTipoMoneda.ToString();
+                    ivaVenta.TipoIva = model.idTipoIva.ToString();
+                    ivaVenta.Dolar = model.Cotizacion;
+                    ivaVenta.Activo = true;
+                    ivaVenta.IdUsuario = OUsuario.IdUsuario;
+                    ivaVenta.UltimaModificacion = DateTime.Now;
+                    ivaVenta.AuxiliarNumero = "0";
+                    ivaVenta.Diario = FacturaInsertada.CodigoDiario.ToString();
+
+                    if (model.IdPuntoVenta == 2)
+                    {
+                        ivaVenta.TipoFac = "E";
+                    }
+                    else
+                    {
+                        ivaVenta.TipoFac = "L";
+                    }
+                    ivaVenta.Cuit = model.Cuit.ToString();
+                    ivaVenta.Clase = tipoComprobanteAbreviado;
+
+                    IvaVentaModel ivaModelInsertado = servicioIvaVenta.Agregar(ivaVenta);
+
+                    //agrega registro tbl Buque si no es nota credito!!!
+
+                    BuqueModel buqueModel = new BuqueModel();
+                    buqueModel.NumeroFactura = cbt.Numero;
+                    buqueModel.Cliente = model.IdCliente.ToString();
+                    buqueModel.Fecha = DateTime.Now;
+                    buqueModel.Buque1 = model.EncabezadoFact;
+                    buqueModel.Monto = model.TotalFactura;
+                    buqueModel.Descripcion = model.EncabezadoFact;
+                    buqueModel.YRef = model.YREf;
+                    buqueModel.ORef = model.ORef;
+                    buqueModel.Carpeta = model.nroCarpera.ToString();
+                    buqueModel.Legajo = model.nroCarperaFinal.ToString();
+                    buqueModel.Activo = true;
+                    buqueModel.IdUsuario = OUsuario.IdUsuario;
+                    buqueModel.UltimaModificacion = DateTime.Now;
+                    BuqueModel buqueModelInsertado = servicioBuque.Agregar(buqueModel);
+
+                    break;
+
+                  //------------------------------------------------------------------
+                case 2: //nota debito
+
+                    // agrega en tbl FactVenta
+                    FacturaVentaModel facturaModelNotaDebito = new FacturaVentaModel();
+                    FacturaVentaModel facturaVentaOriginal = servicioFacturaVenta.GetFacturaVentaPorNumero(int.Parse(model.AplicaNC), model.IdCliente);
+                    facturaModelNotaDebito.IdTipoComprobante = cbt.Id; //model.idTipoComprobanteSeleccionado;  // facturaVentaModel. = model.IdPuntoVenta.ToString();
+                    facturaModelNotaDebito.NumeroFactura = cbt.Numero;
+                    facturaModelNotaDebito.Codigo = facturaVentaOriginal.Codigo;
+                    facturaModelNotaDebito.IdCliente = facturaVentaOriginal.IdCliente;
+                    facturaModelNotaDebito.IdMoneda = model.idTipoMoneda;
+                    facturaModelNotaDebito.Fecha = DateTime.Now; //model.Fecha;
+                    facturaModelNotaDebito.Impre = "false";
+                    facturaModelNotaDebito.Vencimiento = DateTime.Now.AddDays(1);
+                    facturaModelNotaDebito.Concepto = "Nota Debito";
+                    facturaModelNotaDebito.Condicion = "1";
+                    facturaModelNotaDebito.IdProvincia = facturaVentaOriginal.IdProvincia;
+                    facturaModelNotaDebito.IdPais = facturaVentaOriginal.IdPais;
+                    if (model.idTipoMoneda == 2) //faltan campos ej totalDolar
+                    {
+                        facturaModelNotaDebito.TotalDolares = model.MontoAjuste * nFactor;
+                        facturaModelNotaDebito.Saldo = (facturaVentaOriginal.TotalDolares - model.MontoAjuste) * nFactor;
+                    }
+                    else
+                    {
+                        facturaModelNotaDebito.Total = model.MontoAjuste * nFactor;
+                        facturaModelNotaDebito.Saldo = (facturaVentaOriginal.Total - model.MontoAjuste) * nFactor;
+                    }
+                   
+                    facturaModelNotaDebito.TipoIva = facturaVentaOriginal.TipoIva.ToString();
+                    facturaModelNotaDebito.Cotiza = facturaVentaOriginal.CotizaP;
+                    facturaModelNotaDebito.YRef = facturaVentaOriginal.YRef;
+                    facturaModelNotaDebito.ORef = facturaVentaOriginal.ORef;
+                    facturaModelNotaDebito.Tipo = tipoComprobanteAbreviado;
+
+                    if (model.IdPuntoVenta == 2)
+                    {
+                        facturaModelNotaDebito.TipoFac = "E";
+                    }
+                    else
+                    {
+                        facturaModelNotaDebito.TipoFac = "L";
+                    }
+                    facturaModelNotaDebito.Periodo = int.Parse(DateTime.Now.ToString("yyMM"));
+                    //datos obligatorios
+                    facturaModelNotaDebito.Baja = "*";
+                    facturaModelNotaDebito.IdImputacion = 0;
+                    facturaModelNotaDebito.NumeroCobro = 0;
+                    //facturaVentaModel.Moneda = model.idTipoMoneda.ToString();
+                    facturaModelNotaDebito.Descuento = "1"; //no se de donde sale
+                    facturaModelNotaDebito.Recibo = "0";
+                    facturaModelNotaDebito.NumeroTra = "0"; //no se de donde sale
+                    facturaModelNotaDebito.Anula = facturaVentaOriginal.NumeroFactura.ToString();
+                    facturaModelNotaDebito.Activo = true;
+                    facturaModelNotaDebito.IdUsuario = OUsuario.IdUsuario;
+                    facturaModelNotaDebito.UltimaModificacion = DateTime.Now;
+
+                    FacturaVentaModel FacNotaDebitoInsertada = servicioFacturaVenta.Agregar(facturaModelNotaDebito);
+
+                    break;
+                case 3: //nota credito
+                        // agrega en tbl FactVenta
+                    FacturaVentaModel facturaModelNotaCredito = new FacturaVentaModel();
+                    FacturaVentaModel facturaVentaOriginal1 = servicioFacturaVenta.GetFacturaVentaPorNumero(int.Parse(model.AplicaNC), model.IdCliente);
+                    facturaModelNotaCredito.IdTipoComprobante = cbt.Id; //model.idTipoComprobanteSeleccionado;
+                                                                        // facturaVentaModel. = model.IdPuntoVenta.ToString();
+                    facturaModelNotaCredito.NumeroFactura = cbt.Numero;
+                    facturaModelNotaCredito.Codigo = facturaVentaOriginal1.Codigo;
+                    facturaModelNotaCredito.IdCliente = facturaVentaOriginal1.IdCliente;
+                    facturaModelNotaCredito.IdMoneda = model.idTipoMoneda;
+                    facturaModelNotaCredito.Fecha = DateTime.Now; //model.Fecha;
+                    facturaModelNotaCredito.Impre = "false";
+                    facturaModelNotaCredito.Vencimiento = DateTime.Now.AddDays(1);
+                    facturaModelNotaCredito.Concepto = "Nota Credito";
+                    facturaModelNotaCredito.Condicion = "1";
+                    facturaModelNotaCredito.IdProvincia = facturaVentaOriginal1.IdProvincia;
+                    facturaModelNotaCredito.IdPais = facturaVentaOriginal1.IdPais;
+                    if (model.idTipoMoneda == 2) //faltan campos ej totalDolar
+                    {
+                        facturaModelNotaCredito.TotalDolares = model.MontoAjuste * nFactor;
+                        facturaModelNotaCredito.Saldo = (facturaVentaOriginal1.TotalDolares - model.MontoAjuste) * nFactor;
+                    }
+                    else
+                    {
+                        facturaModelNotaCredito.Total = model.MontoAjuste * nFactor;
+                        facturaModelNotaCredito.Saldo = (facturaVentaOriginal1.Total - model.MontoAjuste) * nFactor;
+                    }
+
+                    facturaModelNotaCredito.TipoIva = facturaVentaOriginal1.TipoIva.ToString();
+                    facturaModelNotaCredito.Cotiza = facturaVentaOriginal1.CotizaP;
+                    facturaModelNotaCredito.YRef = facturaVentaOriginal1.YRef;
+                    facturaModelNotaCredito.ORef = facturaVentaOriginal1.ORef;
+                    facturaModelNotaCredito.Tipo = tipoComprobanteAbreviado;
+
+                    if (model.IdPuntoVenta == 2)
+                    {
+                        facturaModelNotaCredito.TipoFac = "E";
+                    }
+                    else
+                    {
+                        facturaModelNotaCredito.TipoFac = "L";
+                    }
+                    facturaModelNotaCredito.Periodo = int.Parse(DateTime.Now.ToString("yyMM"));
+                    //datos obligatorios
+                    facturaModelNotaCredito.Baja = "*";
+                    facturaModelNotaCredito.IdImputacion = 0;
+                    facturaModelNotaCredito.NumeroCobro = 0;
+                    //facturaVentaModel.Moneda = model.idTipoMoneda.ToString();
+                    facturaModelNotaCredito.Descuento = "1"; //no se de donde sale
+                    facturaModelNotaCredito.Recibo = "0";
+                    facturaModelNotaCredito.NumeroTra = "0"; //no se de donde sale
+                    facturaModelNotaCredito.Anula = facturaVentaOriginal1.NumeroFactura.ToString();
+                    facturaModelNotaCredito.Activo = true;
+                    facturaModelNotaCredito.IdUsuario = OUsuario.IdUsuario;
+                    facturaModelNotaCredito.UltimaModificacion = DateTime.Now;
+
+                    FacturaVentaModel FacNotaCreditoInsertada = servicioFacturaVenta.Agregar(facturaModelNotaCredito);
+
+                    break;
             }
 
-            //actualiza tabla cotiza
-
-            //genera asiento ventas
-
-            // agrega en tbl FactVenta
-
-            FacturaVentaModel facturaVentaModel = new FacturaVentaModel();
-            facturaVentaModel.IdTipoComprobante = model.idTipoComprobanteSeleccionado;
-            facturaVentaModel.PuntoVenta = model.IdPuntoVenta.ToString();
-            facturaVentaModel.NumeroFactura = model.NumeroFactura;
-            facturaVentaModel.Codigo = model.IdCliente.ToString();
-            facturaVentaModel.Fecha = model.Fecha;
-            facturaVentaModel.Impre = "false";
-            facturaVentaModel.Vencimiento = model.Fecha.AddDays(1);
-            facturaVentaModel.Concepto = model.EncabezadoFact;
-            facturaVentaModel.Condic = "1";
-            //facturaVentaModel.IdProvincia =
-            //facturaVentaModel.IdPais = model.PaisComp;
-            //if (model.idTipoMoneda == 2 ) //faltan campos ej totalDolar
-            //{
-            //    facturaVentaModel.
-            //}
-            //facturaVentaModel.Saldo = model.TotalFactura * nfactor;
-            facturaVentaModel.TipoIva = model.idTipoIva.ToString();
-            facturaVentaModel.Cotiza = model.Cotizacion;
-            facturaVentaModel.YRef = model.YREf;
-            facturaVentaModel.ORef = model.ORef;
-            //facturaVentaModel.Dto // no existe campo
-            facturaVentaModel.Diario = "nro dia";
-            facturaVentaModel.IdTipoComprobante = model.idTipoComprobanteSeleccionado;
-            if (model.IdPuntoVenta == 2)
-            {
-                facturaVentaModel.TipoFac = "E";
-            }
-            else
-            {
-                facturaVentaModel.TipoFac = "L";
-            }
-            //facturaVentaModel.Periodo = buscar
-
-            FacturaVentaModel FacturaInsertada = servicioFacturaVenta.Agregar(facturaVentaModel);
-
-
-            //agrega en tbl IvaVenta
-
-            //agrega registro tbl Buque si no es nota credito OJO VER ESTO!!!
+            //   var FacturaActuralizada = servicioTipoComprobanteVenta.ActualizarNroFactura(comprobanteActualizado, model.IdPuntoVenta, nroFactura);
 
             return RedirectToAction("Index");
 
 
-
-            //return View(model);
         }
+     
 
+        //metodo para obtener el tipo de comprobante
+        int DeterminarNroComprovante (int tipoIva, bool miPyme, decimal TotalFactura, string tipoComprobante)
+        {
+            int retorno = 0 ;
+            if (tipoIva != 4)
+            {
+                if (miPyme == true && TotalFactura > 100000)
+                {
+                    switch (tipoComprobante)
+                    {
+                        case "Factura":
+                            retorno = 211;
+                            break;
+                        case "Debito":
+                            retorno = 212;
+                            break;
+                        case "Credito":
+                            retorno = 213;
+                            break;
+                    }
+                }
 
-
+                if (miPyme == false)
+                {
+                    switch (tipoComprobante)
+                    {
+                        case "Factura":
+                            retorno = 11;
+                            break;
+                        case "Debito":
+                            retorno = 12;
+                            break;
+                        case "Credito":
+                            retorno = 13;
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                switch (tipoComprobante)
+                {
+                    case "Factura":
+                        retorno = 19;
+                        break;
+                    case "Debito":
+                        retorno = 20;
+                        break;
+                    case "Credito":
+                        retorno = 21;
+                        break;
+                }
+            }
+            return retorno;
+        }
 
         [HttpGet()]
         public ActionResult GetListClienteJson(string term)
@@ -266,6 +632,100 @@ namespace SAC.Controllers
         }
 
         [HttpGet()]
+        public ActionResult GetExisteFacturaJson(string term, string idCliente)
+        {
+            try
+            {
+                //if (idCliente == null)
+                //{
+                //    idCliente = "0";
+                //}
+                List<FacturaVentaModel> Listadofactura = servicioFacturaVenta.GetAllFacturaVentaPorNumero(int.Parse(term), int.Parse(idCliente));
+                var arrayProveedor = (from fact in Listadofactura
+                                      select new AutoCompletarViewModel()
+                                      {
+                                          //id = cli.Id,
+                                          label = fact.NumeroFactura.ToString()
+                                      }).ToArray();
+
+                return Json(arrayProveedor, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                servicioCliente._mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+
+        }
+
+        [HttpGet()]
+        public ActionResult GetObtenerFacturaJson(string idCliente, string nroFactura, string idComprobante)
+        {
+            try
+            {
+                string strJson;
+                int idPuntoVenta=0;
+                ClienteModelView Cliente = Mapper.Map<ClienteModel, ClienteModelView>(servicioCliente.GetClientePorId(int.Parse(idCliente)));
+
+                if (Cliente.IdTipoiva != 4)
+                {
+                    idPuntoVenta = 3;
+                }
+                else
+                {
+                    idPuntoVenta = 2;
+                }
+
+                int comprobanteActualizado = DeterminarNroComprovante(Cliente.IdTipoiva, Cliente.MiPyme, 0, "Factura");
+                TipoComprobanteVentaModelView tipoComprobante = Mapper.Map<TipoComprobanteVentaModel, TipoComprobanteVentaModelView>(servicioTipoComprobanteVenta.GetTipoComprobanteVentaPorNroAfip(comprobanteActualizado, idPuntoVenta));
+
+                FacturaVentaItemsModel FacturaItems = servicioFacturaVentaItems.ObtenerDatosFacturaItems(int.Parse(idCliente), int.Parse(nroFactura), tipoComprobante.Id);
+
+                strJson = Newtonsoft.Json.JsonConvert.SerializeObject(FacturaItems);
+
+                if ((strJson != null))
+                {
+                    var rJson = Json(strJson, JsonRequestBehavior.AllowGet);
+                    return rJson;
+                }
+
+                return Json(strJson, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                servicioCliente._mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+
+        }
+
+
+        [HttpGet()]
+        public ActionResult GetDireccionJson(string idDireccion)
+        {
+            try
+            {
+                string strJson;
+                ClienteDireccionModel direccion = servicioClienteDireccion.ObtenerPorID(int.Parse(idDireccion));
+
+                strJson = Newtonsoft.Json.JsonConvert.SerializeObject(direccion);
+                if ((strJson != null))
+                {
+                    var rJson = Json(strJson, JsonRequestBehavior.AllowGet);
+                    return rJson;
+                }
+
+                return Json(strJson, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                servicioCliente._mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+
+        }
+
+        [HttpGet()]
         public ActionResult GetClienteJson(int IdCliente)
         {
             string strJson;
@@ -273,33 +733,15 @@ namespace SAC.Controllers
             {
 
                 ClienteModelView Cliente = Mapper.Map<ClienteModel, ClienteModelView>(servicioCliente.GetClientePorId(IdCliente));
+
                 Cliente.ClienteDireccion = Mapper.Map<List<ClienteDireccionModel>, List<ClienteDireccionModelView>>(servicioClienteDireccion.GetDireccionPorcliente(Cliente.Id));
 
-
-                List<TipoComprobanteModelView> tipoComprobantes = null;
-                //ClienteModelView Cliente = Mapper.Map<ClienteModel, ClienteModelView>(servicioCliente.GetClientePorId(IdCliente));
-                //Cliente.ClienteDireccion = Mapper.Map<List<ClienteDireccionModel>, List<ClienteDireccionModelView>>(servicioClienteDireccion.GetDireccionPorcliente(Cliente.Id));
-                if (Cliente.IdTipoiva == 4)
-                {
-                    tipoComprobantes = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetTipoComprobanteExtranjerosVenta());
-                }
-                if (Cliente.IdTipoiva != 4)
-                {
-                    if (Cliente.MiPyme == false)
-                    {
-                        tipoComprobantes = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetTipoComprobanteLocalesVentaSinFactura());
-                    }
-                    //else
-                    //{
-                    //    if (factura > 100000)
-                    //    {
-                    //        //aca busca los tipo cbte 211,212,213
-                    //    }
-                    //}
-                }
-
-
-                Cliente.ListaComprobantes = tipoComprobantes;
+                List<SelectListItem> tipoComprobantes = new List<SelectListItem>();
+                tipoComprobantes.Add(new SelectListItem() { Text = "Factura", Value = "1" });
+                tipoComprobantes.Add(new SelectListItem() { Text = "Nota Debito", Value = "2" });
+                tipoComprobantes.Add(new SelectListItem() { Text = "Nota Credito", Value = "3" });
+                // model.TipoIdioma = lstIdioma;
+                Cliente.ListaComprobantesDrop = tipoComprobantes;
 
                 strJson = Newtonsoft.Json.JsonConvert.SerializeObject(Cliente);
                     if ((strJson != null))
@@ -339,6 +781,30 @@ namespace SAC.Controllers
         }
 
 
+        //[HttpGet()]
+        //public ActionResult GetCotizacionJson(string term)
+        //{
+        //    try
+        //    {
+        //        List<ArticuloModel> articulos = servicioArticulo.GetArticulosPorCodigo(term);
+        //        var arrayArticulos = (from cli in articulos
+        //                              select new AutoCompletarViewModel()
+        //                              {
+        //                                  id = cli.Id,
+        //                                  label = cli.DescripcionCastellano
+        //                              }).ToArray();
+        //        return Json(arrayArticulos, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        servicioCliente._mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+        //        return null;
+        //    }
+
+        //}
+
+
+
         [HttpGet()]
         public ActionResult GetCodigoJson(int IdArticulo)
         {
@@ -364,28 +830,41 @@ namespace SAC.Controllers
 
 
         [HttpGet()]
-        public ActionResult GetDireccionJson(string idDireccion)
+        public ActionResult GetCotizacionJson(string IdMoneda)
         {
+      
+            CotizacionAFIP cotizacion = new CotizacionAFIP();
+            var f = DateTime.Now;
+            string strJson;
             try
             {
-                string strJson;
-                ClienteDireccionModelView direccion = Mapper.Map<ClienteDireccionModel, ClienteDireccionModelView>(servicioClienteDireccion.ObtenerPorID(int.Parse(idDireccion)));
-                strJson = Newtonsoft.Json.JsonConvert.SerializeObject(direccion);
+
+                var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(f, int.Parse(IdMoneda));
+                if (moneda == null)
+                {
+                    cotizacion.Importe = 1;
+                    cotizacion.Fecha = f.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    cotizacion.Importe = moneda.Monto;
+                    cotizacion.IdMoneda = moneda.Id.ToString();
+                    cotizacion.Fecha = moneda.Fecha.ToString();
+                }
+                strJson = Newtonsoft.Json.JsonConvert.SerializeObject(cotizacion);
                 if ((strJson != null))
                 {
                     var rJson = Json(strJson, JsonRequestBehavior.AllowGet);
                     return rJson;
                 }
-              
             }
             catch (Exception ex)
             {
                 servicioCliente._mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-                return null;
             }
-            return Json(null, JsonRequestBehavior.AllowGet);
 
-        }
+            return Json(null, JsonRequestBehavior.AllowGet);
+    }
 
 
         [HttpGet()]
@@ -415,48 +894,7 @@ namespace SAC.Controllers
         }
 
 
-        //[HttpGet()]
-        //public ActionResult GetComprobantes(int idTipoIva, bool mipyme, int factura)
-        //{
-        //    string strJson;
-        //    try
-        //    {
-        //        List<TipoComprobanteModelView> tipoComprobantes = null;
-        //        //ClienteModelView Cliente = Mapper.Map<ClienteModel, ClienteModelView>(servicioCliente.GetClientePorId(IdCliente));
-        //        //Cliente.ClienteDireccion = Mapper.Map<List<ClienteDireccionModel>, List<ClienteDireccionModelView>>(servicioClienteDireccion.GetDireccionPorcliente(Cliente.Id));
-        //        if(idTipoIva == 4 )
-        //        {
-        //            tipoComprobantes = Mapper.Map<List<TipoComprobanteModel>,List<TipoComprobanteModelView>>(servicioTipoComprobante.GetTipoComprobanteExtranjerosVenta());
-        //        }
-        //        if (idTipoIva != 4 )
-        //        {
-        //            if (mipyme == false)
-        //            {
-        //                tipoComprobantes = Mapper.Map<List<TipoComprobanteModel>, List<TipoComprobanteModelView>>(servicioTipoComprobante.GetTipoComprobanteLocalesVentaSinFactura());
-        //            }
-        //            else
-        //            {
-        //                if (factura > 100000)
-        //                {
-        //                    //aca busca los tipo cbte 211,212,213
-        //                }
-        //            }
-        //        }
-
-        //        strJson = Newtonsoft.Json.JsonConvert.SerializeObject(tipoComprobantes);
-        //        if ((strJson != null))
-        //        {
-        //            var rJson = Json(strJson, JsonRequestBehavior.AllowGet);
-        //            return rJson;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        servicioCliente._mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
-        //    }
-        //    return Json(null, JsonRequestBehavior.AllowGet);
-        //}
-
+        
 
     }
 }

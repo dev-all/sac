@@ -18,6 +18,7 @@ namespace Negocio.Servicios
    public class ServicioCobro : ServicioBase
     {
         private ArticuloRepositorio oArticuloRepositorio;
+        
 
         public ServicioCobro()
         {
@@ -91,5 +92,6 @@ namespace Negocio.Servicios
                 return -1;//paso algo
             }
         }
+
     }
 }

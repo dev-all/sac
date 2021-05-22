@@ -16,7 +16,7 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-              public virtual ICollection<CompraFacturaPagoModel> CompraFacturaPago { get; set; }
+        public ICollection<CompraFacturaPagoModel> CompraFacturaPago { get; set; }
 
 
 

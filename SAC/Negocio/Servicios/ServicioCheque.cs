@@ -99,5 +99,52 @@ namespace Negocio.Servicios
             List<ChequeModel> listaCheque = Mapper.Map<List<Cheque>, List<ChequeModel>>(pChequeRepositorio.BuscarCheque(idCliente,idbanco, fechaDesde, fechaHasta));
             return listaCheque;
         }
+
+        public ChequeModel ExisteCheque(ChequeModel chequeModel)
+        {
+            try
+            {
+                
+                return Mapper.Map<Cheque, ChequeModel>(pChequeRepositorio.ExisteCheque(Mapper.Map<ChequeModel, Cheque>(chequeModel)));
+
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
+        }
+
+        public ChequeModel IngresarChequeCliente(ChequeModel chequeModel)
+        {
+            try
+            {
+                return Mapper.Map<Cheque, ChequeModel>(pChequeRepositorio.Agregar(Mapper.Map<ChequeModel, Cheque>(chequeModel)));
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                return null;
+            }
+        }
+
+        public void DeleteCheque(int idCheque, int idUsuario)
+        {
+            try
+            {
+                ChequeModel cheque = obtenerCheque(idCheque);
+                if (cheque != null)
+                {
+                    cheque.Activo = false;
+                    cheque.IdUsuario = idUsuario;
+                    cheque.UltimaModificacion = DateTime.Now;
+                    Mapper.Map<Cheque, ChequeModel>(pChequeRepositorio.Actualizar(Mapper.Map<ChequeModel, Cheque>(cheque)));                   
+                }                  
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");                
+            }
+        }
     }
 }

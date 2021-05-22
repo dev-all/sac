@@ -20,6 +20,7 @@ namespace Datos.ModeloDeDatos
             this.Caja = new HashSet<Caja>();
             this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
             this.TarjetaOperacion = new HashSet<TarjetaOperacion>();
+            this.FactVentaCobro = new HashSet<FactVentaCobro>();
         }
     
         public int Id { get; set; }
@@ -37,5 +38,7 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TarjetaOperacion> TarjetaOperacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FactVentaCobro> FactVentaCobro { get; set; }
     }
 }

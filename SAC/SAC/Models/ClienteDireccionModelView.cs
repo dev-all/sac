@@ -59,16 +59,17 @@ namespace SAC.Models
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        
-        
-        public virtual ClienteModelView Cliente { get; set; }      
-        public virtual PieNotaModelView PieNota { get; set; }
-        public virtual TipoClienteModelView TipoCliente { get; set; }
-        public virtual TipoMonedaModelView Moneda { get; set; }
-        public virtual TipoIdiomaModelView Idioma { get; set; }
-        public virtual PaisModelView Pais { get; set; }
-        public virtual ProvinciaModelView Provincia { get; set; }
-        public virtual LocalidadModelView Localidad { get; set; }
+
+        //comento por exeso bre 10/03/2021 (recursivo)
+        //public virtual ClienteModelView Cliente { get; set; }      
+        public  PieNotaModelView PieNota { get; set; }
+        public  TipoClienteModelView TipoCliente { get; set; }
+        public  TipoMonedaModelView Moneda { get; set; }
+        public  TipoIdiomaModelView Idioma { get; set; }
+      
+        public  PaisModelView Pais { get; set; }
+        public  ProvinciaModelView Provincia { get; set; }
+        public  LocalidadModelView Localidad { get; set; }
 
 
         public List<ClienteDireccionModelView> ListaDireccion { get; set; }

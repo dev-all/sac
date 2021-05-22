@@ -8,6 +8,7 @@ using Negocio.Servicios;
 using Negocio.Modelos;
 using AutoMapper;
 using SAC.Models.Cobro;
+using System.IO;
 
 namespace SAC.Controllers
 {
@@ -26,6 +27,8 @@ namespace SAC.Controllers
         private ServicioProvincia servicioProvincia = new ServicioProvincia();
         private ServicioTipoRetencion servicioTipoRetencion = new ServicioTipoRetencion();
         private ServicioRetencion servicioRetencion = new ServicioRetencion();
+
+        private ServicioFacturaVenta servicioFacturaVenta = new ServicioFacturaVenta();
 
         public CobroController()
         {
@@ -55,28 +58,36 @@ namespace SAC.Controllers
         }
 
         [HttpGet()]
-        public ActionResult Index(int IdCliente = 0)
+        public ActionResult Index(int IdCliente = 0 )
         {
-            CobroClienteModelView modelView = new CobroClienteModelView();
-
+            CobroFacturaModoModelView modelView = new CobroFacturaModoModelView();
             try
             {
                 if (IdCliente > 0)
                 {
 
-                    modelView.Cliente = Mapper.Map<ClienteModel, ClienteModelView>(servicioCliente.GetClientePorId(IdCliente));
-                    modelView.Cotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 1);
+                    Session["mediosCobro"] = null;
+
+                    modelView.Cliente = Mapper.Map<ClienteModel, ClienteModelView>(servicioCliente.GetClientePorId(IdCliente));                    
+                   
+                    modelView.Cotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 2);
                     modelView.Periodo = Int32.Parse(DateTime.Now.ToString("yyMM"));
-                    modelView.CuentaCorriente = null; // obtener lista de cbte                
-                                                      //modelView.ComprobanteDePago = null;
-                    modelView.ResumenPago = null;//
+
+                    modelView.CuentaCorriente = Mapper.Map<List<CobroFacturaModel>, List<CobroFacturaModelView>>(servicioFacturaVenta.GetClienteCtaCteCbte(IdCliente));
+                    
+                    modelView.ResumenPago = null; // Mapper.Map<List<CobroFacturaModel>, List<CobroFacturaModelView>>(servicioFacturaVenta.ObtenerPorIdCliente_Moneda(IdCliente, IdTipoMoneda));
+
+                    Session["Facturas_Cobro"] = null;
+
                     List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioBancoCuenta.GetAllCuenta());
+                    
                     modelView.SelectCuentasBancarias = (ListaCuentaBancaria.Select(x => new SelectListItem()
                     {
                         Value = x.Id.ToString(),
                         Text = x.Banco.Nombre + ' ' + x.BancoDescripcion
                     })).ToList();
                     modelView.SelectCuentasBancarias.Insert(0, new SelectListItem() { Value = "0", Text = "Cuentas " });
+                    ViewBag.listaCuentaBancariaDrop = modelView.SelectCuentasBancarias;
 
                     List<TipoMonedaModelView> tipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(servicioTipoMoneda.GetAllTipoMonedas());
                     modelView.SelectTipoMoneda = (tipoMoneda.Select(x => new SelectListItem()
@@ -84,13 +95,15 @@ namespace SAC.Controllers
                         Value = x.Id.ToString(),
                         Text = x.Descripcion
                     })).ToList();
+                    modelView.IdMonedaDeOperacion = 1;
                     ///continuar agregando los drop para el cbt de ingreso
 
-                    List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(servicioCheque.GetAllCheque());
-                    modelView.ListaChequesTerceros = ListaChequesTerceros;
-                    //--------PartialView cheques propios          
-                    List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(servicioChequera.GetAllChequera());
-                    modelView.ListaChequesPropios = ListaChequesPropios;
+                    //List<ChequeModelView> ListaChequesTerceros = Mapper.Map<List<ChequeModel>, List<ChequeModelView>>(servicioCheque.GetAllCheque());
+                    //modelView.ListaChequesTerceros = ListaChequesTerceros;
+                    ////--------PartialView cheques propios          
+                    //List<ChequeraModelView> ListaChequesPropios = Mapper.Map<List<ChequeraModel>, List<ChequeraModelView>>(servicioChequera.GetAllChequera());
+                    //modelView.ListaChequesPropios = ListaChequesPropios;
+
 
                     List<TarjetaModelView> ListaTarjetas = Mapper.Map<List<TarjetaModel>, List<TarjetaModelView>>(servicioTarjeta.GetAllTarjetas());
                     modelView.SelectTarjetas = (ListaTarjetas.Select(x =>
@@ -101,6 +114,7 @@ namespace SAC.Controllers
                                                  })).ToList();
                     modelView.SelectTarjetas.Insert(0, new SelectListItem() { Value = "0", Text = "Tarjetas " });
 
+                                 
 
                     //drop presupuesto
                     List<PresupuestoActualModelView> ListaPresupuesto = Mapper.Map<List<PresupuestoActualModel>, List<PresupuestoActualModelView>>(servicioPresupuestoActual.GetAllPresupuestos());
@@ -112,29 +126,29 @@ namespace SAC.Controllers
                                                                         })).ToList();
 
                     //para la retencion
-                    //RetencionModelView retencionPagoModelView = new RetencionModelView();
+                    RetencionModelView retencionModelView = new RetencionModelView();
 
-                    //List<TipoRetencionModelView> tipoRetencionModelViews = Mapper.Map<List<TipoRetencionModel>, List<TipoRetencionModelView>>(servicioTipoRetencion.GetAllTipoRetencion());
-                    //retencionPagoModelView.tipoRetencion = (tipoRetencionModelViews.Select(x =>
-                    //                             new SelectListItem()
-                    //                             {
-                    //                                 Value = x.Id.ToString(),
-                    //                                 Text = x.Descripcion
-                    //                             })).ToList();
+                  
+                    List<TipoRetencionModelView> tipoRetencionModelViews = Mapper.Map<List<TipoRetencionModel>, List<TipoRetencionModelView>>(servicioTipoRetencion.GetAllTipoRetencion());
+                    retencionModelView.ListaTipoRetencion = (tipoRetencionModelViews.Select(x =>
+                                                 new SelectListItem()
+                                                 {
+                                                     Value = x.Id.ToString(),
+                                                     Text = x.Descripcion
+                                                 })).ToList();
 
-                    //List<ProvinciaModelView> provinciaModelViews = Mapper.Map<List<ProvinciaModel>, List<ProvinciaModelView>>(servicioProvincia.GetAllProvincias());
-                    //retencionPagoModelView.ListadoProvincias = (provinciaModelViews.Select(x =>
-                    //                             new SelectListItem()
-                    //                             {
-                    //                                 Value = x.Id.ToString(),
-                    //                                 Text = x.Nombre
-                    //                             })).ToList();
+                    List<ProvinciaModelView> provinciaModelViews = Mapper.Map<List<ProvinciaModel>, List<ProvinciaModelView>>(servicioProvincia.GetAllProvincias());
+                    retencionModelView.ListadoProvincias = (provinciaModelViews.Select(x =>
+                                                 new SelectListItem()
+                                                 {
+                                                     Value = x.Id.ToString(),
+                                                     Text = x.Nombre
+                                                 })).ToList();
 
-                    //List<CompraFacturaViewModel> compraFacturaViewModel = Mapper.Map<List<CompraFacturaModel>, List<CompraFacturaViewModel>>(servicioCompra.ObtenerPorIDProveedor_Moneda(pagosFacturasModelView.ProveedorSelec_, pagosFacturasModelView.idTipoMonedaSelec_));
-
+                    //List<CobroFacturaModel> compraFacturaViewModel = Mapper.Map<List<CobroFacturaModel>, List<CobroFacturaModel>>( servicioFacturaVenta.ObtenerPorIdCliente_Moneda(modelView.IdCliente, modelView.IdTipoMoneda));
                     //if (compraFacturaViewModel.Count > 0)
                     //{
-                    //    retencionPagoModelView.ListadoFacturas = (compraFacturaViewModel.Select(x =>
+                    //    retencionModelView.ListadoFacturas = (compraFacturaViewModel.Select(x =>
                     //                          new SelectListItem()
                     //                          {
                     //                              Value = x.Id.ToString(),
@@ -142,13 +156,33 @@ namespace SAC.Controllers
                     //                          })).ToList();
                     //}
 
-                    //modelView.Retencion_ = retencionPagoModelView;
+                    modelView.Retencion = retencionModelView;
 
-                    // modelView.idProveedor_ = pagosFacturasModelView.ProveedorSelec_;
-
-
-
+                    modelView.Cheque.SelectBancos = SelectListBanco();
                 }
+                else{
+              
+                    modelView.Cotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 2);                    
+                    modelView.Periodo = Int32.Parse(DateTime.Now.ToString("yyMM"));
+                    List<TipoMonedaModelView> tipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(servicioTipoMoneda.GetAllTipoMonedas());
+                    modelView.SelectTipoMoneda = (tipoMoneda.Select(x => new SelectListItem()
+                    {
+                        Value = x.Id.ToString(),
+                        Text = x.Descripcion
+                    })).ToList();
+                    modelView.IdMonedaDeOperacion = 1;
+                    List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioBancoCuenta.GetAllCuenta());
+                    modelView.SelectCuentasBancarias = (ListaCuentaBancaria.Select(x => new SelectListItem()
+                    {
+                        Value = x.Id.ToString(),
+                        Text = x.Banco.Nombre + ' ' + x.BancoDescripcion
+                    })).ToList();
+                    modelView.SelectCuentasBancarias.Insert(0, new SelectListItem() { Value = "0", Text = "Cuentas " });
+                    ViewBag.listaCuentaBancariaDrop = modelView.SelectCuentasBancarias;
+                    
+                    modelView.Cheque.SelectBancos = SelectListBanco();
+                }
+
 
             }
             catch (Exception ex)
@@ -157,6 +191,412 @@ namespace SAC.Controllers
             }
             return View(modelView);
         }
+
+        private List<SelectListItem> SelectListBanco()
+        {
+            List<BancoModel> listaBanco = servicioBancoCuenta.GetAllBanco();
+            var lista = (listaBanco.Select(x => new SelectListItem()
+                        {
+                            Value = x.Id.ToString(),
+                            Text = x.Nombre
+                        })).ToList();
+           // lista.Insert(0, new SelectListItem() { Value = "0", Text = "Seleccionar " });
+            return lista;
+        }
+
+        //1
+        public int VerificarCobro()
+        {
+            int respuesta = 0;
+            var IdTipoComprobante = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["IdTipoComprobanteVenta"].ToString());
+            try
+            {
+                List<FacturaModelView> listaFacturasSeleccionadas = new List<FacturaModelView>();
+                listaFacturasSeleccionadas = Session["Facturas_Cobro"] as List<FacturaModelView>;
+                if (listaFacturasSeleccionadas != null)
+                {
+                    foreach (FacturaModelView item in listaFacturasSeleccionadas)
+                    {
+                        // El id 34 es el comprobante 99 - Cobro
+                        if (item.IdTipoComprobante == IdTipoComprobante && item.NumeroFactura == 0)
+                        {
+                            respuesta = 1;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    respuesta = 0;
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                respuesta = 0;
+            }
+            return respuesta;
+        }
+
+
+        //2  esto es para alimentar la grilla de facturas seleccionadas para pagar
+        [HttpPost]
+        public ActionResult AgregarFacturaCobro(int idFacturaSeleccionada, int idModoCobro, string MontoCobro, string CotizacionActual ,int idMoneda)
+        {
+            CobroFacturaModelView model = Mapper.Map<CobroFacturaModel, CobroFacturaModelView>(servicioFacturaVenta.ObtenerFacturaPorID(idFacturaSeleccionada));
+            List<CobroFacturaModelView> listaFacturasSeleccionadas = new List<CobroFacturaModelView>();
+            if (idModoCobro == 1)
+            {
+                //if (idMonedaFactura != newIdMoneda) {
+                //    if (idMonedaFactura == 1 ) { // pesos to new money
+                //        valorFactura = valorFactura / newCotiza;
+                //    }
+                //    if (idMonedaFactura > 1 && newIdMoneda == 1) { // to pesos
+                //        valorFactura = valorFactura * newCotiza;
+                //    }
+                //}
+
+                decimal ValorActualizado = 0;
+                if (idMoneda != model.IdMoneda)
+                {   // pesos to new money
+                    if (model.IdMoneda == 1 && idMoneda != 1)
+                    {
+                        ValorActualizado = model.Saldo / Convert.ToDecimal(CotizacionActual);
+                    }
+                    // to pesos
+                    if (model.IdMoneda > 1 && idMoneda == 1) 
+                    { 
+                        ValorActualizado = model.Saldo * Convert.ToDecimal(CotizacionActual);
+                    }
+                    model.aplicacion = decimal.Round(ValorActualizado, 2); ;
+                }
+                else
+                {
+                    model.aplicacion = model.Saldo;
+                }              
+            }
+            if (idModoCobro == 2)
+            {
+                model.aplicacion = ( model.IdMoneda == 2) ? model.aplicacion = Convert.ToDecimal(MontoCobro) * Convert.ToDecimal(CotizacionActual) : model.aplicacion = Convert.ToDecimal(MontoCobro);               
+            }
+            if (idModoCobro == 3)
+            {
+                decimal ValorActualizado = 0;
+                if (model.IdMoneda == 2)
+                {
+                    ValorActualizado = model.Saldo * Convert.ToDecimal(CotizacionActual);
+                }
+                else
+                {
+                    ValorActualizado = model.Saldo;
+                }
+                model.aplicacion = -ValorActualizado;
+            }
+
+            if (Session["Facturas_Cobro"] != null)
+            {
+                listaFacturasSeleccionadas = Session["Facturas_Cobro"] as List<CobroFacturaModelView>;
+
+                bool existe = false;
+                existe = listaFacturasSeleccionadas.Find(f => f.Id == idFacturaSeleccionada) != null ? true : false;
+
+                if (existe == false)
+                {
+                    listaFacturasSeleccionadas.Add(model);
+                }
+
+            }
+            else
+            {
+                listaFacturasSeleccionadas.Add(model);
+            }
+
+            CobroFacturaModoModelView cobro = new CobroFacturaModoModelView();
+            Session["Facturas_Cobro"] = listaFacturasSeleccionadas;
+            cobro.ResumenPago = listaFacturasSeleccionadas;
+            return PartialView("_TablaFacturasCobro", cobro);
+
+        }
+
+        [HttpPost]
+        public ActionResult IngresoDelCobro(CobroFacturaModoModelView medioCobro)
+        {
+            try
+            {
+                Session["mediosCobro"] = medioCobro;
+
+                List<CobroFacturaModelView> listaFacturasSeleccionadas = Session["Facturas_Cobro"] as List<CobroFacturaModelView>;
+
+                decimal totalMontoFacturas = 0;
+                decimal totalMontoAplicacionFacturas = 0;
+                bool existe = false;
+                var IdTipoComprobante = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["IdTipoComprobanteVenta"].ToString());
+                if (listaFacturasSeleccionadas != null)
+                {
+                    foreach (CobroFacturaModelView item in listaFacturasSeleccionadas)
+                    {
+                        decimal valSal = Convert.ToDecimal(item.Saldo);
+                        decimal valApli = Convert.ToDecimal(item.aplicacion);
+                        totalMontoFacturas += valSal;
+                        totalMontoAplicacionFacturas += valApli;
+                        if (item.IdTipoComprobante == IdTipoComprobante && item.NumeroFactura == 0) // es porque ya hay un cobro)
+                        {
+                            existe = true;
+                        }
+                    }
+                }
+                else
+                {
+                    // adelanto se podria 
+                    listaFacturasSeleccionadas = new List<CobroFacturaModelView>();
+                }
+
+                CobroFacturaModelView cobroFactura = new CobroFacturaModelView();
+                
+                cobroFactura.IdTipoComprobante = IdTipoComprobante;
+                cobroFactura.NumeroFactura = 0;
+                cobroFactura.Saldo = 0;
+                cobroFactura.cobro = medioCobro.montoTotal;
+                cobroFactura.aplicacion = -medioCobro.montoTotal;
+                cobroFactura.IdCliente = medioCobro.IdCliente;
+                cobroFactura.IdMoneda = medioCobro.IdMonedaDeOperacion;
+                cobroFactura.Cotiza = medioCobro.Cotizacion.Monto;
+                cobroFactura.Recibo = medioCobro.NumeroRecibo.ToString();
+                cobroFactura.Concepto = medioCobro.ConceptoCobro;
+                
+                if (totalMontoAplicacionFacturas >= medioCobro.montoTotal)
+                {
+                    cobroFactura.saldoCobro = 0;
+                }
+                else
+                {
+                    cobroFactura.saldoCobro = medioCobro.montoTotal - totalMontoAplicacionFacturas;
+                }
+
+                if (existe == false)
+                {
+                    listaFacturasSeleccionadas.Add(cobroFactura);
+                }
+
+                CobroFacturaModoModelView cobro = new CobroFacturaModoModelView();
+                Session["Facturas_Cobro"] = listaFacturasSeleccionadas;
+                cobro.ResumenPago = listaFacturasSeleccionadas;
+                return PartialView("_TablaFacturasCobro", cobro);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult AgregarRetencion(CobroFacturaModoModelView medioCobro)
+        {
+            var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+            RetencionModelView retencion = new RetencionModelView();
+            retencion = medioCobro.Retencion;
+            retencion.Periodo = int.Parse(DateTime.Now.ToString("yyMM"));
+            retencion.IdCompraFactura = null ;
+            retencion.UltimaModificacion = DateTime.Now;
+            retencion.Idusuario = usuario.IdUsuario;
+            retencion.Fecha = DateTime.Now;
+            retencion.Activo = true;
+
+            RetencionModel retencionModel = servicioRetencion.Agregar(Mapper.Map<RetencionModelView, RetencionModel>(retencion));
+
+            List<RetencionModelView> retencionModelView = Mapper.Map<List<RetencionModel>, List<RetencionModelView>>(servicioRetencion.GetAllRetencionVenta(retencionModel.IdFactVenta ?? 0));
+
+            CobroFacturaModoModelView retencionCobro = new CobroFacturaModoModelView();
+            retencionCobro.ListadoRetenciones = retencionModelView;
+
+            try
+            {
+                return PartialView("_TablaRetenciones", retencionCobro);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+         }
+
+        [HttpPost]
+        public ActionResult EliminarRetencion(int IdRetencionEliminar, int idFacturaEliminar)
+        {
+
+            var oRetencionModel = servicioRetencion.GetRetencionOu(IdRetencionEliminar);
+            servicioRetencion.Eliminar(oRetencionModel);
+
+            List<RetencionModelView> ListaretencionModelView = Mapper.Map<List<RetencionModel>, List<RetencionModelView>>(servicioRetencion.GetAllRetencionVenta(idFacturaEliminar));
+
+
+            CobroFacturaModoModelView retencionCobro = new CobroFacturaModoModelView();
+            retencionCobro.ListadoRetenciones = ListaretencionModelView;
+
+            try
+            {
+                return PartialView("_TablaRetenciones", retencionCobro);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+       
+        private void ListaCuentaBancaria()
+        {
+            List<BancoCuentaModelView> ListaCuentaBancaria = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioBancoCuenta.GetAllCuenta());
+            var SelectCuentasBancarias = (ListaCuentaBancaria.Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.Banco.Nombre + ' ' + x.BancoDescripcion
+            })).ToList();
+            SelectCuentasBancarias.Insert(0, new SelectListItem() { Value = "0", Text = "Cuentas " });
+            ViewBag.listaCuentaBancariaDrop = SelectCuentasBancarias;
+
+        }
+
+        
+        //-----------------
+         [HttpPost]
+        public ActionResult CancelarPago()
+        {
+            try
+            {                
+                Session["Facturas_Cobro"] = null;
+                return Json(new { result = true, data = 1 }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = false, data = "Ops!, A ocurriodo un error. Contacte al Administrador" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Cobrar()
+        {
+            var datosUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+         
+
+            List<CobroFacturaModelView> cobroFacturaModelViews = Session["Facturas_Cobro"] as List<CobroFacturaModelView>;
+            CobroFacturaModoModelView mediosCobro = Session["mediosCobro"] as CobroFacturaModoModelView;
+            mediosCobro.IdUsuario = datosUsuario.IdUsuario;
+   
+            var IdTipoComprobanteVenta = Int32.Parse(System.Configuration.ConfigurationManager.AppSettings["IdTipoComprobanteVenta"].ToString());
+
+            servicioFacturaVenta.RegistroDeCobro(Mapper.Map<List<CobroFacturaModelView>, List<CobroFacturaModel>>(cobroFacturaModelViews)
+                                                , Mapper.Map< CobroFacturaModoModelView, CobroFacturaModoModel>(mediosCobro) 
+                                                , IdTipoComprobanteVenta);
+
+            //var f = (from i in cobroFacturaModelViews
+            //         where (i.IdTipoComprobante != 34)
+            //         select new CobroFacturaModelView
+            //         {
+            //             IdMoneda = i.IdMoneda,
+            //             IdCliente = i.IdCliente
+            //         }).FirstOrDefault();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public JsonResult ObtenerDatos(int IdFact)
+        {
+            CobroFacturaModelView cobroFacturaModelView = new CobroFacturaModelView();
+            cobroFacturaModelView = Mapper.Map<CobroFacturaModel, CobroFacturaModelView>(servicioFacturaVenta.ObtenerFacturaPorID(IdFact));
+            return Json(cobroFacturaModelView, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult IngresarChequeClienteAjax(ChequeModelView model)
+        {          
+            try
+            {
+          
+                List<ChequeModelView> listaCheque = new List<ChequeModelView>();
+                ChequeModel chequeModel = Mapper.Map<ChequeModelView, ChequeModel>(model);
+                ChequeModel cheque = servicioCheque.ExisteCheque(chequeModel);
+                if (cheque == null)
+                {
+                    var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+                    chequeModel.Fecha = DateTime.Now;
+                    chequeModel.Activo = true;
+                    chequeModel.IdMoneda = 1;
+                    chequeModel.Endosado = false;
+                    chequeModel.Descripcion = "Cobro a Cliente";
+                    chequeModel.UltimaModificacion = DateTime.Now;
+                    chequeModel.IdUsuario = usuario.IdUsuario;
+
+                    cheque = servicioCheque.IngresarChequeCliente(chequeModel);
+                    cheque.BancoCheque = servicioBancoCuenta.GetBancoPorIdLazy(cheque.IdBanco);
+                    listaCheque.Add(Mapper.Map<ChequeModel,ChequeModelView>(cheque));
+                }
+                //else
+                //{
+                //    listaCheque.Add(Mapper.Map<ChequeModel, ChequeModelView>(cheque));
+                //}
+
+                return PartialView("~/Views/Cobro/_TablaNewCheque.cshtml", listaCheque);
+            }
+            catch (Exception ex)
+            {             
+                return JsonView(false, ex.Message.ToString(), "~/Views/Cobro/_TablaChequesCliente.cshtml", model);
+            }
+
+
+        }
+
+      
+        private JsonResult JsonView(bool success, string message, string viewName, object model)
+        {
+            return Json(new { Success = success, Message = message, View = RenderPartialView(viewName, model) });
+        }
+
+        private string RenderPartialView(string partialViewName, object model)
+        {
+            if (ControllerContext == null)
+                return string.Empty;
+
+            if (model == null)
+                throw new ArgumentNullException("model");
+
+            if (string.IsNullOrEmpty(partialViewName))
+                throw new ArgumentNullException("partialViewName");
+
+            ViewData.Model = model;
+
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, partialViewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult QuitarCheque(int IdCheque = 0)  
+        {
+            var usuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+            servicioCheque.DeleteCheque(IdCheque, usuario.IdUsuario);
+
+            List<ChequeModelView> listaCheque = new List<ChequeModelView>();
+
+            return PartialView("~/Views/Cobro/_TablaNewCheque.cshtml", listaCheque);
+
+            //return PartialView("_RDChequesPropios", listChequeraModelView);
+            //return PartialView("~/Views/CuentaCteProveedor/_RDChequesPropios.cshtml", listChequeraModelView);
+
+        }
+
+
+
+
+
+
 
     }
 }

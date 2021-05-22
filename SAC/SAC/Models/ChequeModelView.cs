@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-
+using System.Web.Mvc;
 
 namespace SAC.Models
 {
@@ -53,10 +53,7 @@ namespace SAC.Models
         public string tipoMonedaDescripcion { get; set; }
 
         //propiedad agregada
-        public bool seleccionado { get; set; }
-   
-
-        
+        public bool seleccionado { get; set; }          
 
         public int cParametro1 { get; set; }
         public int cParametro2 { get; set; }
@@ -81,5 +78,12 @@ namespace SAC.Models
 
         public ClienteModelView ListaCliente { get; set; }
         public BancoCuentaModelView BancoCuenta { get; set; }
+
+        public List<SelectListItem> SelectBancos { get; set; }
+
+
+        public BancoModelView BancoCheque { get; set; }
+
+
     }
 }

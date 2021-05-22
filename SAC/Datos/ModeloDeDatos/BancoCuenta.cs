@@ -22,6 +22,7 @@ namespace Datos.ModeloDeDatos
             this.Chequera = new HashSet<Chequera>();
             this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
             this.BancoCuentaBancaria = new HashSet<BancoCuentaBancaria>();
+            this.FactVentaCobro = new HashSet<FactVentaCobro>();
         }
     
         public int Id { get; set; }
@@ -50,5 +51,7 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FactVentaCobro> FactVentaCobro { get; set; }
     }
 }

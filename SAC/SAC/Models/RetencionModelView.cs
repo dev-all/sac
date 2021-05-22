@@ -15,7 +15,7 @@ namespace SAC.Models
 
         public RetencionModelView()
         {
-            tipoRetencion = new List<SelectListItem>();
+            ListaTipoRetencion = new List<SelectListItem>();
             ListadoProvincias = new List<SelectListItem>();
             ListadoFacturas = new List<SelectListItem>();
         }
@@ -28,7 +28,8 @@ namespace SAC.Models
         public decimal Importe { get; set; }
         public int NroRecibo { get; set; }
         public int IdProvincia { get; set; }
-        public int IdCompraFactura { get; set; }
+        public Nullable<int> IdFactVenta { get; set; }
+        public Nullable<int> IdCompraFactura { get; set; }
         public int IdTipoRetencion { get; set; }
         public int Periodo { get; set; }
         public string Actividad { get; set; }
@@ -37,8 +38,10 @@ namespace SAC.Models
 
         public System.DateTime UltimaModificacion { get; set; }
 
+    
 
-        public List<SelectListItem> tipoRetencion { get; set; }
+
+        public List<SelectListItem> ListaTipoRetencion { get; set; }
         public List<SelectListItem> ListadoProvincias { get; set; }
         public List<SelectListItem> ListadoFacturas { get; set; }
 
@@ -46,8 +49,9 @@ namespace SAC.Models
         ////----------------------
 
         public CompraFacturaViewModel CompraFactura { get; set; }
+        public CobroFacturaModelView VentaFactura { get; set; }
         public ProvinciaModelView Provincia { get; set; }
-        public TipoRetencionModelView _TipoRetencion { get; set; }
+        public TipoRetencionModelView TipoRetencion { get; set; }
 
     }
 }

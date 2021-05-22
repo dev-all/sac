@@ -26,10 +26,18 @@ namespace Datos.Repositorios
         }
         public ValorCotizacion GetCotizacionPorIdMoneda(DateTime f, int idMoneda)
         {
-            return context.ValorCotizacion.Where(p => p.Activo == true
+            var cotizacion =  context.ValorCotizacion.Where(p => p.Activo == true
                                                     && p.Fecha == f 
                                                     && p.Id == idMoneda).FirstOrDefault();
+            if (cotizacion == null)
+            {
+                cotizacion = GetUltimaCotizacion(idMoneda);
+            }
+            return cotizacion;
         }
-
+        public ValorCotizacion GetUltimaCotizacion(int idMoneda)
+        {
+            return context.ValorCotizacion.Where(p => p.Activo == true && p.IdTipoMoneda == idMoneda).FirstOrDefault();
+        }
     }
 }

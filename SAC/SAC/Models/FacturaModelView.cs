@@ -16,6 +16,8 @@ namespace SAC.Models
 
         [Display(Name = "Id Cliente")]
         public int IdCliente { get; set; }
+        public string CodigoCliente { get; set; }
+        public int idImputacion { get; set; }
 
         [Display(Name = "Tipo Comprobante")]
         public int IdTipoComprobante { get; set; }
@@ -28,9 +30,14 @@ namespace SAC.Models
         [DisplayFormat(DataFormatString = "{0:00000000}", ApplyFormatInEditMode = true)]
         public int NumeroFactura { get; set; }
         public DateTime Fecha { get; set; }
-        public int Cuit { get; set; }
+        public string Cuit { get; set; }
+        public string CuitSeleccionado { get; set; }
+        public int CodPaisAfip { get; set; }
 
         public int IdDireccionCliente { get; set; }
+        public int idProvincia { get; set; }
+        public int idPais { get; set; }
+
         public int IdTipoPago { get; set; }
         public int IdTipoFactura { get; set; }
         public int IdTipoIdioma { get; set; }
@@ -48,6 +55,7 @@ namespace SAC.Models
 
         public int IdArticulo { get; set; }
 
+        [Required]
         public string ORef { get; set; }
         public string YREf { get; set; }
 
@@ -69,6 +77,9 @@ namespace SAC.Models
         public string Nota { get; set; }
        
 
+        //agrego el ajuste para nota credito/debito
+        public decimal MontoAjuste { get; set; }
+
         //drops
         public List<SelectListItem> TipoMonedas { get; set; }
 
@@ -89,6 +100,10 @@ namespace SAC.Models
         //relaciones
 
         public ClienteModelView Cliente { get; set; }
+
+        public decimal cobro { get; set; }
+        public decimal aplicacion { get; set; }
+        public decimal saldoCobro { get; set; }
 
     }
 }

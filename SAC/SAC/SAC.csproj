@@ -142,7 +142,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Atributos\AutorizacionDeSistema.cs" />
-    <Compile Include="CajaRepositorio.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\BancoControllers.cs" />
     <Compile Include="Controllers\CajaCierreController.cs" />
@@ -190,7 +189,8 @@
     <Compile Include="Models\ChequeraModelView.cs" />
     <Compile Include="Models\ClienteDireccionModelView.cs" />
     <Compile Include="Models\ClienteModelView.cs" />
-    <Compile Include="Models\CobroClienteModelView.cs" />
+    <Compile Include="Models\CobroFacturaModelView.cs" />
+    <Compile Include="Models\CobroFacturaModoModelView.cs" />
     <Compile Include="Models\Cobro\BuscarClienteModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoChequesModelView.cs" />
     <Compile Include="Models\CompraFacturaPagoModelView.cs" />
@@ -2954,11 +2954,12 @@
     <Content Include="Views\Articulo\AddOrEdit.cshtml" />
     <Content Include="Views\Articulo\Index.cshtml" />
     <Content Include="Views\Contabilidad\ConsultaSumaYSaldos.cshtml" />
-    <Content Include="Views\Cobros\_TablaFacturasPagar.cshtml" />
-    <Content Include="Views\Cobros\_tablaRetenciones.cshtml" />
-    <Content Include="Views\Cobros\Index.cshtml" />
     <Content Include="Views\Cobro\Index.cshtml" />
     <Content Include="Views\Factura\Index.cshtml" />
+    <Content Include="Views\Cobro\_TablaFacturasCobro.cshtml" />
+    <Content Include="Views\Cobro\_TablaRetenciones.cshtml" />
+    <Content Include="Views\Cobro\_TablaChequesCliente.cshtml" />
+    <Content Include="Views\Cobro\_TablaNewCheque.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

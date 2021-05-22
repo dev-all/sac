@@ -56,6 +56,7 @@ namespace Datos.Repositorios
              var nro = context.Diario.Where(o => o.Activo == true).Max(x => (int?)x.Codigo) ?? 0;
             return nro;
         }
+        
 
     }
 }

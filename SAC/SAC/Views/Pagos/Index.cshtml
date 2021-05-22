@@ -372,7 +372,7 @@
 
                         <div class="row col-md-12 m-t-10">
                             <div class="col-md-2"> @Html.Label("Tipo", new { @class = "control-label form-control-sm" })</div>
-                            <div class="col-md-3">@Html.DropDownListFor(p => p.Retencion_.IdTipoRetencion, Model.Retencion_.tipoRetencion, null, new { @class = "form-control form-control-sm" })</div>
+                            <div class="col-md-3">@Html.DropDownListFor(p => p.Retencion_.IdTipoRetencion, Model.Retencion_.ListaTipoRetencion, null, new { @class = "form-control form-control-sm" })</div>
                             <div class="col-md-2"> @Html.Label("Importe", new { @class = "control-label form-control-sm" })</div>
                             <div class="col-md-3">@Html.TextBoxFor(p => p.Retencion_.Importe, new { @class = "form-control form-control-sm" })</div>
                         </div>

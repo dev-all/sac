@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using Datos.ModeloDeDatos;
+using System.Web.Mvc;
 
 namespace SAC.Models
 {
@@ -47,12 +48,7 @@ namespace SAC.Models
         public virtual TipoClienteModelView TipoCliente { get; set; }
         public virtual TipoMonedaModelView TipoMoneda { get; set; }
         public virtual ICollection<ClienteDireccionModelView> ClienteDireccion { get; set; }
-
-           
-       
-    
-
-
+         
 
         public List<ClienteModelView> ListaCliente { get; set; }
 
@@ -66,7 +62,7 @@ namespace SAC.Models
         //agrego listaComprobantes
         public List<TipoComprobanteModelView> ListaComprobantes { get; set; }
 
-
+        public List<SelectListItem> ListaComprobantesDrop { get; set; }
 
 
     }

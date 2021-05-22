@@ -23,9 +23,9 @@ namespace Datos.Repositorios
         }
 
 
-        public Dto obtenerDto(int anio, int CodigoDto, int CodigoArt)
+        public Dto obtenerDto(int anio, int CodigoDto, string CodigoArt)
         {
-            var retorno =  context.Dto.Where(p => p.Periodo == anio && p.CodArt == CodigoArt.ToString() && p.CodDto == CodigoDto.ToString()).FirstOrDefault();
+            var retorno =  context.Dto.Where(p => p.Periodo == anio && p.CodArt == CodigoArt && p.CodDto == CodigoDto.ToString()).FirstOrDefault();
             return retorno;
         }
 
@@ -37,7 +37,7 @@ namespace Datos.Repositorios
 
         public Dto Actualizar(Dto oDto)
         {
-            Dto nDto = obtenerDto(oDto.Periodo, int.Parse(oDto.CodDto), int.Parse(oDto.CodArt));
+            Dto nDto = obtenerDto(oDto.Periodo, int.Parse(oDto.CodDto), oDto.CodArt);
             nDto.Id = oDto.Id;
             nDto.Periodo = oDto.Periodo;
             nDto.CodDto = oDto.CodDto;

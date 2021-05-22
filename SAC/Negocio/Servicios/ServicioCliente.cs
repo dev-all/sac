@@ -121,15 +121,7 @@ namespace Negocio.Servicios
 
         }
 
-
-        #region "Metodos de Actualizacion de Datos"
-
-
-
-
-
-
-
+       
         public ClienteModel ActualizarCliente(ClienteModel model)
         {
 
@@ -175,8 +167,6 @@ namespace Negocio.Servicios
             //}
 
         }
-
-
 
         public void Eliminar(int IdCliente)
         {
@@ -234,9 +224,6 @@ namespace Negocio.Servicios
             }
         }
 
-
-
-
         public ClienteModel GuardarCliente(ClienteModel model)
         {
 
@@ -259,9 +246,21 @@ namespace Negocio.Servicios
 
         }
 
-     
+        internal void ActualizarPresupuestoCliente(ClienteModel model)
+        {
+            try
+            {
+                if (_mensaje != null) { _mensaje?.Invoke("El proveedor se actualizo correctamente", "ok"); }
+                oClienteRepositorio.ActualizarPresupuesto(Mapper.Map<ClienteModel, Cliente>(model));
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurrido un error. Contactese con el Administrador", "error");
+                throw new Exception("No pudo ejecutar ActualizarProveedor");
+            }
+        }
 
 
-        #endregion
-    }
+
+        }
 }

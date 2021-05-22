@@ -31,7 +31,7 @@ namespace Negocio.Servicios
             return listaDto;
         }
 
-        public DtoModel obtenerDto(int anio, int codigoDto, int codigoArticulo)
+        public DtoModel obtenerDto(int anio, int codigoDto, string codigoArticulo)
         {
             return Mapper.Map<Dto, DtoModel>(oDtoRepositorio.obtenerDto(anio, codigoDto, codigoArticulo));
         }
@@ -52,7 +52,7 @@ namespace Negocio.Servicios
         }
 
 
-        public DtoModel ActualizarDatosDto (DateTime fechaFactura, ItemImprModel itemImpre,int codigoArticulo, int idTipoIva, int dto, int nFactor, int idmoneda, decimal cotizacion, ArticuloModel articuloModel)
+        public DtoModel ActualizarDatosDto (DateTime fechaFactura, ItemImprModel itemImpre,string codigoArticulo, int idTipoIva, int dto, int nFactor, int idmoneda, decimal cotizacion, ArticuloModel articuloModel, UsuarioModel oUsuario)
         {
             string fecha = fechaFactura.ToString();
             string[] FechaDesarmada = fecha.Split('/');
@@ -61,6 +61,11 @@ namespace Negocio.Servicios
             string mes;
             AnioDesarmado = FechaDesarmada[2].Split(' ');
             anio = AnioDesarmado[0];
+
+            if (cotizacion == 0 )
+            {
+                cotizacion = 1;
+            }
 
             if (int.Parse(FechaDesarmada[1]) < 10)
             {
@@ -81,7 +86,7 @@ namespace Negocio.Servicios
                 DtoInsertar.CodDto = dto.ToString();
                 DtoInsertar.CodArt = itemImpre.Codigo;
                 DtoInsertar.Activo = true;
-                DtoInsertar.IdUsuario = 1;
+                DtoInsertar.IdUsuario = oUsuario.IdUsuario;
                 DtoInsertar.UltimaModificacion = DateTime.Now;
                 decimal valor;
                 if (idTipoIva != 4) //es local
@@ -225,10 +230,10 @@ namespace Negocio.Servicios
             {
               ServicioDto servicioDto = new ServicioDto();
 
-                DtoModel DtoActualizar = new DtoModel();
-                DtoActualizar.Periodo = int.Parse(anio);
-                DtoActualizar.CodDto = dto.ToString();
-                DtoActualizar.CodArt = itemImpre.Codigo;
+
+                dtoVerifica.IdUsuario = oUsuario.IdUsuario;
+                dtoVerifica.UltimaModificacion = DateTime.Now;
+
                 decimal valor;
                 if (idTipoIva != 4) //es local
                 {
@@ -238,40 +243,40 @@ namespace Negocio.Servicios
                         switch (int.Parse(mes))
                         {
                             case 1:
-                                DtoActualizar.Loc01 += valor;
+                                dtoVerifica.Loc01 += valor;
                                 break;
                             case 2:
-                                DtoActualizar.Loc02 += valor;
+                                dtoVerifica.Loc02 += valor;
                                 break;
                             case 3:
-                                DtoActualizar.Loc03 += valor;
+                                dtoVerifica.Loc03 += valor;
                                 break;
                             case 4:
-                                DtoActualizar.Loc04 += valor;
+                                dtoVerifica.Loc04 += valor;
                                 break;
                             case 5:
-                                DtoActualizar.Loc05 += valor;
+                                dtoVerifica.Loc05 += valor;
                                 break;
                             case 6:
-                                DtoActualizar.Loc06 += valor;
+                                dtoVerifica.Loc06 += valor;
                                 break;
                             case 7:
-                                DtoActualizar.Loc07 += valor;
+                                dtoVerifica.Loc07 += valor;
                                 break;
                             case 8:
-                                DtoActualizar.Loc08 += valor;
+                                dtoVerifica.Loc08 += valor;
                                 break;
                             case 9:
-                                DtoActualizar.Loc09 += valor;
+                                dtoVerifica.Loc09 += valor;
                                 break;
                             case 10:
-                                DtoActualizar.Loc10 += valor;
+                                dtoVerifica.Loc10 += valor;
                                 break;
                             case 11:
-                                DtoActualizar.Loc11 += valor;
+                                dtoVerifica.Loc11 += valor;
                                 break;
                             case 12:
-                                DtoActualizar.Loc12 += valor;
+                                dtoVerifica.Loc12 += valor;
                                 break;
                         }
                     }
@@ -282,40 +287,40 @@ namespace Negocio.Servicios
                         switch (int.Parse(mes))
                         {
                             case 1:
-                                DtoActualizar.Loc01 += valor;
+                                dtoVerifica.Loc01 += valor;
                                 break;
                             case 2:
-                                DtoActualizar.Loc02 += valor;
+                                dtoVerifica.Loc02 += valor;
                                 break;
                             case 3:
-                                DtoActualizar.Loc03 += valor;
+                                dtoVerifica.Loc03 += valor;
                                 break;
                             case 4:
-                                DtoActualizar.Loc04 += valor;
+                                dtoVerifica.Loc04 += valor;
                                 break;
                             case 5:
-                                DtoActualizar.Loc05 += valor;
+                                dtoVerifica.Loc05 += valor;
                                 break;
                             case 6:
-                                DtoActualizar.Loc06 += valor;
+                                dtoVerifica.Loc06 += valor;
                                 break;
                             case 7:
-                                DtoActualizar.Loc07 += valor;
+                                dtoVerifica.Loc07 += valor;
                                 break;
                             case 8:
-                                DtoActualizar.Loc08 += valor;
+                                dtoVerifica.Loc08 += valor;
                                 break;
                             case 9:
-                                DtoActualizar.Loc09 += valor;
+                                dtoVerifica.Loc09 += valor;
                                 break;
                             case 10:
-                                DtoActualizar.Loc10 += valor;
+                                dtoVerifica.Loc10 += valor;
                                 break;
                             case 11:
-                                DtoActualizar.Loc11 += valor;
+                                dtoVerifica.Loc11 += valor;
                                 break;
                             case 12:
-                                DtoActualizar.Loc12 += valor;
+                                dtoVerifica.Loc12 += valor;
                                 break;
                         }
                     }
@@ -326,40 +331,40 @@ namespace Negocio.Servicios
                     switch (int.Parse(mes))
                     {
                         case 1:
-                            DtoActualizar.Ext01 += valor;
+                            dtoVerifica.Ext01 += valor;
                             break;
                         case 2:
-                            DtoActualizar.Ext02 += valor;
+                            dtoVerifica.Ext02 += valor;
                             break;
                         case 3:
-                            DtoActualizar.Ext03 += valor;
+                            dtoVerifica.Ext03 += valor;
                             break;
                         case 4:
-                            DtoActualizar.Ext04 += valor;
+                            dtoVerifica.Ext04 += valor;
                             break;
                         case 5:
-                            DtoActualizar.Ext05 += valor;
+                            dtoVerifica.Ext05 += valor;
                             break;
                         case 6:
-                            DtoActualizar.Ext06 += valor;
+                            dtoVerifica.Ext06 += valor;
                             break;
                         case 7:
-                            DtoActualizar.Ext07 += valor;
+                            dtoVerifica.Ext07 += valor;
                             break;
                         case 8:
-                            DtoActualizar.Ext08 += valor;
+                            dtoVerifica.Ext08 += valor;
                             break;
                         case 9:
-                            DtoActualizar.Ext09 += valor;
+                            dtoVerifica.Ext09 += valor;
                             break;
                         case 10:
-                            DtoActualizar.Ext10 += valor;
+                            dtoVerifica.Ext10 += valor;
                             break;
                         case 11:
-                            DtoActualizar.Ext11 += valor;
+                            dtoVerifica.Ext11 += valor;
                             break;
                         case 12:
-                            DtoActualizar.Ext12 += valor;
+                            dtoVerifica.Ext12 += valor;
                             break;
                     }
                 }

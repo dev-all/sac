@@ -1,13 +1,13 @@
-﻿@model SAC.Models.PagosFacturasModelView
+﻿@model SAC.Models.CobroFacturaModoModelView
 
 
 
-@if (Model.ListadoRetenciones_.Count > 0)
+@if (Model.ListadoRetenciones.Count > 0)
 {
     <div class="row col-md-12 m-t-10">
         <div class="table-responsive">
 
-            <div id="div" style="height:250px">
+          
                 <table id="tableRetencion" class="table stylish-table">
                     <thead>
                         <tr>
@@ -21,17 +21,16 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model.ListadoRetenciones_)
+                        @foreach (var item in Model.ListadoRetenciones)
                         {
-                        <tr>
-
-                            <td class="text-right">@Html.DisplayFor(modelItem => item._TipoRetencion.Descripcion)</td>
+                        <tr id="@item.Id" import="@item.Importe">
+                            <td class="text-right">@Html.DisplayFor(modelItem => item.TipoRetencion.Descripcion)</td>
                             <td class="text-right">@Html.DisplayFor(modelItem => item.Importe)</td>
                             <td class="text-right">@Html.DisplayFor(modelItem => item.NroRecibo)</td>
                             <td class="text-right">@Html.DisplayFor(modelItem => item.Provincia.Nombre)</td>
-                            <td class="text-center">@Html.DisplayFor(modelItem => item.CompraFactura.NumeroFactura)</td>
+                            <td class="text-center">@Html.DisplayFor(modelItem => item.VentaFactura.NumeroFactura)</td>
                             <td>
-                                <a href="#" data-toggle="tooltip" data-original-title="Eliminar " class="btn btn-danger btn-xs fa fa-trash-o " onclick="ConfirmaEliminarRetencion(@item.Id, @item.IdCompraFactura)"> </a>
+                                <a href="#" data-toggle="tooltip" data-original-title="Eliminar " class="btn btn-danger btn-xs fa fa-trash-o " onclick="ConfirmaEliminarRetencion(@item.Id, @item.IdFactVenta)"> </a>
                             </td>
                         </tr>
                         }
@@ -41,10 +40,10 @@
 
                     </tfoot>
                 </table>
-            </div>
+            
 
             </div>
-        </div>
+    </div>
 }
 
 

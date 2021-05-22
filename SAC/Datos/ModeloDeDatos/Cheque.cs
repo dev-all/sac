@@ -19,6 +19,7 @@ namespace Datos.ModeloDeDatos
         {
             this.Caja = new HashSet<Caja>();
             this.CompraFacturaPago = new HashSet<CompraFacturaPago>();
+            this.FactVentaCobro = new HashSet<FactVentaCobro>();
         }
     
         public int Id { get; set; }
@@ -47,8 +48,10 @@ namespace Datos.ModeloDeDatos
         public virtual BancoCuenta BancoCuenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Caja> Caja { get; set; }
-        public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFacturaPago> CompraFacturaPago { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FactVentaCobro> FactVentaCobro { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
     }
 }

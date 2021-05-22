@@ -12,6 +12,7 @@ namespace SAC.Models
         public int Id { get; set; }
         public Nullable<int> IdTipoComprobante { get; set; }
         public string PuntoVenta { get; set; }
+        public Nullable<int> IdFactVenta { get; set; }
         public Nullable<int> Factura { get; set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }

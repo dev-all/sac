@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,10 +14,21 @@ namespace SAC.Infrastructure
     {
         public AutoMapperWebProfile()
         {
+            CreateMap<CobroFacturaModoModel, CobroFacturaModoModelView>();
+            CreateMap<CobroFacturaModoModelView, CobroFacturaModoModel>();
+
+            CreateMap<CobroFacturaModel, CobroFacturaModelView>();
+            CreateMap<CobroFacturaModelView, CobroFacturaModel>();
 
            
+            CreateMap<FacturaModelView, FacturaVentaModel>()
+                    .ForMember(fv => fv.IdMoneda, fvm => fvm.MapFrom(i => i.idTipoMoneda));
+            CreateMap<FacturaVentaModel, FacturaModelView>()
+                    .ForMember(fv => fv.idTipoMoneda, fvm => fvm.MapFrom(i => i.IdMoneda));
+
+
             CreateMap<CuentaPlanContableModelView, CuentaPlanContableModel>();
-            CreateMap< CuentaPlanContableModel, CuentaPlanContableModelView>();
+            CreateMap<CuentaPlanContableModel, CuentaPlanContableModelView>();
 
             CreateMap<CompraRegistroDetalleModel, CompraRegistroDetalleModelView>();
             CreateMap<CompraRegistroDetalleModelView, CompraRegistroDetalleModel>();
@@ -57,11 +69,13 @@ namespace SAC.Infrastructure
 
             CreateMap<TarjetaOperacionModel, TarjetaOperacionModelView>();
             CreateMap<TarjetaOperacionModelView, TarjetaOperacionModel>();
-           
-           
-           
-           CreateMap<RetencionModel, RetencionModelView>();
-            CreateMap<RetencionModelView, RetencionModel>();
+
+
+
+            CreateMap<RetencionModel, RetencionModelView>()
+                .ForMember(rmv => rmv.VentaFactura, rm => rm.MapFrom(i => i.FactVenta));
+            CreateMap<RetencionModelView, RetencionModel>()
+            .ForMember(rm => rm.FactVenta, rmv => rmv.MapFrom(i => i.VentaFactura));
 
             CreateMap<TipoRetencionModel, TipoRetencionModelView>();
             CreateMap<TipoRetencionModelView, TipoRetencionModel>();

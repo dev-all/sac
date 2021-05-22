@@ -12,6 +12,7 @@ using AutoMapper;
 using Negocio.Helpers;
 using Entidad.Modelos;
 using Datos.Repositorios;
+using System.Data.Entity.Validation;
 
 namespace Negocio.Servicios
 {
@@ -39,9 +40,18 @@ namespace Negocio.Servicios
                 var oModel = Mapper.Map<IvaVentaModel, IvaVenta>(oIvaVentaModel);
                 return Mapper.Map<IvaVenta, IvaVentaModel>(oIvaVentaRepositorio.Agregar(oModel));
             }
-            catch (Exception ex)
+            catch (DbEntityValidationException e)
             {
-                _mensaje("Ops!, Ocurrio un error. Comuníquese con el administrador del sistema", "error");
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
                 return null;
             }
         }

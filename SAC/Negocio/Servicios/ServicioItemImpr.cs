@@ -30,6 +30,11 @@ namespace Negocio.Servicios
             return Mapper.Map<List<ItemImpre>, List<ItemImprModel>>(ItemImprRepositorio.GetAllItemImpre());
         }
 
+        public List<ItemImprModel> GetAllItemImpreNroFactura(int nroFactura, int idComprobante)
+        {
+            return Mapper.Map<List<ItemImpre>, List<ItemImprModel>>(ItemImprRepositorio.GetAllItemImpreNroFactura(nroFactura, idComprobante));
+        }
+
 
         public ItemImprModel Agregar(ItemImprModel oItemImprModel)
         {

@@ -52,7 +52,7 @@ namespace Negocio.Modelos
 
         public ICollection<CajaModel> Caja { get; set; }
         public BancoCuentaModel BancoCuenta { get; set; }
-
+        public BancoModel BancoCheque { get; set; }
 
     }
 }

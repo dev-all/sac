@@ -64,7 +64,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Prioridad> Prioridad { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
-        public virtual DbSet<Retencion> Retencion { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<Rubro> Rubro { get; set; }
         public virtual DbSet<SubRubro> SubRubro { get; set; }
@@ -74,10 +73,8 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<TipoCliente> TipoCliente { get; set; }
         public virtual DbSet<TipoComprobante> TipoComprobante { get; set; }
         public virtual DbSet<TipoComprobanteTipoIva> TipoComprobanteTipoIva { get; set; }
-        public virtual DbSet<TipoComprobanteVenta> TipoComprobanteVenta { get; set; }
         public virtual DbSet<TipoIdioma> TipoIdioma { get; set; }
         public virtual DbSet<TipoIva> TipoIva { get; set; }
-        public virtual DbSet<TipoMoneda> TipoMoneda { get; set; }
         public virtual DbSet<TipoPago> TipoPago { get; set; }
         public virtual DbSet<TipoProveedor> TipoProveedor { get; set; }
         public virtual DbSet<TipoRetencion> TipoRetencion { get; set; }
@@ -89,9 +86,15 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<BancoCuentaBancaria> BancoCuentaBancaria { get; set; }
         public virtual DbSet<GrupoCaja> GrupoCaja { get; set; }
         public virtual DbSet<Dto> Dto { get; set; }
-        public virtual DbSet<FactVenta> FactVenta { get; set; }
         public virtual DbSet<ItemImpre> ItemImpre { get; set; }
         public virtual DbSet<IvaVenta> IvaVenta { get; set; }
         public virtual DbSet<CompraIvaVista> CompraIvaVista { get; set; }
+        public virtual DbSet<FactVentaCobro> FactVentaCobro { get; set; }
+        public virtual DbSet<FactVenta> FactVenta { get; set; }
+        public virtual DbSet<TipoMoneda> TipoMoneda { get; set; }
+        public virtual DbSet<TipoComprobanteVenta> TipoComprobanteVenta { get; set; }
+        public virtual DbSet<Buque> Buque { get; set; }
+        public virtual DbSet<Cotiza> Cotiza { get; set; }
+        public virtual DbSet<Retencion> Retencion { get; set; }
     }
 }

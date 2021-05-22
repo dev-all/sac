@@ -98,6 +98,15 @@ namespace Datos.Repositorios
             return listaCheque;
         }
 
+       
+        public Cheque ExisteCheque(Cheque cheque)
+        {
+            return context.Cheque.Where(p => p.Activo == true
+            && p.IdCliente == cheque.IdCliente
+            && p.IdBanco == cheque.IdBanco
+            && p.NumeroCheque == cheque.NumeroCheque).FirstOrDefault();
+        }
+
         public List<Cheque> obtenerChequePorCliente(int cIdCliente, DateTime cfechadesde, DateTime cfechahasta)
         {
 

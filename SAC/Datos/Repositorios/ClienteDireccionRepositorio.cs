@@ -108,8 +108,8 @@ namespace Datos.Repositorios
             .Include("Pais")
             .Include("Provincia")
             .Include("Localidad")
-            .Include("TipoIdioma")
-            .Include("TipoMoneda")
+            //.Include("TipoIdioma")
+            //.Include("TipoMoneda")
             .Where(p => p.Activo == true && p.IdCliente == idcliente).ToList();
 
             return listaCliente;
@@ -117,17 +117,19 @@ namespace Datos.Repositorios
 
         }
 
-
-
-     
-
-
         /// <summary>
         ///  Obtener una direccion por el Id
         /// </summary>
         public ClienteDireccion GetObtenerDireccion(int IdDireccion)
         {
-            return context.ClienteDireccion.Where(p => p.Id == IdDireccion).First();
+            context.Configuration.LazyLoadingEnabled = false;
+
+            ClienteDireccion dir = context.ClienteDireccion
+            .Include("Pais")
+            .Include("Provincia")
+            .Include("Localidad")
+            .Where(p => p.Id == IdDireccion).First();
+            return dir;
         }
 
 
@@ -136,11 +138,7 @@ namespace Datos.Repositorios
         /// </summary>
 
         public List<ClienteDireccion> GetAllClienteDireccion()
-
-
-
         {
-
            context.Configuration.LazyLoadingEnabled = false;
 
             List<ClienteDireccion> listaCliente = context.ClienteDireccion

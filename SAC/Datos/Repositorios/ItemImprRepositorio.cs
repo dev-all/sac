@@ -36,8 +36,16 @@ namespace Datos.Repositorios
             context.Configuration.LazyLoadingEnabled = false;
             return context.ItemImpre.Where(p => p.Activo == true).ToList();
         }
-      
-      
+
+        public List<ItemImpre> GetAllItemImpreNroFactura(int nroFactura, int idComprobante)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.ItemImpre.Where(p => p.Activo == true && p.Factura == nroFactura && p.IdTipoComprobante == idComprobante).ToList();
+        }
+
+        
+
+
         public ItemImpre GetItemImprePorId(int id)
         {
             context.Configuration.LazyLoadingEnabled = false;

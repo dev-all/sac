@@ -47,8 +47,8 @@ namespace Datos.ModeloDeDatos
         public virtual PieNota PieNota { get; set; }
         public virtual TipoCliente TipoCliente { get; set; }
         public virtual TipoIdioma TipoIdioma { get; set; }
-        public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
     }
 }

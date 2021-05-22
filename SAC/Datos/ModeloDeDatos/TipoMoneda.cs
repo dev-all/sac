@@ -22,6 +22,7 @@ namespace Datos.ModeloDeDatos
             this.Cliente = new HashSet<Cliente>();
             this.ClienteDireccion = new HashSet<ClienteDireccion>();
             this.CompraFactura = new HashSet<CompraFactura>();
+            this.FactVenta = new HashSet<FactVenta>();
             this.Proveedor = new HashSet<Proveedor>();
         }
     
@@ -41,6 +42,8 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<ClienteDireccion> ClienteDireccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompraFactura> CompraFactura { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FactVenta> FactVenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedor> Proveedor { get; set; }
     }

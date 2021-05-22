@@ -12,6 +12,13 @@ namespace Agenda.Infrastructure
         public AutoMapperNegProfile()
         {
 
+            CreateMap<FactVenta, CobroFacturaModel>();
+            CreateMap<CobroFacturaModel, FactVenta>();
+
+            CreateMap<FactVentaCobro, CobroFacturaModoModel>();
+            CreateMap<CobroFacturaModoModel, FactVentaCobro>();
+
+
             CreateMap<DiarioModel, Diario>();
             CreateMap<Diario, DiarioModel>();
 
@@ -21,8 +28,14 @@ namespace Agenda.Infrastructure
             CreateMap<TipoPago, TipoPagoModel>();
             CreateMap<TipoPagoModel, TipoPago>();
 
+            CreateMap<Buque, BuqueModel>();
+            CreateMap<BuqueModel, Buque>();
+
             CreateMap<Dto, DtoModel>();
             CreateMap<DtoModel, Dto>();
+
+            CreateMap<FactVenta, FacturaVentaModel>();
+            CreateMap<FacturaVentaModel, FactVenta>();
 
             CreateMap<TrackingFacturaPagoCompraModel, TrackingFacturaPagoCompra>();
             CreateMap<TrackingFacturaPagoCompra, TrackingFacturaPagoCompraModel>();
@@ -142,8 +155,7 @@ namespace Agenda.Infrastructure
             CreateMap<PersonaModel, Persona>();
             CreateMap<Persona, PersonaModel>();
 
-            //CreateMap<PrioridadModel, Prioridad>();
-            //CreateMap<Prioridad, PrioridadModel>();
+          
 
             CreateMap<Pais, PaisModel>();
             CreateMap<PaisModel, Pais>();

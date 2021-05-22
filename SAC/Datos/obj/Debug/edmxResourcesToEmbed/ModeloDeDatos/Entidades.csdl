@@ -40,7 +40,6 @@
     <EntitySet Name="Prioridad" EntityType="SAC_Model.Prioridad" />
     <EntitySet Name="Proveedor" EntityType="SAC_Model.Proveedor" />
     <EntitySet Name="Provincia" EntityType="SAC_Model.Provincia" />
-    <EntitySet Name="Retencion" EntityType="SAC_Model.Retencion" />
     <EntitySet Name="Rol" EntityType="SAC_Model.Rol" />
     <EntitySet Name="Rubro" EntityType="SAC_Model.Rubro" />
     <EntitySet Name="SubRubro" EntityType="SAC_Model.SubRubro" />
@@ -50,10 +49,8 @@
     <EntitySet Name="TipoCliente" EntityType="SAC_Model.TipoCliente" />
     <EntitySet Name="TipoComprobante" EntityType="SAC_Model.TipoComprobante" />
     <EntitySet Name="TipoComprobanteTipoIva" EntityType="SAC_Model.TipoComprobanteTipoIva" />
-    <EntitySet Name="TipoComprobanteVenta" EntityType="SAC_Model.TipoComprobanteVenta" />
     <EntitySet Name="TipoIdioma" EntityType="SAC_Model.TipoIdioma" />
     <EntitySet Name="TipoIva" EntityType="SAC_Model.TipoIva" />
-    <EntitySet Name="TipoMoneda" EntityType="SAC_Model.TipoMoneda" />
     <EntitySet Name="TipoPago" EntityType="SAC_Model.TipoPago" />
     <EntitySet Name="TipoProveedor" EntityType="SAC_Model.TipoProveedor" />
     <EntitySet Name="TipoRetencion" EntityType="SAC_Model.TipoRetencion" />
@@ -117,17 +114,9 @@
       <End Role="Tarjetas" EntitySet="Tarjetas" />
       <End Role="Caja" EntitySet="Caja" />
     </AssociationSet>
-    <AssociationSet Name="FK_Cheque_TipoMoneda" Association="SAC_Model.FK_Cheque_TipoMoneda">
-      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-      <End Role="Cheque" EntitySet="Cheque" />
-    </AssociationSet>
     <AssociationSet Name="FK_CompraFacturaPago_Cheque" Association="SAC_Model.FK_CompraFacturaPago_Cheque">
       <End Role="Cheque" EntitySet="Cheque" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Chequera_TipoMoneda" Association="SAC_Model.FK_Chequera_TipoMoneda">
-      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-      <End Role="Chequera" EntitySet="Chequera" />
     </AssociationSet>
     <AssociationSet Name="FK_CompraFacturaPago_Chequera" Association="SAC_Model.FK_CompraFacturaPago_Chequera">
       <End Role="Chequera" EntitySet="Chequera" />
@@ -151,10 +140,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_Cliente_TipoIdioma" Association="SAC_Model.FK_Cliente_TipoIdioma">
       <End Role="TipoIdioma" EntitySet="TipoIdioma" />
-      <End Role="Cliente" EntitySet="Cliente" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Cliente_TipoMoneda" Association="SAC_Model.FK_Cliente_TipoMoneda">
-      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
       <End Role="Cliente" EntitySet="Cliente" />
     </AssociationSet>
     <AssociationSet Name="FK_ClienteDireccion_Cliente" Association="SAC_Model.FK_ClienteDireccion_Cliente">
@@ -181,10 +166,6 @@
       <End Role="TipoIdioma" EntitySet="TipoIdioma" />
       <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
     </AssociationSet>
-    <AssociationSet Name="FK_ClienteDireccion_TipoMoneda" Association="SAC_Model.FK_ClienteDireccion_TipoMoneda">
-      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
-    </AssociationSet>
     <AssociationSet Name="FK_CompraFactura_CompraIva" Association="SAC_Model.FK_CompraFactura_CompraIva">
       <End Role="CompraIva" EntitySet="CompraIva" />
       <End Role="CompraFactura" EntitySet="CompraFactura" />
@@ -201,17 +182,9 @@
       <End Role="TipoComprobante" EntitySet="TipoComprobante" />
       <End Role="CompraFactura" EntitySet="CompraFactura" />
     </AssociationSet>
-    <AssociationSet Name="FK_CompraFactura_TipoMoneda" Association="SAC_Model.FK_CompraFactura_TipoMoneda">
-      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-    </AssociationSet>
     <AssociationSet Name="FK_CompraFacturaPago_CompraFactura" Association="SAC_Model.FK_CompraFacturaPago_CompraFactura">
       <End Role="CompraFactura" EntitySet="CompraFactura" />
       <End Role="CompraFacturaPago" EntitySet="CompraFacturaPago" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Retencion_CompraFactura" Association="SAC_Model.FK_Retencion_CompraFactura">
-      <End Role="CompraFactura" EntitySet="CompraFactura" />
-      <End Role="Retencion" EntitySet="Retencion" />
     </AssociationSet>
     <AssociationSet Name="FK_TrackingFacturaPagoCompra_CompraFactura" Association="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura">
       <End Role="CompraFactura" EntitySet="CompraFactura" />
@@ -301,21 +274,9 @@
       <End Role="TipoIva" EntitySet="TipoIva" />
       <End Role="Proveedor" EntitySet="Proveedor" />
     </AssociationSet>
-    <AssociationSet Name="FK_Proveedor_TipoMoneda" Association="SAC_Model.FK_Proveedor_TipoMoneda">
-      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
-      <End Role="Proveedor" EntitySet="Proveedor" />
-    </AssociationSet>
     <AssociationSet Name="FK_Proveedor_TipoProveedor" Association="SAC_Model.FK_Proveedor_TipoProveedor">
       <End Role="TipoProveedor" EntitySet="TipoProveedor" />
       <End Role="Proveedor" EntitySet="Proveedor" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Retencion_Provincia" Association="SAC_Model.FK_Retencion_Provincia">
-      <End Role="Provincia" EntitySet="Provincia" />
-      <End Role="Retencion" EntitySet="Retencion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Retencion_TipoRetencion" Association="SAC_Model.FK_Retencion_TipoRetencion">
-      <End Role="TipoRetencion" EntitySet="TipoRetencion" />
-      <End Role="Retencion" EntitySet="Retencion" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuarios_Roles" Association="SAC_Model.FK_Usuarios_Roles">
       <End Role="Rol" EntitySet="Rol" />
@@ -353,10 +314,92 @@
       <End Role="Caja" EntitySet="Caja" />
     </AssociationSet>
     <EntitySet Name="Dto" EntityType="SAC_Model.Dto" />
-    <EntitySet Name="FactVenta" EntityType="SAC_Model.FactVenta" />
     <EntitySet Name="ItemImpre" EntityType="SAC_Model.ItemImpre" />
     <EntitySet Name="IvaVenta" EntityType="SAC_Model.IvaVenta" />
     <EntitySet Name="CompraIvaVista" EntityType="SAC_Model.CompraIvaVista" />
+    <EntitySet Name="FactVentaCobro" EntityType="SAC_Model.FactVentaCobro" />
+    <AssociationSet Name="FK_FactVentaCobro_BancoCuenta" Association="SAC_Model.FK_FactVentaCobro_BancoCuenta">
+      <End Role="BancoCuenta" EntitySet="BancoCuenta" />
+      <End Role="FactVentaCobro" EntitySet="FactVentaCobro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FactVentaCobro_Cheque" Association="SAC_Model.FK_FactVentaCobro_Cheque">
+      <End Role="Cheque" EntitySet="Cheque" />
+      <End Role="FactVentaCobro" EntitySet="FactVentaCobro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FactVentaCobro_Chequera" Association="SAC_Model.FK_FactVentaCobro_Chequera">
+      <End Role="Chequera" EntitySet="Chequera" />
+      <End Role="FactVentaCobro" EntitySet="FactVentaCobro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FactVentaCobro_Tarjetas" Association="SAC_Model.FK_FactVentaCobro_Tarjetas">
+      <End Role="Tarjetas" EntitySet="Tarjetas" />
+      <End Role="FactVentaCobro" EntitySet="FactVentaCobro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FactVentaCobro_TipoPago" Association="SAC_Model.FK_FactVentaCobro_TipoPago">
+      <End Role="TipoPago" EntitySet="TipoPago" />
+      <End Role="FactVentaCobro" EntitySet="FactVentaCobro" />
+    </AssociationSet>
+    <EntitySet Name="FactVenta" EntityType="SAC_Model.FactVenta" />
+    <AssociationSet Name="FK_FactVentaCobro_CompraFactura" Association="SAC_Model.FK_FactVentaCobro_CompraFactura">
+      <End Role="FactVenta" EntitySet="FactVenta" />
+      <End Role="FactVentaCobro" EntitySet="FactVentaCobro" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemImpre_FactVenta" Association="SAC_Model.FK_ItemImpre_FactVenta">
+      <End Role="FactVenta" EntitySet="FactVenta" />
+      <End Role="ItemImpre" EntitySet="ItemImpre" />
+    </AssociationSet>
+    <EntitySet Name="TipoMoneda" EntityType="SAC_Model.TipoMoneda" />
+    <AssociationSet Name="FK_Cheque_TipoMoneda" Association="SAC_Model.FK_Cheque_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="Cheque" EntitySet="Cheque" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chequera_TipoMoneda" Association="SAC_Model.FK_Chequera_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="Chequera" EntitySet="Chequera" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Cliente_TipoMoneda" Association="SAC_Model.FK_Cliente_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClienteDireccion_TipoMoneda" Association="SAC_Model.FK_ClienteDireccion_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompraFactura_TipoMoneda" Association="SAC_Model.FK_CompraFactura_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FactVenta_TipoMoneda" Association="SAC_Model.FK_FactVenta_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="FactVenta" EntitySet="FactVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Proveedor_TipoMoneda" Association="SAC_Model.FK_Proveedor_TipoMoneda">
+      <End Role="TipoMoneda" EntitySet="TipoMoneda" />
+      <End Role="Proveedor" EntitySet="Proveedor" />
+    </AssociationSet>
+    <EntitySet Name="TipoComprobanteVenta" EntityType="SAC_Model.TipoComprobanteVenta" />
+    <AssociationSet Name="FK_FactVenta_TipoComprobanteVenta" Association="SAC_Model.FK_FactVenta_TipoComprobanteVenta">
+      <End Role="TipoComprobanteVenta" EntitySet="TipoComprobanteVenta" />
+      <End Role="FactVenta" EntitySet="FactVenta" />
+    </AssociationSet>
+    <EntitySet Name="Buque" EntityType="SAC_Model.Buque" />
+    <EntitySet Name="Cotiza" EntityType="SAC_Model.Cotiza" />
+    <EntitySet Name="Retencion" EntityType="SAC_Model.Retencion" />
+    <AssociationSet Name="FK_Retencion_CompraFactura" Association="SAC_Model.FK_Retencion_CompraFactura">
+      <End Role="CompraFactura" EntitySet="CompraFactura" />
+      <End Role="Retencion" EntitySet="Retencion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retencion_FactVenta" Association="SAC_Model.FK_Retencion_FactVenta">
+      <End Role="FactVenta" EntitySet="FactVenta" />
+      <End Role="Retencion" EntitySet="Retencion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retencion_Provincia" Association="SAC_Model.FK_Retencion_Provincia">
+      <End Role="Provincia" EntitySet="Provincia" />
+      <End Role="Retencion" EntitySet="Retencion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Retencion_TipoRetencion" Association="SAC_Model.FK_Retencion_TipoRetencion">
+      <End Role="TipoRetencion" EntitySet="TipoRetencion" />
+      <End Role="Retencion" EntitySet="Retencion" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Accion">
     <Key>
@@ -466,6 +509,7 @@
     <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_BancoCuenta" FromRole="BancoCuenta" ToRole="Chequera" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_BancoCuenta" FromRole="BancoCuenta" ToRole="CompraFacturaPago" />
     <NavigationProperty Name="BancoCuentaBancaria" Relationship="SAC_Model.FK_BancoCuentaBancaria_BancoCuenta" FromRole="BancoCuenta" ToRole="BancoCuentaBancaria" />
+    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_BancoCuenta" FromRole="BancoCuenta" ToRole="FactVentaCobro" />
   </EntityType>
   <EntityType Name="Caja">
     <Key>
@@ -557,8 +601,9 @@
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_Cheque_BancoCuenta" FromRole="Cheque" ToRole="BancoCuenta" />
     <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_Cheque" FromRole="Cheque" ToRole="Caja" />
-    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="Cheque" ToRole="TipoMoneda" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Cheque" FromRole="Cheque" ToRole="CompraFacturaPago" />
+    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_Cheque" FromRole="Cheque" ToRole="FactVentaCobro" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="Cheque" ToRole="TipoMoneda" />
   </EntityType>
   <EntityType Name="Chequera">
     <Key>
@@ -582,8 +627,9 @@
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_Chequera_BancoCuenta" FromRole="Chequera" ToRole="BancoCuenta" />
-    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="Chequera" ToRole="TipoMoneda" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Chequera" FromRole="Chequera" ToRole="CompraFacturaPago" />
+    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_Chequera" FromRole="Chequera" ToRole="FactVentaCobro" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="Chequera" ToRole="TipoMoneda" />
   </EntityType>
   <EntityType Name="Cliente">
     <Key>
@@ -615,8 +661,8 @@
     <NavigationProperty Name="PieNota" Relationship="SAC_Model.FK_Cliente_PieNota" FromRole="Cliente" ToRole="PieNota" />
     <NavigationProperty Name="TipoCliente" Relationship="SAC_Model.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
     <NavigationProperty Name="TipoIdioma" Relationship="SAC_Model.FK_Cliente_TipoIdioma" FromRole="Cliente" ToRole="TipoIdioma" />
-    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Cliente_TipoMoneda" FromRole="Cliente" ToRole="TipoMoneda" />
     <NavigationProperty Name="ClienteDireccion" Relationship="SAC_Model.FK_ClienteDireccion_Cliente" FromRole="Cliente" ToRole="ClienteDireccion" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Cliente_TipoMoneda" FromRole="Cliente" ToRole="TipoMoneda" />
   </EntityType>
   <EntityType Name="ClienteDireccion">
     <Key>
@@ -691,11 +737,11 @@
     <NavigationProperty Name="Imputacion" Relationship="SAC_Model.FK_CompraFactura_Imputacion" FromRole="CompraFactura" ToRole="Imputacion" />
     <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_CompraFactura_Proveedor" FromRole="CompraFactura" ToRole="Proveedor" />
     <NavigationProperty Name="TipoComprobante" Relationship="SAC_Model.FK_CompraFactura_TipoComprobante" FromRole="CompraFactura" ToRole="TipoComprobante" />
-    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="CompraFactura" ToRole="TipoMoneda" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_CompraFactura" FromRole="CompraFactura" ToRole="CompraFacturaPago" />
-    <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="CompraFactura" ToRole="Retencion" />
     <NavigationProperty Name="TrackingFacturaPagoCompra" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
     <NavigationProperty Name="TrackingFacturaPagoCompra1" Relationship="SAC_Model.FK_TrackingFacturaPagoCompra_CompraFactura1" FromRole="CompraFactura" ToRole="TrackingFacturaPagoCompra" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="CompraFactura" ToRole="TipoMoneda" />
+    <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="CompraFactura" ToRole="Retencion" />
   </EntityType>
   <EntityType Name="CompraFacturaPago">
     <Key>
@@ -1123,8 +1169,8 @@
     <NavigationProperty Name="PrespuestoActual" Relationship="SAC_Model.FK_Proveedor_Presupuesto1" FromRole="Proveedor" ToRole="PrespuestoActual" />
     <NavigationProperty Name="Provincia" Relationship="SAC_Model.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
     <NavigationProperty Name="TipoIva" Relationship="SAC_Model.FK_Proveedor_TipoIva" FromRole="Proveedor" ToRole="TipoIva" />
-    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
     <NavigationProperty Name="TipoProveedor" Relationship="SAC_Model.FK_Proveedor_TipoProveedor" FromRole="Proveedor" ToRole="TipoProveedor" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="Proveedor" ToRole="TipoMoneda" />
   </EntityType>
   <EntityType Name="Provincia">
     <Key>
@@ -1144,29 +1190,6 @@
     <NavigationProperty Name="Pais" Relationship="SAC_Model.FK_Provincia_Pais" FromRole="Provincia" ToRole="Pais" />
     <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
     <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_Provincia" FromRole="Provincia" ToRole="Retencion" />
-  </EntityType>
-  <EntityType Name="Retencion">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NroPago" Type="Int32" />
-    <Property Name="IdCodigoProveedor" Type="Int32" />
-    <Property Name="NombreProveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Fecha" Type="DateTime" Precision="3" />
-    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="NroRecibo" Type="Int32" />
-    <Property Name="IdProvincia" Type="Int32" />
-    <Property Name="IdCompraFactura" Type="Int32" />
-    <Property Name="IdTipoRetencion" Type="Int32" />
-    <Property Name="Periodo" Type="Int32" />
-    <Property Name="Actividad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="Idusuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="Retencion" ToRole="CompraFactura" />
-    <NavigationProperty Name="Provincia" Relationship="SAC_Model.FK_Retencion_Provincia" FromRole="Retencion" ToRole="Provincia" />
-    <NavigationProperty Name="TipoRetencion" Relationship="SAC_Model.FK_Retencion_TipoRetencion" FromRole="Retencion" ToRole="TipoRetencion" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -1253,6 +1276,7 @@
     <NavigationProperty Name="Caja" Relationship="SAC_Model.FK_Caja_Tarjetas" FromRole="Tarjetas" ToRole="Caja" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_Tarjetas" FromRole="Tarjetas" ToRole="CompraFacturaPago" />
     <NavigationProperty Name="TarjetaOperacion" Relationship="SAC_Model.FK_TarjetaOperacion_Tarjetas" FromRole="Tarjetas" ToRole="TarjetaOperacion" />
+    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_Tarjetas" FromRole="Tarjetas" ToRole="FactVentaCobro" />
   </EntityType>
   <EntityType Name="TipoCliente">
     <Key>
@@ -1291,20 +1315,6 @@
     <NavigationProperty Name="TipoComprobante" Relationship="SAC_Model.FK_TipoComprobanteTipoIva_TipoComprobante" FromRole="TipoComprobanteTipoIva" ToRole="TipoComprobante" />
     <NavigationProperty Name="TipoIva" Relationship="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva" FromRole="TipoComprobanteTipoIva" ToRole="TipoIva" />
   </EntityType>
-  <EntityType Name="TipoComprobanteVenta">
-    <Key>
-      <PropertyRef Name="Id" />
-      <PropertyRef Name="PuntoVenta" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="PuntoVenta" Type="Int32" Nullable="false" />
-    <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Numero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Abreviatura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="TipoIdioma">
     <Key>
       <PropertyRef Name="Id" />
@@ -1328,22 +1338,6 @@
     <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoIva" FromRole="TipoIva" ToRole="Proveedor" />
     <NavigationProperty Name="TipoComprobanteTipoIva" Relationship="SAC_Model.FK_TipoComprobanteTipoIva_TipoIva" FromRole="TipoIva" ToRole="TipoComprobanteTipoIva" />
   </EntityType>
-  <EntityType Name="TipoMoneda">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="TipoMoneda" ToRole="Cheque" />
-    <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="TipoMoneda" ToRole="Chequera" />
-    <NavigationProperty Name="Cliente" Relationship="SAC_Model.FK_Cliente_TipoMoneda" FromRole="TipoMoneda" ToRole="Cliente" />
-    <NavigationProperty Name="ClienteDireccion" Relationship="SAC_Model.FK_ClienteDireccion_TipoMoneda" FromRole="TipoMoneda" ToRole="ClienteDireccion" />
-    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="TipoMoneda" ToRole="CompraFactura" />
-    <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="TipoMoneda" ToRole="Proveedor" />
-  </EntityType>
   <EntityType Name="TipoPago">
     <Key>
       <PropertyRef Name="Id" />
@@ -1354,6 +1348,7 @@
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CompraFacturaPago" Relationship="SAC_Model.FK_CompraFacturaPago_TipoPago" FromRole="TipoPago" ToRole="CompraFacturaPago" />
+    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_TipoPago" FromRole="TipoPago" ToRole="FactVentaCobro" />
   </EntityType>
   <EntityType Name="TipoProveedor">
     <Key>
@@ -1597,18 +1592,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Cheque_TipoMoneda">
-    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-    <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoMoneda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Cheque">
-        <PropertyRef Name="IdMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CompraFacturaPago_Cheque">
     <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="0..1" />
     <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
@@ -1618,18 +1601,6 @@
       </Principal>
       <Dependent Role="CompraFacturaPago">
         <PropertyRef Name="IdCheque" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Chequera_TipoMoneda">
-    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-    <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoMoneda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Chequera">
-        <PropertyRef Name="IdMoneda" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1705,18 +1676,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Cliente_TipoMoneda">
-    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-    <End Type="SAC_Model.Cliente" Role="Cliente" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoMoneda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Cliente">
-        <PropertyRef Name="IdTipoMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ClienteDireccion_Cliente">
     <End Type="SAC_Model.Cliente" Role="Cliente" Multiplicity="0..1" />
     <End Type="SAC_Model.ClienteDireccion" Role="ClienteDireccion" Multiplicity="*" />
@@ -1789,18 +1748,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ClienteDireccion_TipoMoneda">
-    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-    <End Type="SAC_Model.ClienteDireccion" Role="ClienteDireccion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoMoneda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ClienteDireccion">
-        <PropertyRef Name="IdTipoMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CompraFactura_CompraIva">
     <End Type="SAC_Model.CompraIva" Role="CompraIva" Multiplicity="0..1" />
     <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
@@ -1849,18 +1796,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CompraFactura_TipoMoneda">
-    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoMoneda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CompraFactura">
-        <PropertyRef Name="IdMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CompraFacturaPago_CompraFactura">
     <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
     <End Type="SAC_Model.CompraFacturaPago" Role="CompraFacturaPago" Multiplicity="*" />
@@ -1870,18 +1805,6 @@
       </Principal>
       <Dependent Role="CompraFacturaPago">
         <PropertyRef Name="IdFacturaCompra" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Retencion_CompraFactura">
-    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
-    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CompraFactura">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Retencion">
-        <PropertyRef Name="IdCompraFactura" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2149,18 +2072,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Proveedor_TipoMoneda">
-    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
-    <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoMoneda">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Proveedor">
-        <PropertyRef Name="IdTipoMoneda" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Proveedor_TipoProveedor">
     <End Type="SAC_Model.TipoProveedor" Role="TipoProveedor" Multiplicity="0..1" />
     <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
@@ -2170,30 +2081,6 @@
       </Principal>
       <Dependent Role="Proveedor">
         <PropertyRef Name="IdTipoProveedor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Retencion_Provincia">
-    <End Type="SAC_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
-    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Provincia">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Retencion">
-        <PropertyRef Name="IdProvincia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Retencion_TipoRetencion">
-    <End Type="SAC_Model.TipoRetencion" Role="TipoRetencion" Multiplicity="0..1" />
-    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TipoRetencion">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Retencion">
-        <PropertyRef Name="IdTipoRetencion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2402,57 +2289,6 @@
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="FactVenta">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
-    <Property Name="PuntoVenta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
-    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdCliente" Type="Int32" />
-    <Property Name="TotalD" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Parcial" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Saldo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Baja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Impre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FPago" Type="DateTime" Precision="3" />
-    <Property Name="TipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Condic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdProvincia" Type="Int32" Nullable="false" />
-    <Property Name="IdPais" Type="Int32" Nullable="false" />
-    <Property Name="IdImputacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="NumeroPago" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Cotiza" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Moneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ORef" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="YRef" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Descuento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CotizaP" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="TipoFac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Diario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Recibo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Periodo" Type="Int32" Nullable="false" />
-    <Property Name="NumeroTra" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Anula" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Combria" Type="Double" Nullable="false" />
-    <Property Name="IngBr" Type="Double" Nullable="false" />
-    <Property Name="Efectivo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Cheque" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Debito" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Cuenta" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="ItemImpre">
     <Key>
       <PropertyRef Name="Id" />
@@ -2471,6 +2307,8 @@
     <Property Name="Activo" Type="Boolean" />
     <Property Name="IdUsuario" Type="Int32" />
     <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdFactVenta" Type="Int32" />
+    <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK_ItemImpre_FactVenta" FromRole="ItemImpre" ToRole="FactVenta" />
   </EntityType>
   <EntityType Name="IvaVenta">
     <Key>
@@ -2612,4 +2450,396 @@
     <Property Name="Expr2" Type="Int32" />
     <Property Name="Expr3" Type="Int32" />
   </EntityType>
+  <EntityType Name="FactVentaCobro">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFactVenta" Type="Int32" />
+    <Property Name="IdTipoPago" Type="Int32" />
+    <Property Name="IdCheque" Type="Int32" />
+    <Property Name="IdChequera" Type="Int32" />
+    <Property Name="IdTarjeta" Type="Int32" />
+    <Property Name="IdBancoCuenta" Type="Int32" />
+    <Property Name="Monto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Observaciones" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BancoCuenta" Relationship="SAC_Model.FK_FactVentaCobro_BancoCuenta" FromRole="FactVentaCobro" ToRole="BancoCuenta" />
+    <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_FactVentaCobro_Cheque" FromRole="FactVentaCobro" ToRole="Cheque" />
+    <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_FactVentaCobro_Chequera" FromRole="FactVentaCobro" ToRole="Chequera" />
+    <NavigationProperty Name="Tarjetas" Relationship="SAC_Model.FK_FactVentaCobro_Tarjetas" FromRole="FactVentaCobro" ToRole="Tarjetas" />
+    <NavigationProperty Name="TipoPago" Relationship="SAC_Model.FK_FactVentaCobro_TipoPago" FromRole="FactVentaCobro" ToRole="TipoPago" />
+    <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK_FactVentaCobro_CompraFactura" FromRole="FactVentaCobro" ToRole="FactVenta" />
+  </EntityType>
+  <Association Name="FK_FactVentaCobro_BancoCuenta">
+    <End Type="SAC_Model.BancoCuenta" Role="BancoCuenta" Multiplicity="0..1" />
+    <End Type="SAC_Model.FactVentaCobro" Role="FactVentaCobro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BancoCuenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVentaCobro">
+        <PropertyRef Name="IdBancoCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FactVentaCobro_Cheque">
+    <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="0..1" />
+    <End Type="SAC_Model.FactVentaCobro" Role="FactVentaCobro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cheque">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVentaCobro">
+        <PropertyRef Name="IdCheque" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FactVentaCobro_Chequera">
+    <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="0..1" />
+    <End Type="SAC_Model.FactVentaCobro" Role="FactVentaCobro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chequera">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVentaCobro">
+        <PropertyRef Name="IdChequera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FactVentaCobro_Tarjetas">
+    <End Type="SAC_Model.Tarjetas" Role="Tarjetas" Multiplicity="0..1" />
+    <End Type="SAC_Model.FactVentaCobro" Role="FactVentaCobro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tarjetas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVentaCobro">
+        <PropertyRef Name="IdTarjeta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FactVentaCobro_TipoPago">
+    <End Type="SAC_Model.TipoPago" Role="TipoPago" Multiplicity="0..1" />
+    <End Type="SAC_Model.FactVentaCobro" Role="FactVentaCobro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoPago">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVentaCobro">
+        <PropertyRef Name="IdTipoPago" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FactVenta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
+    <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="TotalDolares" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Parcial" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Saldo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Baja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Impre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCobro" Type="DateTime" Precision="3" />
+    <Property Name="TipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Condicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdProvincia" Type="Int32" Nullable="false" />
+    <Property Name="IdPais" Type="Int32" Nullable="false" />
+    <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+    <Property Name="NumeroCobro" Type="Int32" Nullable="false" />
+    <Property Name="Cotiza" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IdMoneda" Type="Int32" Nullable="false" />
+    <Property Name="ORef" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="YRef" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Descuento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CotizaP" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TipoFac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoDiario" Type="Int32" Nullable="false" />
+    <Property Name="Recibo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Periodo" Type="Int32" Nullable="false" />
+    <Property Name="NumeroTra" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Combria" Type="Double" Nullable="false" />
+    <Property Name="IngBr" Type="Double" Nullable="false" />
+    <Property Name="Anula" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_CompraFactura" FromRole="FactVenta" ToRole="FactVentaCobro" />
+    <NavigationProperty Name="ItemImpre" Relationship="SAC_Model.FK_ItemImpre_FactVenta" FromRole="FactVenta" ToRole="ItemImpre" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_FactVenta_TipoMoneda" FromRole="FactVenta" ToRole="TipoMoneda" />
+    <NavigationProperty Name="TipoComprobanteVenta" Relationship="SAC_Model.FK_FactVenta_TipoComprobanteVenta" FromRole="FactVenta" ToRole="TipoComprobanteVenta" />
+    <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_FactVenta" FromRole="FactVenta" ToRole="Retencion" />
+  </EntityType>
+  <Association Name="FK_FactVentaCobro_CompraFactura">
+    <End Type="SAC_Model.FactVenta" Role="FactVenta" Multiplicity="0..1" />
+    <End Type="SAC_Model.FactVentaCobro" Role="FactVentaCobro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FactVenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVentaCobro">
+        <PropertyRef Name="IdFactVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemImpre_FactVenta">
+    <End Type="SAC_Model.FactVenta" Role="FactVenta" Multiplicity="0..1" />
+    <End Type="SAC_Model.ItemImpre" Role="ItemImpre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FactVenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItemImpre">
+        <PropertyRef Name="IdFactVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TipoMoneda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cheque" Relationship="SAC_Model.FK_Cheque_TipoMoneda" FromRole="TipoMoneda" ToRole="Cheque" />
+    <NavigationProperty Name="Chequera" Relationship="SAC_Model.FK_Chequera_TipoMoneda" FromRole="TipoMoneda" ToRole="Chequera" />
+    <NavigationProperty Name="Cliente" Relationship="SAC_Model.FK_Cliente_TipoMoneda" FromRole="TipoMoneda" ToRole="Cliente" />
+    <NavigationProperty Name="ClienteDireccion" Relationship="SAC_Model.FK_ClienteDireccion_TipoMoneda" FromRole="TipoMoneda" ToRole="ClienteDireccion" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_CompraFactura_TipoMoneda" FromRole="TipoMoneda" ToRole="CompraFactura" />
+    <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK_FactVenta_TipoMoneda" FromRole="TipoMoneda" ToRole="FactVenta" />
+    <NavigationProperty Name="Proveedor" Relationship="SAC_Model.FK_Proveedor_TipoMoneda" FromRole="TipoMoneda" ToRole="Proveedor" />
+  </EntityType>
+  <Association Name="FK_Cheque_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="SAC_Model.Cheque" Role="Cheque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cheque">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chequera_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="SAC_Model.Chequera" Role="Chequera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Chequera">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Cliente_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="SAC_Model.Cliente" Role="Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="IdTipoMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClienteDireccion_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="SAC_Model.ClienteDireccion" Role="ClienteDireccion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClienteDireccion">
+        <PropertyRef Name="IdTipoMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompraFactura_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CompraFactura">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FactVenta_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="1" />
+    <End Type="SAC_Model.FactVenta" Role="FactVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVenta">
+        <PropertyRef Name="IdMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Proveedor_TipoMoneda">
+    <End Type="SAC_Model.TipoMoneda" Role="TipoMoneda" Multiplicity="0..1" />
+    <End Type="SAC_Model.Proveedor" Role="Proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoMoneda">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Proveedor">
+        <PropertyRef Name="IdTipoMoneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TipoComprobanteVenta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CodigoAfip" Type="Int32" Nullable="false" />
+    <Property Name="PuntoVenta" Type="Int32" Nullable="false" />
+    <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Numero" Type="Int32" Nullable="false" />
+    <Property Name="Abreviatura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK_FactVenta_TipoComprobanteVenta" FromRole="TipoComprobanteVenta" ToRole="FactVenta" />
+  </EntityType>
+  <Association Name="FK_FactVenta_TipoComprobanteVenta">
+    <End Type="SAC_Model.TipoComprobanteVenta" Role="TipoComprobanteVenta" Multiplicity="1" />
+    <End Type="SAC_Model.FactVenta" Role="FactVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoComprobanteVenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVenta">
+        <PropertyRef Name="IdTipoComprobante" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Buque">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Buque1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Monto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NumeroFactura" Type="Int32" />
+    <Property Name="TipoFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ORef" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="YRef" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Puerto" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Carpeta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Legajo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Cotiza">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <Property Name="Cotiza1" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Retencion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NroPago" Type="Int32" />
+    <Property Name="IdCodigoProveedor" Type="Int32" />
+    <Property Name="NombreProveedor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NroRecibo" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="IdFactVenta" Type="Int32" />
+    <Property Name="IdCompraFactura" Type="Int32" />
+    <Property Name="IdTipoRetencion" Type="Int32" />
+    <Property Name="Periodo" Type="Int32" />
+    <Property Name="Actividad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Idusuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CompraFactura" Relationship="SAC_Model.FK_Retencion_CompraFactura" FromRole="Retencion" ToRole="CompraFactura" />
+    <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK_Retencion_FactVenta" FromRole="Retencion" ToRole="FactVenta" />
+    <NavigationProperty Name="Provincia" Relationship="SAC_Model.FK_Retencion_Provincia" FromRole="Retencion" ToRole="Provincia" />
+    <NavigationProperty Name="TipoRetencion" Relationship="SAC_Model.FK_Retencion_TipoRetencion" FromRole="Retencion" ToRole="TipoRetencion" />
+  </EntityType>
+  <Association Name="FK_Retencion_CompraFactura">
+    <End Type="SAC_Model.CompraFactura" Role="CompraFactura" Multiplicity="0..1" />
+    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompraFactura">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Retencion">
+        <PropertyRef Name="IdCompraFactura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retencion_FactVenta">
+    <End Type="SAC_Model.FactVenta" Role="FactVenta" Multiplicity="0..1" />
+    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FactVenta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Retencion">
+        <PropertyRef Name="IdFactVenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retencion_Provincia">
+    <End Type="SAC_Model.Provincia" Role="Provincia" Multiplicity="0..1" />
+    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Provincia">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Retencion">
+        <PropertyRef Name="IdProvincia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Retencion_TipoRetencion">
+    <End Type="SAC_Model.TipoRetencion" Role="TipoRetencion" Multiplicity="0..1" />
+    <End Type="SAC_Model.Retencion" Role="Retencion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoRetencion">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Retencion">
+        <PropertyRef Name="IdTipoRetencion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

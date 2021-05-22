@@ -28,5 +28,8 @@ namespace Datos.ModeloDeDatos
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
+        public Nullable<int> IdFactVenta { get; set; }
+    
+        public virtual FactVenta FactVenta { get; set; }
     }
 }

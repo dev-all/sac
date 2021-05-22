@@ -40,7 +40,11 @@ namespace Negocio.Servicios
              var a = Mapper.Map<List<Retencion>, List<RetencionModel>>(oRetencionRepositorio.GetAllRetencion(idFactura));
             return a;
         }
-
+        public List<RetencionModel> GetAllRetencionVenta(int idFactura)
+        {
+            var a = Mapper.Map<List<Retencion>, List<RetencionModel>>(oRetencionRepositorio.GetAllRetencionVenta(idFactura));
+            return a;
+        }
         public RetencionModel Agregar(RetencionModel oChequeModel)
         {
             try

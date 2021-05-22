@@ -50,7 +50,11 @@ namespace Datos.Repositorios
             return context.Banco.Where(p => p.Id == id).First();
         }
 
-
+        public Banco GetBancoPorIdLazy(int id)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+            return context.Banco.Where(p => p.Id == id).First();
+        }
 
 
         public List<BancoCuentaBancaria> GetmMovimientosPendientesCuentaBancaria(int idBanco, DateTime fecha)
@@ -88,6 +92,11 @@ namespace Datos.Repositorios
             bancoCuenta.Fecha = DateTime.Now;
             context.SaveChanges();
             return bancoCuenta;
+        }
+
+        public List<Banco> GetAllBanco()
+        {
+            return context.Banco.Where(p => p.Activo == true).ToList();
         }
     }
 }

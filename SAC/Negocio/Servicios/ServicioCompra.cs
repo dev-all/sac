@@ -630,13 +630,10 @@ namespace Negocio.Servicios
                 // 1 pago factura con cbte de pago
                 // 1.1 pago fact 100 con cbte > 500 (saldo a favor)
                 // 1.2 pago fact 700 con cbte < 200 (actualiza monto factura)
-
                 // 2 pago fact(N) + cbte pago(N) a favor + cbte pago
-
                 // 3 cbte pago adelanto
 
                
-
                 int nroPago = 0;
                 //obtengo el nro de pago
                 nroPago = oServicioTipoComprobanteVenta.ObtenerNroPago(98) + 1;
@@ -648,8 +645,6 @@ namespace Negocio.Servicios
                 oMediosPago.montoTotal_ = oMediosPago.montoTotal_ + saldoPagoTotalAFavor;
                 decimal saldoPagoTotal = oMediosPago.montoTotal_;
                 decimal saldoAPagarTotal = oListaFacturas.Where(x => x.IdTipoComprobante.Equals(11)).Sum(x => x.Saldo);
-
-                
 
 
                 foreach (var Factura in oListaFacturas)
@@ -1097,8 +1092,6 @@ namespace Negocio.Servicios
             {
                 _mensaje?.Invoke("Ops!, Ocurrio un error al ejecutar el método de Pago. Comuníquese en contacto con el administrador del sistema - " + ex.Message, "error");
             }
-
-
         }
 
         private void SaveTrackingCompras(List<CompraFacturaModel> oListaFacturas, CompraFacturaModel pago)

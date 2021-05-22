@@ -34,6 +34,16 @@ namespace Datos.Repositorios
                         .Include("CompraFactura")
                         .Where(p => p.IdCompraFactura == idFactura && p.Activo == true).ToList();
         }
+        public List<Retencion> GetAllRetencionVenta(int idFactura)
+        {
+            context.Configuration.LazyLoadingEnabled = false;
+
+            return context.Retencion
+                        .Include("TipoRetencion")
+                        .Include("Provincia")
+                        .Include("FactVenta")
+                        .Where(p => p.IdFactVenta == idFactura && p.Activo == true).ToList();
+        }
         public Retencion GetRetencionOu (int idRetencion)
         {
             context.Configuration.LazyLoadingEnabled = false;
@@ -49,9 +59,13 @@ namespace Datos.Repositorios
         public Retencion Eliminar(Retencion oRetencion)
         {
             Retencion RetencionEliminar = GetRetencionOu(oRetencion.Id);
+            if (RetencionEliminar != null)
+            {
             RetencionEliminar.Activo = false;
             RetencionEliminar.UltimaModificacion = DateTime.Now;
             context.SaveChanges();
+            }
+      
             return RetencionEliminar;
 
         }

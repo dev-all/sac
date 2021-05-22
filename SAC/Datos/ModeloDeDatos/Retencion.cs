@@ -22,6 +22,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<decimal> Importe { get; set; }
         public Nullable<int> NroRecibo { get; set; }
         public Nullable<int> IdProvincia { get; set; }
+        public Nullable<int> IdFactVenta { get; set; }
         public Nullable<int> IdCompraFactura { get; set; }
         public Nullable<int> IdTipoRetencion { get; set; }
         public Nullable<int> Periodo { get; set; }
@@ -31,6 +32,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual CompraFactura CompraFactura { get; set; }
+        public virtual FactVenta FactVenta { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual TipoRetencion TipoRetencion { get; set; }
     }

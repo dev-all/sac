@@ -14,13 +14,23 @@ namespace Datos.ModeloDeDatos
     
     public partial class TipoComprobanteVenta
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TipoComprobanteVenta()
+        {
+            this.FactVenta = new HashSet<FactVenta>();
+        }
+    
         public int Id { get; set; }
+        public int CodigoAfip { get; set; }
         public int PuntoVenta { get; set; }
         public string Denominacion { get; set; }
-        public string Numero { get; set; }
+        public int Numero { get; set; }
         public string Abreviatura { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FactVenta> FactVenta { get; set; }
     }
 }
