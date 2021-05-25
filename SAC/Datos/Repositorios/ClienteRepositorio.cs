@@ -216,6 +216,8 @@ namespace Datos.Repositorios
         public Cliente GetClientePorId(int IdCliente)
         {
             context.Configuration.LazyLoadingEnabled = false;
+
+
             return context.Cliente
                 .Include("TipoCliente")
                 .Where(p => p.Id == IdCliente).First();

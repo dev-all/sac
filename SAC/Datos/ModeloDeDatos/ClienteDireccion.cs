@@ -35,12 +35,12 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
         public virtual Localidad Localidad { get; set; }
         public virtual Localidad Localidad1 { get; set; }
         public virtual Pais Pais { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual TipoIdioma TipoIdioma { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

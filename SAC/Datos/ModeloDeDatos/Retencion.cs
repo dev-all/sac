@@ -32,8 +32,8 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual CompraFactura CompraFactura { get; set; }
-        public virtual FactVenta FactVenta { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual TipoRetencion TipoRetencion { get; set; }
+        public virtual FactVenta FactVenta { get; set; }
     }
 }

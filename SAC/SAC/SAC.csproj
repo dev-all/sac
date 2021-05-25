@@ -2824,6 +2824,17 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jspdf\jspdf.debug.js" />
+    <Content Include="Scripts\jspdf\jspdf.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.autotable.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.from_html.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.split_text_to_size.js" />
+    <Content Include="Scripts\jspdf\jspdf.plugin.standard_fonts_metrics.js" />
+    <Content Include="Scripts\jspdf\libs\faker.min.js" />
+    <Content Include="Scripts\jspdf\libs\grids-responsive-min.css" />
+    <Content Include="Scripts\jspdf\libs\jspdf.min.js" />
+    <Content Include="Scripts\jspdf\libs\jspdf.plugin.autotable.src.js" />
+    <Content Include="Scripts\jspdf\libs\pure-min.css" />
     <Content Include="Scripts\js\chat.js" />
     <Content Include="Scripts\js\custom.js" />
     <Content Include="Scripts\js\custom.min.js" />
@@ -2861,6 +2872,7 @@
     <Content Include="Scripts\view\CtaCteProveedorDetalle.js" />
     <Content Include="Scripts\view\DatePickerReady.js" />
     <Content Include="Scripts\view\FacturaCompraScript.js" />
+    <Content Include="Scripts\view\Reporte\ReportesJSPDF.js" />
     <Content Include="Scripts\view\TarjetaScript.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2960,6 +2972,7 @@
     <Content Include="Views\Cobro\_TablaRetenciones.cshtml" />
     <Content Include="Views\Cobro\_TablaChequesCliente.cshtml" />
     <Content Include="Views\Cobro\_TablaNewCheque.cshtml" />
+    <None Include="Views\Reporte\Factura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

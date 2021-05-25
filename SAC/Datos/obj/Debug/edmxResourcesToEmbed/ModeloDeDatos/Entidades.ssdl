@@ -1827,6 +1827,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FactVenta_Cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="FactVenta" Type="Self.FactVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FactVenta">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FactVenta_TipoComprobanteVenta">
     <End Role="TipoComprobanteVenta" Type="Self.TipoComprobanteVenta" Multiplicity="1" />
     <End Role="FactVenta" Type="Self.FactVenta" Multiplicity="*" />
@@ -2605,6 +2617,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <AssociationSet Name="FK_Diario_Imputacion" Association="Self.FK_Diario_Imputacion">
       <End Role="Imputacion" EntitySet="Imputacion" />
       <End Role="Diario" EntitySet="Diario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FactVenta_Cliente" Association="Self.FK_FactVenta_Cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="FactVenta" EntitySet="FactVenta" />
     </AssociationSet>
     <AssociationSet Name="FK_FactVenta_TipoComprobanteVenta" Association="Self.FK_FactVenta_TipoComprobanteVenta">
       <End Role="TipoComprobanteVenta" EntitySet="TipoComprobanteVenta" />

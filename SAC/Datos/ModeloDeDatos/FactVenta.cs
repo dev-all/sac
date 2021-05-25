@@ -64,12 +64,13 @@ namespace Datos.ModeloDeDatos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
+        public virtual Cliente Cliente { get; set; }
+        public virtual TipoComprobanteVenta TipoComprobanteVenta { get; set; }
+        public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FactVentaCobro> FactVentaCobro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemImpre> ItemImpre { get; set; }
-        public virtual TipoMoneda TipoMoneda { get; set; }
-        public virtual TipoComprobanteVenta TipoComprobanteVenta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Retencion> Retencion { get; set; }
     }

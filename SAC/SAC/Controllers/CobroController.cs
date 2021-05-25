@@ -496,8 +496,11 @@ namespace SAC.Controllers
             //             IdMoneda = i.IdMoneda,
             //             IdCliente = i.IdCliente
             //         }).FirstOrDefault();
+            
 
-            return RedirectToAction("Index");
+            ViewBag.Factura = Newtonsoft.Json.JsonConvert.SerializeObject("");
+            return View("~/Views/Reporte/Factura.cshtml");
+            //return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -599,4 +602,5 @@ namespace SAC.Controllers
 
 
     }
+
 }

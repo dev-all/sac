@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="93">
+      <Diagram DiagramId="751d221779084cb88e22e6e00f41c871" Name="Diagram1" ZoomLevel="56">
         <EntityTypeShape EntityType="SAC_Model.Accion" Width="1.5" PointX="17.75" PointY="38" />
         <EntityTypeShape EntityType="SAC_Model.AccionPorRol" Width="1.5" PointX="20" PointY="3.375" />
         <EntityTypeShape EntityType="SAC_Model.AfipCategorias" Width="1.5" PointX="1.5" PointY="1.125" />
@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="SAC_Model.CajaTipoMovimiento" Width="1.5" PointX="17.25" PointY="29" />
         <EntityTypeShape EntityType="SAC_Model.Cheque" Width="1.5" PointX="6.75" PointY="21.375" />
         <EntityTypeShape EntityType="SAC_Model.Chequera" Width="1.5" PointX="9.75" PointY="22" />
-        <EntityTypeShape EntityType="SAC_Model.Cliente" Width="1.5" PointX="6.75" PointY="14.25" />
         <EntityTypeShape EntityType="SAC_Model.ClienteDireccion" Width="1.5" PointX="12" PointY="20" />
         <EntityTypeShape EntityType="SAC_Model.CompraFactura" Width="1.5" PointX="3.75" PointY="19.875" />
         <EntityTypeShape EntityType="SAC_Model.CompraFacturaPago" Width="1.5" PointX="16.5" PointY="19.75" />
@@ -78,12 +77,6 @@
         <AssociationConnector Association="SAC_Model.FK_Caja_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Cheque" />
         <AssociationConnector Association="SAC_Model.FK_CompraFacturaPago_Chequera" />
-        <AssociationConnector Association="SAC_Model.FK_Cliente_GrupoPresupuesto" />
-        <AssociationConnector Association="SAC_Model.FK_Cliente_GrupoPresupuesto1" />
-        <AssociationConnector Association="SAC_Model.FK_Cliente_PieNota" />
-        <AssociationConnector Association="SAC_Model.FK_Cliente_TipoCliente" />
-        <AssociationConnector Association="SAC_Model.FK_Cliente_TipoIdioma" />
-        <AssociationConnector Association="SAC_Model.FK_ClienteDireccion_Cliente" />
         <AssociationConnector Association="SAC_Model.FK_ClienteDireccion_Localidad" />
         <AssociationConnector Association="SAC_Model.FK_ClienteDireccion_Localidad1" />
         <AssociationConnector Association="SAC_Model.FK_ClienteDireccion_Pais" />
@@ -138,26 +131,34 @@
         <AssociationConnector Association="SAC_Model.FK_FactVentaCobro_Chequera" />
         <AssociationConnector Association="SAC_Model.FK_FactVentaCobro_Tarjetas" />
         <AssociationConnector Association="SAC_Model.FK_FactVentaCobro_TipoPago" />
-        <EntityTypeShape EntityType="SAC_Model.FactVenta" Width="1.5" PointX="37.125" PointY="17.5" />
-        <AssociationConnector Association="SAC_Model.FK_FactVentaCobro_CompraFactura" />
-        <AssociationConnector Association="SAC_Model.FK_ItemImpre_FactVenta" />
         <EntityTypeShape EntityType="SAC_Model.TipoMoneda" Width="1.5" PointX="1.5" PointY="22.625" />
         <AssociationConnector Association="SAC_Model.FK_Cheque_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_Chequera_TipoMoneda" />
-        <AssociationConnector Association="SAC_Model.FK_Cliente_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_ClienteDireccion_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_CompraFactura_TipoMoneda" />
-        <AssociationConnector Association="SAC_Model.FK_FactVenta_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_Proveedor_TipoMoneda" />
         <EntityTypeShape EntityType="SAC_Model.TipoComprobanteVenta" Width="1.5" PointX="32.875" PointY="17" />
-        <AssociationConnector Association="SAC_Model.FK_FactVenta_TipoComprobanteVenta" />
         <EntityTypeShape EntityType="SAC_Model.Buque" Width="1.5" PointX="22.375" PointY="3.75" />
         <EntityTypeShape EntityType="SAC_Model.Cotiza" Width="1.5" PointX="26.375" PointY="20.75" />
         <EntityTypeShape EntityType="SAC_Model.Retencion" Width="1.5" PointX="39.375" PointY="18.875" />
         <AssociationConnector Association="SAC_Model.FK_Retencion_CompraFactura" />
-        <AssociationConnector Association="SAC_Model.FK_Retencion_FactVenta" />
         <AssociationConnector Association="SAC_Model.FK_Retencion_Provincia" />
         <AssociationConnector Association="SAC_Model.FK_Retencion_TipoRetencion" />
+        <EntityTypeShape EntityType="SAC_Model.Cliente" Width="1.5" PointX="6.75" PointY="13.5" />
+        <EntityTypeShape EntityType="SAC_Model.FactVenta" Width="1.5" PointX="35.125" PointY="14.75" />
+        <AssociationConnector Association="SAC_Model.FK_Cliente_GrupoPresupuesto" />
+        <AssociationConnector Association="SAC_Model.FK_Cliente_GrupoPresupuesto1" />
+        <AssociationConnector Association="SAC_Model.FK_Cliente_PieNota" />
+        <AssociationConnector Association="SAC_Model.FK_Cliente_TipoCliente" />
+        <AssociationConnector Association="SAC_Model.FK_Cliente_TipoIdioma" />
+        <AssociationConnector Association="SAC_Model.FK_Cliente_TipoMoneda" />
+        <AssociationConnector Association="SAC_Model.FK_ClienteDireccion_Cliente" />
+        <AssociationConnector Association="SAC_Model.FK_FactVenta_Cliente" />
+        <AssociationConnector Association="SAC_Model.FK_FactVenta_TipoComprobanteVenta" />
+        <AssociationConnector Association="SAC_Model.FK_FactVenta_TipoMoneda" />
+        <AssociationConnector Association="SAC_Model.FK_FactVentaCobro_CompraFactura" />
+        <AssociationConnector Association="SAC_Model.FK_ItemImpre_FactVenta" />
+        <AssociationConnector Association="SAC_Model.FK_Retencion_FactVenta" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

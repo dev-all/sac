@@ -40,16 +40,10 @@ namespace SAC.Controllers
         // GET: Usuario
         public ActionResult Index()
         {
-
-
-
             ClienteModelView model = new ClienteModelView();
             model.CVisible = false;
              CargarTipoCliente();
-             return View(model);
-
-           
-
+             return View(model);          
         }
 
 
@@ -81,9 +75,6 @@ namespace SAC.Controllers
 
         }
 
-
-
-
         public ActionResult AddOrEdit(int id = 0)
         {
 
@@ -110,11 +101,7 @@ namespace SAC.Controllers
             return View(model);
         }
 
-
-
-        [HttpPost]
-       
-
+        [HttpPost]       
         public ActionResult AddOrEdit(ClienteModelView model)
         {
             try
@@ -258,8 +245,6 @@ namespace SAC.Controllers
 
         #endregion
 
-
-
         [HttpPost]
         public ActionResult Eliminar(int id)
         {
@@ -275,8 +260,6 @@ namespace SAC.Controllers
 
             return RedirectToAction("Index");
         }
-
-
 
         [HttpPost]
         public ActionResult BloquearCliente(int id)
@@ -328,8 +311,6 @@ namespace SAC.Controllers
            
         }
 
-
-
         [HttpPost]
         public ActionResult EliminarDireccion(int Id, int IdCliente=0)
         {
@@ -349,15 +330,8 @@ namespace SAC.Controllers
         }
 
 
-
-
-
-
         public ActionResult DireccionCliente(int IdCliente)
         {
-
-
-
 
             ClienteDireccionModelView model = new ClienteDireccionModelView();
 
@@ -366,13 +340,9 @@ namespace SAC.Controllers
             model.IdCliente = IdCliente;
             return View(model);
 
-
-
-
         }
 
       
-
 
         #region "Cargar Combos"
 

@@ -99,7 +99,7 @@ namespace Datos.Repositorios
             factura.FechaCobro = model.FechaCobro;
             factura.NumeroCobro = model.NumeroCobro;
             factura.Cotiza = model.Cotiza;
-
+            factura.CotizaP = model.CotizaP;
             factura.Saldo = model.Saldo;
             factura.Parcial = model.Parcial;
             context.SaveChanges();

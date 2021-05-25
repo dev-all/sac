@@ -37,7 +37,6 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<CajaTipoMovimiento> CajaTipoMovimiento { get; set; }
         public virtual DbSet<Cheque> Cheque { get; set; }
         public virtual DbSet<Chequera> Chequera { get; set; }
-        public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<ClienteDireccion> ClienteDireccion { get; set; }
         public virtual DbSet<CompraFactura> CompraFactura { get; set; }
         public virtual DbSet<CompraFacturaPago> CompraFacturaPago { get; set; }
@@ -90,11 +89,12 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<IvaVenta> IvaVenta { get; set; }
         public virtual DbSet<CompraIvaVista> CompraIvaVista { get; set; }
         public virtual DbSet<FactVentaCobro> FactVentaCobro { get; set; }
-        public virtual DbSet<FactVenta> FactVenta { get; set; }
         public virtual DbSet<TipoMoneda> TipoMoneda { get; set; }
         public virtual DbSet<TipoComprobanteVenta> TipoComprobanteVenta { get; set; }
         public virtual DbSet<Buque> Buque { get; set; }
         public virtual DbSet<Cotiza> Cotiza { get; set; }
         public virtual DbSet<Retencion> Retencion { get; set; }
+        public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<FactVenta> FactVenta { get; set; }
     }
 }

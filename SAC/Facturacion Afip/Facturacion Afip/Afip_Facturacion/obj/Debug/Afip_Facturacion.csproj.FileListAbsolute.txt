@@ -1,0 +1,14 @@
+C:\Users\MAX\Desktop\AFIP\Facturacion Afip\Afip_Facturacion\bin\Debug\Afip_Facturacion.dll.config
+C:\Users\MAX\Desktop\AFIP\Facturacion Afip\Afip_Facturacion\bin\Debug\Afip_Facturacion.dll
+C:\Users\MAX\Desktop\AFIP\Facturacion Afip\Afip_Facturacion\bin\Debug\Afip_Facturacion.pdb
+C:\Users\MAX\Desktop\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.csprojAssemblyReference.cache
+C:\Users\MAX\Desktop\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.csproj.CoreCompileInputs.cache
+C:\Users\MAX\Desktop\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.dll
+C:\Users\MAX\Desktop\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.pdb
+D:\Escritorio\AFIP\Facturacion Afip\Afip_Facturacion\bin\Debug\Afip_Facturacion.dll.config
+D:\Escritorio\AFIP\Facturacion Afip\Afip_Facturacion\bin\Debug\Afip_Facturacion.dll
+D:\Escritorio\AFIP\Facturacion Afip\Afip_Facturacion\bin\Debug\Afip_Facturacion.pdb
+D:\Escritorio\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.csproj.CoreCompileInputs.cache
+D:\Escritorio\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.dll
+D:\Escritorio\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.pdb
+D:\Escritorio\AFIP\Facturacion Afip\Afip_Facturacion\obj\Debug\Afip_Facturacion.csprojAssemblyReference.cache
