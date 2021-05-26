@@ -200,8 +200,12 @@
     <Compile Include="Models\CompraIvaModelView.cs" />
     <Compile Include="Models\CompraRegistroDetalleModelView.cs" />
     <Compile Include="Models\CompraRegistroModelView.cs" />
+    <Compile Include="Models\ConsultaIvaVentaModelView.cs" />
+    <Compile Include="Models\CtaCteClienteModelView.cs" />
+    <Compile Include="Models\CteCteClienteResumenModelView.cs" />
     <Compile Include="Models\CuentaPlanContableModelView.cs" />
     <Compile Include="Models\FacturaModelView.cs" />
+    <Compile Include="Models\FacturaVentaModelView.cs" />
     <Compile Include="Models\IngresoBancoModelView.cs" />
     <Compile Include="Models\ItemImprFacturaModelView.cs" />
     <Compile Include="Models\ItemImprModelView.cs" />
@@ -2989,6 +2993,9 @@
     <Content Include="Views\Cobro\_TablaRetenciones.cshtml" />
     <Content Include="Views\Cobro\_TablaChequesCliente.cshtml" />
     <Content Include="Views\Cobro\_TablaNewCheque.cshtml" />
+    <Content Include="Views\Cliente\ConsultaIvaVentas.cshtml" />
+    <Content Include="Views\Cliente\CtaCteDetalle.cshtml" />
+    <Content Include="Views\Cliente\CtaCteResumen.cshtml" />
     <None Include="Views\Reporte\Factura.cshtml" />
     <None Include="Web References\afip.wsaahomo\LoginCms.wsdl" />
     <Content Include="Web References\afip.wsaahomo\Reference.map">

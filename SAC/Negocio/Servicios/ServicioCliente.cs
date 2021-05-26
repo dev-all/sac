@@ -60,7 +60,8 @@ namespace Negocio.Servicios
                 return null;
             }
         }
-     public List<ClienteModel> GetClientePorCodigo(string strCodigo)
+       
+        public List<ClienteModel> GetClientePorCodigo(string strCodigo)
         {
             try
             {
@@ -80,9 +81,9 @@ namespace Negocio.Servicios
             {
                 return Mapper.Map<Cliente, ClienteModel>(oClienteRepositorio.GetClientePorId(id));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor", "error");
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor" + ex.Message, "error" );
 
                 return null;
             }
@@ -262,5 +263,84 @@ namespace Negocio.Servicios
 
 
 
+
+
+        #region "Servicios Reportes"
+
+        // 1 Cuenta Corriente Detalle
+
+
+
+
+
+
+        public List<CobroFacturaModel> GetCtaCteDetalle(int IdCliente,DateTime strCodigo)
+        {
+            try
+            {               
+                return Mapper.Map<List<FactVenta>, List<CobroFacturaModel>>(oClienteRepositorio.GetCtaCteDetalle(IdCliente, strCodigo));
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
         }
+
+
+
+
+        // 2 Cuenta Corriente Resumen
+
+        public List<CteCteClienteResumenModel> GetCtaCteResumen(DateTime fechaHasta)
+        {
+            try
+            {
+                var datos = oClienteRepositorio.GetCtaCteResumen(fechaHasta);
+
+                return datos.ToList().Select(i =>  new  CteCteClienteResumenModel()
+                          {
+                               Codigo = i.Codigo,
+                               Nombre = i.Nombre,
+                               TotalPesos = i.TotalPesos,
+                               TotalDolares = i.TotalDolares,
+                               FechaUltimoMov = i.FechaUltimoMov
+                           
+                           }).ToList();                              
+            }
+            catch (Exception ex)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador" + ex.Message, "erro");
+                throw new Exception();
+
+            }
+        }
+
+
+
+        //3  Registro de Ventas Mensuales
+
+    
+
+        public List<ConsultaIvaVentaModel> GetIvaVentas(string Periodo)
+        {
+            try
+            {
+                return Mapper.Map<List<ConsultaIvaVenta>, List<ConsultaIvaVentaModel>>(oClienteRepositorio.GetIvaVentas(Periodo));
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
+
+
+
+        #endregion
+
+
+
+
+    }
 }

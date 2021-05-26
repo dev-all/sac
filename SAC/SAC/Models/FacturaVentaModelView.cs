@@ -1,13 +1,13 @@
-﻿using Datos.ModeloDeDatos;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
-namespace Negocio.Modelos
+namespace SAC.Models
 {
-   public class FacturaVentaModel
+    public class FacturaVentaModelView
     {
         public int Id { get; set; }
         public int IdTipoComprobante { get; set; }
@@ -51,14 +51,16 @@ namespace Negocio.Modelos
         public Nullable<int> IdUsuario { get; set; }
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
 
-        public TipoComprobanteVenta TipoComprobanteVenta { get; set; }
-        public  TipoMoneda TipoMoneda { get; set; }
-        public  ICollection<FactVentaCobro> FactVentaCobro { get; set; }
-        public  ICollection<ItemImpre> ItemImpre { get; set; }
-        public  ICollection<Retencion> Retencion { get; set; }
+     
 
-        public ICollection<ClienteModel> Cliente { get; set; }
+        public TipoComprobanteModelView TipoComprobanteVenta { get; set; }
+        public TipoMonedaModelView TipoMoneda { get; set; }
+      //  public ICollection<FacturaVentaCobroModelView> FactVentaCobro { get; set; }
+        public ICollection<ItemImprModelView> ItemImpre { get; set; }
+        public ICollection<RetencionModelView> Retencion { get; set; }
 
-       
+        public ICollection<ClienteModelView> Cliente { get; set; }
+
+
     }
 }

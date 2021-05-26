@@ -14,6 +14,16 @@ namespace SAC.Infrastructure
     {
         public AutoMapperWebProfile()
         {
+
+
+            CreateMap<CteCteClienteResumenModel, CteCteClienteResumenModelView>();
+            CreateMap<CteCteClienteResumenModelView, CteCteClienteResumenModel>();
+
+
+            CreateMap<ConsultaIvaVentaModel, ConsultaIvaVentaModelView>();
+            CreateMap<ConsultaIvaVentaModelView, ConsultaIvaVentaModel>();
+
+
             CreateMap<CobroFacturaModoModel, CobroFacturaModoModelView>();
             CreateMap<CobroFacturaModoModelView, CobroFacturaModoModel>();
 

@@ -48,7 +48,8 @@ namespace SAC.Models
         public virtual TipoClienteModelView TipoCliente { get; set; }
         public virtual TipoMonedaModelView TipoMoneda { get; set; }
         public virtual ICollection<ClienteDireccionModelView> ClienteDireccion { get; set; }
-         
+
+        public virtual ICollection<FacturaVentaModelView> FactVenta { get; set; }
 
         public List<ClienteModelView> ListaCliente { get; set; }
 
@@ -63,6 +64,24 @@ namespace SAC.Models
         public List<TipoComprobanteModelView> ListaComprobantes { get; set; }
 
         public List<SelectListItem> ListaComprobantesDrop { get; set; }
+
+
+
+        // Variableas para Consultas Resumen
+
+        // 1. Cta Cte Detalle
+
+        public List<CobroFacturaModelView> ListaFacturas{ get; set; }//
+
+        //
+
+        public decimal TotalPesos { get; set; }
+        public decimal TotalDolares { get; set; }
+        public DateTime FechaUltimoMov { get; set; }
+
+
+
+
 
 
     }

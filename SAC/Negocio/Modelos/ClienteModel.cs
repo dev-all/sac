@@ -33,13 +33,20 @@ namespace Negocio.Modelos
         public int IdUsuario { get; set; }
         public System.DateTime UltimaModificacion { get; set; }
 
-        public virtual GrupoPresupuesto GrupoPresupuesto { get; set; }
+        public  GrupoPresupuesto GrupoPresupuesto { get; set; }
       
-        public virtual PieNotaModel PieNota { get; set; }
-        public virtual TipoClienteModel TipoCliente { get; set; }
-        public virtual TipoMonedaModel TipoMoneda { get; set; }
-               public virtual ICollection<ClienteDireccionModel> ClienteDireccion { get; set; }
+        public  PieNotaModel PieNota { get; set; }
+        public  TipoClienteModel TipoCliente { get; set; }
+        public  TipoMonedaModel TipoMoneda { get; set; }
+        public  ICollection<ClienteDireccionModel> ClienteDireccion { get; set; }
 
+        // public virtual ICollection<FacturaVentaModel> FactVenta { get; set; }
+
+
+
+        public decimal TotalPesos { get; set; }
+        public decimal TotalDolares { get; set; }
+        public DateTime FechaUltimoMov { get; set; }
 
 
     }

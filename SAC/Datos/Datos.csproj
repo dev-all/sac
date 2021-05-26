@@ -125,12 +125,14 @@
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\CompraRegistroDetalle.cs" />
+    <Compile Include="ModeloDeDatos\ConsultaIvaVenta.cs" />
     <Compile Include="ModeloDeDatos\Contacto.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
     <Compile Include="ModeloDeDatos\Cotiza.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloDeDatos\CtaCteResumen.cs" />
     <Compile Include="ModeloDeDatos\CuentaCorriente.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>

@@ -67,7 +67,9 @@
     <Compile Include="Modelos\ClienteModel.cs" />
     <Compile Include="Modelos\CobroFacturaModoModel.cs" />
     <Compile Include="Modelos\CompraRegistroDetalleModel.cs" />
+    <Compile Include="Modelos\ConsultaIvaVentaModel.cs" />
     <Compile Include="Modelos\CotizaModel.cs" />
+    <Compile Include="Modelos\CteCteClienteResumenModel.cs" />
     <Compile Include="Modelos\CuentaCorrienteProveedorDetallesModel.cs" />
     <Compile Include="Modelos\BancoModel.cs" />
     <Compile Include="Modelos\BancoCuentaBancariaModel.cs" />

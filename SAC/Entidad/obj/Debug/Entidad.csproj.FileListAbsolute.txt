@@ -15,4 +15,3 @@ D:\sac\sac\SAC\Entidad\bin\Debug\Entidad.pdb
 D:\sac\sac\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
 D:\sac\sac\SAC\Entidad\obj\Debug\Entidad.dll
 D:\sac\sac\SAC\Entidad\obj\Debug\Entidad.pdb
-D:\sac\sac\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache

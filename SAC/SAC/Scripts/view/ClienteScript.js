@@ -1,8 +1,6 @@
 ﻿$(function () {
 
 
-
-
     $('#Nombre').autocomplete({
         source: function (request, response) {
             $.getJSON("/Banco/GetListClienteJson/", request, function (data) {

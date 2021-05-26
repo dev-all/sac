@@ -8,6 +8,8 @@ using SAC.Atributos;
 using SAC.Models;
 using AutoMapper;
 using Negocio.Modelos;
+using System.Globalization;
+using System.Text;
 
 namespace SAC.Controllers
 {
@@ -144,6 +146,161 @@ namespace SAC.Controllers
                 return View(model);
             }
         }
+
+
+
+        #region "Servicios Reportes"
+
+        // 1 Cuenta Corriente Detalle
+
+
+        public ActionResult CtaCteDetalle(int IdCliente = 0, string searchFecha= null)
+        {
+            CtaCteClienteModelView model = new CtaCteClienteModelView();
+            DateTime fechaHasta = DateTime.Now;
+            
+            if (IdCliente != 0)
+            {
+                if (!string.IsNullOrEmpty(searchFecha))
+                {
+                    fechaHasta = DateTime.ParseExact(searchFecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);                  
+                }
+
+                model.CtaCte = Mapper.Map<List<CobroFacturaModel>, List<CobroFacturaModelView>>(oServicioCliente.GetCtaCteDetalle(IdCliente, fechaHasta));
+                model.cliente = Mapper.Map<ClienteModel, ClienteModelView>(oServicioCliente.GetClientePorId(IdCliente));
+
+            }
+
+            return View(model);
+
+        }
+
+
+
+        // 2 Cuenta Corriente Resumen
+        public ActionResult CtaCteResumen(string searchFecha)
+        {
+
+            
+
+
+
+
+                List<CteCteClienteResumenModelView> model = new List<CteCteClienteResumenModelView> ();
+try
+            {
+            DateTime fechaHasta = DateTime.Now;
+
+            if (!string.IsNullOrEmpty(searchFecha))
+
+            {
+                fechaHasta = DateTime.ParseExact(searchFecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                model = Mapper.Map<List<CteCteClienteResumenModel>, List<CteCteClienteResumenModelView>>(oServicioCliente.GetCtaCteResumen(fechaHasta));
+
+           }
+
+            }
+
+            catch (Exception ex)
+            {
+                oServicioCliente._mensaje(ex.Message, "error");
+            }
+
+
+            return View(model);
+        }
+
+
+        //3  Registro de Ventas Mensuales
+
+        public ActionResult ConsultaIvaVentas(int anio=0, int mes=0)
+        {
+
+
+            ConsultaIvaVentaModelView model = new ConsultaIvaVentaModelView();
+            model.ListaConsultaIva = null;
+
+            int Anio = DateTime.Now.Year;
+            int Mes = DateTime.Now.Month;
+
+            if (anio != 0)
+
+            {
+
+                if (mes != 0)
+                {
+                    Anio = anio;
+                    Mes = mes;
+               }
+
+                string Periodo = Convert.ToString(Anio) + Convert.ToString(Mes);
+
+                model.ListaConsultaIva = Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModelView>>(oServicioCliente.GetIvaVentas(Periodo));
+
+               // model.ListaConsultaIva= Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModel>>(oServicioCliente.GetIvaVentas(Periodo, Mes));
+
+            }
+
+
+            CargarAnio();
+            CargarMes();
+
+            return View(model);
+        }
+
+        private void CargarAnio()
+        {
+            List<Anios> ListaAnio = new List<Anios>()
+            {
+                new Anios(){ Id = "0", Descripcion = "Selecionar" },
+                new Anios(){ Id = "19", Descripcion = "2019" },
+                new Anios(){ Id = "20", Descripcion = "2020" },
+                new Anios(){ Id = "21", Descripcion = "2021" },
+                new Anios(){ Id = "22", Descripcion = "2022" },
+                new Anios(){ Id = "23", Descripcion = "2023" },
+                new Anios(){ Id = "24", Descripcion = "2024" },
+                new Anios(){ Id = "25", Descripcion = "2025" }
+
+            };
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var type in ListaAnio)
+            {
+                sb.Append("<option value='" + type.Id + "'>" + type.Descripcion + "</option>");
+            }
+            ViewBag.ListaAnio = sb.ToString();
+        }
+
+
+
+
+        private void CargarMes()
+        {
+            List<Meses> ListaMes = new List<Meses>()
+            {
+                new Meses(){ Id = "0", Descripcion = "Selecionar" },
+                new Meses(){ Id = "01", Descripcion = "Enero" },
+                new Meses(){ Id = "02", Descripcion = "Febrero" },
+                new Meses(){ Id = "03", Descripcion = "Marzo" },
+                new Meses(){ Id = "04", Descripcion = "Abril" },
+                new Meses(){ Id = "05", Descripcion = "Mayo" },
+                new Meses(){ Id = "06", Descripcion = "Junio" },
+                new Meses(){ Id = "07", Descripcion = "Julio" },
+                new Meses(){ Id = "08", Descripcion = "Agosto" },
+                new Meses(){ Id = "09", Descripcion = "Septiembre" },
+                new Meses(){ Id = "10", Descripcion = "Octubre" },
+                new Meses(){ Id = "11", Descripcion = "Noviembre" },
+                new Meses(){ Id = "12", Descripcion = "Diciembre" }};
+            StringBuilder sb = new StringBuilder();
+            foreach (var type in ListaMes)
+            {
+                sb.Append("<option value='" + type.Id + "'>" + type.Descripcion + "</option>");
+            }
+            ViewBag.ListaMes = sb.ToString();
+        }
+
+        #endregion
 
 
 

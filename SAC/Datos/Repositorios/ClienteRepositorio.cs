@@ -216,8 +216,6 @@ namespace Datos.Repositorios
         public Cliente GetClientePorId(int IdCliente)
         {
             context.Configuration.LazyLoadingEnabled = false;
-
-
             return context.Cliente
                 .Include("TipoCliente")
                 .Where(p => p.Id == IdCliente).First();
@@ -300,10 +298,134 @@ namespace Datos.Repositorios
 
         }
 
-        
-
-    #endregion
+      
 
 
-}
+
+        #endregion
+
+
+
+        #region "Reportes"
+
+        // 1 Cuenta Corriente Detalle
+
+
+        public List<FactVenta> GetCtaCteDetalle(int IdCliente,DateTime fecha)
+        {
+
+            context.Configuration.LazyLoadingEnabled = false;
+            List<FactVenta> listaCteCteDetalle = context.FactVenta
+                                               .Include("TipoComprobanteVenta")
+                                               .Where(f => f.IdCliente == IdCliente &&
+                                                        f.Activo == true &&                                                        
+                                                        f.Fecha <= fecha
+                                                        ).ToList();
+           
+            return listaCteCteDetalle;
+
+
+        }
+
+
+        // 2 Cuenta Corriente Resumen
+
+
+        public List<CteCteClienteResumen> GetCtaCteResumen(DateTime fechaHasta)
+        {
+            var r=  context.FactVenta
+                         .Include("Cliente")
+                         .Where(p => p.Activo == true &&
+                         p.Fecha.Month < fechaHasta.Month && p.Fecha.Year < fechaHasta.Year)
+                         .GroupBy(c => new { c.Cliente.Codigo, c.Cliente.Nombre })
+                         .Select(c => new CteCteClienteResumen ()
+                         {
+                             Codigo = c.Key.Codigo,
+                             Nombre = c.Key.Nombre,
+                             TotalPesos = c.Sum(x => x.Total),
+                             TotalDolares = c.Sum(x => x.TotalDolares),
+                             FechaUltimoMov = c.Max(x => x.Fecha),
+                         }).ToList();
+
+            return r;
+            
+        }
+
+
+
+
+
+        //3  Registro de Ventas Mensuales
+
+        public List<ConsultaIvaVenta> GetIvaVentas(string Periodo)
+        {
+
+                context.Configuration.LazyLoadingEnabled = false;
+
+
+            int periodo = Convert.ToInt32(Periodo);
+
+
+            var query = from a in context.FactVenta
+                        join s in context.IvaVenta on a.NumeroFactura equals s.NumeroFactura
+                        where a.Activo == true // && a.Periodo == periodo
+
+                        select new ConsultaIvaVenta
+                        {
+
+                            Abreviatura = a.TipoComprobanteVenta.Abreviatura,
+                            CodigoAfip = a.TipoComprobanteVenta.CodigoAfip,
+                            PuntoVenta = a.TipoComprobanteVenta.PuntoVenta,
+                            NumeroFactura = a.NumeroFactura,
+                            Fecha = a.Fecha,
+                            Nombre = a.Cliente.Nombre,
+                            Neto = s.Neto,
+                            Gasto = s.Gasto,
+                            Iva = s.Iva,
+                            Isib = s.Isib,
+                            Total = s.Total
+
+                        };
+
+
+            return query.ToList();
+
+
+            //var query = from f in context.FactVenta
+            //                           join i in context.IvaVenta on f.NumeroFactura equals i.NumeroFactura
+            //                           where f.Activo == true
+            //                           select new
+            //                           {
+            //                               f.TipoComprobanteVenta.Abreviatura,
+            //                               f.TipoComprobanteVenta.CodigoAfip,
+            //                               f.TipoComprobanteVenta.PuntoVenta,
+            //                               f.NumeroFactura,
+            //                               f.Fecha,
+            //                               f.Cliente.Nombre,
+            //                               i.Neto,
+            //                               i.Gasto,
+            //                               i.Iva,
+            //                               i.Isib,
+            //                               i.Total,
+            //                           }).ToList();
+
+
+
+
+
+           // return query;
+
+
+
+
+
+        }
+
+
+
+
+        #endregion
+
+
+    }
 }
