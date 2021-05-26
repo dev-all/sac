@@ -71,53 +71,31 @@
                 @if (Model.cliente != null)
                 {
 
-
-
-
                     <div class="row m-t-15">
-                        <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-12">
+                      
+                        <div class="col-md-4">
 
-                            <div class="col-xlg-4 col-lg-4 col-md-4">
-                                <div class="form-group row">
-                                    <small class="text-right col-md-4">Razon Social:</small>
-                                    <div class="col-md-8">
-                                        <small class="">@Model.cliente.Nombre</small>
-                                    </div>
-                                </div>
+                            <small> Razon Social:     @Model.cliente.Nombre</small>
+                    
+                               
                             </div>
 
-                            <div class="col-xlg-4 col-lg-4 col-md-4">
-                                <div class="form-group row">
-                                    <small class="text-right col-md-4">Cuit:</small>
-                                    <div class="col-md-4">
-                                        <small class="">@Model.cliente.Cuit</small>
-                                    </div>
-                                </div>
+                            <div class=" col-md-2">
+                                    <small >Cuit:
+                                   @Model.cliente.Cuit</small>
+                                  
                             </div>
 
-                            <div class="col-xlg-4 col-lg-4 col-md-4">
-                                <div class="form-group row">
-                                    <small class="text-right col-md-4">Tipo Iva:</small>
-                                    <div class="col-md-8">
-                                        <small class="">@Model.cliente.IdTipoiva</small>
-                                    </div>
-                                </div>
+                            <div class="col-md-2">
+                                
+                                    <small >Tipo Iva: @Model.cliente.IdTipoiva</small>
+                                    
                             </div>
 
-                            <div class="col-xlg-4 col-lg-4 col-md-4">
-                                <div class="form-group row">
-                                    <small class="text-right col-md-4">Direccion:</small>
-                                    <div class="col-md-8">
-                                        <small class=""></small>
-                                    </div>
-                                </div>
+                            <div class=" col-md-4">                              
+                                    <small >Direccion:</small>                                                                                                   
                             </div>
 
-
-
-
-
-                        </div>
                     </div>
 
 
@@ -137,7 +115,7 @@
                                             <th class="text-center">Fecha</th>
                                             <th class="text-center">Total</th>
                                             <th class="text-center">Pago $</th>
-                                            <th class="text-center">Total U$</th>
+                                            <th class="text-center">Total U$S</th>
                                             <th class="text-center">Pago</th>
                                             <th class="text-center">Parcial</th>
                                             <th class="text-center">Saldo</th>
@@ -173,24 +151,37 @@
                                                 </td>
 
                                                 <td class="text-right">
-                                                    @Html.DisplayFor(modelItem => item.Total)
+                                                    @if (item.IdMoneda == 1 && item.TipoComprobanteVenta.CodigoAfip != 99)
+                                                    {
+                                                        @Html.DisplayFor(modelItem => item.Total)
+                                                    }                 
+                                                </td>
+                                                <td class="text-right">
+                                                    @if (item.IdMoneda == 1 && item.TipoComprobanteVenta.CodigoAfip == 99)
+                                                    {
+                                                        @Html.DisplayFor(modelItem => item.Total)
+                                                    }
+
+                                                </td>
+
+                                                <td class="text-right">
+                                                    @if (item.IdMoneda == 2 && item.TipoComprobanteVenta.CodigoAfip != 99)
+                                                    {
+                                                        @Html.DisplayFor(modelItem => item.Total)
+                                                    }
+                                                </td>
+
+                                                <td class="text-right">
+                                                    @if (item.IdMoneda == 2 && item.TipoComprobanteVenta.CodigoAfip == 99)
+                                                    {
+                                                        @Html.DisplayFor(modelItem => item.Total)
+                                                    }
+                                                </td>
+                                                <td class="text-right">
+                                                    @Html.DisplayFor(modelItem => item.Parcial)
                                                 </td>
                                                 <td class="text-right">
                                                     @Html.DisplayFor(modelItem => item.Saldo)
-                                                </td>
-
-                                                <td class="text-right">
-                                                    @Html.DisplayFor(modelItem => item.Cotiza)
-                                                </td>
-
-                                                <td class="text-right">
-                                                    @Html.DisplayFor(modelItem => item.Cotiza)
-                                                </td>
-                                                <td class="text-right">
-                                                    @Html.DisplayFor(modelItem => item.Cotiza)
-                                                </td>
-                                                <td class="text-right">
-                                                    @Html.DisplayFor(modelItem => item.Cotiza)
                                                 </td>
                                                 <td class="text-right">
                                                     @Html.DisplayFor(modelItem => item.Cotiza)
@@ -201,7 +192,7 @@
                                                 </td>
 
                                                 <td class="text-right">
-                                                    @Html.DisplayFor(modelItem => item.Codigo)
+                                                    @Html.DisplayFor(modelItem => item.Concepto)
                                                 </td>
 
 
@@ -235,90 +226,29 @@
 
                     <div class="row m-b-10">
 
-                        <div class="col-xlg-4 col-lg-4 col-md-4">
-                            <div class="form-group row">
-                                <small class="text-right col-md-5">Facturas Impagas</small>
-                                <small class="text-right col-md-6">Pagos Parciales</small>
-
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-xlg-4 col-lg-4 col-md-4">
-                            <div class="form-group row">
-
-                                <small class="text-left col-md-6">Saldo Factura</small>
-                            </div>
-                        </div>
-
-
-
+                        <div class="col-md-2"> </div>
+                        <small class=" col-md-2">Facturas Impagas</small>
+                        <small class=" col-md-2">Cobro Parciales</small>
+                        <small class=" col-md-2">Saldo Factura</small>
                     </div>
 
 
 
                     <div class="row m-b-10">
-
-                        <div class="col-xlg-4 col-lg-4 col-md-4">
-                            <div class="form-group row">
-                                <small class="text-right col-md-3">Pesos</small>
-
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xlg-4 col-lg-4 col-md-4">
-                            <div class="form-group row">
-
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-2 text-right"> Pesos </div>
+                        <small class=" col-md-2 font-weight-bold">$ @Model.facImpPesos</small>
+                        <small class=" col-md-2 font-weight-bold">$ @Model.facParcialPesos</small>
+                        @{ var SaldoPesos = Model.facImpPesos + Model.facParcialPesos;}
+                        <small class=" col-md-2 font-weight-bold">$ @SaldoPesos</small>
                     </div>
-
-
-
-
 
                     <div class="row m-b-10">
-
-                        <div class="col-xlg-4 col-lg-4 col-md-4">
-                            <div class="form-group row">
-                                <small class="text-right col-md-3">Dolares</small>
-
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xlg-4 col-lg-4 col-md-4">
-                            <div class="form-group row">
-
-                                <div class="col-md-3">
-                                    <input class="form-control form-control-sm" id="Nombre" name="Nombre" type="text">
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-md-2 text-right"> Dolares </div>
+                        <small class=" col-md-2 font-weight-bold">$ @Model.facImpDolares</small>
+                        <small class=" col-md-2 font-weight-bold">$ @Model.facParcialDolares</small>
+                        @{ var SaldoDolares = Model.facImpDolares + Model.facParcialDolares;}
+                        <small class=" col-md-2 font-weight-bold">$ @SaldoDolares</small>
                     </div>
-
-
 
 
                 }
@@ -383,7 +313,7 @@
         $(function () {
 
             $('#example23').DataTable({
-                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },               
                 "order": [[2, 'asc']],
                 'paging': true,
                 'lengthChange': false,
@@ -393,7 +323,11 @@
                 'autoWidth': true,
                 'dom': 'Bfrtip',
                 'buttons': [
-                    'pdf'
+                    {
+                        extend: 'pdf',
+                        orientation: 'landscape',
+                        pageSize: 'legal'
+                    }          
                 ]
             });
         });

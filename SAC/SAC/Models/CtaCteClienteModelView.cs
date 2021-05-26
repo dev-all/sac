@@ -15,8 +15,10 @@ namespace SAC.Models
 
         public ClienteModelView cliente { get; set; }
 
-     
-
+        public decimal facImpDolares { get; set; }
+        public decimal facImpPesos { get; set; }
+        public decimal facParcialDolares { get; set; }
+        public decimal facParcialPesos { get; set; }
 
     }
 

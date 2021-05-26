@@ -188,6 +188,7 @@ namespace Negocio.Servicios
 
         }
 
+      
 
         public void BloquearCliente(int IdCliente)
         {
@@ -287,8 +288,32 @@ namespace Negocio.Servicios
             }
         }
 
+        
+        public List<FactVenta> GetFacturasCobradasClientePorId(int idCliente, DateTime fechaHasta)
+        {
+            try
+            {
+                return oClienteRepositorio.GetFacturasCobradasClientePorId(idCliente, fechaHasta);
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
 
-
+     public List<FactVenta> GetFacturasImpagasClientePorId(int IdCliente, DateTime fecha)
+        {
+            try
+            {
+                return oClienteRepositorio.GetFacturasImpagasClientePorId(IdCliente, fecha);               
+            }
+            catch (Exception)
+            {
+                _mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
 
         // 2 Cuenta Corriente Resumen
 

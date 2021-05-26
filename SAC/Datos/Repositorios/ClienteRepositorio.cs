@@ -298,7 +298,24 @@ namespace Datos.Repositorios
 
         }
 
-      
+        public List<FactVenta> GetFacturasImpagasClientePorId(int idCliente, DateTime fecha)
+        {
+            return context.FactVenta.Where(f => f.IdCliente == idCliente
+                                                && f.Fecha <= fecha
+                                                && f.Activo == true
+                                                && f.TipoComprobanteVenta.Denominacion.Contains("FACTURA")
+                                                && f.NumeroCobro == 0).ToList();
+        }
+
+
+        public List<FactVenta> GetFacturasCobradasClientePorId(int idCliente, DateTime fecha)
+        {
+            return context.FactVenta.Where(f => f.IdCliente == idCliente
+                                                && f.Fecha <= fecha
+                                                && f.Activo == true
+                                                && f.TipoComprobanteVenta.Denominacion.Contains("FACTURA")
+                                                && f.NumeroCobro > 0).ToList();
+        }
 
 
 

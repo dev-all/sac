@@ -169,6 +169,37 @@ namespace SAC.Controllers
                 model.CtaCte = Mapper.Map<List<CobroFacturaModel>, List<CobroFacturaModelView>>(oServicioCliente.GetCtaCteDetalle(IdCliente, fechaHasta));
                 model.cliente = Mapper.Map<ClienteModel, ClienteModelView>(oServicioCliente.GetClientePorId(IdCliente));
 
+                var facturasImpagas = oServicioCliente.GetFacturasImpagasClientePorId(IdCliente , fechaHasta);
+                var Totales = facturasImpagas.GroupBy(c => new { c.Cliente.Codigo })
+                                    .Select(c => new
+                                    {
+                                        TotalPesos = c.Sum(x => x.Total),
+                                        TotalDolares = c.Sum(x => x.TotalDolares)
+                                    }).FirstOrDefault();
+                model.facImpPesos = Totales != null ? Totales.TotalPesos : 0;
+                model.facImpDolares = Totales != null ? Totales.TotalDolares : 0;
+
+
+                var facturasCobradas = oServicioCliente.GetFacturasCobradasClientePorId(IdCliente, fechaHasta);
+                var facParcialPesos = facturasCobradas.Where(c => c.Parcial > 0 && c.IdMoneda == 1)
+                                                    .GroupBy(c => new { c.Cliente.Codigo })
+                                                    .Select(c => new
+                                                      {
+                                                          TotalPesos = c.Sum(x => x.Saldo),                                                      
+                                                      }).FirstOrDefault();
+                model.facParcialPesos = facParcialPesos != null ? facParcialPesos.TotalPesos : 0;
+
+                var facParcialDolares= facturasCobradas.Where(c => c.Parcial > 0 && c.IdMoneda == 2)
+                                                    .GroupBy(c => new { c.Cliente.Codigo })
+                                                    .Select(c => new
+                                                    {
+                                                        TotalDolares = c.Sum(x => x.Saldo),
+                                                    }).FirstOrDefault();
+                model.facParcialDolares = facParcialDolares != null ? facParcialDolares.TotalDolares : 0;
+
+
+
+
             }
 
             return View(model);
