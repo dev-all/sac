@@ -1,8 +1,8 @@
 *.vs/
 
 *SAC/.vs/
-
-
+SAC/.vs/SAC/v16/.suo
+*SAC/SAC/obj/*
 *SAC/SAC/obj/
 *SAC/SAC/Negocio/obj/
 *SAC/SAC/Datos/obj/
