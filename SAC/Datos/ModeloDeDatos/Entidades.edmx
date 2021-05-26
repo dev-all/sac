@@ -25,6 +25,20 @@
           <Property Name="idRol" Type="int" Nullable="false" />
           <Property Name="idAccion" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Afip_TicketAcceso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uniqueId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha_solicitud" Type="datetime" />
+          <Property Name="fecha_expiracion" Type="datetime" />
+          <Property Name="servicio" Type="nvarchar" MaxLength="50" />
+          <Property Name="token" Type="nvarchar(max)" />
+          <Property Name="sing" Type="nvarchar(max)" />
+          <Property Name="url" Type="nvarchar" MaxLength="50" />
+          <Property Name="usuario" Type="int" />
+        </EntityType>
         <EntityType Name="AfipCategorias">
           <Key>
             <PropertyRef Name="Id" />
@@ -519,6 +533,55 @@
           <Property Name="Activo" Type="bit" Nullable="false" />
           <Property Name="IdUsuario" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FacturaElectronica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPOCBTE" Type="int" />
+          <Property Name="PUNTOVTA" Type="int" />
+          <Property Name="NROCBTE" Type="int" />
+          <Property Name="FECHACBTE" Type="date" />
+          <Property Name="TIPODOC" Type="int" />
+          <Property Name="NRODOC" Type="nvarchar" MaxLength="11" />
+          <Property Name="IDIVA" Type="varchar" MaxLength="50" />
+          <Property Name="NETO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IVA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="NETO10" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IVA10" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TOTAL" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FECHAVEN" Type="date" />
+          <Property Name="TIPOSERV" Type="int" />
+          <Property Name="FDESDE" Type="date" />
+          <Property Name="FHASTA" Type="date" />
+          <Property Name="CAE" Type="varchar" MaxLength="15" />
+          <Property Name="FECHAVTO" Type="date" />
+          <Property Name="RESULTADO" Type="varchar" MaxLength="50" />
+          <Property Name="MOTIVO" Type="varchar" MaxLength="350" />
+          <Property Name="REPROCESO" Type="varchar" MaxLength="350" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="350" />
+          <Property Name="DOMICILIO" Type="varchar" MaxLength="350" />
+          <Property Name="LOCALIDAD" Type="varchar" MaxLength="350" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="50" />
+          <Property Name="CATEGORIA" Type="varchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="50" />
+          <Property Name="NRONC" Type="varchar" MaxLength="50" />
+          <Property Name="NROAUX" Type="varchar" MaxLength="50" />
+          <Property Name="CODCLI" Type="varchar" MaxLength="50" />
+          <Property Name="PRECEP" Type="varchar" MaxLength="50" />
+          <Property Name="ALICUOTA" Type="varchar" MaxLength="50" />
+          <Property Name="CODPAIS" Type="varchar" MaxLength="10" />
+          <Property Name="IDMONEDA" Type="varchar" MaxLength="10" />
+          <Property Name="COTIZA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IDIOMA" Type="varchar" MaxLength="20" />
+          <Property Name="FORMAPAGO" Type="varchar" MaxLength="50" />
+          <Property Name="XMLREQ" Type="varchar(max)" />
+          <Property Name="XMLRES" Type="varchar(max)" />
+          <Property Name="OBS" Type="varchar" MaxLength="50" />
+          <Property Name="CODBARRA" Type="varchar" MaxLength="50" />
+          <Property Name="QR" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="FactVenta">
           <Key>
@@ -2303,6 +2366,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
         <EntityContainer Name="Agenda_ModelStoreContainer">
           <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccionPorRol" EntityType="Self.AccionPorRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Afip_TicketAcceso" EntityType="Self.Afip_TicketAcceso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AfipCategorias" EntityType="Self.AfipCategorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AfipRegimen" EntityType="Self.AfipRegimen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
@@ -2327,6 +2391,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <EntitySet Name="Dto" EntityType="Self.Dto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacturaElectronica" EntityType="Self.FacturaElectronica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FactVenta" EntityType="Self.FactVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FactVentaCobro" EntityType="Self.FactVentaCobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GrupoCaja" EntityType="Self.GrupoCaja" Schema="dbo" store:Type="Tables" />
@@ -3188,6 +3253,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             <End Role="FactVenta" EntitySet="FactVenta" />
             <End Role="Retencion" EntitySet="Retencion" />
           </AssociationSet>
+          <EntitySet Name="Afip_TicketAcceso" EntityType="SAC_Model.Afip_TicketAcceso" />
+          <EntitySet Name="FacturaElectronica" EntityType="SAC_Model.FacturaElectronica" />
           </EntityContainer>
         <EntityType Name="Accion">
           <Key>
@@ -5644,6 +5711,69 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Afip_TicketAcceso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uniqueId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha_solicitud" Type="DateTime" Precision="3" />
+          <Property Name="fecha_expiracion" Type="DateTime" Precision="3" />
+          <Property Name="servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="sing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usuario" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FacturaElectronica">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPOCBTE" Type="Int32" />
+          <Property Name="PUNTOVTA" Type="Int32" />
+          <Property Name="NROCBTE" Type="Int32" />
+          <Property Name="FECHACBTE" Type="DateTime" Precision="0" />
+          <Property Name="TIPODOC" Type="Int32" />
+          <Property Name="NRODOC" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="IDIVA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NETO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="NETO10" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IVA10" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FECHAVEN" Type="DateTime" Precision="0" />
+          <Property Name="TIPOSERV" Type="Int32" />
+          <Property Name="FDESDE" Type="DateTime" Precision="0" />
+          <Property Name="FHASTA" Type="DateTime" Precision="0" />
+          <Property Name="CAE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FECHAVTO" Type="DateTime" Precision="0" />
+          <Property Name="RESULTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MOTIVO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="REPROCESO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="DOMICILIO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="LOCALIDAD" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NRONC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NROAUX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CODCLI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRECEP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ALICUOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CODPAIS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDMONEDA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="COTIZA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IDIOMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FORMAPAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="XMLREQ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="XMLRES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OBS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CODBARRA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6988,6 +7118,71 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
                 <ScalarProperty Name="NumeroFactura" ColumnName="NumeroFactura" />
                 <ScalarProperty Name="IdTipoComprobante" ColumnName="IdTipoComprobante" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Afip_TicketAcceso">
+            <EntityTypeMapping TypeName="SAC_Model.Afip_TicketAcceso">
+              <MappingFragment StoreEntitySet="Afip_TicketAcceso">
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="sing" ColumnName="sing" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="servicio" ColumnName="servicio" />
+                <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="uniqueId" ColumnName="uniqueId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacturaElectronica">
+            <EntityTypeMapping TypeName="SAC_Model.FacturaElectronica">
+              <MappingFragment StoreEntitySet="FacturaElectronica">
+                <ScalarProperty Name="QR" ColumnName="QR" />
+                <ScalarProperty Name="CODBARRA" ColumnName="CODBARRA" />
+                <ScalarProperty Name="OBS" ColumnName="OBS" />
+                <ScalarProperty Name="XMLRES" ColumnName="XMLRES" />
+                <ScalarProperty Name="XMLREQ" ColumnName="XMLREQ" />
+                <ScalarProperty Name="FORMAPAGO" ColumnName="FORMAPAGO" />
+                <ScalarProperty Name="IDIOMA" ColumnName="IDIOMA" />
+                <ScalarProperty Name="COTIZA" ColumnName="COTIZA" />
+                <ScalarProperty Name="IDMONEDA" ColumnName="IDMONEDA" />
+                <ScalarProperty Name="CODPAIS" ColumnName="CODPAIS" />
+                <ScalarProperty Name="ALICUOTA" ColumnName="ALICUOTA" />
+                <ScalarProperty Name="PRECEP" ColumnName="PRECEP" />
+                <ScalarProperty Name="CODCLI" ColumnName="CODCLI" />
+                <ScalarProperty Name="NROAUX" ColumnName="NROAUX" />
+                <ScalarProperty Name="NRONC" ColumnName="NRONC" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
+                <ScalarProperty Name="DOMICILIO" ColumnName="DOMICILIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="REPROCESO" ColumnName="REPROCESO" />
+                <ScalarProperty Name="MOTIVO" ColumnName="MOTIVO" />
+                <ScalarProperty Name="RESULTADO" ColumnName="RESULTADO" />
+                <ScalarProperty Name="FECHAVTO" ColumnName="FECHAVTO" />
+                <ScalarProperty Name="CAE" ColumnName="CAE" />
+                <ScalarProperty Name="FHASTA" ColumnName="FHASTA" />
+                <ScalarProperty Name="FDESDE" ColumnName="FDESDE" />
+                <ScalarProperty Name="TIPOSERV" ColumnName="TIPOSERV" />
+                <ScalarProperty Name="FECHAVEN" ColumnName="FECHAVEN" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="IVA10" ColumnName="IVA10" />
+                <ScalarProperty Name="NETO10" ColumnName="NETO10" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="NETO" ColumnName="NETO" />
+                <ScalarProperty Name="IDIVA" ColumnName="IDIVA" />
+                <ScalarProperty Name="NRODOC" ColumnName="NRODOC" />
+                <ScalarProperty Name="TIPODOC" ColumnName="TIPODOC" />
+                <ScalarProperty Name="FECHACBTE" ColumnName="FECHACBTE" />
+                <ScalarProperty Name="NROCBTE" ColumnName="NROCBTE" />
+                <ScalarProperty Name="PUNTOVTA" ColumnName="PUNTOVTA" />
+                <ScalarProperty Name="TIPOCBTE" ColumnName="TIPOCBTE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

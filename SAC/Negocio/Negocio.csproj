@@ -60,6 +60,7 @@
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Infrastructure\AutoMapperNegProfile.cs" />
     <Compile Include="Interfaces\IServicioUsuario.cs" />
+    <Compile Include="Modelos\Afip_TicketAccesoModel.cs" />
     <Compile Include="Modelos\ArticuloModel.cs" />
     <Compile Include="Modelos\BuqueModel.cs" />
     <Compile Include="Modelos\ClienteDireccionModel.cs" />
@@ -137,6 +138,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ServicioAfip_TicketAcceso.cs" />
     <Compile Include="Servicios\ServicioBuque.cs" />
     <Compile Include="Servicios\ServicioCobro.cs" />
     <Compile Include="Servicios\ServicioArticulo.cs" />

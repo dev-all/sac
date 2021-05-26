@@ -56,7 +56,7 @@ namespace SAC.Controllers
 
             PagosFacturasModelView oPagosFacturasModel = new PagosFacturasModelView();
             ValorCotizacionModel oValorCotizacion = new ValorCotizacionModel();
-            oValorCotizacion = oServicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 1);
+            oValorCotizacion = oServicioTipoMoneda.GetCotizacionPorIdMoneda(1);
 
             if (oValorCotizacion == null)
             {

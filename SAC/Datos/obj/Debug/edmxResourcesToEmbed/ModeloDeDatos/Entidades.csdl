@@ -404,6 +404,8 @@
       <End Role="FactVenta" EntitySet="FactVenta" />
       <End Role="Retencion" EntitySet="Retencion" />
     </AssociationSet>
+    <EntitySet Name="Afip_TicketAcceso" EntityType="SAC_Model.Afip_TicketAcceso" />
+    <EntitySet Name="FacturaElectronica" EntityType="SAC_Model.FacturaElectronica" />
   </EntityContainer>
   <EntityType Name="Accion">
     <Key>
@@ -2860,4 +2862,67 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Afip_TicketAcceso">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uniqueId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_solicitud" Type="DateTime" Precision="3" />
+    <Property Name="fecha_expiracion" Type="DateTime" Precision="3" />
+    <Property Name="servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="usuario" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FacturaElectronica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TIPOCBTE" Type="Int32" />
+    <Property Name="PUNTOVTA" Type="Int32" />
+    <Property Name="NROCBTE" Type="Int32" />
+    <Property Name="FECHACBTE" Type="DateTime" Precision="0" />
+    <Property Name="TIPODOC" Type="Int32" />
+    <Property Name="NRODOC" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="IDIVA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NETO" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NETO10" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IVA10" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FECHAVEN" Type="DateTime" Precision="0" />
+    <Property Name="TIPOSERV" Type="Int32" />
+    <Property Name="FDESDE" Type="DateTime" Precision="0" />
+    <Property Name="FHASTA" Type="DateTime" Precision="0" />
+    <Property Name="CAE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAVTO" Type="DateTime" Precision="0" />
+    <Property Name="RESULTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MOTIVO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="REPROCESO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="DOMICILIO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="LOCALIDAD" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NRONC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NROAUX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CODCLI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PRECEP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ALICUOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CODPAIS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IDMONEDA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="COTIZA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IDIOMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FORMAPAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="XMLREQ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="XMLRES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OBS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CODBARRA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

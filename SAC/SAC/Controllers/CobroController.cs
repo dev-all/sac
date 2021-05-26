@@ -70,7 +70,7 @@ namespace SAC.Controllers
 
                     modelView.Cliente = Mapper.Map<ClienteModel, ClienteModelView>(servicioCliente.GetClientePorId(IdCliente));                    
                    
-                    modelView.Cotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 2);
+                    modelView.Cotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(2);
                     modelView.Periodo = Int32.Parse(DateTime.Now.ToString("yyMM"));
 
                     modelView.CuentaCorriente = Mapper.Map<List<CobroFacturaModel>, List<CobroFacturaModelView>>(servicioFacturaVenta.GetClienteCtaCteCbte(IdCliente));
@@ -162,7 +162,7 @@ namespace SAC.Controllers
                 }
                 else{
               
-                    modelView.Cotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 2);                    
+                    modelView.Cotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(2);                    
                     modelView.Periodo = Int32.Parse(DateTime.Now.ToString("yyMM"));
                     List<TipoMonedaModelView> tipoMoneda = Mapper.Map<List<TipoMonedaModel>, List<TipoMonedaModelView>>(servicioTipoMoneda.GetAllTipoMonedas());
                     modelView.SelectTipoMoneda = (tipoMoneda.Select(x => new SelectListItem()

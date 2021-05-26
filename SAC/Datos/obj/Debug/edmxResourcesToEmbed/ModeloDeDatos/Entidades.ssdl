@@ -20,6 +20,20 @@
     <Property Name="idRol" Type="int" Nullable="false" />
     <Property Name="idAccion" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Afip_TicketAcceso">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uniqueId" Type="nvarchar" MaxLength="50" />
+    <Property Name="fecha_solicitud" Type="datetime" />
+    <Property Name="fecha_expiracion" Type="datetime" />
+    <Property Name="servicio" Type="nvarchar" MaxLength="50" />
+    <Property Name="token" Type="nvarchar(max)" />
+    <Property Name="sing" Type="nvarchar(max)" />
+    <Property Name="url" Type="nvarchar" MaxLength="50" />
+    <Property Name="usuario" Type="int" />
+  </EntityType>
   <EntityType Name="AfipCategorias">
     <Key>
       <PropertyRef Name="Id" />
@@ -514,6 +528,55 @@
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="IdUsuario" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FacturaElectronica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TIPOCBTE" Type="int" />
+    <Property Name="PUNTOVTA" Type="int" />
+    <Property Name="NROCBTE" Type="int" />
+    <Property Name="FECHACBTE" Type="date" />
+    <Property Name="TIPODOC" Type="int" />
+    <Property Name="NRODOC" Type="nvarchar" MaxLength="11" />
+    <Property Name="IDIVA" Type="varchar" MaxLength="50" />
+    <Property Name="NETO" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IVA" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="NETO10" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IVA10" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TOTAL" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FECHAVEN" Type="date" />
+    <Property Name="TIPOSERV" Type="int" />
+    <Property Name="FDESDE" Type="date" />
+    <Property Name="FHASTA" Type="date" />
+    <Property Name="CAE" Type="varchar" MaxLength="15" />
+    <Property Name="FECHAVTO" Type="date" />
+    <Property Name="RESULTADO" Type="varchar" MaxLength="50" />
+    <Property Name="MOTIVO" Type="varchar" MaxLength="350" />
+    <Property Name="REPROCESO" Type="varchar" MaxLength="350" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="350" />
+    <Property Name="DOMICILIO" Type="varchar" MaxLength="350" />
+    <Property Name="LOCALIDAD" Type="varchar" MaxLength="350" />
+    <Property Name="TELEFONO" Type="varchar" MaxLength="50" />
+    <Property Name="CATEGORIA" Type="varchar" MaxLength="50" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+    <Property Name="ESTADO" Type="varchar" MaxLength="50" />
+    <Property Name="NRONC" Type="varchar" MaxLength="50" />
+    <Property Name="NROAUX" Type="varchar" MaxLength="50" />
+    <Property Name="CODCLI" Type="varchar" MaxLength="50" />
+    <Property Name="PRECEP" Type="varchar" MaxLength="50" />
+    <Property Name="ALICUOTA" Type="varchar" MaxLength="50" />
+    <Property Name="CODPAIS" Type="varchar" MaxLength="10" />
+    <Property Name="IDMONEDA" Type="varchar" MaxLength="10" />
+    <Property Name="COTIZA" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IDIOMA" Type="varchar" MaxLength="20" />
+    <Property Name="FORMAPAGO" Type="varchar" MaxLength="50" />
+    <Property Name="XMLREQ" Type="varchar(max)" />
+    <Property Name="XMLRES" Type="varchar(max)" />
+    <Property Name="OBS" Type="varchar" MaxLength="50" />
+    <Property Name="CODBARRA" Type="varchar" MaxLength="50" />
+    <Property Name="QR" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="FactVenta">
     <Key>
@@ -2298,6 +2361,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
   <EntityContainer Name="Agenda_ModelStoreContainer">
     <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AccionPorRol" EntityType="Self.AccionPorRol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Afip_TicketAcceso" EntityType="Self.Afip_TicketAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AfipCategorias" EntityType="Self.AfipCategorias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AfipRegimen" EntityType="Self.AfipRegimen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
@@ -2322,6 +2386,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <EntitySet Name="Dto" EntityType="Self.Dto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadoCivil" EntityType="Self.EstadoCivil" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FacturaElectronica" EntityType="Self.FacturaElectronica" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FactVenta" EntityType="Self.FactVenta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FactVentaCobro" EntityType="Self.FactVentaCobro" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GrupoCaja" EntityType="Self.GrupoCaja" Schema="dbo" store:Type="Tables" />

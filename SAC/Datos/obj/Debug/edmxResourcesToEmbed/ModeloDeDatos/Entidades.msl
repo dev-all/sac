@@ -1342,5 +1342,70 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Afip_TicketAcceso">
+      <EntityTypeMapping TypeName="SAC_Model.Afip_TicketAcceso">
+        <MappingFragment StoreEntitySet="Afip_TicketAcceso">
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="sing" ColumnName="sing" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="servicio" ColumnName="servicio" />
+          <ScalarProperty Name="fecha_expiracion" ColumnName="fecha_expiracion" />
+          <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+          <ScalarProperty Name="uniqueId" ColumnName="uniqueId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacturaElectronica">
+      <EntityTypeMapping TypeName="SAC_Model.FacturaElectronica">
+        <MappingFragment StoreEntitySet="FacturaElectronica">
+          <ScalarProperty Name="QR" ColumnName="QR" />
+          <ScalarProperty Name="CODBARRA" ColumnName="CODBARRA" />
+          <ScalarProperty Name="OBS" ColumnName="OBS" />
+          <ScalarProperty Name="XMLRES" ColumnName="XMLRES" />
+          <ScalarProperty Name="XMLREQ" ColumnName="XMLREQ" />
+          <ScalarProperty Name="FORMAPAGO" ColumnName="FORMAPAGO" />
+          <ScalarProperty Name="IDIOMA" ColumnName="IDIOMA" />
+          <ScalarProperty Name="COTIZA" ColumnName="COTIZA" />
+          <ScalarProperty Name="IDMONEDA" ColumnName="IDMONEDA" />
+          <ScalarProperty Name="CODPAIS" ColumnName="CODPAIS" />
+          <ScalarProperty Name="ALICUOTA" ColumnName="ALICUOTA" />
+          <ScalarProperty Name="PRECEP" ColumnName="PRECEP" />
+          <ScalarProperty Name="CODCLI" ColumnName="CODCLI" />
+          <ScalarProperty Name="NROAUX" ColumnName="NROAUX" />
+          <ScalarProperty Name="NRONC" ColumnName="NRONC" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
+          <ScalarProperty Name="DOMICILIO" ColumnName="DOMICILIO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="REPROCESO" ColumnName="REPROCESO" />
+          <ScalarProperty Name="MOTIVO" ColumnName="MOTIVO" />
+          <ScalarProperty Name="RESULTADO" ColumnName="RESULTADO" />
+          <ScalarProperty Name="FECHAVTO" ColumnName="FECHAVTO" />
+          <ScalarProperty Name="CAE" ColumnName="CAE" />
+          <ScalarProperty Name="FHASTA" ColumnName="FHASTA" />
+          <ScalarProperty Name="FDESDE" ColumnName="FDESDE" />
+          <ScalarProperty Name="TIPOSERV" ColumnName="TIPOSERV" />
+          <ScalarProperty Name="FECHAVEN" ColumnName="FECHAVEN" />
+          <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+          <ScalarProperty Name="IVA10" ColumnName="IVA10" />
+          <ScalarProperty Name="NETO10" ColumnName="NETO10" />
+          <ScalarProperty Name="IVA" ColumnName="IVA" />
+          <ScalarProperty Name="NETO" ColumnName="NETO" />
+          <ScalarProperty Name="IDIVA" ColumnName="IDIVA" />
+          <ScalarProperty Name="NRODOC" ColumnName="NRODOC" />
+          <ScalarProperty Name="TIPODOC" ColumnName="TIPODOC" />
+          <ScalarProperty Name="FECHACBTE" ColumnName="FECHACBTE" />
+          <ScalarProperty Name="NROCBTE" ColumnName="NROCBTE" />
+          <ScalarProperty Name="PUNTOVTA" ColumnName="PUNTOVTA" />
+          <ScalarProperty Name="TIPOCBTE" ColumnName="TIPOCBTE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

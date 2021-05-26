@@ -215,12 +215,11 @@ namespace SAC.Controllers
         public ActionResult GetCotizacionMoneda(int IdMoneda)
         {
             CotizacionAFIP cotizacion = new CotizacionAFIP();
-            var f = DateTime.Now;
+            var f = DateTime.Today;
             string strJson;
             try
             {
-
-                 var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(f, IdMoneda);
+                 var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(IdMoneda);
                 if (cotizacion == null)
                 {
                     cotizacion.Importe = 1;

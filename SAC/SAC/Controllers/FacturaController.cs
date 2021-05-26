@@ -14,17 +14,24 @@ using System.IO;
 using System.Xml.Linq;
 using System.Text;
 
+//tema afip
+using SAC.Models.Afip;
+using SAC.afip.wswhomo;
+using System.Security.Cryptography.X509Certificates;
+using System.Security;
+using SAC.Helpers;
+
 namespace SAC.Controllers
 {
     public class FacturaController : BaseController
     {
         private ServicioTipoMoneda servicioTipoMoneda = new ServicioTipoMoneda();
-        private ServicioCliente servicioCliente= new ServicioCliente();
+        private ServicioCliente servicioCliente = new ServicioCliente();
         private ServicioClienteDireccion servicioClienteDireccion = new ServicioClienteDireccion();
         private ServicioDepartamento servicioDepartamento = new ServicioDepartamento();
         private ServicioTipoComprobanteVenta servicioTipoComprobanteVenta = new ServicioTipoComprobanteVenta();
-       // private ServicioTipoPago servicioTipoPago = new ServicioTipoPago();
-       // private ServicioBancoCuenta servicioCuentaBancaria = new ServicioBancoCuenta();
+        // private ServicioTipoPago servicioTipoPago = new ServicioTipoPago();
+        // private ServicioBancoCuenta servicioCuentaBancaria = new ServicioBancoCuenta();
         private ServicioTipoComprobante servicioTipoComprobante = new ServicioTipoComprobante();
         private ServicioArticulo servicioArticulo = new ServicioArticulo();
 
@@ -39,7 +46,10 @@ namespace SAC.Controllers
         private ServicioContable servicioContable = new ServicioContable();
         private ServicioImputacion servicioImputacion = new ServicioImputacion();
 
+        private ServicioAfip_TicketAcceso servicioAfip_TicketAcceso = new ServicioAfip_TicketAcceso();
+
         private ServicioFacturaVentaItems servicioFacturaVentaItems = new ServicioFacturaVentaItems();
+
 
 
         // GET: Factura
@@ -57,7 +67,7 @@ namespace SAC.Controllers
                                   })).ToList();
 
 
-        List<SelectListItem> listFormaPago = new List<SelectListItem>();
+            List<SelectListItem> listFormaPago = new List<SelectListItem>();
 
             listFormaPago.Add(new SelectListItem() { Text = "Contado", Value = "1" });
             listFormaPago.Add(new SelectListItem() { Text = "Tarjeta de Crédito", Value = "68" });
@@ -82,7 +92,7 @@ namespace SAC.Controllers
             model.TipoIdioma = lstIdioma;
 
             List<TipoComprobanteVentaModelView> ListaComprobantes = Mapper.Map<List<TipoComprobanteVentaModel>, List<TipoComprobanteVentaModelView>>(servicioTipoComprobanteVenta.GetAllTipoComprobante());
-            List<SelectListItem> lstTipoComprobante=  (ListaComprobantes.Select(x =>
+            List<SelectListItem> lstTipoComprobante = (ListaComprobantes.Select(x =>
                                   new SelectListItem()
                                   {
                                       Value = x.Id.ToString(),
@@ -90,12 +100,12 @@ namespace SAC.Controllers
                                   })).ToList();
 
             List<DepartamentoModelView> ListaDepartamentos = Mapper.Map<List<DepartamentoModel>, List<DepartamentoModelView>>(servicioDepartamento.GetAllDepartamento());
-            List<SelectListItem> lstDepartamentos =  (ListaDepartamentos.Select(x =>
-                                  new SelectListItem()
-                                  {
-                                      Value = x.Id.ToString(),
-                                      Text = x.Descripcion
-                                  })).ToList();
+            List<SelectListItem> lstDepartamentos = (ListaDepartamentos.Select(x =>
+                                 new SelectListItem()
+                                 {
+                                     Value = x.Id.ToString(),
+                                     Text = x.Descripcion
+                                 })).ToList();
             lstDepartamentos.Insert(0, new SelectListItem { Value = "0", Text = "Sin Especificar" });
 
             List<BancoCuentaModelView> ListaCuentasBancarias = Mapper.Map<List<BancoCuentaModel>, List<BancoCuentaModelView>>(servicioBancoCuenta.GetAllCuenta());
@@ -108,7 +118,7 @@ namespace SAC.Controllers
                                   })).ToList();
             lstCuentasBancarias.Insert(0, new SelectListItem { Value = "0", Text = "Sin Especificar" });
 
-         
+
 
             model.TipoComprobante = lstTipoComprobante;
             model.Departamentos = lstDepartamentos;
@@ -126,14 +136,12 @@ namespace SAC.Controllers
             {
                 model.Cotizacion = 1;
             }
-
             return View(model);
         }
 
         [HttpPost]
         public ActionResult GrabarFactura(FacturaModelView model)
         {
-
             var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
 
             ClienteModel cliente = servicioCliente.GetClientePorId(model.IdCliente);
@@ -147,7 +155,7 @@ namespace SAC.Controllers
                 case 1:
                     tipoComprobante = "Factura";
                     tipoComprobanteAbreviado = "F";
-                   
+
                     break;
                 case 2:
                     tipoComprobante = "Debito";
@@ -164,6 +172,30 @@ namespace SAC.Controllers
 
             var cbt = servicioTipoComprobanteVenta.getTipoComprobanteVentaNewNumeroFactura(comprobanteActualizado, model.IdPuntoVenta);
 
+            //if (model.FacturaManual == false)
+            //{
+            //verificar en la base si el token esta vencido 
+            Afip_TicketAccesoModel login;
+            login = VerificarTicketAcceso("wsfe");
+
+            ClaseLoginAfip ClaseLogin = null;
+            if (login == null)
+            {
+                //busca el token nuevo y graba en la bd
+                ClaseLogin = ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
+            }
+            else
+            {
+                //usa el token de la base
+                ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
+                ClaseLogin.Token = login.token;
+                ClaseLogin.Sign = login.sing;
+            }
+            //insertar la factura
+            InsertarFacturaAfip(ClaseLogin, model, cbt.CodigoAfip);
+            // }
+            //afip 
+
             int nFactor = 1;
             if (tipoComprobante != "Credito")
             {
@@ -177,14 +209,19 @@ namespace SAC.Controllers
                 }
             }
 
-            decimal  totalGastosPesos = 0; // ver esto porque deberia ser el acumulado de gastos
-            decimal totalGastosDolares= 0;
+            decimal totalGastosPesos = 0; // ver esto porque deberia ser el acumulado de gastos
+            decimal totalGastosDolares = 0;
             //tengo que controlar el tipo de comprobante que viene solo para la factura son los items
 
             switch (model.idTipoComprobanteSeleccionado)
             {
                 case 1: //factura
-               
+
+
+                    
+
+
+
                     //actualiza tabla cotiza ?? nose
                     List<FacturaVentaModel> ListaFactura = servicioFacturaVenta.GetAllFacturaVentaCliente(model.IdCliente);
                     //if (ListaFactura.Count == 0)
@@ -196,7 +233,7 @@ namespace SAC.Controllers
                     //    //actualiza tabla cotiza ?? nose
                     //    CotizaModel cotiza = servicioCotiza.Agregar(CotizaInsert);
                     //}
-                                  
+
                     // agrega en tbl FactVenta
                     FacturaVentaModel facturaVentaModel = new FacturaVentaModel();
                     facturaVentaModel.IdTipoComprobante = cbt.Id; //model.idTipoComprobanteSeleccionado;  // facturaVentaModel. = model.IdPuntoVenta.ToString();
@@ -212,7 +249,7 @@ namespace SAC.Controllers
                     facturaVentaModel.IdPais = model.idPais;
 
                     //Monto de factura
-                    decimal TotalFactura = model.TotalFactura * nFactor;                   
+                    decimal TotalFactura = model.TotalFactura * nFactor;
                     if (model.idTipoMoneda == 2)
                     {
                         facturaVentaModel.TotalDolares = TotalFactura;
@@ -268,7 +305,7 @@ namespace SAC.Controllers
                     foreach (ItemImprFacturaModelView item in ListadoItemsFactura)
                     {
                         ItemImprModelView itemImpr = new ItemImprModelView();
-                        itemImpr.IdTipoComprobante = cbt.Id; 
+                        itemImpr.IdTipoComprobante = cbt.Id;
                         itemImpr.PuntoVenta = model.IdPuntoVenta.ToString();
                         itemImpr.IdFactVenta = FacturaInsertada.Id;
                         itemImpr.Factura = cbt.Numero;
@@ -295,13 +332,13 @@ namespace SAC.Controllers
                                 totalGastosPesos += (item.valor * model.Cotizacion) * nFactor;
                             }
                             else {
-                                totalGastosPesos += item.valor * nFactor; 
-                            }                                                                                     
+                                totalGastosPesos += item.valor * nFactor;
+                            }
                         }
                     }
- 
-                    
-                    var ImportePesos = (FacturaInsertada.IdMoneda == 1) ? (FacturaInsertada.Total * nFactor) : (FacturaInsertada.TotalDolares * FacturaInsertada.Cotiza * nFactor);                       
+
+
+                    var ImportePesos = (FacturaInsertada.IdMoneda == 1) ? (FacturaInsertada.Total * nFactor) : (FacturaInsertada.TotalDolares * FacturaInsertada.Cotiza * nFactor);
                     /// asientos de ventas
                     if (FacturaInsertada != null)
                     {
@@ -550,7 +587,221 @@ namespace SAC.Controllers
 
 
         }
-     
+
+        public string InsertarFacturaAfip(ClaseLoginAfip TicketAcceso, FacturaModelView model, int NroComprobante )
+        {
+            
+            decimal totalGastos= 0; // ver esto porque deberia ser el acumulado de gastos       
+            var ListadoItemsFactura = JsonConvert.DeserializeObject<List<ItemImprFacturaModelView>>(model.hdnArticulos);
+            foreach (ItemImprFacturaModelView item in ListadoItemsFactura)
+            {
+                ArticuloModel artModel = servicioArticulo.GetArticuloOuCodigo(item.codigo);
+                if (artModel.Tipo.Contains("Gastos"))
+                {
+                    totalGastos += item.valor ;                    
+                }
+            }
+
+            var totalImporte = model.TotalFactura;
+
+            //instancio objeto autenticacion
+            FEAuthRequest Autenticacion = new FEAuthRequest();
+            Autenticacion.Cuit = long.Parse(model.Cuit);
+            Autenticacion.Sign = TicketAcceso.Sign;
+            Autenticacion.Token = TicketAcceso.Token;
+
+            //se prepara el servicio para enviar
+            Service ServicioWebFactura = new Service();
+            ServicioWebFactura.Url = @"https://wswhomo.afip.gov.ar/wsfev1/service.asmx?WSDL";
+
+            ServicioWebFactura.ClientCertificates.Add(TicketAcceso.certificado);
+            //cargo los datos de la factura
+            int puntoVenta = model.IdPuntoVenta;
+            int tipoComprobante = model.idTipoComprobanteSeleccionado;
+
+            //inicio solicitud
+            FECAERequest Solicitud = new FECAERequest();
+            //encabezado solicitud
+            FECAECabRequest EncabezadoSolicitud = new FECAECabRequest();
+            //cuerpo solicitud 
+            FECAEDetRequest CuerpoSolicitud = new FECAEDetRequest();
+
+            EncabezadoSolicitud.CantReg = 1;
+            EncabezadoSolicitud.PtoVta = puntoVenta;
+            EncabezadoSolicitud.CbteTipo = tipoComprobante;
+            Solicitud.FeCabReq = EncabezadoSolicitud;
+
+            //cargamos el cuerpo
+
+            CuerpoSolicitud.Concepto = 2;//servicios
+            CuerpoSolicitud.DocTipo = 80; //model.IdTipoPago;
+            CuerpoSolicitud.DocNro = Convert.ToInt64(model.Cuit);//model.NumeroFactura;
+
+            //autorizarse
+            //FERecuperaLastCbteResponse UltimoRes = ServicioWebFactura.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
+
+            //int ultimoNroComprobante = NroComprobante;//UltimoRes.CbteNro;
+
+            //FEParamGetCotizacion 
+
+            FECotizacionResponse paramCoti = ServicioWebFactura.FEParamGetCotizacion(Autenticacion, "DOL");
+
+
+            CuerpoSolicitud.CbteDesde = NroComprobante;
+            CuerpoSolicitud.CbteHasta = NroComprobante;
+
+            CuerpoSolicitud.CbteFch = model.Fecha.ToString("yyyyMMdd") ;//DateTime.Today.ToString("yyyyMMdd");
+
+            //decimal porcentajeIva = 0;
+            //decimal total = model.TotalFactura;
+            //decimal Coeficiente = 0;// 1 + (porcentajeIva / 100);
+
+            //decimal neto = total; /// Coeficiente;
+            //decimal impIva = total - neto;
+
+
+
+            CuerpoSolicitud.ImpTotal = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
+            CuerpoSolicitud.ImpNeto =  decimal.ToDouble(Math.Round(model.TotalFactura, 2));
+            CuerpoSolicitud.ImpIVA = 0;
+
+
+
+            CuerpoSolicitud.ImpTotConc = 0;
+            CuerpoSolicitud.ImpOpEx = 0;
+            CuerpoSolicitud.ImpTrib = 0;
+
+            CuerpoSolicitud.FchServDesde = model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
+            CuerpoSolicitud.FchServHasta = model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
+
+            CuerpoSolicitud.FchVtoPago = (model.Fecha.AddDays(180)).ToString("yyyyMMdd"); //DateTime.Today.ToString("yyyyMMdd");
+
+            switch (model.idTipoMoneda)
+            {
+                case 1:
+                    CuerpoSolicitud.MonId = "PES";
+                    CuerpoSolicitud.MonCotiz = 1;
+                    break;
+                case 2:
+                    CuerpoSolicitud.MonId = "DOL";
+                    CuerpoSolicitud.MonCotiz = 1;
+                    break;
+            }
+                        
+            AlicIva Alicuota = new AlicIva();
+            //el id de alicuota es el tipo de iva
+            Alicuota.Id = 3;
+            Alicuota.BaseImp = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
+            Alicuota.Importe = 0;
+
+            CuerpoSolicitud.Iva = new[] { Alicuota };
+
+            //CuerpoSolicitud.Iva[] = Alicuota;
+            Solicitud.FeDetReq = new[] { CuerpoSolicitud };
+            //Solicitud.FeDetReq[0] = CuerpoSolicitud;
+
+            //se envia el servicio al WS
+            var r = ServicioWebFactura.FECAESolicitar(Autenticacion, Solicitud);
+
+
+            if (r.Errors != null)
+            {
+                string error="";
+                string Observaciones = "";
+
+                foreach (var er in r.Errors)
+                {
+                    error += string.Format("Er: {0}: {1}", er.Code, er.Msg);
+                }
+
+                if (r.FeDetResp[0].Observaciones != null)
+                {
+
+                    foreach (var obs in r.FeDetResp[0].Observaciones)
+                    {
+                        Observaciones += string.Format("Er: {0}: {1}", obs.Msg, obs.Code);
+                    }
+                }
+
+                return error;
+            }
+            else
+            {
+                return r.FeCabResp.Resultado;
+            }
+
+        }
+
+ 
+        public Afip_TicketAccesoModel VerificarTicketAcceso(string servicio)
+        {
+            DateTime today = DateTime.Now;
+            Afip_TicketAccesoModel Ta = servicioAfip_TicketAcceso.GetTicketAccesoUltimoPorServicio(servicio);
+            if (Ta !=null)
+            {
+                if (Ta.fecha_expiracion >= today)
+                {
+                    return Ta;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public ClaseLoginAfip ObtenerTicketAccesoWS(string servicio, int usuario)
+        {
+            ClaseLoginAfip LoginAfip;
+            string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
+            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+            LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
+            LoginAfip.hacerLogin();
+
+            Afip_TicketAccesoModel Ta = new Afip_TicketAccesoModel();
+            Ta.servicio = LoginAfip.serv;
+            
+            Ta.sing = LoginAfip.Sign;
+            Ta.token = LoginAfip.Token;
+            Ta.fecha_solicitud = LoginAfip.GenerationTime;
+            Ta.fecha_expiracion = LoginAfip.ExpirationTime;
+            Ta.usuario = usuario;
+            //me falta la url
+
+            Afip_TicketAccesoModel TaReq = servicioAfip_TicketAcceso.CrearTicketAcceso(Ta);
+            if (TaReq != null)
+            {
+                return LoginAfip;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public ClaseLoginAfip ObtenerTicketAccesoSinWS(string servicio, int usuario)
+        {
+            ClaseLoginAfip LoginAfip;
+            string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
+            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+            LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
+            LoginAfip.LoginSinWs();
+
+            if (LoginAfip != null)
+            {
+                return LoginAfip;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         //metodo para obtener el tipo de comprobante
         int DeterminarNroComprovante (int tipoIva, bool miPyme, decimal TotalFactura, string tipoComprobante)
@@ -804,7 +1055,6 @@ namespace SAC.Controllers
         //}
 
 
-
         [HttpGet()]
         public ActionResult GetCodigoJson(int IdArticulo)
         {
@@ -839,7 +1089,7 @@ namespace SAC.Controllers
             try
             {
 
-                var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(f, int.Parse(IdMoneda));
+                var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(int.Parse(IdMoneda));
                 if (moneda == null)
                 {
                     cotizacion.Importe = 1;

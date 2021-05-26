@@ -79,6 +79,21 @@ namespace Negocio.Servicios
             }
         }
 
+        public void updateCotizacionPorIdMoneda(ValorCotizacionModel valorCotizacionModel)
+        {
+            try
+            {
+                valorCotizacionRepositorio.updateCotizacionPorIdMoneda(Mapper.Map<ValorCotizacionModel, ValorCotizacion>(valorCotizacionModel));
+                _mensaje?.Invoke("Se actualizo la cotización de Moneda", "ok");
+
+            }
+            catch (Exception)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+
+            }
+        }
+
         public List<TipoMonedaModel> GetAllTipoMonedas()
         {
             try
@@ -135,7 +150,18 @@ namespace Negocio.Servicios
 
             }
         }
-
+        public ValorCotizacionModel GetCotizacionPorIdMoneda(int idMoneda)
+        {
+            try
+            {
+                return Mapper.Map<ValorCotizacion, ValorCotizacionModel>(valorCotizacionRepositorio.GetCotizacionPorIdMoneda(idMoneda));
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke(ex.Message, "error");
+                return null;
+            }
+        }
         public ValorCotizacionModel GetCotizacionPorIdMoneda(DateTime f, int idMoneda)
         {
             try

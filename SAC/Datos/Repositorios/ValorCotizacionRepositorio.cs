@@ -24,20 +24,36 @@ namespace Datos.Repositorios
         {
            return context.ValorCotizacion.Where(p => p.Activo == true && p.Fecha == f).ToList();
         }
+        public ValorCotizacion GetCotizacionPorIdMoneda(int idMoneda)
+        {
+            var cotizacion = context.ValorCotizacion.Where(p => p.Activo == true
+                                                   && p.Id == idMoneda).FirstOrDefault();           
+            return cotizacion;
+        }
         public ValorCotizacion GetCotizacionPorIdMoneda(DateTime f, int idMoneda)
         {
             var cotizacion =  context.ValorCotizacion.Where(p => p.Activo == true
                                                     && p.Fecha == f 
                                                     && p.Id == idMoneda).FirstOrDefault();
-            if (cotizacion == null)
-            {
-                cotizacion = GetUltimaCotizacion(idMoneda);
-            }
+            //if (cotizacion == null)
+            //{
+            //    cotizacion = GetUltimaCotizacion(idMoneda);
+            //}
             return cotizacion;
         }
         public ValorCotizacion GetUltimaCotizacion(int idMoneda)
         {
             return context.ValorCotizacion.Where(p => p.Activo == true && p.IdTipoMoneda == idMoneda).FirstOrDefault();
+        }
+
+        public void updateCotizacionPorIdMoneda(ValorCotizacion moneda)
+        {
+            var cotizacion = context.ValorCotizacion.Where(p => p.Activo == true
+                                                   && p.Id == moneda.IdTipoMoneda).FirstOrDefault();
+            cotizacion.Monto = moneda.Monto;
+            cotizacion.Fecha = moneda.Fecha;
+            context.SaveChanges();
+
         }
     }
 }
