@@ -41,7 +41,7 @@
     @Html.HiddenFor(model => model.CuitSeleccionado)
     @Html.HiddenFor(model => model.idImputacion)
 
-    
+
 
     @*@Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Proveedor.Id)*@
@@ -51,7 +51,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="form-body">                       
+                    <div class="form-body">
                         <div class="form-horizontal">
                             <div class="row">
                                 <div class="col-md-2">
@@ -274,17 +274,17 @@
                                 <div class="col-md-4"></div>
                             </div>
 
-                           
+
                             <div class="row m-t-10">
                                 <div class="col-md-8" id="MostrarItems" style="display:none">
                                     <table id="TblItemsFact" class="table table-bordered">
                                         <thead class="thead-dark">
                                             <tr>
-                                                <td >Orden</td>
-                                                <td >Codigo</td>
-                                                <td >Descripcion</td>
-                                                <td >Valor</td>
-                                                <td  class="text-center" id="ColumnaEliminar">Eliminar</td>
+                                                <td>Orden</td>
+                                                <td>Codigo</td>
+                                                <td>Descripcion</td>
+                                                <td>Valor</td>
+                                                <td class="text-center" id="ColumnaEliminar">Eliminar</td>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -297,7 +297,7 @@
 
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="d-flex no-block">                                                    
+                                                <div class="d-flex no-block">
                                                     <div class="align-self-center">
                                                         <h4 class="text-muted m-t-10 m-b-0">Total:</h4>
                                                         <h3 class="m-t-0">$<span id="LblTotalFactura"></span> </h3>
@@ -306,7 +306,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                
+
                                 </div>
                                 <div class="col-md-2 text-left">
                                     <div id="TotalAjuste" style="display:none">
@@ -324,8 +324,8 @@
                                             </div>
                                         </div>
 
-                                       
-                                       
+
+
                                     </div>
                                 </div>
                             </div>
@@ -337,10 +337,10 @@
 
                     <div class="text-right m-t-10">
                         <button type="submit" onclick="Validacion(event)" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
-                       
+
                         @* esto es con validacion de modelo pero hay atributos que los valida sin que el diga *@
                         @*<button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>*@
-                       
+
                     </div>
                 </div>
             </div>
@@ -351,330 +351,348 @@
 }
 
 
-<script>
 
-    jQuery('.fechadatepicker').datepicker({
-        language: 'es',
-        autoclose: true,
-        format: 'dd/mm/yyyy',
-        todayHighlight: true
-
-    }).datepicker('setDate', new Date());
-
-    //autocompletar de los clientes
-    $('#NombreCliente').autocomplete({
-        source: function (request, response) {
-            $.getJSON("/Factura/GetListClienteJson/", request, function (data) {
-                response($.map(data, function (item) {
-
-                    return {
-                        id: item.id,
-                        value: item.label
-                    }
-
-                }))
-            })
-        },
-        minLength: 2,
-        select: function (event, ui) {
-            getCliente(ui.item.id)
-            $("#IdCliente").val(ui.item.id);
-            //  $("#Proveedor_Id").val(ui.item.id);
-
-            // this.value = ui.item.value;
-
-            return false;
-        }
-
-    });
-
-    function getCliente(codigo) {
-        $.getJSON("/Factura/GetClienteJson",
-            { IdCliente: codigo },
-            function (data) {
-                var cliente = JSON.parse(data);
-                //console.log(cliente);
-                //validaciones del word, se considera que el iva 4 es excento en tbl tipoiva, por lo tanto es extranjero
-                //if (cliente.IdTipoCliente != 4) {
-                //    $("#IdPuntoVenta").val(IdTipoCliente);
-                //}
-                //else {
-                //    $("#IdPuntoVenta").val(2);
-                //}
-
-
-                console.log($("#IdPuntoVenta").val());
-
-                $("#IdPuntoVenta option[value=" + cliente.IdTipoCliente + "]").attr('selected', 'true');
-                $("#IdPuntoVenta").val(cliente.IdTipoCliente);
-         
-                console.log($("#IdPuntoVenta").val());
-                console.log($("#IdPuntoVenta option:selected").text());
-
-                $("#NombreCliente").val(cliente.Codigo);
-                $("#CodigoCliente").val(cliente.Codigo);
-
-                $("#NombreComp").val(cliente.Nombre);
-                $("#idImputacion").val(cliente.IdImputacion);
-
-
-                $("#IdCliente").val(cliente.Id);
-                $("#idTipoIva").val(cliente.IdTipoiva);
-                $("#mipyme").val(cliente.MiPyme);
-
-
-                $("#IdTipoIdioma").val(cliente.IdIdioma);
-                //$("#Cuit").val(cliente.Cuit);
-
-                $("#idTipoComprobanteSeleccionado").empty();
-                $("#idTipoComprobanteSeleccionado").append("<option value> Seleccionar ...</option>")
-                $.each(cliente.ListaComprobantesDrop, function (index, row) {
-                   // console.log(row);
-                    $("#idTipoComprobanteSeleccionado").append("<option value='" + row.Value + "'>" + row.Text + "</option>")
-                });
-
-                $("#IdDireccionCliente").empty();
-                $("#IdDireccionCliente").append("<option value> Seleccionar ...</option>")
-                $.each(cliente.ClienteDireccion, function (index, row) {
-                    $("#IdDireccionCliente").append("<option value='" + row.Id + "'>" + row.Direccion + "</option>")
-                });
-
-
-            });
-
-    }
-    //-----------------------------//
-
-    //auto completar de los articulos
-    $('#txtCodigo').autocomplete({
-        source: function (request, response) {
-            $.getJSON("/Factura/GetListCodigoJson/", request, 
-                function (data) {
-                response($.map(data, function (item) {
-
-                    return {
-                        id: item.id,
-                        value: item.label
-                    }
-
-                }))
-            })
-        },
-        minLength: 2,
-        select: function (event, ui) {
-            getArticulo(ui.item.id)
-            $("#IdArticulo").val(ui.item.id);
-            //  $("#Proveedor_Id").val(ui.item.id);
-
-            //this.value = ui.item.value;
-            return false;
-        }
-
-    });
-
-    function getArticulo(cod) {
-        $.getJSON("/Factura/GetCodigoJson",
-            { IdArticulo: cod },
-            function (data) {
-                var articulo = JSON.parse(data);
-                //console.log(articulo);
-
-                $("#txtCodigo").val(articulo.Codigo);
-                if ($("#IdTipoIdioma").val() == 1) {
-                    $("#txtCodigoDescripcion").val(articulo.DescripcionCastellano);
-                }
-                else {
-                    $("#txtCodigoDescripcion").val(articulo.DescripcionIngles);
-                }
-
-
-            });
-
-    }
-
-    function fnAsignarItem() {
-        var codigo = $("#txtCodigo").val();
-        var descripcion = $("#txtCodigoDescripcion").val();
-        var monto = $("#txtMonto").val();
-
-        var item = $('#TblItemsFact >tbody >tr').length;
-
-        $("#ColumnaEliminar").css("display", "block");
-        if (codigo != "" && descripcion != "" && monto != "") {
-            item += 1;
-
-            var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + item + ")'> <i class='fa fa-times'></i> </button>";
-          
-            $('#TblItemsFact > tbody:last-child').append("<tr><td class='text-center'>" + item + "</td><td class='text-center'>" + codigo + "</td><td>" + descripcion + "</td><td class='text-right'>" + monto + "</td><td class='text-center'>" + botonEliminar + "</td></tr>");           
-            $("#txtCodigo").val('');
-            $("#txtCodigoDescripcion").val('');
-            $("#txtMonto").val('');
-
-
-            SumarMontoTotal();
-          
-        }
-        else {
-            alert("Faltan datos");
-        }
-
-        if (item >= 1) {
-            $("#MostrarItems").css("display", "block");
-        }
-        else {
-            $("#MostrarItems").css("display", "none");
-        }
-
-       
-        CargarItems();
-        // $('#TblItemsFact > tfoot:last-child').append("<tr><td>Total:</td><td>" + 111 + "</td></tr>");
-    }
-
-    function CargarItems() {
-        $("#hdnArticulos").val('');
-
-        let arrayItems = [];
-
-        $('#TblItemsFact tbody tr').each(function () {
-            let ObjItem = {
-                id: $(this).find("td").eq(0).html(),
-                codigo: $(this).find("td").eq(1).html(),
-                descripcion: $(this).find("td").eq(2).html(),
-                valor: $(this).find("td").eq(3).html()
-            };
-            arrayItems.push(ObjItem);
-
-        })
-        $("#hdnArticulos").val(JSON.stringify(arrayItems));
-        //console.log(arrayItems);
-        //console.log($("#hdnArticulos").val());
-    }
-
-    function SumarMontoTotal() {
-        var total_col1 = 0;
-        $('#TblItemsFact tbody').find('tr').each(function (i, el) {
-
-            //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )
-            total_col1 += parseFloat($(this).find('td').eq(3).text());
-
-        });
-
-        if (total_col1 > 0) {
-            $("#Total").css("display", "block");
-            $("#LblTotalFactura").html(total_col1);
-            $("#TotalFactura").val(total_col1);
-        }
-        else {
-            $("#Total").css("display", "none");
-            $("#TotalFactura").val(0);
-        }
-
-    }
-
-    function el(e) {
-        //console.log(e);
-        var index = e - 1;
-        $("table tr:eq(" + e + ")").remove();
-        var item = $('#TblItemsFact >tbody >tr').length;
-        if (item == 0) {
-            $("#TblItemsFact").css("display", "none");
-
-        }
-        else {
-            //esto es para re ordenar el table
-            $('#TblItemsFact > tbody  > tr').each(function (index1, tr) {
-                var a = index1 + 1;
-                $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[0].innerHTML = a;
-                var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + a + ")'> <i class='fa fa-times'></i> </button>";
-                var td = $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[4];
-                td.innerHTML = botonEliminar;                            
-            });
-        }
-        SumarMontoTotal();
-        CargarItems();
-    }
 
     
 
-    $('#BuscarFactura').on('click', function () {
-        var idCliente = $("#IdCliente").val();
-        var nroFactura = $("#AplicaNC").val();
-        var tipoComprobante = $("#idTipoComprobanteSeleccionado").val();
+@section Scripts {
 
-        if (idCliente != 0 && nroFactura != '' && tipoComprobante != '' && tipoComprobante != '1') {
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 
-            $.getJSON("/Factura/GetObtenerFacturaJson",
-                {
-                    idCliente: idCliente,
-                    nroFactura: nroFactura,
-                    idComprobante: 1
-                },
-                function (data) {
-                    var resultado = JSON.parse(data);
-                    console.log(resultado);
-                    $("#idTipoMoneda").val(resultado.factura.IdMoneda);
-                    $("#EncabezadoFact").val(resultado.factura.Concepto);
-                    if (resultado.factura.IdMoneda !=1) {
-                        $("#Cotizacion").val(resultado.factura.CotizaP);
-                    }
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/js/mask.js"></script>
 
-                    $("#ORef").val(resultado.factura.ORef);
-                    $("#YREf").val(resultado.factura.YRef);
+    @*<script src="~/Scripts/view/FacturaCompraScript.js"></script>
+        <script src="~/Scripts/view/calcularporcentaje.js"></script>*@
 
-                    
+    <script>
+        jQuery('.fechadatepicker').datepicker({
+            language: 'es',
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            todayHighlight: true
+
+        }).datepicker('setDate', new Date());
 
 
-                    var item = 0;
 
-                    var item = $('#TblItemsFact >tbody >tr').length;
-                    if (item == 0) {
-                        for (var clave in resultado.items) {
-                            //console.log(resultado.items[clave].Codigo);
-                            //console.log("La clave es " + clave + " y el valor es " + rates[clave]);
 
-                            item += 1;
 
-                            $('#TblItemsFact > tbody:last-child').append("<tr><td>" + item + "</td><td>" + resultado.items[clave].Codigo + "</td><td>" + resultado.items[clave].Descripcion + "</td><td>" + resultado.items[clave].Precio + "</td></tr>");
+        //autocompletar de los clientes
+        $('#NombreCliente').autocomplete({
+            source: function (request, response) {
+                $.getJSON("/Factura/GetListClienteJson/", request, function (data) {
+                    response($.map(data, function (item) {
 
-                            SumarMontoTotal();
+                        return {
+                            id: item.id,
+                            value: item.label
                         }
-                        $("#MostrarItems").css("display", "block");
-                        $("#ColumnaEliminar").css("display", "none");
-                        $("#TotalAjuste").css("display", "block");
-                        
-                    }
-                    
+
+                    }))
+                })
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                getCliente(ui.item.id)
+                $("#IdCliente").val(ui.item.id);
+                //  $("#Proveedor_Id").val(ui.item.id);
+
+                // this.value = ui.item.value;
+
+                return false;
+            }
+
+        });
+
+        function getCliente(codigo) {
+            $.getJSON("/Factura/GetClienteJson",
+                { IdCliente: codigo },
+                function (data) {
+                    var cliente = JSON.parse(data);
+                    //console.log(cliente);
+                    //validaciones del word, se considera que el iva 4 es excento en tbl tipoiva, por lo tanto es extranjero
+                    //if (cliente.IdTipoCliente != 4) {
+                    //    $("#IdPuntoVenta").val(IdTipoCliente);
+                    //}
+                    //else {
+                    //    $("#IdPuntoVenta").val(2);
+                    //}
+
+
+                    console.log($("#IdPuntoVenta").val());
+
+                    $("#IdPuntoVenta option[value=" + cliente.IdTipoCliente + "]").attr('selected', 'true');
+                    $("#IdPuntoVenta").val(cliente.IdTipoCliente);
+
+                    console.log($("#IdPuntoVenta").val());
+                    console.log($("#IdPuntoVenta option:selected").text());
+
+                    $("#NombreCliente").val(cliente.Codigo);
+                    $("#CodigoCliente").val(cliente.Codigo);
+
+                    $("#NombreComp").val(cliente.Nombre);
+                    $("#idImputacion").val(cliente.IdImputacion);
+
+
+                    $("#IdCliente").val(cliente.Id);
+                    $("#idTipoIva").val(cliente.IdTipoiva);
+                    $("#mipyme").val(cliente.MiPyme);
+
+
+                    $("#IdTipoIdioma").val(cliente.IdIdioma);
+                    //$("#Cuit").val(cliente.Cuit);
+
+                    $("#idTipoComprobanteSeleccionado").empty();
+                    $("#idTipoComprobanteSeleccionado").append("<option value> Seleccionar ...</option>")
+                    $.each(cliente.ListaComprobantesDrop, function (index, row) {
+                        // console.log(row);
+                        $("#idTipoComprobanteSeleccionado").append("<option value='" + row.Value + "'>" + row.Text + "</option>")
+                    });
+
+                    $("#IdDireccionCliente").empty();
+                    $("#IdDireccionCliente").append("<option value> Seleccionar ...</option>")
+                    $.each(cliente.ClienteDireccion, function (index, row) {
+                        $("#IdDireccionCliente").append("<option value='" + row.Id + "'>" + row.Direccion + "</option>")
+                    });
+
+
                 });
+
         }
-        else {
-            alert("Ingrese el cliente y el nro factura para buscar o verifique el tipo de comprobante");
+        //-----------------------------//
+
+        //auto completar de los articulos
+        $('#txtCodigo').autocomplete({
+            source: function (request, response) {
+                $.getJSON("/Factura/GetListCodigoJson/", request,
+                    function (data) {
+                        response($.map(data, function (item) {
+
+                            return {
+                                id: item.id,
+                                value: item.label
+                            }
+
+                        }))
+                    })
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                getArticulo(ui.item.id)
+                $("#IdArticulo").val(ui.item.id);
+                //  $("#Proveedor_Id").val(ui.item.id);
+
+                //this.value = ui.item.value;
+                return false;
+            }
+
+        });
+
+        function getArticulo(cod) {
+            $.getJSON("/Factura/GetCodigoJson",
+                { IdArticulo: cod },
+                function (data) {
+                    var articulo = JSON.parse(data);
+                    //console.log(articulo);
+
+                    $("#txtCodigo").val(articulo.Codigo);
+                    if ($("#IdTipoIdioma").val() == 1) {
+                        $("#txtCodigoDescripcion").val(articulo.DescripcionCastellano);
+                    }
+                    else {
+                        $("#txtCodigoDescripcion").val(articulo.DescripcionIngles);
+                    }
+
+
+                });
+
         }
-    });
+
+        function fnAsignarItem() {
+            var codigo = $("#txtCodigo").val();
+            var descripcion = $("#txtCodigoDescripcion").val();
+            var monto = $("#txtMonto").val();
+
+            var item = $('#TblItemsFact >tbody >tr').length;
+
+            $("#ColumnaEliminar").css("display", "block");
+            if (codigo != "" && descripcion != "" && monto != "") {
+                item += 1;
+
+                var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + item + ")'> <i class='fa fa-times'></i> </button>";
+
+                $('#TblItemsFact > tbody:last-child').append("<tr><td class='text-center'>" + item + "</td><td class='text-center'>" + codigo + "</td><td>" + descripcion + "</td><td class='text-right'>" + monto + "</td><td class='text-center'>" + botonEliminar + "</td></tr>");
+                $("#txtCodigo").val('');
+                $("#txtCodigoDescripcion").val('');
+                $("#txtMonto").val('');
 
 
-    $('#IdDireccionCliente').on('change', function () {
-        var idDir = this.value;
-        $.getJSON("/Factura/GetDireccionJson",
-            { idDireccion: idDir },
-            function (data) {
-                var direccion = JSON.parse(data);
-                $("#DireccionCompuesta").val(direccion.Direccion + ' / ' + direccion.Provincia.Nombre + ' / ' + direccion.Localidad.Nombre);
-                var cuitLimpio = direccion.Cuit.replaceAll("-", "");
-                $("#Cuit").val(cuitLimpio);
-                $("#CuitSeleccionado").val(direccion.Cuit);
-                $("#CodPaisAfip").val(direccion.CodigoAfip);
-                $("#idPais").val(direccion.Pais.Id);
-                $("#idProvincia").val(direccion.Provincia.Id);
+                SumarMontoTotal();
 
-                $("#PaisComp").val(direccion.Pais.Nombre);
+            }
+            else {
+                alert("Faltan datos");
+            }
+
+            if (item >= 1) {
+                $("#MostrarItems").css("display", "block");
+            }
+            else {
+                $("#MostrarItems").css("display", "none");
+            }
+
+
+            CargarItems();
+            // $('#TblItemsFact > tfoot:last-child').append("<tr><td>Total:</td><td>" + 111 + "</td></tr>");
+        }
+
+        function CargarItems() {
+            $("#hdnArticulos").val('');
+
+            let arrayItems = [];
+
+            $('#TblItemsFact tbody tr').each(function () {
+                let ObjItem = {
+                    id: $(this).find("td").eq(0).html(),
+                    codigo: $(this).find("td").eq(1).html(),
+                    descripcion: $(this).find("td").eq(2).html(),
+                    valor: $(this).find("td").eq(3).html()
+                };
+                arrayItems.push(ObjItem);
+
+            })
+            $("#hdnArticulos").val(JSON.stringify(arrayItems));
+            //console.log(arrayItems);
+            //console.log($("#hdnArticulos").val());
+        }
+
+        function SumarMontoTotal() {
+            var total_col1 = 0;
+            $('#TblItemsFact tbody').find('tr').each(function (i, el) {
+
+                //Voy incrementando las variables segun la fila ( .eq(0) representa la fila 1 )
+                total_col1 += parseFloat($(this).find('td').eq(3).text());
 
             });
-    });
 
-    $('#idTipoMoneda').on('change', function () {
-        var idTipoMoneda = this.value;
+            if (total_col1 > 0) {
+                $("#Total").css("display", "block");
+                $("#LblTotalFactura").html(total_col1);
+                $("#TotalFactura").val(total_col1);
+            }
+            else {
+                $("#Total").css("display", "none");
+                $("#TotalFactura").val(0);
+            }
 
-       
+        }
+
+        function el(e) {
+            //console.log(e);
+            var index = e - 1;
+            $("table tr:eq(" + e + ")").remove();
+            var item = $('#TblItemsFact >tbody >tr').length;
+            if (item == 0) {
+                $("#TblItemsFact").css("display", "none");
+
+            }
+            else {
+                //esto es para re ordenar el table
+                $('#TblItemsFact > tbody  > tr').each(function (index1, tr) {
+                    var a = index1 + 1;
+                    $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[0].innerHTML = a;
+                    var botonEliminar = "<button type='button' class='btn btn-danger btn-sm' onclick='el(" + a + ")'> <i class='fa fa-times'></i> </button>";
+                    var td = $($('#TblItemsFact').find('tbody > tr')[index1]).children('td')[4];
+                    td.innerHTML = botonEliminar;
+                });
+            }
+            SumarMontoTotal();
+            CargarItems();
+        }
+
+
+
+        $('#BuscarFactura').on('click', function () {
+            var idCliente = $("#IdCliente").val();
+            var nroFactura = $("#AplicaNC").val();
+            var tipoComprobante = $("#idTipoComprobanteSeleccionado").val();
+
+            if (idCliente != 0 && nroFactura != '' && tipoComprobante != '' && tipoComprobante != '1') {
+
+                $.getJSON("/Factura/GetObtenerFacturaJson",
+                    {
+                        idCliente: idCliente,
+                        nroFactura: nroFactura,
+                        idComprobante: 1
+                    },
+                    function (data) {
+                        var resultado = JSON.parse(data);
+                        console.log(resultado);
+                        $("#idTipoMoneda").val(resultado.factura.IdMoneda);
+                        $("#EncabezadoFact").val(resultado.factura.Concepto);
+                        if (resultado.factura.IdMoneda != 1) {
+                            $("#Cotizacion").val(resultado.factura.CotizaP);
+                        }
+
+                        $("#ORef").val(resultado.factura.ORef);
+                        $("#YREf").val(resultado.factura.YRef);
+
+
+
+
+                        var item = 0;
+
+                        var item = $('#TblItemsFact >tbody >tr').length;
+                        if (item == 0) {
+                            for (var clave in resultado.items) {
+                                //console.log(resultado.items[clave].Codigo);
+                                //console.log("La clave es " + clave + " y el valor es " + rates[clave]);
+
+                                item += 1;
+
+                                $('#TblItemsFact > tbody:last-child').append("<tr><td>" + item + "</td><td>" + resultado.items[clave].Codigo + "</td><td>" + resultado.items[clave].Descripcion + "</td><td>" + resultado.items[clave].Precio + "</td></tr>");
+
+                                SumarMontoTotal();
+                            }
+                            $("#MostrarItems").css("display", "block");
+                            $("#ColumnaEliminar").css("display", "none");
+                            $("#TotalAjuste").css("display", "block");
+
+                        }
+
+                    });
+            }
+            else {
+                alert("Ingrese el cliente y el nro factura para buscar o verifique el tipo de comprobante");
+            }
+        });
+
+
+        $('#IdDireccionCliente').on('change', function () {
+            var idDir = this.value;
+            $.getJSON("/Factura/GetDireccionJson",
+                { idDireccion: idDir },
+                function (data) {
+                    var direccion = JSON.parse(data);
+                    $("#DireccionCompuesta").val(direccion.Direccion + ' / ' + direccion.Provincia.Nombre + ' / ' + direccion.Localidad.Nombre);
+                    var cuitLimpio = direccion.Cuit.replaceAll("-", "");
+                    $("#Cuit").val(cuitLimpio);
+                    $("#CuitSeleccionado").val(direccion.Cuit);
+                    $("#CodPaisAfip").val(direccion.CodigoAfip);
+                    $("#idPais").val(direccion.Pais.Id);
+                    $("#idProvincia").val(direccion.Provincia.Id);
+
+                    $("#PaisComp").val(direccion.Pais.Nombre);
+
+                });
+        });
+
+        $('#idTipoMoneda').on('change', function () {
+            var idTipoMoneda = this.value;
+
+
             $.getJSON("/Factura/GetCotizacionJson",
                 { IdMoneda: idTipoMoneda },
                 function (data) {
@@ -682,115 +700,108 @@
                     console.log(resultado);
                     $("#Cotizacion").val(parseFloat(resultado.Importe).toFixed(2));
                 });
-        //if (this.value != 1) { }
-        //else {
-        //    $("#Cotizacion").val("");
-        //}
-        
-    });
+            //if (this.value != 1) { }
+            //else {
+            //    $("#Cotizacion").val("");
+            //}
 
-    $('#IdCuentaBancaria').on('change', function () {
+        });
 
-        var idCuenta = this.value;
-        $.getJSON("/Factura/GetPieNotaJson",
-            { idCodigoCuentaBancaria: idCuenta },
-            function (data) {
-                var pieNota = JSON.parse(data);
-                $("#Nota").val(pieNota.Nota);
-            });
+        $('#IdCuentaBancaria').on('change', function () {
+
+            var idCuenta = this.value;
+            $.getJSON("/Factura/GetPieNotaJson",
+                { idCodigoCuentaBancaria: idCuenta },
+                function (data) {
+                    var pieNota = JSON.parse(data);
+                    $("#Nota").val(pieNota.Nota);
+                });
 
 
-    });
+        });
 
-    $('#idTipoComprobanteSeleccionado').on('change', function () {
+        $('#idTipoComprobanteSeleccionado').on('change', function () {
 
-        if (this.value != 1) {
-            $("#ItemsCargaDatos").css("display", "none");
-            $("#ItemsCargaDatosBtn").css("display", "none");
+            if (this.value != 1) {
+                $("#ItemsCargaDatos").css("display", "none");
+                $("#ItemsCargaDatosBtn").css("display", "none");
+            }
+            else {
+                $("#ItemsCargaDatos").css("display", "inline-flex");
+                $("#ItemsCargaDatosBtn").css("display", "block");
+                //borro las filas de la tabla
+                $('table tbody tr').remove();
+                $("#MostrarItems").css("display", "none");
+                $("#Total").css("display", "none");
+                $("#TotalAjuste").css("display", "none");
+                $("#AplicaNC").val('');
+
+            }
+
+        });
+
+
+        function Validacion(event) {
+            var cantidad = 5;
+            var contralor = 0;
+
+            event.preventDefault();
+
+            if ($("#ORef").val() != '') {
+                contralor += 1;
+                $("#ORef").css("border-color", "");
+            }
+            else {
+                $("#ORef").css("border-color", "red");
+            }
+
+            if ($("#YREf").val() != '') {
+                contralor += 1;
+                $("#YREf").css("border-color", "");
+            }
+            else {
+                $("#YREf").css("border-color", "red");
+            }
+
+            if ($("#idDepartamento").val() != 0) {
+                contralor += 1;
+                $("#idDepartamento").css("border-color", "");
+            }
+            else {
+                $("#idDepartamento").css("border-color", "red");
+            }
+
+            if ($("#IdCuentaBancaria").val() != 0) {
+                contralor += 1;
+                $("#IdCuentaBancaria").css("border-color", "");
+            }
+            else {
+                $("#IdCuentaBancaria").css("border-color", "red");
+            }
+            if ($("#LblTotalFactura").html() != '') {
+                contralor += 1;
+            }
+
+
+            if (cantidad == contralor) {
+                $("#FrmGrabar").submit();
+            }
+            else {
+                return false;
+            }
+
         }
-        else {
-            $("#ItemsCargaDatos").css("display", "inline-flex");
-            $("#ItemsCargaDatosBtn").css("display", "block");
-            //borro las filas de la tabla
-            $('table tbody tr').remove();
-            $("#MostrarItems").css("display", "none");
-            $("#Total").css("display", "none");
-            $("#TotalAjuste").css("display", "none");
-            $("#AplicaNC").val('');
 
-        }
+        //en teoria valida y si esta ok hace el submit
+        //$(function () {
+        //    $('#FrmGrabar').on('submit', function (event) {
+        //        event.preventDefault();
+        //        return Validacion();
+        //    });
+        //});
 
-    });
+    </script>
 
-    
-    function Validacion(event) {
-        var cantidad = 5;
-        var contralor = 0;
 
-        event.preventDefault();
 
-        if ($("#ORef").val() != '') {
-            contralor += 1;
-            $("#ORef").css("border-color", "");
-        }
-        else {
-            $("#ORef").css("border-color", "red");
-        }
-
-        if ($("#YREf").val() != '') {
-            contralor += 1;
-            $("#YREf").css("border-color", "");
-        }
-        else {
-            $("#YREf").css("border-color", "red");
-        }
-
-        if ($("#idDepartamento").val() != 0) {
-            contralor += 1;
-            $("#idDepartamento").css("border-color", "");
-        }
-        else {
-            $("#idDepartamento").css("border-color", "red");
-        }
-
-        if ($("#IdCuentaBancaria").val() != 0) {
-            contralor += 1;
-            $("#IdCuentaBancaria").css("border-color", "");
-        }
-        else {
-            $("#IdCuentaBancaria").css("border-color", "red");
-        }
-        if ($("#LblTotalFactura").html() != '') {
-            contralor += 1;
-        }
-        
-
-        if (cantidad == contralor) {
-            $("#FrmGrabar").submit();
-        }
-        else {
-            return false;
-        }
-
-    }
-
-    //en teoria valida y si esta ok hace el submit
-    //$(function () {
-    //    $('#FrmGrabar').on('submit', function (event) {
-    //        event.preventDefault();
-    //        return Validacion();
-    //    });
-    //});
-
-</script>
-
-@section Scripts {
-
-    <!-- Date Picker Plugin JavaScript -->
-    <script src="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/js/mask.js"></script>
-
-    @*<script src="~/Scripts/view/FacturaCompraScript.js"></script>
-        <script src="~/Scripts/view/calcularporcentaje.js"></script>*@
 }

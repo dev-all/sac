@@ -126,6 +126,7 @@ namespace SAC.Controllers
             model.CuentaBancaria = lstCuentasBancarias;
             model.FormaPago = listFormaPago;
             model.ClienteDirecciones = null;
+            model.Fecha = DateTime.Now;
 
             ValorCotizacionModel valorCotizacion = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Now, 1);
             if (valorCotizacion != null)
@@ -192,7 +193,8 @@ namespace SAC.Controllers
                 ClaseLogin.Sign = login.sing;
             }
             //insertar la factura
-            InsertarFacturaAfip(ClaseLogin, model, cbt.CodigoAfip);
+            //agrego mi cuit porque da error
+           InsertarFacturaAfip(ClaseLogin, model, cbt.CodigoAfip, 20305789489);
             // }
             //afip 
 
@@ -216,11 +218,6 @@ namespace SAC.Controllers
             switch (model.idTipoComprobanteSeleccionado)
             {
                 case 1: //factura
-
-
-                    
-
-
 
                     //actualiza tabla cotiza ?? nose
                     List<FacturaVentaModel> ListaFactura = servicioFacturaVenta.GetAllFacturaVentaCliente(model.IdCliente);
@@ -588,7 +585,7 @@ namespace SAC.Controllers
 
         }
 
-        public string InsertarFacturaAfip(ClaseLoginAfip TicketAcceso, FacturaModelView model, int NroComprobante )
+        public string InsertarFacturaAfip(ClaseLoginAfip TicketAcceso, FacturaModelView model, int NroComprobante, long cuitPropietario )
         {
             
             decimal totalGastos= 0; // ver esto porque deberia ser el acumulado de gastos       
@@ -606,7 +603,7 @@ namespace SAC.Controllers
 
             //instancio objeto autenticacion
             FEAuthRequest Autenticacion = new FEAuthRequest();
-            Autenticacion.Cuit = long.Parse(model.Cuit);
+            Autenticacion.Cuit = cuitPropietario;//long.Parse(model.Cuit);
             Autenticacion.Sign = TicketAcceso.Sign;
             Autenticacion.Token = TicketAcceso.Token;
 
@@ -635,22 +632,28 @@ namespace SAC.Controllers
 
             CuerpoSolicitud.Concepto = 2;//servicios
             CuerpoSolicitud.DocTipo = 80; //model.IdTipoPago;
-            CuerpoSolicitud.DocNro = Convert.ToInt64(model.Cuit);//model.NumeroFactura;
+            CuerpoSolicitud.DocNro =Convert.ToInt64(model.Cuit);//model.NumeroFactura;
 
             //autorizarse
-            //FERecuperaLastCbteResponse UltimoRes = ServicioWebFactura.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
-
-            //int ultimoNroComprobante = NroComprobante;//UltimoRes.CbteNro;
+            FERecuperaLastCbteResponse UltimoRes = ServicioWebFactura.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
+            int ultimoNroComprobante = UltimoRes.CbteNro+1;
+            //int ultimoNroComprobante = NroComprobante;
 
             //FEParamGetCotizacion 
 
-            FECotizacionResponse paramCoti = ServicioWebFactura.FEParamGetCotizacion(Autenticacion, "DOL");
+            //FECotizacionResponse paramCoti = ServicioWebFactura.FEParamGetCotizacion(Autenticacion, "DOL");
 
+            CuerpoSolicitud.CbteDesde = ultimoNroComprobante;
+            CuerpoSolicitud.CbteHasta = ultimoNroComprobante;
 
+            /* tengo q dejar tomar el del ws sw afip, si mando mi nro factura no coicide y da error
             CuerpoSolicitud.CbteDesde = NroComprobante;
             CuerpoSolicitud.CbteHasta = NroComprobante;
+            */
 
-            CuerpoSolicitud.CbteFch = model.Fecha.ToString("yyyyMMdd") ;//DateTime.Today.ToString("yyyyMMdd");
+            DateTime fechaHard = DateTime.Now;
+
+            CuerpoSolicitud.CbteFch = fechaHard.ToString("yyyyMMdd");// model.Fecha.ToString("yyyyMMdd") ;//DateTime.Today.ToString("yyyyMMdd");
 
             //decimal porcentajeIva = 0;
             //decimal total = model.TotalFactura;
@@ -671,10 +674,10 @@ namespace SAC.Controllers
             CuerpoSolicitud.ImpOpEx = 0;
             CuerpoSolicitud.ImpTrib = 0;
 
-            CuerpoSolicitud.FchServDesde = model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
-            CuerpoSolicitud.FchServHasta = model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
+            CuerpoSolicitud.FchServDesde = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
+            CuerpoSolicitud.FchServHasta = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
 
-            CuerpoSolicitud.FchVtoPago = (model.Fecha.AddDays(180)).ToString("yyyyMMdd"); //DateTime.Today.ToString("yyyyMMdd");
+            CuerpoSolicitud.FchVtoPago = (fechaHard.AddDays(180)).ToString("yyyyMMdd");//(model.Fecha.AddDays(180)).ToString("yyyyMMdd"); //DateTime.Today.ToString("yyyyMMdd");
 
             switch (model.idTipoMoneda)
             {

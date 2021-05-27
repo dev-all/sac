@@ -29,6 +29,8 @@ namespace SAC.Models
         [Display(Name = "Número")]
         [DisplayFormat(DataFormatString = "{0:00000000}", ApplyFormatInEditMode = true)]
         public int NumeroFactura { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}")]
         public DateTime Fecha { get; set; }
         public string Cuit { get; set; }
         public string CuitSeleccionado { get; set; }
