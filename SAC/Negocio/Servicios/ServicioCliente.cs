@@ -361,6 +361,23 @@ namespace Negocio.Servicios
         }
 
 
+        //4  Registro de Ventas Totales
+       
+             public ConsultaIvaTotalesModel GetIvaVentasTotales(string Periodo)
+        {
+            try
+            {
+                return Mapper.Map<ConsultaIvaTotales, ConsultaIvaTotalesModel>(oClienteRepositorio.GetIvaTotales(Periodo));
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor" + ex.Message, "error");
+
+                return null;
+            }
+        }
+
+
 
         #endregion
 

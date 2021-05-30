@@ -1407,5 +1407,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetIvaVentasTotalPesos" FunctionName="Agenda_Model.Store.GetIvaVentasTotalPesos" />
   </EntityContainerMapping>
 </Mapping>

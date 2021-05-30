@@ -2,7 +2,9 @@
 using Datos.ModeloDeDatos;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+
 
 namespace Datos.Repositorios
 {
@@ -385,7 +387,7 @@ namespace Datos.Repositorios
 
             var query = from a in context.FactVenta
                         join s in context.IvaVenta on a.NumeroFactura equals s.NumeroFactura
-                        where a.Activo == true // && a.Periodo == periodo
+                        where a.Activo == true  && a.Periodo == periodo
 
                         select new ConsultaIvaVenta
                         {
@@ -401,6 +403,7 @@ namespace Datos.Repositorios
                             Iva = s.Iva,
                             Isib = s.Isib,
                             Total = s.Total
+                           
 
                         };
 
@@ -408,29 +411,7 @@ namespace Datos.Repositorios
             return query.ToList();
 
 
-            //var query = from f in context.FactVenta
-            //                           join i in context.IvaVenta on f.NumeroFactura equals i.NumeroFactura
-            //                           where f.Activo == true
-            //                           select new
-            //                           {
-            //                               f.TipoComprobanteVenta.Abreviatura,
-            //                               f.TipoComprobanteVenta.CodigoAfip,
-            //                               f.TipoComprobanteVenta.PuntoVenta,
-            //                               f.NumeroFactura,
-            //                               f.Fecha,
-            //                               f.Cliente.Nombre,
-            //                               i.Neto,
-            //                               i.Gasto,
-            //                               i.Iva,
-            //                               i.Isib,
-            //                               i.Total,
-            //                           }).ToList();
-
-
-
-
-
-           // return query;
+         
 
 
 
@@ -439,9 +420,43 @@ namespace Datos.Repositorios
         }
 
 
+        //4  Registro de Ventas Totales
+
+        public ConsultaIvaTotales GetIvaTotales(string Periodo)
+        {
+
+            ConsultaIvaTotales lista = new ConsultaIvaTotales();
+
+            int periodo = Convert.ToInt32(Periodo);
+
+            try
+            {
+                SqlParameter param1 = new SqlParameter("@Periodo", periodo);
+                lista = context.Database.SqlQuery<ConsultaIvaTotales>("GetIvaVentasTotalPesos @Periodo", param1).First();
+            }
+            catch (Exception ex)
+            {
+                lista = null;
+            }
+
+            return lista;
+
+
+
+        }
+
+
+
+
+
+
 
 
         #endregion
+
+
+
+      
 
 
     }

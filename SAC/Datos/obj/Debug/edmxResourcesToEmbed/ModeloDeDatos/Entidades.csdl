@@ -406,6 +406,9 @@
     </AssociationSet>
     <EntitySet Name="Afip_TicketAcceso" EntityType="SAC_Model.Afip_TicketAcceso" />
     <EntitySet Name="FacturaElectronica" EntityType="SAC_Model.FacturaElectronica" />
+    <FunctionImport Name="GetIvaVentasTotalPesos">
+      <Parameter Name="Periodo" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Accion">
     <Key>

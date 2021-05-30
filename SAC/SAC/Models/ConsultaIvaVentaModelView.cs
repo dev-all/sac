@@ -26,7 +26,10 @@ namespace SAC.Models
 
         public List<ConsultaIvaVentaModelView> ListaConsultaIva { get; set; }
 
-   
+        public ConsultaIvaTotalesModelView ConsultaIvaTotales { get; set; }
+
+
+
 
     }
 }

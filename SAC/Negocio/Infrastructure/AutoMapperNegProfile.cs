@@ -13,6 +13,12 @@ namespace Agenda.Infrastructure
         {
 
 
+
+                  CreateMap<ConsultaIvaTotales, ConsultaIvaTotalesModel>();
+            CreateMap<ConsultaIvaTotalesModel, ConsultaIvaTotales>();
+
+
+
             CreateMap<CteCteClienteResumen, CteCteClienteResumenModel>();
             CreateMap<CteCteClienteResumenModel, CteCteClienteResumen>();
 

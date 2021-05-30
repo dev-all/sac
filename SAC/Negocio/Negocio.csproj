@@ -64,6 +64,7 @@
     <Compile Include="Modelos\ArticuloModel.cs" />
     <Compile Include="Modelos\BuqueModel.cs" />
     <Compile Include="Modelos\ClienteDireccionModel.cs" />
+    <Compile Include="Modelos\ConsultaIvaTotalesModel.cs" />
     <Compile Include="Modelos\ClienteModel.cs" />
     <Compile Include="Modelos\CobroFacturaModoModel.cs" />
     <Compile Include="Modelos\CompraRegistroDetalleModel.cs" />

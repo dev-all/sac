@@ -21,6 +21,10 @@ namespace Datos.ModeloDeDatos
         public double Isib { get; set; }
         public decimal Total { get; set; }
 
+        public string TipoFac { get; set; }
+
+
+
 
 
 

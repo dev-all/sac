@@ -245,31 +245,26 @@ try
 
         //3  Registro de Ventas Mensuales
 
-        public ActionResult ConsultaIvaVentas(int anio=0, int mes=0)
+        public ActionResult ConsultaIvaVentas(string Periodo = null, string Anio=null, string Mes = null)
         {
 
 
             ConsultaIvaVentaModelView model = new ConsultaIvaVentaModelView();
             model.ListaConsultaIva = null;
 
-            int Anio = DateTime.Now.Year;
-            int Mes = DateTime.Now.Month;
+          //  int Anio = DateTime.Now.Year;
+          //  int Mes = DateTime.Now.Month;
 
-            if (anio != 0)
-
+            if (!string.IsNullOrEmpty(Periodo))
             {
 
-                if (mes != 0)
-                {
-                    Anio = anio;
-                    Mes = mes;
-               }
-
-                string Periodo = Convert.ToString(Anio) + Convert.ToString(Mes);
-
+              
                 model.ListaConsultaIva = Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModelView>>(oServicioCliente.GetIvaVentas(Periodo));
+                model.ConsultaIvaTotales= Mapper.Map<ConsultaIvaTotalesModel, ConsultaIvaTotalesModelView>(oServicioCliente.GetIvaVentasTotales(Periodo));
 
-               // model.ListaConsultaIva= Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModel>>(oServicioCliente.GetIvaVentas(Periodo, Mes));
+                // model.ListaConsultaIva= Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModel>>(oServicioCliente.GetIvaVentas(Periodo, Mes));
+                model.ConsultaIvaTotales.Periodo = Mes + "/20" +  Anio;
+
 
             }
 
@@ -279,6 +274,47 @@ try
 
             return View(model);
         }
+
+
+
+        //3  Registro de Boton Resumen
+
+        public ActionResult ConsultaIvaVentasResumen(int anio = 0, int mes = 0)
+        {
+
+
+            ConsultaIvaVentaModelView model = new ConsultaIvaVentaModelView();
+            model.ListaConsultaIva = null;
+
+            //int Anio = DateTime.Now.Year;
+            //int Mes = DateTime.Now.Month;
+
+            //if (anio != 0)
+
+            //{
+
+            //    if (mes != 0)
+            //    {
+            //        Anio = anio;
+            //        Mes = mes;
+            //    }
+
+            //    string Periodo = Convert.ToString(Anio) + Convert.ToString(Mes);
+
+            //    model.ListaConsultaIva = Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModelView>>(oServicioCliente.GetIvaVentas(Periodo));
+
+            //    // model.ListaConsultaIva= Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModel>>(oServicioCliente.GetIvaVentas(Periodo, Mes));
+
+            //}
+
+
+            CargarAnio();
+            CargarMes();
+
+            return View(model);
+        }
+
+
 
         private void CargarAnio()
         {

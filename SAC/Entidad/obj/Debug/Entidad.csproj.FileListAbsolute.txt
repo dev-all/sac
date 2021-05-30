@@ -15,3 +15,9 @@ D:\sac\sac\SAC\Entidad\bin\Debug\Entidad.pdb
 D:\sac\sac\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
 D:\sac\sac\SAC\Entidad\obj\Debug\Entidad.dll
 D:\sac\sac\SAC\Entidad\obj\Debug\Entidad.pdb
+C:\dev-e\SAC\Entidad\bin\Debug\Entidad.dll
+C:\dev-e\SAC\Entidad\bin\Debug\Entidad.pdb
+C:\dev-e\SAC\Entidad\obj\Debug\Entidad.csprojAssemblyReference.cache
+C:\dev-e\SAC\Entidad\obj\Debug\Entidad.csproj.CoreCompileInputs.cache
+C:\dev-e\SAC\Entidad\obj\Debug\Entidad.dll
+C:\dev-e\SAC\Entidad\obj\Debug\Entidad.pdb
