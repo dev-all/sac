@@ -204,6 +204,7 @@
     <Compile Include="Models\CtaCteClienteModelView.cs" />
     <Compile Include="Models\CteCteClienteResumenModelView.cs" />
     <Compile Include="Models\CuentaPlanContableModelView.cs" />
+    <Compile Include="Models\FacturaElectronicaModelView.cs" />
     <Compile Include="Models\FacturaModelView.cs" />
     <Compile Include="Models\FacturaVentaModelView.cs" />
     <Compile Include="Models\IngresoBancoModelView.cs" />

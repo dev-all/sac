@@ -92,6 +92,7 @@
     <Compile Include="Modelos\DtoModel.cs" />
     <Compile Include="Modelos\EventoModel.cs" />
     <Compile Include="Modelos\AccionModel.cs" />
+    <Compile Include="Modelos\FacturaElectronicaModel.cs" />
     <Compile Include="Modelos\FacturaPagoModel.cs" />
     <Compile Include="Modelos\CobroFacturaModel.cs" />
     <Compile Include="Modelos\FacturaVentaItemsModel.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Servicios\ServicioDepartamento.cs" />
     <Compile Include="Servicios\ServicioDto.cs" />
     <Compile Include="Servicios\ServicioElog.cs" />
+    <Compile Include="Servicios\ServicioFacturaElectronica.cs" />
     <Compile Include="Servicios\ServicioFacturaVenta.cs" />
     <Compile Include="Servicios\ServicioFacturaVentaItems.cs" />
     <Compile Include="Servicios\ServicioGrupoPresupuesto.cs" />

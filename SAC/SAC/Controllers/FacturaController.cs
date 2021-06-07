@@ -29,7 +29,9 @@ namespace SAC.Controllers
         private ServicioCliente servicioCliente = new ServicioCliente();
         private ServicioClienteDireccion servicioClienteDireccion = new ServicioClienteDireccion();
         private ServicioDepartamento servicioDepartamento = new ServicioDepartamento();
-        private ServicioTipoComprobanteVenta servicioTipoComprobanteVenta = new ServicioTipoComprobanteVenta();        
+        private ServicioTipoComprobanteVenta servicioTipoComprobanteVenta = new ServicioTipoComprobanteVenta();
+        // private ServicioTipoPago servicioTipoPago = new ServicioTipoPago();
+        // private ServicioBancoCuenta servicioCuentaBancaria = new ServicioBancoCuenta();
         private ServicioTipoComprobante servicioTipoComprobante = new ServicioTipoComprobante();
         private ServicioArticulo servicioArticulo = new ServicioArticulo();
 
@@ -47,7 +49,7 @@ namespace SAC.Controllers
         private ServicioAfip_TicketAcceso servicioAfip_TicketAcceso = new ServicioAfip_TicketAcceso();
 
         private ServicioFacturaVentaItems servicioFacturaVentaItems = new ServicioFacturaVentaItems();
-        private AfipHelper afipHelper = new AfipHelper();
+        private ServicioFacturaElectronica servicioFacturaElectronica = new ServicioFacturaElectronica();
 
 
         // GET: Factura
@@ -66,13 +68,14 @@ namespace SAC.Controllers
 
 
             List<SelectListItem> listFormaPago = new List<SelectListItem>();
-            listFormaPago.Add(new SelectListItem() { Text = "Cuenta Corriente", Value = "96" });
+
             listFormaPago.Add(new SelectListItem() { Text = "Contado", Value = "1" });
             listFormaPago.Add(new SelectListItem() { Text = "Tarjeta de Crédito", Value = "68" });
             listFormaPago.Add(new SelectListItem() { Text = "Tarjeta de Débito", Value = "69" });
             listFormaPago.Add(new SelectListItem() { Text = "Cheque", Value = "97" });
             listFormaPago.Add(new SelectListItem() { Text = "Ticket", Value = "98" });
-            listFormaPago.Add(new SelectListItem() { Text = "Otra", Value = "99" });            
+            listFormaPago.Add(new SelectListItem() { Text = "Otra", Value = "99" });
+            listFormaPago.Add(new SelectListItem() { Text = "Cuenta Corriente", Value = "96" });
             listFormaPago.Add(new SelectListItem() { Text = "30 días", Value = "93" });
             listFormaPago.Add(new SelectListItem() { Text = "60 días", Value = "94" });
             listFormaPago.Add(new SelectListItem() { Text = "90 días", Value = "95" });
@@ -170,50 +173,131 @@ namespace SAC.Controllers
 
             var cbt = servicioTipoComprobanteVenta.getTipoComprobanteVentaNewNumeroFactura(comprobanteActualizado, model.IdPuntoVenta);
 
-            //if (model.FacturaManual == false)
-            //{
+            FECAEResponse RetornoAfip = new FECAEResponse();
 
-            //verificar en la base si el token esta vencido 
-            //Afip_TicketAccesoModel login;
-            //login = VerificarTicketAcceso("wsfe");
+            //pregunto si la carga de la factura es manual, si es asi no inserta la factura electronica
+            if (model.FacturaManual == false)
+            {
+                //verificar en la base si el token esta vencido 
+                Afip_TicketAccesoModel login;
+                login = VerificarTicketAcceso("wsfe");
 
-            //ClaseLoginAfip ClaseLogin = null;
-            //if (login == null)
-            //{
-            //    //busca el token nuevo y graba en la bd
-            //    ClaseLogin = ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
-            //}
-            //else
-            //{
-            //    //usa el token de la base
-            //    ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
-            //    ClaseLogin.Token = login.token;
-            //    ClaseLogin.Sign = login.sing;
-            //}
-            //insertar la factura
-            //agrego mi cuit porque da error
-            
-            //login con afip           
-            //ClaseLoginAfip ClaseLogin = afipHelper.LoginSacAfip();
-            //if (ClaseLogin != null)
-            //{
-            //    InsertarFacturaAfip(ClaseLogin, model, cbt.CodigoAfip, 20305789489);
-            //}
-          
-           
-            // }
+                ClaseLoginAfip ClaseLogin = null;
+                if (login == null)
+                {
+                    //busca el token nuevo y graba en la bd
+                    ClaseLogin = ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
+                }
+                else
+                {
+                    //usa el token de la base
+                    ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
+                    ClaseLogin.Token = login.token;
+                    ClaseLogin.Sign = login.sing;
+                }
+                //insertar la factura
+                //agrego mi cuit porque da error
+                RetornoAfip = InsertarFacturaAfip(ClaseLogin, model, cbt.CodigoAfip, 20305789489);
+
+            }
             //afip 
+
+            string mensajeErrorAfip = "";
+            string mensajeObservacionesAfip = "";
+            string cae = "";
+            string ResultadoAfip = "";
+            if (RetornoAfip != null)
+            {
+                if (RetornoAfip.Errors != null)
+                {
+                    //mostrar mensaje error;
+                    foreach (var er in RetornoAfip.Errors)
+                    {
+                        mensajeErrorAfip += string.Format("Er: {0}: {1}", er.Code, er.Msg);
+                    }
+
+                    if (RetornoAfip.FeDetResp[0].Observaciones != null)
+                    {
+                        foreach (var obs in RetornoAfip.FeDetResp[0].Observaciones)
+                        {
+                            mensajeObservacionesAfip += string.Format("Er: {0}: {1}", obs.Msg, obs.Code);
+                        }
+                    }
+                }
+                else
+                {
+                    ResultadoAfip = RetornoAfip.FeDetResp[0].Resultado;
+                    if (RetornoAfip.FeDetResp[0].Resultado == "A")
+                    {
+                        cae = RetornoAfip.FeDetResp[0].CAE;
+                    }
+                }
+            }
+            else
+            {
+                //mensaje que no grabo en afip por error
+            }
+
+            String moneda = "";
+            if (model.idTipoMoneda == 1)
+            {
+                moneda = "PES";
+            }
+            if (model.idTipoMoneda == 2)
+            {
+                moneda = "DOL";
+            }
+
+
+           
+
+
+            FacturaElectronicaModel FacturaElectronica = new FacturaElectronicaModel();
+            FacturaElectronica.ALICUOTA = "0";
+            FacturaElectronica.CAE = cae;
+            FacturaElectronica.CATEGORIA = "Exento";
+            FacturaElectronica.CODBARRA = "";
+            FacturaElectronica.NRODOC = model.Cuit;
+            FacturaElectronica.TIPOSERV = 2;
+            FacturaElectronica.NOMBRE = model.NombreComp;
+            FacturaElectronica.CODCLI = model.CodigoCliente;
+            FacturaElectronica.CODPAIS = model.CodPaisAfip.ToString();
+            FacturaElectronica.COTIZA = 0;//obtener cotizacion
+            FacturaElectronica.DOMICILIO = model.DireccionCompuesta;
+            FacturaElectronica.ESTADO = "2";
+            FacturaElectronica.FDESDE = model.Fecha;
+            FacturaElectronica.FECHACBTE = model.Fecha;
+            FacturaElectronica.FECHAVEN = model.Fecha;
+            FacturaElectronica.FECHAVTO = model.Fecha.AddDays(180);
+            FacturaElectronica.FHASTA =null;
+            FacturaElectronica.FORMAPAGO = model.IdTipoPago.ToString();
+            FacturaElectronica.TOTAL = model.TotalFactura;
+            FacturaElectronica.NETO = model.TotalFactura;
+            FacturaElectronica.NROCBTE = comprobanteActualizado;
+            FacturaElectronica.PUNTOVTA = model.IdPuntoVenta;
+            FacturaElectronica.TIPOCBTE = cbt.Id; //traigo el tipo cbte
+            FacturaElectronica.RESULTADO = ResultadoAfip;
+            FacturaElectronica.IVA = 0;
+            FacturaElectronica.IDIVA = "3";
+            FacturaElectronica.TIPODOC = 80;
+            FacturaElectronica.IVA10 = 0;
+            FacturaElectronica.NETO10 = 0;
+            FacturaElectronica.IDMONEDA = moneda;
+
+            FacturaElectronicaModel FacturaElectronicaInsertada = servicioFacturaElectronica.Agregar(FacturaElectronica);
 
             int nFactor = 1;
             if (tipoComprobante != "Credito")
             {
                 nFactor = 1;
             }
-            if (tipoComprobante == "Credito")
-               {
+            else
+            {
+                if (tipoComprobante == "Credito")
+                {
                     nFactor = -1;
-               }
-            
+                }
+            }
 
             decimal totalGastosPesos = 0; // ver esto porque deberia ser el acumulado de gastos
             decimal totalGastosDolares = 0;
@@ -224,16 +308,7 @@ namespace SAC.Controllers
                 case 1: //factura
 
                     //actualiza tabla cotiza ?? nose
-                    List<FacturaVentaModel> ListaFactura = servicioFacturaVenta.GetAllFacturaVentaCliente(model.IdCliente);
-                    //if (ListaFactura.Count == 0)
-                    //{
-                    //    CotizaModel CotizaInsert = new CotizaModel();
-                    //    CotizaInsert.Activo = true;
-                    //    CotizaInsert.Cotiza1 = model.Cotizacion;
-                    //    CotizaInsert.Fecha = DateTime.Now;
-                    //    //actualiza tabla cotiza ?? nose
-                    //    CotizaModel cotiza = servicioCotiza.Agregar(CotizaInsert);
-                    //}
+                    //List<FacturaVentaModel> ListaFactura = servicioFacturaVenta.GetAllFacturaVentaCliente(model.IdCliente);
 
                     // agrega en tbl FactVenta
                     FacturaVentaModel facturaVentaModel = new FacturaVentaModel();
@@ -589,226 +664,236 @@ namespace SAC.Controllers
 
         }
 
-        public string InsertarFacturaAfip(ClaseLoginAfip TicketAcceso, FacturaModelView model, int NroComprobante, long cuitPropietario )
+        public FECAEResponse InsertarFacturaAfip(ClaseLoginAfip TicketAcceso, FacturaModelView model, int NroComprobante, long cuitPropietario )
         {
-            
-            decimal totalGastos= 0; // ver esto porque deberia ser el acumulado de gastos       
-            var ListadoItemsFactura = JsonConvert.DeserializeObject<List<ItemImprFacturaModelView>>(model.hdnArticulos);
-            foreach (ItemImprFacturaModelView item in ListadoItemsFactura)
+            try
             {
-                ArticuloModel artModel = servicioArticulo.GetArticuloOuCodigo(item.codigo);
-                if (artModel.Tipo.Contains("Gastos"))
+                decimal totalGastos = 0; // ver esto porque deberia ser el acumulado de gastos       
+                var ListadoItemsFactura = JsonConvert.DeserializeObject<List<ItemImprFacturaModelView>>(model.hdnArticulos);
+                foreach (ItemImprFacturaModelView item in ListadoItemsFactura)
                 {
-                    totalGastos += item.valor ;                    
-                }
-            }
-
-            var totalImporte = model.TotalFactura;
-
-            //instancio objeto autenticacion
-            FEAuthRequest Autenticacion = new FEAuthRequest();
-            Autenticacion.Cuit = cuitPropietario;//long.Parse(model.Cuit);
-            Autenticacion.Sign = TicketAcceso.Sign;
-            Autenticacion.Token = TicketAcceso.Token;
-            //se prepara el servicio para enviar
-            Service ServicioWebFactura = new Service();
-            ServicioWebFactura.Url = @"https://wswhomo.afip.gov.ar/wsfev1/service.asmx?WSDL";
-            ServicioWebFactura.ClientCertificates.Add(TicketAcceso.certificado);
-            //cargo los datos de la factura
-            int puntoVenta = model.IdPuntoVenta;
-            int tipoComprobante = model.idTipoComprobanteSeleccionado;
-
-            //inicio solicitud
-            FECAERequest Solicitud = new FECAERequest();
-            //encabezado solicitud
-            FECAECabRequest EncabezadoSolicitud = new FECAECabRequest();
-            //cuerpo solicitud 
-            FECAEDetRequest CuerpoSolicitud = new FECAEDetRequest();
-
-            EncabezadoSolicitud.CantReg = 1;
-            EncabezadoSolicitud.PtoVta = puntoVenta;
-            EncabezadoSolicitud.CbteTipo = tipoComprobante;
-            Solicitud.FeCabReq = EncabezadoSolicitud;
-
-            //cargamos el cuerpo
-
-            CuerpoSolicitud.Concepto = 2;//servicios
-            CuerpoSolicitud.DocTipo = 80; //model.IdTipoPago;
-            CuerpoSolicitud.DocNro =Convert.ToInt64(model.Cuit);//model.NumeroFactura;
-
-            //autorizarse
-            FERecuperaLastCbteResponse UltimoRes = ServicioWebFactura.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
-            int ultimoNroComprobante = UltimoRes.CbteNro+1;
-            //int ultimoNroComprobante = NroComprobante;
-
-            //FEParamGetCotizacion 
-
-            //FECotizacionResponse paramCoti = ServicioWebFactura.FEParamGetCotizacion(Autenticacion, "DOL");
-
-            CuerpoSolicitud.CbteDesde = ultimoNroComprobante;
-            CuerpoSolicitud.CbteHasta = ultimoNroComprobante;
-
-            /* tengo q dejar tomar el del ws sw afip, si mando mi nro factura no coicide y da error
-            CuerpoSolicitud.CbteDesde = NroComprobante;
-            CuerpoSolicitud.CbteHasta = NroComprobante;
-            */
-
-            DateTime fechaHard = DateTime.Now;
-
-            CuerpoSolicitud.CbteFch = fechaHard.ToString("yyyyMMdd");// model.Fecha.ToString("yyyyMMdd") ;//DateTime.Today.ToString("yyyyMMdd");
-
-            //decimal porcentajeIva = 0;
-            //decimal total = model.TotalFactura;
-            //decimal Coeficiente = 0;// 1 + (porcentajeIva / 100);
-
-            //decimal neto = total; /// Coeficiente;
-            //decimal impIva = total - neto;
-
-
-
-            CuerpoSolicitud.ImpTotal = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
-            CuerpoSolicitud.ImpNeto =  decimal.ToDouble(Math.Round(model.TotalFactura, 2));
-            CuerpoSolicitud.ImpIVA = 0;
-
-
-
-            CuerpoSolicitud.ImpTotConc = 0;
-            CuerpoSolicitud.ImpOpEx = 0;
-            CuerpoSolicitud.ImpTrib = 0;
-
-            CuerpoSolicitud.FchServDesde = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
-            CuerpoSolicitud.FchServHasta = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
-            CuerpoSolicitud.FchVtoPago = (fechaHard.AddDays(180)).ToString("yyyyMMdd");//(model.Fecha.AddDays(180)).ToString("yyyyMMdd"); //DateTime.Today.ToString("yyyyMMdd");
-
-            switch (model.idTipoMoneda)
-            {
-                case 1:
-                    CuerpoSolicitud.MonId = "PES";
-                    CuerpoSolicitud.MonCotiz = 1;
-                    break;
-                case 2:
-                    CuerpoSolicitud.MonId = "DOL";
-                    CuerpoSolicitud.MonCotiz = 1;
-                    break;
-            }
-                        
-            AlicIva Alicuota = new AlicIva();
-            //el id de alicuota es el tipo de iva
-            Alicuota.Id = 3;
-            Alicuota.BaseImp = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
-            Alicuota.Importe = 0;
-
-            CuerpoSolicitud.Iva = new[] { Alicuota };
-
-            //CuerpoSolicitud.Iva[] = Alicuota;
-            Solicitud.FeDetReq = new[] { CuerpoSolicitud };
-            //Solicitud.FeDetReq[0] = CuerpoSolicitud;
-
-            //se envia el servicio al WS
-            var r = ServicioWebFactura.FECAESolicitar(Autenticacion, Solicitud);
-
-
-            if (r.Errors != null)
-            {
-                string error="";
-                string Observaciones = "";
-
-                foreach (var er in r.Errors)
-                {
-                    error += string.Format("Er: {0}: {1}", er.Code, er.Msg);
-                }
-
-                if (r.FeDetResp[0].Observaciones != null)
-                {
-
-                    foreach (var obs in r.FeDetResp[0].Observaciones)
+                    ArticuloModel artModel = servicioArticulo.GetArticuloOuCodigo(item.codigo);
+                    if (artModel.Tipo.Contains("Gastos"))
                     {
-                        Observaciones += string.Format("Er: {0}: {1}", obs.Msg, obs.Code);
+                        totalGastos += item.valor;
                     }
                 }
 
-                return error;
+                var totalImporte = model.TotalFactura;
+
+                //instancio objeto autenticacion
+                FEAuthRequest Autenticacion = new FEAuthRequest();
+                Autenticacion.Cuit = cuitPropietario;//long.Parse(model.Cuit);
+                Autenticacion.Sign = TicketAcceso.Sign;
+                Autenticacion.Token = TicketAcceso.Token;
+
+                //se prepara el servicio para enviar
+                Service ServicioWebFactura = new Service();
+                ServicioWebFactura.Url = @"https://wswhomo.afip.gov.ar/wsfev1/service.asmx?WSDL";
+
+                ServicioWebFactura.ClientCertificates.Add(TicketAcceso.certificado);
+                //cargo los datos de la factura
+                int puntoVenta = model.IdPuntoVenta;
+                int tipoComprobante = model.idTipoComprobanteSeleccionado;
+
+                //inicio solicitud
+                FECAERequest Solicitud = new FECAERequest();
+                //encabezado solicitud
+                FECAECabRequest EncabezadoSolicitud = new FECAECabRequest();
+                //cuerpo solicitud 
+                FECAEDetRequest CuerpoSolicitud = new FECAEDetRequest();
+
+                EncabezadoSolicitud.CantReg = 1;
+                EncabezadoSolicitud.PtoVta = puntoVenta;
+                EncabezadoSolicitud.CbteTipo = tipoComprobante;
+                Solicitud.FeCabReq = EncabezadoSolicitud;
+
+                //cargamos el cuerpo
+
+                CuerpoSolicitud.Concepto = 2;//servicios
+                CuerpoSolicitud.DocTipo = 80; //model.IdTipoPago;
+                CuerpoSolicitud.DocNro = Convert.ToInt64(model.Cuit);//model.NumeroFactura;
+
+                //autorizarse
+                FERecuperaLastCbteResponse UltimoRes = ServicioWebFactura.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
+                int ultimoNroComprobante = UltimoRes.CbteNro + 1;
+                //int ultimoNroComprobante = NroComprobante;
+
+                //FEParamGetCotizacion 
+
+                //FECotizacionResponse paramCoti = ServicioWebFactura.FEParamGetCotizacion(Autenticacion, "DOL");
+
+                CuerpoSolicitud.CbteDesde = ultimoNroComprobante;
+                CuerpoSolicitud.CbteHasta = ultimoNroComprobante;
+
+                /* tengo q dejar tomar el del ws sw afip, si mando mi nro factura no coicide y da error
+                CuerpoSolicitud.CbteDesde = NroComprobante;
+                CuerpoSolicitud.CbteHasta = NroComprobante;
+                */
+
+                DateTime fechaHard = DateTime.Now;
+
+                CuerpoSolicitud.CbteFch = fechaHard.ToString("yyyyMMdd");// model.Fecha.ToString("yyyyMMdd") ;//DateTime.Today.ToString("yyyyMMdd");
+
+                //decimal porcentajeIva = 0;
+                //decimal total = model.TotalFactura;
+                //decimal Coeficiente = 0;// 1 + (porcentajeIva / 100);
+
+                //decimal neto = total; /// Coeficiente;
+                //decimal impIva = total - neto;
+
+
+
+                CuerpoSolicitud.ImpTotal = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
+                CuerpoSolicitud.ImpNeto = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
+                CuerpoSolicitud.ImpIVA = 0;
+
+
+
+                CuerpoSolicitud.ImpTotConc = 0;
+                CuerpoSolicitud.ImpOpEx = 0;
+                CuerpoSolicitud.ImpTrib = 0;
+
+                CuerpoSolicitud.FchServDesde = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
+                CuerpoSolicitud.FchServHasta = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
+
+                CuerpoSolicitud.FchVtoPago = (fechaHard.AddDays(180)).ToString("yyyyMMdd");//(model.Fecha.AddDays(180)).ToString("yyyyMMdd"); //DateTime.Today.ToString("yyyyMMdd");
+
+                switch (model.idTipoMoneda)
+                {
+                    case 1:
+                        CuerpoSolicitud.MonId = "PES";
+                        CuerpoSolicitud.MonCotiz = 1;
+                        break;
+                    case 2:
+                        CuerpoSolicitud.MonId = "DOL";
+                        CuerpoSolicitud.MonCotiz = 1;
+                        break;
+                }
+
+                AlicIva Alicuota = new AlicIva();
+                //el id de alicuota es el tipo de iva
+                Alicuota.Id = 3;
+                Alicuota.BaseImp = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
+                Alicuota.Importe = 0;
+
+                CuerpoSolicitud.Iva = new[] { Alicuota };
+
+                //CuerpoSolicitud.Iva[] = Alicuota;
+                Solicitud.FeDetReq = new[] { CuerpoSolicitud };
+                //Solicitud.FeDetReq[0] = CuerpoSolicitud;
+
+                //se envia el servicio al WS
+                var r = ServicioWebFactura.FECAESolicitar(Autenticacion, Solicitud);
+
+                return r;
+                //if (r.Errors != null)
+                //{
+                //    string error="";
+                //    string Observaciones = "";
+
+                //    foreach (var er in r.Errors)
+                //    {
+                //        error += string.Format("Er: {0}: {1}", er.Code, er.Msg);
+                //    }
+
+                //    if (r.FeDetResp[0].Observaciones != null)
+                //    {
+
+                //        foreach (var obs in r.FeDetResp[0].Observaciones)
+                //        {
+                //            Observaciones += string.Format("Er: {0}: {1}", obs.Msg, obs.Code);
+                //        }
+                //    }
+
+                //    return error;
+                //}
+                //else
+                //{
+                //    return r.FeCabResp.Resultado;
+                //}
+
+            }
+            catch
+            {
+                return null;
+            }
+           
+        }
+
+        
+ 
+        public Afip_TicketAccesoModel VerificarTicketAcceso(string servicio)
+        {
+            DateTime today = DateTime.Now;
+            Afip_TicketAccesoModel Ta = servicioAfip_TicketAcceso.GetTicketAccesoUltimoPorServicio(servicio);
+            if (Ta !=null)
+            {
+                if (Ta.fecha_expiracion >= today)
+                {
+                    return Ta;
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {
-                return r.FeCabResp.Resultado;
+                return null;
             }
 
         }
 
- 
-        //public Afip_TicketAccesoModel VerificarTicketAcceso(string servicio)
-        //{
-        //    DateTime today = DateTime.Now;
-        //    Afip_TicketAccesoModel Ta = servicioAfip_TicketAcceso.GetTicketAccesoUltimoPorServicio(servicio);
-        //    if (Ta !=null)
-        //    {
-        //        if (Ta.fecha_expiracion >= today)
-        //        {
-        //            return Ta;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
+        public ClaseLoginAfip ObtenerTicketAccesoWS(string servicio, int usuario)
+        {
+            ClaseLoginAfip LoginAfip;
+            string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
+            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+            LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
+            LoginAfip.hacerLogin();
 
-        //}
-
-        //public ClaseLoginAfip ObtenerTicketAccesoWS(string servicio, int usuario)
-        //{
-        //    ClaseLoginAfip LoginAfip;
-        //    string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
-        //    string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
-        //    LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
-        //    LoginAfip.hacerLogin();
-
-        //    Afip_TicketAccesoModel Ta = new Afip_TicketAccesoModel();
-        //    Ta.servicio = LoginAfip.serv;
+            Afip_TicketAccesoModel Ta = new Afip_TicketAccesoModel();
+            Ta.servicio = LoginAfip.serv;
             
-        //    Ta.sing = LoginAfip.Sign;
-        //    Ta.token = LoginAfip.Token;
-        //    Ta.fecha_solicitud = LoginAfip.GenerationTime;
-        //    Ta.fecha_expiracion = LoginAfip.ExpirationTime;
-        //    Ta.usuario = usuario;
-        //    //me falta la url
+            Ta.sing = LoginAfip.Sign;
+            Ta.token = LoginAfip.Token;
+            Ta.fecha_solicitud = LoginAfip.GenerationTime;
+            Ta.fecha_expiracion = LoginAfip.ExpirationTime;
+            Ta.usuario = usuario;
+            //me falta la url
 
-        //    Afip_TicketAccesoModel TaReq = servicioAfip_TicketAcceso.CrearTicketAcceso(Ta);
-        //    if (TaReq != null)
-        //    {
-        //        return LoginAfip;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
+            Afip_TicketAccesoModel TaReq = servicioAfip_TicketAcceso.CrearTicketAcceso(Ta);
+            if (TaReq != null)
+            {
+                return LoginAfip;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
-        //public ClaseLoginAfip ObtenerTicketAccesoSinWS(string servicio, int usuario)
-        //{
-        //    ClaseLoginAfip LoginAfip;
-        //    string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
-        //    string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
-        //    LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
-        //    LoginAfip.LoginSinWs();
+        public ClaseLoginAfip ObtenerTicketAccesoSinWS(string servicio, int usuario)
+        {
+            ClaseLoginAfip LoginAfip;
+            string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
+            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+            LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
+            LoginAfip.LoginSinWs();
 
-        //    if (LoginAfip != null)
-        //    {
-        //        return LoginAfip;
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
+            if (LoginAfip != null)
+            {
+                return LoginAfip;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
 
         //metodo para obtener el tipo de comprobante
-      
         int DeterminarNroComprovante (int tipoIva, bool miPyme, decimal TotalFactura, string tipoComprobante)
         {
             int retorno = 0 ;

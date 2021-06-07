@@ -319,6 +319,7 @@
     <Compile Include="Repositorios\CotizaRepositorio.cs" />
     <Compile Include="Repositorios\DepartamentoRepositorio.cs" />
     <Compile Include="Repositorios\DtoRepositorio.cs" />
+    <Compile Include="Repositorios\FacturaElectronicaRepositorio.cs" />
     <Compile Include="Repositorios\FacturaVentasRepositorio.cs" />
     <Compile Include="Repositorios\GrupoPresupuestoRepositorio.cs" />
     <Compile Include="Repositorios\ImputacionRepositorio.cs" />

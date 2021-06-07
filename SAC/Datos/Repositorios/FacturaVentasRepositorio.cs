@@ -17,7 +17,7 @@ namespace Datos.Repositorios
 
         public List<FactVenta> GetAllFacturaVenta()
         {
-            context.Configuration.LazyLoadingEnabled = false;
+            //context.Configuration.LazyLoadingEnabled = false;
             List<FactVenta> listaFacturasVentas= context.FactVenta.Where(p => p.Activo == true ).ToList();
             return listaFacturasVentas;
         }

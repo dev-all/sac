@@ -4,6 +4,11 @@
     ViewBag.Title = "Registro Factura ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<!-- Date picker plugins css -->
+<link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
+
 <style>
     fieldset {
         /* min-width: 0; */
@@ -17,8 +22,7 @@
         font: small sans-serif;
     }
 </style>
-<!-- Date picker plugins css -->
-<link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+
 
 @using (Html.BeginForm("GrabarFactura", "Factura", FormMethod.Post, new { id = "FrmGrabar" }))
 {
@@ -66,7 +70,7 @@
 
                                 <div class="col-md-2">
                                     <small>Pto Venta</small>
-                                    @Html.DropDownListFor(model => model.IdPuntoVenta, Model.SelectPuntoVenta, null, new { @class = "form-control form-control-sm"})
+                                    @Html.DropDownListFor(model => model.IdPuntoVenta, Model.SelectPuntoVenta, null, new { @class = "form-control form-control-sm" })
                                 </div>
 
                                 <div class="col-md-1">
@@ -154,7 +158,8 @@
                                             <label class="col-sm-8 text-right small" style="padding-top:5px;">Factura Manual</label>
                                             <div class="col-sm-4">
                                                 @*@Html.TextBoxFor(m => m.FacturaManual, new { @class = "form-control form-control-sm", @placeholder = "" })*@
-                                                @Html.CheckBoxFor(model => model.FacturaManual, new { @class = "form-check-input" })
+                                                @* @Html.CheckBoxFor(model => model.FacturaManual, new { @class = "form-check-input" })*@
+                                                @Html.EditorFor(model => model.FacturaManual, new { @class = "form-check-input" })
                                             </div>
 
                                         </div>
@@ -201,7 +206,7 @@
                                             <div class="col-sm-7">
                                                 @Html.DropDownList("IdTipoIdioma", Model.TipoIdioma, null, new { @class = "form-control form-control-sm" })
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
 
                                 </div>
@@ -242,9 +247,9 @@
                             </div>
 
                             @*<div class="row">
-            <div class="col-md-8"></div>
-            <div class="col-md-4"></div>
-        </div>*@
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-4"></div>
+                                </div>*@
                             <div class="row">
                                 <div class="col-md-8">
                                     <fieldset>
@@ -268,7 +273,7 @@
                                                        onclick="fnAsignarItem()" />
                                             </div>
                                         </div>
-</fieldset>
+                                    </fieldset>
 
                                 </div>
                                 <div class="col-md-4"></div>

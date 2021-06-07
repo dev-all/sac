@@ -188,7 +188,6 @@ namespace Negocio.Servicios
 
         }
 
-      
 
         public void BloquearCliente(int IdCliente)
         {

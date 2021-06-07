@@ -12,13 +12,14 @@ namespace Agenda.Infrastructure
         public AutoMapperNegProfile()
         {
 
-
             CreateMap<CteCteClienteResumen, CteCteClienteResumenModel>();
             CreateMap<CteCteClienteResumenModel, CteCteClienteResumen>();
 
             CreateMap<ConsultaIvaVenta, ConsultaIvaVentaModel>();
             CreateMap<ConsultaIvaVentaModel, ConsultaIvaVenta>();
 
+            CreateMap<FacturaElectronica, FacturaElectronicaModel>();
+            CreateMap<FacturaElectronicaModel, FacturaElectronica>();
 
             CreateMap<FactVenta, CobroFacturaModel>();
             CreateMap<CobroFacturaModel, FactVenta>();

@@ -16,6 +16,9 @@ namespace SAC.Infrastructure
         {
 
 
+            CreateMap<FacturaElectronicaModel, FacturaElectronicaModelView>();
+            CreateMap<FacturaElectronicaModelView, FacturaElectronicaModel>();
+
             CreateMap<CteCteClienteResumenModel, CteCteClienteResumenModelView>();
             CreateMap<CteCteClienteResumenModelView, CteCteClienteResumenModel>();
 
