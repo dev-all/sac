@@ -634,7 +634,20 @@ namespace Negocio.Servicios
                 _mensaje?.Invoke("Ops!, Ocurrio un error al ejecutar el método de Pago. Comuníquese en contacto con el administrador del sistema - " + ex.Message, "error");
             }
         }
-     
+
+        public CobroFacturaModel GetFacturaVentaPorId(int idcliente, int idFactura)
+        {
+            try
+            {
+                return Mapper.Map<FactVenta, CobroFacturaModel>(oFacturaVentasRepositorio.GetFacturaVentaPorId(idcliente,idFactura));
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return null;
+            }
+        }
+
         public CobroFacturaModel GuardarCobro(CobroFacturaModel model)
         {
             try

@@ -2844,6 +2844,13 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jspdf\arial-unicode-ms\ARIALUNI-normal.js" />
+    <Content Include="Scripts\jspdf\arial-unicode-ms\ArialUnicodeMS-normal.js" />
+    <Content Include="Scripts\jspdf\arial-unicode-ms\arialu_vfs.js" />
+    <Content Include="Scripts\jspdf\arial-unicode-ms\default_vfs.js" />
+    <Content Include="Scripts\jspdf\default_vfs.js" />
+    <Content Include="Scripts\jspdf\fontjs\jspdf.debug.js" />
+    <Content Include="Scripts\jspdf\jspdf.customfonts.min.js" />
     <Content Include="Scripts\jspdf\jspdf.debug.js" />
     <Content Include="Scripts\jspdf\jspdf.js" />
     <Content Include="Scripts\jspdf\jspdf.plugin.autotable.js" />
@@ -2879,6 +2886,9 @@
     <Content Include="Scripts\js\widget-charts.js" />
     <Content Include="Scripts\js\widget-data.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\qr\qrcode.js" />
+    <Content Include="Scripts\qr\QR\qrcode.js" />
+    <Content Include="Scripts\qr\sample.js" />
     <Content Include="Scripts\TreeView\TreeView.js" />
     <Content Include="Scripts\view\Banco\BancoCheques.js" />
     <Content Include="Scripts\view\Caja\CajaScript.js" />
@@ -2996,6 +3006,8 @@
     <Content Include="Views\Cliente\ConsultaIvaVentas.cshtml" />
     <Content Include="Views\Cliente\CtaCteDetalle.cshtml" />
     <Content Include="Views\Cliente\CtaCteResumen.cshtml" />
+    <Content Include="Scripts\jspdf\arial-unicode-ms\ARIALUNI.TTF" />
+    <Content Include="Scripts\jspdf\arial-unicode-ms\ArialUnicodeMS.ttf" />
     <None Include="Views\Reporte\Factura.cshtml" />
     <None Include="Web References\afip.wsaahomo\LoginCms.wsdl" />
     <Content Include="Web References\afip.wsaahomo\Reference.map">

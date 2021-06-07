@@ -33,7 +33,7 @@ namespace Datos.Repositorios
         public ValorCotizacion GetCotizacionPorIdMoneda(DateTime f, int idMoneda)
         {
             var cotizacion =  context.ValorCotizacion.Where(p => p.Activo == true
-                                                    && p.Fecha == f 
+                                                    && p.UltimaModificacion == f                          
                                                     && p.Id == idMoneda).FirstOrDefault();
             //if (cotizacion == null)
             //{
@@ -52,6 +52,7 @@ namespace Datos.Repositorios
                                                    && p.Id == moneda.IdTipoMoneda).FirstOrDefault();
             cotizacion.Monto = moneda.Monto;
             cotizacion.Fecha = moneda.Fecha;
+            cotizacion.UltimaModificacion = moneda.UltimaModificacion;
             context.SaveChanges();
 
         }

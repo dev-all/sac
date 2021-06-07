@@ -42,3 +42,9 @@
 .Seleccionable {
     cursor: pointer;    
 }
+
+.modal-xl{
+    max-width: 1140px !important;
+}
+
+

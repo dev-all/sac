@@ -52,9 +52,33 @@ namespace SAC.Helpers
             Service ServicioWebFactura = new Service();
             ServicioWebFactura.Url = ConfigurationManager.AppSettings["url_wsdlAfip"].ToString();
             ServicioWebFactura.ClientCertificates.Add(ClaseLogin.certificado);
-            FECotizacionResponse paramCoti = ServicioWebFactura.FEParamGetCotizacion(Autenticacion, moneda);
-           
+
+            var paramCoti = ServicioWebFactura.FEParamGetCotizacion(Autenticacion, moneda);
+            
             return paramCoti;
+        }
+
+        public ClaseLoginAfip LoginSacAfip()
+        {
+            var OUsuario = (UsuarioModel)System.Web.HttpContext.Current.Session["currentUser"];
+            //verificar en la base si el token esta vencido 
+            Afip_TicketAccesoModel login;
+            login = VerificarTicketAcceso("wsfe");
+
+            ClaseLoginAfip ClaseLogin = null;
+            if (login == null)
+            {
+                //busca el token nuevo y graba en la bd
+                ClaseLogin = ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
+            }
+            else
+            {
+                //usa el token de la base
+                ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
+                ClaseLogin.Token = login.token;
+                ClaseLogin.Sign = login.sing;
+            }
+            return ClaseLogin;
         }
 
         public Afip_TicketAccesoModel VerificarTicketAcceso(string servicio)
@@ -74,10 +98,12 @@ namespace SAC.Helpers
 
         public ClaseLoginAfip ObtenerTicketAccesoWS(string servicio, int usuario)
         {
-            ClaseLoginAfip LoginAfip;
-           // string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
+            ClaseLoginAfip LoginAfip;          
             string url =  ConfigurationManager.AppSettings["url_wsAfip"].ToString();
-            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+            string directorioCetificado = System.Configuration.ConfigurationManager.AppSettings["pathCertificado"].ToString();
+            string path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath;
+            string pathCertificado = Path.Combine(path, directorioCetificado);
+
             string claveAfip = System.Configuration.ConfigurationManager.AppSettings["claveAfip"].ToString();
             LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, claveAfip);
             LoginAfip.hacerLogin();
@@ -106,7 +132,10 @@ namespace SAC.Helpers
         {
             ClaseLoginAfip LoginAfip;          
             string url = ConfigurationManager.AppSettings["url_wsAfip"].ToString();
-            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+            string directorioCetificado = System.Configuration.ConfigurationManager.AppSettings["pathCertificado"].ToString();
+            string path =  System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath;
+            string pathCertificado = Path.Combine(path, directorioCetificado);
+           
             string claveAfip = System.Configuration.ConfigurationManager.AppSettings["claveAfip"].ToString();
             LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, claveAfip);
             LoginAfip.LoginSinWs();

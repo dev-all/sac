@@ -29,9 +29,7 @@ namespace SAC.Controllers
         private ServicioCliente servicioCliente = new ServicioCliente();
         private ServicioClienteDireccion servicioClienteDireccion = new ServicioClienteDireccion();
         private ServicioDepartamento servicioDepartamento = new ServicioDepartamento();
-        private ServicioTipoComprobanteVenta servicioTipoComprobanteVenta = new ServicioTipoComprobanteVenta();
-        // private ServicioTipoPago servicioTipoPago = new ServicioTipoPago();
-        // private ServicioBancoCuenta servicioCuentaBancaria = new ServicioBancoCuenta();
+        private ServicioTipoComprobanteVenta servicioTipoComprobanteVenta = new ServicioTipoComprobanteVenta();        
         private ServicioTipoComprobante servicioTipoComprobante = new ServicioTipoComprobante();
         private ServicioArticulo servicioArticulo = new ServicioArticulo();
 
@@ -49,7 +47,7 @@ namespace SAC.Controllers
         private ServicioAfip_TicketAcceso servicioAfip_TicketAcceso = new ServicioAfip_TicketAcceso();
 
         private ServicioFacturaVentaItems servicioFacturaVentaItems = new ServicioFacturaVentaItems();
-
+        private AfipHelper afipHelper = new AfipHelper();
 
 
         // GET: Factura
@@ -68,14 +66,13 @@ namespace SAC.Controllers
 
 
             List<SelectListItem> listFormaPago = new List<SelectListItem>();
-
+            listFormaPago.Add(new SelectListItem() { Text = "Cuenta Corriente", Value = "96" });
             listFormaPago.Add(new SelectListItem() { Text = "Contado", Value = "1" });
             listFormaPago.Add(new SelectListItem() { Text = "Tarjeta de Crédito", Value = "68" });
             listFormaPago.Add(new SelectListItem() { Text = "Tarjeta de Débito", Value = "69" });
             listFormaPago.Add(new SelectListItem() { Text = "Cheque", Value = "97" });
             listFormaPago.Add(new SelectListItem() { Text = "Ticket", Value = "98" });
-            listFormaPago.Add(new SelectListItem() { Text = "Otra", Value = "99" });
-            listFormaPago.Add(new SelectListItem() { Text = "Cuenta Corriente", Value = "96" });
+            listFormaPago.Add(new SelectListItem() { Text = "Otra", Value = "99" });            
             listFormaPago.Add(new SelectListItem() { Text = "30 días", Value = "93" });
             listFormaPago.Add(new SelectListItem() { Text = "60 días", Value = "94" });
             listFormaPago.Add(new SelectListItem() { Text = "90 días", Value = "95" });
@@ -175,26 +172,35 @@ namespace SAC.Controllers
 
             //if (model.FacturaManual == false)
             //{
-            //verificar en la base si el token esta vencido 
-            Afip_TicketAccesoModel login;
-            login = VerificarTicketAcceso("wsfe");
 
-            ClaseLoginAfip ClaseLogin = null;
-            if (login == null)
-            {
-                //busca el token nuevo y graba en la bd
-                ClaseLogin = ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
-            }
-            else
-            {
-                //usa el token de la base
-                ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
-                ClaseLogin.Token = login.token;
-                ClaseLogin.Sign = login.sing;
-            }
+            //verificar en la base si el token esta vencido 
+            //Afip_TicketAccesoModel login;
+            //login = VerificarTicketAcceso("wsfe");
+
+            //ClaseLoginAfip ClaseLogin = null;
+            //if (login == null)
+            //{
+            //    //busca el token nuevo y graba en la bd
+            //    ClaseLogin = ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
+            //}
+            //else
+            //{
+            //    //usa el token de la base
+            //    ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
+            //    ClaseLogin.Token = login.token;
+            //    ClaseLogin.Sign = login.sing;
+            //}
             //insertar la factura
             //agrego mi cuit porque da error
-           InsertarFacturaAfip(ClaseLogin, model, cbt.CodigoAfip, 20305789489);
+            
+            //login con afip           
+            //ClaseLoginAfip ClaseLogin = afipHelper.LoginSacAfip();
+            //if (ClaseLogin != null)
+            //{
+            //    InsertarFacturaAfip(ClaseLogin, model, cbt.CodigoAfip, 20305789489);
+            //}
+          
+           
             // }
             //afip 
 
@@ -203,13 +209,11 @@ namespace SAC.Controllers
             {
                 nFactor = 1;
             }
-            else
-            {
-                if (tipoComprobante == "Credito")
-                {
+            if (tipoComprobante == "Credito")
+               {
                     nFactor = -1;
-                }
-            }
+               }
+            
 
             decimal totalGastosPesos = 0; // ver esto porque deberia ser el acumulado de gastos
             decimal totalGastosDolares = 0;
@@ -606,11 +610,9 @@ namespace SAC.Controllers
             Autenticacion.Cuit = cuitPropietario;//long.Parse(model.Cuit);
             Autenticacion.Sign = TicketAcceso.Sign;
             Autenticacion.Token = TicketAcceso.Token;
-
             //se prepara el servicio para enviar
             Service ServicioWebFactura = new Service();
             ServicioWebFactura.Url = @"https://wswhomo.afip.gov.ar/wsfev1/service.asmx?WSDL";
-
             ServicioWebFactura.ClientCertificates.Add(TicketAcceso.certificado);
             //cargo los datos de la factura
             int puntoVenta = model.IdPuntoVenta;
@@ -676,7 +678,6 @@ namespace SAC.Controllers
 
             CuerpoSolicitud.FchServDesde = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
             CuerpoSolicitud.FchServHasta = fechaHard.ToString("yyyyMMdd");//model.Fecha.ToString("yyyyMMdd");//DateTime.Today.ToString("yyyyMMdd");
-
             CuerpoSolicitud.FchVtoPago = (fechaHard.AddDays(180)).ToString("yyyyMMdd");//(model.Fecha.AddDays(180)).ToString("yyyyMMdd"); //DateTime.Today.ToString("yyyyMMdd");
 
             switch (model.idTipoMoneda)
@@ -736,77 +737,78 @@ namespace SAC.Controllers
         }
 
  
-        public Afip_TicketAccesoModel VerificarTicketAcceso(string servicio)
-        {
-            DateTime today = DateTime.Now;
-            Afip_TicketAccesoModel Ta = servicioAfip_TicketAcceso.GetTicketAccesoUltimoPorServicio(servicio);
-            if (Ta !=null)
-            {
-                if (Ta.fecha_expiracion >= today)
-                {
-                    return Ta;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                return null;
-            }
+        //public Afip_TicketAccesoModel VerificarTicketAcceso(string servicio)
+        //{
+        //    DateTime today = DateTime.Now;
+        //    Afip_TicketAccesoModel Ta = servicioAfip_TicketAcceso.GetTicketAccesoUltimoPorServicio(servicio);
+        //    if (Ta !=null)
+        //    {
+        //        if (Ta.fecha_expiracion >= today)
+        //        {
+        //            return Ta;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
 
-        }
+        //}
 
-        public ClaseLoginAfip ObtenerTicketAccesoWS(string servicio, int usuario)
-        {
-            ClaseLoginAfip LoginAfip;
-            string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
-            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
-            LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
-            LoginAfip.hacerLogin();
+        //public ClaseLoginAfip ObtenerTicketAccesoWS(string servicio, int usuario)
+        //{
+        //    ClaseLoginAfip LoginAfip;
+        //    string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
+        //    string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+        //    LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
+        //    LoginAfip.hacerLogin();
 
-            Afip_TicketAccesoModel Ta = new Afip_TicketAccesoModel();
-            Ta.servicio = LoginAfip.serv;
+        //    Afip_TicketAccesoModel Ta = new Afip_TicketAccesoModel();
+        //    Ta.servicio = LoginAfip.serv;
             
-            Ta.sing = LoginAfip.Sign;
-            Ta.token = LoginAfip.Token;
-            Ta.fecha_solicitud = LoginAfip.GenerationTime;
-            Ta.fecha_expiracion = LoginAfip.ExpirationTime;
-            Ta.usuario = usuario;
-            //me falta la url
+        //    Ta.sing = LoginAfip.Sign;
+        //    Ta.token = LoginAfip.Token;
+        //    Ta.fecha_solicitud = LoginAfip.GenerationTime;
+        //    Ta.fecha_expiracion = LoginAfip.ExpirationTime;
+        //    Ta.usuario = usuario;
+        //    //me falta la url
 
-            Afip_TicketAccesoModel TaReq = servicioAfip_TicketAcceso.CrearTicketAcceso(Ta);
-            if (TaReq != null)
-            {
-                return LoginAfip;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //    Afip_TicketAccesoModel TaReq = servicioAfip_TicketAcceso.CrearTicketAcceso(Ta);
+        //    if (TaReq != null)
+        //    {
+        //        return LoginAfip;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
-        public ClaseLoginAfip ObtenerTicketAccesoSinWS(string servicio, int usuario)
-        {
-            ClaseLoginAfip LoginAfip;
-            string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
-            string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
-            LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
-            LoginAfip.LoginSinWs();
+        //public ClaseLoginAfip ObtenerTicketAccesoSinWS(string servicio, int usuario)
+        //{
+        //    ClaseLoginAfip LoginAfip;
+        //    string url = @"https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
+        //    string pathCertificado = System.Configuration.ConfigurationManager.AppSettings["RutaCetificado"].ToString();
+        //    LoginAfip = new ClaseLoginAfip(servicio, url, pathCertificado, "123");
+        //    LoginAfip.LoginSinWs();
 
-            if (LoginAfip != null)
-            {
-                return LoginAfip;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //    if (LoginAfip != null)
+        //    {
+        //        return LoginAfip;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
 
         //metodo para obtener el tipo de comprobante
+      
         int DeterminarNroComprovante (int tipoIva, bool miPyme, decimal TotalFactura, string tipoComprobante)
         {
             int retorno = 0 ;

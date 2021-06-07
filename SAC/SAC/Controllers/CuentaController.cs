@@ -33,8 +33,8 @@ namespace SAC.Controllers
         public ActionResult Acceder()
         {
 
-          
-            
+
+
             if ((System.Web.HttpContext.Current.Session["currentUser"] != null))
             {
                 if ((System.Web.HttpContext.Current.Session["controller"] != null & System.Web.HttpContext.Current.Session["metodo"] != null))
@@ -59,53 +59,59 @@ namespace SAC.Controllers
                 UsuarioModel usuario = servicioUsuario.ObtenerUsuario(loginViewModel.Usuario, 1);
                 System.Web.HttpContext.Current.Session["currentUser"] = usuario;
 
-               
-                var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda( DateTime.Today, 2);
+                var moneda = servicioTipoMoneda.GetCotizacionPorIdMoneda(DateTime.Today, 2);
                 if (moneda == null)
                 {
                     var x = afipHelper.GetCotizacion("DOL");
-                    ValorCotizacionModel valorCotizacionModel = new ValorCotizacionModel();
-                    valorCotizacionModel.IdTipoMoneda = 2;
-                    valorCotizacionModel.Monto  = decimal.Parse(x.ResultGet.MonCotiz.ToString());                   
-                    
-                    string str = x.ResultGet.FchCotiz.ToString();
-                    int y = int.Parse(str.Substring(0, 4));
-                    int m = int.Parse(str.Substring(4, 2));
-                    int d = int.Parse(str.Substring(6, 2));
-                    valorCotizacionModel.Fecha = new DateTime(y, m, d);
-                    valorCotizacionModel.UltimaModificacion = DateTime.Now;
-                    valorCotizacionModel.IdUsuario = usuario.IdUsuario;
-                    servicioTipoMoneda.updateCotizacionPorIdMoneda(valorCotizacionModel);
-                }
-               
-                if(Convert.ToString(loginViewModel.Usuario) == loginViewModel.Password)
+                    if (x.ResultGet != null)
                     {
-                    System.Web.HttpContext.Current.Session["controller"] = null ;
+                        ValorCotizacionModel valorCotizacionModel = new ValorCotizacionModel();
+
+                        valorCotizacionModel.IdTipoMoneda = 2;
+                        valorCotizacionModel.Monto = decimal.Parse(x.ResultGet.MonCotiz.ToString());
+
+                        string str = x.ResultGet.FchCotiz.ToString();
+                        int y = int.Parse(str.Substring(0, 4));
+                        int m = int.Parse(str.Substring(4, 2));
+                        int d = int.Parse(str.Substring(6, 2));
+                        valorCotizacionModel.Fecha = new DateTime(y, m, d);
+                        valorCotizacionModel.UltimaModificacion = DateTime.Now;
+                        valorCotizacionModel.IdUsuario = usuario.IdUsuario;
+                        servicioTipoMoneda.updateCotizacionPorIdMoneda(valorCotizacionModel);
+                    }
+
+
+
+                }
+
+                if (Convert.ToString(loginViewModel.Usuario) == loginViewModel.Password)
+                {
+                    System.Web.HttpContext.Current.Session["controller"] = null;
                     return RedirectToAction("CambiarPassword", "Cuenta");
                 }
                 else
                 {
-                 
+
                     MenuHelper menu = new MenuHelper();
-                  
+
                     System.Web.HttpContext.Current.Session["menu"] = menu.ObtenerMenuSidebar(usuario.IdUsuario);
-                  
+
                     RolModel rol = servicioUsuario.ObtenerRol(usuario.IdUsuario);
 
-                    if(rol != null)
+                    if (rol != null)
                     {
                         System.Web.HttpContext.Current.Session["controller"] = rol.Controller;
                         System.Web.HttpContext.Current.Session["metodo"] = rol.Metodo;
                         if (rol.Controller != null && rol.Metodo != null)
                         {
                             return RedirectToAction(rol.Metodo, rol.Controller);
-                        }                        
+                        }
                     }
 
 
 
                     return RedirectToAction("Index", "Home");
-                }                
+                }
             }
             else
             {
@@ -116,16 +122,16 @@ namespace SAC.Controllers
 
 
         }
-     
+
         [HttpGet]
         public ActionResult Logout()
         {
 
             Session.Remove("username");
-            System.Web.HttpContext.Current.Session["currentUser"] = null ;
+            System.Web.HttpContext.Current.Session["currentUser"] = null;
             return RedirectToAction("Acceder");
         }
-       
+
 
 
     }

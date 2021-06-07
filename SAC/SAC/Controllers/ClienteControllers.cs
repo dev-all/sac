@@ -30,7 +30,7 @@ namespace SAC.Controllers
 
         private ServicioPais OservicioPais = new ServicioPais();
 
-
+        private ServicioFacturaVenta servicioFacturaVenta = new ServicioFacturaVenta();
 
         public ClienteController()
         {
@@ -279,6 +279,39 @@ try
 
             return View(model);
         }
+
+
+
+        [HttpGet()]
+        public ActionResult GetFacturaJson(string idCliente, string idComprobante)
+        {
+            try
+            {
+                string strJson;
+
+                CobroFacturaModel factura = servicioFacturaVenta.GetFacturaVentaPorId(int.Parse(idCliente),int.Parse(idComprobante) );
+
+                strJson = Newtonsoft.Json.JsonConvert.SerializeObject(factura);
+
+                if ((strJson != null))
+                {
+                    var rJson = Json(strJson, JsonRequestBehavior.AllowGet);
+                    return rJson;
+                }
+
+                return Json(strJson, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                //servicioCliente._mensaje("Ops!, A ocurriodo un error. Contacte al Administrador", "erro");
+                return Json(new { data = false , cbt = "" }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+
+
 
         private void CargarAnio()
         {

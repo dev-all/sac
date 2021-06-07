@@ -17,12 +17,14 @@ namespace Datos.Repositorios
 
         public List<FactVenta> GetAllFacturaVenta()
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<FactVenta> listaFacturasVentas= context.FactVenta.Where(p => p.Activo == true ).ToList();
             return listaFacturasVentas;
         }
 
         public List<FactVenta> GetAllFacturaVentaCliente(int idCliente)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             List<FactVenta> listaFacturasVentas = context.FactVenta.Where(p => p.Activo == true && p.IdCliente == idCliente).ToList();
             return listaFacturasVentas;
         }
@@ -85,6 +87,13 @@ namespace Datos.Repositorios
          
         }
 
+        public FactVenta GetFacturaVentaPorId(int idcliente, int idFactura)
+        {
+
+            //context.Configuration.LazyLoadingEnabled = false;
+            return context.FactVenta.Where(acc => acc.Id == idFactura && acc.IdCliente == idcliente && acc.Activo == true).FirstOrDefault();
+
+        }
         public List<FactVenta> GetCompraFacturaPorIdProveedor_Moneda(int idCliente, int? idTipoMoneda)
         {
             return context.FactVenta
