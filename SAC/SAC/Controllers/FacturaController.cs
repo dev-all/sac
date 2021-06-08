@@ -51,7 +51,7 @@ namespace SAC.Controllers
         private ServicioFacturaVentaItems servicioFacturaVentaItems = new ServicioFacturaVentaItems();
         private ServicioFacturaElectronica servicioFacturaElectronica = new ServicioFacturaElectronica();
 
-
+        private AfipHelper afipHelper = new AfipHelper();
         // GET: Factura
         public ActionResult Index()
         {
@@ -180,18 +180,18 @@ namespace SAC.Controllers
             {
                 //verificar en la base si el token esta vencido 
                 Afip_TicketAccesoModel login;
-                login = VerificarTicketAcceso("wsfe");
+                login = afipHelper.VerificarTicketAcceso("wsfe");
 
                 ClaseLoginAfip ClaseLogin = null;
                 if (login == null)
                 {
                     //busca el token nuevo y graba en la bd
-                    ClaseLogin = ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
+                    ClaseLogin = afipHelper.ObtenerTicketAccesoWS("wsfe", OUsuario.IdUsuario);
                 }
                 else
                 {
                     //usa el token de la base
-                    ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
+                    ClaseLogin = afipHelper.ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
                     ClaseLogin.Token = login.token;
                     ClaseLogin.Sign = login.sing;
                 }
@@ -891,6 +891,8 @@ namespace SAC.Controllers
                 return null;
             }
         }
+
+
 
 
         //metodo para obtener el tipo de comprobante

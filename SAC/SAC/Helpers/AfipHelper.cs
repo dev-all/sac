@@ -81,6 +81,11 @@ namespace SAC.Helpers
             return ClaseLogin;
         }
 
+
+
+
+
+
         public Afip_TicketAccesoModel VerificarTicketAcceso(string servicio)
         {
             DateTime today = DateTime.Now;
