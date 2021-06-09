@@ -1,0 +1,58 @@
+
+
+cQr := GeneraQR( oFacElec:FECHACBTE,;					   		  
+				SELF:oBBServer:TipoCbte,;
+				SELF:oBBServer:PuntoVta,;
+				SELF:oBBServer:NROFAC,;
+				oFacElec:Total,;
+				oFacElec:COTIZA,;
+				oFacElec:NRODOC,;
+				oFacElec:TIPODOC,;
+				oFacElec:CAE) 
+					    
+
+FUNCTION GeneraQR( dDate 		AS USUAL,;
+				   nTipoCbte 	AS DWORD,;
+				   nPvta 		AS DWORD,;
+				   nNroCbte 	AS DWORD,;
+				   nImporte 	AS FLOAT,;
+				   nCotiza		AS FLOAT,;
+				   cCUITR		AS STRING,;
+				   nTipoDoc		AS DWORD,;
+				   cCae			AS STRING) AS STRING
+				    
+	LOCAL cArchivoQR AS STRING
+	LOCAL cArchivo	 AS STRING
+	LOCAL cDate		 AS STRING
+	LOCAL cDoc		 AS STRING
+	LOCAL cMon		 AS STRING
+	LOCAL cCUIT 	 AS STRING
+
+	cArchivo := SetEntorno():[INiValue, #QR ]+StrZero(nTipoCbte,3,0)+StrZero(nPvta,4,0)+StrZero(nNroCbte,8,0)+'.JPG'
+*	cArchivo := SetEntorno():[INiValue, #QR ]+'Factura.JPG'
+	IF IsDate(dDate)
+		cDate 	 := StrZero(Year(dDate),4,0)+'-'+StrZero(Month(dDate),2,0)+'-'+StrZero(Day(dDate),2,0)+','
+	ELSE
+		cDate 	 := dDate+','
+	ENDIF
+	cCUIT     := SetEntorno():[INiValue, #CUIT ]+','
+	
+	cCUITR    := AllTrim(CUITGuion(,cCUITR))+','
+
+	cDoc := Str(nPvta,5,0)+','+Str(nTipoCbte,3,0)+','+Str(nNroCbte,8,0)+','	 
+
+	IF nCotiza>1
+		cMon := ',DOL,'+Str(nCotiza,13,2)+','
+	ELSE
+		cMon := ',PES,1,'
+	ENDIF			
+	 
+	cArchivoQR := SetEntorno():AppPath+[QRAFIFEXE.exe "]+AllTrim(cArchivo)+',1,'+cDate+cCUIT+cDoc+Str(nImporte,12,2)+cMon+Str(nTipoDoc,2,0)+','+cCUITR+'E,'+AllTrim(cCae)+["]
+			
+	
+	RETURN cArchivoQR
+
+cArchivoQR :=c:\QRAFIFEXE.exe "]+AllTrim(cArchivo)+',1,'+cDate+cCUIT+cDoc+Str(nImporte,12,2)+cMon+Str(nTipoDoc,2,0)+','+cCUITR+'E,'+AllTrim(cCae)+["]
+	
+
+{"ver":1,"fecha":"20200305","cuit":20244455299,"ptoVta":5,"tipoCmp":6,"nroCmp":5583,"importe":365.00,"moneda":"PES","ctz":1,"tipoDocRec":6,"nroDocRec":30711630488,"tipoCodAut":"E","codAut":70109852264460}

@@ -351,7 +351,6 @@
       <End Role="Retencion" EntitySet="Retencion" />
     </AssociationSet>
     <EntitySet Name="Cliente" EntityType="SAC_Model.Cliente" />
-    <EntitySet Name="FactVenta" EntityType="SAC_Model.FactVenta" />
     <AssociationSet Name="FK_Cliente_GrupoPresupuesto" Association="SAC_Model.FK_Cliente_GrupoPresupuesto">
       <End Role="GrupoPresupuesto" EntitySet="GrupoPresupuesto" />
       <End Role="Cliente" EntitySet="Cliente" />
@@ -380,8 +379,15 @@
       <End Role="Cliente" EntitySet="Cliente" />
       <End Role="ClienteDireccion" EntitySet="ClienteDireccion" />
     </AssociationSet>
+    <EntitySet Name="Afip_TicketAcceso" EntityType="SAC_Model.Afip_TicketAcceso" />
+    <EntitySet Name="FacturaElectronica" EntityType="SAC_Model.FacturaElectronica" />
+    <EntitySet Name="FactVenta" EntityType="SAC_Model.FactVenta" />
     <AssociationSet Name="FK_FactVenta_Cliente" Association="SAC_Model.FK_FactVenta_Cliente">
       <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="FactVenta" EntitySet="FactVenta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FactVenta__IdFac__12149A71" Association="SAC_Model.FK__FactVenta__IdFac__12149A71">
+      <End Role="FacturaElectronica" EntitySet="FacturaElectronica" />
       <End Role="FactVenta" EntitySet="FactVenta" />
     </AssociationSet>
     <AssociationSet Name="FK_FactVenta_TipoComprobanteVenta" Association="SAC_Model.FK_FactVenta_TipoComprobanteVenta">
@@ -404,8 +410,6 @@
       <End Role="FactVenta" EntitySet="FactVenta" />
       <End Role="Retencion" EntitySet="Retencion" />
     </AssociationSet>
-    <EntitySet Name="Afip_TicketAcceso" EntityType="SAC_Model.Afip_TicketAcceso" />
-    <EntitySet Name="FacturaElectronica" EntityType="SAC_Model.FacturaElectronica" />
   </EntityContainer>
   <EntityType Name="Accion">
     <Key>
@@ -2654,58 +2658,6 @@
     <NavigationProperty Name="ClienteDireccion" Relationship="SAC_Model.FK_ClienteDireccion_Cliente" FromRole="Cliente" ToRole="ClienteDireccion" />
     <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK_FactVenta_Cliente" FromRole="Cliente" ToRole="FactVenta" />
   </EntityType>
-  <EntityType Name="FactVenta">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
-    <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
-    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdCliente" Type="Int32" />
-    <Property Name="TotalDolares" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Parcial" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Saldo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Baja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Impre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FechaCobro" Type="DateTime" Precision="3" />
-    <Property Name="TipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Condicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdProvincia" Type="Int32" Nullable="false" />
-    <Property Name="IdPais" Type="Int32" Nullable="false" />
-    <Property Name="IdImputacion" Type="Int32" Nullable="false" />
-    <Property Name="NumeroCobro" Type="Int32" Nullable="false" />
-    <Property Name="Cotiza" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="IdMoneda" Type="Int32" Nullable="false" />
-    <Property Name="ORef" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="YRef" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="Descuento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CotizaP" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="TipoFac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CodigoDiario" Type="Int32" Nullable="false" />
-    <Property Name="Recibo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Periodo" Type="Int32" Nullable="false" />
-    <Property Name="NumeroTra" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Combria" Type="Double" Nullable="false" />
-    <Property Name="IngBr" Type="Double" Nullable="false" />
-    <Property Name="Anula" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Activo" Type="Boolean" />
-    <Property Name="IdUsuario" Type="Int32" />
-    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Cliente" Relationship="SAC_Model.FK_FactVenta_Cliente" FromRole="FactVenta" ToRole="Cliente" />
-    <NavigationProperty Name="TipoComprobanteVenta" Relationship="SAC_Model.FK_FactVenta_TipoComprobanteVenta" FromRole="FactVenta" ToRole="TipoComprobanteVenta" />
-    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_FactVenta_TipoMoneda" FromRole="FactVenta" ToRole="TipoMoneda" />
-    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_CompraFactura" FromRole="FactVenta" ToRole="FactVentaCobro" />
-    <NavigationProperty Name="ItemImpre" Relationship="SAC_Model.FK_ItemImpre_FactVenta" FromRole="FactVenta" ToRole="ItemImpre" />
-    <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_FactVenta" FromRole="FactVenta" ToRole="Retencion" />
-  </EntityType>
   <Association Name="FK_Cliente_GrupoPresupuesto">
     <End Type="SAC_Model.GrupoPresupuesto" Role="GrupoPresupuesto" Multiplicity="0..1" />
     <End Type="SAC_Model.Cliente" Role="Cliente" Multiplicity="*" />
@@ -2790,6 +2742,124 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Afip_TicketAcceso">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uniqueId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fecha_solicitud" Type="DateTime" Precision="3" />
+    <Property Name="fecha_expiracion" Type="DateTime" Precision="3" />
+    <Property Name="servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="sing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="usuario" Type="Int32" />
+  </EntityType>
+  <EntityType Name="FacturaElectronica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TIPOCBTE" Type="Int32" />
+    <Property Name="PUNTOVTA" Type="Int32" />
+    <Property Name="NROCBTE" Type="Int32" />
+    <Property Name="FECHACBTE" Type="DateTime" Precision="0" />
+    <Property Name="TIPODOC" Type="Int32" />
+    <Property Name="NRODOC" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="IDIVA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NETO" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NETO10" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IVA10" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FECHAVEN" Type="DateTime" Precision="0" />
+    <Property Name="TIPOSERV" Type="Int32" />
+    <Property Name="FDESDE" Type="DateTime" Precision="0" />
+    <Property Name="FHASTA" Type="DateTime" Precision="0" />
+    <Property Name="CAE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAVTO" Type="DateTime" Precision="0" />
+    <Property Name="RESULTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MOTIVO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="REPROCESO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="DOMICILIO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="LOCALIDAD" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NRONC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NROAUX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CODCLI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PRECEP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ALICUOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CODPAIS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IDMONEDA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="COTIZA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IDIOMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="FORMAPAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="XMLREQ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="XMLRES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OBS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CODBARRA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK__FactVenta__IdFac__12149A71" FromRole="FacturaElectronica" ToRole="FactVenta" />
+  </EntityType>
+  <EntityType Name="FactVenta">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFacturaElectronica" Type="Int32" />
+    <Property Name="IdTipoComprobante" Type="Int32" Nullable="false" />
+    <Property Name="NumeroFactura" Type="Int32" Nullable="false" />
+    <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="TotalDolares" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Parcial" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Saldo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Vencimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Baja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Impre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCobro" Type="DateTime" Precision="3" />
+    <Property Name="TipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Condicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdProvincia" Type="Int32" Nullable="false" />
+    <Property Name="IdPais" Type="Int32" Nullable="false" />
+    <Property Name="IdImputacion" Type="Int32" Nullable="false" />
+    <Property Name="NumeroCobro" Type="Int32" Nullable="false" />
+    <Property Name="Cotiza" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IdMoneda" Type="Int32" Nullable="false" />
+    <Property Name="ORef" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="YRef" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Descuento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CotizaP" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TipoFac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoDiario" Type="Int32" Nullable="false" />
+    <Property Name="Recibo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Periodo" Type="Int32" Nullable="false" />
+    <Property Name="NumeroTra" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Combria" Type="Double" Nullable="false" />
+    <Property Name="IngBr" Type="Double" Nullable="false" />
+    <Property Name="Anula" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="UltimaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cliente" Relationship="SAC_Model.FK_FactVenta_Cliente" FromRole="FactVenta" ToRole="Cliente" />
+    <NavigationProperty Name="FacturaElectronica" Relationship="SAC_Model.FK__FactVenta__IdFac__12149A71" FromRole="FactVenta" ToRole="FacturaElectronica" />
+    <NavigationProperty Name="TipoComprobanteVenta" Relationship="SAC_Model.FK_FactVenta_TipoComprobanteVenta" FromRole="FactVenta" ToRole="TipoComprobanteVenta" />
+    <NavigationProperty Name="TipoMoneda" Relationship="SAC_Model.FK_FactVenta_TipoMoneda" FromRole="FactVenta" ToRole="TipoMoneda" />
+    <NavigationProperty Name="FactVentaCobro" Relationship="SAC_Model.FK_FactVentaCobro_CompraFactura" FromRole="FactVenta" ToRole="FactVentaCobro" />
+    <NavigationProperty Name="ItemImpre" Relationship="SAC_Model.FK_ItemImpre_FactVenta" FromRole="FactVenta" ToRole="ItemImpre" />
+    <NavigationProperty Name="Retencion" Relationship="SAC_Model.FK_Retencion_FactVenta" FromRole="FactVenta" ToRole="Retencion" />
+  </EntityType>
   <Association Name="FK_FactVenta_Cliente">
     <End Type="SAC_Model.Cliente" Role="Cliente" Multiplicity="0..1" />
     <End Type="SAC_Model.FactVenta" Role="FactVenta" Multiplicity="*" />
@@ -2799,6 +2869,18 @@
       </Principal>
       <Dependent Role="FactVenta">
         <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FactVenta__IdFac__12149A71">
+    <End Type="SAC_Model.FacturaElectronica" Role="FacturaElectronica" Multiplicity="0..1" />
+    <End Type="SAC_Model.FactVenta" Role="FactVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FacturaElectronica">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FactVenta">
+        <PropertyRef Name="IdFacturaElectronica" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2862,67 +2944,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Afip_TicketAcceso">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="uniqueId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="fecha_solicitud" Type="DateTime" Precision="3" />
-    <Property Name="fecha_expiracion" Type="DateTime" Precision="3" />
-    <Property Name="servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="token" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="sing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="url" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="usuario" Type="Int32" />
-  </EntityType>
-  <EntityType Name="FacturaElectronica">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TIPOCBTE" Type="Int32" />
-    <Property Name="PUNTOVTA" Type="Int32" />
-    <Property Name="NROCBTE" Type="Int32" />
-    <Property Name="FECHACBTE" Type="DateTime" Precision="0" />
-    <Property Name="TIPODOC" Type="Int32" />
-    <Property Name="NRODOC" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-    <Property Name="IDIVA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="NETO" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="IVA" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="NETO10" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="IVA10" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="TOTAL" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="FECHAVEN" Type="DateTime" Precision="0" />
-    <Property Name="TIPOSERV" Type="Int32" />
-    <Property Name="FDESDE" Type="DateTime" Precision="0" />
-    <Property Name="FHASTA" Type="DateTime" Precision="0" />
-    <Property Name="CAE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="FECHAVTO" Type="DateTime" Precision="0" />
-    <Property Name="RESULTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="MOTIVO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-    <Property Name="REPROCESO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-    <Property Name="NOMBRE" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-    <Property Name="DOMICILIO" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-    <Property Name="LOCALIDAD" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
-    <Property Name="TELEFONO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="NRONC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="NROAUX" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CODCLI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PRECEP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ALICUOTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CODPAIS" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="IDMONEDA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="COTIZA" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="IDIOMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="FORMAPAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="XMLREQ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="XMLRES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="OBS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CODBARRA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="QR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-  </EntityType>
 </Schema>

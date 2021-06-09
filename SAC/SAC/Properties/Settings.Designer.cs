@@ -42,5 +42,15 @@ namespace SAC.Properties {
                 return ((string)(this["SAC_afip_wswhomo_Service"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://wswhomo.afip.gov.ar/wsfexv1/service.asmx")]
+        public string SAC_afip_wswhomo_Exportacion_Service {
+            get {
+                return ((string)(this["SAC_afip_wswhomo_Exportacion_Service"]));
+            }
+        }
     }
 }

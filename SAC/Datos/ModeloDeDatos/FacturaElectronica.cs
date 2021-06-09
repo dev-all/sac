@@ -14,6 +14,12 @@ namespace Datos.ModeloDeDatos
     
     public partial class FacturaElectronica
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FacturaElectronica()
+        {
+            this.FactVenta = new HashSet<FactVenta>();
+        }
+    
         public int ID { get; set; }
         public Nullable<int> TIPOCBTE { get; set; }
         public Nullable<int> PUNTOVTA { get; set; }
@@ -58,5 +64,8 @@ namespace Datos.ModeloDeDatos
         public string OBS { get; set; }
         public string CODBARRA { get; set; }
         public string QR { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FactVenta> FactVenta { get; set; }
     }
 }

@@ -583,6 +583,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdFacturaElectronica" Type="int" />
     <Property Name="IdTipoComprobante" Type="int" Nullable="false" />
     <Property Name="NumeroFactura" Type="int" Nullable="false" />
     <Property Name="Codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -1362,6 +1363,18 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     <Property Name="TotalDeuda" Type="decimal" Precision="38" Scale="2" />
     <Property Name="UltimoMovimiento" Type="datetime" />
   </EntityType>
+  <Association Name="FK__FactVenta__IdFac__12149A71">
+    <End Role="FacturaElectronica" Type="Self.FacturaElectronica" Multiplicity="0..1" />
+    <End Role="FactVenta" Type="Self.FactVenta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FacturaElectronica">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FactVenta">
+        <PropertyRef Name="IdFacturaElectronica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_AccionesPorRoles_Acciones">
     <End Role="Accion" Type="Self.Accion" Multiplicity="1" />
     <End Role="AccionPorRol" Type="Self.AccionPorRol" Multiplicity="*" />
@@ -2507,6 +2520,10 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
     [CuentaCorriente].[UltimoMovimiento] AS [UltimoMovimiento]
     FROM [dbo].[CuentaCorriente] AS [CuentaCorriente]</DefiningQuery>
     </EntitySet>
+    <AssociationSet Name="FK__FactVenta__IdFac__12149A71" Association="Self.FK__FactVenta__IdFac__12149A71">
+      <End Role="FacturaElectronica" EntitySet="FacturaElectronica" />
+      <End Role="FactVenta" EntitySet="FactVenta" />
+    </AssociationSet>
     <AssociationSet Name="FK_AccionesPorRoles_Acciones" Association="Self.FK_AccionesPorRoles_Acciones">
       <End Role="Accion" EntitySet="Accion" />
       <End Role="AccionPorRol" EntitySet="AccionPorRol" />

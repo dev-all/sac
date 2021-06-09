@@ -10,6 +10,7 @@ namespace Negocio.Modelos
    public class FacturaVentaModel
     {
         public int Id { get; set; }
+        public Nullable<int> IdFacturaElectronica { get; set; }
         public int IdTipoComprobante { get; set; }
         public int NumeroFactura { get; set; }
         public string Codigo { get; set; }

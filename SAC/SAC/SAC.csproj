@@ -275,6 +275,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\afip.wswhomo_Exportacion\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Models\Afip\LoginClass.vb" />
@@ -2906,6 +2911,65 @@
     <Content Include="Scripts\view\Reporte\ReportesJSPDF.js" />
     <Content Include="Scripts\view\TarjetaScript.js" />
     <Content Include="Templates\LoginTemplate.xml" />
+    <Content Include="Web References\afip.wswhomo_Exportacion\DummyResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXGetCMPResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponseAuthorize.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponseLast_CMP.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Cbte_Tipo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_CheckPermiso.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Ctz.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_DST_cuit.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_DST_pais.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Idi.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Inc.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_LastID.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Mon.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Mon_CON_COTIZACION.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Opc.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_PtoVenta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Tex.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\FEXResponse_Umed.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\afip.wswhomo_Exportacion\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\afip.wswhomo_Exportacion\service.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -3077,6 +3141,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
     <None Include="Web References\afip.wswhomo\service.wsdl" />
+    <None Include="Web References\afip.wswhomo_Exportacion\service.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3134,6 +3199,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SAC_afip_wswhomo_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://wswhomo.afip.gov.ar/wsfexv1/service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\afip.wswhomo_Exportacion\</RelPath>
+      <UpdateFromURL>https://wswhomo.afip.gov.ar/wsfexv1/service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SAC_afip_wswhomo_Exportacion_Service</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

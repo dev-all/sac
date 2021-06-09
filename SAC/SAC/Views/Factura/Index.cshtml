@@ -45,8 +45,6 @@
     @Html.HiddenFor(model => model.CuitSeleccionado)
     @Html.HiddenFor(model => model.idImputacion)
 
-
-
     @*@Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Proveedor.Id)*@
 
@@ -428,11 +426,19 @@
 
                     console.log($("#IdPuntoVenta").val());
 
-                    $("#IdPuntoVenta option[value=" + cliente.IdTipoCliente + "]").attr('selected', 'true');
-                    $("#IdPuntoVenta").val(cliente.IdTipoCliente);
+                    var puntoVenta;
+                    if (cliente.IdTipoCliente == 2) {
+                        puntoVenta = 2;
+                    }
+                    else {
+                        puntoVenta = 3;
+                    }
 
-                    console.log($("#IdPuntoVenta").val());
-                    console.log($("#IdPuntoVenta option:selected").text());
+                    $("#IdPuntoVenta option[value=" + puntoVenta + "]").attr('selected', 'true');
+                    $("#IdPuntoVenta").val(puntoVenta);
+
+                    //console.log($("#IdPuntoVenta").val());
+                    //console.log($("#IdPuntoVenta option:selected").text());
 
                     $("#NombreCliente").val(cliente.Codigo);
                     $("#CodigoCliente").val(cliente.Codigo);
@@ -682,7 +688,16 @@
                 function (data) {
                     var direccion = JSON.parse(data);
                     $("#DireccionCompuesta").val(direccion.Direccion + ' / ' + direccion.Provincia.Nombre + ' / ' + direccion.Localidad.Nombre);
-                    var cuitLimpio = direccion.Cuit.replaceAll("-", "");
+
+                    var cuitLimpio;
+                    if ($("#IdPuntoVenta").val() == 1) {
+                        cuitLimpio = direccion.Cuit;
+                    }
+                    else {
+                        cuitLimpio = direccion.Cuit.replaceAll("-", "");
+                    }
+
+                    
                     $("#Cuit").val(cuitLimpio);
                     $("#CuitSeleccionado").val(direccion.Cuit);
                     $("#CodPaisAfip").val(direccion.CodigoAfip);

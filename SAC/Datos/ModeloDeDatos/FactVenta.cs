@@ -23,6 +23,7 @@ namespace Datos.ModeloDeDatos
         }
     
         public int Id { get; set; }
+        public Nullable<int> IdFacturaElectronica { get; set; }
         public int IdTipoComprobante { get; set; }
         public int NumeroFactura { get; set; }
         public string Codigo { get; set; }
@@ -65,6 +66,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual Cliente Cliente { get; set; }
+        public virtual FacturaElectronica FacturaElectronica { get; set; }
         public virtual TipoComprobanteVenta TipoComprobanteVenta { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
