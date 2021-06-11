@@ -4,6 +4,10 @@
 
     ViewBag.Title = "Registro de Ventas Mensuales";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    List<SelectListItem> ListaProvincia = (List<SelectListItem>)ViewBag.ListaProvincia;
+
 }
 <!-- Date picker plugins css -->
 <link href="/Content/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
@@ -35,10 +39,11 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-xlg-2 col-lg-2 col-md-2">
                                     <div class="form-group ">
                                         <small>Mes</small>
-                                        <select class="form-control form-control-sm" name="Mes" id="Mes">
+                                        <select class="form-control form-control-sm" name="Mes" id="Mes" value="@(Model!=null ? Model.MesNro : string.Empty)">
                                             @Html.Raw(ViewBag.ListaMes)
                                         </select>
                                     </div>
@@ -48,8 +53,8 @@
                                 <div class="col-xlg-1 col-lg-1 col-md-1">
                                     <div class="form-group ">
                                         <small>Periodo:</small>
-                                        <input type="text" name="Periodo"  class="form-control" id="Periodo" readonly="true" />
-                                    
+                                        <input type="text" name="Periodo" value="@(Model!=null ? Model.Periodo : string.Empty)" class="form-control" id="Periodo" readonly="true" />
+
 
                                     </div>
                                 </div>
@@ -64,7 +69,7 @@
 
                             </div>
 
-                       </div>
+                        </div>
 
 
 
@@ -76,28 +81,30 @@
                     @if (Model.ListaConsultaIva != null)
                     {
 
-                        <div class="row">
-                            <div class="col-md-6"></div>
-                               
 
-                            <div class="col-md-6 columns-left">
-                                <span data-toggle="modal" data-target="#myModalResumen" data-id="">
-                                    <a class="btn btn-success btn-sm m-t-20" role='button' data-toggle="tooltip" data-placement="top" title="Abrir Resumen">Resumen</a>
-                                </span>
-
-
-                                <button type="submit" id="btnConsultar" class="btn btn-success btn-sm m-t-20"> <i class="fa fa-check"></i> Imprimir</button>
-                                <button type="submit" id="btnConsultar" class="btn btn-success btn-sm m-t-20"> <i class="fa fa-check"></i> Exportar</button>
-
-                               
+                        <input type="hidden" id="PeriodoBuscar" name="PeriodoBuscar" value="$@Html.Raw(Model.Periodo)" />
 
 
 
 
-                            </div>
+
+                        <div class="form-actions mt-5">
+
+                            <span data-toggle="modal" data-target="#myModalResumen" data-id="">
+                                <a class="btn btn-success btn-sm m-t-20" role='button' data-toggle="tooltip" data-placement="top" title="Abrir Resumen">Resumen</a>
+                            </span>
+
+                            <span data-toggle="modal" data-target="#myModalImpresionIva" data-id="">
+                                <a class="btn btn-success btn-sm m-t-20" role='button' data-toggle="tooltip" data-placement="top" title="Abrir Resumen">Impresion Iva</a>
+                            </span>
 
 
+                            
                         </div>
+
+
+
+
 
 
 
@@ -229,6 +236,96 @@
 
                             </div>
                         </div>
+
+
+
+                        <div class="modal fullscreen-modal fade" id="myModalImpresionIva" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="myModalLabel">Resumen Iva Ventas Periodo: @Html.DisplayFor(x => x.ConsultaIvaTotales.Periodo)</h4>
+
+                                    </div>
+                                    <div class="modal-body">
+
+
+
+                                        <div class="table-responsive">
+                                        <table id="example24" class="table stylish-table">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Clase</th>
+                                                    <th>Tipo</th>
+                                                    <th>Punto</th>
+                                                    <th>Numero Factura</th>
+                                                    <th>Empresa</th>
+                                                    <th>Neto</th>
+                                                    <th>Total Iva</th>
+                                                    <th>Gasto</th>
+                                                    <th>Isib</th>
+                                                    <th>Total</th>
+                                                    <th>Cuit</th>
+                                                    <th>Dolar</th>
+                                                    <th>Moneda</th>
+                                                    <th>Periodo</th>
+                                                    <th>Asiento</th>
+
+
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var iva in Model.ListaFacturaVentaIva)
+                                                {
+                                                    <tr>
+                                                        <td>@iva.Clase</td>
+                                                        <td>@iva.Tipo</td>
+                                                        <td>@iva.Punto</td>
+                                                        <td>@iva.NumeroFactura</td>
+                                                        <td>@iva.Empresa</td>
+                                                        <td>@iva.Neto</td>
+                                                        <td>@iva.TotalIva</td>
+                                                        <td>@iva.Gasto</td>
+                                                        <td>@iva.Isib</td>
+                                                        <td>@iva.Total</td>
+                                                        <td>@iva.Cuit</td>
+                                                        <td>@iva.Dolar</td>
+                                                        <td>@iva.Moneda</td>
+                                                        <td>@iva.Periodo</td>
+                                                        <td>@iva.Asiento</td>
+
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                          
+                                        </table>
+                                    </div>
+                                                <br />
+                                                <br />
+                                                @using (Html.BeginForm("Export", "Cliente", FormMethod.Post))
+                                                {
+                                                    <input type="submit" class="btn btn-success btn-sm m-t-20" value="Export" />
+                                                }
+
+
+
+
+                                                <input type="hidden" name="ID" id="Id" value="" />
+                                        </div>
+                                        <div class="modal-footer">
+
+                                            <button type="button" class="btn btn-raised btn-default" data-dismiss="modal">Cancelar</button>
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+
+
+
                     }
 
                 </div>
@@ -413,6 +510,12 @@
 </div>
 
 
+
+
+
+
+
+
 @section Scripts{
 
     <!-- ============================================================== -->
@@ -467,6 +570,27 @@
                         pageSize: 'legal'
                     }
                 ]
+            });
+
+
+            $('#example24').DataTable({
+                "language": { "url": "../Content/assets/plugins/datatables/es.txt" },
+                "order": [[2, 'asc']],
+                'paging': true,
+                'lengthChange': false,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+                /*,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        extend: 'excel',
+                        orientation: 'landscape',
+                        pageSize: 'legal'
+                    }
+                ]*/
             });
         });
 

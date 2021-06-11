@@ -13,8 +13,10 @@ namespace Agenda.Infrastructure
         {
 
 
+            CreateMap<ConsultaFacturaVentaIva, FacturaVentaIvaModel>();
+            CreateMap<FacturaVentaIvaModel, ConsultaFacturaVentaIva>();
 
-                  CreateMap<ConsultaIvaTotales, ConsultaIvaTotalesModel>();
+            CreateMap<ConsultaIvaTotales, ConsultaIvaTotalesModel>();
             CreateMap<ConsultaIvaTotalesModel, ConsultaIvaTotales>();
 
 

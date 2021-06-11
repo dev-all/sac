@@ -24,9 +24,19 @@ namespace SAC.Models
 
 
 
-        public List<ConsultaIvaVentaModelView> ListaConsultaIva { get; set; }
+
+        public string Anio { get; set; }
+        public string MesNro { get; set; }
+        public string Periodo { get; set; }
+
+       
 
         public ConsultaIvaTotalesModelView ConsultaIvaTotales { get; set; }
+
+
+        public List<ConsultaIvaVentaModelView> ListaConsultaIva { get; set; }
+        public List<FacturaVentaIvaModelView> ListaFacturaVentaIva { get; set; }
+        
 
 
 

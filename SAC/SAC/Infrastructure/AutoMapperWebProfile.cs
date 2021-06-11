@@ -15,9 +15,15 @@ namespace SAC.Infrastructure
         public AutoMapperWebProfile()
         {
 
-             
 
-                CreateMap<ConsultaIvaTotalesModel, ConsultaIvaTotalesModelView>();
+
+
+            CreateMap<FacturaVentaIvaModel, FacturaVentaIvaModelView>();
+            CreateMap<FacturaVentaIvaModelView, FacturaVentaIvaModel>();
+
+
+
+            CreateMap<ConsultaIvaTotalesModel, ConsultaIvaTotalesModelView>();
             CreateMap<ConsultaIvaTotalesModelView, ConsultaIvaTotalesModel>();
 
 

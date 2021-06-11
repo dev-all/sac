@@ -548,3 +548,12 @@ C:\dev-e\SAC\SAC\obj\Debug\SAC.csproj.CoreCompileInputs.cache
 C:\dev-e\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
 C:\dev-e\SAC\SAC\obj\Debug\SAC.dll
 C:\dev-e\SAC\SAC\obj\Debug\SAC.pdb
+C:\dev-e\SAC\SAC\bin\ClosedXML.dll
+C:\dev-e\SAC\SAC\bin\DocumentFormat.OpenXml.dll
+C:\dev-e\SAC\SAC\bin\ExcelNumberFormat.dll
+C:\dev-e\SAC\SAC\bin\System.IO.FileSystem.Primitives.dll
+C:\dev-e\SAC\SAC\bin\System.IO.Packaging.dll
+C:\dev-e\SAC\SAC\bin\ClosedXML.pdb
+C:\dev-e\SAC\SAC\bin\ClosedXML.xml
+C:\dev-e\SAC\SAC\bin\DocumentFormat.OpenXml.xml
+C:\dev-e\SAC\SAC\bin\ExcelNumberFormat.xml

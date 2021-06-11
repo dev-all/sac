@@ -2358,9 +2358,6 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="GetIvaVentasTotalPesos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Periodo" Type="int" Mode="In" />
-  </Function>
   <EntityContainer Name="Agenda_ModelStoreContainer">
     <EntitySet Name="Accion" EntityType="Self.Accion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AccionPorRol" EntityType="Self.AccionPorRol" Schema="dbo" store:Type="Tables" />

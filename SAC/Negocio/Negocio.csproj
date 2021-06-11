@@ -96,6 +96,7 @@
     <Compile Include="Modelos\FacturaPagoModel.cs" />
     <Compile Include="Modelos\CobroFacturaModel.cs" />
     <Compile Include="Modelos\FacturaVentaItemsModel.cs" />
+    <Compile Include="Modelos\FacturaVentaIvaModel.cs" />
     <Compile Include="Modelos\FacturaVentaModel.cs" />
     <Compile Include="Modelos\GrupoPresupuestoModel.cs" />
     <Compile Include="Modelos\ImputacionModel.cs" />

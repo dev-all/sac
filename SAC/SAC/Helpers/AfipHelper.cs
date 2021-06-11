@@ -42,6 +42,7 @@ namespace SAC.Helpers
                   ClaseLogin = ObtenerTicketAccesoSinWS("wsfe", OUsuario.IdUsuario);
 
              }
+
             ClaseLogin.Token = login.token;          
             FEAuthRequest Autenticacion = new FEAuthRequest();
             Autenticacion.Cuit = long.Parse(ConfigurationManager.AppSettings["cuitUserAfip"].ToString());

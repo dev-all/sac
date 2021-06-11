@@ -379,6 +379,27 @@ namespace Negocio.Servicios
 
 
 
+
+        //5  Impresion de Iva
+
+        public List<FacturaVentaIvaModel> GetIvaImpresion(string Periodo)
+        {
+            try
+            {
+                return Mapper.Map<List<ConsultaFacturaVentaIva>, List<FacturaVentaIvaModel>>(oClienteRepositorio.GetIvaImpresion(Periodo));
+            }
+            catch (Exception ex)
+            {
+                _mensaje?.Invoke("Ops!, A ocurriodo un error. Intente mas tarde por favor" + ex.Message, "error");
+
+                return null;
+            }
+        }
+
+
+      
+
+
         #endregion
 
 

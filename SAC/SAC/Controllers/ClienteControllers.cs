@@ -10,6 +10,10 @@ using AutoMapper;
 using Negocio.Modelos;
 using System.Globalization;
 using System.Text;
+using ClosedXML.Excel;
+using System.Data;
+using System.IO;
+
 
 namespace SAC.Controllers
 {
@@ -245,78 +249,134 @@ try
 
         //3  Registro de Ventas Mensuales
 
+        //4  Registro de Boton Resumen
+
+     
         public ActionResult ConsultaIvaVentas(string Periodo = null, string Anio=null, string Mes = null)
         {
 
 
             ConsultaIvaVentaModelView model = new ConsultaIvaVentaModelView();
             model.ListaConsultaIva = null;
+            model.ListaFacturaVentaIva = null;
 
-          //  int Anio = DateTime.Now.Year;
-          //  int Mes = DateTime.Now.Month;
+            //  int Anio = DateTime.Now.Year;
+            //  int Mes = DateTime.Now.Month;
 
             if (!string.IsNullOrEmpty(Periodo))
             {
 
-              
+                model.Anio = Anio;
+                model.MesNro = Mes;
+                model.Periodo = Periodo;
+
+
                 model.ListaConsultaIva = Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModelView>>(oServicioCliente.GetIvaVentas(Periodo));
                 model.ConsultaIvaTotales= Mapper.Map<ConsultaIvaTotalesModel, ConsultaIvaTotalesModelView>(oServicioCliente.GetIvaVentasTotales(Periodo));
+                
+
+                model.ListaFacturaVentaIva= Mapper.Map<List<FacturaVentaIvaModel>, List<FacturaVentaIvaModelView>>(oServicioCliente.GetIvaImpresion(Periodo));
 
                 // model.ListaConsultaIva= Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModel>>(oServicioCliente.GetIvaVentas(Periodo, Mes));
                 model.ConsultaIvaTotales.Periodo = Mes + "/20" +  Anio;
+
+                Session["Datos"] = model.ListaFacturaVentaIva;
+                Session["Periodo"] = Periodo;
+
+
+
 
 
             }
 
 
-            CargarAnio();
-            CargarMes();
+            CargarAnio(Anio);
+            CargarMes(Mes);
 
             return View(model);
         }
 
 
 
-        //3  Registro de Boton Resumen
+        //  5. Boton Impresión
 
-        public ActionResult ConsultaIvaVentasResumen(int anio = 0, int mes = 0)
+        //  BOTON IMPRESION
+
+        // La Impresión tiene 2 partes. (IVA.PDF)
+
+        //1.- Listado de todos los movimientos.
+        //2.- Los totales
+        //3.-Totales Locales y Exterior por mes se obtiene de la Tabla ITEMImpr.
+         
+        [HttpPost]
+        public FileResult Export()
         {
+            List<FacturaVentaIvaModelView> listResultado = new List<FacturaVentaIvaModelView>();
 
 
-            ConsultaIvaVentaModelView model = new ConsultaIvaVentaModelView();
-            model.ListaConsultaIva = null;
+            DataTable dt = new DataTable("Grid");
 
-            //int Anio = DateTime.Now.Year;
-            //int Mes = DateTime.Now.Month;
-
-            //if (anio != 0)
-
-            //{
-
-            //    if (mes != 0)
-            //    {
-            //        Anio = anio;
-            //        Mes = mes;
-            //    }
-
-            //    string Periodo = Convert.ToString(Anio) + Convert.ToString(Mes);
-
-            //    model.ListaConsultaIva = Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModelView>>(oServicioCliente.GetIvaVentas(Periodo));
-
-            //    // model.ListaConsultaIva= Mapper.Map<List<ConsultaIvaVentaModel>, List<ConsultaIvaVentaModel>>(oServicioCliente.GetIvaVentas(Periodo, Mes));
-
-            //}
+            dt.Columns.AddRange(new DataColumn[16]
+                                             {                                
+                                             new DataColumn("Clase"),
+                                             new DataColumn("Tipo"),
+                                             new DataColumn("Punto"),
+                                             new DataColumn("NumeroFactura"),
+                                             new DataColumn("Codigo"),
+                                             new DataColumn("Empresa"),                                             
+                                             new DataColumn("Neto"),
+                                             new DataColumn("TotalIva"),
+                                             new DataColumn("Gasto"),
+                                             new DataColumn("Isib"),
+                                             new DataColumn("Total"),
+                                             new DataColumn("Cuit"),
+                                             new DataColumn("Dolar"),
+                                             new DataColumn("Moneda"),
+                                             new DataColumn("Periodo"),
+                                             new DataColumn("Asiento")
 
 
-            CargarAnio();
-            CargarMes();
 
-            return View(model);
+
+
+
+                                             });
+
+
+            listResultado = Session["Datos"] as List<FacturaVentaIvaModelView>;
+
+            string Periodo = "";
+            Periodo= Session["Periodo"] as string;
+
+            foreach (FacturaVentaIvaModelView i  in listResultado)
+            {
+
+                dt.Rows.Add(i.Clase,i.Tipo,i.Punto,i.NumeroFactura,i.Codigo,i.Codigo,i.Neto,i.TotalIva,i.Gasto,i.Isib,i.Total,i.Cuit,i.Dolar,i.Moneda,i.Periodo,i.Asiento);
+
+
+            }
+
+
+
+         
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "IvaCLI" + Periodo + ".xlsx");
+                }
+            }
         }
 
 
 
-        private void CargarAnio()
+
+
+
+
+        public void CargarAnio(string anio = null)
         {
             List<Anios> ListaAnio = new List<Anios>()
             {
@@ -334,15 +394,32 @@ try
             StringBuilder sb = new StringBuilder();
             foreach (var type in ListaAnio)
             {
-                sb.Append("<option value='" + type.Id + "'>" + type.Descripcion + "</option>");
+
+                if (anio == type.Id)
+                {
+                    sb.Append("<option value='" + type.Id + "' selected>" + type.Descripcion + "</option>");
+
+                }
+
+                else
+
+                {
+                    sb.Append("<option value='" + type.Id + "'>" + type.Descripcion + "</option>");
+
+                }
+
+
+
+
             }
+
             ViewBag.ListaAnio = sb.ToString();
         }
 
 
 
 
-        private void CargarMes()
+        public void CargarMes(string mes = null)
         {
             List<Meses> ListaMes = new List<Meses>()
             {
@@ -360,9 +437,23 @@ try
                 new Meses(){ Id = "11", Descripcion = "Noviembre" },
                 new Meses(){ Id = "12", Descripcion = "Diciembre" }};
             StringBuilder sb = new StringBuilder();
+
             foreach (var type in ListaMes)
             {
-                sb.Append("<option value='" + type.Id + "'>" + type.Descripcion + "</option>");
+                if (mes == type.Id)
+                {
+                    sb.Append("<option value='" + type.Id + "' selected>" + type.Descripcion + "</option>");
+
+                }
+
+                else
+
+                {
+                    sb.Append("<option value='" + type.Id + "'>" + type.Descripcion + "</option>");
+
+                }
+
+
             }
             ViewBag.ListaMes = sb.ToString();
         }
@@ -644,9 +735,7 @@ try
                                       Value = x.Id.ToString(),
                                       Text = x.Descripcion
                                   })).ToList();
-            retornoLista.Insert(0, new SelectListItem { Text = "--Seleccione el Idioma--", Value = "" });
-
-           
+            retornoLista.Insert(0, new SelectListItem { Text = "--Seleccione el Idioma--", Value = "" });        
 
 
 

@@ -446,6 +446,34 @@ namespace Datos.Repositorios
         }
 
 
+        //4  Impresion de Iva de Ventas Totales
+
+     
+        public List<ConsultaFacturaVentaIva> GetIvaImpresion(string Periodo)
+        {
+
+
+
+            List <ConsultaFacturaVentaIva> lista = new List<ConsultaFacturaVentaIva>();
+
+            int periodo = Convert.ToInt32(Periodo);
+
+            try
+            {
+                SqlParameter param1 = new SqlParameter("@Periodo", periodo);
+                lista = context.Database.SqlQuery<ConsultaFacturaVentaIva>("GetIvaImpresion @Periodo", param1).ToList();
+            }
+            catch (Exception ex)
+            {
+                lista = null;
+            }
+
+            return lista;
+
+
+
+        }
+
 
 
 
@@ -456,7 +484,7 @@ namespace Datos.Repositorios
 
 
 
-      
+
 
 
     }
