@@ -22,6 +22,11 @@ using SAC.afip.wswhomo_Exportacion; //ws facturas externas
 using System.Security.Cryptography.X509Certificates;
 using System.Security;
 using SAC.Helpers;
+using SAC.QR;
+
+using System.Drawing;
+
+
 using System.Configuration;
 
 namespace SAC.Controllers
@@ -205,7 +210,7 @@ namespace SAC.Controllers
 
                     string cae = "";
                     string mensajeErrorAfip = "";
-                    string mensajeObservacionesAfip = "";
+                    //string mensajeObservacionesAfip = "";
                     string ResultadoAfip = "";
 
                     //pregunto si la carga de la factura es manual, si es asi no inserta la factura electronica
@@ -367,6 +372,30 @@ namespace SAC.Controllers
                     FacturaElectronica.IVA10 = 0;
                     FacturaElectronica.NETO10 = 0;
                     FacturaElectronica.IDMONEDA = moneda;
+
+
+                    DatosQrAfip qrAfip = new DatosQrAfip();
+                    qrAfip.ver = 1;
+                    qrAfip.fecha = model.Fecha;
+                    qrAfip.cuit = long.Parse(System.Configuration.ConfigurationManager.AppSettings["cuitUserAfip"].ToString());
+                    qrAfip.ptoVenta = model.IdPuntoVenta;
+                    qrAfip.tipoCmp = cbt.Id;
+                    qrAfip.nroCmp = comprobanteActualizado;
+                    qrAfip.Importe = model.TotalFactura; ;
+                    qrAfip.moneda = moneda;
+                    qrAfip.ctz = 1;
+                    qrAfip.tipoDocRec = 80;
+                    qrAfip.nroDocRec = long.Parse(model.Cuit);
+                    qrAfip.tipoCodAut = "E";
+                    qrAfip.codAut = long.Parse(cae);
+
+                    string jsonQrAfip = Newtonsoft.Json.JsonConvert.SerializeObject(qrAfip);
+
+                    GeneradorQR Qr = new GeneradorQR();
+                    Bitmap bm =  Qr.GetQRBitmap(jsonQrAfip);
+                    string Qr64b = Qr.convertirBase64(bm);
+
+                    FacturaElectronica.QR = Qr64b;
 
                     FacturaElectronicaModel FacturaElectronicaInsertada = servicioFacturaElectronica.Agregar(FacturaElectronica);
 
