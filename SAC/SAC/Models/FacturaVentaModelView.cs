@@ -59,6 +59,7 @@ namespace SAC.Models
         public ICollection<ItemImprModelView> ItemImpre { get; set; }
         public ICollection<RetencionModelView> Retencion { get; set; }
 
+        public ICollection<FacturaElectronicaModelView> FacturaElectronica { get; set; }
         public ICollection<ClienteModelView> Cliente { get; set; }
 
 

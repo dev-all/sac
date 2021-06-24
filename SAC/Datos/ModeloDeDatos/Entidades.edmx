@@ -579,7 +579,7 @@
           <Property Name="FORMAPAGO" Type="varchar" MaxLength="50" />
           <Property Name="XMLREQ" Type="varchar(max)" />
           <Property Name="XMLRES" Type="varchar(max)" />
-          <Property Name="OBS" Type="varchar" MaxLength="50" />
+          <Property Name="OBS" Type="varchar(max)" />
           <Property Name="CODBARRA" Type="varchar" MaxLength="50" />
           <Property Name="QR" Type="varchar(max)" />
         </EntityType>
@@ -604,7 +604,8 @@
           <Property Name="Impre" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FechaCobro" Type="datetime" />
           <Property Name="TipoIva" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Concepto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Concepto" Type="nvarchar" MaxLength="350" />
+          <Property Name="IdDto" Type="int" />
           <Property Name="Marca" Type="nvarchar" MaxLength="1" />
           <Property Name="Condicion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdProvincia" Type="int" Nullable="false" />
@@ -5667,7 +5668,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="FORMAPAGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="XMLREQ" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="XMLRES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="OBS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OBS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CODBARRA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="QR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="FactVenta" Relationship="SAC_Model.FK__FactVenta__IdFac__12149A71" FromRole="FacturaElectronica" ToRole="FactVenta" />
@@ -5693,7 +5694,8 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
           <Property Name="Impre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FechaCobro" Type="DateTime" Precision="3" />
           <Property Name="TipoIva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Concepto" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="IdDto" Type="Int32" />
           <Property Name="Marca" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="Condicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdProvincia" Type="Int32" Nullable="false" />
@@ -7202,6 +7204,7 @@ advertencia 6002: La tabla o vista 'SAC.dbo.CuentaCorriente' no tiene definida n
                 <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
                 <ScalarProperty Name="Condicion" ColumnName="Condicion" />
                 <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="IdDto" ColumnName="IdDto" />
                 <ScalarProperty Name="Concepto" ColumnName="Concepto" />
                 <ScalarProperty Name="TipoIva" ColumnName="TipoIva" />
                 <ScalarProperty Name="FechaCobro" ColumnName="FechaCobro" />

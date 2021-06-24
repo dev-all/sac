@@ -58,6 +58,7 @@ namespace Negocio.Modelos
         public  ICollection<ItemImpre> ItemImpre { get; set; }
         public  ICollection<Retencion> Retencion { get; set; }
 
+        public ICollection <FacturaElectronicaModel> FacturaElectronica { get; set; }
         public ICollection<ClienteModel> Cliente { get; set; }
 
        

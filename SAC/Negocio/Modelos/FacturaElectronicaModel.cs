@@ -53,5 +53,7 @@ namespace Negocio.Modelos
         public string OBS { get; set; }
         public string CODBARRA { get; set; }
         public string QR { get; set; }
+
+        public  ICollection<FacturaVentaModel> FactVenta { get; set; }
     }
 }

@@ -56,5 +56,7 @@ namespace SAC.Models
         public string OBS { get; set; }
         public string CODBARRA { get; set; }
         public string QR { get; set; }
+
+        public ICollection<FacturaVentaModelView> FactVenta { get; set; }
     }
 }

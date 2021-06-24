@@ -40,6 +40,7 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> FechaCobro { get; set; }
         public string TipoIva { get; set; }
         public string Concepto { get; set; }
+        public Nullable<int> IdDto { get; set; }
         public string Marca { get; set; }
         public string Condicion { get; set; }
         public int IdProvincia { get; set; }

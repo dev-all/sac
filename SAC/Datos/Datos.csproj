@@ -299,7 +299,6 @@
     <Compile Include="ModeloDeDatos\ValorCotizacion.cs">
       <DependentUpon>Entidades.tt</DependentUpon>
     </Compile>
- 
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\Afip_TicketAccesoRepositorio.cs" />
     <Compile Include="Repositorios\ArticuloRepositorio.cs" />

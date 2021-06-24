@@ -38,6 +38,7 @@ namespace Datos.Repositorios
 
         public FactVenta GetFacturaVentaPorNumero(int nroBuscado, int idCliente)
         {
+            context.Configuration.LazyLoadingEnabled = false;
             FactVenta FacturasVentas = context.FactVenta.Where(p => p.Activo == true && p.NumeroFactura.Equals(nroBuscado) && p.IdCliente == idCliente).First();
             return FacturasVentas;
         }
