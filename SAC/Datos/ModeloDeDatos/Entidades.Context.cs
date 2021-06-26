@@ -96,7 +96,7 @@ namespace Datos.ModeloDeDatos
         public virtual DbSet<Retencion> Retencion { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Afip_TicketAcceso> Afip_TicketAcceso { get; set; }
-        public virtual DbSet<FacturaElectronica> FacturaElectronica { get; set; }
         public virtual DbSet<FactVenta> FactVenta { get; set; }
+        public virtual DbSet<FacturaElectronica> FacturaElectronica { get; set; }
     }
 }

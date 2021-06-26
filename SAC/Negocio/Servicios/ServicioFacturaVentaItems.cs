@@ -34,7 +34,7 @@ namespace Negocio.Servicios
             FacturaVentaItemsModel facturaItem = new FacturaVentaItemsModel();
             try
             {
-                FacturaVentaModel factura = Mapper.Map <FactVenta, FacturaVentaModel>(oFacturaVenta.GetFacturaVentaPorNumero(nroFactura));
+                FacturaVentaModel factura = Mapper.Map <FactVenta, FacturaVentaModel>(oFacturaVenta.GetFacturaVentaPorNumero(nroFactura, idComprobante.ToString()));
                 List<ItemImprModel> listaItems = Mapper.Map<List<ItemImpre>, List<ItemImprModel>>(oItemImpr.GetAllItemImpreNroFactura(nroFactura, idComprobante));
 
                 facturaItem.factura = factura;

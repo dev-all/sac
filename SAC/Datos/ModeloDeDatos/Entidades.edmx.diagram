@@ -153,15 +153,15 @@
         <AssociationConnector Association="SAC_Model.FK_Cliente_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_ClienteDireccion_Cliente" />
         <EntityTypeShape EntityType="SAC_Model.Afip_TicketAcceso" Width="1.5" PointX="26.375" PointY="23.75" />
-        <EntityTypeShape EntityType="SAC_Model.FacturaElectronica" Width="1.5" PointX="26.375" PointY="28.25" />
         <EntityTypeShape EntityType="SAC_Model.FactVenta" Width="1.5" PointX="35.125" PointY="20.375" />
         <AssociationConnector Association="SAC_Model.FK_FactVenta_Cliente" />
-        <AssociationConnector Association="SAC_Model.FK__FactVenta__IdFac__12149A71" />
         <AssociationConnector Association="SAC_Model.FK_FactVenta_TipoComprobanteVenta" />
         <AssociationConnector Association="SAC_Model.FK_FactVenta_TipoMoneda" />
         <AssociationConnector Association="SAC_Model.FK_FactVentaCobro_CompraFactura" />
         <AssociationConnector Association="SAC_Model.FK_ItemImpre_FactVenta" />
         <AssociationConnector Association="SAC_Model.FK_Retencion_FactVenta" />
+        <EntityTypeShape EntityType="SAC_Model.FacturaElectronica" Width="1.5" PointX="28.75" PointY="28.5" />
+        <AssociationConnector Association="SAC_Model.FK__FactVenta__IdFac__12149A71" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

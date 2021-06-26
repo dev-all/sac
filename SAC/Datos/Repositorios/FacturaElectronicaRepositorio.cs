@@ -25,7 +25,7 @@ namespace Datos.Repositorios
 
         public FacturaElectronica GetFacturasElectonicasPorId(int tipoComprobante, int idPuntoVenta, int nroCbte)
         {
-            return context.FacturaElectronica.Where(p => p.TIPOCBTE == tipoComprobante  && p.PUNTOVTA == idPuntoVenta && p.NROCBTE == nroCbte).First();
+            return context.FacturaElectronica.Where(p => p.ID_TIPOCBTE == tipoComprobante  && p.PUNTOVTA == idPuntoVenta && p.NROCBTE_AFIP == nroCbte).First();
         }
 
         public FacturaElectronica Agregar(FacturaElectronica oFacturaElectronica)

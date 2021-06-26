@@ -67,7 +67,6 @@ namespace Datos.ModeloDeDatos
         public Nullable<System.DateTime> UltimaModificacion { get; set; }
     
         public virtual Cliente Cliente { get; set; }
-        public virtual FacturaElectronica FacturaElectronica { get; set; }
         public virtual TipoComprobanteVenta TipoComprobanteVenta { get; set; }
         public virtual TipoMoneda TipoMoneda { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -76,5 +75,6 @@ namespace Datos.ModeloDeDatos
         public virtual ICollection<ItemImpre> ItemImpre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Retencion> Retencion { get; set; }
+        public virtual FacturaElectronica FacturaElectronica { get; set; }
     }
 }

@@ -10,9 +10,9 @@ namespace Negocio.Modelos
    public class FacturaElectronicaModel
     {
         public int ID { get; set; }
-        public Nullable<int> TIPOCBTE { get; set; }
+        public Nullable<int> ID_TIPOCBTE { get; set; }
         public Nullable<int> PUNTOVTA { get; set; }
-        public Nullable<int> NROCBTE { get; set; }
+        public Nullable<int> NROCBTE_AFIP { get; set; }
         public Nullable<System.DateTime> FECHACBTE { get; set; }
         public Nullable<int> TIPODOC { get; set; }
         public string NRODOC { get; set; }
@@ -53,6 +53,7 @@ namespace Negocio.Modelos
         public string OBS { get; set; }
         public string CODBARRA { get; set; }
         public string QR { get; set; }
+        public Nullable<long> ID_CBTE_WSAFIP { get; set; }
 
         public  ICollection<FacturaVentaModel> FactVenta { get; set; }
     }

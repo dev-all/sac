@@ -330,3 +330,9 @@ D:\sac\sac\SAC\SAC\obj\Debug\SAC.csproj.CoreCompileInputs.cache
 D:\sac\sac\SAC\SAC\obj\Debug\SAC.csproj.CopyComplete
 D:\sac\sac\SAC\SAC\obj\Debug\SAC.dll
 D:\sac\sac\SAC\SAC\obj\Debug\SAC.pdb
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\SAC\bin\roslyn\csc.exe
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\SAC\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\SAC\bin\roslyn\System.IO.Compression.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\SAC\bin\roslyn\System.Reflection.Metadata.dll
+E:\TRABAJOS DE PROGRAMACION\sac\sac\SAC\SAC\bin\roslyn\System.ValueTuple.dll

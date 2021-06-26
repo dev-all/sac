@@ -43,14 +43,13 @@ namespace Datos.Repositorios
             return FacturasVentas;
         }
 
-        public FactVenta GetFacturaVentaPorNumero(int nroBuscado)
+        public FactVenta GetFacturaVentaPorNumero(int nroBuscado, string idComprobante)
         {
             context.Configuration.LazyLoadingEnabled = false;
-            FactVenta FacturasVentas = context.FactVenta.Where(p => p.Activo == true && p.NumeroFactura.Equals(nroBuscado)).First();
+            int idComprobantei = int.Parse(idComprobante);
+            FactVenta FacturasVentas = context.FactVenta.Where(p => p.Activo == true && p.NumeroFactura.Equals(nroBuscado) && p.IdTipoComprobante == idComprobantei).First();
             return FacturasVentas;
         }
-
-
 
 
         public FactVenta Agregar(FactVenta oFactVenta)

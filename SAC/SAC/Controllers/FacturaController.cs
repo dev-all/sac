@@ -206,6 +206,8 @@ namespace SAC.Controllers
 
             long cuitOriginador = long.Parse(System.Configuration.ConfigurationManager.AppSettings["cuitUserAfip"].ToString());
 
+            long nroFactura = 0;
+
             switch (model.idTipoComprobanteSeleccionado)
             {
                
@@ -213,6 +215,7 @@ namespace SAC.Controllers
                 case 1: //factura 
                     #region Factura
                     string cae = "";
+                    long idWsAfip = 0 ;
                     string mensajeErrorAfip = "";
                     //string mensajeObservacionesAfip = "";
                     string ResultadoAfip = "";
@@ -254,7 +257,9 @@ namespace SAC.Controllers
                                     if (a.FEXErr.ErrMsg == "OK")
                                     {
                                         ResultadoAfip = "A";
+                                        idWsAfip = a.FEXResultAuth.Id;
                                         cae = a.FEXResultAuth.Cae;
+                                        nroFactura = a.FEXResultAuth.Cbte_nro;
                                     }
                                     else
                                     {
@@ -371,9 +376,10 @@ namespace SAC.Controllers
                     FacturaElectronica.FORMAPAGO = model.IdTipoPago.ToString();
                     FacturaElectronica.TOTAL = model.TotalFactura;
                     FacturaElectronica.NETO = model.TotalFactura;
-                    FacturaElectronica.NROCBTE = comprobanteActualizado;
+                    FacturaElectronica.NROCBTE_AFIP = comprobanteActualizado;
                     FacturaElectronica.PUNTOVTA = model.IdPuntoVenta;
-                    FacturaElectronica.TIPOCBTE = cbt.Id; //traigo el tipo cbte
+                    FacturaElectronica.ID_TIPOCBTE = cbt.Id; //traigo el tipo cbte
+                    FacturaElectronica.ID_CBTE_WSAFIP = idWsAfip;
 
                     if (ResultadoAfip != null)
                     {
@@ -425,7 +431,7 @@ namespace SAC.Controllers
                     FacturaVentaModel facturaVentaModel = new FacturaVentaModel();
                     facturaVentaModel.IdTipoComprobante = cbt.Id; //model.idTipoComprobanteSeleccionado;  // facturaVentaModel. = model.IdPuntoVenta.ToString();
                     facturaVentaModel.IdFacturaElectronica = FacturaElectronicaInsertada.ID;
-                    facturaVentaModel.NumeroFactura = cbt.Numero;
+                    facturaVentaModel.NumeroFactura = cbt.Numero;//int.Parse(nroFactura.ToString()); //;
                     facturaVentaModel.Codigo = model.CodigoCliente;
                     facturaVentaModel.IdCliente = model.IdCliente;
                     facturaVentaModel.Fecha = DateTime.Now; //model.Fecha;
@@ -448,8 +454,6 @@ namespace SAC.Controllers
                     facturaVentaModel.Cotiza = model.Cotizacion;
                     facturaVentaModel.YRef = model.YREf;
                     facturaVentaModel.ORef = model.ORef;
-                    //facturaVentaModel.Dto // no existe campo                
-                    // facturaVentaModel.IdTipoComprobante = model.idTipoComprobanteSeleccionado;
 
                     //lo agrego asi por que el documento no explica a q tipo de cbante le da esas letras
                     //seteo arriba
@@ -464,14 +468,15 @@ namespace SAC.Controllers
                         facturaVentaModel.TipoFac = "L";
                     }
                     facturaVentaModel.Periodo = int.Parse(DateTime.Now.ToString("yyMM"));
-                    //datos obligatorios
                     facturaVentaModel.Baja = "*";
                     facturaVentaModel.IdImputacion = 0;
                     facturaVentaModel.NumeroCobro = 0;
                     facturaVentaModel.IdMoneda = model.idTipoMoneda;
-                    facturaVentaModel.Descuento = "1"; //no se de donde sale
+                    facturaVentaModel.Descuento = "1"; 
                     facturaVentaModel.Recibo = "0";
-                    facturaVentaModel.NumeroTra = "0"; //no se de donde sale
+                    //aca grabo el cae
+                    facturaVentaModel.NumeroTra = cae;
+                    //-------------
                     facturaVentaModel.Anula = "0";
                     facturaVentaModel.Activo = true;
                     facturaVentaModel.IdUsuario = OUsuario.IdUsuario;
@@ -656,6 +661,7 @@ namespace SAC.Controllers
                     #region Nota Debito
 
                     string caeNd = "";
+                    long idWsAfipNd = 0;
                     string ResultadoAfipNd = "";
                     string mensajeErrorAfipNd = "";
 
@@ -694,6 +700,7 @@ namespace SAC.Controllers
                                     if (a.FEXErr.ErrMsg == "OK")
                                     {
                                         ResultadoAfipNd = "A";
+                                        idWsAfipNd = a.FEXResultAuth.Id;
                                         caeNd = a.FEXResultAuth.Cae;
                                     }
                                     else
@@ -751,6 +758,7 @@ namespace SAC.Controllers
                                         mensajeErrorAfipNd += string.Format("Er: {0}: {1}", er.Code, er.Msg);
                                     }
                                     caeNd = "0";
+                                    ResultadoAfipNd = RetornoAfip.FeDetResp[0].Resultado;
                                     servicioFacturaVenta._mensaje?.Invoke(mensajeErrorAfipNd, "error");
                                 }
                                 else //son observaciones pero puede rechazar la factura
@@ -762,11 +770,12 @@ namespace SAC.Controllers
                                             mensajeErrorAfipNd += string.Format("Er: {0}: {1}", obs.Msg, obs.Code);
                                         }
                                         caeNd = "0";
+                                        ResultadoAfipNd = RetornoAfip.FeDetResp[0].Resultado;
                                         servicioFacturaVenta._mensaje?.Invoke(mensajeErrorAfipNd, "error");
                                     }
                                     else
                                     {
-                                        ResultadoAfip = RetornoAfip.FeDetResp[0].Resultado;
+                                        ResultadoAfipNd = RetornoAfip.FeDetResp[0].Resultado;
                                         if (RetornoAfip.FeDetResp[0].Resultado == "A")
                                         {
                                             caeNd = RetornoAfip.FeDetResp[0].CAE;
@@ -803,11 +812,12 @@ namespace SAC.Controllers
                     FacturaElectronicaND.FECHAVTO = model.Fecha.AddDays(180);
                     FacturaElectronicaND.FHASTA = null;
                     FacturaElectronicaND.FORMAPAGO = model.IdTipoPago.ToString();
-                    FacturaElectronicaND.TOTAL = model.TotalFactura;
-                    FacturaElectronicaND.NETO = model.TotalFactura;
-                    FacturaElectronicaND.NROCBTE = comprobanteActualizado;
+                    FacturaElectronicaND.TOTAL = model.MontoAjuste;
+                    FacturaElectronicaND.NETO = model.MontoAjuste;
+                    FacturaElectronicaND.NROCBTE_AFIP = comprobanteActualizado;
                     FacturaElectronicaND.PUNTOVTA = model.IdPuntoVenta;
-                    FacturaElectronicaND.TIPOCBTE = cbt.Id; //traigo el tipo cbte
+                    FacturaElectronicaND.ID_TIPOCBTE = cbt.Id; //traigo el tipo cbte
+                    FacturaElectronicaND.ID_CBTE_WSAFIP = idWsAfipNd;
 
                     if (ResultadoAfipNd != null)
                     {
@@ -845,7 +855,7 @@ namespace SAC.Controllers
                     qrAfipNd.ptoVenta = model.IdPuntoVenta;
                     qrAfipNd.tipoCmp = cbt.Id;
                     qrAfipNd.nroCmp = comprobanteActualizado;
-                    qrAfipNd.Importe = model.TotalFactura; ;
+                    qrAfipNd.Importe = model.MontoAjuste;
                     qrAfipNd.moneda = monedaNd;
                     qrAfipNd.ctz = 1;
                     qrAfipNd.tipoDocRec = 80;
@@ -878,7 +888,7 @@ namespace SAC.Controllers
                     facturaModelNotaDebito.Fecha = DateTime.Now; //model.Fecha;
                     facturaModelNotaDebito.Impre = "false";
                     facturaModelNotaDebito.Vencimiento = DateTime.Now.AddDays(1);
-                    facturaModelNotaDebito.Concepto = "Nota Debito";
+                    facturaModelNotaDebito.Concepto = model.EncabezadoFact;
                     facturaModelNotaDebito.Condicion = "1";
                     facturaModelNotaDebito.IdProvincia = facturaVentaOriginal.IdProvincia;
                     facturaModelNotaDebito.IdPais = facturaVentaOriginal.IdPais;
@@ -915,7 +925,7 @@ namespace SAC.Controllers
                     //facturaVentaModel.Moneda = model.idTipoMoneda.ToString();
                     facturaModelNotaDebito.Descuento = "1"; //no se de donde sale
                     facturaModelNotaDebito.Recibo = "0";
-                    facturaModelNotaDebito.NumeroTra = "0"; //no se de donde sale
+                   // facturaModelNotaDebito.NumeroTra = "0"; //no se de donde sale
                     facturaModelNotaDebito.Anula = facturaVentaOriginal.NumeroFactura.ToString();
                     facturaModelNotaDebito.Activo = true;
                     facturaModelNotaDebito.IdUsuario = OUsuario.IdUsuario;
@@ -930,6 +940,7 @@ namespace SAC.Controllers
                     #region notaCredito
 
                     string caeNC = "";
+                    long idWsAfipNC = 0;
                     string mensajeErrorAfipNC = "";
                     string ResultadoAfipNC = "";
 
@@ -944,7 +955,7 @@ namespace SAC.Controllers
                         if (cliente.TipoCliente.Id == 2) // extranjero
                         {
 
-                            if (model.IdTipoComprobante == 21)
+                            if (cbt.CodigoAfip == 21)
                             {
                                 loginCredito = afipHelperCredito.VerificarTicketAcceso("wsfex");
 
@@ -968,6 +979,7 @@ namespace SAC.Controllers
                                     if (a.FEXErr.ErrMsg == "OK")
                                     {
                                         ResultadoAfipNC = "A";
+                                        idWsAfipNC = a.FEXResultAuth.Id;
                                         caeNC = a.FEXResultAuth.Cae;
                                     }
                                     else
@@ -1020,7 +1032,9 @@ namespace SAC.Controllers
                                         mensajeErrorAfipNC += string.Format("Er: {0}: {1}", er.Code, er.Msg);
                                     }
                                     caeNC = "0";
+                                    ResultadoAfipNC = RetornoAfip.FeDetResp[0].Resultado;
                                     servicioFacturaVenta._mensaje?.Invoke(mensajeErrorAfipNC, "error");
+
                                 }
                                 else //son observaciones pero puede rechazar la factura
                                 {
@@ -1031,6 +1045,7 @@ namespace SAC.Controllers
                                             mensajeErrorAfipNC += string.Format("Er: {0}: {1}", obs.Msg, obs.Code);
                                         }
                                         caeNC = "0";
+                                        ResultadoAfipNd = RetornoAfip.FeDetResp[0].Resultado;
                                         servicioFacturaVenta._mensaje?.Invoke(mensajeErrorAfipNC, "error");
                                     }
                                     else
@@ -1073,11 +1088,12 @@ namespace SAC.Controllers
                     FacturaElectronicaNC.FECHAVTO = model.Fecha.AddDays(180);
                     FacturaElectronicaNC.FHASTA = null;
                     FacturaElectronicaNC.FORMAPAGO = model.IdTipoPago.ToString();
-                    FacturaElectronicaNC.TOTAL = model.TotalFactura;
-                    FacturaElectronicaNC.NETO = model.TotalFactura;
-                    FacturaElectronicaNC.NROCBTE = comprobanteActualizado;
+                    FacturaElectronicaNC.TOTAL = model.MontoAjuste; 
+                    FacturaElectronicaNC.NETO = model.MontoAjuste; 
+                    FacturaElectronicaNC.NROCBTE_AFIP = comprobanteActualizado;
                     FacturaElectronicaNC.PUNTOVTA = model.IdPuntoVenta;
-                    FacturaElectronicaNC.TIPOCBTE = cbt.Id; //traigo el tipo cbte
+                    FacturaElectronicaNC.ID_TIPOCBTE = cbt.Id; //traigo el tipo cbte
+                    FacturaElectronicaNC.ID_CBTE_WSAFIP = idWsAfipNC;
 
                     if (ResultadoAfipNC != null)
                     {
@@ -1115,7 +1131,7 @@ namespace SAC.Controllers
                     qrAfipNc.ptoVenta = model.IdPuntoVenta;
                     qrAfipNc.tipoCmp = cbt.Id;
                     qrAfipNc.nroCmp = comprobanteActualizado;
-                    qrAfipNc.Importe = model.TotalFactura; ;
+                    qrAfipNc.Importe = model.MontoAjuste; 
                     qrAfipNc.moneda = monedaNc;
                     qrAfipNc.ctz = 1;
                     qrAfipNc.tipoDocRec = 80;
@@ -1146,7 +1162,7 @@ namespace SAC.Controllers
                     facturaModelNotaCredito.Fecha = DateTime.Now; //model.Fecha;
                     facturaModelNotaCredito.Impre = "false";
                     facturaModelNotaCredito.Vencimiento = DateTime.Now.AddDays(1);
-                    facturaModelNotaCredito.Concepto = "Nota Credito";
+                    facturaModelNotaCredito.Concepto = model.EncabezadoFact;
                     facturaModelNotaCredito.Condicion = "1";
                     facturaModelNotaCredito.IdProvincia = facturaVentaOriginal1.IdProvincia;
                     facturaModelNotaCredito.IdPais = facturaVentaOriginal1.IdPais;
@@ -1183,7 +1199,9 @@ namespace SAC.Controllers
                     //facturaVentaModel.Moneda = model.idTipoMoneda.ToString();
                     facturaModelNotaCredito.Descuento = "1"; //no se de donde sale
                     facturaModelNotaCredito.Recibo = "0";
-                    facturaModelNotaCredito.NumeroTra = "0"; //no se de donde sale
+                    //facturaModelNotaCredito.NumeroTra = "0"; //no se de donde sale
+                    //aca grabo el cae
+                    facturaModelNotaCredito.NumeroTra = caeNC;
                     facturaModelNotaCredito.Anula = facturaVentaOriginal1.NumeroFactura.ToString();
                     facturaModelNotaCredito.Activo = true;
                     facturaModelNotaCredito.IdUsuario = OUsuario.IdUsuario;
@@ -1222,7 +1240,7 @@ namespace SAC.Controllers
                 ServicioWebFactura.ClientCertificates.Add(TicketAcceso.certificado);
                 //cargo los datos de la factura
                 int puntoVenta = model.IdPuntoVenta;
-                int tipoComprobante = model.idTipoComprobanteSeleccionado;
+                int tipoComprobante = Comprobante.CodigoAfip;
 
                 //inicio solicitud
                 FECAERequest Solicitud = new FECAERequest();
@@ -1250,8 +1268,8 @@ namespace SAC.Controllers
                 FECAEResponse Respuesta = new FECAEResponse();
 
                 //FEParamGetCotizacion 
-                if (Comprobante.Numero == ultimoNroComprobante)
-                {
+                //if (Comprobante.Numero == ultimoNroComprobante)
+                //{
                     CuerpoSolicitud.CbteDesde = ultimoNroComprobante;
                     CuerpoSolicitud.CbteHasta = ultimoNroComprobante;
 
@@ -1259,7 +1277,7 @@ namespace SAC.Controllers
 
                     CuerpoSolicitud.ImpTotal = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
                     CuerpoSolicitud.ImpNeto = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
-                    CuerpoSolicitud.ImpIVA = 0;
+                   // CuerpoSolicitud.ImpIVA = 0;
                     CuerpoSolicitud.ImpTotConc = 0;
                     CuerpoSolicitud.ImpOpEx = 0;
                     CuerpoSolicitud.ImpTrib = 0;
@@ -1282,28 +1300,28 @@ namespace SAC.Controllers
                             break;
                     }
 
-                    AlicIva Alicuota = new AlicIva();
-                    //el id de alicuota es el tipo de iva
-                    Alicuota.Id = 3;
-                    Alicuota.BaseImp = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
-                    Alicuota.Importe = 0;
+                    //AlicIva Alicuota = new AlicIva();
+                    ////el id de alicuota es el tipo de iva
+                    //Alicuota.Id = 3;
+                    //Alicuota.BaseImp = decimal.ToDouble(Math.Round(model.TotalFactura, 2));
+                    //Alicuota.Importe = 0;
 
-                    CuerpoSolicitud.Iva = new[] { Alicuota };
+                    //CuerpoSolicitud.Iva = new[] { Alicuota };
 
                     Solicitud.FeDetReq = new[] { CuerpoSolicitud };
 
                     //se envia el servicio al WS
                     Respuesta = ServicioWebFactura.FECAESolicitar(Autenticacion, Solicitud);
                     return Respuesta;
-                }
-                else
-                {
-                    Err error = new Err();
-                    error.Code = 0;
-                    error.Msg = "El nro de comprobante local no coincide con el de AFIP";
-                    Respuesta.Errors = new[] { error };
-                    return Respuesta;
-                }
+                //}
+                //else
+                //{
+                //    Err error = new Err();
+                //    error.Code = 0;
+                //    error.Msg = "El nro de comprobante local no coincide con el de AFIP";
+                //    Respuesta.Errors = new[] { error };
+                //    return Respuesta;
+                //}
 
             }
             catch (Exception e)
@@ -1355,8 +1373,8 @@ namespace SAC.Controllers
 
                 FECAEResponse Respuesta = new FECAEResponse();
 
-                if (ultimoNroComprobante == Comprobante.Numero)
-                {
+                //if (ultimoNroComprobante == Comprobante.Numero)
+                //{
                     CuerpoSolicitud.CbteDesde = ultimoNroComprobante;
                     CuerpoSolicitud.CbteHasta = ultimoNroComprobante;
 
@@ -1410,15 +1428,15 @@ namespace SAC.Controllers
                     Respuesta = ServicioWebFactura.FECAESolicitar(Autenticacion, Solicitud);
 
                     return Respuesta;
-                }
-                else
-                {
-                    Err error = new Err();
-                    error.Code = 0;
-                    error.Msg = "El nro de comprobante local no coincide con el de AFIP";
-                    Respuesta.Errors = new[] { error };
-                    return Respuesta;
-                }
+                //}
+                //else
+                //{
+                //    Err error = new Err();
+                //    error.Code = 0;
+                //    error.Msg = "El nro de comprobante local no coincide con el de AFIP";
+                //    Respuesta.Errors = new[] { error };
+                //    return Respuesta;
+                //}
             }
             catch (Exception e )
             {
@@ -1468,8 +1486,8 @@ namespace SAC.Controllers
 
                 FECAEResponse Respuesta = new FECAEResponse();
 
-                if (ultimoNroComprobante == Comprobante.Numero)
-                {
+                //if (ultimoNroComprobante == Comprobante.Numero)
+                //{
                     CuerpoSolicitud.CbteDesde = ultimoNroComprobante;
                     CuerpoSolicitud.CbteHasta = ultimoNroComprobante;
 
@@ -1524,15 +1542,15 @@ namespace SAC.Controllers
                     Respuesta = ServicioWebFactura.FECAESolicitar(Autenticacion, Solicitud);
 
                     return Respuesta;
-                }
-                else
-                {
-                    Err error = new Err();
-                    error.Code = 0;
-                    error.Msg = "El nro de comprobante local no coincide con el de AFIP";
-                    Respuesta.Errors = new[] { error };
-                    return Respuesta;
-                }
+                //}
+                //else
+                //{
+                //    Err error = new Err();
+                //    error.Code = 0;
+                //    error.Msg = "El nro de comprobante local no coincide con el de AFIP";
+                //    Respuesta.Errors = new[] { error };
+                //    return Respuesta;
+                //}
             }
             catch (Exception e)
             {
@@ -1559,12 +1577,10 @@ namespace SAC.Controllers
                 ServicioWebFacturaExterior.Url = @"https://wswhomo.afip.gov.ar/wsfexv1/service.asmx?WSDL";
 
                 ServicioWebFacturaExterior.ClientCertificates.Add(TicketAcceso.certificado);
-                //cargo los datos de la factura
-                //int puntoVenta = model.IdPuntoVenta;
-                ////int tipoComprobante = model.idTipoComprobanteSeleccionado;
-                //int tipoComprobante = Comprobante.CodigoAfip;
-
-
+                
+                //verificaciona ws 
+                var EstadoWs = ServicioWebFacturaExterior.FEXDummy();
+             
                 //FERecuperaLastCbteResponse UltimoRes = ServicioWebFacturaExterior.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
                 //int ultimoNroComprobante = UltimoRes.CbteNro + 1;
 
@@ -1577,22 +1593,32 @@ namespace SAC.Controllers
 
                 var cbte_nroObternido = ServicioWebFacturaExterior.FEXGetLast_CMP(ultimoComprobante);
 
+                ClsFEXGetCMP clsFEXGetCMP = new ClsFEXGetCMP();
+                clsFEXGetCMP.Cbte_nro = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro;
+                clsFEXGetCMP.Cbte_tipo = short.Parse(Comprobante.CodigoAfip.ToString());
+                clsFEXGetCMP.Punto_vta = model.IdPuntoVenta;
+
+                var UltimoCbte_Existente = ServicioWebFacturaExterior.FEXGetCMP(Autenticacion, clsFEXGetCMP);
+
+
+                var ultimo_id = ServicioWebFacturaExterior.FEXGetLast_ID(Autenticacion);
+
                 FEXResponseAuthorize Respuesta = new FEXResponseAuthorize();
 
                 //if (Comprobante.Numero == cbte_nroObternido.FEXResult_LastCMP.Cbte_nro)
                 //{
                     ClsFEXRequest solicitud = new ClsFEXRequest();
 
-                    ClsFEXResponse_LastID UltimoId = new ClsFEXResponse_LastID();
-                    var idU = UltimoId.Id + 1;
+                //ClsFEXResponse_LastID UltimoId = new ClsFEXResponse_LastID();
+                //var idU = UltimoId.Id + 1;
 
-                    solicitud.Id = idU;
+                    solicitud.Id = ultimo_id.FEXResultGet.Id + 1;
                     solicitud.Cbte_Tipo = short.Parse(Comprobante.CodigoAfip.ToString());
                     solicitud.Fecha_cbte = model.Fecha.ToString("yyyyMMdd");
                     solicitud.Punto_vta = model.IdPuntoVenta;
                     solicitud.Cbte_nro = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1;
                     solicitud.Tipo_expo = 2; //servicios
-                    solicitud.Permiso_existente = "N";
+                    solicitud.Permiso_existente = "";
                     solicitud.Dst_cmp = short.Parse(model.CodPaisAfip.ToString()); //pais destino
                     solicitud.Cliente = model.Cliente.Nombre;
                     solicitud.Cuit_pais_cliente = long.Parse(model.Cuit);
@@ -1616,10 +1642,23 @@ namespace SAC.Controllers
                     solicitud.Obs = "Sin observaciones";
                     solicitud.Forma_pago = "tktk";
                     solicitud.Fecha_pago = (model.Fecha.AddDays(180)).ToString("yyyyMMdd");
-                    solicitud.Incoterms = "FOB";
+
+                    var icoterm = ServicioWebFacturaExterior.FEXGetPARAM_Incoterms(Autenticacion);
+
+                    solicitud.Incoterms = null;
                     solicitud.Incoterms_Ds = null;
                     solicitud.Idioma_cbte = short.Parse(model.IdTipoIdioma.ToString());
                     solicitud.Permisos = null; // ver este item
+
+                    ///*defino el comprobante asociado ej Factura E*/
+                    //Cmp_asoc ComprobanteAsociado = new Cmp_asoc();
+                    //ComprobanteAsociado.Cbte_tipo = 19;
+                    //ComprobanteAsociado.Cbte_punto_vta = model.IdPuntoVenta;
+                    //ComprobanteAsociado.Cbte_nro = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1;
+                    //ComprobanteAsociado.Cbte_cuit = long.Parse(model.Cuit);
+                    ////asigno el comprobante a la nota debito que estoy generando
+                    //solicitud.Cmps_asoc = new[] { ComprobanteAsociado };
+
 
                     /*agrego el item*/
                     Item item = new Item();
@@ -1632,7 +1671,7 @@ namespace SAC.Controllers
                         Item itemGrabar = new Item();
                         itemGrabar.Pro_codigo = itemIterar.codigo;
                         itemGrabar.Pro_ds = itemIterar.descripcion;
-                        itemGrabar.Pro_qty = 2;
+                        itemGrabar.Pro_qty = 1;
                         itemGrabar.Pro_umed = 1;
                         itemGrabar.Pro_precio_uni = itemIterar.valor;
                         itemGrabar.Pro_bonificacion = 0;
@@ -1640,17 +1679,6 @@ namespace SAC.Controllers
                         //inserto los items
                         solicitud.Items = new[] { itemGrabar };
                     }
-
-                    /*defino el comprobante asociado ej Factura E*/
-                    Cmp_asoc ComprobanteAsociado = new Cmp_asoc();
-                    ComprobanteAsociado.Cbte_tipo = 19;
-                    ComprobanteAsociado.Cbte_punto_vta = model.IdPuntoVenta;
-                    ComprobanteAsociado.Cbte_nro = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1;
-                    ComprobanteAsociado.Cbte_cuit = long.Parse(model.Cuit);
-                    //asigno el comprobante a la nota debito que estoy generando
-                    solicitud.Cmps_asoc = new[] { ComprobanteAsociado };
-
-                
 
                     //se envia el servicio al WS
                     Respuesta = ServicioWebFacturaExterior.FEXAuthorize(Autenticacion, solicitud);
@@ -1693,7 +1721,7 @@ namespace SAC.Controllers
         {
             try
             {
-                var totalImporte = model.TotalFactura;
+                //var totalImporte = model.TotalFactura;
 
                 //instancio objeto autenticacion
                 ClsFEXAuthRequest Autenticacion = new ClsFEXAuthRequest();
@@ -1706,10 +1734,9 @@ namespace SAC.Controllers
                 ServicioWebFacturaExterior.Url = @"https://wswhomo.afip.gov.ar/wsfexv1/service.asmx?WSDL";
 
                 ServicioWebFacturaExterior.ClientCertificates.Add(TicketAcceso.certificado);
-                //cargo los datos de la factura
-                int puntoVenta = model.IdPuntoVenta;
-                int tipoComprobante = Comprobante.CodigoAfip;
-
+                
+                //verificaciona ws 
+                var EstadoWs = ServicioWebFacturaExterior.FEXDummy();
 
                 //FERecuperaLastCbteResponse UltimoRes = ServicioWebFacturaExterior.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
                 //int ultimoNroComprobante = UltimoRes.CbteNro + 1;
@@ -1722,86 +1749,98 @@ namespace SAC.Controllers
                 ultimoComprobante.Token = TicketAcceso.Token;
 
                 var cbte_nroObternido = ServicioWebFacturaExterior.FEXGetLast_CMP(ultimoComprobante);
-                var NroCbte = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1;
+                //var NroCbte = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1;
+
+                //obtengo el ultimo comprobante cagado en afip
+                ClsFEXGetCMP clsFEXGetCMP = new ClsFEXGetCMP();
+                clsFEXGetCMP.Cbte_nro = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro+1;
+                clsFEXGetCMP.Cbte_tipo = short.Parse(Comprobante.CodigoAfip.ToString());
+                clsFEXGetCMP.Punto_vta = model.IdPuntoVenta;
+
+                var UltimoCbte_Existente = ServicioWebFacturaExterior.FEXGetCMP(Autenticacion, clsFEXGetCMP);
+
+                var ultimo_id = ServicioWebFacturaExterior.FEXGetLast_ID(Autenticacion);
+
 
                 FEXResponseAuthorize Respuesta = new FEXResponseAuthorize();
 
-                if (Comprobante.Numero == NroCbte)
+                //if (Comprobante.Numero == cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1)
+                //{
+                ClsFEXRequest solicitud = new ClsFEXRequest();
+                solicitud.Id = ultimo_id.FEXResultGet.Id + 1;
+                solicitud.Cbte_Tipo = short.Parse(Comprobante.CodigoAfip.ToString());
+                solicitud.Fecha_cbte = model.Fecha.ToString("yyyyMMdd");
+                solicitud.Punto_vta = model.IdPuntoVenta;
+                solicitud.Cbte_nro = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1;
+                solicitud.Tipo_expo = 2; //servicios
+                solicitud.Permiso_existente = "";
+                solicitud.Dst_cmp = short.Parse(model.CodPaisAfip.ToString());
+                solicitud.Cliente = model.Cliente.Nombre;
+                solicitud.Cuit_pais_cliente = long.Parse(model.Cuit);
+                solicitud.Domicilio_cliente = model.DireccionCompuesta;
+                solicitud.Id_impositivo = null;
+
+                /*defino el comprobante asociado ej Factura E*/
+                Cmp_asoc ComprobanteAsociado = new Cmp_asoc();
+                ComprobanteAsociado.Cbte_tipo = 19;
+                ComprobanteAsociado.Cbte_punto_vta = model.IdPuntoVenta;
+                ComprobanteAsociado.Cbte_nro = long.Parse(model.AplicaNC);
+                /*cambio esto por mi cuil
+                 error:Campo Cmps_asoc.Cbte_tipo: Para comprobantes tipo 20 o 21 si informa el cuit del emisor del comprobante asociado, debe ser igual al emisor del comprobante que esta autorizando
+                 */
+                ComprobanteAsociado.Cbte_cuit = cuitPropietario;//long.Parse(model.Cuit);
+                //asigno el comprobante a la nota debito que estoy generando
+                solicitud.Cmps_asoc = new[] { ComprobanteAsociado };
+
+                AfipHelper afipHelper = new AfipHelper();
+                switch (model.idTipoMoneda)
                 {
-                    ClsFEXRequest solicitud = new ClsFEXRequest();
-                    solicitud.Id = 1;
-                    solicitud.Cbte_Tipo = short.Parse(Comprobante.CodigoAfip.ToString());
-                    solicitud.Fecha_cbte = model.Fecha.ToString("yyyyMMdd");
-                    solicitud.Punto_vta = model.IdPuntoVenta;
-                    solicitud.Cbte_nro = NroCbte;
-                    solicitud.Tipo_expo = 2; //servicios
-                    solicitud.Permiso_existente = "";
-                    solicitud.Dst_cmp = short.Parse(model.CodPaisAfip.ToString());
-                    solicitud.Cliente = model.Cliente.Nombre;
-                    solicitud.Cuit_pais_cliente = long.Parse(model.Cuit);
-                    solicitud.Domicilio_cliente = model.DireccionCompuesta;
-                    solicitud.Id_impositivo = null;
+                    case 1:
+                        solicitud.Moneda_Id = "PES";
+                        solicitud.Moneda_ctz = 1;
+                        break;
+                    case 2:
+                        solicitud.Moneda_Id = "DOL";
+                        solicitud.Moneda_ctz = decimal.Parse(afipHelper.GetCotizacion("DOL").ResultGet.MonCotiz.ToString());
+                        break;
+                }
 
-                    /*defino el comprobante asociado ej Factura E*/
-                    Cmp_asoc ComprobanteAsociado = new Cmp_asoc();
-                    ComprobanteAsociado.Cbte_tipo = 19;
-                    ComprobanteAsociado.Cbte_punto_vta = model.IdPuntoVenta;
-                    ComprobanteAsociado.Cbte_nro = long.Parse(model.AplicaNC);
-                    ComprobanteAsociado.Cbte_cuit = long.Parse(model.Cuit);
-                    //asigno el comprobante a la nota debito que estoy generando
-                    solicitud.Cmps_asoc = new[] { ComprobanteAsociado };
+                solicitud.Obs_comerciales = null;
+                
+                solicitud.Obs = null;
+                solicitud.Forma_pago = null;
+               // solicitud.Fecha_pago = (model.Fecha.AddDays(180)).ToString("yyyyMMdd");
+                solicitud.Incoterms = null;
+                solicitud.Incoterms_Ds = null;
+                solicitud.Idioma_cbte = short.Parse(model.IdTipoIdioma.ToString());
+                solicitud.Permisos = null;
 
-                    AfipHelper afipHelper = new AfipHelper();
-                    switch (model.idTipoMoneda)
+                Item item = new Item();
+                item.Pro_codigo = null;
+                item.Pro_ds = null;
+
+                Item itemGrabar = new Item();
+                itemGrabar.Pro_codigo = "1";
+                itemGrabar.Pro_ds = "Nd item de Factura";
+                itemGrabar.Pro_qty = 1;
+                itemGrabar.Pro_umed = 1;
+                itemGrabar.Pro_precio_uni = decimal.Parse(model.MontoAjuste.ToString());
+                itemGrabar.Pro_bonificacion = 0;
+                itemGrabar.Pro_total_item = itemGrabar.Pro_qty * itemGrabar.Pro_precio_uni - itemGrabar.Pro_bonificacion;
+
+                solicitud.Imp_total = itemGrabar.Pro_total_item;
+
+                //inserto los items
+                solicitud.Items = new[] { itemGrabar };
+
+                ////se envia el servicio al WS
+               Respuesta = ServicioWebFacturaExterior.FEXAuthorize(Autenticacion, solicitud);
+
+                if (Respuesta.FEXErr != null)
+                {
+                    if (Respuesta.FEXErr.ErrMsg == "OK")
                     {
-                        case 1:
-                            solicitud.Moneda_Id = "PES";
-                            solicitud.Moneda_ctz = 1;
-                            break;
-                        case 2:
-                            solicitud.Moneda_Id = "DOL";
-                            solicitud.Moneda_ctz = decimal.Parse(afipHelper.GetCotizacion("DOL").ResultGet.MonCotiz.ToString());
-                            break;
-                    }
-
-                    solicitud.Obs_comerciales = null;
-                    solicitud.Imp_total = model.TotalFactura;
-                    solicitud.Obs = null;
-                    solicitud.Forma_pago = null;
-                    solicitud.Fecha_pago = (model.Fecha.AddDays(180)).ToString("yyyyMMdd");
-                    solicitud.Incoterms = null;
-                    solicitud.Incoterms_Ds = null;
-                    solicitud.Idioma_cbte = short.Parse(model.IdTipoIdioma.ToString());
-                    solicitud.Permisos = null;
-
-                    Item item = new Item();
-                    item.Pro_codigo = null;
-                    item.Pro_ds = null;
-                  
-                    Item itemGrabar = new Item();
-                    itemGrabar.Pro_codigo = "1";
-                    itemGrabar.Pro_ds = "monto total";
-                    itemGrabar.Pro_qty = 1;
-                    itemGrabar.Pro_umed = 1;
-                    itemGrabar.Pro_precio_uni = decimal.Parse(model.MontoAjuste.ToString());
-                    itemGrabar.Pro_bonificacion = 0;
-                    itemGrabar.Pro_total_item = itemGrabar.Pro_qty * itemGrabar.Pro_precio_uni - itemGrabar.Pro_bonificacion;
-                    //inserto los items
-                    solicitud.Items = new[] { itemGrabar };
-
-                    //se envia el servicio al WS
-                    Respuesta = ServicioWebFacturaExterior.FEXAuthorize(Autenticacion, solicitud);
-
-                    if (Respuesta.FEXErr != null)
-                    {
-                        if (Respuesta.FEXErr.ErrMsg == "OK")
-                        {
-                            return Respuesta;
-                        }
-                        else
-                        {
-                            return null;
-                        }
+                        return Respuesta;
                     }
                     else
                     {
@@ -1810,13 +1849,18 @@ namespace SAC.Controllers
                 }
                 else
                 {
-                    ClsFEXErr error = new ClsFEXErr();
-                    error.ErrCode = 0;
-                    error.ErrMsg = "El nro de comprobante local no coincide con el de AFIP";
-                    Respuesta.FEXErr = error;
-                    return Respuesta;
+                    return null;
                 }
-
+                //}
+                //else
+                //{
+                //    ClsFEXErr error = new ClsFEXErr();
+                //    error.ErrCode = 0;
+                //    error.ErrMsg = "El nro de comprobante local no coincide con el de AFIP";
+                //    Respuesta.FEXErr = error;
+                //    return Respuesta;
+                //}
+                return null;
             }
             catch
             {
@@ -1829,7 +1873,7 @@ namespace SAC.Controllers
         {
             try
             {
-                var totalImporte = model.TotalFactura;
+               // var totalImporte = model.TotalFactura;
 
                 //instancio objeto autenticacion
                 ClsFEXAuthRequest Autenticacion = new ClsFEXAuthRequest();
@@ -1842,9 +1886,14 @@ namespace SAC.Controllers
                 ServicioWebFacturaExterior.Url = @"https://wswhomo.afip.gov.ar/wsfexv1/service.asmx?WSDL";
 
                 ServicioWebFacturaExterior.ClientCertificates.Add(TicketAcceso.certificado);
-                //cargo los datos de la factura
-                int puntoVenta = model.IdPuntoVenta;
-                int tipoComprobante = model.idTipoComprobanteSeleccionado;
+
+                //verificaciona ws 
+                var EstadoWs = ServicioWebFacturaExterior.FEXDummy();
+
+
+                ////cargo los datos de la factura
+                //int puntoVenta = model.IdPuntoVenta;
+                //int tipoComprobante = model.idTipoComprobanteSeleccionado;
 
 
                 //FERecuperaLastCbteResponse UltimoRes = ServicioWebFacturaExterior.FECompUltimoAutorizado(Autenticacion, puntoVenta, tipoComprobante);
@@ -1859,12 +1908,23 @@ namespace SAC.Controllers
 
                 var cbte_nroObternido = ServicioWebFacturaExterior.FEXGetLast_CMP(ultimoComprobante);
 
+                //obtengo el ultimo comprobante cagado en afip
+                ClsFEXGetCMP clsFEXGetCMP = new ClsFEXGetCMP();
+                clsFEXGetCMP.Cbte_nro = cbte_nroObternido.FEXResult_LastCMP.Cbte_nro + 1;
+                clsFEXGetCMP.Cbte_tipo = short.Parse(Comprobante.CodigoAfip.ToString());
+                clsFEXGetCMP.Punto_vta = model.IdPuntoVenta;
+
+                var UltimoCbte_Existente = ServicioWebFacturaExterior.FEXGetCMP(Autenticacion, clsFEXGetCMP);
+
+                var ultimo_id = ServicioWebFacturaExterior.FEXGetLast_ID(Autenticacion);
+
+
                 FEXResponseAuthorize Respuesta = new FEXResponseAuthorize();
 
-                if (Comprobante.Numero == cbte_nroObternido.FEXResult_LastCMP.Cbte_nro)
-                {
+                //if (Comprobante.Numero == cbte_nroObternido.FEXResult_LastCMP.Cbte_nro)
+                //{
                     ClsFEXRequest solicitud = new ClsFEXRequest();
-                    solicitud.Id = 1;
+                    solicitud.Id = ultimo_id.FEXResultGet.Id + 1;
                     solicitud.Cbte_Tipo = short.Parse(Comprobante.CodigoAfip.ToString());
                     solicitud.Fecha_cbte = model.Fecha.ToString("yyyyMMdd");
                     solicitud.Punto_vta = model.IdPuntoVenta;
@@ -1881,8 +1941,12 @@ namespace SAC.Controllers
                     Cmp_asoc ComprobanteAsociado = new Cmp_asoc();
                     ComprobanteAsociado.Cbte_tipo = 19;
                     ComprobanteAsociado.Cbte_punto_vta = model.IdPuntoVenta;
-                    ComprobanteAsociado.Cbte_nro = model.NumeroFactura;
-                    ComprobanteAsociado.Cbte_cuit = long.Parse(model.Cuit);
+                    ComprobanteAsociado.Cbte_nro = long.Parse(model.AplicaNC);
+                    /*cambio esto por mi cuil
+                  error:Campo Cmps_asoc.Cbte_tipo: Para comprobantes tipo 20 o 21 si informa el cuit del emisor del comprobante asociado, debe ser igual al emisor del comprobante que esta autorizando
+                  */
+                    ComprobanteAsociado.Cbte_cuit = cuitPropietario;//long.Parse(model.Cuit);
+
                     //asigno el comprobante a la nota debito que estoy generando
                     solicitud.Cmps_asoc = new[] { ComprobanteAsociado };
 
@@ -1900,10 +1964,10 @@ namespace SAC.Controllers
                     }
 
                     solicitud.Obs_comerciales = null;
-                    solicitud.Imp_total = model.TotalFactura;
+                   
                     solicitud.Obs = null;
                     solicitud.Forma_pago = null;
-                    solicitud.Fecha_pago = (model.Fecha.AddDays(180)).ToString("yyyyMMdd");
+                   //solicitud.Fecha_pago = (model.Fecha.AddDays(180)).ToString("yyyyMMdd");
                     solicitud.Incoterms = null;
                     solicitud.Incoterms_Ds = null;
                     solicitud.Idioma_cbte = short.Parse(model.IdTipoIdioma.ToString());
@@ -1915,12 +1979,14 @@ namespace SAC.Controllers
 
                     Item itemGrabar = new Item();
                     itemGrabar.Pro_codigo = "1";
-                    itemGrabar.Pro_ds = "monto total";
+                    itemGrabar.Pro_ds = "Nc item de Factura";
                     itemGrabar.Pro_qty = 1;
                     itemGrabar.Pro_umed = 1;
-                    itemGrabar.Pro_precio_uni = decimal.Parse(model.AplicaNC);
+                    itemGrabar.Pro_precio_uni = decimal.Parse(model.MontoAjuste.ToString());
                     itemGrabar.Pro_bonificacion = 0;
                     itemGrabar.Pro_total_item = itemGrabar.Pro_qty * itemGrabar.Pro_precio_uni - itemGrabar.Pro_bonificacion;
+
+                    solicitud.Imp_total = itemGrabar.Pro_total_item;
                     //inserto los items
                     solicitud.Items = new[] { itemGrabar };
 
@@ -1942,15 +2008,15 @@ namespace SAC.Controllers
                     {
                         return null;
                     }
-                }
-                else
-                {
-                    ClsFEXErr error = new ClsFEXErr();
-                    error.ErrCode = 0;
-                    error.ErrMsg = "El nro de comprobante local no coincide con el de AFIP";
-                    Respuesta.FEXErr = error;
-                    return Respuesta;
-                }
+                //}
+                //else
+                //{
+                //    ClsFEXErr error = new ClsFEXErr();
+                //    error.ErrCode = 0;
+                //    error.ErrMsg = "El nro de comprobante local no coincide con el de AFIP";
+                //    Respuesta.FEXErr = error;
+                //    return Respuesta;
+                //}
 
             }
             catch
